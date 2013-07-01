@@ -1,0 +1,40 @@
+<form id="restaurant-order-form">
+	
+	<fieldset>
+		<legend>
+			{{ fullname }}
+		</legend>
+		<div>
+			<label>日期</label>
+			<input type="date" name="orderdate" value="2013-06-30" />
+		</div>
+		<div>
+			<label>时间</label>
+			<input type="time" name="ordertime" value="17:00:00" />
+		</div>
+
+		<div>
+			<label>人数</label>
+			<input type="number" name="personnum" value="2" />
+		</div>
+
+		<div>
+			<label>联系人</label>
+			<input type="text" name="contactname" />
+			<input type="text" name="contactphone" />
+			<select name="contacts"></select>
+		</div>
+
+		<div>
+			<textarea name="other" placeholder="其他要求"></textarea>
+		</div>
+
+		<button id="submit-order">提交</button>
+	</fieldset>
+	
+	<fieldset>
+		<legend>桌位图</legend>
+		<div class="floorplan"></div>
+	</fieldset>
+	
+</form>

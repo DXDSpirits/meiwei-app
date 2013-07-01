@@ -1,0 +1,17 @@
+.restaurant-list-item {
+	height: 200px;
+	overflow: hidden;
+}
+.recommend-list-item {
+	height: 200px;
+	overflow: display;
+	position: relative;
+	img {
+		left: 0;
+		height: 200px;
+		width: 100%;
+		max-width: 400px;
+		position: absolute;
+		z-index: -1;
+	}
+}

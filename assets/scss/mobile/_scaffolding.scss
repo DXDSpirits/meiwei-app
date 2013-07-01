@@ -1,0 +1,109 @@
+
+/* ==============
+     Body Reset
+   ============== */
+
+html {
+	height: 100%;
+	font-size: 100%;
+}
+
+body {
+	padding: 0;
+	height: 100%;
+	font-family: $baseFontFamily;
+	font-size: $baseFontSize;
+	line-height: $baseLineHeight;
+	color: $textColor;
+	word-wrap: break-word;
+	overflow: hidden;
+	background-color: $bodyBackground;
+	-webkit-text-size-adjust: none;
+}
+
+
+/* ==========
+     Links
+   ========== */
+
+a {
+	color: $linkColor;
+	text-decoration: none;
+	-webkit-touch-callout: none;
+}
+a:hover,
+a:focus {
+	color: $linkColorHover;
+	text-decoration: none;
+}
+
+/* ==========================================================================
+	 HTML5 Boilerplate styles - h5bp.com (generated via initializr.com)
+   ========================================================================== */
+
+::-moz-selection {
+	background: #b3d4fc;
+	text-shadow: none;
+}
+
+::selection {
+	background: #b3d4fc;
+	text-shadow: none;
+}
+
+fieldset {
+	border: 0;
+	margin: 0;
+	padding: 0;
+}
+
+textarea {
+	resize: vertical;
+}
+
+.chromeframe {
+	margin: 0.2em 0;
+	background: #ccc;
+	color: #000;
+	padding: 0.2em 0;
+}
+
+
+/* ==========
+     Images
+   ========== */
+
+// Rounded corners
+img {
+	/* Responsive images (ensure images don't scale beyond their parents) */
+	max-width: 100%; /* Part 1: Set a maxium relative to the parent */
+	width: auto\9; /* IE7-8 need help adjusting responsive images */
+	height: auto; /* Part 2: Scale the height according to the width, otherwise you get stretching */
+
+	vertical-align: middle;
+	-ms-interpolation-mode: bicubic;
+}
+
+// Prevent max-width from affecting Google Maps
+#map_canvas img,
+.google-maps img {
+	max-width: none;
+}
+
+.img-rounded {
+	@include border-radius(6px);
+}
+
+// Add polaroid-esque trim
+.img-polaroid {
+	padding: 4px;
+	background-color: #fff;
+	border: 1px solid #ccc;
+	border: 1px solid rgba(0,0,0,.2);
+	@include box-shadow(0 1px 3px rgba(0,0,0,.1));
+}
+
+// Perfect circle
+.img-circle {
+	@include border-radius(500px); // crank the border-radius so it works with most reasonably sized images
+}
