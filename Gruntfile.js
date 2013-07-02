@@ -37,6 +37,15 @@ module.exports = function(grunt) {
 				cwd: '.'
 			}
 		},
+		templates: {
+			all: {
+				files: {
+					'assets/js/app/templates.js': [
+						'assets/mustache/*.html'
+					]
+				}
+			}
+		},
 		jshint: {
 			all: [
 				'assets/js/app/*.js'
@@ -56,10 +65,14 @@ module.exports = function(grunt) {
 				],
 				tasks: ['sass']
 			},
+			templates: {
+				files: ['assets/mustache/*.html'],
+				tasks: ['templates']
+			},
 			html: {
 				files: ['mobile/*.html'],
 				tasks: ['includes']
-			},
+			}
 		},
 		connect: {
 			server: {
@@ -95,6 +108,7 @@ module.exports = function(grunt) {
 		}
 	});
 
+	grunt.loadTasks('tasks');
 	grunt.loadNpmTasks('grunt-contrib-uglify');
 	grunt.loadNpmTasks('grunt-contrib-jshint');
 	grunt.loadNpmTasks('grunt-contrib-sass');

@@ -51,7 +51,7 @@ MeiweiApp.Views.RecommendListItem = MeiweiApp.ModelView.extend({
 	//events: { 'click': 'viewRestaurant' },
 	tagName: 'section',
 	className: 'recommend-list-item',
-	template: Mustache.compile(MeiweiApp.loadTemplate('recommend-list-item')),
+	template: MeiweiApp.Templates['recommend-list-item'],
 	viewRestaurant: function() {
 		var restaurantId = this.model.get('restaurant').id
 		MeiweiApp.Router.navigate('restaurant/' + restaurantId, {trigger: true});
@@ -82,7 +82,7 @@ MeiweiApp.Views.RestaurantListItem = MeiweiApp.ModelView.extend({
 	events: { 'click': 'viewRestaurant' },
 	tagName: 'section',
 	className: 'restaurant-list-item',
-	template: Mustache.compile(MeiweiApp.loadTemplate('restaurant-list-item')),
+	template: MeiweiApp.Templates['restaurant-list-item'],
 	viewRestaurant: function() {
 		MeiweiApp.Router.navigate('restaurant/' + this.model.id, {trigger: true});
 	}
@@ -121,18 +121,18 @@ MeiweiApp.Pages.RestaurantList = new (MeiweiApp.PageView.extend({
 
 
 MeiweiApp.Views.RestaurantProfileBox = MeiweiApp.ModelView.extend({
-	template: Mustache.compile(MeiweiApp.loadTemplate('restaurant-profile-box')),
+	template: MeiweiApp.Templates['restaurant-profile-box'],
 });
 
 MeiweiApp.Views.RestaurantPictureList = MeiweiApp.CollectionView.extend({
 	modelView: MeiweiApp.ModelView.extend({
-		template: Mustache.compile(MeiweiApp.loadTemplate('restaurant-picture')),
+		template: MeiweiApp.Templates['restaurant-picture'],
 	})
 });
 
 MeiweiApp.Views.RestaurantReviewList = MeiweiApp.CollectionView.extend({
 	modelView: MeiweiApp.ModelView.extend({
-		template: Mustache.compile(MeiweiApp.loadTemplate('restaurant-review')),
+		template: MeiweiApp.Templates['restaurant-review'],
 	})
 });
 
@@ -197,7 +197,7 @@ MeiweiApp.Views.RestaurantOrderForm = MeiweiApp.View.extend({
 		this.restaurant = this.model;
 		this.model = null;
 	},
-	template: Mustache.compile(MeiweiApp.loadTemplate('restaurant-order-form')),
+	template: MeiweiApp.Templates['restaurant-order-form'],
 	render: function() {
 		this.$el.html(this.template(this.restaurant.toJSON()));
 		this.fillContacts();
@@ -262,7 +262,7 @@ MeiweiApp.Pages.RestaurantOrder = new (MeiweiApp.PageView.extend({
 
 
 MeiweiApp.Views.MemberProfileForm = MeiweiApp.ModelView.extend({
-	template: Mustache.compile(MeiweiApp.loadTemplate('member-profile-form')),
+	template: MeiweiApp.Templates['member-profile-form'],
 	render: function() {
 		this.$el.html(this.template(this.model.toJSON()));
 	}
@@ -296,7 +296,7 @@ MeiweiApp.Views.MemberLoginForm = MeiweiApp.View.extend({
 		MeiweiApp.me.login(username, password);
 		MeiweiApp.Router.navigate('member/profile', {trigger: true});
 	},
-	template: MeiweiApp.loadTemplate('member-login-form'),
+	template: MeiweiApp.Templates['member-login-form'],
 	render: function() {
 		this.$el.html(this.template);
 	}
@@ -312,7 +312,7 @@ MeiweiApp.Views.MemberRegisterForm = MeiweiApp.View.extend({
 		MeiweiApp.me.register(email, mobile, password);
 		MeiweiApp.Router.navigate('member/profile', {trigger: true});
 	},
-	template: MeiweiApp.loadTemplate('member-register-form'),
+	template: MeiweiApp.Templates['member-register-form'],
 	render: function() {
 		this.$el.html(this.template);
 	}
@@ -338,7 +338,7 @@ MeiweiApp.Pages.MemberLogin = new (MeiweiApp.PageView.extend({
 
 MeiweiApp.Views.OrderList = MeiweiApp.CollectionView.extend({
 	modelView: MeiweiApp.ModelView.extend({
-		template: Mustache.compile(MeiweiApp.loadTemplate('order-list-item')),
+		template: MeiweiApp.Templates['order-list-item'],
 		events: { 'click': 'viewOrder' },
 		viewOrder: function() {
 			MeiweiApp.Router.navigate('order/' + this.model.id, {trigger: true});
