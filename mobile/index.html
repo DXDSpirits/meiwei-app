@@ -35,15 +35,15 @@
     <body>
         <!-- Page content Begin -->
         
-        {% include "mobile/view-home.html" %}
+        include "view-home.html"
         
-        {% include "mobile/view-restaurant-list.html" %}
-        {% include "mobile/view-restaurant.html" %}
-        {% include "mobile/view-restaurant-order.html" %}
+        include "view-restaurant-list.html"
+        include "view-restaurant.html"
+        include "view-restaurant-order.html"
         
-        {% include "mobile/view-member-login.html" %}
-        {% include "mobile/view-member-profile.html" %}
-        {% include "mobile/view-member-orders.html" %}
+        include "view-member-login.html"
+        include "view-member-profile.html"
+        include "view-member-orders.html"
         
         <!-- Page content End -->
         
@@ -57,11 +57,7 @@
         <script src="/assets/js/vendor/backbone.localStorage-min.js"></script>
         <script src="/assets/js/vendor/iscroll-min.js"></script>
         
-        <script src="/assets/js/app/app.js"></script>
-        <script src="/assets/js/app/templates.js"></script>
-        <script src="/assets/js/app/models.js"></script>
-        <script src="/assets/js/app/views.js"></script>
-        <script src="/assets/js/app/router.js"></script>
+        <script src="/assets/js/mw-app.js"></script>
         
         <script>
 			(function(i, s, o, g, r, a, m) {
