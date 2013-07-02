@@ -3,7 +3,8 @@
 
 MeiweiApp.Router = new (Backbone.Router.extend({
 	initialize: function(){
-		this.route('home', 'index');
+		this.route('', 'index');
+		this.route('home', 'home');
 		
 		this.route(/^restaurant\/(\d+)$/, 'restaurant');
 		this.route(/^restaurant\/(\d+)\/order$/, 'restaurantOrder');
@@ -16,6 +17,9 @@ MeiweiApp.Router = new (Backbone.Router.extend({
 		this.route(/^member\/order\/(\d+)$/, 'orderDetail');
 	},
 	index: function(){
+		MeiweiApp.Router.navigate('home', {trigger: true});
+	},
+	home: function(){
 		MeiweiApp.Pages.Home.show();
 	},
 	

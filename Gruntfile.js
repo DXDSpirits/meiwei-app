@@ -3,7 +3,7 @@ module.exports = function(grunt) {
 	grunt.initConfig({
 		pkg: grunt.file.readJSON('package.json'),
 		uglify: {
-			ios: {
+			mwapp: {
 				options: {
 					sourceMap: 'assets/js/mw-app.map',
 					beautify: {

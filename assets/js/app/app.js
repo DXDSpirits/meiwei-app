@@ -9,14 +9,14 @@ var MeiweiApp = new (Backbone.View.extend({
 	Pages: {},
 	
 	configs: {
-		
+		APIHost: "http://localhost:8000",
+		StaticHost: "http://localhost:8000",
+		MediaHost: "http://localhost:8000"
 	},
 	
-	events: {
-		
-	},
+	events: {},
 
-    log: function(msg) { console.log(msg) },
+	log: function(msg) { console.log(msg) },
     
 	start: function() {
 		Backbone.history.start();

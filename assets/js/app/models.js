@@ -3,18 +3,18 @@
 
 
 MeiweiApp.Models.Circle = MeiweiApp.Model.extend({
-	urlRoot: '/restaurants/circle/'
+	urlRoot: MeiweiApp.configs.APIHost + '/restaurants/circle/'
 });
 MeiweiApp.Collections.Circles = MeiweiApp.Collection.extend({
-	url: '/restaurants/circle/',
+	url: MeiweiApp.configs.APIHost + '/restaurants/circle/',
 	model: MeiweiApp.Models.Circle
 });
 
 MeiweiApp.Models.District = MeiweiApp.Model.extend({
-	urlRoot: '/restaurants/district/'
+	urlRoot: MeiweiApp.configs.APIHost + '/restaurants/district/'
 });
 MeiweiApp.Collections.Districts = MeiweiApp.Collection.extend({
-	url: '/restaurants/district/',
+	url: MeiweiApp.configs.APIHost + '/restaurants/district/',
 	model: MeiweiApp.Models.District
 });
 
@@ -39,7 +39,7 @@ MeiweiApp.Collections.Hours = MeiweiApp.Collection.extend({
 });
 
 MeiweiApp.Models.Restaurant = MeiweiApp.Model.extend({
-	urlRoot: '/restaurants/restaurant/',
+	urlRoot: MeiweiApp.configs.APIHost + '/restaurants/restaurant/',
 	parse: function(response) {
 		this.hours = new (MeiweiApp.Collections.Hours.extend({url: response.hours}))();
 		this.reviews = new (MeiweiApp.Collections.Reviews.extend({url: response.reviews}))();
@@ -50,7 +50,7 @@ MeiweiApp.Models.Restaurant = MeiweiApp.Model.extend({
 });
 
 MeiweiApp.Collections.Restaurants = MeiweiApp.Collection.extend({
-	url: '/restaurants/restaurant/',
+	url: MeiweiApp.configs.APIHost + '/restaurants/restaurant/',
 	model: MeiweiApp.Models.Restaurant
 });
 
@@ -65,7 +65,7 @@ MeiweiApp.Models.Recommend = MeiweiApp.Model.extend({
 });
 
 MeiweiApp.Collections.Recommends = MeiweiApp.Collection.extend({
-	url: '/restaurants/recommendrule/1/',
+	url: MeiweiApp.configs.APIHost + '/restaurants/recommendrule/1/',
 	model: MeiweiApp.Models.Recommend,
 	parse: function(response) {
 		return response.recommends;
@@ -77,25 +77,25 @@ MeiweiApp.Collections.Recommends = MeiweiApp.Collection.extend({
 
 
 MeiweiApp.Models.Profile = MeiweiApp.Model.extend({
-	urlRoot: '/members/profile/',
+	urlRoot: MeiweiApp.configs.APIHost + '/members/profile/',
 	parse: function(response) {
 		if (response.results != null) return response.results[0]; else return response;
 	}
 });
 
 MeiweiApp.Models.Member = MeiweiApp.Model.extend({
-	urlRoot: '/members/member/',
+	urlRoot: MeiweiApp.configs.APIHost + '/members/member/',
 	parse: function(response) {
 		if (response.results != null) return response.results[0]; else return response;
 	}
 });
 
 MeiweiApp.Models.Contact = MeiweiApp.Model.extend({
-	urlRoot: '/members/contact/'
+	urlRoot: MeiweiApp.configs.APIHost + '/members/contact/'
 });
 
 MeiweiApp.Collections.Contacts = MeiweiApp.Collection.extend({
-	url: '/members/contact/',
+	url: MeiweiApp.configs.APIHost + '/members/contact/',
 	model: MeiweiApp.Models.Contact
 });
 
@@ -107,7 +107,8 @@ MeiweiApp.me = new (MeiweiApp.Models.Member.extend({
 	login: function(username, password, callback) {
 		var self = this;
 		$.ajax({
-			async: false, type: 'POST', url: '/members/login/',
+			async: false, type: 'POST',
+			url: MeiweiApp.configs.APIHost + '/members/login/',
 			data: {"username": username, "password": password},
 			success: function(data) {
 				self.set(data);
@@ -118,7 +119,8 @@ MeiweiApp.me = new (MeiweiApp.Models.Member.extend({
 	},
 	logout: function(callback) {
 		$.ajax({
-			async: false, type: 'GET', url: '/members/logout/',
+			async: false, type: 'GET',
+			url: MeiweiApp.configs.APIHost + '/members/logout/',
 			success: function(data) {
 				if (callback) callback();
 			}
@@ -127,7 +129,8 @@ MeiweiApp.me = new (MeiweiApp.Models.Member.extend({
 	register: function(email, moblie, password, callback) {
 		var self = this;
 		$.ajax({
-			async: false, type: 'POST', url: '/members/register/',
+			async: false, type: 'POST',
+			url: MeiweiApp.configs.APIHost + '/members/register/',
 			data: {"email": email, "mobile": mobile, "password": password},
 			success: function(data) {
 				var newMember = data;
@@ -145,10 +148,10 @@ MeiweiApp.me = new (MeiweiApp.Models.Member.extend({
 
 
 MeiweiApp.Models.Order = MeiweiApp.Model.extend({
-	urlRoot: '/orders/order/'
+	urlRoot: MeiweiApp.configs.APIHost + '/orders/order/'
 });
 
 MeiweiApp.Collections.Orders = MeiweiApp.Collection.extend({
-	url: '/orders/order/',
+	url: MeiweiApp.configs.APIHost + '/orders/order/',
 	model: MeiweiApp.Models.Order
 });
