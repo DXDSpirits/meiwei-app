@@ -2,30 +2,30 @@
 	
 	<fieldset>
 		<legend>
-			{{ fullname }}
+			{{ restaurant.fullname }}
 		</legend>
 		<div>
 			<label>日期</label>
-			<input type="date" name="orderdate" value="2013-06-30" />
+			<input type="date" name="orderdate" value="{{ order.orderdate }}" />
 		</div>
 		<div>
 			<label>时间</label>
-			<input type="time" name="ordertime" value="17:00:00" />
+			<input type="time" name="ordertime" value="{{ order.ordertime }}" />
 		</div>
 
 		<div>
 			<label>人数</label>
-			<input type="number" name="personnum" value="2" />
+			<input type="number" name="personnum" value="{{ order.personnum }}" />
 		</div>
 
 		<div>
 			<label>联系人</label>
-			<input type="text" name="contactname" />
-			<input type="text" name="contactphone" />
+			<input type="text" name="contactname" value="{{ order.contactname }}"/>
+			<input type="text" name="contactphone" value="{{ order.contactphone }}"/>
 		</div>
 
 		<div>
-			<textarea name="other" placeholder="其他要求"></textarea>
+			<textarea name="other" placeholder="其他要求">{{ order.other }}</textarea>
 		</div>
 
 		<button id="submit-order">提交</button>

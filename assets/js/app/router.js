@@ -43,7 +43,7 @@ MeiweiApp.Router = new (Backbone.Router.extend({
         MeiweiApp.Pages.MemberOrders.show();
     },
     orderDetail: function(orderId) {
-    	MeiweiApp.Pages.RestaurantOrder.show(orderId);
+    	MeiweiApp.Pages.Order.show(orderId);
     }
 }));
 

@@ -205,7 +205,10 @@ MeiweiApp.Views.RestaurantOrderForm = MeiweiApp.View.extend({
 	},
 	template: MeiweiApp.Templates['restaurant-order-form'],
 	render: function() {
-		this.$el.html(this.template(this.restaurant.toJSON()));
+		this.$el.html(this.template({
+			restaurant: this.restaurant.toJSON(),
+			order: MeiweiApp.pendingOrder.toJSON()
+		}));
 	},
 	submitOrder: function(e) {
 		e.preventDefault();
@@ -368,7 +371,7 @@ MeiweiApp.Views.OrderList = MeiweiApp.CollectionView.extend({
 		template: MeiweiApp.Templates['order-list-item'],
 		events: { 'click': 'viewOrder' },
 		viewOrder: function() {
-			MeiweiApp.Router.navigate('order/' + this.model.id, {trigger: true});
+			MeiweiApp.Router.navigate('member/order/' + this.model.id, {trigger: true});
 		}
 	})
 });
@@ -386,3 +389,34 @@ MeiweiApp.Pages.MemberOrders = new (MeiweiApp.PageView.extend({
         this.slideIn();
     }
 }))({el: $("#view-member-orders")});
+
+
+/********************************** Order Detail **********************************/
+
+
+MeiweiApp.Views.OrderDetail = MeiweiApp.ModelView.extend({
+	events: {
+		'click .button-modify-order': 'modifyOrder'
+	},
+	template: MeiweiApp.Templates['order-detail'],
+	modifyOrder: function(e) {
+		e.preventDefault();
+		MeiweiApp.pendingOrder = this.model;
+		MeiweiApp.Router.navigate('restaurant/' + this.model.get('restaurant') + '/order', {trigger: true});
+	}
+});
+
+MeiweiApp.Pages.Order = new (MeiweiApp.PageView.extend({
+	initialize: function() {
+		this.model = new MeiweiApp.Models.Order();
+		this.views.OrderDetail = new MeiweiApp.Views.OrderDetail({
+			model: this.model,
+			el: this.$('.scroll')
+		});
+	},
+	show: function(orderId) {
+		this.model.set({id: orderId})
+		this.model.fetch();
+		this.slideIn();
+	}
+}))({el: $("#view-order")});
