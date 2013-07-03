@@ -64,11 +64,15 @@ MeiweiApp.Collections.Hours = MeiweiApp.Collection.extend({
 
 MeiweiApp.Models.Restaurant = MeiweiApp.Model.extend({
 	urlRoot: MeiweiApp.configs.APIHost + '/restaurants/restaurant/',
+	hours: new MeiweiApp.Collections.Hours(),
+	reviews: new MeiweiApp.Collections.Reviews(),
+	pictures: new MeiweiApp.Collections.Pictures(),
+	floorplans: new MeiweiApp.Collections.Floorplans(),
 	parse: function(response) {
-		this.hours = new (MeiweiApp.Collections.Hours.extend({url: response.hours}))();
-		this.reviews = new (MeiweiApp.Collections.Reviews.extend({url: response.reviews}))();
-		this.pictures = new (MeiweiApp.Collections.Pictures.extend({url: response.pictures}))();
-		this.floorplans = new (MeiweiApp.Collections.Floorplans.extend({url: response.floorplans}))();
+		this.hours.url = response.hours;
+		this.reviews.url = response.reviews;
+		this.pictures.url = response.pictures;
+		this.floorplans.url = response.floorplans;
 		return response;
 	}
 });
@@ -124,48 +128,25 @@ MeiweiApp.Collections.Contacts = MeiweiApp.Collection.extend({
 });
 
 MeiweiApp.me = new (MeiweiApp.Models.Member.extend({
-	initialize: function() {
-		this.contacts = new MeiweiApp.Collections.Contacts();
-	},
+	contacts: new MeiweiApp.Collections.Contacts(),
 	profile: new MeiweiApp.Models.Profile(),
 	login: function(username, password, callback) {
-		var self = this;
-		$.ajax({
-			async: false, type: 'POST',
-			url: MeiweiApp.configs.APIHost + '/members/login/',
-			data: {"username": username, "password": password},
-			success: function(data) {
-				self.set(data);
-				self.profile.set(self.attributes['profile']);
-				if (callback) callback();
-			}
-		});
+		Backbone.BasicAuth.set(username, password);
 	},
 	logout: function(callback) {
-		$.ajax({
-			async: false, type: 'GET',
-			url: MeiweiApp.configs.APIHost + '/members/logout/',
-			success: function(data) {
-				if (callback) callback();
-			}
-		});
+		Backbone.BasicAuth.clear();
 	},
 	register: function(email, moblie, password, callback) {
-		var self = this;
 		$.ajax({
 			async: false, type: 'POST',
 			url: MeiweiApp.configs.APIHost + '/members/register/',
 			data: {"email": email, "mobile": mobile, "password": password},
 			success: function(data) {
-				var newMember = data;
-				self.login(newMember.username, password);
-				if (callback) callback();
+				MeiweiApp.me.login(data.username, password);
 			}
 		});
 	}
 }));
-
-//MeiweiApp.me.login('dxdeat', '123abc');
 
 
 /********************************** Orders **********************************/

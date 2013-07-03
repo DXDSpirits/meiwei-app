@@ -204,14 +204,14 @@ MeiweiApp.Views.RestaurantOrderForm = MeiweiApp.View.extend({
 		this.fillFloorplans();
 	},
 	fillContacts: function() {
-		new MeiweiApp.Views.ContactList({
+		this.contactListView = new MeiweiApp.Views.ContactList({
 			collection: MeiweiApp.me.contacts,
 			el: this.$('select[name=contacts]')
 		});
 		MeiweiApp.me.contacts.fetch({reset: true});
 	},
 	fillFloorplans: function() {
-		new MeiweiApp.Views.FloorplanList({
+		this.floorplanListView = new MeiweiApp.Views.FloorplanList({
 			collection: this.restaurant.floorplans,
 			el: this.$('.floorplan')
 		});
@@ -244,13 +244,17 @@ MeiweiApp.Views.RestaurantOrderForm = MeiweiApp.View.extend({
 });
 
 MeiweiApp.Pages.RestaurantOrder = new (MeiweiApp.PageView.extend({
-	show: function(rid) {
-		var restaurant = new MeiweiApp.Models.Restaurant({id: rid});
-		var restaurantOrderForm = new MeiweiApp.Views.RestaurantOrderForm({
-			model: restaurant,
+	initialize: function() {
+		this.restaurant = new MeiweiApp.Models.Restaurant();
+		this.restaurantOrderForm = new MeiweiApp.Views.RestaurantOrderForm({
+			model: this.restaurant,
 			el: this.$('.scroll')
 		});
-		restaurant.fetch({
+	},
+	show: function(rid) {
+		this.restaurant.set({id: rid});
+		var restaurantOrderForm = this.restaurantOrderForm;
+		this.restaurant.fetch({
 			success: function() { restaurantOrderForm.render(); }
 		});
 		this.slideIn();
@@ -302,6 +306,19 @@ MeiweiApp.Views.MemberLoginForm = MeiweiApp.View.extend({
 	}
 });
 
+MeiweiApp.Views.MemberLogoutForm = MeiweiApp.View.extend({
+	events: { 'submit': 'logout' },
+	logout: function(e) {
+		e.preventDefault();
+		MeiweiApp.me.logout();
+		MeiweiApp.Router.navigate('home', {trigger: true});
+	},
+	template: MeiweiApp.Templates['member-logout-form'],
+	render: function() {
+		this.$el.html(this.template);
+	}
+});
+
 MeiweiApp.Views.MemberRegisterForm = MeiweiApp.View.extend({
 	events: { 'submit': 'register' },
 	register: function(e) {
@@ -319,14 +336,14 @@ MeiweiApp.Views.MemberRegisterForm = MeiweiApp.View.extend({
 });
 
 MeiweiApp.Pages.MemberLogin = new (MeiweiApp.PageView.extend({
+	initialize: function() {
+		this.loginForm = new MeiweiApp.Views.MemberLoginForm({ el: this.$('.scroll .login-box') });
+		this.logoutForm = new MeiweiApp.Views.MemberLogoutForm({ el: this.$('.scroll .logout-box') });
+		this.registerForm = new MeiweiApp.Views.MemberRegisterForm({ el: this.$('.scroll .register-box') });
+	},
 	show: function() {
-		var loginForm = new MeiweiApp.Views.MemberLoginForm({
-			el: this.$('.scroll .login-box')
-		});
-		var registerForm = new MeiweiApp.Views.MemberRegisterForm({
-			el: this.$('.scroll .register-box')
-		});
 		loginForm.render();
+		logoutForm.render();
 		registerForm.render();
 		this.slideIn();
 	}
@@ -347,12 +364,14 @@ MeiweiApp.Views.OrderList = MeiweiApp.CollectionView.extend({
 });
 
 MeiweiApp.Pages.MemberOrders = new (MeiweiApp.PageView.extend({
-    show: function() {
-        this.collection = new MeiweiApp.Collections.Orders();
-        var orderListView = new MeiweiApp.Views.OrderList({
+	initialize: function() {
+		this.collection = new MeiweiApp.Collections.Orders();
+        this.orderListView = new MeiweiApp.Views.OrderList({
             collection: this.collection,
             el: this.$('.scroll')
         });
+	},
+    show: function() {
         this.collection.fetch();
         this.slideIn();
     }
