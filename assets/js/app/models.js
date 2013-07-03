@@ -93,7 +93,7 @@ MeiweiApp.Models.Recommend = MeiweiApp.Model.extend({
 });
 
 MeiweiApp.Collections.Recommends = MeiweiApp.Collection.extend({
-	url: MeiweiApp.configs.APIHost + '/restaurants/recommendrule/1/',
+	url: MeiweiApp.configs.APIHost + '/restaurants/recommend/1/',
 	model: MeiweiApp.Models.Recommend,
 	parse: function(response) {
 		return response.recommends;
