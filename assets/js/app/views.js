@@ -32,6 +32,7 @@ MeiweiApp.CollectionView = Backbone.View.extend({
 });
 
 MeiweiApp.PageView = Backbone.View.extend({
+	views: {},
 	slideIn: function() {
 		if (this.$el && this.$el.hasClass('view-hidden')) {
 			$('.view').addClass('view-hidden');
@@ -93,24 +94,24 @@ MeiweiApp.Views.RestaurantList = MeiweiApp.CollectionView.extend({
 })
 
 MeiweiApp.Pages.RestaurantList = new (MeiweiApp.PageView.extend({
-	show: function() {
+	initialize: function() {
 		this.collection = new MeiweiApp.Collections.Restaurants();
-		var restaurantListView = new MeiweiApp.Views.RestaurantList({
+		this.restaurantListView = new MeiweiApp.Views.RestaurantList({
 			collection: this.collection,
 			el: this.$('.scroll')
 		});
+		_.bindAll(this, 'renderRestaurantList');
+	},
+	renderRestaurantList: function() {
+		this.restaurantListView.render();
+		this.scroller = new IScroll('#view-restaurant-list .wrapper', {
+			scrollX: false, scrollY: true, momentum: true, snap: true, snapStepY: 200
+		});
+	},
+	show: function() {
 		this.collection.fetch({
 			reset: true,
-			success: function() {
-				restaurantListView.render();
-				MeiweiApp.Pages.RestaurantList.scroller = new IScroll('#view-restaurant-list .wrapper', {
-					scrollX: false,
-					scrollY: true,
-					momentum: true,
-					snap: true,
-					snapStepY: 200
-				});
-			}
+			success: this.renderRestaurantList 
 		});
 		this.slideIn();
 	}
@@ -137,29 +138,29 @@ MeiweiApp.Views.RestaurantReviewList = MeiweiApp.CollectionView.extend({
 });
 
 MeiweiApp.Pages.Restaurant = new (MeiweiApp.PageView.extend({
-	show: function(rid) {
-		var restaurant = new MeiweiApp.Models.Restaurant({id: rid});
-		this.model = restaurant;
-		var info = new MeiweiApp.Views.RestaurantProfileBox({
-			model: restaurant,
+	initialize: function() {
+		this.restaurant = new MeiweiApp.Models.Restaurant();
+		this.views.restaurantProfileBox = new MeiweiApp.Views.RestaurantProfileBox({
+			model: this.restaurant,
 			el: this.$('.restaurant-profile')
 		});
-		var picturesEl = this.$('.restaurant-pictures');
-		var reviewsEl = this.$('.restaurant-reviews');
-		restaurant.fetch({
-			success: function() {
-				var pictures = new MeiweiApp.Views.RestaurantPictureList({
-					collection: restaurant.pictures,
-					el: picturesEl
-				});
-				var reviews = new MeiweiApp.Views.RestaurantReviewList({
-					collection: restaurant.reviews,
-					el: reviewsEl
-				});
-				restaurant.pictures.fetch({reset: true});
-				restaurant.reviews.fetch({reset: true});
-			}
+		this.views.pictures = new MeiweiApp.Views.RestaurantPictureList({
+			collection: this.restaurant.pictures,
+			el: this.$('.restaurant-pictures')
 		});
+		this.views.reviews = new MeiweiApp.Views.RestaurantReviewList({
+			collection: this.restaurant.reviews,
+			el: this.$('.restaurant-reviews')
+		});
+		_.bindAll(this, 'renderRestaurantProfileBox')
+	},
+	renderRestaurantProfileBox: function() {
+		this.restaurant.pictures.fetch({reset: true});
+		this.restaurant.reviews.fetch({reset: true});
+	},
+	show: function(rid) {
+		this.restaurant.set({id: rid});
+		this.restaurant.fetch({ success: this.renderRestaurantProfileBox });
 		this.slideIn();
 	}
 }))({el: $("#view-restaurant")});
@@ -170,17 +171,23 @@ MeiweiApp.Pages.Restaurant = new (MeiweiApp.PageView.extend({
 
 MeiweiApp.Views.ContactList = MeiweiApp.CollectionView.extend({
 	modelView: MeiweiApp.ModelView.extend({
-		tagName: "option",
+		events: {
+			"click": "updateContact"
+		},
 		template: Mustache.compile("{{name}} - {{mobile}}"),
 		initialize: function() {
 			this.$el.val(this.model.id);
+		},
+		updateContact: function(e) {
+			var contactId = e.target.value;
+			var contact = MeiweiApp.me.contacts.get(contactId);
+			contact.trigger("select");
 		}
 	})
 });
 
 MeiweiApp.Views.FloorplanList = MeiweiApp.CollectionView.extend({
 	modelView: MeiweiApp.ModelView.extend({
-		tagName: "p",
 		template: Mustache.compile("{{caption}} - {{path}}"),
 		initialize: function() {
 			this.$el.attr("id", "floorplan" + this.model.id);
@@ -190,8 +197,7 @@ MeiweiApp.Views.FloorplanList = MeiweiApp.CollectionView.extend({
 
 MeiweiApp.Views.RestaurantOrderForm = MeiweiApp.View.extend({
 	events: {
-		'click button': 'submitOrder',
-		'change select[name=contacts]': 'updateContact'
+		'submit': 'submitOrder',
 	},
 	initialize: function() {
 		this.restaurant = this.model;
@@ -200,28 +206,6 @@ MeiweiApp.Views.RestaurantOrderForm = MeiweiApp.View.extend({
 	template: MeiweiApp.Templates['restaurant-order-form'],
 	render: function() {
 		this.$el.html(this.template(this.restaurant.toJSON()));
-		this.fillContacts();
-		this.fillFloorplans();
-	},
-	fillContacts: function() {
-		this.contactListView = new MeiweiApp.Views.ContactList({
-			collection: MeiweiApp.me.contacts,
-			el: this.$('select[name=contacts]')
-		});
-		MeiweiApp.me.contacts.fetch({reset: true});
-	},
-	fillFloorplans: function() {
-		this.floorplanListView = new MeiweiApp.Views.FloorplanList({
-			collection: this.restaurant.floorplans,
-			el: this.$('.floorplan')
-		});
-		this.restaurant.floorplans.fetch({reset: true});
-	},
-	updateContact: function(e) {
-		var contactId = e.target.value;
-		var contact = MeiweiApp.me.contacts.get(contactId);
-		this.$('input[name=contactname]').val(contact.get('name'));
-		this.$('input[name=contactphone]').val(contact.get('mobile'));
 	},
 	submitOrder: function(e) {
 		e.preventDefault();
@@ -248,15 +232,39 @@ MeiweiApp.Pages.RestaurantOrder = new (MeiweiApp.PageView.extend({
 		this.restaurant = new MeiweiApp.Models.Restaurant();
 		this.restaurantOrderForm = new MeiweiApp.Views.RestaurantOrderForm({
 			model: this.restaurant,
-			el: this.$('.scroll')
+			el: this.$('.scroll div:nth-child(1)')
 		});
+		this.contactListView = new MeiweiApp.Views.ContactList({
+			collection: MeiweiApp.me.contacts,
+			el: this.$('.scroll div:nth-child(2)')
+		});
+		this.floorplanListView = new MeiweiApp.Views.FloorplanList({
+			collection: this.restaurant.floorplans,
+			el: this.$('.scroll div:nth-child(3)')
+		});
+		_.bindAll(this, "renderOrderForm", "bindContactSelect");
+	},
+	renderOrderForm: function(model, response, options) {
+		this.restaurantOrderForm.render();
+		this.restaurant.floorplans.fetch({ reset: true });
+		MeiweiApp.me.contacts.fetch({
+			reset: true,
+			success: this.bindContactSelect
+		});
+	},
+	bindContactSelect: function(collection, response, options) {
+		collection.forEach(
+			function(contact) {
+				contact.on("select", function() {
+					this.$('input[name=contactname]').val(contact.get('name'));
+					this.$('input[name=contactphone]').val(contact.get('mobile'));
+				}, this)
+			}, this);
+		collection.at(0).trigger("select");
 	},
 	show: function(rid) {
 		this.restaurant.set({id: rid});
-		var restaurantOrderForm = this.restaurantOrderForm;
-		this.restaurant.fetch({
-			success: function() { restaurantOrderForm.render(); }
-		});
+		this.restaurant.fetch({ success: this.renderOrderForm });
 		this.slideIn();
 	}
 }))({el: $("#view-restaurant-order")});
@@ -273,16 +281,18 @@ MeiweiApp.Views.MemberProfileForm = MeiweiApp.ModelView.extend({
 });
 
 MeiweiApp.Pages.MemberProfile = new (MeiweiApp.PageView.extend({
-	show: function() {
-		var profileView = new MeiweiApp.Views.MemberProfileForm({
+	initialize: function() {
+		this.profileView = new MeiweiApp.Views.MemberProfileForm({
 			model: MeiweiApp.me.profile,
 			el: this.$('.scroll')
 		});
-		MeiweiApp.me.profile.fetch({
-			success: function() {
-				profileView.render();
-			}
-		});
+		_.bindAll(this, 'renderProfileView')
+	},
+	renderProfileView: function() {
+		this.profileView.render();
+	},
+	show: function() {
+		MeiweiApp.me.profile.fetch({ success: this.renderProfileView });
 		this.slideIn();
 	}
 }))({el: $("#view-member-profile")});
