@@ -5,13 +5,8 @@ MeiweiApp.Views.ContactList = MeiweiApp.CollectionView.extend({
 			"click": "updateContact"
 		},
 		template: Mustache.compile("{{name}} - {{mobile}}"),
-		initialize: function() {
-			this.$el.val(this.model.id);
-		},
 		updateContact: function(e) {
-			var contactId = e.target.value;
-			var contact = MeiweiApp.me.contacts.get(contactId);
-			contact.trigger("select");
+			this.model.trigger("select");
 		}
 	})
 });

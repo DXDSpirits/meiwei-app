@@ -1,4 +1,12 @@
 
+MeiweiApp.Models.Cuisine = MeiweiApp.Model.extend({
+	urlRoot: MeiweiApp.configs.APIHost + '/restaurants/cuisine/'
+});
+MeiweiApp.Collections.Cuisines = MeiweiApp.Collection.extend({
+	url: MeiweiApp.configs.APIHost + '/restaurants/cuisine/',
+	model: MeiweiApp.Models.Cuisine
+});
+
 MeiweiApp.Models.Circle = MeiweiApp.Model.extend({
 	urlRoot: MeiweiApp.configs.APIHost + '/restaurants/circle/'
 });
