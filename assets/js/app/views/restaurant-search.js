@@ -24,7 +24,7 @@ MeiweiApp.Pages.RestaurantList = new (MeiweiApp.PageView.extend({
 	},
 	renderRestaurantList: function() {
 		this.restaurantListView.render();
-		this.scroller = new IScroll('#view-restaurant-list .wrapper', {
+		this.scroller = new IScroll(this.$('.wrapper').selector, {
 			scrollX: false, scrollY: true, momentum: true, snap: true, snapStepY: 200
 		});
 	},

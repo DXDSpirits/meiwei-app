@@ -12,6 +12,7 @@ MeiweiApp.Views.MemberProfileForm = MeiweiApp.ModelView.extend({
 			email: this.$('input[name=email]').val(),
 			mobile: this.$('input[name=mobile]').val(),
 			sexe: this.$('input[name=sexe]').val(),
+			birthday: this.$('input[name=birthday]').val(),
 			anniversary: this.$('input[name=anniversary]').val()
 		});
 		MeiweiApp.me.profile.save();
