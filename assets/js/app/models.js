@@ -64,10 +64,12 @@ MeiweiApp.Collections.Hours = MeiweiApp.Collection.extend({
 
 MeiweiApp.Models.Restaurant = MeiweiApp.Model.extend({
 	urlRoot: MeiweiApp.configs.APIHost + '/restaurants/restaurant/',
-	hours: new MeiweiApp.Collections.Hours(),
-	reviews: new MeiweiApp.Collections.Reviews(),
-	pictures: new MeiweiApp.Collections.Pictures(),
-	floorplans: new MeiweiApp.Collections.Floorplans(),
+	initialize: function() {
+		this.hours = new MeiweiApp.Collections.Hours();
+		this.reviews = new MeiweiApp.Collections.Reviews();
+		this.pictures = new MeiweiApp.Collections.Pictures();
+		this.floorplans = new MeiweiApp.Collections.Floorplans();
+	},
 	parse: function(response) {
 		this.hours.url = response.hours;
 		this.reviews.url = response.reviews;
@@ -83,21 +85,65 @@ MeiweiApp.Collections.Restaurants = MeiweiApp.Collection.extend({
 });
 
 
+/********************************** Products **********************************/
+
+
+MeiweiApp.Models.ProductItem = MeiweiApp.Model.extend({
+	urlRoot: MeiweiApp.configs.APIHost + '/restaurants/productitem/',
+});
+
+MeiweiApp.Collections.ProductItems = MeiweiApp.Collection.extend({
+	model: MeiweiApp.Models.ProductItem,
+});
+
+MeiweiApp.Models.Product = MeiweiApp.Model.extend({
+	initItems: function() {
+		if (this.items == null)
+			this.items = new MeiweiApp.Collections.ProductItems();
+	},
+	initialize: function() {
+		this.initItems();
+	},
+	urlRoot: MeiweiApp.configs.APIHost + '/restaurants/product/',
+	parse: function(response) {
+		this.initItems();
+		this.items.reset(response.productitem_set)
+		response.productitem_set = null;
+		return response;
+	}
+});
+
+MeiweiApp.Collections.Products = MeiweiApp.Collection.extend({
+	url: MeiweiApp.configs.APIHost + '/restaurants/product/',
+	model: MeiweiApp.Models.Product,
+});
+
+
 /********************************** Recommends **********************************/
 
 
+MeiweiApp.Models.RecommendItem = MeiweiApp.Model.extend({
+});
+
+MeiweiApp.Collections.RecommendItems = MeiweiApp.Collection.extend({
+	model: MeiweiApp.Models.RecommendItem,
+});
+
 MeiweiApp.Models.Recommend = MeiweiApp.Model.extend({
+	initialize: function() {
+		this.items = new MeiweiApp.Collections.RecommendItems();
+	},
+	urlRoot: MeiweiApp.configs.APIHost + '/restaurants/recommend/',
 	parse: function(response) {
+		this.items.reset(response.recommenditem_set)
+		response.recommenditem_set = null;
 		return response;
 	}
 });
 
 MeiweiApp.Collections.Recommends = MeiweiApp.Collection.extend({
-	url: MeiweiApp.configs.APIHost + '/restaurants/recommend/1/',
+	url: MeiweiApp.configs.APIHost + '/restaurants/recommend/',
 	model: MeiweiApp.Models.Recommend,
-	parse: function(response) {
-		return response.recommends;
-	}
 });
 
 
@@ -128,8 +174,10 @@ MeiweiApp.Collections.Contacts = MeiweiApp.Collection.extend({
 });
 
 MeiweiApp.me = new (MeiweiApp.Models.Member.extend({
-	contacts: new MeiweiApp.Collections.Contacts(),
-	profile: new MeiweiApp.Models.Profile(),
+	initialize: function() {
+		this.contacts = new MeiweiApp.Collections.Contacts();
+		this.profile = new MeiweiApp.Models.Profile();
+	},
 	login: function(username, password, callback) {
 		Backbone.BasicAuth.set(username, password);
 	},

@@ -48,7 +48,7 @@ MeiweiApp.PageView = Backbone.View.extend({
 
 /********************************** Home **********************************/
 
-MeiweiApp.Views.RecommendListItem = MeiweiApp.ModelView.extend({
+MeiweiApp.Views.RecommendItem = MeiweiApp.ModelView.extend({
 	//events: { 'click': 'viewRestaurant' },
 	tagName: 'section',
 	className: 'recommend-list-item',
@@ -59,18 +59,20 @@ MeiweiApp.Views.RecommendListItem = MeiweiApp.ModelView.extend({
 	}
 });
 
-MeiweiApp.Views.RecommendList = MeiweiApp.CollectionView.extend({
-	modelView: MeiweiApp.Views.RecommendListItem
+MeiweiApp.Views.RecommendItems = MeiweiApp.CollectionView.extend({
+	modelView: MeiweiApp.Views.RecommendItem
 })
 
 MeiweiApp.Pages.Home = new (MeiweiApp.PageView.extend({
-	show: function() {
-		this.recommends = new MeiweiApp.Collections.Recommends();
-		var recommendListView = new MeiweiApp.Views.RecommendList({
-			collection: this.recommends,
+	initialize: function() {
+		this.recommend = new MeiweiApp.Models.Recommend({id: 1});
+		this.views.recommendItems = new MeiweiApp.Views.RecommendItems({
+			collection: this.recommend.items,
 			el: this.$('.scroll')
 		});
-		this.recommends.fetch({reset: true});
+	},
+	show: function() {
+		this.recommend.fetch();
 		this.slideIn();
 	}
 }))({el: $("#view-home")});
@@ -195,6 +197,22 @@ MeiweiApp.Views.FloorplanList = MeiweiApp.CollectionView.extend({
 	})
 });
 
+MeiweiApp.Views.ProductList = MeiweiApp.CollectionView.extend({
+	modelView: MeiweiApp.ModelView.extend({
+		template: MeiweiApp.Templates['product-box'],
+		initialize: function() {
+			this.$el.attr("id", "product" + this.model.id);
+		},
+		render: function() {
+			this.$el.html(this.template({
+				product: this.model.toJSON(),
+				items: this.model.items.toJSON(),
+			}));
+			return this;
+		}
+	})
+});
+
 MeiweiApp.Views.RestaurantOrderForm = MeiweiApp.View.extend({
 	events: {
 		'submit': 'submitOrder',
@@ -205,9 +223,20 @@ MeiweiApp.Views.RestaurantOrderForm = MeiweiApp.View.extend({
 	},
 	template: MeiweiApp.Templates['restaurant-order-form'],
 	render: function() {
+		var pending
+		if (MeiweiApp.pendingOrder == null) {
+			var today = new Date();
+			pending = {
+				orderdate: today.toJSON().slice(0, 10),
+				ordertime: '19:00:00',
+				personnum: 2
+			}
+		} else {
+			pending = MeiweiApp.pendingOrder.toJSON()
+		}
 		this.$el.html(this.template({
 			restaurant: this.restaurant.toJSON(),
-			order: MeiweiApp.pendingOrder.toJSON()
+			order: pending
 		}));
 	},
 	submitOrder: function(e) {
@@ -245,6 +274,13 @@ MeiweiApp.Pages.RestaurantOrder = new (MeiweiApp.PageView.extend({
 			collection: this.restaurant.floorplans,
 			el: this.$('.scroll div:nth-child(3)')
 		});
+		
+		this.products = new MeiweiApp.Collections.Products();
+		this.productList = new MeiweiApp.Views.ProductList({
+			collection: this.products,
+			el: this.$('.scroll div:nth-child(4)')
+		});
+		
 		_.bindAll(this, "renderOrderForm", "bindContactSelect");
 	},
 	renderOrderForm: function(model, response, options) {
@@ -268,6 +304,10 @@ MeiweiApp.Pages.RestaurantOrder = new (MeiweiApp.PageView.extend({
 	show: function(rid) {
 		this.restaurant.set({id: rid});
 		this.restaurant.fetch({ success: this.renderOrderForm });
+		this.products.fetch({
+			data: {category: 1}, 
+			trigger: true
+		});
 		this.slideIn();
 	}
 }))({el: $("#view-restaurant-order")});
