@@ -15,8 +15,10 @@ module.exports = function(grunt) {
 					'assets/js/mw-app.js': [
 						'assets/js/app/app.js',
 						'assets/js/app/templates.js',
-						'assets/js/app/models.js',
-						'assets/js/app/views.js',
+						'assets/js/app/model.js',
+						'assets/js/app/models/*.js',
+						'assets/js/app/view.js',
+						'assets/js/app/views/*.js',
 						'assets/js/app/router.js'
 					]
 				}
@@ -41,7 +43,8 @@ module.exports = function(grunt) {
 			all: {
 				files: {
 					'assets/js/app/templates.js': [
-						'assets/mustache/*.html'
+						'assets/template/*.html',
+						'assets/template/*/*.html'
 					]
 				}
 			}
@@ -54,7 +57,9 @@ module.exports = function(grunt) {
 		watch: {
 			scripts: {
 				files: [
-					'assets/js/app/*.js'
+					'assets/js/app/*.js',
+					'assets/js/app/models/*.js',
+					'assets/js/app/views/*.js'
 				],
 				tasks: ['uglify']
 			},
@@ -66,7 +71,10 @@ module.exports = function(grunt) {
 				tasks: ['sass']
 			},
 			templates: {
-				files: ['assets/mustache/*.html'],
+				files: [
+					'assets/template/*.html',
+					'assets/template/*/*.html'
+				],
 				tasks: ['templates']
 			},
 			html: {
