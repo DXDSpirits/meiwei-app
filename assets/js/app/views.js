@@ -243,14 +243,14 @@ MeiweiApp.Views.RestaurantOrderForm = MeiweiApp.View.extend({
 		e.preventDefault();
 		var newOrder = new MeiweiApp.Models.Order();
 		newOrder.set({
-		    'member': MeiweiApp.me.id,
-		    'restaurant': this.restaurant.id,
-		    'orderdate': this.$('input[name=orderdate]').val(),
-		    'ordertime': this.$('input[name=ordertime]').val(),
-		    'personnum': this.$('input[name=personnum]').val(),
-		    'contactname': this.$('input[name=contactname]').val(),
-		    'contactphone': this.$('input[name=contactphone]').val(),
-		    'other': this.$('textarea[name=other]').text()
+		    member: MeiweiApp.me.id,
+		    restaurant: this.restaurant.id,
+		    orderdate: this.$('input[name=orderdate]').val(),
+		    ordertime: this.$('input[name=ordertime]').val(),
+		    personnum: this.$('input[name=personnum]').val(),
+		    contactname: this.$('input[name=contactname]').val(),
+		    contactphone: this.$('input[name=contactphone]').val(),
+		    other: this.$('textarea[name=other]').text()
 		});
 		newOrder.save({}, {error: function(model, xhr, options) {
 			var errors = JSON.parse(xhr.responseText);
@@ -317,25 +317,50 @@ MeiweiApp.Pages.RestaurantOrder = new (MeiweiApp.PageView.extend({
 
 
 MeiweiApp.Views.MemberProfileForm = MeiweiApp.ModelView.extend({
+	events: { 'submit': 'updateProfile' },
 	template: MeiweiApp.Templates['member-profile-form'],
 	render: function() {
 		this.$el.html(this.template(this.model.toJSON()));
+	},
+	updateProfile: function(e) {
+		e.preventDefault();
+		MeiweiApp.me.profile.set({
+			nickname: this.$('input[name=nickname]').val(),
+			email: this.$('input[name=email]').val(),
+			mobile: this.$('input[name=mobile]').val(),
+			sexe: this.$('input[name=sexe]').val(),
+			anniversary: this.$('input[name=anniversary]').val()
+		});
+		MeiweiApp.me.profile.save();
 	}
+});
+
+MeiweiApp.Views.MemberAvatarForm = MeiweiApp.ModelView.extend({
+	events: { 'submit': 'uploadAvatar' },
+	template: MeiweiApp.Templates['member-profile-avatar-form'],
+	render: function() {
+		this.$el.html(this.template(this.model.toJSON()));
+	},
+	uploadAvatar: function(e) {
+		e.preventDefault();
+		avatar = this.$('input[name=avatar]').val();
+		console.log(this.$el.serialize())
+	},
 });
 
 MeiweiApp.Pages.MemberProfile = new (MeiweiApp.PageView.extend({
 	initialize: function() {
-		this.profileView = new MeiweiApp.Views.MemberProfileForm({
+		this.views.profileForm = new MeiweiApp.Views.MemberProfileForm({
 			model: MeiweiApp.me.profile,
-			el: this.$('.scroll')
+			el: this.$('.scroll div:nth-child(1)')
 		});
-		_.bindAll(this, 'renderProfileView')
-	},
-	renderProfileView: function() {
-		this.profileView.render();
+		this.views.avatarForm = new MeiweiApp.Views.MemberAvatarForm({
+			model: MeiweiApp.me.profile,
+			el: this.$('.scroll div:nth-child(2)')
+		});
 	},
 	show: function() {
-		MeiweiApp.me.profile.fetch({ success: this.renderProfileView });
+		MeiweiApp.me.profile.fetch();
 		this.slideIn();
 	}
 }))({el: $("#view-member-profile")});
@@ -395,9 +420,9 @@ MeiweiApp.Pages.MemberLogin = new (MeiweiApp.PageView.extend({
 		this.registerForm = new MeiweiApp.Views.MemberRegisterForm({ el: this.$('.scroll .register-box') });
 	},
 	show: function() {
-		loginForm.render();
-		logoutForm.render();
-		registerForm.render();
+		this.loginForm.render();
+		this.logoutForm.render();
+		this.registerForm.render();
 		this.slideIn();
 	}
 }))({el: $("#view-member-login")});

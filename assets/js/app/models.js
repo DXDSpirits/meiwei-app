@@ -65,12 +65,13 @@ MeiweiApp.Collections.Hours = MeiweiApp.Collection.extend({
 MeiweiApp.Models.Restaurant = MeiweiApp.Model.extend({
 	urlRoot: MeiweiApp.configs.APIHost + '/restaurants/restaurant/',
 	initialize: function() {
-		this.hours = new MeiweiApp.Collections.Hours();
-		this.reviews = new MeiweiApp.Collections.Reviews();
-		this.pictures = new MeiweiApp.Collections.Pictures();
-		this.floorplans = new MeiweiApp.Collections.Floorplans();
+		if (this.hours == null) this.hours = new MeiweiApp.Collections.Hours();
+		if (this.reviews == null) this.reviews = new MeiweiApp.Collections.Reviews();
+		if (this.pictures == null) this.pictures = new MeiweiApp.Collections.Pictures();
+		if (this.floorplans == null) this.floorplans = new MeiweiApp.Collections.Floorplans();
 	},
 	parse: function(response) {
+		this.initialize();
 		this.hours.url = response.hours;
 		this.reviews.url = response.reviews;
 		this.pictures.url = response.pictures;
@@ -97,16 +98,12 @@ MeiweiApp.Collections.ProductItems = MeiweiApp.Collection.extend({
 });
 
 MeiweiApp.Models.Product = MeiweiApp.Model.extend({
-	initItems: function() {
-		if (this.items == null)
-			this.items = new MeiweiApp.Collections.ProductItems();
-	},
 	initialize: function() {
-		this.initItems();
+		if (this.items == null) this.items = new MeiweiApp.Collections.ProductItems();
 	},
 	urlRoot: MeiweiApp.configs.APIHost + '/restaurants/product/',
 	parse: function(response) {
-		this.initItems();
+		this.initialize();
 		this.items.reset(response.productitem_set)
 		response.productitem_set = null;
 		return response;
@@ -131,10 +128,11 @@ MeiweiApp.Collections.RecommendItems = MeiweiApp.Collection.extend({
 
 MeiweiApp.Models.Recommend = MeiweiApp.Model.extend({
 	initialize: function() {
-		this.items = new MeiweiApp.Collections.RecommendItems();
+		if (this.items == null) this.items = new MeiweiApp.Collections.RecommendItems();
 	},
 	urlRoot: MeiweiApp.configs.APIHost + '/restaurants/recommend/',
 	parse: function(response) {
+		this.initialize();
 		this.items.reset(response.recommenditem_set)
 		response.recommenditem_set = null;
 		return response;
@@ -175,8 +173,8 @@ MeiweiApp.Collections.Contacts = MeiweiApp.Collection.extend({
 
 MeiweiApp.me = new (MeiweiApp.Models.Member.extend({
 	initialize: function() {
-		this.contacts = new MeiweiApp.Collections.Contacts();
-		this.profile = new MeiweiApp.Models.Profile();
+		if (this.contacts == null) this.contacts = new MeiweiApp.Collections.Contacts();
+		if (this.profile == null) this.profile = new MeiweiApp.Models.Profile();
 	},
 	login: function(username, password, callback) {
 		Backbone.BasicAuth.set(username, password);
