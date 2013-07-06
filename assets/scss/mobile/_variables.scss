@@ -12,9 +12,6 @@
     font-style: normal;
 }
 
-@function imageUrl($url) {
-	@return url(../img/#{$url});
-}
 
 // Global values
 // --------------------------------------------------
@@ -133,8 +130,7 @@ $zindexModal:             1050 !default;
 
 // Sprite icons path
 // -------------------------
-$iconSpritePath:          "../img/glyphicons-halflings.png" !default;
-$iconWhiteSpritePath:     "../img/glyphicons-halflings-white.png" !default;
+$iconSpritePath:          "../img/icons@2x.png" !default;
 
 
 // Input placeholder text color
@@ -159,8 +155,9 @@ $wellBackground:                  #f5f5f5 !default;
 
 // Navbar
 // -------------------------
+$navbarBackgroundImagePath:		  "../img/navbar@2x.png" !default;;
 $navbarHeight:                    44px !default;
-$navbarPadding:                   10px 18px !default;
+$navbarPadding:                   9px 17px !default;
 
 
 // Form states and alerts

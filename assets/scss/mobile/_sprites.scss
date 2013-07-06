@@ -1,0 +1,51 @@
+[class^="icon-"],
+[class*=" icon-"] {
+	display: inline-block;
+	width: 26px;
+	height: 26px;
+	@include ie7-restore-right-whitespace();
+	line-height: 26px;
+	vertical-align: text-top;
+	background-image: url($iconSpritePath);
+	background-size: 260px 208px;
+	background-position: 26px 26px;
+	background-repeat: no-repeat;
+	margin-top: 1px;
+}
+
+@mixin icon-offset($x, $y) {
+	background-position: $x * (-26px)  $y * (-26px);
+}
+
+.icon-member              	{ @include icon-offset( 0,  0); }
+.icon-member:hover			{ @include icon-offset( 1,  0); }
+
+.icon-back					{ @include icon-offset( 2,  0); }
+.icon-back:hover			{ @include icon-offset( 3,  0); }
+
+.icon-cancel				{ @include icon-offset( 4,  0); }
+.icon-cancel:hover			{ @include icon-offset( 5,  0); }
+
+.icon-confirm				{ @include icon-offset( 0,  1); }
+.icon-confirm:hover			{ @include icon-offset( 1,  1); }
+
+.icon-edit					{ @include icon-offset( 2,  1); }
+.icon-edit:hover			{ @include icon-offset( 3,  1); }
+
+.icon-plus					{ @include icon-offset( 4,  1); }
+.icon-plus:hover			{ @include icon-offset( 5,  1); }
+
+.icon-setting				{ @include icon-offset( 6,  1); }
+.icon-setting:hover			{ @include icon-offset( 7,  1); }
+
+.icon-share					{ @include icon-offset( 8,  1); }
+.icon-share:hover			{ @include icon-offset( 9,  1); }
+
+.icon-locate				{ @include icon-offset( 0,  2); }
+.icon-locate:hover			{ @include icon-offset( 1,  2); }
+
+.icon-favorite				{ @include icon-offset( 2,  2); }
+.icon-favorite:hover		{ @include icon-offset( 3,  2); }
+
+.icon-map-marker			{ @include icon-offset( 4,  2); }
+.icon-map-marker:hover		{ @include icon-offset( 5,  2); }
