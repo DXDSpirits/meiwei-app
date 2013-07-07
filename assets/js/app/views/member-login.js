@@ -45,9 +45,9 @@ MeiweiApp.Views.MemberRegisterForm = MeiweiApp.View.extend({
 
 MeiweiApp.Pages.MemberLogin = new (MeiweiApp.PageView.extend({
 	initialize: function() {
-		this.loginForm = new MeiweiApp.Views.MemberLoginForm({ el: this.$('.scroll .login-box') });
-		this.logoutForm = new MeiweiApp.Views.MemberLogoutForm({ el: this.$('.scroll .logout-box') });
-		this.registerForm = new MeiweiApp.Views.MemberRegisterForm({ el: this.$('.scroll .register-box') });
+		this.loginForm = new MeiweiApp.Views.MemberLoginForm({ el: this.$('.login-box') });
+		this.logoutForm = new MeiweiApp.Views.MemberLogoutForm({ el: this.$('.logout-box') });
+		this.registerForm = new MeiweiApp.Views.MemberRegisterForm({ el: this.$('.register-box') });
 	},
 	show: function() {
 		this.loginForm.render();

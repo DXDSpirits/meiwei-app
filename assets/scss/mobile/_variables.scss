@@ -17,12 +17,11 @@
 // --------------------------------------------------
 
 
-// Grays
+// Colors
 // -------------------------
 $brownDark:             #482614 !default;
 $brown:                 #8B7D73 !default;
 $brownLight:            #C5BEB9 !default;
-
 $white:                 #FFF !default;
 
 
@@ -62,21 +61,14 @@ $fontSizeLarge:         18px !default;
 $fontSizeSmall:         12px !default;
 $fontSizeMini:          10px !default;
 
-$paddingLarge:          11px 19px !default; // 44px
-$paddingSmall:          2px 10px !default;  // 26px
-$paddingMini:           0px 6px !default;   // 22px
+$paddingLarge:          9px 17px !default;
+$paddingSmall:          2px 10px !default;
+$paddingMini:           0px 6px !default;
 
 $baseBorderRadius:      10px !default;
 $borderRadiusLarge:     15px !default;
 $borderRadiusSmall:     5px !default;
 
-
-// Tables
-// -------------------------
-$tableBackground:                   transparent !default; // overall background-color
-$tableBackgroundAccent:             #f9f9f9 !default; // for striping
-$tableBackgroundHover:              #f5f5f5 !default; // for hover
-$tableBorder:                       #ddd !default; // table and cell border
 
 // Buttons
 // -------------------------
@@ -138,26 +130,10 @@ $iconSpritePath:          "../img/icons@2x.png" !default;
 $placeholderText:         $brownLight !default;
 
 
-// Hr border color
-// -------------------------
-$hrBorder:                $brownLight !default;
-
-
-// Horizontal forms & lists
-// -------------------------
-$horizontalComponentOffset:       180px !default;
-
-
-// Wells
-// -------------------------
-$wellBackground:                  #f5f5f5 !default;
-
-
 // Navbar
 // -------------------------
 $navbarBackgroundImagePath:		  "../img/navbar@2x.png" !default;;
 $navbarHeight:                    44px !default;
-$navbarPadding:                   9px 17px !default;
 
 
 // Form states and alerts
@@ -186,31 +162,8 @@ $infoBorder:              darken(adjust-hue($infoBackground, -10), 7%) !default;
 
 // Default 940px grid
 // -------------------------
-$gridColumns:             12 !default;
-$gridColumnWidth:         60px !default;
-$gridGutterWidth:         20px !default;
-$gridRowWidth:            ($gridColumns * $gridColumnWidth) + ($gridGutterWidth * ($gridColumns - 1)) !default;
-
-// 1200px min
-$gridColumnWidth1200:     70px !default;
-$gridGutterWidth1200:     30px !default;
-$gridRowWidth1200:        ($gridColumns * $gridColumnWidth1200) + ($gridGutterWidth1200 * ($gridColumns - 1)) !default;
-
-// 768px-979px
-$gridColumnWidth768:      42px !default;
-$gridGutterWidth768:      20px !default;
-$gridRowWidth768:         ($gridColumns * $gridColumnWidth768) + ($gridGutterWidth768 * ($gridColumns - 1)) !default;
 
 
 // Fluid grid
 // -------------------------
-$fluidGridColumnWidth:    percentage($gridColumnWidth/$gridRowWidth) !default;
-$fluidGridGutterWidth:    percentage($gridGutterWidth/$gridRowWidth) !default;
 
-// 1200px min
-$fluidGridColumnWidth1200:     percentage($gridColumnWidth1200/$gridRowWidth1200) !default;
-$fluidGridGutterWidth1200:     percentage($gridGutterWidth1200/$gridRowWidth1200) !default;
-
-// 768px-979px
-$fluidGridColumnWidth768:      percentage($gridColumnWidth768/$gridRowWidth768) !default;
-$fluidGridGutterWidth768:      percentage($gridGutterWidth768/$gridRowWidth768) !default;

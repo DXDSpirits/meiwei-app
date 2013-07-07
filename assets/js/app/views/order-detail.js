@@ -16,7 +16,7 @@ MeiweiApp.Pages.Order = new (MeiweiApp.PageView.extend({
 		this.model = new MeiweiApp.Models.Order();
 		this.views.OrderDetail = new MeiweiApp.Views.OrderDetail({
 			model: this.model,
-			el: this.$('.scroll')
+			el: this.$('.scroll .wrapper')
 		});
 	},
 	show: function(orderId) {

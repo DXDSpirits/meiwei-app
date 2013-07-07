@@ -1,15 +1,17 @@
 .view {
 	position: fixed;
-	width: 100%;
-	height: 100%;
-	-webkit-box-orient: vertical;
-	box-orient: vertical;
-	display: -webkit-box;
-	display: box;
-	z-index: 2;
-	
 	top: 0;
 	left: 0;
+	
+	padding: 0;
+	margin: 0;
+	
+	max-width: 320px;
+	width: 100%;
+	height: 100%;
+	
+	@include box-display($orient: vertical);
+	
 	@include translate3d(0, 0, 0);
 	@include animation(slideinfromright .35s ease-in-out);
 	&.view-hidden {
@@ -21,21 +23,23 @@
 @include keyframes-transform(slideinfromright, translateX(100%), translateX(0));
 @include keyframes-transform(slideouttoleft, translateX(0), translateX(-100%));
 
-.view>.wrapper{
-	-webkit-box-flex: 1;
-	box-flex: 1;
+.view > .scroll{
 	overflow: auto;
-	-webkit-overflow-scrolling: touch;
-	//background-color: #fff;
-	display: -webkit-box;
-	display: box;
-	-webkit-box-orient: vertical;
-	box-orient: vertical;
-	height: 100%;
+	
+	@include flexible();
+	@include box-display($orient: vertical);
+	
 	position: relative;
+	
 	padding: 0;
 	margin: 0;
+	
+	-webkit-overflow-scrolling: touch;
 	&::-webkit-scrollbar {
 		display: none;
+	}
+	
+	& > .wrapper {
+		width: 100%;
 	}
 }

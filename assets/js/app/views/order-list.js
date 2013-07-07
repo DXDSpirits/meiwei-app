@@ -14,7 +14,7 @@ MeiweiApp.Pages.MemberOrders = new (MeiweiApp.PageView.extend({
 		this.collection = new MeiweiApp.Collections.Orders();
         this.orderListView = new MeiweiApp.Views.OrderList({
             collection: this.collection,
-            el: this.$('.scroll')
+            el: this.$('.scroll .wrapper')
         });
 	},
     show: function() {

@@ -19,7 +19,7 @@ MeiweiApp.Pages.Home = new (MeiweiApp.PageView.extend({
 		this.recommend = new MeiweiApp.Models.Recommend({id: 1});
 		this.views.recommendItems = new MeiweiApp.Views.RecommendItems({
 			collection: this.recommend.items,
-			el: this.$('.scroll')
+			el: this.$('.scroll .wrapper')
 		});
 	},
 	show: function() {

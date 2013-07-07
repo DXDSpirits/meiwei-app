@@ -28,7 +28,7 @@ MeiweiApp.Pages.RestaurantList = new (MeiweiApp.PageView.extend({
 		this.restaurants = new MeiweiApp.Collections.Restaurants();
 		this.views.restaurantList = new MeiweiApp.Views.RestaurantList({
 			collection: this.restaurants,
-			el: this.$('.scroll')
+			el: this.$('.scroll .wrapper')
 		});
 		this.cuisines = new MeiweiApp.Collections.Cuisines();
 		this.circles = new MeiweiApp.Collections.Circles();
@@ -44,7 +44,7 @@ MeiweiApp.Pages.RestaurantList = new (MeiweiApp.PageView.extend({
 	},
 	renderRestaurantList: function() {
 		this.views.restaurantList.render();
-		this.scroller = new IScroll(this.$('.wrapper').selector, {
+		this.scroller = new IScroll(this.$('.scroll').selector, {
 			scrollX: false, scrollY: true, momentum: true, snap: true, snapStepY: 200
 		});
 	},
