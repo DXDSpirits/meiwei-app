@@ -1,4 +1,10 @@
 
+function checkIfElementShouldScroll(element) {
+	console.log(element);
+	console.log($(element).hasClass(".scroll"));
+	return false;
+}
+
 var MeiweiApp = new (Backbone.View.extend({
 	
 	Models: {},
@@ -9,12 +15,21 @@ var MeiweiApp = new (Backbone.View.extend({
 	Pages: {},
 	
 	configs: {
-		APIHost: "http://localhost:8000",
+		APIHost: "http://192.168.1.7:8000",
 		StaticHost: "http://localhost:8000",
 		MediaHost: "http://localhost:8000"
 	},
 	
-	events: {},
+	events1: {
+		'touchstart .view > .scroll': function(e) {
+			console.log(1);
+			setTimeout( function(){ window.scrollTo(0, 1); }, 1000 );
+		},
+		'touchmove .view > .scroll' : function(e) {
+			console.log(2);
+		    e.stopPropagation();
+		}
+	},
 
 	log: function(msg) { console.log(msg) },
     

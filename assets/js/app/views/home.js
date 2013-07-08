@@ -21,9 +21,16 @@ MeiweiApp.Pages.Home = new (MeiweiApp.PageView.extend({
 			collection: this.recommend.items,
 			el: this.$('.scroll .wrapper')
 		});
+		_.bindAll(this, 'renderRecommendList');
+	},
+	renderRecommendList: function() {
+		this.views.recommendItems.render();
+		this.scroller = new IScroll(this.$('.scroll').selector, {
+			scrollX: false, scrollY: true, momentum: true
+		});
 	},
 	show: function() {
-		this.recommend.fetch();
+		this.recommend.fetch({success: this.renderRecommendList});
 		this.slideIn();
 	}
 }))({el: $("#view-home")});

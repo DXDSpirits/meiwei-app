@@ -1,16 +1,16 @@
+$view-max-width: 320px;
+
 .view {
+	@include flex-box($orient: vertical);
 	position: fixed;
 	top: 0;
 	left: 0;
-	
 	padding: 0;
 	margin: 0;
-	
-	max-width: 320px;
 	width: 100%;
 	height: 100%;
 	
-	@include box-display($orient: vertical);
+	max-width: $view-max-width;
 	
 	@include translate3d(0, 0, 0);
 	@include animation(slideinfromright .35s ease-in-out);
@@ -24,21 +24,16 @@
 @include keyframes-transform(slideouttoleft, translateX(0), translateX(-100%));
 
 .view > .scroll{
-	overflow: auto;
-	
 	@include flexible();
-	@include box-display($orient: vertical);
-	
+	@include flex-box($orient: vertical);
 	position: relative;
-	
 	padding: 0;
 	margin: 0;
-	
+	overflow: auto;
 	-webkit-overflow-scrolling: touch;
 	&::-webkit-scrollbar {
 		display: none;
 	}
-	
 	& > .wrapper {
 		width: 100%;
 	}

@@ -18,24 +18,28 @@
         <script src="/assets/js/vendor/modernizr-2.6.2.min.js"></script>
         <style>
             .box {
-                -webkit-box-flex: 1;
+                
                 border: 1px solid #000000;
                 height: 300px;
                 width: 300px;
+                
                 display: -webkit-box;
-                -webkit-box-orient: horizontal;
-                -webkit-box-pack: center;
-                -webkit-box-align: center;
+				display: -moz-box;
+				display: -ms-flexbox;
+				display: -webkit-flex;
+				display: flex;
+				
+                
             }
             .box-inner {
                 height: 50px;
-                width: 50px;
+                
                 border: 1px solid #000000;
+                
+                
             }
             
-            .box-inner:nth-child(2) {
-                height: 80px;
-                -webkit-box-flex: 1;
+            box-inner:nth-child(2) {
             }
         </style>
     </head>
@@ -43,9 +47,7 @@
         <!-- Page content Begin -->
         
         <div class="box">
-            <div class="box-inner"></div>
-            <div class="box-inner"></div>
-            <div class="box-inner"></div>
+            <div class="box-inner">haha</div>
         </div>
         
         <i class="icon-member"></i>

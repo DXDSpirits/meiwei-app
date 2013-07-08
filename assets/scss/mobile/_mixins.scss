@@ -477,43 +477,25 @@
 // COMPONENT MIXINS
 // --------------------------------------------------
 
-@mixin box-display($orient: vertical, $direction: normal, $pack: center, $align: center) {
+@mixin flex-box($orient: vertical, $direction: normal, $pack: center, $align: center, $sizing: border-box) {
 	display: -webkit-box;
-	display:    -moz-box;
-	display:         box;
 	
-	-webkit-box-orient: $orient;
-	   -moz-box-orient: $orient;
-	        box-orient: $orient;
-	
+	-webkit-box-orient: $orient;	
 	-webkit-box-direction: $direction;
-	   -moz-box-direction: $direction;
-	        box-direction: $direction;
+	-webkit-box-sizing: $sizing;
 	
 	& > * {
 		-webkit-box-flex: 0;
-		   -moz-box-flex: 0;
-		        box-flex: 0;
-		
 		-webkit-box-pack: $pack;
-		   -moz-box-pack: $pack;
-		        box-pack: $pack;
-		
 		-webkit-box-align: $align;
-		   -moz-box-align: $align;
-		        box-align: $align;
 		display: block;
 	}
 	
 	& > .flexible {
 		-webkit-box-flex: 1;
-		   -moz-box-flex: 1;
-		        box-flex: 1;
 	}
 }
 
-@mixin flexible {
-	-webkit-box-flex: 1;
-	   -moz-box-flex: 1;
-	        box-flex: 1;
+@mixin flexible($flex: 1) {
+	-webkit-box-flex: $flex;
 }
