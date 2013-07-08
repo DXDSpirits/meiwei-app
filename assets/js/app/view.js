@@ -13,13 +13,16 @@ MeiweiApp.ModelView = Backbone.View.extend({
 });
 
 MeiweiApp.CollectionView = Backbone.View.extend({
-	modelView: MeiweiApp.ModelView,
+	ModelView: MeiweiApp.ModelView,
+	modelViews: [],
 	initialize: function() {
 		this.collection.on('reset', this.addAll, this);
 		this.collection.on('add', this.addOne, this);
 	},
 	addOne: function(item) {
-		this.$el.append((new this.modelView({model: item})).render().el);
+		var modelView = new this.ModelView({model: item});
+		this.modelViews.push(modelView);
+		this.$el.append(modelView.render().el);
 	},
 	addAll: function() {
 		this.$el.html("");

@@ -8,7 +8,6 @@
 
 // Grid system and page structure
 @import "mobile/scaffolding";
-@import "mobile/grid";
 @import "mobile/layouts";
 
 // Base CSS
@@ -24,5 +23,8 @@
 // Responsive
 @import "mobile/responsive";
 
-// Custom styles
-@import "mobile/custom";
+// Page specific styles
+@import "pages/home";
+@import "pages/restaurant";
+@import "pages/order";
+@import "pages/member";

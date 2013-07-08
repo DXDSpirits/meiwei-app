@@ -15,7 +15,7 @@ var MeiweiApp = new (Backbone.View.extend({
 	Pages: {},
 	
 	configs: {
-		APIHost: "http://192.168.1.7:8000",
+		APIHost: "http://localhost:8000",
 		StaticHost: "http://localhost:8000",
 		MediaHost: "http://localhost:8000"
 	},

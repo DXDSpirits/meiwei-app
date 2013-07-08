@@ -10,11 +10,11 @@ MeiweiApp.Views.RestaurantListItem = MeiweiApp.ModelView.extend({
 });
 
 MeiweiApp.Views.RestaurantList = MeiweiApp.CollectionView.extend({
-	modelView: MeiweiApp.Views.RestaurantListItem
+	ModelView: MeiweiApp.Views.RestaurantListItem
 });
 
 MeiweiApp.Views.Filter = MeiweiApp.CollectionView.extend({
-	modelView: MeiweiApp.ModelView.extend({
+	ModelView: MeiweiApp.ModelView.extend({
 		template: Mustache.compile('<li>{{name}}</li>'),
 		events: { 'click': 'selectFilter' },
 		selectFilter: function() {

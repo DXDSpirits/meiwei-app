@@ -1,6 +1,6 @@
 
 MeiweiApp.Views.OrderList = MeiweiApp.CollectionView.extend({
-	modelView: MeiweiApp.ModelView.extend({
+	ModelView: MeiweiApp.ModelView.extend({
 		template: MeiweiApp.Templates['order-list-item'],
 		events: { 'click': 'viewOrder' },
 		viewOrder: function() {
@@ -18,7 +18,7 @@ MeiweiApp.Pages.MemberOrders = new (MeiweiApp.PageView.extend({
         });
 	},
     show: function() {
-        this.collection.fetch();
+        this.collection.fetch({reset: true});
         this.slideIn();
     }
 }))({el: $("#view-member-orders")});

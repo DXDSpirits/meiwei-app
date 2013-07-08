@@ -66,7 +66,8 @@ module.exports = function(grunt) {
 			stylesheets: {
 				files: [
 					'assets/scss/*.scss',
-					'assets/scss/mobile/*.scss'
+					'assets/scss/mobile/*.scss',
+					'assets/scss/pages/*.scss'
 				],
 				tasks: ['sass']
 			},

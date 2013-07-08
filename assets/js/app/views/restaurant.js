@@ -4,13 +4,13 @@ MeiweiApp.Views.RestaurantProfileBox = MeiweiApp.ModelView.extend({
 });
 
 MeiweiApp.Views.RestaurantPictureList = MeiweiApp.CollectionView.extend({
-	modelView: MeiweiApp.ModelView.extend({
+	ModelView: MeiweiApp.ModelView.extend({
 		template: MeiweiApp.Templates['restaurant-picture'],
 	})
 });
 
 MeiweiApp.Views.RestaurantReviewList = MeiweiApp.CollectionView.extend({
-	modelView: MeiweiApp.ModelView.extend({
+	ModelView: MeiweiApp.ModelView.extend({
 		template: MeiweiApp.Templates['restaurant-review'],
 	})
 });

@@ -1,6 +1,6 @@
 
 MeiweiApp.Views.ContactList = MeiweiApp.CollectionView.extend({
-	modelView: MeiweiApp.ModelView.extend({
+	ModelView: MeiweiApp.ModelView.extend({
 		events: {
 			"click": "updateContact"
 		},
@@ -12,7 +12,7 @@ MeiweiApp.Views.ContactList = MeiweiApp.CollectionView.extend({
 });
 
 MeiweiApp.Views.FloorplanList = MeiweiApp.CollectionView.extend({
-	modelView: MeiweiApp.ModelView.extend({
+	ModelView: MeiweiApp.ModelView.extend({
 		template: Mustache.compile("{{caption}} - {{path}}"),
 		initialize: function() {
 			this.$el.attr("id", "floorplan" + this.model.id);
@@ -21,7 +21,7 @@ MeiweiApp.Views.FloorplanList = MeiweiApp.CollectionView.extend({
 });
 
 MeiweiApp.Views.ProductList = MeiweiApp.CollectionView.extend({
-	modelView: MeiweiApp.ModelView.extend({
+	ModelView: MeiweiApp.ModelView.extend({
 		template: MeiweiApp.Templates['product-box'],
 		initialize: function() {
 			this.$el.attr("id", "product" + this.model.id);
@@ -129,7 +129,7 @@ MeiweiApp.Pages.RestaurantOrder = new (MeiweiApp.PageView.extend({
 		this.restaurant.fetch({ success: this.renderOrderForm });
 		this.products.fetch({
 			data: {category: 1}, 
-			trigger: true
+			reset: true
 		});
 		this.slideIn();
 	}

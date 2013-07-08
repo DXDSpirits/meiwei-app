@@ -1,0 +1,24 @@
+.recommend-flow {
+	@include flex-box($orient: vertical, $direction: reverse);
+}
+
+.recommend-list-item {
+	height: 124px;
+	overflow: display;
+	position: relative;
+	border-width: 0 0 1px;
+	border-style: solid;
+	border-color: $brownDark;
+	&.hero {
+		height: 125px;
+		border-width: 0;
+	}
+	img {
+		left: 0;
+		top: 0;
+		height: 250px;
+		width: 100%;
+		position: absolute;
+		z-index: -1;
+	}
+}
