@@ -85,29 +85,29 @@ MeiweiApp.Views.RestaurantOrderForm = MeiweiApp.View.extend({
 MeiweiApp.Pages.RestaurantOrder = new (MeiweiApp.PageView.extend({
 	initialize: function() {
 		this.restaurant = new MeiweiApp.Models.Restaurant();
-		this.restaurantOrderForm = new MeiweiApp.Views.RestaurantOrderForm({
-			model: this.restaurant,
-			el: this.$('.scroll .wrapper div:nth-child(1)')
-		});
-		this.contactListView = new MeiweiApp.Views.ContactList({
-			collection: MeiweiApp.me.contacts,
-			el: this.$('.scroll .wrapper div:nth-child(2)')
-		});
-		this.floorplanListView = new MeiweiApp.Views.FloorplanList({
-			collection: this.restaurant.floorplans,
-			el: this.$('.scroll .wrapper div:nth-child(3)')
-		});
-		
 		this.products = new MeiweiApp.Collections.Products();
-		this.productList = new MeiweiApp.Views.ProductList({
-			collection: this.products,
-			el: this.$('.scroll .wrapper div:nth-child(4)')
-		});
-		
+		this.views = {
+			orderForm: new MeiweiApp.Views.RestaurantOrderForm({
+				model: this.restaurant,
+				el: this.$('.scroll .wrapper div:nth-child(1)')
+			}),
+			contactList: new MeiweiApp.Views.ContactList({
+				collection: MeiweiApp.me.contacts,
+				el: this.$('.scroll .wrapper div:nth-child(2)')
+			}),
+			floorplanList: new MeiweiApp.Views.FloorplanList({
+				collection: this.restaurant.floorplans,
+				el: this.$('.scroll .wrapper div:nth-child(3)')
+			}),
+			productList: new MeiweiApp.Views.ProductList({
+				collection: this.products,
+				el: this.$('.scroll .wrapper div:nth-child(4)')
+			})
+		}
 		_.bindAll(this, "renderOrderForm", "bindContactSelect");
 	},
 	renderOrderForm: function(model, response, options) {
-		this.restaurantOrderForm.render();
+		this.views.orderForm.render();
 		this.restaurant.floorplans.fetch({ reset: true });
 		MeiweiApp.me.contacts.fetch({
 			reset: true,

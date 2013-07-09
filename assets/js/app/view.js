@@ -14,8 +14,8 @@ MeiweiApp.ModelView = Backbone.View.extend({
 
 MeiweiApp.CollectionView = Backbone.View.extend({
 	ModelView: MeiweiApp.ModelView,
-	modelViews: [],
 	initialize: function() {
+		this.modelViews = [];
 		this.collection.on('reset', this.addAll, this);
 		this.collection.on('add', this.addOne, this);
 	},
@@ -35,7 +35,6 @@ MeiweiApp.CollectionView = Backbone.View.extend({
 });
 
 MeiweiApp.PageView = Backbone.View.extend({
-	views: {},
 	slideIn: function() {
 		if (this.$el && this.$el.hasClass('view-hidden')) {
 			$('.view').addClass('view-hidden');

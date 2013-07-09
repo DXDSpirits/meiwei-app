@@ -14,10 +14,12 @@ MeiweiApp.Views.OrderDetail = MeiweiApp.ModelView.extend({
 MeiweiApp.Pages.Order = new (MeiweiApp.PageView.extend({
 	initialize: function() {
 		this.model = new MeiweiApp.Models.Order();
-		this.views.OrderDetail = new MeiweiApp.Views.OrderDetail({
-			model: this.model,
-			el: this.$('.scroll .wrapper')
-		});
+		this.views = {
+			orderDetail: new MeiweiApp.Views.OrderDetail({
+				model: this.model,
+				el: this.$('.scroll .wrapper')
+			})
+		}
 	},
 	show: function(orderId) {
 		this.model.set({id: orderId})

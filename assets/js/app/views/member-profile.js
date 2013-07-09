@@ -34,14 +34,16 @@ MeiweiApp.Views.MemberAvatarForm = MeiweiApp.ModelView.extend({
 
 MeiweiApp.Pages.MemberProfile = new (MeiweiApp.PageView.extend({
 	initialize: function() {
-		this.views.profileForm = new MeiweiApp.Views.MemberProfileForm({
-			model: MeiweiApp.me.profile,
-			el: this.$('.scroll .wrapper div:nth-child(1)')
-		});
-		this.views.avatarForm = new MeiweiApp.Views.MemberAvatarForm({
-			model: MeiweiApp.me.profile,
-			el: this.$('.scroll .wrapper div:nth-child(2)')
-		});
+		this.views = {
+			profileForm: new MeiweiApp.Views.MemberProfileForm({
+				model: MeiweiApp.me.profile,
+				el: this.$('.scroll .wrapper div:nth-child(1)')
+			}),
+			avatarForm: new MeiweiApp.Views.MemberAvatarForm({
+				model: MeiweiApp.me.profile,
+				el: this.$('.scroll .wrapper div:nth-child(2)')
+			})
+		}
 	},
 	show: function() {
 		MeiweiApp.me.profile.fetch();

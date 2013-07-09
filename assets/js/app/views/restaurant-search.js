@@ -26,20 +26,23 @@ MeiweiApp.Views.Filter = MeiweiApp.CollectionView.extend({
 MeiweiApp.Pages.RestaurantList = new (MeiweiApp.PageView.extend({
 	initialize: function() {
 		this.restaurants = new MeiweiApp.Collections.Restaurants();
-		this.views.restaurantList = new MeiweiApp.Views.RestaurantList({
-			collection: this.restaurants,
-			el: this.$('.scroll .wrapper')
-		});
 		this.cuisines = new MeiweiApp.Collections.Cuisines();
 		this.circles = new MeiweiApp.Collections.Circles();
-		this.views.cuisineFilter = new MeiweiApp.Views.Filter({
-			collection: this.cuisines,
-			el: this.$('.filter :nth-child(1)')
-		});
-		this.views.circleFilter = new MeiweiApp.Views.Filter({
-			collection: this.circles,
-			el: this.$('.filter :nth-child(2)')
-		});
+		
+		this.views = {
+			restaurantList: new MeiweiApp.Views.RestaurantList({
+				collection: this.restaurants,
+				el: this.$('.scroll .wrapper')
+			}),
+			cuisineFilter: new MeiweiApp.Views.Filter({
+				collection: this.cuisines,
+				el: this.$('.filter :nth-child(1)')
+			}),
+			circleFilter: new MeiweiApp.Views.Filter({
+				collection: this.circles,
+				el: this.$('.filter :nth-child(2)')
+			})
+		}
 		_.bindAll(this, 'renderRestaurantList', 'filterRestaurant', 'bindCuisineFilters', 'bindCircleFilters');
 	},
 	renderRestaurantList: function() {
