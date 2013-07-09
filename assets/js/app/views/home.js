@@ -1,6 +1,6 @@
 
 MeiweiApp.Views.RecommendItem = MeiweiApp.ModelView.extend({
-	//events: { 'click': 'viewRestaurant' },
+	events: { 'click img': 'viewRestaurant' },
 	tagName: 'section',
 	className: 'recommend-list-item',
 	template: MeiweiApp.Templates['recommend-list-item'],
@@ -23,21 +23,21 @@ MeiweiApp.Pages.Home = new (MeiweiApp.PageView.extend({
 				el: this.$('.recommend-flow')
 			})
 		};
-		this.recommend.items.on('reset', this.initScroller, this)
+		this.recommend.items.on('reset', this.initScroller, this);
 		_.bindAll(this, 'initScroller', 'hero');
 	},
 	hero: function() {
 		var x = this.scroller.currentPage.pageX;
 		var y = this.scroller.currentPage.pageY;
-		console.log(x, y);
 		var modelViews = this.views.recommendItems.modelViews;
-		this.$('.hero').removeClass('hero'); 
+		this.$('.hero').removeClass('hero');
 		modelViews[modelViews.length - y - 1].$el.addClass('hero');
 	},
 	initScroller: function() {
 		if (this.scroller == null) {
 		    this.scroller = new IScroll(this.$('.scroll').selector, {
-				scrollX: false, scrollY: true, momentum: true, snap: true, snapStepY: 125
+				scrollX: false, scrollY: true, snap: true, snapStepY: 125,
+				click: true
 			});
 			this.scroller.on('scrollEnd', this.hero);
 		} else {

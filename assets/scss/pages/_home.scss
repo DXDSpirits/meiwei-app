@@ -3,23 +3,20 @@
 }
 
 .recommend-list-item {
-	height: 124px;
+	height: 125px;
 	overflow: display;
 	position: relative;
-	border-width: 0 0 1px;
-	border-style: solid;
-	border-color: $brownDark;
-	&.hero {
-		height: 125px;
-		border-width: 0;
-		z-index: 1;
-	}
+	
 	img {
-		left: 0;
-		top: 0;
-		height: 250px;
 		width: 100%;
-		position: absolute;
-		z-index: -1;
+		height: 249px;
+		border-width: 0 0 1px;
+		border-style: solid;
+		border-color: $brown;
+	}
+	
+	&.hero + & {
+		opacity: 0;
+		@include transition(opacity .35s ease-in-out);
 	}
 }
