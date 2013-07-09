@@ -53,9 +53,13 @@ MeiweiApp.Models.Restaurant = MeiweiApp.Model.extend({
 	},
 	parse: function(response) {
 		this.initialize();
+		this.hours.reset();
 		this.hours.url = response.hours;
+		this.reviews.reset();
 		this.reviews.url = response.reviews;
+		this.pictures.reset();
 		this.pictures.url = response.pictures;
+		this.floorplans.reset();
 		this.floorplans.url = response.floorplans;
 		return response;
 	}

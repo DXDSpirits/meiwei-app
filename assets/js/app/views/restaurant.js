@@ -5,7 +5,12 @@ MeiweiApp.Views.RestaurantProfileBox = MeiweiApp.ModelView.extend({
 
 MeiweiApp.Views.RestaurantPictureList = MeiweiApp.CollectionView.extend({
 	ModelView: MeiweiApp.ModelView.extend({
+		tagName: 'img',
 		template: MeiweiApp.Templates['restaurant-picture'],
+		render: function() {
+			this.$el.attr('src', this.template(this.model.toJSON()));
+			return this;
+		}
 	})
 });
 
@@ -35,10 +40,12 @@ MeiweiApp.Pages.Restaurant = new (MeiweiApp.PageView.extend({
 		_.bindAll(this, 'renderRestaurantProfileBox')
 	},
 	renderRestaurantProfileBox: function() {
+		this.$('> header h1').html(this.restaurant.get('fullname'));
 		this.restaurant.pictures.fetch({reset: true});
 		this.restaurant.reviews.fetch({reset: true});
 	},
 	show: function(rid) {
+		this.restaurant.clear();
 		this.restaurant.set({id: rid});
 		this.restaurant.fetch({ success: this.renderRestaurantProfileBox });
 		this.slideIn();

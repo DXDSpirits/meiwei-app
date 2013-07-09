@@ -22,14 +22,14 @@ $navbarPadding:		17px !default;
 		width: 100%;
 		height: $bannerHeight;
 		margin: 0 (-$navbarPadding);
-		background-image: url($navbarBackgroundImagePath);
+		background-image: url($bannerImagePath);
 		background-repeat: repeat-x;
 		background-size: contain;
 	}
 }
 
 .view > header h1 {
-	padding: 0;
+	padding: 0 5px;
 	margin: 0;
 	
 	text-align: center;

@@ -43,9 +43,9 @@ $sansFontFamily:        "Microsoft Yahei", "Helvetica Neue", Helvetica, Arial, s
 $serifFontFamily:       Georgia, "Times New Roman", Times, serif !default;
 $monoFontFamily:        Monaco, Menlo, Consolas, "Courier New", monospace !default;
 
-$baseFontSize:          14px !default;
+$baseFontSize:          16px !default;
 $baseFontFamily:        $sansFontFamily !default;
-$baseLineHeight:        14px !default;
+$baseLineHeight:        20px !default;
 $altFontFamily:         $serifFontFamily !default;
 
 $headingsFontFamily:    inherit !default; // empty to use BS default, $baseFontFamily
@@ -55,11 +55,11 @@ $headingsColor:         inherit !default; // empty to use BS default, $textColor
 
 // Component sizing
 // -------------------------
-// Based on 14px font-size and 20px line-height
+// Based on 16px font-size and 26px line-height
 
 $fontSizeLarge:         18px !default;
-$fontSizeSmall:         12px !default;
-$fontSizeMini:          10px !default;
+$fontSizeSmall:         14px !default;
+$fontSizeMini:          12px !default;
 
 $paddingLarge:          9px 17px !default;
 $paddingSmall:          2px 10px !default;
@@ -132,7 +132,13 @@ $placeholderText:         $brownLight !default;
 
 // Navbar
 // -------------------------
-$navbarBackgroundImagePath:		  "../img/navbar@2x.png" !default;;
+$bannerImagePath:		  "../img/navbar@2x.png" !default;
+
+
+// Navbar
+// -------------------------
+$gradientShadowPath:	  "../img/gradient-shadow@2x.png" !default;
+$gradientShadowPathR:	  "../img/gradient-shadow-r@2x.png" !default;
 
 
 // Form states and alerts
@@ -152,17 +158,4 @@ $successBorder:           darken(adjust-hue($successBackground, -10), 5%) !defau
 $infoText:                #3a87ad !default;
 $infoBackground:          #d9edf7 !default;
 $infoBorder:              darken(adjust-hue($infoBackground, -10), 7%) !default;
-
-
-
-// GRID
-// --------------------------------------------------
-
-
-// Default 940px grid
-// -------------------------
-
-
-// Fluid grid
-// -------------------------
 

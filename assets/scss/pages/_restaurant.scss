@@ -1,4 +1,85 @@
-.restaurant-list-item {
-	height: 125px;
-	overflow: hidden;
+#view-restaurant-search {
+
+	.restaurant-list-item {
+		height: 125px;
+		overflow: hidden;
+	}
+
 }
+
+#view-restaurant {
+
+	.restaurant-pictures {
+		@include flex-box($orient: vertical);
+		height: 250px;
+		width: 100%;
+		overflow: hidden;
+		img {
+			width: auto;
+			max-width: none;
+			height: 100%;
+		}
+	}
+	
+	.restaurant-profile {
+		@include flex-box($orient: vertical);
+		
+		padding: 0 17px;
+		
+		border-width: 0 0 1px;
+		border-style: solid;
+		border-color: $brownLight;
+		
+		font-size: $fontSizeMini;
+		line-height: $fontSizeMini;
+		
+		article {
+			padding: 10px 0;
+			height: 3 * $baseLineHeight;
+			color: $brown;
+			p {
+				height: 100%;
+				width: 100%;
+				text-overflow: ellipsis;
+				overflow: hidden;
+				line-height: $baseLineHeight;
+			}
+			background-image: url($gradientShadowPath);
+			background-repeat: repeat-x;
+			background-size: 100% (3*$baseLineHeight);
+			background-position: bottom;
+		}
+		
+		section.information  {
+			color: $brownDark;
+			margin: 16px 0;
+			p {
+				margin: 16px 0;
+			}
+		}
+		
+	}
+	
+	.restaurant-reviews {
+		
+	}
+	
+	.callus-button {
+		padding: 0 17px;
+		height: 60px;
+		background-image: url($gradientShadowPathR);
+		background-repeat: repeat-x;
+		background-size: 100% 60px;
+		background-position: top;
+	}
+
+}
+
+
+
+
+
+
+
+
+

@@ -1,22 +1,24 @@
-.recommend-flow {
-	@include flex-box($orient: vertical, $direction: reverse);
-}
-
-.recommend-list-item {
-	height: 125px;
-	overflow: display;
-	position: relative;
-	
-	img {
-		width: 100%;
-		height: 249px;
-		border-width: 0 0 1px;
-		border-style: solid;
-		border-color: $brown;
+#view-home {
+	.recommend-flow {
+		@include flex-box($orient: vertical, $direction: reverse);
 	}
 	
-	&.hero + & {
-		opacity: 0;
-		@include transition(opacity .35s ease-in-out);
+	.recommend-list-item {
+		height: 125px;
+		overflow: display;
+		position: relative;
+		
+		img {
+			width: 100%;
+			height: 249px;
+			border-width: 0 0 1px;
+			border-style: solid;
+			border-color: $brown;
+		}
+		
+		&.hero + .recommend-list-item {
+			opacity: 0;
+			@include transition(opacity .35s ease-in-out);
+		}
 	}
 }

@@ -25,7 +25,6 @@ $view-max-width: 320px;
 
 .view > .scroll{
 	@include flexible();
-	@include flex-box($orient: vertical);
 	position: relative;
 	padding: 0;
 	margin: 0;
