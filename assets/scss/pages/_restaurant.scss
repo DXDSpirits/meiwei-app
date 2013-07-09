@@ -35,13 +35,11 @@
 		
 		article {
 			padding: 10px 0;
-			height: 3 * $baseLineHeight;
+			height: 2 * $baseLineHeight;
 			color: $brown;
 			p {
 				height: 100%;
 				width: 100%;
-				text-overflow: ellipsis;
-				overflow: hidden;
 				line-height: $baseLineHeight;
 			}
 			background-image: url($gradientShadowPath);
@@ -50,18 +48,23 @@
 			background-position: bottom;
 		}
 		
-		section.information  {
+		.information  {
 			color: $brownDark;
 			margin: 16px 0;
 			p {
-				margin: 16px 0;
+				margin: 10px 0;
+				white-space: nowrap;
+				vetical-align: middle;
+			}
+			[class^="icon-"] {
+				vertical-align: middle;
 			}
 		}
 		
 	}
 	
 	.restaurant-reviews {
-		
+		height: 30px;
 	}
 	
 	.callus-button {
@@ -74,12 +77,5 @@
 	}
 
 }
-
-
-
-
-
-
-
 
 
