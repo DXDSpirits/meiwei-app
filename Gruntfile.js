@@ -14,6 +14,7 @@ module.exports = function(grunt) {
 				files: {
 					'assets/js/mw-app.js': [
 						'assets/js/app/app.js',
+						'assets/js/app/app-local.js',
 						'assets/js/app/templates.js',
 						'assets/js/app/model.js',
 						'assets/js/app/models/*.js',
