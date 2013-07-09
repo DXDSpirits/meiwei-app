@@ -1,6 +1,7 @@
 /assets/css/
 /assets/js/mw-app.*
 /assets/js/app/app-local.js
+/assets/js/app/templates.js
 /node_modules/
 /.sass-cache/
 index.html
