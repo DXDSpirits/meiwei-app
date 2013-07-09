@@ -12,17 +12,6 @@ MeiweiApp.Views.RecommendItem = MeiweiApp.ModelView.extend({
 
 MeiweiApp.Views.RecommendItems = MeiweiApp.CollectionView.extend({
 	ModelView: MeiweiApp.Views.RecommendItem,
-	render: function() {
-	    this.addAll();
-	    if (this.scroller == null) {
-		    this.scroller = new IScroll(this.$('.scroll').selector, {
-				scrollX: false, scrollY: true, momentum: true
-			});
-		} else {
-			this.scroller;
-		}
-	    return this;
-	}
 });
 
 MeiweiApp.Pages.Home = new (MeiweiApp.PageView.extend({
@@ -34,13 +23,29 @@ MeiweiApp.Pages.Home = new (MeiweiApp.PageView.extend({
 				el: this.$('.recommend-flow')
 			})
 		};
-		_.bindAll(this, 'renderRecommendList');
+		this.recommend.items.on('reset', this.initScroller, this)
+		_.bindAll(this, 'initScroller', 'hero');
 	},
-	renderRecommendList: function() {
-		//this.views.recommendItems.render();
+	hero: function() {
+		var x = this.scroller.currentPage.pageX;
+		var y = this.scroller.currentPage.pageY;
+		console.log(x, y);
+		var modelViews = this.views.recommendItems.modelViews;
+		this.$('.hero').removeClass('hero'); 
+		modelViews[modelViews.length - y - 1].$el.addClass('hero');
+	},
+	initScroller: function() {
+		if (this.scroller == null) {
+		    this.scroller = new IScroll(this.$('.scroll').selector, {
+				scrollX: false, scrollY: true, momentum: true, snap: true, snapStepY: 125
+			});
+			this.scroller.on('scrollEnd', this.hero);
+		} else {
+			this.scroller.refresh();
+		}
 	},
 	show: function() {
-		this.recommend.fetch({reset: true, success: this.renderRecommendList});
+		this.recommend.fetch({ reset: true });
 		this.slideIn();
 	}
 }))({el: $("#view-home")});
