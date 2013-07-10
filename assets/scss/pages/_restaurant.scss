@@ -11,12 +11,14 @@
 
 	.restaurant-pictures {
 		@include flex-box($orient: vertical);
+		//Make the pictures wrapper 2X wider.
+		position: relative;
+		width: 200%;
+		left: -50%;
+		
 		height: 250px;
-		width: 100%;
 		overflow: hidden;
 		img {
-			width: auto;
-			max-width: none;
 			height: 100%;
 		}
 	}
@@ -47,6 +49,7 @@
 		}
 		
 		.information  {
+			width: 100%;
 			color: $brownDark;
 			margin: 16px 0;
 			p {

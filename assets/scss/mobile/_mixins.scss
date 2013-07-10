@@ -418,11 +418,11 @@
 	-webkit-box-orient: $orient;	
 	-webkit-box-direction: $direction;
 	-webkit-box-sizing: $sizing;
+	-webkit-box-pack: $pack;
+	-webkit-box-align: $align;
 	
 	& > * {
 		-webkit-box-flex: 0;
-		-webkit-box-pack: $pack;
-		-webkit-box-align: $align;
 		display: block;
 	}
 	
