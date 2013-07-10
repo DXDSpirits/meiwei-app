@@ -54,22 +54,22 @@
 			p {
 				margin: 10px 0;
 				white-space: nowrap;
-				vetical-align: middle;
-			}
-			[class^="icon-"] {
-				vertical-align: middle;
 			}
 		}
 		
 	}
 	
 	.restaurant-reviews {
-		height: 30px;
+		font-size: $fontSizeMini;
 	}
 	
 	.callus-button {
-		padding: 0 17px;
-		height: 60px;
+		padding: 20px 17px;
+		.btn {
+			@include center-block;
+			width: 200px;
+			text-indent: -20px;
+		}
 		background-image: url($gradientShadowPathR);
 		background-repeat: repeat-x;
 		background-size: 100% 60px;
@@ -77,5 +77,3 @@
 	}
 
 }
-
-

@@ -1,0 +1,51 @@
+//
+// Buttons
+// --------------------------------------------------
+
+
+// Base styles
+// --------------------------------------------------
+
+// Core
+.btn {
+	display: inline-block;
+	cursor: pointer;
+
+	height: 26px;
+	padding: 9px;
+	margin-bottom: 0; // For input.btn
+
+	font-size: $baseFontSize;
+	line-height: $baseLineHeight;
+	text-align: center;
+	vertical-align: middle;
+	color: $brownDark;
+	background-color: $white;
+
+	border: 1px solid $btnBorder;
+	@include border-radius($baseBorderRadius);
+
+	&.btn-inverse,
+	&:hover,
+	&:focus {
+		color: $white;
+		background-color: $brown;
+	}
+
+	&.active,
+	&:active {
+		outline: 0;
+	}
+
+	&.disabled,
+	&[disabled] {
+		cursor: default;
+		@include opacity(65);
+	}
+
+}
+
+button.btn,
+input[type="submit"].btn {
+	box-sizing: content-box;
+}

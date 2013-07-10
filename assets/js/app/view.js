@@ -41,6 +41,13 @@ MeiweiApp.PageView = Backbone.View.extend({
 			this.$el.removeClass('view-hidden');
 		}
 	},
+	initScroller: function() {
+		if (this.scroller == null) {
+		    this.scroller = new IScroll(this.$('.scroll').selector);
+		} else {
+			this.scroller.refresh();
+		}
+	},
 	show: function() {
 		this.render();
 		this.slideIn();

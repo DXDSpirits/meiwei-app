@@ -10,6 +10,11 @@
 	background-size: 260px 260px;
 	background-position: 26px 26px;
 	background-repeat: no-repeat;
+	
+	vertical-align: middle;
+	&::after, &::before {
+		vertical-align: middle;
+	}
 }
 
 @mixin icon-offset($x, $y) {
