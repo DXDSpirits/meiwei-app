@@ -83,7 +83,7 @@ MeiweiApp.Views.RestaurantOrderForm = MeiweiApp.View.extend({
 });
 
 MeiweiApp.Pages.RestaurantOrder = new (MeiweiApp.PageView.extend({
-	initialize: function() {
+	initPage: function() {
 		this.restaurant = new MeiweiApp.Models.Restaurant();
 		this.products = new MeiweiApp.Collections.Products();
 		this.views = {
@@ -124,13 +124,12 @@ MeiweiApp.Pages.RestaurantOrder = new (MeiweiApp.PageView.extend({
 			}, this);
 		collection.at(0).trigger("select");
 	},
-	show: function(rid) {
-		this.restaurant.set({id: rid});
+	render: function() {
+		this.restaurant.set({id: arguments[0]});
 		this.restaurant.fetch({ success: this.renderOrderForm });
 		this.products.fetch({
 			data: {category: 1}, 
 			reset: true
 		});
-		this.slideIn();
 	}
 }))({el: $("#view-restaurant-order")});

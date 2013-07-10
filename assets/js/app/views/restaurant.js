@@ -31,7 +31,7 @@ MeiweiApp.Views.RestaurantReviewList = MeiweiApp.CollectionView.extend({
 });
 
 MeiweiApp.Pages.Restaurant = new (MeiweiApp.PageView.extend({
-	initialize: function() {
+	initPage: function() {
 		this.restaurant = new MeiweiApp.Models.Restaurant();
 		this.views = {
 			restaurantProfileBox: new MeiweiApp.Views.RestaurantProfileBox({
@@ -54,10 +54,9 @@ MeiweiApp.Pages.Restaurant = new (MeiweiApp.PageView.extend({
 		this.restaurant.pictures.fetch({reset: true});
 		this.restaurant.reviews.fetch({reset: true});
 	},
-	show: function(rid) {
+	render: function() {
 		this.restaurant.clear();
-		this.restaurant.set({id: rid});
+		this.restaurant.set({id: arguments[0]});
 		this.restaurant.fetch({ success: this.renderRestaurantProfileBox });
-		this.slideIn();
 	}
 }))({el: $("#view-restaurant")});

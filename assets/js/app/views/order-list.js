@@ -10,15 +10,14 @@ MeiweiApp.Views.OrderList = MeiweiApp.CollectionView.extend({
 });
 
 MeiweiApp.Pages.MemberOrders = new (MeiweiApp.PageView.extend({
-	initialize: function() {
+	initPage: function() {
 		this.collection = new MeiweiApp.Collections.Orders();
         this.orderListView = new MeiweiApp.Views.OrderList({
             collection: this.collection,
             el: this.$('.scroll .wrapper')
         });
 	},
-    show: function() {
+    render: function() {
         this.collection.fetch({reset: true});
-        this.slideIn();
     }
 }))({el: $("#view-member-orders")});

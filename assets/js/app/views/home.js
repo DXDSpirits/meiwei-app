@@ -15,7 +15,7 @@ MeiweiApp.Views.RecommendItems = MeiweiApp.CollectionView.extend({
 });
 
 MeiweiApp.Pages.Home = new (MeiweiApp.PageView.extend({
-	initialize: function() {
+	initPage: function() {
 		this.recommend = new MeiweiApp.Models.Recommend({id: 1});
 		this.views = {
 			recommendItems: new MeiweiApp.Views.RecommendItems({
@@ -23,7 +23,7 @@ MeiweiApp.Pages.Home = new (MeiweiApp.PageView.extend({
 				el: this.$('.recommend-flow')
 			})
 		};
-		this.recommend.items.on('reset', this.initScroller, this);
+		//this.recommend.items.on('reset', this.initScroller, this);
 		_.bindAll(this, 'initScroller', 'hero');
 	},
 	hero: function() {
@@ -44,8 +44,7 @@ MeiweiApp.Pages.Home = new (MeiweiApp.PageView.extend({
 			this.scroller.refresh();
 		}
 	},
-	show: function() {
+	render: function() {
 		this.recommend.fetch({ reset: true });
-		this.slideIn();
 	}
 }))({el: $("#view-home")});

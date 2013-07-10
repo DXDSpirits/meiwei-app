@@ -33,7 +33,7 @@ MeiweiApp.Views.MemberAvatarForm = MeiweiApp.ModelView.extend({
 });
 
 MeiweiApp.Pages.MemberProfile = new (MeiweiApp.PageView.extend({
-	initialize: function() {
+	initPage: function() {
 		this.views = {
 			profileForm: new MeiweiApp.Views.MemberProfileForm({
 				model: MeiweiApp.me.profile,
@@ -45,8 +45,7 @@ MeiweiApp.Pages.MemberProfile = new (MeiweiApp.PageView.extend({
 			})
 		}
 	},
-	show: function() {
+	render: function() {
 		MeiweiApp.me.profile.fetch();
-		this.slideIn();
 	}
 }))({el: $("#view-member-profile")});

@@ -12,7 +12,7 @@ MeiweiApp.Views.OrderDetail = MeiweiApp.ModelView.extend({
 });
 
 MeiweiApp.Pages.Order = new (MeiweiApp.PageView.extend({
-	initialize: function() {
+	initPage: function() {
 		this.model = new MeiweiApp.Models.Order();
 		this.views = {
 			orderDetail: new MeiweiApp.Views.OrderDetail({
@@ -21,9 +21,8 @@ MeiweiApp.Pages.Order = new (MeiweiApp.PageView.extend({
 			})
 		}
 	},
-	show: function(orderId) {
-		this.model.set({id: orderId})
+	render: function() {
+		this.model.set({id: arguments[0]})
 		this.model.fetch();
-		this.slideIn();
 	}
 }))({el: $("#view-order")});

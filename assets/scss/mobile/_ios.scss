@@ -15,7 +15,7 @@ body{
 	word-wrap: break-word;
 	-webkit-text-size-adjust: none;
 }
-#apploader{
+#apploader {
 	position: fixed;
 	top: 0;
 	z-index: 100;
@@ -27,7 +27,7 @@ body{
 	-webkit-transition: opacity .6s;
 	transition: opacity .6s;
 }
-#apploader.hide{
+#apploader.hide {
 	opacity: 0;
 }
 pre{
