@@ -38,14 +38,12 @@
 			height: 2 * $baseLineHeight;
 			color: $brown;
 			p {
-				height: 100%;
-				width: 100%;
+				@include size(100%, 100%);
+				overflow: hidden; 
 				line-height: $baseLineHeight;
 			}
-			background-image: url($gradientShadowPath);
-			background-repeat: repeat-x;
-			background-size: 100% (3*$baseLineHeight);
-			background-position: bottom;
+			background: transparent url($gradientShadowPath) repeat-x bottom;
+			@include background-size(100% (3*$baseLineHeight));
 		}
 		
 		.information  {
@@ -53,7 +51,7 @@
 			margin: 16px 0;
 			p {
 				margin: 10px 0;
-				white-space: nowrap;
+				@include text-overflow();
 			}
 		}
 		
@@ -66,14 +64,12 @@
 	.callus-button {
 		padding: 20px 17px;
 		.btn {
-			@include center-block;
+			@include center-block();
 			width: 200px;
 			text-indent: -20px;
 		}
-		background-image: url($gradientShadowPathR);
-		background-repeat: repeat-x;
-		background-size: 100% 60px;
-		background-position: top;
+		background: transparent url($gradientShadowPathR) repeat-x top;
+		@include background-size(100% 60px);
 	}
 
 }

@@ -22,9 +22,8 @@ $navbarPadding:		17px !default;
 		width: 100%;
 		height: $bannerHeight;
 		margin: 0 (-$navbarPadding);
-		background-image: url($bannerImagePath);
-		background-repeat: repeat-x;
-		background-size: contain;
+		background: transparent url($bannerImagePath) repeat-x;
+		@include background-size(contain);
 	}
 }
 
@@ -36,10 +35,7 @@ $navbarPadding:		17px !default;
 	font-size: $fontSizeLarge;
 	line-height: $navbarHeight;
 	
-	white-space: nowrap;
-	text-overflow: ellipsis;
-	overflow: hidden;
-	
+	@include text-overflow();
 	@include flexible();
 }
 
@@ -47,10 +43,10 @@ $navbarPadding:		17px !default;
 	@include border-radius(15px);
 	@include placeholder();
 	@include flexible();
+	@include clear-tap-highlight();
 	border: 1px solid $brown;
 	height: 26px;
 	padding: 0 15px;
 	font-size: $fontSizeSmall;
   	line-height: $baseLineHeight;
-  	-webkit-tap-highlight-color: rgba(0,0,0,0);
 }

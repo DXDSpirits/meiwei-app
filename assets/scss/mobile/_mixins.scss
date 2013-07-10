@@ -42,29 +42,9 @@
   margin-right: auto;
 }
 
-// IE7 inline-block
-// ----------------
-@mixin ie7-inline-block() {
-  *display: inline; /* IE7 inline-block hack */
-  *zoom: 1;
-}
-
-// IE7 likes to collapse whitespace on either side of the inline-block elements.
-// Ems because we're attempting to match the width of a space character. Left
-// version is for form buttons, which typically come after other elements, and
-// right version is for icons, which come before. Applying both is ok, but it will
-// mean that space between those elements will be .6em (~2 space characters) in IE7,
-// instead of the 1 space in other browsers.
-@mixin ie7-restore-left-whitespace() {
-  *margin-left: .3em;
-
-  &:first-child {
-    *margin-left: 0;
-  }
-}
-
-@mixin ie7-restore-right-whitespace() {
-  *margin-right: .3em;
+// Clear iOS tap highlight
+@mixin clear-tap-highlight() {
+	-webkit-tap-highlight-color: rgba(0,0,0,0);
 }
 
 // Sizing shortcuts
@@ -95,20 +75,20 @@
 // -------------------------
 // Requires inline-block or block for proper styling
 @mixin text-overflow() {
-  overflow: hidden;
-  text-overflow: ellipsis;
-  white-space: nowrap;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	white-space: nowrap;
 }
 
 // CSS image replacement
 // -------------------------
 // Source: https://github.com/h5bp/html5-boilerplate/commit/aa0396eae757
 @mixin hide-text {
-  font: 0/0 a;
-  color: transparent;
-  text-shadow: none;
-  background-color: transparent;
-  border: 0;
+	font: 0/0 a;
+	color: transparent;
+	text-shadow: none;
+	background-color: transparent;
+	border: 0;
 }
 
 
@@ -362,7 +342,6 @@
           background-size: $size;
 }
 
-
 // Box sizing
 @mixin box-sizing($boxmodel) {
   -webkit-box-sizing: $boxmodel;
@@ -454,10 +433,4 @@
 
 @mixin flexible($flex: 1) {
 	-webkit-box-flex: $flex;
-}
-
-@mixin box-sizing($sizing) {
-	-webkit-box-sizing: $sizing;
-	   -moz-box-sizing: $sizing;
-	        box-sizing: $sizing;
 }

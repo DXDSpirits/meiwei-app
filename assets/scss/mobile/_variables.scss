@@ -1,21 +1,5 @@
-//
-// Variables
-// --------------------------------------------------
-@font-face {
-    font-family: 'OpenSansCondensedLight';
-    src: url('../font/OpenSans-CondLight-webfont.eot');
-    src: url('../font/OpenSans-CondLight-webfont.eot?#iefix') format('embedded-opentype'),
-         url('../font/OpenSans-CondLight-webfont.woff') format('woff'),
-         url('../font/OpenSans-CondLight-webfont.ttf') format('truetype'),
-         url('../font/OpenSans-CondLight-webfont.svg#OpenSansCondensedLight') format('svg');
-    font-weight: normal;
-    font-style: normal;
-}
-
-
 // Global values
 // --------------------------------------------------
-
 
 // Colors
 // -------------------------
@@ -39,6 +23,17 @@ $linkColorHover:        $linkColor !default;
 
 // Typography
 // -------------------------
+@font-face {
+    font-family: 'OpenSansCondensedLight';
+    src: url('../font/OpenSans-CondLight-webfont.eot');
+    src: url('../font/OpenSans-CondLight-webfont.eot?#iefix') format('embedded-opentype'),
+         url('../font/OpenSans-CondLight-webfont.woff') format('woff'),
+         url('../font/OpenSans-CondLight-webfont.ttf') format('truetype'),
+         url('../font/OpenSans-CondLight-webfont.svg#OpenSansCondensedLight') format('svg');
+    font-weight: normal;
+    font-style: normal;
+}
+
 $sansFontFamily:        "Microsoft Yahei", "Helvetica Neue", Helvetica, Arial, sans-serif !default;
 $serifFontFamily:       Georgia, "Times New Roman", Times, serif !default;
 $monoFontFamily:        Monaco, Menlo, Consolas, "Courier New", monospace !default;
@@ -74,34 +69,17 @@ $borderRadiusSmall:     5px !default;
 // -------------------------
 $btnBackground:                     $white !default;
 $btnBorder:                         $brown !default;
-
 $btnInverseBackground:              $brown !default;
 
 
 // Forms
 // -------------------------
 $inputBackground:               $white !default;
-$inputBorder:                   #ccc !default;
+$inputBorder:                   $brown !default;
 $inputBorderRadius:             $baseBorderRadius !default;
 $inputDisabledBackground:       $brownLight !default;
-$formActionsBackground:         #f5f5f5 !default;
+$formActionsBackground:         $brown !default;
 $inputHeight:                   $baseLineHeight + 10px; // base line-height + 8px vertical padding + 2px top/bottom border
-
-
-// Dropdowns
-// -------------------------
-$dropdownBackground:            $white !default;
-$dropdownBorder:                rgba(0,0,0,.2) !default;
-$dropdownDividerTop:            #e5e5e5 !default;
-$dropdownDividerBottom:         $white !default;
-
-$dropdownLinkColor:             $brownDark !default;
-$dropdownLinkColorHover:        $white !default;
-$dropdownLinkColorActive:       $white !default;
-
-$dropdownLinkBackgroundActive:  $linkColor !default;
-$dropdownLinkBackgroundHover:   $dropdownLinkBackgroundActive !default;
-
 
 
 // COMPONENT VARIABLES
@@ -130,31 +108,8 @@ $iconSpritePath:          "../img/icons@2x.png" !default;
 $placeholderText:         $brownLight !default;
 
 
-// Navbar
+// Images Paths
 // -------------------------
 $bannerImagePath:		  "../img/navbar@2x.png" !default;
-
-
-// Navbar
-// -------------------------
 $gradientShadowPath:	  "../img/gradient-shadow@2x.png" !default;
 $gradientShadowPathR:	  "../img/gradient-shadow-r@2x.png" !default;
-
-
-// Form states and alerts
-// -------------------------
-$warningText:             #c09853 !default;
-$warningBackground:       #fcf8e3 !default;
-$warningBorder:           darken(adjust-hue($warningBackground, -10), 3%) !default;
-
-$errorText:               #b94a48 !default;
-$errorBackground:         #f2dede !default;
-$errorBorder:             darken(adjust-hue($errorBackground, -10), 3%) !default;
-
-$successText:             #468847 !default;
-$successBackground:       #dff0d8 !default;
-$successBorder:           darken(adjust-hue($successBackground, -10), 5%) !default;
-
-$infoText:                #3a87ad !default;
-$infoBackground:          #d9edf7 !default;
-$infoBorder:              darken(adjust-hue($infoBackground, -10), 7%) !default;
