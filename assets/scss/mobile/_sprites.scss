@@ -51,8 +51,8 @@
 .icon-map-marker			{ @include icon-offset(4, 2); }
 .icon-map-marker.light		{ @include icon-offset(5, 2); }
 
-.icon-share					{ @include icon-offset(6, 1); }
-.icon-share.light			{ @include icon-offset(7, 1); }
+.icon-share					{ @include icon-offset(6, 2); }
+.icon-share.light			{ @include icon-offset(7, 2); }
 
 .icon-map-marker.small		{ @include icon-offset(0, 3); }
 .icon-car					{ @include icon-offset(1, 3); }

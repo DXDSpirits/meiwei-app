@@ -21,19 +21,16 @@
 	vertical-align: middle;
 	color: $brownDark;
 	background-color: $white;
+	-webkit-tap-highlight-color: rgba(0,0,0,0);
 
 	border: 1px solid $btnBorder;
 	@include border-radius($baseBorderRadius);
 
 	&.btn-inverse,
-	&:hover,
-	&:focus {
-		color: $white;
-		background-color: $brown;
-	}
-
 	&.active,
 	&:active {
+		color: $white;
+		background-color: $brown;
 		outline: 0;
 	}
 

@@ -154,8 +154,6 @@
   @include box-sizing(border-box); // Makes inputs behave like true block-level elements
 }
 
-
-
 // Mixin for form field states
 @mixin formFieldState($textColor: #555, $borderColor: #ccc, $backgroundColor: #f5f5f5) {
   // Set the text color
@@ -191,6 +189,15 @@
   }
 }
 
+@mixin input-states($color) {
+	border-color: $color;
+	color: $color;
+	@include box-shadow(none);
+
+	&:focus {
+		@include box-shadow(none);
+	}
+}
 
 
 // CSS3 PROPERTIES
@@ -447,4 +454,10 @@
 
 @mixin flexible($flex: 1) {
 	-webkit-box-flex: $flex;
+}
+
+@mixin box-sizing($sizing) {
+	-webkit-box-sizing: $sizing;
+	   -moz-box-sizing: $sizing;
+	        box-sizing: $sizing;
 }
