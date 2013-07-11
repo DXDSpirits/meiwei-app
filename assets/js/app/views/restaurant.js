@@ -47,16 +47,18 @@ MeiweiApp.Pages.Restaurant = new (MeiweiApp.PageView.extend({
 				el: this.$('.restaurant-reviews')
 			})
 		}
-		_.bindAll(this, 'renderRestaurantProfileBox');
+		_.bindAll(this, 'renderAll');
 	},
-	renderRestaurantProfileBox: function() {
+	renderAll: function() {
 		this.$('> header h1').html(this.restaurant.get('fullname'));
-		this.restaurant.pictures.fetch({reset: true});
-		this.restaurant.reviews.fetch({reset: true});
+		$.when(
+			this.restaurant.pictures.fetch({reset: true}),
+			this.restaurant.reviews.fetch({reset: true})
+		).then(this.showPage);
 	},
 	render: function() {
 		this.restaurant.clear();
 		this.restaurant.set({id: arguments[0]});
-		this.restaurant.fetch({ success: this.renderRestaurantProfileBox });
+		this.restaurant.fetch({ success: this.renderAll })
 	}
 }))({el: $("#view-restaurant")});

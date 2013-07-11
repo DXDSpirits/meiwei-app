@@ -20,30 +20,30 @@ MeiweiApp.Router = new (Backbone.Router.extend({
 		MeiweiApp.Router.navigate('home', {trigger: true});
 	},
 	home: function(){
-		MeiweiApp.Pages.Home.show();
+		MeiweiApp.Pages.Home.go();
 	},
 	
 	restaurant: function(rid) {
-		MeiweiApp.Pages.Restaurant.show(rid);
+		MeiweiApp.Pages.Restaurant.go(rid);
 	},
 	restaurantList: function(){
-		MeiweiApp.Pages.RestaurantList.show();
+		MeiweiApp.Pages.RestaurantList.go();
 	},
 	restaurantOrder: function(rid){
-		MeiweiApp.Pages.RestaurantOrder.show(rid);
+		MeiweiApp.Pages.RestaurantOrder.go(rid);
 	},
 	
 	memberLogin: function(){
-		MeiweiApp.Pages.MemberLogin.show();
+		MeiweiApp.Pages.MemberLogin.go();
 	},
 	memberProfile: function(){
-		MeiweiApp.Pages.MemberProfile.show();
+		MeiweiApp.Pages.MemberProfile.go();
 	},
 	memberOrders: function(){
-        MeiweiApp.Pages.MemberOrders.show();
+        MeiweiApp.Pages.MemberOrders.go();
     },
     orderDetail: function(orderId) {
-    	MeiweiApp.Pages.Order.show(orderId);
+    	MeiweiApp.Pages.Order.go(orderId);
     }
 }));
 

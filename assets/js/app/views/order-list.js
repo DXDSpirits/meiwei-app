@@ -11,13 +11,17 @@ MeiweiApp.Views.OrderList = MeiweiApp.CollectionView.extend({
 
 MeiweiApp.Pages.MemberOrders = new (MeiweiApp.PageView.extend({
 	initPage: function() {
-		this.collection = new MeiweiApp.Collections.Orders();
-        this.orderListView = new MeiweiApp.Views.OrderList({
-            collection: this.collection,
-            el: this.$('.scroll .wrapper')
-        });
+		this.orders = new MeiweiApp.Collections.Orders();
+        this.views = {
+        	orderList: new MeiweiApp.Views.OrderList({
+	            collection: this.orders,
+	            el: this.$('.scroll .wrapper')
+	        })
+	    }
 	},
     render: function() {
-        this.collection.fetch({reset: true});
+        $.when(
+        	this.orders.fetch({reset: true})
+        ).then(this.showPage);
     }
 }))({el: $("#view-member-orders")});

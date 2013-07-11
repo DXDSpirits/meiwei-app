@@ -45,6 +45,8 @@ MeiweiApp.Pages.Home = new (MeiweiApp.PageView.extend({
 		}
 	},
 	render: function() {
-		this.recommend.fetch({ reset: true });
+		$.when(
+			this.recommend.fetch({ reset: true })
+		).then(this.showPage);
 	}
 }))({el: $("#view-home")});

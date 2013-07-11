@@ -40,6 +40,8 @@ MeiweiApp.PageView = Backbone.View.extend({
 	},
 	
 	initialize: function() {
+		this.views = {};
+		_.bindAll(this, 'initScroller', 'go', 'showPage')
 		if (this.initPage != null) {
 			this.initPage();
 		}
@@ -52,23 +54,21 @@ MeiweiApp.PageView = Backbone.View.extend({
 		}
 	},
 	
-	show: function() {
-		this._startShow();
-		this.render.apply(this, arguments); // Pass arguments to render function;
-		this._endShow();
-	},
-	_startShow: function() {
+	go: function() {
 		$("#apploader").removeClass('hide');
+		this.render.apply(this, arguments); // Pass arguments to render function;
 	},
-	_endShow: function() {
-		var self = this;
-		$(document).ajaxStop(function() {
-			$("#apploader").addClass('hide');
-			if (self.$el && self.$el.hasClass('view-hidden')) {
-				$('.view').addClass('view-hidden');
-				self.$el.removeClass('view-hidden');
-			}
-			//self.initScroller();
-		});
+	showPage: function() {
+		$("#apploader").addClass('hide');
+		if (this.$el && this.$el.hasClass('view-hidden')) {
+			var $curPage = $('.view:not(".view-hidden")');
+			$curPage.addClass('view-hiding');
+			setTimeout(function(){
+				$curPage.removeClass('view-hiding');
+				$curPage.addClass('view-hidden');
+			}, 1000);
+			this.$el.removeClass('view-hidden');
+		}
+		//this.initScroller();
 	}
 });

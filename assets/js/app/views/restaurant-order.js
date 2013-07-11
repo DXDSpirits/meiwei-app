@@ -108,11 +108,11 @@ MeiweiApp.Pages.RestaurantOrder = new (MeiweiApp.PageView.extend({
 	},
 	renderOrderForm: function(model, response, options) {
 		this.views.orderForm.render();
-		this.restaurant.floorplans.fetch({ reset: true });
-		MeiweiApp.me.contacts.fetch({
-			reset: true,
-			success: this.bindContactSelect
-		});
+		$.when(
+			this.restaurant.floorplans.fetch({ reset: true }),
+			MeiweiApp.me.contacts.fetch({ reset: true, success: this.bindContactSelect }),
+			this.products.fetch({ data: {category: 1}, reset: true })
+		).then(this.showPage);
 	},
 	bindContactSelect: function(collection, response, options) {
 		collection.forEach(
@@ -127,9 +127,5 @@ MeiweiApp.Pages.RestaurantOrder = new (MeiweiApp.PageView.extend({
 	render: function() {
 		this.restaurant.set({id: arguments[0]});
 		this.restaurant.fetch({ success: this.renderOrderForm });
-		this.products.fetch({
-			data: {category: 1}, 
-			reset: true
-		});
 	}
 }))({el: $("#view-restaurant-order")});

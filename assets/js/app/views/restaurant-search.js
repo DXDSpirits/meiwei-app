@@ -15,7 +15,8 @@ MeiweiApp.Views.RestaurantList = MeiweiApp.CollectionView.extend({
 
 MeiweiApp.Views.Filter = MeiweiApp.CollectionView.extend({
 	ModelView: MeiweiApp.ModelView.extend({
-		template: Mustache.compile('<li>{{name}}</li>'),
+		tagName: 'span',
+		template: Mustache.compile('{{name}}'),
 		events: { 'click': 'selectFilter' },
 		selectFilter: function() {
 			this.model.trigger('select');
@@ -47,9 +48,6 @@ MeiweiApp.Pages.RestaurantList = new (MeiweiApp.PageView.extend({
 	},
 	renderRestaurantList: function() {
 		this.views.restaurantList.render();
-		this.scroller = new IScroll(this.$('.scroll').selector, {
-			scrollX: false, scrollY: true, momentum: true, snap: true, snapStepY: 200
-		});
 	},
 	filterRestaurant: function(filter) {
 		this.restaurants.fetch({ reset: true, success: this.renderRestaurantList, data: filter });
@@ -65,8 +63,10 @@ MeiweiApp.Pages.RestaurantList = new (MeiweiApp.PageView.extend({
 		}; circles.forEach(bindFilter, this);
 	},
 	render: function() {
-		this.filterRestaurant();
-		this.cuisines.fetch({ reset: true, success: this.bindCuisineFilters });
-		this.circles.fetch({ reset: true, success: this.bindCircleFilters });
+		$.when(
+			this.restaurants.fetch({ reset: true, success: this.renderRestaurantList }),
+			this.cuisines.fetch({ reset: true, success: this.bindCuisineFilters }),
+			this.circles.fetch({ reset: true, success: this.bindCircleFilters })
+		).then(this.showPage);
 	}
 }))({el: $("#view-restaurant-search")});

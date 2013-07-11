@@ -13,16 +13,18 @@ MeiweiApp.Views.OrderDetail = MeiweiApp.ModelView.extend({
 
 MeiweiApp.Pages.Order = new (MeiweiApp.PageView.extend({
 	initPage: function() {
-		this.model = new MeiweiApp.Models.Order();
+		this.order = new MeiweiApp.Models.Order();
 		this.views = {
 			orderDetail: new MeiweiApp.Views.OrderDetail({
-				model: this.model,
+				model: this.order,
 				el: this.$('.scroll .wrapper')
 			})
 		}
 	},
 	render: function() {
-		this.model.set({id: arguments[0]})
-		this.model.fetch();
+		this.order.set({id: arguments[0]})
+		$.when(
+			this.order.fetch()
+		).then(this.showPage);
 	}
 }))({el: $("#view-order")});
