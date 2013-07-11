@@ -27,7 +27,7 @@ $navbarPadding:		17px !default;
 	}
 }
 
-.view > header h1 {
+.view > header > h1 {
 	padding: 0 5px;
 	margin: 0;
 	
@@ -39,7 +39,7 @@ $navbarPadding:		17px !default;
 	@include flexible();
 }
 
-.view > header input[type=search] {
+.view > header > input[type=search] {
 	@include border-radius(15px);
 	@include placeholder();
 	@include flexible();
@@ -49,4 +49,10 @@ $navbarPadding:		17px !default;
 	padding: 0 15px;
 	font-size: $fontSizeSmall;
   	line-height: $baseLineHeight;
+}
+
+.view > header > .header-btn {
+	&.back-btn {}
+	&.header-btn-left {}
+	&.header-btn-right {}
 }
