@@ -34,12 +34,6 @@
 		outline: 0;
 	}
 
-	&.disabled,
-	&[disabled] {
-		cursor: default;
-		@include opacity(65);
-	}
-
 }
 
 button.btn,

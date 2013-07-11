@@ -19,157 +19,56 @@ input[type="search"],
 input[type="tel"],
 input[type="color"],
 .uneditable-input {
-  border: 2px solid $brownLight;
-  color: $brown;
-  font-family: $sansFontFamily;
-  font-size: $baseFontSize;
-  padding: 8px 5px;
-  height: 21px;
-  text-indent: 6px;
-  -webkit-appearance: none;
-  @include border-radius(6px);
-  @include box-shadow(none);
-  @include placeholder($brownLight);
-  @include transition("border .25s linear, color .25s linear");
+	display: block;
+	color: $brown;
+	font-family: $sansFontFamily;
+	font-size: $baseFontSize;
+	padding: 8px 5px;
+	height: 44px;
+	text-indent: 6px;
+	-webkit-appearance: none;
+	@include box-shadow(none);
+	@include placeholder($brownLight);
+	//@include transition("border .25s linear, color .25s linear");
 
-  // Alternate state
-  // --------------------------------------------------
-  .control-group.focus &,
-  &:focus {
-    border-color: $brown;
-    @include box-shadow(none);
-  }
-  
-  .row-fluid & {
-    height: 41px;
-    width: 100%;
-  }
-
-  // Flat (without border)
-  &.flat {
-    border-color: transparent;
-    &:hover {
-      border-color: $brownLight;
-    }
-    &:focus {
-      border-color: $brown;
-    }
-  }
-
-  // Alternate Colors
-  // --------------------------------------------------
-  .control-group.error &   { @include input-states(#FF0000) }
-  .control-group.success & { @include input-states(#00FF00) }
-  .control-group.warning & { @include input-states(#FF0000) }
-  .control-group.info &    { @include input-states($brownLight) }
-
-  .control-group & { margin-bottom: 0; }
+	outline: 0;
+    outline-style:none;
+    outline-width:0;
+	
+	//@include border-radius($baseBorderRadius);
+	border: none;
+	&:hover, &:focus {
+		border: none;
+	}
 }
 
-// INPUT ICONS
-// ----------------------
-.control-group {
-  position: relative;
-
-  > .input-icon {
-    position: absolute;
-    top: 2px;
-    right: 2px;
-    line-height: 37px;
-    vertical-align: middle;
-    font-size: $baseFontSize * 1.428; /* 20px */
-    color: $brown;
-    background-color: #ffffff;
-    padding: 0 10px;
-    @include border-radius(6px);
-  }
-
-  input:focus + .input-icon { color: $brown; }
-
-  // Icon Sizes
-  // --------------------------------------------------
-
-  // Huge
-  &.huge {
-    > .input-icon {
-      line-height: 49px;
-    }
-  }
-
-  //Large
-  &.large {
-    > .input-icon {
-      line-height: 41px;
-    }
-  }
-
-  // Small
-  &.small {
-    > .input-icon {
-      font-size: $baseFontSize * 1.142; /* 16px */
-      line-height: 30px;
-    }
-  }
-
-
-  // Icon Colors
-  // --------------------------------------------------
-  &.success {
-    > .input-icon, input + .input-icon {
-      color: $brown;
-    }
-  }
-  &.warning {
-    > .input-icon, input + .input-icon {
-      color: $brownLight;
-    }
-  }
-  &.error {
-    > .input-icon, input + .input-icon {
-      color: $brownDark;
-    }
-  }
-  &.disabled {
-    > .input-icon, input + .input-icon {
-      color: mix($brown, $white, 40%);
-      background-color: mix($brown, $white, 10%);
-    }
-  }
-
-}
-
-// Disabled state
-input[disabled],
-input[readonly],
-textarea[disabled],
-textarea[readonly] {
-  background-color: mix($brown, $white, 10%);
-  border-color: mix($brown, $white, 40%);
-  color: mix($brown, $white, 40%);
-  cursor: default;
+fieldset {
+	border: 1px solid $brownLight;
+	@include border-radius($baseBorderRadius);
 }
 
 // Text field grids
 input,
 textarea,
 .uneditable-input {
-  width: 192px;
+	width: 192px;
 }
 
 // Textarea
 textarea {
-  height: auto;
-  font-size: $baseFontSize * 1.071; /* 15px */
-  line-height: 24px;
-  padding: 5px 11px;
-  text-indent: 0;
-  
-  .row-fluid & {
-    height: auto;
-    width: 100% !important;
-  }
+	height: auto;
+	font-size: $baseFontSize * 1.071; /* 15px */
+	line-height: 24px;
+	padding: 5px 11px;
+	text-indent: 0;
+	
+	.row-fluid & {
+		height: auto;
+		width: 100% !important;
+	}
 }
+
 textarea[class*="span"] {
-  width: 100% !important;
-  @include box-sizing(border-box);
+	width: 100% !important;
+	@include box-sizing(border-box);
 }
