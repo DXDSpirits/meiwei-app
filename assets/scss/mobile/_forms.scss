@@ -19,39 +19,35 @@ input[type="search"],
 input[type="tel"],
 input[type="color"],
 .uneditable-input {
+	@include box-sizing(border-box);
+	@include box-shadow(none);
+	@include clear-outline();
+	@include placeholder($brownLight);
 	display: block;
 	color: $brown;
 	font-family: $sansFontFamily;
 	font-size: $baseFontSize;
-	padding: 8px 5px;
+	padding: 8px 11px;
 	height: 44px;
-	text-indent: 6px;
+	width: 100%;
 	-webkit-appearance: none;
-	@include box-shadow(none);
-	@include placeholder($brownLight);
-	//@include transition("border .25s linear, color .25s linear");
-
-	outline: 0;
-    outline-style:none;
-    outline-width:0;
-	
-	//@include border-radius($baseBorderRadius);
-	border: none;
-	&:hover, &:focus {
-		border: none;
-	}
+	border: 1px solid $brownLight;
 }
 
 fieldset {
-	border: 1px solid $brownLight;
-	@include border-radius($baseBorderRadius);
-}
-
-// Text field grids
-input,
-textarea,
-.uneditable-input {
-	width: 192px;
+	margin: 10px 0;
+	:first-child {
+		@include border-top-left-radius($baseBorderRadius);
+		@include border-top-right-radius($baseBorderRadius);
+	}
+	:not(:first-child) {
+		position: relative;
+		top: -1px;
+	}
+	:last-child {
+		@include border-bottom-left-radius($baseBorderRadius);
+		@include border-bottom-right-radius($baseBorderRadius);
+	}
 }
 
 // Textarea
@@ -66,9 +62,4 @@ textarea {
 		height: auto;
 		width: 100% !important;
 	}
-}
-
-textarea[class*="span"] {
-	width: 100% !important;
-	@include box-sizing(border-box);
 }

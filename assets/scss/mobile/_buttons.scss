@@ -7,11 +7,12 @@
 // --------------------------------------------------
 
 // Core
-.btn {
+input[type="submit"], button, .btn {
+	@include box-sizing(border-box);
 	display: inline-block;
 	cursor: pointer;
 
-	height: 26px;
+	height: 44px;
 	padding: 9px;
 	margin-bottom: 0; // For input.btn
 
@@ -34,9 +35,4 @@
 		outline: 0;
 	}
 
-}
-
-button.btn,
-input[type="submit"].btn {
-	box-sizing: content-box;
 }

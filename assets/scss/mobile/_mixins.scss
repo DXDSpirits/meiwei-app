@@ -47,6 +47,13 @@
 	-webkit-tap-highlight-color: rgba(0,0,0,0);
 }
 
+// Clear outline
+@mixin clear-outline() {
+	outline: 0;
+    outline-style:none;
+    outline-width:0;
+}
+
 // Sizing shortcuts
 // -------------------------
 @mixin size($height, $width) {

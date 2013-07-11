@@ -41,8 +41,6 @@ body {
 .view > .scroll{
 	@include flexible();
 	position: relative;
-	padding: 0;
-	margin: 0;
 	width: 100%;
 	overflow: auto;
 	-webkit-overflow-scrolling: touch;
@@ -51,6 +49,7 @@ body {
 	}
 	& > .wrapper {
 		width: 100%;
+		@include flex-box();
 	}
 }
 
