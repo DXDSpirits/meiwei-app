@@ -2,8 +2,40 @@
 // Inputs
 // --------------------------------------------------
 
+@mixin block-field-set {
+	width: 100%;
+	border-width: 0 0 1px 0;
+	&:last-child {
+	    border-bottom-width: 0;
+	}
+}
+
+@mixin inline-field-set {
+	width: 0;
+	border-width: 0 1px 0 0;
+	&:last-child {
+		border-right-width: 0;
+	}
+}
+
+fieldset {
+	@include border-radius($baseBorderRadius);
+	@include box-sizing(border-box);
+	width: 100%;
+	margin: 15px 0;
+	overflow: hidden;
+	border: 1px solid $brownLight;
+	.inline-group {
+		overflow: hidden;
+		border: 1px solid $brownLight;
+		@include block-field-set();
+		@include flex-box($orient: horizontal);
+	}
+}
+
 // Text fields
 textarea,
+input[type="search"],
 input[type="text"],
 input[type="password"],
 input[type="datetime"],
@@ -15,51 +47,41 @@ input[type="week"],
 input[type="number"],
 input[type="email"],
 input[type="url"],
-input[type="search"],
 input[type="tel"],
 input[type="color"],
 .uneditable-input {
+	@include clear-tap-highlight();
 	@include box-sizing(border-box);
 	@include box-shadow(none);
 	@include clear-outline();
 	@include placeholder($brownLight);
+	@include border-radius(0);
+	border: 1px solid $brownLight;
+	
 	display: block;
 	color: $brown;
 	font-family: $sansFontFamily;
 	font-size: $baseFontSize;
 	padding: 8px 11px;
 	height: 44px;
-	width: 100%;
 	-webkit-appearance: none;
-	border: 1px solid $brownLight;
+	
+	fieldset > & {
+		@include block-field-set();
+	}
+	
+	fieldset .inline-group > & {
+		@include flexible();
+		@include inline-field-set();
+	}
 }
 
-fieldset {
-	margin: 10px 0;
-	:first-child {
-		@include border-top-left-radius($baseBorderRadius);
-		@include border-top-right-radius($baseBorderRadius);
-	}
-	:not(:first-child) {
-		position: relative;
-		top: -1px;
-	}
-	:last-child {
-		@include border-bottom-left-radius($baseBorderRadius);
-		@include border-bottom-right-radius($baseBorderRadius);
-	}
-}
+
 
 // Textarea
 textarea {
 	height: auto;
-	font-size: $baseFontSize * 1.071; /* 15px */
-	line-height: 24px;
-	padding: 5px 11px;
+	font-size: $baseFontSize;
+	line-height: $baseLineHeight;
 	text-indent: 0;
-	
-	.row-fluid & {
-		height: auto;
-		width: 100% !important;
-	}
 }

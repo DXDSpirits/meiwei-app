@@ -40,10 +40,8 @@ $navbarPadding:		17px !default;
 }
 
 .view > header > input[type=search] {
-	@include border-radius(15px);
-	@include placeholder();
+	@include border-radius(500px);
 	@include flexible();
-	@include clear-tap-highlight();
 	border: 1px solid $brown;
 	height: 26px;
 	padding: 0 15px;

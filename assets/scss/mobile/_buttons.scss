@@ -9,7 +9,7 @@
 // Core
 input[type="submit"], button, .btn {
 	@include box-sizing(border-box);
-	display: inline-block;
+	display: block;
 	cursor: pointer;
 
 	height: 44px;
@@ -34,5 +34,22 @@ input[type="submit"], button, .btn {
 		background-color: $brown;
 		outline: 0;
 	}
+	
+	&.btn-inverse.active,
+	&.btn-inverse:active{
+		color: $brownDark;
+		background-color: $white;
+	}
 
+}
+
+.button-group {
+	@include flex-box($orient: horizontal);
+	input[type="submit"], button, .btn {
+		@include flexible();
+		margin-right: 10px;
+		&:last-child {
+			margin-right: 0;
+		}
+	}
 }

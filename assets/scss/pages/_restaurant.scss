@@ -41,7 +41,7 @@
 			height: 2 * $baseLineHeight;
 			color: $brown;
 			p {
-				@include size(100%, 100%);
+				@include square(100%);
 				overflow: hidden; 
 				line-height: $baseLineHeight;
 			}

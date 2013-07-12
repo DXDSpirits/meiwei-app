@@ -1,9 +1,37 @@
 #view-member-login {
+	.wrapper {
+		height: 495px;
+	}
 	.wrapper > header {
-		width: 250px;
-		height: 100px;
+		height: 190px;
+		img {
+			position: relative;
+			top: 50%;
+			margin-top: -30px;
+			@include square(70px);
+		}
 	}
 	.login-box {
-		width: 200px;
+		height: 200px;
+	}
+	.social-box {
+		@include size(105px, 100%);
+		& > header {
+			height: 28px;
+			line-height: 30px;
+			color: $brownDark;
+			text-align: center;
+			vertical-align: middle;
+			border-width: 1px 0;
+			border-style: solid;
+			border-color: $brownDark;
+		}
+		.social-icons {
+			padding: 15px 0;
+			text-align: center;
+			img {
+				@include square(45px);
+			}
+		}
 	}
 }
