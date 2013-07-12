@@ -14,13 +14,14 @@
 		@include flex-box($orient: vertical);
 		//Make the pictures wrapper 2X wider.
 		position: relative;
-		width: 200%;
-		left: -50%;
+		width: 100%;
+		//left: -50%;
 		
 		height: 250px;
 		overflow: hidden;
 		img {
 			height: 100%;
+			width: 100%;
 		}
 	}
 	
