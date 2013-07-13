@@ -413,12 +413,11 @@
 	border-bottom: 1px solid $bottom;
 }
 
-@mixin flex-box($orient: vertical, $direction: normal, $pack: center, $align: center, $sizing: border-box) {
+@mixin flex-box($orient: vertical, $direction: normal, $pack: center, $align: center) {
 	display: -webkit-box;
 	
 	-webkit-box-orient: $orient;	
 	-webkit-box-direction: $direction;
-	-webkit-box-sizing: $sizing;
 	-webkit-box-pack: $pack;
 	-webkit-box-align: $align;
 	
