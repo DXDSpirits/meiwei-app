@@ -80,7 +80,11 @@
 }
 
 #view-restaurant-order {
-	input, textarea {
-		border-width: 0;
+	.order-info {
+		width: 250px;
+		fieldset {
+			border-width: 1px 0;
+			@include border-radius(0);
+		}
 	}
 }
