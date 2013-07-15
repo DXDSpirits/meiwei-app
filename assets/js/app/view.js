@@ -46,6 +46,13 @@ MeiweiApp.PageView = Backbone.View.extend({
 		if (this.initPage != null) {
 			this.initPage();
 		}
+		var $me = this.$el;
+		$me.on('webkitAnimationEnd', function(e) {
+			if (e.originalEvent.animationName == 'slideouttoleft') {
+				$me.removeClass('view-hiding');
+				$me.addClass('view-hidden');
+			}
+		});
 	},
 	initScroller: function() {
 		if (this.scroller == null) {
@@ -65,10 +72,6 @@ MeiweiApp.PageView = Backbone.View.extend({
 		if (this.$el && this.$el.hasClass('view-hidden')) {
 			var $curPage = $('.view:not(".view-hidden")');
 			$curPage.addClass('view-hiding');
-			setTimeout(function(){
-				$curPage.removeClass('view-hiding');
-				$curPage.addClass('view-hidden');
-			}, 1000);
 			this.$el.removeClass('view-hidden');
 		}
 		//this.initScroller();
