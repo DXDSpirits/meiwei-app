@@ -1,36 +1,19 @@
-<form id="member-profile-form">
+<form class="member-profile-form">
 	<fieldset>
-		<legend>
-			用户资料
-		</legend>
-		<div>
-			<label>昵称</label>
-			<input type="text" name="nickname" value="{{ nickname }}" />
+		<div class="inline-group">
+			<i class="icon-car"></i>
+			<input type="text" name="nickname" value="{{ nickname }}" placeholder="昵称"/>
 		</div>
-		<div>
-			<label>邮箱</label>
-			<input type="email" name="email" value="{{ email }}" />
-		</div>
-		<div>
-			<label>手机</label>
-			<input type="tel" name="mobile" value="{{ mobile }}" />
-		</div>
-		<div>
+		<input type="email" name="email" value="{{ email }}" placeholder="邮箱"/>
+		<input type="tel" name="mobile" value="{{ mobile }}" placeholder="手机"/>
+		<div class="inline-group">
 			<label>男</label>
 			<input type="radio" name="sexe" value="0" />
 			<label>女</label>
 			<input type="radio" name="sexe" value="1" />
 		</div>
-		<div>
-            <label>生日</label>
-            <input type="date" name="birthday" value="{{ birthday }}" />
-        </div>
-		<div>
-			<label>纪念日</label>
-			<input type="text" name="anniversary" value="{{ anniversary }}" />
-		</div>
-		<button>
-			提交
-		</button>
+		<input type="date" name="birthday" value="{{ birthday }}" />
+		<input type="text" name="anniversary" value="{{ anniversary }}" />
 	</fieldset>
+	<button>提交</button>
 </form>

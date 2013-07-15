@@ -26,6 +26,8 @@ MeiweiApp.Pages.Home = new (MeiweiApp.PageView.extend({
 		//this.recommend.items.on('reset', this.initScroller, this);
 		_.bindAll(this, 'initScroller', 'hero');
 	},
+	onClickLeftBtn: function() { MeiweiApp.Router.navigate('member', {trigger: true}); },
+	onClickRightBtn: function() { console.log('Show Map'); },
 	hero: function() {
 		var x = this.scroller.currentPage.pageX;
 		var y = this.scroller.currentPage.pageY;

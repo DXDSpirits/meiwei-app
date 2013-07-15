@@ -36,7 +36,8 @@ MeiweiApp.CollectionView = Backbone.View.extend({
 
 MeiweiApp.PageView = Backbone.View.extend({
 	events: {
-		'click header .back-btn': function() { window.history.back(); }
+		'click header .header-btn-left': 'onClickLeftBtn',
+		'click header .header-btn-right': 'onClickRightBtn'
 	},
 	
 	initialize: function() {
@@ -53,7 +54,8 @@ MeiweiApp.PageView = Backbone.View.extend({
 			this.scroller.refresh();
 		}
 	},
-	
+	onClickLeftBtn: function() { window.history.back(); },
+	onClickRightBtn: function() {},
 	go: function() {
 		$("#apploader").removeClass('hide');
 		this.render.apply(this, arguments); // Pass arguments to render function;
