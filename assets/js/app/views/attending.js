@@ -1,19 +1,15 @@
 
-MeiweiApp.Views.OrderList = MeiweiApp.CollectionView.extend({
+MeiweiApp.Views.OrderList1 = MeiweiApp.CollectionView.extend({
 	ModelView: MeiweiApp.ModelView.extend({
-		template: MeiweiApp.Templates['order-list-item'],
-		events: { 'click': 'viewOrder' },
-		viewOrder: function() {
-			MeiweiApp.Router.navigate('member/order/' + this.model.id, {trigger: true});
-		}
+		template: MeiweiApp.Templates['order-list-item']
 	})
 });
 
-MeiweiApp.Pages.MemberOrders = new (MeiweiApp.PageView.extend({
+MeiweiApp.Pages.Attending = new (MeiweiApp.PageView.extend({
 	initPage: function() {
 		this.orders = new MeiweiApp.Collections.Orders();
         this.views = {
-        	orderList: new MeiweiApp.Views.OrderList({
+        	orderList: new MeiweiApp.Views.OrderList1({
 	            collection: this.orders,
 	            el: this.$('.scroll .wrapper')
 	        })
@@ -24,4 +20,4 @@ MeiweiApp.Pages.MemberOrders = new (MeiweiApp.PageView.extend({
         	this.orders.fetch({reset: true})
         ).then(this.showPage);
     }
-}))({el: $("#view-member-orders")});
+}))({el: $("#view-attending")});

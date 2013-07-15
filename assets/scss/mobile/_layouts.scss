@@ -20,21 +20,21 @@ body {
 	width: 100%;
 	height: 100%;
 	background-color: $bodyBackground;
+	overflow: hidden;
 	
 	max-width: $view-max-width;
 	
+	z-index: 2;
+	visibility: visible;
 	@include translate3d(0, 0, 0);
 	@include animation(slideinfromright .35s ease-in-out);
-	z-index: 1;
-	&.view-hiding {
-		@include translate3d(-100%, 0, 0);
-		@include animation(slideouttoleft .35s ease-in-out);
-		z-index: 0;
-	}
+	
 	&.view-hidden {
-		display: none !important;
-    	visibility: hidden;
-		@include translate3d(-100%, 0, 0);
+		z-index: 0;
+		visibility: hidden;
+		@include transition(visibility .35s ease-in-out 1s);
+		@include translate3d(100%, 0, 0);
+		@include animation(slideouttoleft .35s ease-in-out);
 	}
 }
 
