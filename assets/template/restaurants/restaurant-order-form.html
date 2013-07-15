@@ -1,34 +1,21 @@
+{{ restaurant.fullname }}
 <form id="restaurant-order-form">
-	
 	<fieldset>
-		<legend>
-			{{ restaurant.fullname }}
-		</legend>
-		<div>
-			<label>日期</label>
-			<input type="date" name="orderdate" value="{{ order.orderdate }}" />
-		</div>
-		<div>
-			<label>时间</label>
-			<input type="time" name="ordertime" value="{{ order.ordertime }}" />
-		</div>
+		<input type="text" name="orderdate" value="{{ order.orderdate }}" />
+		
+		<div class="inline-group">
+    		<input type="text" name="ordertime" value="{{ order.ordertime }}" />
+    		<input type="text" name="personnum" value="{{ order.personnum }}" />
+    	</div>
 
-		<div>
-			<label>人数</label>
-			<input type="number" name="personnum" value="{{ order.personnum }}" />
-		</div>
-
-		<div>
-			<label>联系人</label>
-			<input type="text" name="contactname" value="{{ order.contactname }}"/>
-			<input type="text" name="contactphone" value="{{ order.contactphone }}"/>
-		</div>
-
-		<div>
-			<textarea name="other" placeholder="其他要求">{{ order.other }}</textarea>
-		</div>
-
-		<button id="submit-order">提交</button>
+		<textarea name="other" placeholder="其他要求">{{ order.other }}</textarea>
 	</fieldset>
-	
+	<fieldset>
+	    <div class="inline-group">
+            <label>联系人</label>
+            <input type="text" name="contactname" value="{{ order.contactname }}"/>
+            <input type="text" name="contactphone" value="{{ order.contactphone }}"/>
+        </div>
+	</fieldset>
+	<button id="submit-order">提交</button>
 </form>

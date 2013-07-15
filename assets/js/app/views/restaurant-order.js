@@ -89,19 +89,19 @@ MeiweiApp.Pages.RestaurantOrder = new (MeiweiApp.PageView.extend({
 		this.views = {
 			orderForm: new MeiweiApp.Views.RestaurantOrderForm({
 				model: this.restaurant,
-				el: this.$('.scroll .wrapper div:nth-child(1)')
+				el: this.$('.order-info')
 			}),
 			contactList: new MeiweiApp.Views.ContactList({
 				collection: MeiweiApp.me.contacts,
-				el: this.$('.scroll .wrapper div:nth-child(2)')
+				el: this.$('.contact-info')
 			}),
 			floorplanList: new MeiweiApp.Views.FloorplanList({
 				collection: this.restaurant.floorplans,
-				el: this.$('.scroll .wrapper div:nth-child(3)')
+				el: this.$('.addtional-info')
 			}),
 			productList: new MeiweiApp.Views.ProductList({
 				collection: this.products,
-				el: this.$('.scroll .wrapper div:nth-child(4)')
+				el: this.$('.submit-order-button')
 			})
 		}
 		_.bindAll(this, "renderOrderForm", "bindContactSelect");
