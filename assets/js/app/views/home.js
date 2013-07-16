@@ -15,11 +15,10 @@ MeiweiApp.Views.RecommendItems = MeiweiApp.CollectionView.extend({
 });
 
 MeiweiApp.Pages.Home = new (MeiweiApp.PageView.extend({
-	events: _.extend({
-		"click header input": function() { MeiweiApp.goTo('restaurant/search'); }
-	}, MeiweiApp.PageView.events),
 	initPage: function() {
 		this.recommend = new MeiweiApp.Models.Recommend({id: 1});
+		this.events['click header input'] = function() { MeiweiApp.goTo('restaurant/search'); }
+		this.delegateEvents();
 		this.views = {
 			recommendItems: new MeiweiApp.Views.RecommendItems({
 				collection: this.recommend.items,

@@ -1,14 +1,4 @@
-<header>
-    <h3>{{ orderno }}</h3>
-    <h5>{{ ordersubmittime }} | status: {{ status }}</h5>
-</header>
-<article>
-	<p>{{ member }}</p>
-    <p>{{ restaurantinfor.fullname }}</p>
-    <p>{{ personnum }}</p>
-    <p>{{ orderdate }}</p>
-    <p>{{ ordertime }}</p>
-    <p>{{ contactname }} {{ contactphone }}</p>
-    <p>{{ other }}</p>
-    <p>{{ adminother }}</p>
-</article>
+<img src="{{restaurantinfor.frontpic}}"/>
+<p>{{ orderdate }} {{ ordertime }} {{ personnum }}人</p>
+<h1>{{ restaurantinfor.fullname }}</h1>
+<p>{{ restaurantinfor.address }}</p>

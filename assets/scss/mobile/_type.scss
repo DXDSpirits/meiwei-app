@@ -11,6 +11,11 @@ body {
 	-webkit-text-size-adjust: none;
 }
 
+small   { font-size: 85%; }
+strong  { font-weight: bold; }
+em      { font-style: italic; }
+cite    { font-style: normal; }
+
 h1 {
 	font-size: $fontSizeLarge;
 }
