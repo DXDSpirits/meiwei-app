@@ -56,13 +56,17 @@ MeiweiApp.Router = new (Backbone.Router.extend({
     }
 }));
 
+MeiweiApp.goTo = function(path) {
+	MeiweiApp.Router.navigate(path, {trigger: true});
+};
+
 $.ajaxSetup({
     statusCode : {
         401: function() {
-            MeiweiApp.Router.navigate('member/login', {trigger: true});
+            MeiweiApp.goTo('member/login');
         },
         403: function() {
-            MeiweiApp.Router.navigate('member/login', {trigger: true});
+            MeiweiApp.goTo('member/login');
         }
     }
 });

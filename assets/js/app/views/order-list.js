@@ -4,7 +4,7 @@ MeiweiApp.Views.OrderList = MeiweiApp.CollectionView.extend({
 		template: MeiweiApp.Templates['order-list-item'],
 		events: { 'click': 'viewOrder' },
 		viewOrder: function() {
-			MeiweiApp.Router.navigate('member/order/' + this.model.id, {trigger: true});
+			MeiweiApp.goTo('member/order/' + this.model.id);
 		}
 	})
 });

@@ -7,7 +7,7 @@ MeiweiApp.Views.OrderDetail = MeiweiApp.ModelView.extend({
 	modifyOrder: function(e) {
 		e.preventDefault();
 		MeiweiApp.pendingOrder = this.model;
-		MeiweiApp.Router.navigate('restaurant/' + this.model.get('restaurant') + '/order', {trigger: true});
+		MeiweiApp.goTo('restaurant/' + this.model.get('restaurant') + '/order');
 	}
 });
 

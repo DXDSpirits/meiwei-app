@@ -5,7 +5,7 @@ MeiweiApp.Views.RestaurantListItem = MeiweiApp.ModelView.extend({
 	className: 'restaurant-list-item',
 	template: MeiweiApp.Templates['restaurant-list-item'],
 	viewRestaurant: function() {
-		MeiweiApp.Router.navigate('restaurant/' + this.model.id, {trigger: true});
+		MeiweiApp.goTo('restaurant/' + this.model.id);
 	}
 });
 
@@ -33,7 +33,7 @@ MeiweiApp.Pages.RestaurantList = new (MeiweiApp.PageView.extend({
 		this.views = {
 			restaurantList: new MeiweiApp.Views.RestaurantList({
 				collection: this.restaurants,
-				el: this.$('.scroll .wrapper')
+				el: this.$('.wrapper')
 			}),
 			cuisineFilter: new MeiweiApp.Views.Filter({
 				collection: this.cuisines,
