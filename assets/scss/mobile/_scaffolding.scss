@@ -1,6 +1,7 @@
 
 * {
 	@include box-sizing(border-box);
+	@include translate3d(0, 0, 0);
 	-webkit-user-select: none;
 	-webkit-touch-callout: none;
 }
