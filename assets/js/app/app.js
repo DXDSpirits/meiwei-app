@@ -19,17 +19,6 @@ var MeiweiApp = new (Backbone.View.extend({
 		StaticHost: "http://localhost:8000",
 		MediaHost: "http://localhost:8000"
 	},
-	
-	events1: {
-		'touchstart .view > .scroll': function(e) {
-			console.log(1);
-			setTimeout( function(){ window.scrollTo(0, 1); }, 1000 );
-		},
-		'touchmove .view > .scroll' : function(e) {
-			console.log(2);
-		    e.stopPropagation();
-		}
-	},
 
 	log: function(msg) { console.log(msg) },
     
@@ -74,7 +63,7 @@ $(function(){
 	e.preventDefault();
 	Backbone.history.navigate(e.target.pathname, {trigger: true});
 },*/
-/*'touchstart .view>.wrapper': function(e) {
+/*'touchstart .view>.scroll-inner': function(e) {
 	document.body.style.height = '600px';
 	setTimeout( function(){ window.scrollTo(0, 0); }, 0 );
 }*/

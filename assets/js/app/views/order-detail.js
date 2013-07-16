@@ -9,7 +9,7 @@ MeiweiApp.Pages.Order = new (MeiweiApp.PageView.extend({
 		this.views = {
 			orderDetail: new MeiweiApp.Views.OrderDetail({
 				model: this.order,
-				el: this.$('.scroll .wrapper')
+				el: this.$('.scroll .scroll-inner')
 			})
 		}
 	},

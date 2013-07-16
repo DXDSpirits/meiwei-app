@@ -33,7 +33,7 @@ MeiweiApp.Pages.RestaurantSearch = new (MeiweiApp.PageView.extend({
 		this.views = {
 			restaurantList: new MeiweiApp.Views.RestaurantList({
 				collection: this.restaurants,
-				el: this.$('.wrapper')
+				el: this.$('.scroll-inner')
 			}),
 			cuisineFilter: new MeiweiApp.Views.Filter({
 				collection: this.cuisines,

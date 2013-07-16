@@ -37,11 +37,11 @@ MeiweiApp.Pages.MemberProfile = new (MeiweiApp.PageView.extend({
 		this.views = {
 			profileForm: new MeiweiApp.Views.MemberProfileForm({
 				model: MeiweiApp.me.profile,
-				el: this.$('.scroll .wrapper div:nth-child(1)')
+				el: this.$('.scroll .scroll-inner div:nth-child(1)')
 			}),
 			avatarForm: new MeiweiApp.Views.MemberAvatarForm({
 				model: MeiweiApp.me.profile,
-				el: this.$('.scroll .wrapper div:nth-child(2)')
+				el: this.$('.scroll .scroll-inner div:nth-child(2)')
 			})
 		}
 	},

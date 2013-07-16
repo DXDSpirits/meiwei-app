@@ -11,7 +11,7 @@ MeiweiApp.Pages.Attending = new (MeiweiApp.PageView.extend({
         this.views = {
         	orderList: new MeiweiApp.Views.OrderList1({
 	            collection: this.orders,
-	            el: this.$('.scroll .wrapper')
+	            el: this.$('.scroll .scroll-inner')
 	        })
 	    }
 	},

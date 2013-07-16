@@ -1,8 +1,8 @@
 #view-member-login {
-	.wrapper {
+	.scroll-inner {
 		height: 495px;
 	}
-	.wrapper > header {
+	.scroll-inner > header {
 		height: 190px;
 		img {
 			position: relative;
@@ -43,7 +43,7 @@
 			margin: 0 auto;
 		}
 	}
-	.wrapper {
+	.scroll-inner {
 		padding: 50px 50px 0;
 	}
 }
@@ -71,7 +71,7 @@
 		}
 	}
 	
-	.wrapper {
+	.scroll-inner {
 		$listItemHeight: 45px;
 		$listItemWidth: 93.75%;
 		$buttomWidth: 62.5%;
