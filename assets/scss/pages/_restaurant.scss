@@ -1,34 +1,69 @@
 #view-restaurant-search {
 
 	.restaurant-list-item {
-		height: 125px;
+		border-width: 1px 0 0 0;
+		border-style: solid;
+		border-color: $brownDark;
+		padding: 9px 17px 9px 99px;
+		@include size(90px, 100%);
+		height: 90px;
 		width: 100%;
+		position: relative;
+		img {
+			position: absolute;
+			top: 0;
+			left: 0;
+			@include square(89px);
+		}
+		p {
+			font-size: $fontSizeMini;
+		}
+		.rating {
+			position: absolute;
+			right: 17px;
+			bottom: 9px;
+			border: 1px solid black;
+			width: 20px;
+			height: 5px;
+		}
+	}
+	
+	.filter {
+		@include size(50px, 100%);
+		background-color: $brown;
 		overflow: hidden;
+		> div {
+			@include size(20px, 32%);
+			margin-top: 17px;
+			//padding-left: 13px;
+			display: inline-block;
+			text-align: center;
+			font-size: $fontSizeSmall;
+			color: $white;
+		}
+		.icon-down {
+			width: 9px;
+		}
 	}
 
 }
 
 #view-restaurant {
-
 	.restaurant-pictures {
 		@include flex-box($orient: vertical);
 		//Make the pictures wrapper 2X wider.
 		position: relative;
-		width: 100%;
 		//left: -50%;
 		
 		height: 250px;
 		overflow: hidden;
 		img {
-			height: 100%;
-			width: 100%;
+			@include square(100%);
 		}
 	}
 	
 	.restaurant-profile {
-		@include flex-box($orient: vertical);
-		
-		padding: 0 17px;
+		width: 90%;
 		
 		border-width: 0 0 1px;
 		border-style: solid;
@@ -38,8 +73,8 @@
 		line-height: $fontSizeMini;
 		
 		article {
-			padding: 10px 0;
-			height: 2 * $baseLineHeight;
+			padding: $baseLineHeight/2 0;
+			@include size(3 * $baseLineHeight, 100%);
 			color: $brown;
 			p {
 				@include square(100%);
@@ -51,7 +86,6 @@
 		}
 		
 		.information  {
-			width: 100%;
 			color: $brownDark;
 			margin: 16px 0;
 			p {
@@ -63,14 +97,16 @@
 	}
 	
 	.restaurant-reviews {
+		width: 90%;
 		font-size: $fontSizeMini;
 	}
 	
 	.callus-button {
-		padding: 20px 17px;
+		width: 90%;
+		padding: 20px 10%;
 		.btn {
 			@include center-block();
-			width: 200px;
+			width: 100%;
 			text-indent: -20px;
 		}
 		background: transparent url($gradientShadowPathR) repeat-x top;

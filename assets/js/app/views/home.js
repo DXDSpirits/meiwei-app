@@ -15,6 +15,9 @@ MeiweiApp.Views.RecommendItems = MeiweiApp.CollectionView.extend({
 });
 
 MeiweiApp.Pages.Home = new (MeiweiApp.PageView.extend({
+	events: _.extend({
+		"click header input": function() { MeiweiApp.goTo('restaurant/search'); }
+	}, MeiweiApp.PageView.events),
 	initPage: function() {
 		this.recommend = new MeiweiApp.Models.Recommend({id: 1});
 		this.views = {
@@ -25,6 +28,7 @@ MeiweiApp.Pages.Home = new (MeiweiApp.PageView.extend({
 		};
 		//this.recommend.items.on('reset', this.initScroller, this);
 		_.bindAll(this, 'initScroller', 'hero');
+		this.$('header input').click(function() {});
 	},
 	onClickLeftBtn: function() { MeiweiApp.goTo('member'); },
 	onClickRightBtn: function() { console.log('Checkin'); },

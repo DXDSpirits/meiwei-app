@@ -4,7 +4,6 @@
 	width: 26px;
 	height: 26px;
 	line-height: 26px;
-	vertical-align: text-top;
 	background-image: url($iconSpritePath);
 	background-size: 260px 260px;
 	background-position: 26px 26px;
@@ -80,9 +79,9 @@
 .icon-envelope				{ @include icon-offset(6, 5); }
 .icon-pencil				{ @include icon-offset(7, 5); }
 
-.icon-start.large.full		{ @include icon-offset(0, 6); }
-.icon-start.large.zero		{ @include icon-offset(1, 6); }
-.icon-start.large.half		{ @include icon-offset(2, 6); }
-.icon-start.large.full		{ @include icon-offset(3, 6); }
-.icon-start.large.zero		{ @include icon-offset(4, 6); }
-.icon-start.large.half		{ @include icon-offset(5, 6); }
+.icon-star.large.full		{ @include icon-offset(0, 6); }
+.icon-star.large.zero		{ @include icon-offset(1, 6); }
+.icon-star.large.half		{ @include icon-offset(2, 6); }
+.icon-star.small.full		{ @include icon-offset(3, 6); }
+.icon-star.small.zero		{ @include icon-offset(4, 6); }
+.icon-star.small.half		{ @include icon-offset(5, 6); }
