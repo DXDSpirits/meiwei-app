@@ -28,7 +28,8 @@
 	}
 }
 
-#view-restaurant {
+#view-restaurant-detail {
+	
 	.restaurant-pictures {
 		@include flex-box($orient: vertical);
 		//Make the pictures wrapper 2X wider.

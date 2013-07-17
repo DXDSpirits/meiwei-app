@@ -18,6 +18,8 @@ MeiweiApp.Router = new (Backbone.Router.extend({
 		this.route('order', 'orderList');
 		this.route(/^order\/(\d+)$/, 'orderDetail');
 		
+		this.route('product/purchase', 'productPurchase');
+		
 		this.route('attending', 'attending');
 	},
 	
@@ -35,6 +37,8 @@ MeiweiApp.Router = new (Backbone.Router.extend({
     
     orderList: function() { MeiweiApp.Pages.OrderList.go(); },
     orderDetail: function(orderId) { MeiweiApp.Pages.Order.go(orderId); },
+    
+    productPurchase: function() { MeiweiApp.Pages.ProductPurchase.go(); },
     
     attending:function() { MeiweiApp.Pages.Attending.go(); }
 }));
