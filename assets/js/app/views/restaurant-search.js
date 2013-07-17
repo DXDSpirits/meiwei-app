@@ -5,7 +5,7 @@ MeiweiApp.Views.RestaurantListItem = MeiweiApp.ModelView.extend({
 	className: 'restaurant-list-item',
 	template: MeiweiApp.Templates['restaurant-list-item'],
 	viewRestaurant: function() {
-		MeiweiApp.Router.navigate('restaurant/' + this.model.id, {trigger: true});
+		MeiweiApp.goTo('restaurant/' + this.model.id);
 	}
 });
 
@@ -24,7 +24,7 @@ MeiweiApp.Views.Filter = MeiweiApp.CollectionView.extend({
 	})
 });
 
-MeiweiApp.Pages.RestaurantList = new (MeiweiApp.PageView.extend({
+MeiweiApp.Pages.RestaurantSearch = new (MeiweiApp.PageView.extend({
 	initPage: function() {
 		this.restaurants = new MeiweiApp.Collections.Restaurants();
 		this.cuisines = new MeiweiApp.Collections.Cuisines();
@@ -33,15 +33,15 @@ MeiweiApp.Pages.RestaurantList = new (MeiweiApp.PageView.extend({
 		this.views = {
 			restaurantList: new MeiweiApp.Views.RestaurantList({
 				collection: this.restaurants,
-				el: this.$('.scroll .wrapper')
+				el: this.$('.scroll-inner')
 			}),
 			cuisineFilter: new MeiweiApp.Views.Filter({
 				collection: this.cuisines,
-				el: this.$('.filter :nth-child(1)')
+				el: this.$('.filter-circles')
 			}),
 			circleFilter: new MeiweiApp.Views.Filter({
 				collection: this.circles,
-				el: this.$('.filter :nth-child(2)')
+				el: this.$('.filter-cuisines')
 			})
 		}
 		_.bindAll(this, 'renderRestaurantList', 'filterRestaurant', 'bindCuisineFilters', 'bindCircleFilters');

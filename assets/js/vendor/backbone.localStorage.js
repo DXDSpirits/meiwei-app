@@ -1,11 +1,11 @@
 /**
  * Backbone localStorage Adapter
- * Version 1.1.4
+ * Version 1.1.6
  *
  * https://github.com/jeromegn/Backbone.localStorage
  */
 (function (root, factory) {
-   if (typeof exports === 'object') {
+   if (typeof exports === 'object' && root.require) {
      module.exports = factory(require("underscore"), require("backbone"));
    } else if (typeof define === "function" && define.amd) {
       // AMD. Register as an anonymous module.
@@ -125,6 +125,8 @@ _.extend(Backbone.LocalStorage.prototype, {
     (_.chain || _)(local).keys()
       .filter(function (k) { return itemRe.test(k); })
       .each(function (k) { local.removeItem(k); });
+
+    this.records.length = 0;
   },
 
   // Size of localStorage.
@@ -160,7 +162,7 @@ Backbone.LocalStorage.sync = window.Store.sync = Backbone.localSync = function(m
     }
 
   } catch(error) {
-    if (error.code === DOMException.QUOTA_EXCEEDED_ERR && store._storageSize() === 0)
+    if (error.code === 22 && store._storageSize() === 0)
       errorMessage = "Private browsing is unsupported";
     else
       errorMessage = error.message;
@@ -177,7 +179,7 @@ Backbone.LocalStorage.sync = window.Store.sync = Backbone.localSync = function(m
     if (syncDfd) {
       syncDfd.resolve(resp);
     }
-  
+
   } else {
     errorMessage = errorMessage ? errorMessage
                                 : "Record Not Found";

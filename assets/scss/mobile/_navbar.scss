@@ -1,30 +1,29 @@
 
-$navbarHeight:		44px !default;
-$bannerHeight:		65px !default;
-$navbarPadding:		17px !default;
-
 .view > header {
-	height: $navbarHeight;
-	padding: 0 $navbarPadding;
-	position: relative;
-	width: 100%;
 	@include flex-box($orient: horizontal);
-	
-	-webkit-user-select: none;
-	-webkit-touch-callout: none;
-	
-	z-index: $zindexNavbar;
+	@include size($navbarHeight, 100%);
+	padding: 0 $navbarPadding;
+	position: fixed;
+	top: 0;
+	z-index: $zindexFixedNavbar;
 	
 	&::before {
 		content: " ";
-		position: absolute;
-		z-index: -1;
-		width: 100%;
-		height: $bannerHeight;
-		margin: 0 (-$navbarPadding);
 		background: transparent url($bannerImagePath) repeat-x;
 		@include background-size(contain);
+		@include size($bannerHeight, 100%);
+		position: absolute;
+		z-index: -1;
+		margin: 0 (-$navbarPadding);
 	}
+	
+	opacity: 1;
+	@include transition(opacity $pageSwitchDuration ease-in-out);
+}
+
+.view-hidden > header {
+	opacity: 0;
+	@include transition(opacity $pageSwitchDuration ease-in-out);
 }
 
 .view > header > h1 {
@@ -47,10 +46,4 @@ $navbarPadding:		17px !default;
 	padding: 0 15px;
 	font-size: $fontSizeSmall;
   	line-height: $baseLineHeight;
-}
-
-.view > header > .header-btn {
-	&.back-btn {}
-	&.header-btn-left {}
-	&.header-btn-right {}
 }

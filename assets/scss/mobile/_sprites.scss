@@ -4,7 +4,6 @@
 	width: 26px;
 	height: 26px;
 	line-height: 26px;
-	vertical-align: text-top;
 	background-image: url($iconSpritePath);
 	background-size: 260px 260px;
 	background-position: 26px 26px;
@@ -21,68 +20,68 @@
 }
 
 .icon-member              	{ @include icon-offset(0, 0); }
-.icon-member.light			{ @include icon-offset(1, 0); }
+.icon-member:active			{ @include icon-offset(1, 0); }
 
 .icon-back					{ @include icon-offset(2, 0); }
-.icon-back.light			{ @include icon-offset(3, 0); }
+.icon-back:active			{ @include icon-offset(3, 0); }
 
 .icon-cancel				{ @include icon-offset(4, 0); }
-.icon-cancel.light			{ @include icon-offset(5, 0); }
+.icon-cancel:active			{ @include icon-offset(5, 0); }
 
 .icon-confirm				{ @include icon-offset(0, 1); }
-.icon-confirm.light			{ @include icon-offset(1, 1); }
+.icon-confirm:active		{ @include icon-offset(1, 1); }
 
 .icon-edit					{ @include icon-offset(2, 1); }
-.icon-edit.light			{ @include icon-offset(3, 1); }
+.icon-edit:active			{ @include icon-offset(3, 1); }
 
 .icon-plus					{ @include icon-offset(4, 1); }
-.icon-plus.light			{ @include icon-offset(5, 1); }
+.icon-plus:active			{ @include icon-offset(5, 1); }
 
 .icon-setting				{ @include icon-offset(6, 1); }
-.icon-setting.light			{ @include icon-offset(7, 1); }
+.icon-setting:active		{ @include icon-offset(7, 1); }
 
 .icon-locate				{ @include icon-offset(0, 2); }
-.icon-locate.light			{ @include icon-offset(1, 2); }
+.icon-locate:active			{ @include icon-offset(1, 2); }
 
 .icon-favorite				{ @include icon-offset(2, 2); }
-.icon-favorite.light		{ @include icon-offset(3, 2); }
+.icon-favorite:active		{ @include icon-offset(3, 2); }
 
 .icon-map-marker			{ @include icon-offset(4, 2); }
-.icon-map-marker.light		{ @include icon-offset(5, 2); }
+.icon-map-marker:active		{ @include icon-offset(5, 2); }
 
 .icon-share					{ @include icon-offset(6, 2); }
-.icon-share.light			{ @include icon-offset(7, 2); }
+.icon-share:active			{ @include icon-offset(7, 2); }
 
-.icon-map-marker.small		{ @include icon-offset(0, 3); }
+.icon-map-marker-small		{ @include icon-offset(0, 3); }
 .icon-car					{ @include icon-offset(1, 3); }
 .icon-tag					{ @include icon-offset(2, 3); }
 .icon-chat					{ @include icon-offset(3, 3); }
 .icon-calendar				{ @include icon-offset(4, 3); }
 .icon-group					{ @include icon-offset(5, 3); }
-.icon-member.small			{ @include icon-offset(6, 3); }
-.icon-member.small.lighter	{ @include icon-offset(7, 3); }
+.icon-member-small			{ @include icon-offset(6, 3); }
+.icon-member-small-light	{ @include icon-offset(7, 3); }
 
 .icon-down					{ @include icon-offset(0, 4); }
 .icon-up					{ @include icon-offset(1, 4); }
 .icon-left					{ @include icon-offset(2, 4); }
 .icon-right					{ @include icon-offset(3, 4); }
 .icon-phone					{ @include icon-offset(4, 4); }
-.icon-phone.light			{ @include icon-offset(5, 4); }
+.icon-phone-light			{ @include icon-offset(5, 4); }
 .icon-clock					{ @include icon-offset(6, 4); }
 .icon-clock					{ @include icon-offset(7, 4); }
 
 .icon-gift					{ @include icon-offset(0, 5); }
-.icon-edit.lighter			{ @include icon-offset(1, 5); }
-.icon-left.light			{ @include icon-offset(2, 5); }
-.icon-right.light			{ @include icon-offset(3, 5); }
+.icon-edit-light			{ @include icon-offset(1, 5); }
+.icon-left-light			{ @include icon-offset(2, 5); }
+.icon-right-light			{ @include icon-offset(3, 5); }
 .icon-circle				{ @include icon-offset(4, 5); }
 .icon-select				{ @include icon-offset(5, 5); }
 .icon-envelope				{ @include icon-offset(6, 5); }
 .icon-pencil				{ @include icon-offset(7, 5); }
 
-.icon-start.large.full		{ @include icon-offset(0, 6); }
-.icon-start.large.zero		{ @include icon-offset(1, 6); }
-.icon-start.large.half		{ @include icon-offset(2, 6); }
-.icon-start.large.full		{ @include icon-offset(3, 6); }
-.icon-start.large.zero		{ @include icon-offset(4, 6); }
-.icon-start.large.half		{ @include icon-offset(5, 6); }
+.icon-star-large.full		{ @include icon-offset(0, 6); }
+.icon-star-large.zero		{ @include icon-offset(1, 6); }
+.icon-star-large.half		{ @include icon-offset(2, 6); }
+.icon-star-small.full		{ @include icon-offset(3, 6); }
+.icon-star-small.zero		{ @include icon-offset(4, 6); }
+.icon-star-small.half		{ @include icon-offset(5, 6); }
