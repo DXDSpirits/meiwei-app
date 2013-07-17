@@ -20,22 +20,6 @@ MeiweiApp.Views.FloorplanList = MeiweiApp.CollectionView.extend({
 	})
 });
 
-MeiweiApp.Views.ProductList = MeiweiApp.CollectionView.extend({
-	ModelView: MeiweiApp.ModelView.extend({
-		template: MeiweiApp.Templates['product-box'],
-		initialize: function() {
-			this.$el.attr("id", "product" + this.model.id);
-		},
-		render: function() {
-			this.$el.html(this.template({
-				product: this.model.toJSON(),
-				items: this.model.items.toJSON(),
-			}));
-			return this;
-		}
-	})
-});
-
 MeiweiApp.Views.RestaurantOrderForm = MeiweiApp.View.extend({
 	events: {
 		'submit': 'submitOrder',
@@ -98,10 +82,6 @@ MeiweiApp.Pages.RestaurantOrder = new (MeiweiApp.PageView.extend({
 			floorplanList: new MeiweiApp.Views.FloorplanList({
 				collection: this.restaurant.floorplans,
 				el: this.$('.addtional-info')
-			}),
-			productList: new MeiweiApp.Views.ProductList({
-				collection: this.products,
-				el: this.$('.submit-order-button')
 			})
 		}
 		_.bindAll(this, "renderOrderForm", "bindContactSelect");

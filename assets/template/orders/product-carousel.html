@@ -1,0 +1,15 @@
+<header>
+	<h1>{{ product.name }}</h1>
+	<p>{{ product.remark }}</p>
+</header>
+<div class="carousel">
+	{{ #items }}
+	<div class="product-item">
+		<div class="tag">
+			<p>￥{{ price }}</p>
+			<p>{{ model }}</p>
+		</div>
+		<img src="{{ picture }}" alt="">
+	</div>
+	{{ /items }}
+</div>

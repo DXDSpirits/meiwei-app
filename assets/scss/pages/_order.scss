@@ -69,8 +69,29 @@
 			font-size: $fontSizeMini;
 			@include text-overflow();
 		}
+	}	
+}
+
+#view-product-purchase {
+	.product-carousel {
+		width: 100%;
 	}
-	
+	.product-item {
+		@include size(150px, 100px);
+		position: relative;
+		overflow: hidden;
+		.tag {
+			position: absolute;
+			bottom: 0;
+			width: 100%;
+			background-color: $brown;
+			opacity: 0.9;
+			font-size: $fontSizeMini;
+			line-height: $fontSizeMini + 2px;
+			color: white;
+			text-align: center;
+		}
+	}
 }
 
 #view-attending {
