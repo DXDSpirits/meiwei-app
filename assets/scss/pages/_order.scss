@@ -1,3 +1,4 @@
+
 #view-order-detail{
 
   $section-width: 70%;
@@ -55,4 +56,65 @@
      
   }
   
+}
+
+
+#view-attending {
+	
+	  $section-width: 70%;
+
+	.section-header-img {
+		  max-height:140px;
+        width:100%;
+	}
+	.section-qrcode {
+		 @include flex-box($pack: center);
+            @include square(155px);   
+            position: relative;
+            top: -50px;     
+	}
+	.restaurant-name {
+		background: transparent url($gradientShadowPathR) repeat-x top;
+		@include background-size(100% 60px);
+	}
+	.section-content {
+		width:  $section-width;
+		padding-left:5%;
+		background: transparent url($gradientShadowPathR) repeat-y top;
+		align:center;
+		@include background-size(100% 40px);
+	}
+	p.restaurant-name{
+    font-size: 16px;
+    overflow: hidden; 
+    line-height: 1.5*$baseLineHeight;
+  }
+	p.title {
+		 font-size:10px;
+           color:$brownLight;
+	}
+	p.content {
+		      font-size:12px;
+               color: $brownDark;
+	}
+	
+	.order-date {
+		float:left;
+		margin-right: 15%;
+	}
+	 .buttons {
+		padding: 20px 17px;
+		.btn {
+			@include center-block();
+			width: 100px;
+			//text-indent: -20px;
+			float: left;
+			margin-left:10px;
+			text-align: center;
+		}
+		//background: transparent url($gradientShadowPathR) repeat-x top;
+		background: transparent url($gradientShadowPathR);
+		@include background-size(100% 60px);
+	}
+	
 }
