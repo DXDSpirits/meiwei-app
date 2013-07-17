@@ -15,6 +15,10 @@
 	}
 }
 
+.icon-down, .icon-up {
+	width: 9px;
+}
+
 @mixin icon-offset($x, $y) {
 	background-position: $x * (-26px)  $y * (-26px);
 }

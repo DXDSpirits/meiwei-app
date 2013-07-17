@@ -71,23 +71,6 @@
 		}
 	}
 	
-	.filter {
-		@include size(50px, 100%);
-		background-color: $brown;
-		overflow: hidden;
-		> div {
-			@include size(20px, 49%);
-			margin-top: 17px;
-			//padding-left: 13px;
-			display: inline-block;
-			text-align: center;
-			font-size: $fontSizeSmall;
-			color: $white;
-		}
-		.icon-down, .icon-up {
-			width: 9px;
-		}
-	}
 }
 
 #view-attending {

@@ -16,6 +16,7 @@ MeiweiApp.Router = new (Backbone.Router.extend({
 		
 		this.route('member/order', 'memberOrders');
 		this.route(/^member\/order\/(\d+)$/, 'orderDetail');
+		this.route('member/contacts', 'memberContacts');
 		
 		this.route('member/attending', 'memberAttending');
 	},
@@ -47,6 +48,9 @@ MeiweiApp.Router = new (Backbone.Router.extend({
 	},
 	memberOrders: function(){
         MeiweiApp.Pages.MemberOrders.go();
+    },
+    memberContacts: function(){
+        MeiweiApp.Pages.MemberContacts.go();
     },
     orderDetail: function(orderId) {
     	MeiweiApp.Pages.Order.go(orderId);

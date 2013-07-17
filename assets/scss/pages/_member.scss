@@ -100,3 +100,19 @@
 		}
 	}
 }
+
+#view-member-contacts {
+	.contact-list-item {
+		$itemHeight: 45px;
+		@include size($itemHeight, 100%);
+		padding: 0 17px;
+		border-width: 1px 0 0 0;
+		border-style: solid;
+		border-color: $brown;
+		> div {
+			display: inline-block;
+			@include size($itemHeight - 1px, 50%);
+			line-height: $itemHeight - 1px;
+		}
+	}
+}

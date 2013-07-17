@@ -47,3 +47,17 @@
 	font-size: $fontSizeSmall;
   	line-height: $baseLineHeight;
 }
+
+.view > .wrapper > .filter-bar {
+	@include flex-box($orient: horizontal);
+	@include size(50px, 100%);
+	background-color: $brown;
+	overflow: hidden;
+	> div {
+		@include flexible();
+		height: 20px;
+		text-align: center;
+		font-size: $fontSizeSmall;
+		color: $white;
+	}
+}
