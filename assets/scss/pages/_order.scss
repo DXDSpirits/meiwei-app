@@ -107,7 +107,7 @@
 		 @include flex-box($pack: center);
             @include square(155px);   
             position: relative;
-           top: -50px;     
+           top: -20px;     
 	}
 	div.restaurant-name {
 		height:30px;
@@ -150,6 +150,8 @@
 	}
 	 .buttons {
 		padding: 20px 17px;
+		@include clearfix();
+		//margin-bottom:5px;
 		.btn {
 			@include center-block();
 			width: 100px;
