@@ -98,14 +98,16 @@
 	  $section-width: 70%;
 
 	.section-header-img {
+	display:block;
 		  max-height:140px;
         width:100%;
+       overflow: hidden;
 	}
 	.section-qrcode {
 		 @include flex-box($pack: center);
             @include square(155px);   
             position: relative;
-            //top: -50px;     
+           top: -50px;     
 	}
 	div.restaurant-name {
 		height:30px;
