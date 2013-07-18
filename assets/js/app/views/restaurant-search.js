@@ -15,7 +15,7 @@ MeiweiApp.Views.RestaurantList = MeiweiApp.CollectionView.extend({
 
 MeiweiApp.Views.Filter = MeiweiApp.CollectionView.extend({
 	ModelView: MeiweiApp.ModelView.extend({
-		tagName: 'span',
+		tagName: 'li',
 		template: Mustache.compile('{{name}}'),
 		events: { 'click': 'selectFilter' },
 		selectFilter: function() {
@@ -37,15 +37,24 @@ MeiweiApp.Pages.RestaurantSearch = new (MeiweiApp.PageView.extend({
 			}),
 			cuisineFilter: new MeiweiApp.Views.Filter({
 				collection: this.cuisines,
-				el: this.$('.filter-circles')
+				el: this.$('.collapsible-inner.circle')
 			}),
 			circleFilter: new MeiweiApp.Views.Filter({
 				collection: this.circles,
-				el: this.$('.filter-cuisines')
+				el: this.$('.collapsible-inner.cuisine')
 			})
 		}
+		this.$('.collapsible').on('click', function() {
+			if (!$(this).hasClass('expand')) {
+				$(this).siblings().removeClass('expand');
+				$(this).addClass('expand');
+			} else {
+				$(this).removeClass('expand');
+			}
+		});
 		_.bindAll(this, 'renderRestaurantList', 'filterRestaurant', 'bindCuisineFilters', 'bindCircleFilters');
 	},
+	onClickRightBtn: function() { MeiweiApp.goTo('restaurant/search/map'); },
 	renderRestaurantList: function() {
 		this.views.restaurantList.render();
 	},

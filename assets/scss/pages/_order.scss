@@ -73,51 +73,87 @@
 }
 
 #view-product-purchase {
-	.product-carousel {
-		width: 100%;
+	.scroll-inner {
+		padding: 15px 17px 0;
 	}
-	.product-item {
-		@include size(150px, 100px);
-		position: relative;
-		overflow: hidden;
-		.tag {
-			position: absolute;
-			bottom: 0;
-			width: 100%;
-			background-color: $brown;
-			opacity: 0.9;
-			font-size: $fontSizeMini;
-			line-height: $fontSizeMini + 2px;
-			color: white;
-			text-align: center;
+	.product-box {
+		width: 100%;
+		margin: 5px 0;
+		p { font-size: $fontSizeMini; }
+		$carouselWidth: 250px;
+		.carousel {
+			@include size(164px, $carouselWidth);
+			padding: 7px 0;
+			@include center-block();
+			@include scrollable();
+			background: url($gradientShadowPath) repeat-x bottom, url($gradientShadowPathR) repeat-x top;
+			@include background-size(100% auto, 100% auto);
 		}
+		.carousel-inner {
+			height: 100%;
+			@include flex-box($orient: horizontal);
+		}
+		.carousel-item {
+			@include size(100%, $carouselWidth);
+			position: relative;
+			overflow: hidden;
+			.tag {
+				position: absolute;
+				bottom: 0;
+				width: 100%;
+				min-height: 2 * ($fontSizeMini + 2px);
+				background-color: $brown;
+				opacity: 0.9;
+				font-size: $fontSizeMini;
+				line-height: $fontSizeMini + 2px;
+				color: white;
+				text-align: center;
+			}
+			img {
+				@include center-block();
+				max-height: 100%;
+				max-width: 100%;
+			}
+		}
+		
 	}
 }
-
 #view-attending {
 	
-	$section-width: 70%;
+	  $section-width: 70%;
 
 	.section-header-img {
-		max-height:140px;
+	display:block;
+		  max-height:140px;
         width:100%;
+       overflow: hidden;
 	}
 	.section-qrcode {
 		 @include flex-box($pack: center);
             @include square(155px);   
             position: relative;
-            top: -50px;     
+           top: -20px;     
 	}
-	.restaurant-name {
-		background: transparent url($gradientShadowPathR) repeat-x top;
+	div.restaurant-name {
+		height:30px;
+		width: $section-width;
+		text-align:center;
+		background: transparent url($gradientShadowPathR) repeat-y top;
 		@include background-size(100% 60px);
+	}
+	p.res-name {
+		
+		line-height:1.5*$baseLineHeight;
+	}
+	.checkin-item {
+		height: 45px;
 	}
 	.section-content {
 		width:  $section-width;
 		padding-left:5%;
 		background: transparent url($gradientShadowPathR) repeat-y top;
 		align:center;
-		@include background-size(100% 40px);
+		@include background-size(100% 45px);
 	}
 	p.restaurant-name{
     font-size: 16px;
@@ -139,6 +175,8 @@
 	}
 	 .buttons {
 		padding: 20px 17px;
+		@include clearfix();
+		//margin-bottom:5px;
 		.btn {
 			@include center-block();
 			width: 100px;
