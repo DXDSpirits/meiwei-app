@@ -5,12 +5,12 @@ MeiweiApp.Views.OrderList = MeiweiApp.CollectionView.extend({
 		events: { 'click': 'viewOrder' },
 		className: 'order-list-item',
 		viewOrder: function() {
-			MeiweiApp.goTo('member/order/' + this.model.id);
+			MeiweiApp.goTo('order/' + this.model.id);
 		}
 	})
 });
 
-MeiweiApp.Pages.MemberOrders = new (MeiweiApp.PageView.extend({
+MeiweiApp.Pages.OrderList = new (MeiweiApp.PageView.extend({
 	initPage: function() {
 		this.orders = new MeiweiApp.Collections.Orders();
 		this.views = {

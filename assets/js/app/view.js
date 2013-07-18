@@ -35,14 +35,13 @@ MeiweiApp.CollectionView = Backbone.View.extend({
 });
 
 MeiweiApp.PageView = Backbone.View.extend({
-	events: {
-		'click header .header-btn-left': 'onClickLeftBtn',
-		'click header .header-btn-right': 'onClickRightBtn'
-	},
-	
 	initialize: function() {
 		this.views = {};
-		_.bindAll(this, 'initScroller', 'go', 'showPage')
+		_.bindAll(this, 'initScroller', 'go', 'showPage', 'onClickLeftBtn', 'onClickRightBtn');
+		
+		new MBP.fastButton(this.$('.header-btn-left')[0], this.onClickLeftBtn);
+		new MBP.fastButton(this.$('.header-btn-right')[0], this.onClickRightBtn);
+		
 		if (this.initPage != null) {
 			this.initPage();
 		}
