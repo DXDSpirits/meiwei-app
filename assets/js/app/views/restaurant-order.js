@@ -75,6 +75,7 @@ MeiweiApp.Pages.RestaurantOrder = new (MeiweiApp.PageView.extend({
 				model: this.restaurant,
 				el: this.$('.order-info')
 			}),
+			/*
 			contactList: new MeiweiApp.Views.ContactList({
 				collection: MeiweiApp.me.contacts,
 				el: this.$('.contact-info')
@@ -83,6 +84,7 @@ MeiweiApp.Pages.RestaurantOrder = new (MeiweiApp.PageView.extend({
 				collection: this.restaurant.floorplans,
 				el: this.$('.addtional-info')
 			})
+			*/
 		}
 		_.bindAll(this, "renderOrderForm", "bindContactSelect");
 	},

@@ -1,21 +1,15 @@
-{{ restaurant.fullname }}
+
+<div class="restaurant-name">{{ restaurant.fullname }}</div>
 <form id="restaurant-order-form">
 	<fieldset>
-		<input type="text" name="orderdate" value="{{ order.orderdate }}" />
+	    <p class="order-heading">预订信息</p>                                             
+		<div class="inline-group"><i class="icon-calendar"></i><input type="text" name="orderdate" value="{{ order.orderdate }}" placeholder="订餐日期"/></div>
 		
 		<div class="inline-group">
-    		<input type="text" name="ordertime" value="{{ order.ordertime }}" />
-    		<input type="text" name="personnum" value="{{ order.personnum }}" />
+    		<i class="icon-clock"></i><input type="text" name="ordertime" value="{{ order.ordertime }}" placeholder="订餐时间"/>
+    		<i class="icon-group"></i><input type="text" name="personnum" value="{{ order.personnum }}" placeholder="就餐人数"/>
     	</div>
 
-		<textarea name="other" placeholder="其他要求">{{ order.other }}</textarea>
+		<div class="inline-group"><i class="icon-pencil"></i><textarea name="other" placeholder="备注">{{ order.other }}</textarea></div>
 	</fieldset>
-	<fieldset>
-	    <div class="inline-group">
-            <label>联系人</label>
-            <input type="text" name="contactname" value="{{ order.contactname }}"/>
-            <input type="text" name="contactphone" value="{{ order.contactphone }}"/>
-        </div>
-	</fieldset>
-	<button id="submit-order">提交</button>
 </form>

@@ -97,6 +97,12 @@
 }
 
 #view-restaurant-order {
+input {
+	font-size:10px;
+	}
+	 textarea {
+	 font-size:10px;
+	 }
 	.order-info {
 		width: 250px;
 		fieldset {
@@ -104,4 +110,66 @@
 			@include border-radius(0);
 		}
 	}
+	.section-header-img {
+	     display:block;
+		 max-height:140px;
+         width:100%;
+         overflow: hidden;
+	}
+	.restaurant-name{
+    font-size: 16px;
+    overflow: hidden; 
+    line-height: 1.5*$baseLineHeight;
+    text-align:center;
+  }
+  .order-heading{
+  font-size: 13px;
+	color: brownDark;
+	text-align:center;
+	padding: 0 10px;
+	line-height: 1.5*$baseLineHeight;
+  }
+	.form-heading {
+	font-size: 13px;
+	color: brownDark;
+	text-align:center;
+	padding: 0 10px;
+	line-height: 1.5*$baseLineHeight;
+	}
+
+	.contact-info {
+	width:250px;
+	}
+	.addtional-info {
+		width:250px;
+}
+	.inline {
+	   position:relative;
+		overflow: hidden;
+		border-bottom:1px ;
+		border-style:solid;
+		border-color: $brownLight;
+	//	@include block-field-set();
+		@include flex-box($orient: horizontal);
+	input {
+	border:none;
+	}
+	
+}
+$listItemHeight: 45px;
+		$listItemWidth: 63.75%;
+		$buttomWidth: 62.5%;
+		$listPadding: ($listItemWidth - $buttomWidth) / 2;
+.form-heading::after{
+            content: ">";
+			position: absolute;
+			right: $listPadding;
+			font-weight: bold;
+}
+.btn-wide {@include center-block();
+width:200px;
+
+}
+.submit-order-button {
+padding:15px 0;}
 }
