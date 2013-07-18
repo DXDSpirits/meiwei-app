@@ -9,6 +9,7 @@ MeiweiApp.Router = new (Backbone.Router.extend({
 		this.route(/^restaurant\/(\d+)$/, 'restaurantDetail');
 		this.route(/^restaurant\/(\d+)\/order$/, 'restaurantOrder');
 		this.route('restaurant/search', 'restaurantSearch');
+		this.route('restaurant/search/map', 'restaurantSearchMap');
 		
 		this.route('member', 'memberCenter');
 		this.route('member/login', 'memberLogin');
@@ -28,6 +29,7 @@ MeiweiApp.Router = new (Backbone.Router.extend({
 	
 	restaurantDetail: function(rid) { MeiweiApp.Pages.RestaurantDetail.go(rid); },
 	restaurantSearch: function() { MeiweiApp.Pages.RestaurantSearch.go(); },
+	restaurantSearchMap: function() { MeiweiApp.Pages.RestaurantSearchMap.go(); },
 	restaurantOrder: function(rid) { MeiweiApp.Pages.RestaurantOrder.go(rid); },
 	
 	memberCenter: function() { MeiweiApp.Pages.MemberCenter.go(); },

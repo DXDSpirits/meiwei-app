@@ -50,6 +50,12 @@
 	}
 }
 
+#view-restaurant-search-map {
+	#map-canvas {
+		@include square(100%);
+	}
+}
+
 #view-restaurant-detail {
 	
 	.restaurant-pictures {

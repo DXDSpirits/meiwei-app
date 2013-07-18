@@ -54,6 +54,7 @@ MeiweiApp.Pages.RestaurantSearch = new (MeiweiApp.PageView.extend({
 		});
 		_.bindAll(this, 'renderRestaurantList', 'filterRestaurant', 'bindCuisineFilters', 'bindCircleFilters');
 	},
+	onClickRightBtn: function() { MeiweiApp.goTo('restaurant/search/map'); },
 	renderRestaurantList: function() {
 		this.views.restaurantList.render();
 	},
