@@ -73,24 +73,49 @@
 }
 
 #view-product-purchase {
-	.product-carousel {
-		width: 100%;
+	.scroll-inner {
+		padding: 15px 17px 0;
 	}
-	.product-item {
-		@include size(150px, 100px);
-		position: relative;
-		overflow: hidden;
-		.tag {
-			position: absolute;
-			bottom: 0;
-			width: 100%;
-			background-color: $brown;
-			opacity: 0.9;
-			font-size: $fontSizeMini;
-			line-height: $fontSizeMini + 2px;
-			color: white;
-			text-align: center;
+	.product-box {
+		width: 100%;
+		margin: 5px 0;
+		p { font-size: $fontSizeMini; }
+		$carouselWidth: 250px;
+		.carousel {
+			@include size(164px, $carouselWidth);
+			padding: 7px 0;
+			@include center-block();
+			@include scrollable();
+			background: url($gradientShadowPath) repeat-x bottom, url($gradientShadowPathR) repeat-x top;
+			@include background-size(100% auto, 100% auto);
 		}
+		.carousel-inner {
+			height: 100%;
+			@include flex-box($orient: horizontal);
+		}
+		.carousel-item {
+			@include size(100%, $carouselWidth);
+			position: relative;
+			overflow: hidden;
+			.tag {
+				position: absolute;
+				bottom: 0;
+				width: 100%;
+				min-height: 2 * ($fontSizeMini + 2px);
+				background-color: $brown;
+				opacity: 0.9;
+				font-size: $fontSizeMini;
+				line-height: $fontSizeMini + 2px;
+				color: white;
+				text-align: center;
+			}
+			img {
+				@include center-block();
+				max-height: 100%;
+				max-width: 100%;
+			}
+		}
+		
 	}
 }
 

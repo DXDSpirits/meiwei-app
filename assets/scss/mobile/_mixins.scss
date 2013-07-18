@@ -86,6 +86,16 @@
 	border-bottom: 1px solid $bottom;
 }
 
+// Scrollable
+// -------------------------
+@mixin scrollable() {
+	overflow: auto;
+	-webkit-overflow-scrolling: touch;
+	&::-webkit-scrollbar {
+		display: none;
+	}
+}
+
 
 // FONTS
 // --------------------------------------------------
@@ -273,7 +283,7 @@
 }
 
 // Background sizing
-@mixin background-size($size) {
+@mixin background-size($size...) {
 	-webkit-background-size: $size;
 	   -moz-background-size: $size;
 	     -o-background-size: $size;

@@ -3,13 +3,15 @@
 	<p>{{ product.remark }}</p>
 </header>
 <div class="carousel">
-	{{ #items }}
-	<div class="product-item">
-		<div class="tag">
-			<p>￥{{ price }}</p>
-			<p>{{ model }}</p>
+	<div class="carousel-inner">
+		{{ #items }}
+		<div class="carousel-item">
+			<div class="tag">
+				<p>￥{{ price }}</p>
+				<p>{{ model }}</p>
+			</div>
+			<img src="{{ picture }}" alt="">
 		</div>
-		<img src="{{ picture }}" alt="">
+		{{ /items }}
 	</div>
-	{{ /items }}
 </div>
