@@ -88,11 +88,15 @@
 
 // Scrollable
 // -------------------------
-@mixin scrollable() {
+@mixin scrollable($scrollbarWidth: 0) {
 	overflow: auto;
 	-webkit-overflow-scrolling: touch;
 	&::-webkit-scrollbar {
-		display: none;
+		@if ($scrollbarWidth == 0) {
+			display: none;
+		} @else {
+			width: $scrollbarWidth;
+		}
 	}
 }
 
