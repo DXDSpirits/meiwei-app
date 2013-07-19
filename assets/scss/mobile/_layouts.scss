@@ -34,6 +34,7 @@ body {
 		@include flex-box($orient: vertical);
 		@include size(100%, 100%);
 		background-color: $bodyBackground;
+		position: relative;
 		@include translate3d(0, 0, 0);
 		@include animation(slideinfromright $pageSwitchDuration ease-in-out);
 	}
