@@ -172,6 +172,7 @@ input {
 		width:250px;
 }
 	.inline {
+		
 	   position:relative;
 		overflow: hidden;
 		border-bottom:1px ;
@@ -179,11 +180,16 @@ input {
 		border-color: $brownLight;
 	//	@include block-field-set();
 		@include flex-box($orient: horizontal);
+	//	@include flexible();
 	input {
 	border:none;
 	}
-	
+     	
 }
+   .inline-contact   {
+   	@include flexible();
+   	
+	   }
 $listItemHeight: 45px;
 		$listItemWidth: 63.75%;
 		$buttomWidth: 62.5%;
