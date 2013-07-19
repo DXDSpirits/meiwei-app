@@ -52,7 +52,6 @@
 	@include flex-box($orient: horizontal);
 	@include size(50px, 100%);
 	background-color: $brown;
-	overflow: hidden;
 	> div {
 		@include flexible();
 		height: 20px;
