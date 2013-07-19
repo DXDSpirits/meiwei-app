@@ -4,7 +4,7 @@
 
 @mixin block-field-set {
 	width: 100%;
-	border-width: 1px 0 0 0;
+	border-width: 0 0 1px 0;
 	&:last-child {
 	    border-bottom-width: 0;
 	}
@@ -12,14 +12,13 @@
 
 @mixin inline-field-set {
 	width: 0;
-	border-width: 0 0 0 0;
+	border-width: 0 1px 0 0;
 	&:last-child {
 		border-right-width: 0;
 	}
 }
 
 fieldset {
-
 	@include border-radius($baseBorderRadius);
 	width: 100%;
 	margin: 15px 0;
@@ -30,9 +29,7 @@ fieldset {
 		border: 1px solid $brownLight;
 		@include block-field-set();
 		@include flex-box($orient: horizontal);
-		
 	}
-	
 }
 
 // Text fields
