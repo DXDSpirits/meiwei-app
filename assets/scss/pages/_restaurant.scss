@@ -1,44 +1,65 @@
+@-webkit-keyframes flipinfromright {
+	from { -webkit-transform: rotateY(-180deg); opacity: 0; }
+	50% { opacity: .4; }
+	to { -webkit-transform: rotateY(0); opacity: 1; }
+}
+
+@-webkit-keyframes flipinfromleft {
+	from { -webkit-transform: rotateY(180deg); opacity: 0; }
+	50% { opacity: .4; }
+	to { -webkit-transform: rotateY(0); opacity: 1; }
+}
+
+@-webkit-keyframes flipouttoleft {
+	from { -webkit-transform: rotateY(0); opacity: 1; }
+	50% { opacity: .4; }
+	to { -webkit-transform: rotateY(-180deg); opacity: 0; }
+}
+
+@-webkit-keyframes flipouttoright {
+	from { -webkit-transform: rotateY(0); opacity: 1; }
+	50% { opacity: .4; }
+	to { -webkit-transform: rotateY(180deg); opacity: 0; }
+}
+
+.flipper {
+	-webkit-perspective: 1000;
+	perspective: 1000;
+	
+	position: relative;
+	.ftont, .back {
+		@include backface-visibility(hidden);
+		position: absolute;
+		top: 0;
+	}
+	&.flip .back, &:not(.flip) .front {
+		@include rotateY(0);
+		@include animation(flipinfromleft .6s ease-in-out);
+	}
+	&.flip .front, &:not(.flip) .back {
+		@include rotateY(180deg);
+		@include animation(flipouttoleft .6s ease-in-out);
+	}
+}
+
 #view-restaurant-search {
-	.collapsible {
-		position: relative;
-		& > .collapsible-inner {
-			@include scrollable(5px);
-			position: absolute;
-			z-index: $zindexPopover;
-			top: 30px;
-			height: 0;
-			background-color: $brown;
-			color: $white;
-			width: 100%;
-			@include transition(height .35s ease-in-out);
-		}
-		&.expand > .collapsible-inner {
-			height: 200px;
-			@include transition(height .35s ease-in-out);
+	.filter-bar {
+		.cuisine li, .circle li, .sort li {
+			line-height: 30px;
 		}
 	}
-	
-	.cuisine li, .circle li, .sort li {
-		line-height: 30px;
-	}
-	
 	.restaurant-list-item {
-		border-width: 1px 0 0 0;
-		border-style: solid;
-		border-color: $brownDark;
-		padding: 9px 17px 9px 99px;
+		@include border(1px 0 0 0, solid, $brownDark);
 		@include size(90px, 100%);
+		padding: 9px 17px 9px 99px;
 		overflow: hidden;
 		position: relative;
 		img {
 			position: absolute;
-			top: 0;
-			left: 0;
+			top: 0; left: 0;
 			@include square(89px);
 		}
-		p {
-			font-size: $fontSizeMini;
-		}
+		p { font-size: $fontSizeMini; }
 		.rating {
 			position: absolute;
 			right: 17px;
@@ -47,6 +68,13 @@
 			width: 20px;
 			height: 5px;
 		}
+	}
+	.map-canvas {
+		width: 100%;
+		height: 400px;
+		font-size: 150px;
+		line-height: 150px;
+		background-color: $white;
 	}
 }
 
@@ -74,9 +102,7 @@
 	.restaurant-profile {
 		width: 90%;
 		
-		border-width: 0 0 1px;
-		border-style: solid;
-		border-color: $brownLight;
+		@include border(0 0 1px, solid, $brownLight);
 		
 		font-size: $fontSizeMini;
 		line-height: $fontSizeMini;
