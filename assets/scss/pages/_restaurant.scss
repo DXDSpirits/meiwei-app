@@ -1,44 +1,55 @@
+@-webkit-keyframes flipinfromleft {
+	from { -webkit-transform: rotateY(180deg) scale(.65); opacity: 0; }
+	50% { opacity: .4; }
+	to { -webkit-transform: rotateY(0) scale(1); opacity: 1; }
+}
+
+@-webkit-keyframes flipouttoleft {
+	from { -webkit-transform: rotateY(0) scale(1); opacity: 1; }
+	50% { opacity: .4; }
+	to { -webkit-transform: rotateY(-180deg) scale(.65); opacity: 0; }
+}
+
+.flipper {
+	-webkit-perspective: 1000;
+	perspective: 1000;
+	
+	position: relative;
+	.front, .back {
+		@include backface-visibility(hidden);
+		position: absolute;
+		top: 0;
+	}
+	&.flip .back, &:not(.flip) .front {
+		@include rotateY(0);
+		@include animation(flipinfromleft .6s ease-in-out);
+	}
+	&.flip .front, &:not(.flip) .back {
+		@include rotateY(180deg);
+		@include animation(flipouttoleft .6s ease-in-out);
+		z-index: -1;
+		opacity: 0;
+	}
+}
+
 #view-restaurant-search {
-	.collapsible {
-		position: relative;
-		& > .collapsible-inner {
-			@include scrollable(5px);
-			position: absolute;
-			z-index: $zindexPopover;
-			top: 30px;
-			height: 0;
-			background-color: $brown;
-			color: $white;
-			width: 100%;
-			@include transition(height .35s ease-in-out);
-		}
-		&.expand > .collapsible-inner {
-			height: 200px;
-			@include transition(height .35s ease-in-out);
+	.filter-bar {
+		.cuisine li, .circle li, .sort li {
+			line-height: 30px;
 		}
 	}
-	
-	.cuisine li, .circle li, .sort li {
-		line-height: 30px;
-	}
-	
 	.restaurant-list-item {
-		border-width: 1px 0 0 0;
-		border-style: solid;
-		border-color: $brownDark;
-		padding: 9px 17px 9px 99px;
+		@include border(1px 0 0 0, solid, $brownDark);
 		@include size(90px, 100%);
+		padding: 9px 17px 9px 99px;
 		overflow: hidden;
 		position: relative;
 		img {
 			position: absolute;
-			top: 0;
-			left: 0;
+			top: 0; left: 0;
 			@include square(89px);
 		}
-		p {
-			font-size: $fontSizeMini;
-		}
+		p { font-size: $fontSizeMini; }
 		.rating {
 			position: absolute;
 			right: 17px;
@@ -48,11 +59,26 @@
 			height: 5px;
 		}
 	}
-}
-
-#view-restaurant-search-map {
-	#map-canvas {
-		@include square(100%);
+	.map_canvas {
+		margin-top: 50px;
+		padding-bottom: 50px;
+		&, & #map_canvas {
+			@include square(100%);
+		}
+		.map-marker-info {
+			@extend .restaurant-list-item;
+			position: absolute;
+			z-index: 2;
+			bottom: 50px;
+			background-color: $white;
+			width: 100%;
+			@include translate3d(0, 90px, 0);
+			@include transition(-webkit-transform .6s ease-in-out);
+			&.expand {
+				@include translate3d(0, 0, 0);
+				@include transition(-webkit-transform .6s ease-in-out);
+			}
+		}
 	}
 }
 
@@ -74,9 +100,7 @@
 	.restaurant-profile {
 		width: 90%;
 		
-		border-width: 0 0 1px;
-		border-style: solid;
-		border-color: $brownLight;
+		@include border(0 0 1px, solid, $brownLight);
 		
 		font-size: $fontSizeMini;
 		line-height: $fontSizeMini;
@@ -125,6 +149,12 @@
 }
 
 #view-restaurant-order {
+input {
+	font-size:10px;
+	}
+	 textarea {
+	 font-size:10px;
+	 }
 	.order-info {
 		width: 250px;
 		fieldset {
@@ -132,4 +162,72 @@
 			@include border-radius(0);
 		}
 	}
+	.section-header-img {
+	     display:block;
+		 max-height:140px;
+         width:100%;
+         overflow: hidden;
+	}
+	.restaurant-name{
+    font-size: 16px;
+    overflow: hidden; 
+    line-height: 1.5*$baseLineHeight;
+    text-align:center;
+  }
+  .order-heading{
+  font-size: 13px;
+	color: brownDark;
+	text-align:center;
+	padding: 0 10px;
+	line-height: 1.5*$baseLineHeight;
+  }
+	.form-heading {
+	font-size: 13px;
+	color: brownDark;
+	text-align:center;
+	padding: 0 10px;
+	line-height: 1.5*$baseLineHeight;
+	}
+
+	.contact-info {
+	width:250px;
+	}
+	.addtional-info {
+		width:250px;
+}
+	.inline {
+		
+	   position:relative;
+		overflow: hidden;
+		border-bottom:1px ;
+		border-style:solid;
+		border-color: $brownLight;
+	//	@include block-field-set();
+		@include flex-box($orient: horizontal);
+	//	@include flexible();
+	input {
+	border:none;
+	}
+     	
+}
+   .inline-contact   {
+   	@include flexible();
+   	
+	   }
+$listItemHeight: 45px;
+		$listItemWidth: 63.75%;
+		$buttomWidth: 62.5%;
+		$listPadding: ($listItemWidth - $buttomWidth) / 2;
+.form-heading::after{
+            content: ">";
+			position: absolute;
+			right: $listPadding;
+			font-weight: bold;
+}
+.btn-wide {@include center-block();
+width:200px;
+
+}
+.submit-order-button {
+padding:15px 0;}
 }
