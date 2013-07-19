@@ -100,6 +100,14 @@
 	}
 }
 
+// Border Shorthand
+// -------------------------
+@mixin border($width, $style, $color) {
+	border-width: $width;
+	border-style: $style;
+	border-color: $color;
+}
+
 
 // FONTS
 // --------------------------------------------------
@@ -216,6 +224,14 @@
 	    -ms-transform: rotate($degrees);
 	     -o-transform: rotate($degrees);
 	        transform: rotate($degrees);
+}
+// Transformations
+@mixin rotateY($degrees) {
+	-webkit-transform: rotateY($degrees);
+	   -moz-transform: rotateY($degrees);
+	    -ms-transform: rotateY($degrees);
+	     -o-transform: rotateY($degrees);
+	        transform: rotateY($degrees);
 }
 @mixin scale($ratio) {
 	-webkit-transform: scale($ratio);
@@ -350,10 +366,6 @@
 	-webkit-box-direction: $direction;
 	-webkit-box-pack: $pack;
 	-webkit-box-align: $align;
-	& > * {
-		-webkit-box-flex: 0;
-		display: block;
-	}
 }
 
 @mixin flexible($flex: 1) {
