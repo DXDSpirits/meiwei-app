@@ -1,3 +1,4 @@
+/*
 var neighborhoods = [];
 
 var markers = [];
@@ -54,3 +55,4 @@ MeiweiApp.Pages.RestaurantSearchMap = new (MeiweiApp.PageView.extend({
 		this.showPage();
 	}
 }))({el: $("#view-restaurant-search-map")});
+*/

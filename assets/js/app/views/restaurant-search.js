@@ -1,4 +1,25 @@
 
+MeiweiApp.Views.MarkerItemInfo = MeiweiApp.ModelView.extend({
+	events: { 'click': 'viewRestaurant' },
+	template: MeiweiApp.Templates['restaurant-list-item'],
+	viewRestaurant: function() {
+		MeiweiApp.goTo('restaurant/' + this.model.id);
+	},
+	toggle: function(resto) {
+		if (this.$el.hasClass('expand')) {
+			this.$el.removeClass('expand');
+			var self = this;
+			setTimeout(function() {
+				self.model.set(resto);
+				self.$el.addClass('expand');
+			}, 600);
+		} else {
+			this.model.set(resto);
+			this.$el.addClass('expand');
+		}
+	}
+});
+
 MeiweiApp.Views.RestaurantListItem = MeiweiApp.ModelView.extend({
 	events: { 'click': 'viewRestaurant' },
 	tagName: 'section',
@@ -37,11 +58,15 @@ MeiweiApp.Pages.RestaurantSearch = new (MeiweiApp.PageView.extend({
 			}),
 			cuisineFilter: new MeiweiApp.Views.Filter({
 				collection: this.cuisines,
-				el: this.$('.collapsible-inner.circle')
+				el: this.$('.collapsible-inner.cuisine')
 			}),
 			circleFilter: new MeiweiApp.Views.Filter({
 				collection: this.circles,
-				el: this.$('.collapsible-inner.cuisine')
+				el: this.$('.collapsible-inner.circle')
+			}),
+			markerInfo: new MeiweiApp.Views.MarkerItemInfo({
+				model: new MeiweiApp.Models.Restaurant(),
+				el: this.$('.map-marker-info')
 			})
 		}
 		this.$('.collapsible').on('click', function() {
@@ -53,24 +78,74 @@ MeiweiApp.Pages.RestaurantSearch = new (MeiweiApp.PageView.extend({
 			}
 		});
 		_.bindAll(this, 'renderRestaurantList', 'filterRestaurant', 'bindCuisineFilters', 'bindCircleFilters');
+		this.initializeMap();
 	},
-	onClickRightBtn: function() { this.$('.flipper').toggleClass('flip'); },
+	onClickRightBtn: function() {
+		this.$('.flipper').toggleClass('flip');
+		this.dropMarkers();
+	},
 	renderRestaurantList: function() {
 		this.views.restaurantList.render();
+		this.dropMarkers();
 	},
 	filterRestaurant: function(filter) {
 		this.restaurants.fetch({ reset: true, success: this.renderRestaurantList, data: filter });
 	},
 	bindCuisineFilters: function(cuisines, response, options) {
 		var bindFilter = function(cuisine) {
-			cuisine.on("select", function() { this.filterRestaurant({cuisine: cuisine.id}); }, this)
-		}; cuisines.forEach(bindFilter, this);
+			cuisine.on("select", function() { this.filterRestaurant({cuisine: cuisine.id}); }, this);
+		};
+		cuisines.forEach(bindFilter, this);
 	},
 	bindCircleFilters: function(circles, response, options) {
 		var bindFilter = function(circle) {
-			circle.on("select", function() { this.filterRestaurant({circle: circle.id}); }, this)
-		}; circles.forEach(bindFilter, this);
+			circle.on("select", function() { this.filterRestaurant({circle: circle.id}); }, this);
+		};
+		circles.forEach(bindFilter, this);
 	},
+	
+	/*********************************************/
+	dropMarkers: function () {
+		var latlngbounds = new google.maps.LatLngBounds();
+		var neighborhoods = [];
+		this.restaurants.forEach(function(item) {
+			var coord = item.get('coordinate');
+			var latlng = new google.maps.LatLng(coord.latitude / 100000.0, coord.longitude / 100000.0);
+			neighborhoods.push({latlng: latlng, resto: item.toJSON()});
+			latlngbounds.extend(latlng);
+		}, this);
+		this.map.setCenter(latlngbounds.getCenter());
+		this.map.fitBounds(latlngbounds);
+		
+		for (var i = 0; i < this.markers.length; i++) this.markers[i].setMap(null);
+		this.markers = [];
+		
+		for (var i = 0; i < neighborhoods.length; i++) {
+			var marker = new google.maps.Marker({
+				flat: true,
+				position : neighborhoods[i].latlng,
+				map : this.map,
+				draggable : false,
+				animation : google.maps.Animation.DROP
+			});
+			this.markers.push(marker);
+			this.addMessage(marker, neighborhoods[i].resto);
+		}
+	},
+	addMessage: function(marker, resto) {
+		var markerInfo = this.views.markerInfo;
+		google.maps.event.addListener(marker, 'click', function () {
+			//markerInfo.model.set(resto);
+			markerInfo.toggle(resto);
+		});
+	},
+	initializeMap: function () {
+		var mapOptions = { zoom : 12, mapTypeId : google.maps.MapTypeId.ROADMAP };
+		this.markers = [];
+		this.map = new google.maps.Map(this.$('#map_canvas')[0], mapOptions);
+	},
+	/*********************************************/
+	
 	render: function() {
 		$.when(
 			this.restaurants.fetch({ reset: true, success: this.renderRestaurantList }),
