@@ -1,10 +1,4 @@
 
-function checkIfElementShouldScroll(element) {
-	console.log(element);
-	console.log($(element).hasClass(".scroll"));
-	return false;
-}
-
 var MeiweiApp = new (Backbone.View.extend({
 	
 	Models: {},
