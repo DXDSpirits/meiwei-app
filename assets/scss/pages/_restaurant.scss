@@ -171,7 +171,7 @@
 		@include border-radius(0);
 	}
 	
-	.order-info, .contact-info, .addtional-info {
+	.order-info, .contact-info, .floorplan-select, .product-select {
 		width: 70%;
 		> header {
 			height: 40px;
@@ -188,13 +188,17 @@
 		background: transparent url($gradientShadowPathR) no-repeat top;
 		@include background-size(100% (3*$baseLineHeight));
 	}
-	.addtional-info {
-		background: url($gradientShadowPathR) no-repeat top, url($gradientShadowPath) no-repeat bottom;
-		@include background-size(100% (3*$baseLineHeight), 100% (3*$baseLineHeight));
+	.product-select {
+		background: transparent url($gradientShadowPath) no-repeat bottom;
+		@include background-size(100% (3*$baseLineHeight));
 	}
 	.order-submit-button {
 		padding: 15px;
 		width: 70%;
 		.btn { width: 100%; }
 	}
+}
+
+#view-restaurant-floorplans {
+	
 }

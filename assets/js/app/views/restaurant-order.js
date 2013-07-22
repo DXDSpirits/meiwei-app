@@ -1,25 +1,3 @@
-
-MeiweiApp.Views.ContactList = MeiweiApp.CollectionView.extend({
-	ModelView: MeiweiApp.ModelView.extend({
-		events: {
-			"click": "updateContact"
-		},
-		template: Mustache.compile("{{name}} - {{mobile}}"),
-		updateContact: function(e) {
-			this.model.trigger("select");
-		}
-	})
-});
-
-MeiweiApp.Views.FloorplanList = MeiweiApp.CollectionView.extend({
-	ModelView: MeiweiApp.ModelView.extend({
-		template: Mustache.compile("{{caption}} - {{path}}"),
-		initialize: function() {
-			this.$el.attr("id", "floorplan" + this.model.id);
-		}
-	})
-});
-
 MeiweiApp.Views.RestaurantOrderForm = MeiweiApp.View.extend({
 	events: {
 		'submit': 'submitOrder',
@@ -67,6 +45,11 @@ MeiweiApp.Views.RestaurantOrderForm = MeiweiApp.View.extend({
 });
 
 MeiweiApp.Pages.RestaurantOrder = new (MeiweiApp.PageView.extend({
+	events: {
+		'click .contact-info > header': 'selectContact',
+		'click .floorplan-select > header': 'selectSeat',
+		'click .product-select > header': 'selectProduct',
+	},
 	initPage: function() {
 		this.restaurant = new MeiweiApp.Models.Restaurant();
 		this.products = new MeiweiApp.Collections.Products();
@@ -75,19 +58,12 @@ MeiweiApp.Pages.RestaurantOrder = new (MeiweiApp.PageView.extend({
 				model: this.restaurant,
 				el: this.$('.order-info')
 			}),
-			/*
-			contactList: new MeiweiApp.Views.ContactList({
-				collection: MeiweiApp.me.contacts,
-				el: this.$('.contact-info')
-			}),
-			floorplanList: new MeiweiApp.Views.FloorplanList({
-				collection: this.restaurant.floorplans,
-				el: this.$('.addtional-info')
-			})
-			*/
 		}
-		_.bindAll(this, "renderOrderForm", "bindContactSelect");
+		_.bindAll(this, 'renderOrderForm', 'bindContactSelect', 'selectContact', 'selectSeat', 'selectProduct');
 	},
+	selectContact: function() { MeiweiApp.goTo('#member/contacts'); },
+	selectSeat: function() { MeiweiApp.goTo('#restaurant/' + this.restaurant.id + '/floorplans'); },
+	selectProduct: function() { MeiweiApp.goTo('#product/purchase'); },
 	renderOrderForm: function(model, response, options) {
 		this.$('.restaurant-info img').attr('src', this.restaurant.get('frontpic'));
 		this.$('.restaurant-info h1').html(this.restaurant.get('fullname'));
