@@ -98,19 +98,19 @@
 }
 #view-attending {
 	
-	  $section-width: 70%;
+	$section-width: 70%;
 
 	.section-header-img {
-	display:block;
-		  max-height:140px;
+		display:block;
+		max-height:140px;
         width:100%;
-       overflow: hidden;
+       	overflow: hidden;
 	}
 	.section-qrcode {
 		 @include flex-box($pack: center);
-            @include square(155px);   
-            position: relative;
-           top: -20px;     
+         @include square(155px);   
+         position: relative;
+         top: -20px;     
 	}
 	div.restaurant-name {
 		height:30px;
@@ -120,7 +120,6 @@
 		@include background-size(100% 60px);
 	}
 	p.res-name {
-		
 		line-height:1.5*$baseLineHeight;
 	}
 	.checkin-item {
@@ -133,25 +132,25 @@
 		align:center;
 		@include background-size(100% 45px);
 	}
-	p.restaurant-name{
-    font-size: 16px;
-    overflow: hidden; 
-    line-height: 1.5*$baseLineHeight;
-  }
+	p.restaurant-name {
+	    font-size: 16px;
+	    overflow: hidden; 
+	    line-height: 1.5*$baseLineHeight;
+	}
 	p.title {
-		 font-size:10px;
-           color:$brownLight;
+		font-size:10px;
+        color:$brownLight;
 	}
 	p.content {
-		      font-size:12px;
-               color: $brownDark;
+		font-size:12px;
+        color: $brownDark;
 	}
 	
 	.order-date {
 		float:left;
 		margin-right: 15%;
 	}
-	 .buttons {
+	.buttons {
 		padding: 20px 17px;
 		@include clearfix();
 		//margin-bottom:5px;

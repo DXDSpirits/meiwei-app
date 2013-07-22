@@ -29,10 +29,7 @@ MeiweiApp.Pages.Home = new (MeiweiApp.PageView.extend({
 		this.$('header input').click(function() {});
 	},
 	onClickLeftBtn: function() { MeiweiApp.goTo('member'); },
-	onClickRightBtn: function() { 
-		console.log('Checkin'); 
-		MeiweiApp.googleMap.getLocation();
-	},
+	onClickRightBtn: function() { MeiweiApp.goTo('attending'); },
 	gotoSearch: function() { MeiweiApp.goTo('restaurant/search'); },
 	hero: function() {
 		var x = this.scroller.currentPage.pageX;
