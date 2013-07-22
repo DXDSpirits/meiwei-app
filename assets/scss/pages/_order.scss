@@ -97,7 +97,27 @@
 	}
 }
 #view-attending {
+   	.individual {
+		width: 380px;
+		height: 100%;
+	}
+	.scroll {
+	   @include flexible();
+	   position: relative;
+	   width: 320px;
+	   overflow: auto;
+	   -webkit-overflow-scrolling: touch;
+	   height: 100%;
 	
+	   &::-webkit-scrollbar {
+		   display: none;
+	   }
+	   & > .scroll-inner {
+		   height: 100%;
+		   width: auto;
+		   @include flex-box($orient: horizontal);
+		}
+	}
 	$section-width: 70%;
 
 	.section-header-img {
@@ -153,16 +173,13 @@
 	.buttons {
 		padding: 20px 17px;
 		@include clearfix();
-		//margin-bottom:5px;
 		.btn {
 			@include center-block();
 			width: 100px;
-			//text-indent: -20px;
 			float: left;
 			margin-left:10px;
 			text-align: center;
 		}
-		//background: transparent url($gradientShadowPathR) repeat-x top;
 		background: transparent url($gradientShadowPathR);
 		@include background-size(100% 60px);
 	}
