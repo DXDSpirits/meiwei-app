@@ -148,70 +148,56 @@
 }
 
 #view-restaurant-order {
- input {
-	font-size:10px;
+	.restaurant-info {
+		height:140px;
+        width:100%;
+        @include size(170px, 100%);
+        img {
+        	@include size(140px, 100%);
+        }
+        h1 {
+        	font-size: $baseFontSize;
+        	line-height: 30px;
+        	text-align: center;
+        }
+        overflow: hidden;
 	}
- textarea {
-	 font-size:10px;
-	 }
- .order-info {
-	 width: 250px;		
-     fieldset {
-			border-width: 1px 0;
-			@include border-radius(0);
-		 }
-	}
-	.field-order{
-		margin-top:0px;
-	}
-	.section-header-img {
-	     display:block;
-		 max-height:140px;
-         width:100%;
-         overflow: hidden;
-	}
-	.restaurant-name{
-    font-size: 16px;
-    line-height: 1.5*$baseLineHeight;
-    text-align:center;
-  }
 	
-	.contact-info {	width:250px;}
-	.addtional-info {width:250px;}
-	.inline {		
-	    position:relative;
-		overflow: hidden;
-		border-bottom:1px ;
-		border-style:solid;
-		border-color: $brownLight;
-		input {
-			border:none;
-		   }  	
-	  }
-	.heading {
-		 font-size:13px;
-		 @include flex-box($orient: horizontal, $pack: center);
-	  }
-	.content {
-		@include flex-box($orient: horizontal, $pack: start);
-	   }
+	input, textarea {
+		font-size: $fontSizeSmall;
+	}
+	fieldset {
+		margin: 0;
+		border-width: 1px 0 0 0;
+		@include border-radius(0);
+	}
 	
-   .inline-contact   { 	@include flexible();  }
-   
-        $listItemHeight: 45px;
-		$listItemWidth: 63.75%;
-		$buttomWidth: 62.5%;
-		$listPadding: ($listItemWidth - $buttomWidth) / 2;
-.heading::after{
+	.order-info, .contact-info, .addtional-info {
+		width: 70%;
+		> header {
+			height: 40px;
+			line-height: 40px;
+			text-align: center;
+			font-size: $fontSizeSmall;
+			position: relative;
+		}
+		background: transparent url($gradientShadowPathR) no-repeat top;
+		@include background-size(100% (3*$baseLineHeight));
+	}
+	.contact-info, .addtional-info {
+		> header ::after{
             content: ">";
 			position: absolute;
-			right: $listPadding;
-			font-weight: bold;
-}
-.btn-wide {@include center-block();
-width:200px;
-
-}
-.submit-order-button {
-padding:15px 0;}
+			right: 0;
+		}
+	}
+	.addtional-info {
+		background: url($gradientShadowPathR) no-repeat top, url($gradientShadowPath) no-repeat bottom;
+		@include background-size(100% (3*$baseLineHeight), 100% (3*$baseLineHeight));
+	}
+	.order-submit-button {
+		padding: 15px;
+		width: 70%;
+		.btn { width: 100%; }
+	}
 }

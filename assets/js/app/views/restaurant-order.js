@@ -89,6 +89,8 @@ MeiweiApp.Pages.RestaurantOrder = new (MeiweiApp.PageView.extend({
 		_.bindAll(this, "renderOrderForm", "bindContactSelect");
 	},
 	renderOrderForm: function(model, response, options) {
+		this.$('.restaurant-info img').attr('src', this.restaurant.get('frontpic'));
+		this.$('.restaurant-info h1').html(this.restaurant.get('fullname'));
 		this.views.orderForm.render();
 		$.when(
 			this.restaurant.floorplans.fetch({ reset: true }),

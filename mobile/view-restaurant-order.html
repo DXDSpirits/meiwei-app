@@ -1,5 +1,5 @@
 <div class="view view-hidden" id="view-restaurant-order">
-    <header>
+	<header>
 		<div class="header-btn header-btn-left back-btn">
 			<i class="icon-back"></i>
 		</div>
@@ -9,25 +9,42 @@
 		</div>
 	</header>
 	<section class="wrapper">
-        <div class="scroll">
-    	    <div class="scroll-inner">
-    	    <div class="section-header-img"><img src="http://www.sanyajiudianyuding.com/sanyajiudiantupian/128_s.jpg"></div>
-    			<div class="order-info"></div>
-    			<div class="contact-info">
-    			
-    			<div class="inline heading"><p class="heading">预订人信息</p> </div>
-	           <div class="inline content">
-         <i class="icon-member-small"></i><input type="text" name="contactname" value="{{ order.contactname }}" placeholder="联系人姓名"/></div>
-        <div class="inline content"> <i class="icon-phone"></i> <input type="text" name="contactphone" value="{{ order.contactphone }}" placeholder="手机号" />
-        </div>
-
-	</div>
-    			<div class="addtional-info">
-    			<div class="inline heading"><p class="heading">桌位选择</p>   </div>
-    			<div class="inline heading"><p class="heading">增值服务</p>   </div>
-    			</div>
-    			<div class="submit-order-button"><button class="button-group btn-inverse btn-wide">提交订单</button></div>
-    	    </div>
-        </div>
-    </section>
+		<div class="scroll">
+			<div class="scroll-inner">
+				
+				<header class="restaurant-info">
+					<img src="http://www.sanyajiudianyuding.com/sanyajiudiantupian/128_s.jpg">
+					<h1></h1>
+				</header>
+				
+				<section class="order-info"></section>
+				
+				<section class="contact-info">
+					<header><p>预订人信息</p></header>
+					<form>
+						<fieldset>
+							<div class="inline-group">
+								<i class="icon-member-small"></i>
+								<input type="text" name="contactname" value="{{ order.contactname }}" placeholder="联系人姓名"/>
+							</div>
+							<div class="inline-group">
+								<i class="icon-phone"></i>
+								<input type="text" name="contactphone" value="{{ order.contactphone }}" placeholder="手机号" />
+							</div>
+						</fieldset>
+					</form>
+				</section>
+				
+				<section class="addtional-info">
+					<header><p>桌位选择</p></header>
+					<header><p>增值服务</p></header>
+				</section>
+				
+				<section class="order-submit-button">
+					<button class="btn btn-inverse">提交订单</button>
+				</section>
+				
+			</div>
+		</div>
+	</section>
 </div>

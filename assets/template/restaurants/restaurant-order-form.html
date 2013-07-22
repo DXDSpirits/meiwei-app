@@ -1,15 +1,20 @@
-
-<div class="restaurant-name">{{ restaurant.fullname }}</div>
-<form id="restaurant-order-form">
-	<fieldset class="field-order">
-	    <div class="inline heading">预订信息</div>                                             
-		<div class="inline-group order-detail"><i class="icon-calendar"></i><input type="text" name="orderdate" value="{{ order.orderdate }}" placeholder="订餐日期"/></div>
-		
+<header><p>预订信息</p></header>
+<form>
+	<fieldset>
+		<div class="inline-group">
+			<i class="icon-calendar"></i>
+			<input type="text" name="orderdate" value="{{ order.orderdate }}" placeholder="订餐日期"/>
+		</div>
+		<div class="inline-group">
+			<i class="icon-clock"></i>
+			<input type="text" name="ordertime" value="{{ order.ordertime }}" placeholder="订餐时间"/>
+			<i class="icon-group"></i>
+			<input type="text" name="personnum" value="{{ order.personnum }}" placeholder="就餐人数"/>
+		</div>
 		<div class="order-detail inline-group">
-    		<i class="icon-clock"></i><input type="text" name="ordertime" value="{{ order.ordertime }}" placeholder="订餐时间"/>
-    		<i class="icon-group"></i><input type="text" name="personnum" value="{{ order.personnum }}" placeholder="就餐人数"/>
-    	</div>
-
-		<div class="order-detail inline-group"><i class="icon-pencil"></i><textarea name="other" placeholder="备注">{{ order.other }}</textarea></div>
+			<i class="icon-pencil"></i>
+			<!--<textarea name="other" placeholder="备注">{{ order.other }}</textarea>-->
+			<input type="text" name="other" value="{{ order.other }}" placeholder="备注"/>
+		</div>
 	</fieldset>
 </form>
