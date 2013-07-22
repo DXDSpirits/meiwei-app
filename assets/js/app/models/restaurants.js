@@ -61,6 +61,7 @@ MeiweiApp.Models.Restaurant = MeiweiApp.Model.extend({
 		this.pictures.url = response.pictures;
 		this.floorplans.reset();
 		this.floorplans.url = response.floorplans;
+		response.score = Math.floor(response.score);
 		return response;
 	}
 });

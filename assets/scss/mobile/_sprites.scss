@@ -1,5 +1,4 @@
-[class^="icon-"],
-[class*=" icon-"] {
+@mixin icon-display() {
 	display: inline-block;
 	width: 26px;
 	height: 26px;
@@ -15,13 +14,15 @@
 	}
 }
 
-.icon-down, .icon-up {
-	width: 9px;
-}
-
 @mixin icon-offset($x, $y) {
+	@include icon-display();
 	background-position: $x * (-26px)  $y * (-26px);
 }
+
+//[class^="icon-"],
+//[class*=" icon-"] {
+//	@include icon-display();
+//}
 
 .icon-member              	{ @include icon-offset(0, 0); }
 .icon-member:active			{ @include icon-offset(1, 0); }
@@ -67,6 +68,8 @@
 
 .icon-down					{ @include icon-offset(0, 4); }
 .icon-up					{ @include icon-offset(1, 4); }
+.icon-down, .icon-up 		{ width: 9px; }
+
 .icon-left					{ @include icon-offset(2, 4); }
 .icon-right					{ @include icon-offset(3, 4); }
 .icon-phone					{ @include icon-offset(4, 4); }
@@ -83,9 +86,27 @@
 .icon-envelope				{ @include icon-offset(6, 5); }
 .icon-pencil				{ @include icon-offset(7, 5); }
 
-.icon-star-large.full		{ @include icon-offset(0, 6); }
-.icon-star-large.zero		{ @include icon-offset(1, 6); }
-.icon-star-large.half		{ @include icon-offset(2, 6); }
-.icon-star-small.full		{ @include icon-offset(3, 6); }
-.icon-star-small.zero		{ @include icon-offset(4, 6); }
-.icon-star-small.half		{ @include icon-offset(5, 6); }
+@mixin icon-star-large-full		{ @include icon-offset(0, 6); width: 20px; }
+@mixin icon-star-large-zero		{ @include icon-offset(1, 6); width: 20px; }
+@mixin icon-star-large-half		{ @include icon-offset(2, 6); width: 20px; }
+@mixin icon-star-small-full		{ @include icon-offset(3, 6); width: 20px; }
+@mixin icon-star-small-zero		{ @include icon-offset(4, 6); width: 20px; }
+@mixin icon-star-small-half		{ @include icon-offset(5, 6); width: 20px; }
+
+
+// Rating Component
+@mixin rating($r) {
+	* { @include icon-star-large-full(); }
+	:nth-child(n + #{$r+1}) {
+		@include icon-star-large-zero();
+	}
+}
+.rating {
+	width: 100px;
+	height: 26px;
+	&.r-1 { @include rating(1); }
+	&.r-2 { @include rating(2); }
+	&.r-3 { @include rating(3); }
+	&.r-4 { @include rating(4); }
+	&.r-5 { @include rating(5); }
+}
