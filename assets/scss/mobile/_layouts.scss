@@ -45,6 +45,10 @@ body {
 	}
 }
 
+@include keyframes-transform(slideinfromright, translate3d(100%, 0, 0), translate3d(0, 0, 0));
+//@include keyframes-transform(slideouttoleft, translate3d(0, 0, 0), translate3d(10%, 5%, 0));
+@include keyframes-transform(slideouttoleft, translate3d(0, 0, 0), translate3d(-100%, 0, 0));
+
 .view > .wrapper > .scroll{
 	@include flexible();
 	position: relative;
@@ -95,10 +99,6 @@ body {
 	background-size: 20px auto;
 	-webkit-animation: loading-sprite 1s step-start infinite;
 }
-
-
-@include keyframes-transform(slideinfromright, translate3d(100%, 0, 0), translate3d(0, 0, 0));
-@include keyframes-transform(slideouttoleft, translate3d(0, 0, 0), translate3d(10%, 5%, 0));
 
 @include keyframes(loading-sprite) {
 	0% { background-position: 0 0; }
