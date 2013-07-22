@@ -191,6 +191,7 @@ input {
 
 	.contact-info {
 	width:250px;
+	overflow: hidden;
 	}
 	.addtional-info {
 		width:250px;
@@ -212,6 +213,8 @@ input {
 }
    .inline-contact   {
    	@include flexible();
+   	margin-left: -37%;
+   	
    	
 	   }
 $listItemHeight: 45px;
