@@ -1,6 +1,12 @@
 
 MeiweiApp.Views.RestaurantProfileBox = MeiweiApp.ModelView.extend({
 	template: MeiweiApp.Templates['restaurant-profile-box'],
+	render: function() {
+		this.$el.html(this.template(this.model.toJSON()));
+		var self = this;
+		new MBP.fastButton(this.$('.order-button')[0], function() { MeiweiApp.goTo('restaurant/' + self.model.id + '/order'); });
+		return this;
+	}
 });
 
 MeiweiApp.Views.RestaurantPictureList = MeiweiApp.CollectionView.extend({

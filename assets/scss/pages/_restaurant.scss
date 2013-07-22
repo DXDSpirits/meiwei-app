@@ -53,10 +53,7 @@
 		.rating {
 			position: absolute;
 			right: 17px;
-			bottom: 9px;
-			border: 1px solid black;
-			width: 20px;
-			height: 5px;
+			bottom: 0;
 		}
 	}
 	.map_canvas {
@@ -104,6 +101,26 @@
 		
 		font-size: $fontSizeMini;
 		line-height: $fontSizeMini;
+		
+		position: relative;
+		.rating {
+			position: absolute;
+			top: -40px;
+			left: 0;
+		}
+		.order-button {
+			@include size(35px, 100px);
+			position: absolute;
+			top: -45px;
+			right: 0;
+			text-indent: 50px;
+			line-height: 40px;
+			vertical-align: middle;
+			color: $white;
+			font-size: 20px;
+			background: transparent url($bookButtonPath) no-repeat bottom left;
+			@include background-size(35px 35px);
+		}
 		
 		article {
 			padding: $baseLineHeight/2 0;
