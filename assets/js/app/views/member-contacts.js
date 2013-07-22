@@ -1,3 +1,32 @@
+//测试notification
+var d = new Date();
+d = d.getTime() + 60 * 1000; //60 seconds from now
+d = new Date(d);
+
+window.addNotification({
+    fireDate: d,
+    alertBody: "This is a local notification.",
+    repeatInterval: "daily",
+    soundName: "horn.caf",
+    badge: 0,
+    notificationId: 123,
+    foreground: function(notificationId) {
+        alert("Hello World! This alert was triggered by notification " + notificationId);
+        console.log(notificationId);
+    },
+    background: function(notificationId) {
+        alert("Hello World! This alert was triggered by notification " + notificationId);
+        console.log(notificationId);
+
+    }
+})
+
+
+
+
+
+
+
 MeiweiApp.Views.ContactList = MeiweiApp.CollectionView.extend({
     ModelView: MeiweiApp.ModelView.extend({
         tagName: "div",
@@ -35,8 +64,8 @@ MeiweiApp.Pages.MemberContacts = new(MeiweiApp.PageView.extend({
         collection.at(0).trigger("select");
     },
 
-    getMobileContacts: function() {
-        var collection = new MeiweiApp.Collections.Contacts();
+    getMobileContacts: function(callback) {
+        var collection = this.views.contactList.collection;
         try {
             var self = this;
             navigator.contacts.find(["displayName", "phoneNumbers"],
@@ -50,8 +79,9 @@ MeiweiApp.Pages.MemberContacts = new(MeiweiApp.PageView.extend({
                     });
                     collection.add(model);
                 }
-                self.views.contactList.collection.reset(collection.models);
-                self.views.contactList.render();
+                if (typeof callback == 'function') {
+                    callback.call( self );
+                }
             },
             function(e) {},
             {
@@ -62,8 +92,9 @@ MeiweiApp.Pages.MemberContacts = new(MeiweiApp.PageView.extend({
     },
 
     render: function() {
-        $.when(this.getMobileContacts()).then(this.showPage);
-        //this.bindContactSelect(collection);
+        this.getMobileContacts(function() {
+            this.showPage();
+        });
     }
 }))({
     el: $("#view-member-contacts")
