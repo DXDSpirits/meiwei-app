@@ -149,18 +149,21 @@
 }
 
 #view-restaurant-order {
-input {
+ input {
 	font-size:10px;
 	}
-	 textarea {
+ textarea {
 	 font-size:10px;
 	 }
-	.order-info {
-		width: 250px;
-		fieldset {
+ .order-info {
+	 width: 250px;		
+     fieldset {
 			border-width: 1px 0;
 			@include border-radius(0);
-		}
+		 }
+	}
+	.field-order{
+		margin-top:0px;
 	}
 	.section-header-img {
 	     display:block;
@@ -170,58 +173,37 @@ input {
 	}
 	.restaurant-name{
     font-size: 16px;
-    overflow: hidden; 
     line-height: 1.5*$baseLineHeight;
     text-align:center;
   }
-  .order-heading{
-  font-size: 13px;
-	color: brownDark;
-	text-align:center;
-	padding: 0 10px;
-	line-height: 1.5*$baseLineHeight;
-  }
-	.form-heading {
-	font-size: 13px;
-	color: brownDark;
-	text-align:center;
-	padding: 0 10px;
-	line-height: 1.5*$baseLineHeight;
-	}
-
-	.contact-info {
-	width:250px;
-	overflow: hidden;
-	}
-	.addtional-info {
-		width:250px;
-}
-	.inline {
-		
-	   position:relative;
+	
+	.contact-info {	width:250px;}
+	.addtional-info {width:250px;}
+	.inline {		
+	    position:relative;
 		overflow: hidden;
 		border-bottom:1px ;
 		border-style:solid;
 		border-color: $brownLight;
-	//	@include block-field-set();
-		@include flex-box($orient: horizontal);
-	//	@include flexible();
-	input {
-	border:none;
-	}
-     	
-}
-   .inline-contact   {
-   	@include flexible();
-   	margin-left: -37%;
-   	
-   	
+		input {
+			border:none;
+		   }  	
+	  }
+	.heading {
+		 font-size:13px;
+		 @include flex-box($orient: horizontal, $pack: center);
+	  }
+	.content {
+		@include flex-box($orient: horizontal, $pack: start);
 	   }
-$listItemHeight: 45px;
+	
+   .inline-contact   { 	@include flexible();  }
+   
+        $listItemHeight: 45px;
 		$listItemWidth: 63.75%;
 		$buttomWidth: 62.5%;
 		$listPadding: ($listItemWidth - $buttomWidth) / 2;
-.form-heading::after{
+.heading::after{
             content: ">";
 			position: absolute;
 			right: $listPadding;

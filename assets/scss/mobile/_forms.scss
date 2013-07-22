@@ -18,6 +18,12 @@
 	}
 }
 
+@mixin inline-order {
+	width: 0;
+	border-right-width: 0;
+}
+
+
 fieldset {
 	@include border-radius($baseBorderRadius);
 	width: 100%;
@@ -30,6 +36,8 @@ fieldset {
 		@include block-field-set();
 		@include flex-box($orient: horizontal);
 	}
+	
+	
 }
 
 // Text fields
@@ -71,6 +79,10 @@ input[type="color"],
 	fieldset .inline-group > & {
 		@include flexible();
 		@include inline-field-set();
+	}
+		fieldset .order-detail > & {
+		@include flexible();
+		@include inline-order();
 	}
 }
 
