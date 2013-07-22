@@ -30,11 +30,11 @@ window.addNotification({
 MeiweiApp.Views.ContactList = MeiweiApp.CollectionView.extend({
     ModelView: MeiweiApp.ModelView.extend({
         tagName: "div",
-        className: "contact-list-item",
+        className: "simple-list-item",
         events: {
             "click": "updateContact"
         },
-        template: Mustache.compile('<div><h1>{{name}}</h1></div><div><small>{{mobile}}</small></div>'),
+        template: Mustache.compile('<div class="span"><h1>{{name}}</h1></div><div class="span"><small>{{mobile}}</small></div>'),
         updateContact: function(e) {
             this.model.trigger("select");
         }

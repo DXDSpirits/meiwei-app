@@ -22,6 +22,24 @@ MeiweiApp.Collections.Contacts = MeiweiApp.Collection.extend({
 	model: MeiweiApp.Models.Contact
 });
 
+MeiweiApp.Models.Credit = MeiweiApp.Model.extend({
+	urlRoot: MeiweiApp.configs.APIHost + '/members/credit/'
+});
+
+MeiweiApp.Collections.Credits = MeiweiApp.Collection.extend({
+	url: MeiweiApp.configs.APIHost + '/members/credit/',
+	model: MeiweiApp.Models.Credit
+});
+
+MeiweiApp.Models.Favorite = MeiweiApp.Model.extend({
+	urlRoot: MeiweiApp.configs.APIHost + '/members/favorite/'
+});
+
+MeiweiApp.Collections.Favorites = MeiweiApp.Collection.extend({
+	url: MeiweiApp.configs.APIHost + '/members/favorite/',
+	model: MeiweiApp.Models.Favorite
+});
+
 MeiweiApp.me = new (MeiweiApp.Models.Member.extend({
 	initialize: function() {
 		if (this.contacts == null) this.contacts = new MeiweiApp.Collections.Contacts();

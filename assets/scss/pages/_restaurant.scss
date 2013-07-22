@@ -38,24 +38,6 @@
 			line-height: 30px;
 		}
 	}
-	.restaurant-list-item {
-		@include border(1px 0 0 0, solid, $brownDark);
-		@include size(90px, 100%);
-		padding: 9px 17px 9px 99px;
-		overflow: hidden;
-		position: relative;
-		img {
-			position: absolute;
-			top: 0; left: 0;
-			@include square(89px);
-		}
-		p { font-size: $fontSizeMini; }
-		.rating {
-			position: absolute;
-			right: 17px;
-			bottom: 0;
-		}
-	}
 	.map_canvas {
 		margin-top: 50px;
 		padding-bottom: 50px;

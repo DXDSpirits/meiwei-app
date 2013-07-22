@@ -14,6 +14,8 @@ MeiweiApp.Router = new (Backbone.Router.extend({
 		this.route('member/login', 'memberLogin');
 		this.route('member/profile', 'memberProfile');
 		this.route('member/contacts', 'memberContacts');
+		this.route('member/credits', 'memberCredits');
+		this.route('member/favorites', 'memberFavorites');
 		
 		this.route('order', 'orderList');
 		this.route(/^order\/(\d+)$/, 'orderDetail');
@@ -34,6 +36,8 @@ MeiweiApp.Router = new (Backbone.Router.extend({
 	memberLogin: function() { MeiweiApp.Pages.MemberLogin.go(); },
 	memberProfile: function() { MeiweiApp.Pages.MemberProfile.go(); },
     memberContacts: function() { MeiweiApp.Pages.MemberContacts.go(); },
+    memberCredits: function() { MeiweiApp.Pages.MemberCredits.go(); },
+    memberFavorites: function() { MeiweiApp.Pages.MemberFavorites.go(); },
     
     orderList: function() { MeiweiApp.Pages.OrderList.go(); },
     orderDetail: function(orderId) { MeiweiApp.Pages.Order.go(orderId); },
