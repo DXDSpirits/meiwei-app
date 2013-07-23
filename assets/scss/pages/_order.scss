@@ -98,13 +98,14 @@
 }
 #view-attending {
    	.individual {
-		width: 380px;
+		width: 320px;
 		height: 100%;
+		@include flex-box();		
 	}
 	.scroll {
 	   @include flexible();
 	   position: relative;
-	   width: 320px;
+	   width: 360px;
 	   overflow: auto;
 	   -webkit-overflow-scrolling: touch;
 	   height: 100%;
@@ -121,66 +122,61 @@
 	$section-width: 70%;
 
 	.section-header-img {
-		display:block;
 		max-height:140px;
         width:100%;
        	overflow: hidden;
 	}
 	.section-qrcode {
 		 @include flex-box($pack: center);
-         @include square(155px);   
+         @include square(145px);   
          position: relative;
          top: -20px;     
 	}
 	div.restaurant-name {
+	    line-height:1.5*$baseLineHeight;
 		height:30px;
 		width: $section-width;
 		text-align:center;
 		background: transparent url($gradientShadowPathR) repeat-y top;
 		@include background-size(100% 60px);
 	}
-	p.res-name {
-		line-height:1.5*$baseLineHeight;
-	}
-	.checkin-item {
-		height: 45px;
-	}
-	.section-content {
-		width:  $section-width;
-		padding-left:5%;
-		background: transparent url($gradientShadowPathR) repeat-y top;
-		align:center;
+	.order-detail {
+	    background: transparent url($gradientShadowPathR) repeat-y top;
 		@include background-size(100% 45px);
+	    width: $section-width;
+	    overflow: hidden;
+	    @include flex-box($pack:start,$align:start);
+	        .inline-group {
+	          height:45px;
+	          width:auto;
+		      overflow: hidden;
+		      padding-left:10px;
+		      @include flex-box($align:start);
+		      @include flexible($flex: 1);
 	}
-	p.restaurant-name {
-	    font-size: 16px;
-	    overflow: hidden; 
-	    line-height: 1.5*$baseLineHeight;
-	}
-	p.title {
-		font-size:10px;
+}
+	.item {
+	    font-size:10px;
         color:$brownLight;
 	}
-	p.content {
-		font-size:12px;
+	.content {
+	    font-size:12px;
         color: $brownDark;
 	}
-	
-	.order-date {
-		float:left;
-		margin-right: 15%;
+	.horizontal-item
+	{
+	    width:100%;
+	    height:45px;
+	    @include flex-box($orient: horizontal,$align:start);
 	}
 	.buttons {
-		padding: 20px 17px;
-		@include clearfix();
-		.btn {
-			@include center-block();
-			width: 100px;
-			float: left;
-			margin-left:10px;
-			text-align: center;
-		}
-		background: transparent url($gradientShadowPathR);
+	    background: transparent url($gradientShadowPathR);
 		@include background-size(100% 60px);
+		    .btn {
+			   width: 95px;
+			   margin-top:10px;
+			   margin-left:5px;
+		}
+		
 	}
 }
