@@ -24,6 +24,8 @@
 //	@include icon-display();
 //}
 
+.icon-blank              	{ @include icon-offset(8, 8); }
+
 .icon-member              	{ @include icon-offset(0, 0); }
 .icon-member:active			{ @include icon-offset(1, 0); }
 

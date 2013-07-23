@@ -1,3 +1,4 @@
+/*
 //测试notification
 var d = new Date();
 d = d.getTime() + 60 * 1000; //60 seconds from now
@@ -20,7 +21,7 @@ window.addNotification({
 
 	}
 })
-
+*/
 
 
 MeiweiApp.Views.ContactList = MeiweiApp.CollectionView.extend({
@@ -53,7 +54,6 @@ MeiweiApp.Pages.MemberContacts = new(MeiweiApp.PageView.extend({
 		};
 		_.bindAll(this, "bindContactSelect");
 	},
-	
 	bindContactSelect: function(collection, response, options) {
 		collection.forEach(function(contact) {
 			contact.on("select", function() {
@@ -62,7 +62,6 @@ MeiweiApp.Pages.MemberContacts = new(MeiweiApp.PageView.extend({
 			}, this)
 		}, this);
 	},
-	
 	getLocalContacts: function(callback) {
 		var collection = this.views.contactList.collection;
 		var self = this;
@@ -83,14 +82,12 @@ MeiweiApp.Pages.MemberContacts = new(MeiweiApp.PageView.extend({
 			{ multiple: true }
 		);
 	},
-	
 	getOnlineContacts: function() {
 		this.views.contactList.collection.fetch({
 			reset: true,
 			success: this.bindContactSelect
 		});
 	},
-	
 	render: function(options) {
 		this.options = this.options || {};
 		_.extend(this.options, options);

@@ -41,6 +41,7 @@ MeiweiApp.Pages.RestaurantOrder = new (MeiweiApp.PageView.extend({
 		}
 		_.bindAll(this, 'renderOrderForm', 'fillContact');
 	},
+	onClickLeftBtn: function() { MeiweiApp.Pages.RestaurantOrder.showPage(); },
 	selectContact: function() {
 		MeiweiApp.Pages.MemberContacts.go({
 			multiple: false, 
