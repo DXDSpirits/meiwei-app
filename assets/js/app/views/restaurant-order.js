@@ -110,6 +110,5 @@ MeiweiApp.Pages.RestaurantOrder = new (MeiweiApp.PageView.extend({
 			this.restaurant.set({id: options.restaurantId});
 			this.restaurant.fetch({ success: this.renderOrderForm });
 		}
-		
 	}
 }))({el: $("#view-restaurant-order")});
