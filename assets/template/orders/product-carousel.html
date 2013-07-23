@@ -2,16 +2,18 @@
 	<h1>{{ product.name }}</h1>
 	<p>{{ product.remark }}</p>
 </header>
-<div class="carousel" data-item="{{ product.id }}">
-	<div class="carousel-inner">
-		{{ #items }}
-		<div class="carousel-item" data-item="{{ id }}">
-			<div class="tag">
-				<p>￥{{ price }}</p>
-				<p>{{name}} {{ model }}</p>
+<section class="viewport">
+	<div class="carousel" data-item="{{ product.id }}">
+		<div class="carousel-inner">
+			{{ #items }}
+			<div class="carousel-item" data-item="{{ id }}">
+				<div class="tag">
+					<p>￥{{ price }}</p>
+					<p>{{name}} {{ model }}</p>
+				</div>
+				<img src="{{ picture }}" alt="">
 			</div>
-			<img src="{{ picture }}" alt="">
+			{{ /items }}
 		</div>
-		{{ /items }}
 	</div>
-</div>
+</section>

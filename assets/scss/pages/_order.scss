@@ -59,125 +59,68 @@
 		text-align: center;
 		p { font-size: $fontSizeMini; }
 		$carouselWidth: 150px;
-		.carousel {
-			@include size(164px, $carouselWidth);
-			padding: 7px 0;
-			@include center-block();
-			@include scrollable();
-			background: url($gradientShadowPath) repeat-x bottom, url($gradientShadowPathR) repeat-x top;
-			@include background-size(100% auto, 100% auto);
-		}
-		.carousel-inner {
-			height: 100%;
-			@include flex-box($orient: horizontal);
-		}
-		.carousel-item {
-			@include size(100%, $carouselWidth);
-			position: relative;
-			overflow: hidden;
-			.tag {
-				position: absolute;
-				bottom: 0;
-				width: 100%;
-				min-height: 2 * ($fontSizeMini + 2px);
-				background-color: $brown;
-				opacity: 0.9;
-				font-size: $fontSizeMini;
-				line-height: $fontSizeMini + 2px;
-				color: white;
-				text-align: center;
-			}
-			img {
-				@include center-block();
-				height: 100%;
-				max-width: 100%;
-			}
-		}
-		
 	}
+	.viewport {
+		@include size(164px, 250px);
+		@include center-block();
+		padding: 5px 0;
+		overflow: hidden;
+		background: url($gradientShadowPath) repeat-x bottom, url($gradientShadowPathR) repeat-x top;
+		@include background-size(100% auto, 100% auto);
+	}
+	
+	@include carousel($carouselWidth: 150px);
 }
 
 #view-attending {
-   	.individual {
-		width: 320px;
-		height: 100%;
-		@include flex-box();		
+	.viewport {
+		@include size(100%, 300px);
+		@include center-block();
+		padding: 25px 0 5px 0;
+		overflow: hidden;
+		background: url($gradientShadowPath) repeat-x bottom, url($gradientShadowPathR) repeat-x top;
+		@include background-size(100% auto, 100% auto);
 	}
-	.scroll {
-	   @include flexible();
-	   position: relative;
-	   width: 360px;
-	   overflow: auto;
-	   -webkit-overflow-scrolling: touch;
-	   height: 100%;
 	
-	   &::-webkit-scrollbar {
-		   display: none;
-	   }
-	   & > .scroll-inner {
-		   height: 100%;
-		   width: auto;
-		   @include flex-box($orient: horizontal);
-		}
-	}
-	$section-width: 70%;
-
-	.section-header-img {
-		max-height:140px;
-        width:100%;
-       	overflow: hidden;
-	}
-	.section-qrcode {
-		 @include flex-box($pack: center);
-         @include square(145px);   
-         position: relative;
-         top: -20px;     
-	}
-	div.restaurant-name {
-	    line-height:1.5*$baseLineHeight;
-		height:30px;
-		width: $section-width;
-		text-align:center;
-		background: transparent url($gradientShadowPathR) repeat-y top;
-		@include background-size(100% 60px);
-	}
-	.order-detail {
-	    background: transparent url($gradientShadowPathR) repeat-y top;
-		@include background-size(100% 45px);
-	    width: $section-width;
-	    overflow: hidden;
-	    @include flex-box($pack:start,$align:start);
-	        .inline-group {
-	          height:45px;
-	          width:auto;
-		      overflow: hidden;
-		      padding-left:10px;
-		      @include flex-box($align:start);
-		      @include flexible($flex: 1);
-	}
-}
-	.item {
-	    font-size:10px;
-        color:$brownLight;
-	}
-	.content {
-	    font-size:12px;
-        color: $brownDark;
-	}
-	.horizontal-item
-	{
-	    width:100%;
-	    height:45px;
-	    @include flex-box($orient: horizontal,$align:start);
-	}
-	.buttons {
-	    background: transparent url($gradientShadowPathR);
-		@include background-size(100% 60px);
-		    .btn {
-			   width: 95px;
-			   margin-top:10px;
-			   margin-left:5px;
+	@include carousel($carouselWidth: 250px);
+	
+	.order-page-item {
+		position: relative;
+		
+		.section-header-img {
+			max-height: 140px;
+	        width: 230px;
+	       	overflow: hidden;
+	       	position: absolute;
+	       	top: 0;
+	       	z-index: -1;
+	       	@include border-top-left-radius(5px);
+	       	@include border-top-right-radius(5px);
 		}
 		
+		.order-detail {
+			@include size(100%, 85%);
+			@include center-block();
+			@include flex-box($pack: end);
+			.section-qrcode {
+				 @include flex-box($pack: center);
+		         @include square(145px);
+		         @include center-block();   
+			}
+			> header {
+				line-height: 1.5*$baseLineHeight;
+				height:30px;
+				width: 100%;
+				text-align:center;
+				background: transparent url($gradientShadowPathR) no-repeat top;
+				@include background-size(100% 60px);
+			}
+			table {
+				margin-bottom: 10px;
+			}
+			.button-group {
+				width: 100%;
+			}
+		}
 	}
 }

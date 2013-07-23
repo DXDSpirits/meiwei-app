@@ -49,9 +49,8 @@ MeiweiApp.Pages.ProductPurchase = new (MeiweiApp.PageView.extend({
 	carousel: function() {
 		this.products.forEach(function(product) {
 			var selector = '.carousel[data-item="' + product.id + '"]';
-			var n = $(selector).find('.carousel-inner > .carousel-item').length;
-			console.log(n);
-			$(selector).find('.carousel-inner').css('width', n * 150);
+			var items = $(selector).find('.carousel-inner > .carousel-item');
+			$(selector).find('.carousel-inner').css('width', items.length * $(items[0]).outerWidth());
 			new IScroll(selector, {
 				scrollX: true,
 				scrollY: false,

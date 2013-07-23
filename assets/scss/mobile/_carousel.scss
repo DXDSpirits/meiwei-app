@@ -1,0 +1,41 @@
+
+@mixin carousel($carouselWidth: 150px) {
+
+	.carousel {
+		@include size(100%, $carouselWidth);
+		@include center-block();
+	}
+	
+	.carousel-inner {
+		height: 100%;
+		@include flex-box($orient: horizontal);
+	}
+	
+	.carousel-item {
+		@include size(100%, $carouselWidth);
+		padding: 5px 10px;
+		position: relative;
+		overflow: hidden;
+		> .tag {
+			display: none;
+			position: absolute;
+			bottom: 0;
+			width: 100%;
+			min-height: 2 * ($fontSizeMini + 2px);
+			background-color: $brown;
+			opacity: 0.9;
+			font-size: $fontSizeMini;
+			line-height: $fontSizeMini + 2px;
+			color: white;
+			text-align: center;
+		}
+		> img {
+			@include center-block();
+			@include border-radius(10px);
+			border: 3px solid $brownLight;
+			height: 100%;
+			width: 100%;
+		}
+	}
+
+}
