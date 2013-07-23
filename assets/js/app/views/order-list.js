@@ -5,7 +5,7 @@ MeiweiApp.Views.OrderList = MeiweiApp.CollectionView.extend({
 		events: { 'click': 'viewOrder' },
 		className: 'order-list-item',
 		viewOrder: function() {
-			MeiweiApp.goTo('order/' + this.model.id);
+			MeiweiApp.Pages.OrderDetail.go({orderId: this.model.id});
 		}
 	})
 });
@@ -20,6 +20,7 @@ MeiweiApp.Pages.OrderList = new (MeiweiApp.PageView.extend({
 			})
 		}
 	},
+	onClickLeftBtn: function() { MeiweiApp.Pages.MemberCenter.go(); },
 	render: function() {
 		$.when(
 			this.orders.fetch({reset: true})

@@ -4,7 +4,9 @@ MeiweiApp.Views.RestaurantProfileBox = MeiweiApp.ModelView.extend({
 	render: function() {
 		this.$el.html(this.template(this.model.toJSON()));
 		var self = this;
-		new MBP.fastButton(this.$('.order-button')[0], function() { MeiweiApp.goTo('restaurant/' + self.model.id + '/order'); });
+		new MBP.fastButton(this.$('.order-button')[0], function() {
+			MeiweiApp.Pages.RestaurantOrder.go({restaurantId: self.model.id});
+		});
 		return this;
 	}
 });
@@ -45,11 +47,11 @@ MeiweiApp.Pages.RestaurantDetail = new (MeiweiApp.PageView.extend({
 				el: this.$('.restaurant-profile')
 			}),
 			pictures: new MeiweiApp.Views.RestaurantPictureList({
-				collection: this.restaurant.pictures,
+				collection: new MeiweiApp.Collections.Pictures(),
 				el: this.$('.restaurant-pictures')
 			}),
 			reviews: new MeiweiApp.Views.RestaurantReviewList({
-				collection: this.restaurant.reviews,
+				collection: new MeiweiApp.Collections.Reviews(),
 				el: this.$('.restaurant-reviews')
 			})
 		}
@@ -57,14 +59,21 @@ MeiweiApp.Pages.RestaurantDetail = new (MeiweiApp.PageView.extend({
 	},
 	renderAll: function() {
 		this.$('> header h1').html(this.restaurant.get('fullname'));
+		this.views.pictures.collection.url = this.restaurant.get('pictures');
+		this.views.reviews.collection.url = this.restaurant.get('reviews');
 		$.when(
-			this.restaurant.pictures.fetch({reset: true}),
-			this.restaurant.reviews.fetch({reset: true})
+			this.views.pictures.collection.fetch({reset: true}),
+			this.views.reviews.collection.fetch({reset: true})
 		).then(this.showPage);
 	},
-	render: function() {
-		this.restaurant.clear();
-		this.restaurant.set({id: arguments[0]});
-		this.restaurant.fetch({ success: this.renderAll })
+	render: function(options) {
+		if (options.restaurant) {
+			this.restaurant.set(options.restaurant);
+			this.renderAll();
+		} else if (options.restaurantId) {
+			this.restaurant.clear();
+			this.restaurant.set({id: options.restaurantId});
+			this.restaurant.fetch({ success: this.renderAll })
+		}
 	}
 }))({el: $("#view-restaurant-detail")});

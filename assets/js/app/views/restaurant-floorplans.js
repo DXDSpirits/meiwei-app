@@ -31,8 +31,8 @@ MeiweiApp.Pages.RestaurantFloorplans = new (MeiweiApp.PageView.extend({
 			this.restaurant.floorplans.fetch({ success: this.renderFloorplans })
 		).then(this.showPage);
 	},
-	render: function() {
-		this.restaurant.set({id: arguments[0]});
+	render: function(options) {
+		this.restaurant.set({id: options.restaurantId});
 		this.restaurant.fetch({ success: this.fetchFloorplans });
 	}
 }))({el: $("#view-restaurant-floorplans")});

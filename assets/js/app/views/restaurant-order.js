@@ -61,18 +61,14 @@ MeiweiApp.Pages.RestaurantOrder = new (MeiweiApp.PageView.extend({
 		}
 		_.bindAll(this, 'renderOrderForm', 'bindContactSelect', 'selectContact', 'selectSeat', 'selectProduct');
 	},
-	selectContact: function() { MeiweiApp.goTo('#member/contacts'); },
-	selectSeat: function() { MeiweiApp.goTo('#restaurant/' + this.restaurant.id + '/floorplans'); },
-	selectProduct: function() { MeiweiApp.goTo('#product/purchase'); },
+	selectContact: function() { MeiweiApp.Pages.MemberContacts.go(); },
+	selectSeat: function() { MeiweiApp.Pages.RestaurantFloorplans.go({restaurantId: this.restaurant.id}); },
+	selectProduct: function() { MeiweiApp.Pages.ProductPurchase.go(); },
 	renderOrderForm: function(model, response, options) {
 		this.$('.restaurant-info img').attr('src', this.restaurant.get('frontpic'));
 		this.$('.restaurant-info h1').html(this.restaurant.get('fullname'));
 		this.views.orderForm.render();
-		$.when(
-			this.restaurant.floorplans.fetch({ reset: true }),
-			MeiweiApp.me.contacts.fetch({ reset: true, success: this.bindContactSelect }),
-			this.products.fetch({ data: {category: 1}, reset: true })
-		).then(this.showPage);
+		this.showPage();
 	},
 	bindContactSelect: function(collection, response, options) {
 		collection.forEach(
@@ -84,8 +80,8 @@ MeiweiApp.Pages.RestaurantOrder = new (MeiweiApp.PageView.extend({
 			}, this);
 		collection.at(0).trigger("select");
 	},
-	render: function() {
-		this.restaurant.set({id: arguments[0]});
+	render: function(options) {
+		this.restaurant.set({id: options.restaurantId});
 		this.restaurant.fetch({ success: this.renderOrderForm });
 	}
 }))({el: $("#view-restaurant-order")});

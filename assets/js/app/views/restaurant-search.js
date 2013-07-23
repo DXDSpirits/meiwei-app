@@ -3,7 +3,7 @@ MeiweiApp.Views.MarkerItemInfo = MeiweiApp.ModelView.extend({
 	events: { 'click': 'viewRestaurant' },
 	template: MeiweiApp.Templates['restaurant-list-item'],
 	viewRestaurant: function() {
-		MeiweiApp.goTo('restaurant/' + this.model.id);
+		MeiweiApp.Pages.RestaurantDetail.go({restaurant: this.model.toJSON()});
 	},
 	toggle: function(resto) {
 		if (this.$el.hasClass('expand')) {
@@ -26,7 +26,7 @@ MeiweiApp.Views.RestaurantListItem = MeiweiApp.ModelView.extend({
 	className: 'restaurant-list-item',
 	template: MeiweiApp.Templates['restaurant-list-item'],
 	viewRestaurant: function() {
-		MeiweiApp.goTo('restaurant/' + this.model.id);
+		MeiweiApp.Pages.RestaurantDetail.go({restaurant: this.model.toJSON()});
 	}
 });
 

@@ -50,7 +50,7 @@ MeiweiApp.Pages.MemberContacts = new(MeiweiApp.PageView.extend({
 				collection: new MeiweiApp.Collections.Contacts(),
 				el: this.$('.scroll-inner')
 			})
-		}
+		};
 		_.bindAll(this, "bindContactSelect");
 	},
 	bindContactSelect: function(collection, response, options) {
@@ -65,7 +65,6 @@ MeiweiApp.Pages.MemberContacts = new(MeiweiApp.PageView.extend({
 		this);
 		collection.at(0).trigger("select");
 	},
-	
 	getLocalContacts: function(callback) {
 		var collection = this.views.contactList.collection;
 		var self = this;

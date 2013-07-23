@@ -5,7 +5,7 @@ MeiweiApp.Views.FavoriteList = MeiweiApp.CollectionView.extend({
 		events: { 'click': 'viewRestaurant' },
 		className: 'restaurant-list-item',
 		viewRestaurant: function() {
-			MeiweiApp.goTo('restaurant/' + this.model.id);
+			MeiweiApp.Pages.RestaurantDetail.go({restaurantId: this.model.id});
 		}
 	})
 });
@@ -20,6 +20,7 @@ MeiweiApp.Pages.MemberFavorites = new (MeiweiApp.PageView.extend({
 			})
 		}
 	},
+	onClickLeftBtn: function() { MeiweiApp.Pages.MemberCenter.go(); },
 	render: function() {
 		$.when(
 			this.favorites.fetch({reset: true})
