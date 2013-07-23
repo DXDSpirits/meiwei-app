@@ -3,7 +3,7 @@ MeiweiApp.Views.ProductCartItemList = MeiweiApp.CollectionView.extend({
 		tagName: "div",
 		className: "product-cart-item",
 		events: { "click .item-delete": "triggerDelete" },
-		template: Mustache.compile('<img src="{{ picture }}" alt=""><i class="icon-cancel"></i>'),
+		template: Mustache.compile('<img src="{{ picture }}" alt=""><div class="delete-button">移除</div>'),
 		triggerDelete: function(e) { }
 	})
 });
@@ -42,19 +42,16 @@ MeiweiApp.Pages.RestaurantOrder = new (MeiweiApp.PageView.extend({
 	},
 	initPage: function() {
 		this.restaurant = new MeiweiApp.Models.Restaurant();
-		this.productItems = new MeiweiApp.Collections.ProductItems;
 		this.views = {
 			orderForm: new MeiweiApp.Views.RestaurantOrderForm({
 				model: this.restaurant,
 				el: this.$('.order-info')
 			}),
 			productCart: new MeiweiApp.Views.ProductCartItemList({
-				collection: this.productItems,
+				collection: MeiweiApp.ProductCart,//this.productItems,
 				el: this.$('.product-cart')
 			})
 		};
-		MeiweiApp.ProductCart.on('add', function(item) { this.productItems.add(item); }, this);
-		MeiweiApp.ProductCart.on('remove', function(item) { this.productItems.remove(item); }, this);
 		_.bindAll(this, 'renderOrderForm', 'fillContact');
 	},
 	onClickLeftBtn: function() { MeiweiApp.Pages.RestaurantDetail.showPage(); },
@@ -102,6 +99,7 @@ MeiweiApp.Pages.RestaurantOrder = new (MeiweiApp.PageView.extend({
 		this.$('.restaurant-info img').attr('src', this.restaurant.get('frontpic'));
 		this.$('.restaurant-info h1').html(this.restaurant.get('fullname'));
 		this.views.orderForm.render();
+		this.views.productCart.render();
 		this.showPage();
 	},
 	render: function(options) {

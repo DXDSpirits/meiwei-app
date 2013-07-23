@@ -58,7 +58,7 @@
 		margin: 5px 0;
 		text-align: center;
 		p { font-size: $fontSizeMini; }
-		$carouselWidth: 250px;
+		$carouselWidth: 150px;
 		.carousel {
 			@include size(164px, $carouselWidth);
 			padding: 7px 0;
@@ -89,7 +89,7 @@
 			}
 			img {
 				@include center-block();
-				max-height: 100%;
+				height: 100%;
 				max-width: 100%;
 			}
 		}

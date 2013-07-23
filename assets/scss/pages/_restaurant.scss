@@ -193,14 +193,22 @@
 		@include background-size(100% (3*$baseLineHeight));
 		.product-cart {
 			width: 100%;
-			padding-left: -3.333%;
 			@include clearfix();
 			.product-cart-item {
 				width: 30%;
 				height: 100px;
 				float: left;
-				margin-left: 3.333%;
-				img { @include square(100%); }
+				border: 1px solid $brown;
+				margin: 1.666667%;
+				img { @include square(100%); @include center-block(); }
+				position: relative;
+				.delete-button {
+					position: absolute;
+					bottom: 0; right: 0;
+					opacity: 0.7;
+					padding: 3px;
+					background-color: $brown;
+				}
 			}
 		}
 	}
