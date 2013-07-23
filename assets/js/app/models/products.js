@@ -24,3 +24,5 @@ MeiweiApp.Collections.Products = MeiweiApp.Collection.extend({
 	url: MeiweiApp.configs.APIHost + '/restaurants/product/',
 	model: MeiweiApp.Models.Product,
 });
+
+MeiweiApp.ProductCart = {};

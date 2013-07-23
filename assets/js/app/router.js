@@ -4,6 +4,7 @@
 MeiweiApp.Router = new (Backbone.Router.extend({
 	initialize: function(){
 		this.route('', 'index');
+		
 		this.route('home', 'home');
 		
 		this.route(/^restaurant\/(\d+)$/, 'restaurantDetail');
@@ -24,15 +25,18 @@ MeiweiApp.Router = new (Backbone.Router.extend({
 		this.route('product/purchase', 'productPurchase');
 		
 		this.route('attending', 'attending');
+		
 	},
 	
-	index: function() { MeiweiApp.Router.navigate('home', {trigger: true}); },
+	//index: function() { MeiweiApp.Router.navigate('home', {trigger: true}); },
+	
+	index: function() { MeiweiApp.Pages.Home.go(); },
 	home: function() { MeiweiApp.Pages.Home.go(); },
 	
-	restaurantDetail: function(rid) { MeiweiApp.Pages.RestaurantDetail.go(rid); },
+	restaurantDetail: function(rid) { MeiweiApp.Pages.RestaurantDetail.go({restaurantId: rid}); },
 	restaurantSearch: function() { MeiweiApp.Pages.RestaurantSearch.go(); },
-	restaurantOrder: function(rid) { MeiweiApp.Pages.RestaurantOrder.go(rid); },
-	restaurantFloorplans: function(rid) { MeiweiApp.Pages.RestaurantFloorplans.go(rid); },
+	restaurantOrder: function(rid) { MeiweiApp.Pages.RestaurantOrder.go({restaurantId: rid}); },
+	restaurantFloorplans: function(rid) { MeiweiApp.Pages.RestaurantFloorplans.go({restaurantId: rid}); },
 	
 	memberCenter: function() { MeiweiApp.Pages.MemberCenter.go(); },
 	memberLogin: function() { MeiweiApp.Pages.MemberLogin.go(); },
@@ -42,7 +46,7 @@ MeiweiApp.Router = new (Backbone.Router.extend({
     memberFavorites: function() { MeiweiApp.Pages.MemberFavorites.go(); },
     
     orderList: function() { MeiweiApp.Pages.OrderList.go(); },
-    orderDetail: function(orderId) { MeiweiApp.Pages.Order.go(orderId); },
+    orderDetail: function(oid) { MeiweiApp.Pages.OrderDetail.go({orderId: oid}); },
     
     productPurchase: function() { MeiweiApp.Pages.ProductPurchase.go(); },
     
@@ -56,10 +60,10 @@ MeiweiApp.goTo = function(path) {
 $.ajaxSetup({
     statusCode : {
         401: function() {
-            MeiweiApp.goTo('member/login');
+            MeiweiApp.Pages.MemberLogin.go();
         },
         403: function() {
-            MeiweiApp.goTo('member/login');
+            MeiweiApp.Pages.MemberLogin.go();
         }
     }
 });

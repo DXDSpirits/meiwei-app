@@ -5,10 +5,10 @@
 <div class="carousel">
 	<div class="carousel-inner">
 		{{ #items }}
-		<div class="carousel-item">
+		<div class="carousel-item" data-item="{{ id }}">
 			<div class="tag">
 				<p>￥{{ price }}</p>
-				<p>{{ model }}</p>
+				<p>{{name}} {{ model }}</p>
 			</div>
 			<img src="{{ picture }}" alt="">
 		</div>

@@ -6,7 +6,7 @@ MeiweiApp.Views.RecommendItem = MeiweiApp.ModelView.extend({
 	template: MeiweiApp.Templates['recommend-list-item'],
 	viewRestaurant: function() {
 		var restaurantId = this.model.get('restaurant').id
-		MeiweiApp.goTo('restaurant/' + restaurantId);
+		MeiweiApp.Pages.RestaurantDetail.go({restaurantId: restaurantId});
 	}
 });
 
@@ -28,9 +28,9 @@ MeiweiApp.Pages.Home = new (MeiweiApp.PageView.extend({
 		_.bindAll(this, 'initScroller', 'hero');
 		this.$('header input').click(function() {});
 	},
-	onClickLeftBtn: function() { MeiweiApp.goTo('member'); },
-	onClickRightBtn: function() { MeiweiApp.goTo('attending'); },
-	gotoSearch: function() { MeiweiApp.goTo('restaurant/search'); },
+	onClickLeftBtn: function() { MeiweiApp.Pages.MemberCenter.go(); },
+	onClickRightBtn: function() { MeiweiApp.Pages.Attending.go(); },
+	gotoSearch: function() { MeiweiApp.Pages.RestaurantSearch.go(); },
 	hero: function() {
 		var x = this.scroller.currentPage.pageX;
 		var y = this.scroller.currentPage.pageY;

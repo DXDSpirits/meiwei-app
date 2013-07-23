@@ -3,7 +3,7 @@ MeiweiApp.Views.OrderDetail = MeiweiApp.ModelView.extend({
 	template: MeiweiApp.Templates['order-detail'],
 });
 
-MeiweiApp.Pages.Order = new (MeiweiApp.PageView.extend({
+MeiweiApp.Pages.OrderDetail = new (MeiweiApp.PageView.extend({
 	initPage: function() {
 		this.order = new MeiweiApp.Models.Order();
 		this.views = {
@@ -15,10 +15,10 @@ MeiweiApp.Pages.Order = new (MeiweiApp.PageView.extend({
 	},
 	onClickRightBtn: function() {
 		MeiweiApp.pendingOrder = this.order;
-		MeiweiApp.goTo('restaurant/' + this.order.get('restaurant') + '/order');
+		MeiweiApp.Pages.RestaurantOrder.go({restaurantId: this.order.get('restaurant')});
 	},
-	render: function() {
-		this.order.set({id: arguments[0]})
+	render: function(options) {
+		this.order.set({id: options.orderId})
 		$.when(
 			this.order.fetch()
 		).then(this.showPage);

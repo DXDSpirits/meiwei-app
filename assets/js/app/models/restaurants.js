@@ -45,22 +45,7 @@ MeiweiApp.Collections.Hours = MeiweiApp.Collection.extend({
 
 MeiweiApp.Models.Restaurant = MeiweiApp.Model.extend({
 	urlRoot: MeiweiApp.configs.APIHost + '/restaurants/restaurant/',
-	initialize: function() {
-		if (this.hours == null) this.hours = new MeiweiApp.Collections.Hours();
-		if (this.reviews == null) this.reviews = new MeiweiApp.Collections.Reviews();
-		if (this.pictures == null) this.pictures = new MeiweiApp.Collections.Pictures();
-		if (this.floorplans == null) this.floorplans = new MeiweiApp.Collections.Floorplans();
-	},
 	parse: function(response) {
-		this.initialize();
-		this.hours.reset();
-		this.hours.url = response.hours;
-		this.reviews.reset();
-		this.reviews.url = response.reviews;
-		this.pictures.reset();
-		this.pictures.url = response.pictures;
-		this.floorplans.reset();
-		this.floorplans.url = response.floorplans;
 		response.score = Math.floor(response.score);
 		return response;
 	}

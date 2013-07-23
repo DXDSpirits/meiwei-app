@@ -16,6 +16,7 @@ MeiweiApp.Pages.MemberCredits = new (MeiweiApp.PageView.extend({
 			})
 		}
 	},
+	onClickLeftBtn: function() { MeiweiApp.Pages.MemberCenter.go(); },
 	render: function() {
 		$.when(
 			this.credits.fetch({reset: true})

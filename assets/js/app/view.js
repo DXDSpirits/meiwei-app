@@ -42,18 +42,11 @@ MeiweiApp.PageView = Backbone.View.extend({
 		new MBP.fastButton(this.$('.header-btn-left')[0], this.onClickLeftBtn);
 		new MBP.fastButton(this.$('.header-btn-right')[0], this.onClickRightBtn);
 		
+		this.lastPage = null;
+		
 		if (this.initPage != null) {
 			this.initPage();
 		}
-		/*var $me = this.$el;
-		$me.on('webkitAnimationEnd', function(e) {
-			if (e.originalEvent.animationName == 'slideouttoleft') {
-				$me.removeClass('view-hiding');
-				$me.addClass('view-hidden');
-			} else if (e.originalEvent.animationName == 'slideinfromright') {
-				$me.removeClass('view-showing');
-			}
-		});*/
 	},
 	initScroller: function() {
 		if (this.scroller == null) {
@@ -62,11 +55,16 @@ MeiweiApp.PageView = Backbone.View.extend({
 			this.scroller.refresh();
 		}
 	},
-	onClickLeftBtn: function() { window.history.back(); },
+	//onClickLeftBtn: function() { window.history.back(); },
+	onClickLeftBtn: function() {},
 	onClickRightBtn: function() {},
 	go: function() {
 		$("#apploader").removeClass('hide');
-		this.render.apply(this, arguments); // Pass arguments to render function;
+		if (_.isEmpty(arguments)) {
+			this.render({});
+		} else {
+			this.render(arguments[0]); // Pass arguments to render function;
+		}
 	},
 	showPage: function() {
 		$("#apploader").addClass('hide');
@@ -75,6 +73,16 @@ MeiweiApp.PageView = Backbone.View.extend({
 			$curPage.addClass('view-hidden');
 			this.$el.removeClass('view-hidden');
 		}
-		//this.initScroller();
 	}
 });
+
+
+/*var $me = this.$el;
+$me.on('webkitAnimationEnd', function(e) {
+	if (e.originalEvent.animationName == 'slideouttoleft') {
+		$me.removeClass('view-hiding');
+		$me.addClass('view-hidden');
+	} else if (e.originalEvent.animationName == 'slideinfromright') {
+		$me.removeClass('view-showing');
+	}
+});*/

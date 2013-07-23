@@ -1,3 +1,4 @@
+/*
 //测试notification
 var d = new Date();
 d = d.getTime() + 60 * 1000; //60 seconds from now
@@ -20,7 +21,7 @@ window.addNotification({
 
 	}
 })
-
+*/
 
 
 MeiweiApp.Views.ContactList = MeiweiApp.CollectionView.extend({
@@ -50,22 +51,17 @@ MeiweiApp.Pages.MemberContacts = new(MeiweiApp.PageView.extend({
 				collection: new MeiweiApp.Collections.Contacts(),
 				el: this.$('.scroll-inner')
 			})
-		}
+		};
 		_.bindAll(this, "bindContactSelect");
 	},
 	bindContactSelect: function(collection, response, options) {
 		collection.forEach(function(contact) {
-			contact.on("select",
-			function() {
-				this.$('input[name=contactname]').val(contact.get('name'));
-				this.$('input[name=contactphone]').val(contact.get('mobile'));
-			},
-			this)
-		},
-		this);
-		collection.at(0).trigger("select");
+			contact.on("select", function() {
+				this.options.callback(contact.get('name'), contact.get('mobile'));
+				if (!this.options.multiple)	this.options.caller.showPage();
+			}, this)
+		}, this);
 	},
-	
 	getLocalContacts: function(callback) {
 		var collection = this.views.contactList.collection;
 		var self = this;
@@ -86,12 +82,15 @@ MeiweiApp.Pages.MemberContacts = new(MeiweiApp.PageView.extend({
 			{ multiple: true }
 		);
 	},
-	
 	getOnlineContacts: function() {
-		this.views.contactList.collection.fetch({ reset: true });
+		this.views.contactList.collection.fetch({
+			reset: true,
+			success: this.bindContactSelect
+		});
 	},
-	
-	render: function() {
+	render: function(options) {
+		this.options = this.options || {};
+		_.extend(this.options, options);
 		this.getOnlineContacts();
 		this.showPage();
 	}
