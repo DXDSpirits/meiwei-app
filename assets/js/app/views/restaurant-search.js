@@ -106,27 +106,27 @@ MeiweiApp.Pages.RestaurantSearch = new (MeiweiApp.PageView.extend({
 	
 	/*********************************************/
 	dropMarkers: function () {
-		var latlngbounds = new google.maps.LatLngBounds();
 		var neighborhoods = [];
 		this.restaurants.forEach(function(item) {
 			var coord = item.get('coordinate');
-			var latlng = new google.maps.LatLng(coord.latitude / 100000.0, coord.longitude / 100000.0);
+            var latlng = new AMap.LngLat(coord.longitude / 100000.0 , coord.latitude / 100000.0 );
 			neighborhoods.push({latlng: latlng, resto: item.toJSON()});
-			latlngbounds.extend(latlng);
 		}, this);
-		this.map.setCenter(latlngbounds.getCenter());
-		this.map.fitBounds(latlngbounds);
+		
+		if(neighborhoods.length==1){ this.map.setZoom(18);
+		}else if(neighborhoods.length<5){ this.map.setZoom(15);
+		}else{ this.map.setZoom(12); }
+		
+		this.map.setCenter(neighborhoods.length>0 ? neighborhoods[0].latlng : new AMap.LngLat(48 , 48) );
 		
 		for (var i = 0; i < this.markers.length; i++) this.markers[i].setMap(null);
 		this.markers = [];
 		
 		for (var i = 0; i < neighborhoods.length; i++) {
-			var marker = new google.maps.Marker({
-				flat: true,
+			var marker = new AMap.Marker({
 				position : neighborhoods[i].latlng,
 				map : this.map,
-				draggable : false,
-				animation : google.maps.Animation.DROP
+				draggable : false
 			});
 			this.markers.push(marker);
 			this.addMessage(marker, neighborhoods[i].resto);
@@ -134,15 +134,15 @@ MeiweiApp.Pages.RestaurantSearch = new (MeiweiApp.PageView.extend({
 	},
 	addMessage: function(marker, resto) {
 		var markerInfo = this.views.markerInfo;
-		google.maps.event.addListener(marker, 'click', function () {
+		AMap.event.addListener(marker, 'click', function () {
 			//markerInfo.model.set(resto);
 			markerInfo.toggle(resto);
 		});
 	},
 	initializeMap: function () {
-		var mapOptions = { zoom : 12, mapTypeId : google.maps.MapTypeId.ROADMAP };
+		var mapOptions = { zoom : 12 ,touchZoom:true };
 		this.markers = [];
-		this.map = new google.maps.Map(this.$('#map_canvas')[0], mapOptions);
+		this.map = new AMap.Map(map_canvas, mapOptions);
 	},
 	/*********************************************/
 	
