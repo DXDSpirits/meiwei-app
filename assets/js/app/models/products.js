@@ -25,4 +25,4 @@ MeiweiApp.Collections.Products = MeiweiApp.Collection.extend({
 	model: MeiweiApp.Models.Product,
 });
 
-MeiweiApp.ProductCart = {};
+MeiweiApp.ProductCart = new MeiweiApp.Collections.ProductItems();

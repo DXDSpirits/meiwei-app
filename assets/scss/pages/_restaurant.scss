@@ -191,6 +191,18 @@
 	.product-select {
 		background: transparent url($gradientShadowPath) no-repeat bottom;
 		@include background-size(100% (3*$baseLineHeight));
+		.product-cart {
+			width: 100%;
+			padding-left: -3.333%;
+			@include clearfix();
+			.product-cart-item {
+				width: 30%;
+				height: 100px;
+				float: left;
+				margin-left: 3.333%;
+				img { @include square(100%); }
+			}
+		}
 	}
 	.order-submit-button {
 		padding: 15px;

@@ -4,6 +4,7 @@ MeiweiApp.View = Backbone.View.extend({});
 MeiweiApp.ModelView = Backbone.View.extend({
 	initialize: function() {
 		this.model.on('change', this.render, this);
+		this.model.on('hide', this.remove, this);
 	},
 	template: Mustache.compile(""),
 	render: function() {
@@ -18,6 +19,10 @@ MeiweiApp.CollectionView = Backbone.View.extend({
 		this.modelViews = [];
 		this.collection.on('reset', this.addAll, this);
 		this.collection.on('add', this.addOne, this);
+		this.collection.on('remove', this.removeOne, this);
+	},
+	removeOne: function(item) {
+		item.trigger('hide');
 	},
 	addOne: function(item) {
 		var modelView = new this.ModelView({model: item});
