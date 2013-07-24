@@ -52,6 +52,7 @@ MeiweiApp.PageView = Backbone.View.extend({
 		if (this.initPage != null) {
 			this.initPage();
 		}
+		_.bindAll(this, 'showPage', 'go', 'onClickLeftBtn', 'onClickRightBtn', 'initScroller');
 	},
 	initScroller: function() {
 		if (this.scroller == null) {
@@ -61,9 +62,14 @@ MeiweiApp.PageView = Backbone.View.extend({
 		}
 	},
 	//onClickLeftBtn: function() { window.history.back(); },
-	onClickLeftBtn: function() {},
+	onClickLeftBtn: function() { MeiweiApp.Pages.Home.showPage(); },
 	onClickRightBtn: function() {},
+	timeout: null,
 	go: function() {
+		this.timeout = setTimeout(function() {
+			MeiweiApp.Pages.Home.go();
+			alert('There seems to be problem with your internet connection?');
+		}, 5000);
 		$("#apploader").removeClass('hide');
 		if (_.isEmpty(arguments)) {
 			this.render({});
@@ -72,6 +78,7 @@ MeiweiApp.PageView = Backbone.View.extend({
 		}
 	},
 	showPage: function() {
+		clearTimeout(this.timeout);
 		$("#apploader").addClass('hide');
 		if (this.$el && this.$el.hasClass('view-hidden')) {
 			var $curPage = $('.view:not(".view-hidden")');

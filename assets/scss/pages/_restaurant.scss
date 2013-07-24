@@ -162,13 +162,19 @@
         overflow: hidden;
 	}
 	
-	input, textarea {
+	input, textarea，label {
 		font-size: $fontSizeSmall;
+	}
+	label {
+		margin:5px;
 	}
 	fieldset {
 		margin: 0;
 		border-width: 1px 0 0 0;
 		@include border-radius(0);
+	}
+	.inline-group {
+		border-right: none;
 	}
 	
 	.order-info, .contact-info, .floorplan-select, .product-select {
@@ -187,6 +193,10 @@
 		}
 		background: transparent url($gradientShadowPathR) no-repeat top;
 		@include background-size(100% (3*$baseLineHeight));
+	}
+	.contact-info {
+		input[name="contactname"] { @include flexible(2); }
+		.switch-gender { @include flexible(3); }
 	}
 	.product-select {
 		background: transparent url($gradientShadowPath) no-repeat bottom;

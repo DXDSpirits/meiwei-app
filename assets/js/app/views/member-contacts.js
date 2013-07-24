@@ -54,6 +54,8 @@ MeiweiApp.Pages.MemberContacts = new(MeiweiApp.PageView.extend({
 		};
 		_.bindAll(this, "bindContactSelect");
 	},
+	onClickLeftBtn: function() { this.options.caller.showPage(); },
+	onClickRightBtn: function() { this.options.caller.showPage(); },
 	bindContactSelect: function(collection, response, options) {
 		collection.forEach(function(contact) {
 			contact.on("select", function() {
@@ -89,7 +91,7 @@ MeiweiApp.Pages.MemberContacts = new(MeiweiApp.PageView.extend({
 		});
 	},
 	render: function(options) {
-		this.options = this.options || {};
+		this.options = { caller: MeiweiApp.Pages.MemberCenter };
 		_.extend(this.options, options);
 		this.getOnlineContacts();
 		this.showPage();

@@ -37,16 +37,17 @@
 }
 
 #view-member-profile {
-    img {
-        @include flex-box($pack: center);
-        @include square(25px);   
-        margin-left:5px;
- }
-
-
+    input {
+    	border-right: 0px;
+    }
+    label {
+    	padding: 5px;
+    }
+    .inline-group {
+    	padding-right:5px;
+    }
 	.member-profile-form {
 	    //font-size:10px;
-	    
 		button {
 			width: 100%;
 			margin: 0 auto;

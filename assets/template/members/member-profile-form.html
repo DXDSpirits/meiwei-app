@@ -1,32 +1,35 @@
 <form class="member-profile-form">
 	<fieldset >
 		<div class="inline-group">
-			<img class="frofile-pic"/>
 			<input type="text" name="nickname" value="{{ nickname }}" placeholder="昵称"/>
+			<div class="control-group switch off switch-gender">
+				<input type="hidden" name="sexe" value="先生"/>
+				<label class="text-off">先生</label>
+				<div class="switch-inner">
+					<div class="switch-button"></div>
+				</div>
+				<label class="text-on">女士</label>
+			</div>
 		</div>
 		<div class="inline-group">
-		    <i class="icon-envelope"></i>
-		    <input type="email" name="email" value="{{ email }}" placeholder="邮箱"/>
-        </div>
-        <div class="inline-group">
-            <i class="icon-phone"></i>
-            <input type="tel" name="mobile" value="{{ mobile }}" placeholder="手机"/>
-        </div>
-		<div class="inline-group" style="display:none!important;">
-			<label>男</label>
-			<input type="radio" name="sexe" value="0" />
-			<label>女</label>
-			<input type="radio" name="sexe" value="1" />
+			<i class="icon-envelope"></i>
+			<input type="email" name="email" value="{{ email }}" placeholder="邮箱"/>
 		</div>
 		<div class="inline-group">
-		<i class="icon-calendar"></i>
-		<input type="date" name="birthday" value="{{ birthday }}" />
+			<i class="icon-phone"></i>
+			<input type="tel" name="mobile" value="{{ mobile }}" placeholder="手机"/>
 		</div>
 		<div class="inline-group">
-		<i class="icon-calendar"></i>
-		<input type="text" name="anniversary" value="{{ anniversary }}" placeholder="纪念日" />
+			<i class="icon-calendar"></i>
+			<input type="date" name="birthday" value="{{ birthday }}" />
 		</div>
-		
+		<div class="inline-group">
+			<i class="icon-calendar"></i>
+			<input type="text" name="anniversary" value="{{ anniversary }}" placeholder="纪念日" />
+
+		</div>
 	</fieldset>
-	<button class="btn-inverse">提交</button>
+	<button class="btn-inverse">
+		提交
+	</button>
 </form>

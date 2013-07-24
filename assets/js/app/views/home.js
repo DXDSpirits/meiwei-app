@@ -6,7 +6,10 @@ MeiweiApp.Views.RecommendItem = MeiweiApp.ModelView.extend({
 	template: MeiweiApp.Templates['recommend-list-item'],
 	viewRestaurant: function() {
 		var restaurantId = this.model.get('restaurant').id
-		MeiweiApp.Pages.RestaurantDetail.go({restaurantId: restaurantId});
+		MeiweiApp.Pages.RestaurantDetail.go({
+			restaurantId: restaurantId,
+			caller: MeiweiApp.Pages.Home
+		});
 	}
 });
 

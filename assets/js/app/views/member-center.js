@@ -34,8 +34,6 @@ MeiweiApp.Pages.MemberCenter = new (MeiweiApp.PageView.extend({
 			})
 		}
 	},
-	onClickLeftBtn: function() { MeiweiApp.Pages.Home.go(); },
-	onClickRightBtn: function() { },
 	render: function() {
 		$.when(
 			MeiweiApp.me.profile.fetch()

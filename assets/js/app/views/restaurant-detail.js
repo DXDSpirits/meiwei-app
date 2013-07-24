@@ -5,7 +5,10 @@ MeiweiApp.Views.RestaurantProfileBox = MeiweiApp.ModelView.extend({
 		this.$el.html(this.template(this.model.toJSON()));
 		var self = this;
 		new MBP.fastButton(this.$('.order-button')[0], function() {
-			MeiweiApp.Pages.RestaurantOrder.go({restaurant: self.model.toJSON()});
+			MeiweiApp.Pages.RestaurantOrder.go({
+				restaurant: self.model.toJSON(),
+				caller: MeiweiApp.Pages.RestaurantDetail
+			});
 		});
 		return this;
 	}
@@ -57,6 +60,9 @@ MeiweiApp.Pages.RestaurantDetail = new (MeiweiApp.PageView.extend({
 		}
 		_.bindAll(this, 'renderAll');
 	},
+	onClickLeftBtn: function() { this.options.caller.showPage(); },
+	onClickRightBtn: function() { this.addFavorite(); },
+	addFavorite: function() {},
 	renderAll: function() {
 		this.$('> header h1').html(this.restaurant.get('fullname'));
 		this.views.pictures.collection.url = this.restaurant.get('pictures');
@@ -67,6 +73,8 @@ MeiweiApp.Pages.RestaurantDetail = new (MeiweiApp.PageView.extend({
 		).then(this.showPage);
 	},
 	render: function(options) {
+		this.options = { caller: MeiweiApp.Pages.Home };
+		_.extend(this.options, options);
 		if (options.restaurant) {
 			this.restaurant.set(options.restaurant);
 			this.renderAll();

@@ -30,6 +30,7 @@ MeiweiApp.Views.RestaurantOrderForm = MeiweiApp.View.extend({
 			restaurant: this.restaurant.toJSON(),
 			order: pending
 		}));
+		MWA.fixBlurScroll(this.$el);
 	},
 });
 
@@ -38,7 +39,8 @@ MeiweiApp.Pages.RestaurantOrder = new (MeiweiApp.PageView.extend({
 		'click .contact-info > header': 'selectContact',
 		'click .floorplan-select > header': 'selectSeat',
 		'click .product-select > header': 'selectProduct',
-		'click .order-submit-button': 'submitOrder'
+		'click .order-submit-button': 'submitOrder',
+		'click .switch-gender': 'switchGender'
 	},
 	initPage: function() {
 		this.restaurant = new MeiweiApp.Models.Restaurant();
@@ -54,7 +56,7 @@ MeiweiApp.Pages.RestaurantOrder = new (MeiweiApp.PageView.extend({
 		};
 		_.bindAll(this, 'renderOrderForm', 'fillContact');
 	},
-	onClickLeftBtn: function() { MeiweiApp.Pages.RestaurantDetail.showPage(); },
+	onClickLeftBtn: function() { this.options.caller.showPage(); },
 	selectContact: function() {
 		MeiweiApp.Pages.MemberContacts.go({
 			multiple: false, 
@@ -72,10 +74,17 @@ MeiweiApp.Pages.RestaurantOrder = new (MeiweiApp.PageView.extend({
 		});
 	},
 	selectProduct: function() {
-		MeiweiApp.Pages.ProductPurchase.go();
+		MeiweiApp.Pages.ProductPurchase.go({ caller: this });
 	},
-	updateProductCart: function() {
-		console.log(MeiweiApp.ProductCart);
+	switchGender: function() {
+		var s = this.$('.switch-gender');
+		if ($(s).hasClass('on')) {
+			$(s).removeClass('on');
+			$(s).find('input').val($(s).find('label.text-off').text());
+		} else {
+			$(s).addClass('on');
+			$(s).find('input').val($(s).find('label.text-on').text());
+		}
 	},
 	submitOrder: function(e) {
 		e.preventDefault();
@@ -86,7 +95,7 @@ MeiweiApp.Pages.RestaurantOrder = new (MeiweiApp.PageView.extend({
 		    orderdate: this.$('input[name=orderdate]').val(),
 		    ordertime: this.$('input[name=ordertime]').val(),
 		    personnum: this.$('input[name=personnum]').val(),
-		    contactname: this.$('input[name=contactname]').val(),
+		    contactname: this.$('input[name=contactname]').val() + this.$('input[name=contactgender]').val(),
 		    contactphone: this.$('input[name=contactphone]').val(),
 		    other: this.$('textarea[name=other]').text()
 		});
@@ -103,6 +112,8 @@ MeiweiApp.Pages.RestaurantOrder = new (MeiweiApp.PageView.extend({
 		this.showPage();
 	},
 	render: function(options) {
+		this.options = { caller: MeiweiApp.Pages.Home };
+		_.extend(this.options, options);
 		if (options.restaurant) {
 			this.restaurant.set(options.restaurant);
 			this.renderOrderForm();
