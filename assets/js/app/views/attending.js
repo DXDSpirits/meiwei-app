@@ -2,7 +2,7 @@
 MeiweiApp.Views.OrderPages = MeiweiApp.CollectionView.extend({
 	ModelView: MeiweiApp.ModelView.extend({
 		template: MeiweiApp.Templates['order-attending'],
-		className: 'order-page-item carousel-item',
+		className: 'order-page-item carousel-item'
 	})
 });
 
@@ -18,8 +18,6 @@ MeiweiApp.Pages.Attending = new (MeiweiApp.PageView.extend({
 		};
 		_.bindAll(this, 'renderPages');
 	},
-	onClickLeftBtn: function() { MeiweiApp.Pages.Home.go(); },
-	onClickRightBtn: function() { },
 	renderPages: function() {
 		var items = this.$('.carousel > .carousel-inner > .carousel-item');
 		this.$('.carousel > .carousel-inner').css('width', items.length * $(items[0]).outerWidth());

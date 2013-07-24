@@ -3,7 +3,7 @@ MeiweiApp.Models.RecommendItem = MeiweiApp.Model.extend({
 });
 
 MeiweiApp.Collections.RecommendItems = MeiweiApp.Collection.extend({
-	model: MeiweiApp.Models.RecommendItem,
+	model: MeiweiApp.Models.RecommendItem
 });
 
 MeiweiApp.Models.Recommend = MeiweiApp.Model.extend({
@@ -21,5 +21,5 @@ MeiweiApp.Models.Recommend = MeiweiApp.Model.extend({
 
 MeiweiApp.Collections.Recommends = MeiweiApp.Collection.extend({
 	url: MeiweiApp.configs.APIHost + '/restaurants/recommend/',
-	model: MeiweiApp.Models.Recommend,
+	model: MeiweiApp.Models.Recommend
 });

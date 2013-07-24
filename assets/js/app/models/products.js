@@ -1,10 +1,10 @@
 
 MeiweiApp.Models.ProductItem = MeiweiApp.Model.extend({
-	urlRoot: MeiweiApp.configs.APIHost + '/restaurants/productitem/',
+	urlRoot: MeiweiApp.configs.APIHost + '/restaurants/productitem/'
 });
 
 MeiweiApp.Collections.ProductItems = MeiweiApp.Collection.extend({
-	model: MeiweiApp.Models.ProductItem,
+	model: MeiweiApp.Models.ProductItem
 });
 
 MeiweiApp.Models.Product = MeiweiApp.Model.extend({
@@ -22,7 +22,7 @@ MeiweiApp.Models.Product = MeiweiApp.Model.extend({
 
 MeiweiApp.Collections.Products = MeiweiApp.Collection.extend({
 	url: MeiweiApp.configs.APIHost + '/restaurants/product/',
-	model: MeiweiApp.Models.Product,
+	model: MeiweiApp.Models.Product
 });
 
 MeiweiApp.ProductCart = new MeiweiApp.Collections.ProductItems();

@@ -62,12 +62,12 @@ MeiweiApp.PageView = Backbone.View.extend({
 		}
 	},
 	//onClickLeftBtn: function() { window.history.back(); },
-	onClickLeftBtn: function() { MeiweiApp.Pages.Home.showPage(); },
+	onClickLeftBtn: function() { MeiweiApp.goBack(); },
 	onClickRightBtn: function() {},
 	timeout: null,
 	go: function() {
 		this.timeout = setTimeout(function() {
-			MeiweiApp.Pages.Home.go();
+			MeiweiApp.goTo('Home');
 			alert('There seems to be problem with your internet connection?');
 		}, 5000);
 		$("#apploader").removeClass('hide');

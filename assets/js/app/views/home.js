@@ -6,18 +6,19 @@ MeiweiApp.Views.RecommendItem = MeiweiApp.ModelView.extend({
 	template: MeiweiApp.Templates['recommend-list-item'],
 	viewRestaurant: function() {
 		var restaurantId = this.model.get('restaurant').id
-		MeiweiApp.Pages.RestaurantDetail.go({
-			restaurantId: restaurantId,
-			caller: MeiweiApp.Pages.Home
+		MeiweiApp.goTo('RestaurantDetail', {
+			restaurantId: restaurantId
 		});
 	}
 });
 
 MeiweiApp.Views.RecommendItems = MeiweiApp.CollectionView.extend({
-	ModelView: MeiweiApp.Views.RecommendItem,
+	ModelView: MeiweiApp.Views.RecommendItem
 });
 
 MeiweiApp.Pages.Home = new (MeiweiApp.PageView.extend({
+	onClickLeftBtn: function() { MeiweiApp.goTo('MemberCenter'); },
+	onClickRightBtn: function() { MeiweiApp.goTo('Attending'); },
 	events: { 'click header input': 'gotoSearch' },
 	initPage: function() {
 		this.recommend = new MeiweiApp.Models.Recommend({id: 2});
@@ -31,9 +32,7 @@ MeiweiApp.Pages.Home = new (MeiweiApp.PageView.extend({
 		_.bindAll(this, 'initScroller', 'hero');
 		this.$('header input').click(function() {});
 	},
-	onClickLeftBtn: function() { MeiweiApp.Pages.MemberCenter.go(); },
-	onClickRightBtn: function() { MeiweiApp.Pages.Attending.go(); },
-	gotoSearch: function() { MeiweiApp.Pages.RestaurantSearch.go(); },
+	gotoSearch: function() { MeiweiApp.goTo('RestaurantSearch'); },
 	hero: function() {
 		var x = this.scroller.currentPage.pageX;
 		var y = this.scroller.currentPage.pageY;

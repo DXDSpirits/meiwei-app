@@ -1,10 +1,15 @@
 
 /********************************** Router **********************************/
 
+MeiweiApp.history = {
+	active: MeiweiApp.Pages.Home,
+	stack: []
+};
+
 MeiweiApp.Router = new (Backbone.Router.extend({
 	initialize: function(){
 		this.route('', 'index');
-		
+		/*
 		this.route('home', 'home');
 		
 		this.route(/^restaurant\/(\d+)$/, 'restaurantDetail');
@@ -25,7 +30,7 @@ MeiweiApp.Router = new (Backbone.Router.extend({
 		this.route('product/purchase', 'productPurchase');
 		
 		this.route('attending', 'attending');
-		
+		*/
 	},
 	
 	//index: function() { MeiweiApp.Router.navigate('home', {trigger: true}); },
@@ -53,8 +58,23 @@ MeiweiApp.Router = new (Backbone.Router.extend({
     attending:function() { MeiweiApp.Pages.Attending.go(); }
 }));
 
-MeiweiApp.goTo = function(path) {
+MeiweiApp.goToPath = function(path) {
 	MeiweiApp.Router.navigate(path, {trigger: true});
+};
+
+MeiweiApp.goTo = function(pageName, options) {
+	var next = MeiweiApp.Pages[pageName];
+	MeiweiApp.history.stack.push(MeiweiApp.history.active);
+	MeiweiApp.history.active = next;
+	next.go(options);
+};
+
+MeiweiApp.goBack = function() {
+	if (!_.isEmpty(MeiweiApp.history.stack)) {
+		var prev = MeiweiApp.history.stack.pop();
+		MeiweiApp.history.active = prev;
+		prev.showPage();
+	}
 };
 
 $.ajaxSetup({

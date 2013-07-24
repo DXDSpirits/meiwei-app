@@ -54,13 +54,11 @@ MeiweiApp.Pages.MemberContacts = new(MeiweiApp.PageView.extend({
 		};
 		_.bindAll(this, "bindContactSelect");
 	},
-	onClickLeftBtn: function() { this.options.caller.showPage(); },
-	onClickRightBtn: function() { this.options.caller.showPage(); },
 	bindContactSelect: function(collection, response, options) {
 		collection.forEach(function(contact) {
 			contact.on("select", function() {
 				this.options.callback(contact.get('name'), contact.get('mobile'));
-				if (!this.options.multiple)	this.options.caller.showPage();
+				if (!this.options.multiple)	MeiweiApp.goBack();
 			}, this)
 		}, this);
 	},
@@ -91,7 +89,7 @@ MeiweiApp.Pages.MemberContacts = new(MeiweiApp.PageView.extend({
 		});
 	},
 	render: function(options) {
-		this.options = { caller: MeiweiApp.Pages.MemberCenter };
+		this.options = this.options || {};
 		_.extend(this.options, options);
 		this.getOnlineContacts();
 		this.showPage();

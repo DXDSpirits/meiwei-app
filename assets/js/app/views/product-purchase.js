@@ -8,7 +8,7 @@ MeiweiApp.Views.ProductList = MeiweiApp.CollectionView.extend({
 		render: function() {
 			this.$el.html(this.template({
 				product: this.model.toJSON(),
-				items: this.model.items.toJSON(),
+				items: this.model.items.toJSON()
 			}));
 			return this;
 		},
@@ -38,8 +38,6 @@ MeiweiApp.Pages.ProductPurchase = new (MeiweiApp.PageView.extend({
 		};
 		_.bindAll(this, 'carousel');
 	},
-	onClickLeftBtn: function() { this.options.caller.showPage(); },
-	onClickRightBtn: function() { this.options.caller.showPage(); },
 	carousel: function() {
 		this.products.forEach(function(product) {
 			var selector = '.carousel[data-item="' + product.id + '"]';
@@ -55,7 +53,7 @@ MeiweiApp.Pages.ProductPurchase = new (MeiweiApp.PageView.extend({
 		});
 	},
 	render: function(options) {
-		this.options = { caller: MeiweiApp.Pages.MemberCenter };
+		this.options = this.options || {};
 		_.extend(this.options, options);
 		$.when(
 			this.products.fetch({

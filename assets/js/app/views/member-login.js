@@ -6,7 +6,7 @@ MeiweiApp.Views.MemberLoginForm = MeiweiApp.View.extend({
 		username = this.$('input[name=username]').val();
 		password = this.$('input[name=password]').val();
 		MeiweiApp.me.login(username, password);
-		MeiweiApp.Pages.MemberProfile.go();
+		MeiweiApp.goTo('MemberProfile');
 	},
 	template: MeiweiApp.Templates['member-login-form'],
 	render: function() {
@@ -19,7 +19,7 @@ MeiweiApp.Views.MemberLogoutForm = MeiweiApp.View.extend({
 	logout: function(e) {
 		e.preventDefault();
 		MeiweiApp.me.logout();
-		MeiweiApp.Pages.Home.go();
+		MeiweiApp.goTo('Home');
 	},
 	template: MeiweiApp.Templates['member-logout-form'],
 	render: function() {
@@ -35,7 +35,7 @@ MeiweiApp.Views.MemberRegisterForm = MeiweiApp.View.extend({
 		mobile = this.$('input[name=mobile]').val();
 		password = this.$('input[name=password]').val();
 		MeiweiApp.me.register(email, mobile, password);
-		MeiweiApp.Pages.MemberProfile.go();
+		MeiweiApp.goTo('MemberProfile');
 	},
 	template: MeiweiApp.Templates['member-register-form'],
 	render: function() {

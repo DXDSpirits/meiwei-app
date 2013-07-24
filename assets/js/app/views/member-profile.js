@@ -29,7 +29,7 @@ MeiweiApp.Views.MemberAvatarForm = MeiweiApp.ModelView.extend({
 		e.preventDefault();
 		avatar = this.$('input[name=avatar]').val();
 		console.log(this.$el.serialize())
-	},
+	}
 });
 
 MeiweiApp.Pages.MemberProfile = new (MeiweiApp.PageView.extend({
