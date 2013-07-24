@@ -55,8 +55,16 @@ MeiweiApp.Pages.RestaurantDetail = new (MeiweiApp.PageView.extend({
 				el: this.$('.restaurant-reviews')
 			})
 		}
-		_.bindAll(this, 'renderAll');
+		_.bindAll(this, 'renderAll', 'carousel');
 	},
+	carousel: function() {
+		var A=$('section.restaurant-pictures img');
+		var L=A.length;
+		var i=0;
+		setTimeout(function() {
+			
+		},3000);
+	}。
 	renderAll: function() {
 		this.$('> header h1').html(this.restaurant.get('fullname'));
 		this.views.pictures.collection.url = this.restaurant.get('pictures');

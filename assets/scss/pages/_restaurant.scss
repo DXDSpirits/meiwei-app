@@ -72,7 +72,14 @@
 		height: 250px;
 		overflow: hidden;
 		img {
-			@include square(100%);
+			//display:none;
+	        @include square(100%);
+		    opacity: 0;
+		    @include transition(opacity 2s ease-in-out);
+		    &.front {
+		   		opacity: 1;
+		   		@include transition(opacity 2s ease-in-out);
+		   	    }
 		}
 	}
 	
