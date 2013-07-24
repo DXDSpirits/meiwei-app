@@ -31,7 +31,7 @@
 	$itemHeight: 45px;
 	@include size($itemHeight, 100%);
 	padding: 0 17px;
-	border-width: 1px 0 0 0;
+	border-width: 0 0 1px 0;
 	border-style: solid;
 	border-color: $brown;
 	@include flex-box($orient: horizontal);
