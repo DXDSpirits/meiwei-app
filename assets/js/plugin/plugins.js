@@ -22,3 +22,10 @@
 }());
 
 // Place any Zepto/helper plugins in here.
+(function(document) {
+	window.MWA = window.MWA || {};
+	MWA.fixBlurScroll = function(context) {
+		$(context).find('input').on('blur', function() { window.scrollTo(0, 0); });
+		$(context).find('textarea').on('blur', function() { window.scrollTo(0, 0); });
+	};
+})(document);
