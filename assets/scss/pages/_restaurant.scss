@@ -162,13 +162,19 @@
         overflow: hidden;
 	}
 	
-	input, textarea {
+	input, textarea，label {
 		font-size: $fontSizeSmall;
+	}
+	label {
+		margin:5px;
 	}
 	fieldset {
 		margin: 0;
 		border-width: 1px 0 0 0;
 		@include border-radius(0);
+	}
+	.inline-group {
+		border-right: none;
 	}
 	
 	.order-info, .contact-info, .floorplan-select, .product-select {

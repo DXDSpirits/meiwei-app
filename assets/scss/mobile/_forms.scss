@@ -95,3 +95,32 @@ textarea {
 	line-height: $baseLineHeight;
 	text-indent: 0;
 }
+
+//radio-button
+.circle-base {
+		@include border-radius(999px);
+		//behavior: url(PIE.htc);
+	}
+	.radio {
+		height:20px;
+		width:40px;
+		@include box-shadow(0 0 10px $brownLight);
+		border-left:none;
+	}
+	.radio-inner {
+		height:20px;
+		width:40px;
+		@include box-shadow(inset 0 0 2px #000000);
+		@include flex-box($align:end);
+	}
+	.button-gender {
+		height:21px;
+		width:21px;
+		background-color: $brown;
+		@include flexible();
+		@include box-shadow(inset 0 0 2px #fff);
+	}
+	.radio.flip .button-gender {
+		@include translate3d(-20px, 0, 0);
+		@include transition(-webkit-transform .36s ease-in-out);
+	}
