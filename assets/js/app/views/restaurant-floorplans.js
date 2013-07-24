@@ -59,8 +59,8 @@ MeiweiApp.Pages.RestaurantFloorplans = new (MeiweiApp.PageView.extend({
 		}
 		_.bindAll(this, 'fetchFloorplans', 'renderFloorplans');
 	},
-	onClickLeftBtn: function() { MeiweiApp.Pages.RestaurantDetail.showPage(); },
-	onClickRightBtn: function() { MeiweiApp.Pages.RestaurantDetail.showPage(); },
+	onClickLeftBtn: function() { MeiweiApp.Pages.RestaurantOrder.showPage(); },
+	onClickRightBtn: function() { MeiweiApp.Pages.RestaurantOrder.showPage(); },
 	renderFloorplans: function() {
 		var myScroll = new IScroll('.svg-canvas', {
 			scrollX: true,

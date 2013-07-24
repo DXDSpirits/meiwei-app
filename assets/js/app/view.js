@@ -61,7 +61,7 @@ MeiweiApp.PageView = Backbone.View.extend({
 		}
 	},
 	//onClickLeftBtn: function() { window.history.back(); },
-	onClickLeftBtn: function() {},
+	onClickLeftBtn: function() { MeiweiApp.Pages.Home.showPage(); },
 	onClickRightBtn: function() {},
 	go: function() {
 		$("#apploader").removeClass('hide');

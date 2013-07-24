@@ -54,7 +54,7 @@ MeiweiApp.Pages.RestaurantOrder = new (MeiweiApp.PageView.extend({
 		};
 		_.bindAll(this, 'renderOrderForm', 'fillContact');
 	},
-	onClickLeftBtn: function() { MeiweiApp.Pages.RestaurantDetail.showPage(); },
+	onClickLeftBtn: function() { this.options.caller.showPage(); },
 	selectContact: function() {
 		MeiweiApp.Pages.MemberContacts.go({
 			multiple: false, 
@@ -72,10 +72,7 @@ MeiweiApp.Pages.RestaurantOrder = new (MeiweiApp.PageView.extend({
 		});
 	},
 	selectProduct: function() {
-		MeiweiApp.Pages.ProductPurchase.go();
-	},
-	updateProductCart: function() {
-		console.log(MeiweiApp.ProductCart);
+		MeiweiApp.Pages.ProductPurchase.go({ caller: this });
 	},
 	submitOrder: function(e) {
 		e.preventDefault();
@@ -103,6 +100,8 @@ MeiweiApp.Pages.RestaurantOrder = new (MeiweiApp.PageView.extend({
 		this.showPage();
 	},
 	render: function(options) {
+		this.options = { caller: MeiweiApp.Pages.Home };
+		_.extend(this.options, options);
 		if (options.restaurant) {
 			this.restaurant.set(options.restaurant);
 			this.renderOrderForm();
