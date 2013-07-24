@@ -19,7 +19,12 @@
 	</table>
 	
 	<div class="button-group">
+		<div class="hidden">
+			<input type="hidden" class="full-name" value="{{ restaurantinfor.fullname }}" />
+			<input type="hidden" class="description" value="{{ restaurantinfor.description }}" />
+			<input type="hidden" class="frontpic" value="{{ restaurantinfor.frontpic }}" />
+		</div>
 		<button class="btn btn-inverse" >签到</button>
-		<button class="btn" >分享</button>
+		<button class="btn btn-share" >分享</button>
 	</div>
 </div>
