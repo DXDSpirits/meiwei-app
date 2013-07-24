@@ -1,0 +1,25 @@
+<div class="section-header-img">
+	<img src="{{ restaurantinfor.frontpic }}">
+</div>
+
+<div class="order-detail">
+	<section class="section-qrcode">
+		<img src="http://a1.att.hudong.com/41/23/01100000000014120367236323372.jpg">
+	</section>
+	
+	<header><h1>{{ restaurantinfor.fullname }}</h1></header>
+	
+	<table>
+		<tr><th colspan="2">订餐标号</th></tr>
+		<tr><td colspan="2">{{ orderno }}</td></tr>
+		<tr><th>订餐日期</th><th>订餐时间</th></tr>
+		<tr><td>{{ orderdate }}</td><td>{{ ordertime }}</td></tr>
+		<tr><th colspan="2">订餐折扣</th></tr>
+		<tr><td colspan="2">无</td></tr>
+	</table>
+	
+	<div class="button-group">
+		<button class="btn btn-inverse" >签到</button>
+		<button class="btn" >分享</button>
+	</div>
+</div>

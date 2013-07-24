@@ -5,7 +5,7 @@ MeiweiApp.Views.RestaurantProfileBox = MeiweiApp.ModelView.extend({
 		this.$el.html(this.template(this.model.toJSON()));
 		var self = this;
 		new MBP.fastButton(this.$('.order-button')[0], function() {
-			MeiweiApp.Pages.RestaurantOrder.go({restaurantId: self.model.id});
+			MeiweiApp.Pages.RestaurantOrder.go({restaurant: self.model.toJSON()});
 		});
 		return this;
 	}
