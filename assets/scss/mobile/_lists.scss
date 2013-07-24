@@ -1,5 +1,5 @@
 .thumbnail-list-item {
-	@include border(1px 0 0 0, solid, $brownDark);
+	@include border(0 0 1px 0, solid, $brownDark);
 	@include size(90px, 100%);
 	padding: 9px 17px 9px 99px;
 	overflow: hidden;

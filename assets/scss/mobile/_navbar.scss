@@ -2,7 +2,7 @@
 .view > header {
 	@include flex-box($orient: horizontal);
 	@include size($navbarHeight, 100%);
-	padding: 0 $navbarPadding;
+	//padding: 0 $navbarPadding;
 	position: fixed;
 	top: 0;
 	z-index: $zindexFixedNavbar;
@@ -14,7 +14,7 @@
 		@include size($bannerHeight, 100%);
 		position: absolute;
 		z-index: -1;
-		margin: 0 (-$navbarPadding);
+		//margin: 0 (-$navbarPadding);
 	}
 	
 	opacity: 1;
@@ -46,6 +46,12 @@
 	padding: 0 15px;
 	font-size: $fontSizeSmall;
   	line-height: $baseLineHeight;
+}
+
+.view > header > .header-btn {
+	@include size(50px, 53px);
+	padding-bottom: 6px;
+	@include flex-box($orient: horizontal);
 }
 
 .filter-bar {
