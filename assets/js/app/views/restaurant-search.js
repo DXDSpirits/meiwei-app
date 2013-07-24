@@ -107,42 +107,44 @@ MeiweiApp.Pages.RestaurantSearch = new (MeiweiApp.PageView.extend({
 	/*********************************************/
 	dropMarkers: function () {
 		var neighborhoods = [];
+		var view =[];
+		
 		this.restaurants.forEach(function(item) {
 			var coord = item.get('coordinate');
-            var latlng = new AMap.LngLat(coord.longitude / 100000.0 , coord.latitude / 100000.0 );
+            var latlng = new BMap.Point(coord.longitude / 100000.0 , coord.latitude / 100000.0 );
 			neighborhoods.push({latlng: latlng, resto: item.toJSON()});
+			view.push(latlng);
 		}, this);
+		
+		this.map.setViewport(view);
 		
 		if(neighborhoods.length==1){ this.map.setZoom(18);
 		}else if(neighborhoods.length<5){ this.map.setZoom(15);
 		}else{ this.map.setZoom(12); }
 		
-		this.map.setCenter(neighborhoods.length>0 ? neighborhoods[0].latlng : new AMap.LngLat(48 , 48) );
+		this.map.setCenter(neighborhoods.length>0 ? neighborhoods[0].latlng : new BMap.Point(121.491, 31.233) );
 		
-		for (var i = 0; i < this.markers.length; i++) this.markers[i].setMap(null);
+		//for (var i = 0; i < this.markers.length; i++) this.markers[i].setMap(null);
 		this.markers = [];
 		
 		for (var i = 0; i < neighborhoods.length; i++) {
-			var marker = new AMap.Marker({
-				position : neighborhoods[i].latlng,
-				map : this.map,
-				draggable : false
-			});
+			var marker = new BMap.Marker(neighborhoods[i].latlng , {enableMassClear:true});
 			this.markers.push(marker);
+			this.map.addOverlay(marker);
 			this.addMessage(marker, neighborhoods[i].resto);
 		}
 	},
 	addMessage: function(marker, resto) {
 		var markerInfo = this.views.markerInfo;
-		AMap.event.addListener(marker, 'click', function () {
+		marker.addEventListener('click', function () {
 			//markerInfo.model.set(resto);
 			markerInfo.toggle(resto);
 		});
 	},
 	initializeMap: function () {
-		var mapOptions = { zoom : 12 ,touchZoom:true };
 		this.markers = [];
-		this.map = new AMap.Map(map_canvas, mapOptions);
+		this.map = new BMap.Map("map_canvas");
+		this.map.centerAndZoom(new BMap.Point(121.491, 31.233), 12);
 	},
 	/*********************************************/
 	
