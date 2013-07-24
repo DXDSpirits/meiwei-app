@@ -37,14 +37,9 @@
 }
 
 #view-member-profile {
-    img {
-        @include flex-box($pack: center);
-        @include square(25px);   
-        margin-left:5px;
- }
     input {
     	border-right: 0px;
-    }    
+    }
     label {
     	padding: 5px;
     }

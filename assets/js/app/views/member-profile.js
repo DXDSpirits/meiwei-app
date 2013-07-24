@@ -33,6 +33,7 @@ MeiweiApp.Views.MemberAvatarForm = MeiweiApp.ModelView.extend({
 });
 
 MeiweiApp.Pages.MemberProfile = new (MeiweiApp.PageView.extend({
+	events: { 'click .switch-gender': 'switchGender' },
 	initPage: function() {
 		this.views = {
 			profileForm: new MeiweiApp.Views.MemberProfileForm({
@@ -43,6 +44,16 @@ MeiweiApp.Pages.MemberProfile = new (MeiweiApp.PageView.extend({
 				model: MeiweiApp.me.profile,
 				el: this.$('.scroll .scroll-inner div:nth-child(2)')
 			})
+		}
+	},
+	switchGender: function() {
+		var s = this.$('.switch-gender');
+		if ($(s).hasClass('on')) {
+			$(s).removeClass('on');
+			$(s).find('input').val(0);
+		} else {
+			$(s).addClass('on');
+			$(s).find('input').val(1);
 		}
 	},
 	render: function() {

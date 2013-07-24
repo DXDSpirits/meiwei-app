@@ -194,6 +194,10 @@
 		background: transparent url($gradientShadowPathR) no-repeat top;
 		@include background-size(100% (3*$baseLineHeight));
 	}
+	.contact-info {
+		input[name="contactname"] { @include flexible(2); }
+		.switch-gender { @include flexible(3); }
+	}
 	.product-select {
 		background: transparent url($gradientShadowPath) no-repeat bottom;
 		@include background-size(100% (3*$baseLineHeight));

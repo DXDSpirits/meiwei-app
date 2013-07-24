@@ -38,7 +38,8 @@ MeiweiApp.Pages.RestaurantOrder = new (MeiweiApp.PageView.extend({
 		'click .contact-info > header': 'selectContact',
 		'click .floorplan-select > header': 'selectSeat',
 		'click .product-select > header': 'selectProduct',
-		'click .order-submit-button': 'submitOrder'
+		'click .order-submit-button': 'submitOrder',
+		'click .switch-gender': 'switchGender'
 	},
 	initPage: function() {
 		this.restaurant = new MeiweiApp.Models.Restaurant();
@@ -74,6 +75,16 @@ MeiweiApp.Pages.RestaurantOrder = new (MeiweiApp.PageView.extend({
 	selectProduct: function() {
 		MeiweiApp.Pages.ProductPurchase.go({ caller: this });
 	},
+	switchGender: function() {
+		var s = this.$('.switch-gender');
+		if ($(s).hasClass('on')) {
+			$(s).removeClass('on');
+			$(s).find('input').val($(s).find('label.text-off').text());
+		} else {
+			$(s).addClass('on');
+			$(s).find('input').val($(s).find('label.text-on').text());
+		}
+	},
 	submitOrder: function(e) {
 		e.preventDefault();
 		var newOrder = new MeiweiApp.Models.Order();
@@ -83,7 +94,7 @@ MeiweiApp.Pages.RestaurantOrder = new (MeiweiApp.PageView.extend({
 		    orderdate: this.$('input[name=orderdate]').val(),
 		    ordertime: this.$('input[name=ordertime]').val(),
 		    personnum: this.$('input[name=personnum]').val(),
-		    contactname: this.$('input[name=contactname]').val(),
+		    contactname: this.$('input[name=contactname]').val() + this.$('input[name=contactgender]').val(),
 		    contactphone: this.$('input[name=contactphone]').val(),
 		    other: this.$('textarea[name=other]').text()
 		});

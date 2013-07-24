@@ -25,14 +25,16 @@
 						<fieldset>
 							<div class="inline-group">
 								<i class="icon-member-small"></i>
+								
 								<input type="text" name="contactname" placeholder="联系人姓名"/>
-								<label>先生</label>
-			                    <div class="radio circle-base">
-				                    <div class="radio-inner circle-base">
-				                      	<div class="button-gender circle-base radio"></div>
-			                 	    </div>
+								
+			                    <div class="control-group switch off switch-gender">
+			                    	<input type="hidden" name="contactgender" value="先生"/>
+			                    	<label class="text-off">先生</label>
+				                    <div class="switch-inner"><div class="switch-button"></div></div>
+			                 	    <label class="text-on">女士</label>
 			                    </div>
-		                        <label>女士</label>
+		                        
 							</div>
 							<div class="inline-group">
 								<i class="icon-phone"></i>
