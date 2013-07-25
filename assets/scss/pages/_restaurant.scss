@@ -66,13 +66,23 @@
 	.restaurant-pictures {
 		@include flex-box($orient: vertical);
 		//Make the pictures wrapper 2X wider.
+		width: 100%;
 		position: relative;
 		//left: -50%;
 		
 		height: 250px;
 		overflow: hidden;
 		img {
-			@include square(100%);
+			position: absolute;
+			top: 0;
+			left: 0;
+	        @include square(100%);
+		    opacity: 0;
+		    @include transition(opacity 2s ease-in-out);
+		    &.front {
+		   		opacity: 1;
+		   		@include transition(opacity 2s ease-in-out);
+		   	}
 		}
 	}
 	
