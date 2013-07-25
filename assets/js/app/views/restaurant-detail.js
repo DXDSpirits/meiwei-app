@@ -75,16 +75,10 @@ MeiweiApp.Pages.RestaurantDetail = new (MeiweiApp.PageView.extend({
 	addFavorite: function() {},
 	renderAll: function() {
 		this.$('> header h1').html(this.restaurant.get('fullname'));
-		this.views.pictures.collection.url = this.restaurant.get('pictures');
 		this.views.reviews.collection.url = this.restaurant.get('reviews');
-		var self = this;
-		$.when(
-			this.views.pictures.collection.fetch({reset: true}),
-			this.views.reviews.collection.fetch({reset: true})
-		).then(function() {
-			self.carousel();
-			self.showPage();
-		});
+		this.views.pictures.collection.reset(this.restaurant.get('pictures'));
+		this.carousel();
+		this.showPage();
 	},
 	render: function(options) {
 		this.options = this.options || {};
