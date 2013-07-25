@@ -102,10 +102,10 @@ textarea {
 		@include border-radius(999px);
 		background-color: $brown;
 		@include translate3d(0, 0, 0);
-		@include transition(-webkit-transform .36s ease-in-out);
+		-webkit-transition: -webkit-transform .36s ease-in-out;
 	}
 	&.on .switch-button {
 		@include translate3d(18px, 0, 0);
-		@include transition(-webkit-transform .36s ease-in-out);
+		-webkit-transition: -webkit-transform .36s ease-in-out;
 	}
 }

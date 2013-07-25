@@ -27,14 +27,14 @@
 			border-style: solid;
 			border-color: $brown;
 			-webkit-filter: blur(2px); //sepia(50%);
-			@include transition(-webkit-filter .36s ease-in-out);
+			-webkit-transition: -webkit-filter .36s ease-in-out;
 			-webkit-backface-visibility: hidden;
 		}
 		
 		&.hero img {
 			-webkit-filter: blur(0);
+			-webkit-transition: -webkit-filter .36s ease-in-out;
 			-webkit-backface-visibility: hidden;
-			@include transition(-webkit-filter .36s ease-in-out);
 		}
 		
 		/*&.hero + .recommend-list-item {
