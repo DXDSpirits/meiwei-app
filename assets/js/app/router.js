@@ -9,7 +9,7 @@ MeiweiApp.history = {
 MeiweiApp.Router = new (Backbone.Router.extend({
 	initialize: function(){
 		this.route('', 'index');
-		/*
+		
 		this.route('home', 'home');
 		
 		this.route(/^restaurant\/(\d+)$/, 'restaurantDetail');
@@ -30,32 +30,32 @@ MeiweiApp.Router = new (Backbone.Router.extend({
 		this.route('product/purchase', 'productPurchase');
 		
 		this.route('attending', 'attending');
-		*/
+		
 	},
 	
 	//index: function() { MeiweiApp.Router.navigate('home', {trigger: true}); },
 	
-	index: function() { MeiweiApp.Pages.Home.go(); },
-	home: function() { MeiweiApp.Pages.Home.go(); },
+	index: function() { MeiweiApp.Pages.Home.go(); MeiweiApp.history.active = MeiweiApp.Pages.Home; },
+	home: function() { MeiweiApp.Pages.Home.go(); MeiweiApp.history.active = MeiweiApp.Pages.Home; },
 	
-	restaurantDetail: function(rid) { MeiweiApp.Pages.RestaurantDetail.go({restaurantId: rid}); },
-	restaurantSearch: function() { MeiweiApp.Pages.RestaurantSearch.go(); },
-	restaurantOrder: function(rid) { MeiweiApp.Pages.RestaurantOrder.go({restaurantId: rid}); },
-	restaurantFloorplans: function(rid) { MeiweiApp.Pages.RestaurantFloorplans.go({restaurantId: rid}); },
+	restaurantDetail: function(rid) { MeiweiApp.Pages.RestaurantDetail.go({restaurantId: rid}); MeiweiApp.history.active = MeiweiApp.Pages.RestaurantDetail; },
+	restaurantSearch: function() { MeiweiApp.Pages.RestaurantSearch.go(); MeiweiApp.history.active = MeiweiApp.Pages.RestaurantSearch; },
+	restaurantOrder: function(rid) { MeiweiApp.Pages.RestaurantOrder.go({restaurantId: rid}); MeiweiApp.history.active = MeiweiApp.Pages.RestaurantOrder; },
+	restaurantFloorplans: function(rid) { MeiweiApp.Pages.RestaurantFloorplans.go({restaurantId: rid}); MeiweiApp.history.active = MeiweiApp.Pages.RestaurantFloorplans; },
 	
-	memberCenter: function() { MeiweiApp.Pages.MemberCenter.go(); },
-	memberLogin: function() { MeiweiApp.Pages.MemberLogin.go(); },
-	memberProfile: function() { MeiweiApp.Pages.MemberProfile.go(); },
-    memberContacts: function() { MeiweiApp.Pages.MemberContacts.go(); },
-    memberCredits: function() { MeiweiApp.Pages.MemberCredits.go(); },
-    memberFavorites: function() { MeiweiApp.Pages.MemberFavorites.go(); },
+	memberCenter: function() { MeiweiApp.Pages.MemberCenter.go(); MeiweiApp.history.active = MeiweiApp.Pages.MemberCenter; },
+	memberLogin: function() { MeiweiApp.Pages.MemberLogin.go(); MeiweiApp.history.active = MeiweiApp.Pages.MemberLogin; },
+	memberProfile: function() { MeiweiApp.Pages.MemberProfile.go(); MeiweiApp.history.active = MeiweiApp.Pages.MemberProfile; },
+    memberContacts: function() { MeiweiApp.Pages.MemberContacts.go(); MeiweiApp.history.active = MeiweiApp.Pages.MemberContacts; },
+    memberCredits: function() { MeiweiApp.Pages.MemberCredits.go(); MeiweiApp.history.active = MeiweiApp.Pages.MemberCredits; },
+    memberFavorites: function() { MeiweiApp.Pages.MemberFavorites.go(); MeiweiApp.history.active = MeiweiApp.Pages.MemberFavorites; },
     
-    orderList: function() { MeiweiApp.Pages.OrderList.go(); },
-    orderDetail: function(oid) { MeiweiApp.Pages.OrderDetail.go({orderId: oid}); },
+    orderList: function() { MeiweiApp.Pages.OrderList.go(); MeiweiApp.history.active = MeiweiApp.Pages.OrderList; },
+    orderDetail: function(oid) { MeiweiApp.Pages.OrderDetail.go({orderId: oid}); MeiweiApp.history.active = MeiweiApp.Pages.OrderDetail; },
     
-    productPurchase: function() { MeiweiApp.Pages.ProductPurchase.go(); },
+    productPurchase: function() { MeiweiApp.Pages.ProductPurchase.go(); MeiweiApp.history.active = MeiweiApp.Pages.ProductPurchase; },
     
-    attending:function() { MeiweiApp.Pages.Attending.go(); }
+    attending:function() { MeiweiApp.Pages.Attending.go(); MeiweiApp.history.active = MeiweiApp.Pages.Attending; }
 }));
 
 MeiweiApp.goToPath = function(path) {
@@ -74,6 +74,9 @@ MeiweiApp.goBack = function() {
 		var prev = MeiweiApp.history.stack.pop();
 		MeiweiApp.history.active = prev;
 		prev.showPage();
+	} else {
+		MeiweiApp.history.active = MeiweiApp.Pages.Home;
+		MeiweiApp.Pages.Home.go();
 	}
 };
 

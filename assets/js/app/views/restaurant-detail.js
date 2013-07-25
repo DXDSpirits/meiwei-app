@@ -16,7 +16,7 @@ MeiweiApp.Views.RestaurantProfileBox = MeiweiApp.ModelView.extend({
 MeiweiApp.Views.RestaurantPictureList = MeiweiApp.CollectionView.extend({
 	ModelView: MeiweiApp.ModelView.extend({
 		tagName: 'img',
-		template: MeiweiApp.Templates['restaurant-picture'],
+		template: Mustache.compile('{{{ path }}}'),
 		render: function() {
 			this.$el.attr('src', this.template(this.model.toJSON()));
 			return this;
