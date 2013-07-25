@@ -1,11 +1,13 @@
 #view-home {
 	.recommend-flow {
 		@include flex-box($orient: vertical, $direction: reverse);
+		width: 100%;
 	}
 	
 	.recommend-list-item {
+		@include flex-box($pack: start);
 		$splitterWidth: 2px;
-		$itemHeight: 200px;
+		//$itemHeight: 200px;
 		$itemHeight: 125px !default;
 		height: $itemHeight;
 		width: 100%;
@@ -13,17 +15,43 @@
 		position: relative;
 		
 		img {
+			position: absolute;
+			z-index: -1;
+			top: 0;
+			left: 0;
 			width: 100%;
-			height: $itemHeight;
-			//height: 2 * $itemHeight - $splitterWidth !default;
+			height: 100%;
+			//height: $itemHeight;
+			//height: 2 * $itemHeight - $splitterWidth;
 			border-width: 0 0 $splitterWidth;
 			border-style: solid;
 			border-color: $brown;
+			-webkit-filter: blur(2px); //sepia(50%);
+			@include transition(-webkit-filter .36s ease-in-out);
+			-webkit-backface-visibility: hidden;
 		}
 		
-		&.hero + .recommend-list-item {
+		&.hero img {
+			-webkit-filter: blur(0);
+			-webkit-backface-visibility: hidden;
+			@include transition(-webkit-filter .36s ease-in-out);
+		}
+		
+		/*&.hero + .recommend-list-item {
 			opacity: 0;
 			@include transition(opacity .35s ease-in-out);
+		}*/
+		
+		> header {
+			color: $white;
+			text-shadow: 1px 1px 1px $brownDark;
+			text-align: center;
+			height: 45px;
+			max-width: 200px;
+			min-width: 100px;
+			h1 { @include text-overflow(); }
+			border: 13px solid transparent;
+			-webkit-border-image: url($tagImagePath) 13 stretch;
 		}
 	}
 }
