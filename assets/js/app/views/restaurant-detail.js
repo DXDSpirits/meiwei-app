@@ -57,7 +57,19 @@ MeiweiApp.Pages.RestaurantDetail = new (MeiweiApp.PageView.extend({
 				el: this.$('.restaurant-reviews')
 			})
 		}
-		_.bindAll(this, 'renderAll');
+		_.bindAll(this, 'renderAll', 'carousel');
+	},
+	carousel: function() {
+		var A = this.$('.restaurant-pictures img');
+		var L=A.length;
+		var i=0;
+		$(A[i]).addClass('front');
+		var timedCount = function() {
+			$(A[i]).removeClass('front');
+			$(A[(i+1)%L]).addClass('front');
+			i=(i+1)%L;
+		}
+		this.itv = setInterval(timedCount, 3000);
 	},
 	onClickRightBtn: function() { this.addFavorite(); },
 	addFavorite: function() {},
@@ -65,10 +77,14 @@ MeiweiApp.Pages.RestaurantDetail = new (MeiweiApp.PageView.extend({
 		this.$('> header h1').html(this.restaurant.get('fullname'));
 		this.views.pictures.collection.url = this.restaurant.get('pictures');
 		this.views.reviews.collection.url = this.restaurant.get('reviews');
+		var self = this;
 		$.when(
 			this.views.pictures.collection.fetch({reset: true}),
 			this.views.reviews.collection.fetch({reset: true})
-		).then(this.showPage);
+		).then(function() {
+			self.carousel();
+			self.showPage();
+		});
 	},
 	render: function(options) {
 		this.options = this.options || {};
