@@ -25,7 +25,12 @@
 (function(document) {
 	window.MWA = window.MWA || {};
 	MWA.fixBlurScroll = function(context) {
-		$(context).find('input').on('blur', function() { window.scrollTo(0, 0); });
-		$(context).find('textarea').on('blur', function() { window.scrollTo(0, 0); });
+		var inputs = $(context).find('input,textarea');
+		inputs.on('blur', function() {
+			window.scrollTo(0, 0);
+		});
+	};
+	MWA.preventWindowScroll = function() {
+		$(window).bind('touchmove', function(ev) { ev.preventDefault(); });
 	};
 })(document);

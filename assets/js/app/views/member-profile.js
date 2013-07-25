@@ -4,7 +4,6 @@ MeiweiApp.Views.MemberProfileForm = MeiweiApp.ModelView.extend({
 	template: MeiweiApp.Templates['member-profile-form'],
 	render: function() {
 		this.$el.html(this.template(this.model.toJSON()));
-		MWA.fixBlurScroll(this.$el);
 	},
 	updateProfile: function(e) {
 		e.preventDefault();

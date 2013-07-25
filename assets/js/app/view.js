@@ -69,6 +69,7 @@ MeiweiApp.PageView = Backbone.View.extend({
 		}
 	},
 	showPage: function() {
+		window.scrollTo(0, 0);
 		$("#apploader").addClass('hide');
 		if (this.$el && this.$el.hasClass('view-hidden')) {
 			var $curPage = $('.view:not(".view-hidden")');

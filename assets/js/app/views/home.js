@@ -42,7 +42,12 @@ MeiweiApp.Pages.Home = new (MeiweiApp.PageView.extend({
 	initScroller: function() {
 		if (this.scroller == null) {
 		    this.scroller = new IScroll(this.$('.scroll').selector, {
-				scrollX: false, scrollY: true, snap: true, snapStepY: 125
+				scrollX: false,
+				scrollY: true,
+				snap: true,
+				snapStepY: 125,
+				snapSpeed: 400,
+				click: true
 			});
 			this.scroller.on('scrollEnd', this.hero);
 		} else {
