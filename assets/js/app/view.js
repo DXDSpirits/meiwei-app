@@ -42,18 +42,17 @@ MeiweiApp.CollectionView = Backbone.View.extend({
 MeiweiApp.PageView = Backbone.View.extend({
 	initialize: function() {
 		this.views = {};
-		_.bindAll(this, 'initScroller', 'go', 'showPage', 'onClickLeftBtn', 'onClickRightBtn');
 		
 		new MBP.fastButton(this.$('.header-btn-left')[0], this.onClickLeftBtn);
 		new MBP.fastButton(this.$('.header-btn-right')[0], this.onClickRightBtn);
-		
-		this.lastPage = null;
 		
 		if (this.initPage != null) {
 			this.initPage();
 		}
 		_.bindAll(this, 'showPage', 'go', 'onClickLeftBtn', 'onClickRightBtn', 'initScroller');
 	},
+	onClickLeftBtn: function() { MeiweiApp.goBack(); },
+	onClickRightBtn: function() {},
 	initScroller: function() {
 		if (this.scroller == null) {
 		    this.scroller = new IScroll(this.$('.scroll').selector);
@@ -61,15 +60,7 @@ MeiweiApp.PageView = Backbone.View.extend({
 			this.scroller.refresh();
 		}
 	},
-	//onClickLeftBtn: function() { window.history.back(); },
-	onClickLeftBtn: function() { MeiweiApp.goBack(); },
-	onClickRightBtn: function() {},
-	timeout: null,
 	go: function() {
-		this.timeout = setTimeout(function() {
-			MeiweiApp.goTo('Home');
-			alert('There seems to be problem with your internet connection?');
-		}, 5000);
 		$("#apploader").removeClass('hide');
 		if (_.isEmpty(arguments)) {
 			this.render({});
@@ -78,7 +69,7 @@ MeiweiApp.PageView = Backbone.View.extend({
 		}
 	},
 	showPage: function() {
-		clearTimeout(this.timeout);
+		window.scrollTo(0, 0);
 		$("#apploader").addClass('hide');
 		if (this.$el && this.$el.hasClass('view-hidden')) {
 			var $curPage = $('.view:not(".view-hidden")');
@@ -87,7 +78,6 @@ MeiweiApp.PageView = Backbone.View.extend({
 		}
 	}
 });
-
 
 /*var $me = this.$el;
 $me.on('webkitAnimationEnd', function(e) {
@@ -98,3 +88,10 @@ $me.on('webkitAnimationEnd', function(e) {
 		$me.removeClass('view-showing');
 	}
 });*/
+
+/*this.timeout = setTimeout(function() {
+	MeiweiApp.goTo('Home');
+	alert('There seems to be problem with your internet connection?');
+}, 5000);*/
+
+//clearTimeout(this.timeout);

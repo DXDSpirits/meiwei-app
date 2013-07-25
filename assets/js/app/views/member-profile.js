@@ -15,20 +15,7 @@ MeiweiApp.Views.MemberProfileForm = MeiweiApp.ModelView.extend({
 			birthday: this.$('input[name=birthday]').val(),
 			anniversary: this.$('input[name=anniversary]').val()
 		});
-		MeiweiApp.me.profile.save();
-	}
-});
-
-MeiweiApp.Views.MemberAvatarForm = MeiweiApp.ModelView.extend({
-	events: { 'submit': 'uploadAvatar' },
-	template: MeiweiApp.Templates['member-profile-avatar-form'],
-	render: function() {
-		this.$el.html(this.template(this.model.toJSON()));
-	},
-	uploadAvatar: function(e) {
-		e.preventDefault();
-		avatar = this.$('input[name=avatar]').val();
-		console.log(this.$el.serialize())
+		MeiweiApp.me.profile.save({}, { success: MeiweiApp.goBack });
 	}
 });
 
@@ -38,13 +25,9 @@ MeiweiApp.Pages.MemberProfile = new (MeiweiApp.PageView.extend({
 		this.views = {
 			profileForm: new MeiweiApp.Views.MemberProfileForm({
 				model: MeiweiApp.me.profile,
-				el: this.$('.scroll .scroll-inner div:nth-child(1)')
-			}),
-			avatarForm: new MeiweiApp.Views.MemberAvatarForm({
-				model: MeiweiApp.me.profile,
-				el: this.$('.scroll .scroll-inner div:nth-child(2)')
+				el: this.$('.scroll .scroll-inner')
 			})
-		}
+		};
 	},
 	switchGender: function() {
 		var s = this.$('.switch-gender');

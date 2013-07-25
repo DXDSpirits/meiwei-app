@@ -21,7 +21,7 @@ MeiweiApp.Pages.Attending = new (MeiweiApp.PageView.extend({
 	renderPages: function() {
 		var items = this.$('.carousel > .carousel-inner > .carousel-item');
 		this.$('.carousel > .carousel-inner').css('width', items.length * $(items[0]).outerWidth());
-		new IScroll(this.$('.carousel').selector, {
+		this.scroller = new IScroll(this.$('.carousel').selector, {
 			scrollX: true,
 			scrollY: false,
 			momentum: false,

@@ -30,7 +30,6 @@ MeiweiApp.Views.RestaurantOrderForm = MeiweiApp.View.extend({
 			restaurant: this.restaurant.toJSON(),
 			order: pending
 		}));
-		
 		MWA.fixBlurScroll(this.$el);
 	}
 });

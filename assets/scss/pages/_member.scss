@@ -37,59 +37,73 @@
 }
 
 #view-member-profile {
-    input {
-    	border-right: 0px;
-    }
-    label {
-    	padding: 5px;
-    }
-    .inline-group {
-    	padding-right:5px;
-    }
-	.member-profile-form {
-	    //font-size:10px;
-		button {
-			width: 100%;
-			margin: 0 auto;
-		}
+	.switch-gender {
+		@include flexible(2);
 	}
-	.scroll-inner {
-		padding: 50px 50px 0;
+	form {
+	    width: 90%;
+	    margin-top: 30px;
 	}
-	.profile {
-	    width:100%;
-	    height:100%;
+	input[name=nickname] {
+		text-align: center;
+	}
+	button {
+		width: 100%;
+		margin: 0 auto;
 	}
 }
 
 #view-member-center {
 	.favorite-resto-carousel {
 		height: 200px - 45px;
+		width: 100%;
+		position: relative;
+		img {
+			position: absolute;
+			z-index: -1;
+			top: 0;
+			left: 0;
+	        width: 100%;
+	        height: 200px;
+		    opacity: 0;
+		    @include transition(opacity 2s ease-in-out);
+		    &.front {
+		   		opacity: 1;
+		   		@include transition(opacity 2s ease-in-out);
+		   	}
+		}
 	}
+	
 	.member-profile-box {
 		font-size: $fontSizeMini;
-		width: 100%;
-		height: 90px;
+		@include size(90px, 100%);
+		margin-bottom: 10px;
+		@include clearfix();
 		& > div {
 			float: left;
 			height: 90px;
 		}
-		@include clearfix();
 		.avatar {
 			@include square(90px);
 			border: 2px solid $brown;
 			margin: 0 9%;
+			background-color: $white;
 		}
-		p:first-child {
-			margin-top: 10px;
+		h1 {
+			color: $white;
+			margin: 13px 0;
+			font-size: $fontSizeLarge;
+		}
+		p {
+			margin: -5px 0;
 		}
 	}
 	
 	.scroll-inner {
 		$listItemHeight: 45px;
 		$listItemWidth: 93.75%;
-		$buttomWidth: 62.5%;
-		$listPadding: ($listItemWidth - $buttomWidth) / 2;
+		$buttonWidth: 62.5%;
+		$listPadding: ($listItemWidth - $buttonWidth) / 2;
 		ul {
 			width: $listItemWidth;
 		}
@@ -100,7 +114,7 @@
 			line-height: $listItemHeight;
 			text-align: center;
 			position: relative;
-			background: transparent url($gradientShadowPath) repeat-x bottom;
+			background: transparent url($gradientShadowPathR) no-repeat top;
 			@include background-size(100% $listItemHeight);
 		}
 		li::after {
@@ -109,9 +123,12 @@
 			right: $listPadding;
 			font-weight: bold;
 		}
-		button {
-			width: $buttomWidth;
+		.logout-button {
+			background: transparent url($gradientShadowPathR) no-repeat top;
+			@include background-size(100% $listItemHeight);
+			width: $listItemWidth;
+			padding: 10px $listPadding;
+			button { width: 100%; }
 		}
 	}
 }
-
