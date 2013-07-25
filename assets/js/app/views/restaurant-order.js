@@ -30,6 +30,7 @@ MeiweiApp.Views.RestaurantOrderForm = MeiweiApp.View.extend({
 			restaurant: this.restaurant.toJSON(),
 			order: pending
 		}));
+		
 		MWA.fixBlurScroll(this.$el);
 	}
 });
@@ -69,7 +70,7 @@ MeiweiApp.Pages.RestaurantOrder = new (MeiweiApp.PageView.extend({
 	selectSeat: function() {
 		MeiweiApp.goTo('RestaurantFloorplans', {
 			restaurantId: this.restaurant.id
-		});
+		});	
 	},
 	selectProduct: function() {
 		MeiweiApp.goTo('ProductPurchase');
@@ -95,6 +96,7 @@ MeiweiApp.Pages.RestaurantOrder = new (MeiweiApp.PageView.extend({
 		    personnum: this.$('input[name=personnum]').val(),
 		    contactname: this.$('input[name=contactname]').val() + this.$('input[name=contactgender]').val(),
 		    contactphone: this.$('input[name=contactphone]').val(),
+		    tables: this.$("input[name=tables]").val(),
 		    other: this.$('textarea[name=other]').text()
 		});
 		newOrder.save({}, {error: function(model, xhr, options) {
@@ -107,6 +109,13 @@ MeiweiApp.Pages.RestaurantOrder = new (MeiweiApp.PageView.extend({
 		this.$('.restaurant-info h1').html(this.restaurant.get('fullname'));
 		this.views.orderForm.render();
 		this.views.productCart.render();
+		
+		var tables ;
+		this.$("input[name=tables]").val(tables);
+		if(tables && tables.length>0){
+			this.$(".floorplan-select > header span").text("(已选)");
+		}
+		
 		this.showPage();
 	},
 	render: function(options) {
