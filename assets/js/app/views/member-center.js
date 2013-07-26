@@ -53,6 +53,9 @@ MeiweiApp.Pages.MemberCenter = new (MeiweiApp.PageView.extend({
 		}
 	},
 	carousel: function() {
+		if (this.itv) {
+			clearInterval(this.itv);
+		}
 		var A = this.$('.favorite-resto-carousel img');
 		var L=A.length;
 		var i=0;

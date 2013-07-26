@@ -21,6 +21,7 @@ MeiweiApp.Pages.Home = new (MeiweiApp.PageView.extend({
 	onClickRightBtn: function() { MeiweiApp.goTo('Attending'); },
 	events: { 'click header input': 'gotoSearch' },
 	initPage: function() {
+		_.bindAll(this, 'initScroller', 'hero');
 		this.recommend = new MeiweiApp.Models.Recommend({id: 2});
 		this.views = {
 			recommendItems: new MeiweiApp.Views.RecommendItems({
@@ -29,7 +30,6 @@ MeiweiApp.Pages.Home = new (MeiweiApp.PageView.extend({
 			})
 		};
 		//this.recommend.items.on('reset', this.initScroller, this);
-		_.bindAll(this, 'initScroller', 'hero');
 	},
 	gotoSearch: function() { MeiweiApp.goTo('RestaurantSearch'); },
 	hero: function() {
@@ -45,10 +45,11 @@ MeiweiApp.Pages.Home = new (MeiweiApp.PageView.extend({
 				scrollX: false,
 				scrollY: true,
 				snap: true,
-				snapStepY: 125,
+				snapStepY: 300,
 				snapSpeed: 400,
 				click: true
 			});
+			this.hero();
 			this.scroller.on('scrollEnd', this.hero);
 		} else {
 			this.scroller.refresh();

@@ -84,6 +84,15 @@
 		   		@include transition(opacity 2s ease-in-out);
 		   	}
 		}
+		&::after {
+			content: "";
+			display: block;
+			position: absolute;
+			bottom: 0;
+			@include size(55px, 100%);
+			border: 1px solid transparent;
+			-webkit-border-image: url($tagImagePath) 13 stretch;
+		}
 	}
 	
 	.restaurant-profile {

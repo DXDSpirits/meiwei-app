@@ -10,6 +10,7 @@
 		left: 0;
 		@include square(89px);
 	}
+	h1 { @include text-overflow(); }
 	p { font-size: $fontSizeMini; }
 }
 

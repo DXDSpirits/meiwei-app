@@ -7,7 +7,7 @@
 	.recommend-list-item {
 		@include flex-box($pack: start);
 		$splitterWidth: 2px;
-		//$itemHeight: 200px;
+		$itemHeight: 300px;
 		$itemHeight: 125px !default;
 		height: $itemHeight;
 		width: 100%;
@@ -26,15 +26,32 @@
 			border-width: 0 0 $splitterWidth;
 			border-style: solid;
 			border-color: $brown;
-			-webkit-filter: blur(2px); //sepia(50%);
+			-webkit-filter: blur(3px); //sepia(50%);
 			-webkit-transition: -webkit-filter .36s ease-in-out;
-			-webkit-backface-visibility: hidden;
+			@include backface-visibility(hidden);
 		}
 		
 		&.hero img {
 			-webkit-filter: blur(0);
 			-webkit-transition: -webkit-filter .36s ease-in-out;
-			-webkit-backface-visibility: hidden;
+			@include backface-visibility(hidden);
+		}
+		
+		article {
+			color: $white;
+			width: 100%;
+			h1 { @include text-overflow(); font-size: 20px; }
+			p { font-size: $fontSizeMini; }
+			border: 1px solid transparent;
+			padding: 20px 17px 5px;
+			-webkit-border-image: url($tagImagePath) 13 stretch;
+			opacity: 0;
+			@include translate3d(0, -45px, 0);
+			@include transition(all .35s ease-in-out);
+		}
+		&.hero article {
+			opacity: 1;
+			@include transition(all .35s ease-in-out);
 		}
 		
 		/*&.hero + .recommend-list-item {
@@ -52,6 +69,15 @@
 			h1 { @include text-overflow(); }
 			border: 13px solid transparent;
 			-webkit-border-image: url($tagImagePath) 13 stretch;
+			@include translate3d(0, 0, 0);
+			@include transition(all .35s ease-in-out);
+		}
+		
+		&.hero > header {
+			@include translate3d(0, -45px, 0);
+			@include transition(all .35s ease-in-out);
 		}
 	}
 }
+
+@include keyframes-transform(slideinfromleft, translate3d(-100%, 0, 0), translate3d(0, 0, 0));

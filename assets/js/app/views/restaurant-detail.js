@@ -60,6 +60,9 @@ MeiweiApp.Pages.RestaurantDetail = new (MeiweiApp.PageView.extend({
 		_.bindAll(this, 'renderAll', 'carousel');
 	},
 	carousel: function() {
+		if (this.itv) {
+			clearInterval(this.itv);
+		}
 		var A = this.$('.restaurant-pictures img');
 		var L=A.length;
 		var i=0;
