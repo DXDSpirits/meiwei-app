@@ -6,6 +6,10 @@ MeiweiApp.Views.ProductList = MeiweiApp.CollectionView.extend({
 		events: { "click .carousel-item": "triggerSelect" },
 		template: MeiweiApp.Templates['product-carousel'],
 		render: function() {
+			this.model.items.forEach(function(item) {
+				var findItem = MeiweiApp.ProductCart.where({id: item.id});
+				item.set({selected: !_.isEmpty(findItem)});
+			}, this);
 			this.$el.html(this.template({
 				product: this.model.toJSON(),
 				items: this.model.items.toJSON()
@@ -13,14 +17,14 @@ MeiweiApp.Views.ProductList = MeiweiApp.CollectionView.extend({
 			return this;
 		},
 		triggerSelect: function(e) {
-			var id = $(e.currentTarget).attr('data-item');
+			var $el = $(e.currentTarget);
+			var id = $el.attr('data-item');
 			var item = this.model.items.get(id);
-			var itemView = e.currentTarget;
-			if ($(itemView).hasClass('selected')) {
-				$(itemView).removeClass('selected');
+			if ($el.hasClass('selected')) {
+				$el.removeClass('selected');
 				MeiweiApp.ProductCart.remove(item);
 			} else {
-				$(itemView).addClass('selected');
+				$el.addClass('selected');
 				MeiweiApp.ProductCart.add(item);
 			}
 		}
@@ -49,7 +53,8 @@ MeiweiApp.Pages.ProductPurchase = new (MeiweiApp.PageView.extend({
 				scrollY: false,
 				momentum: false,
 				snap: true,
-				snapSpeed: 400
+				snapSpeed: 400,
+				click: true
 			});
 		});
 	},

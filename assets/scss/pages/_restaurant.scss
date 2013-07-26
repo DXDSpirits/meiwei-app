@@ -198,14 +198,15 @@
 	}
 	
 	.order-info, .contact-info, .floorplan-select, .product-select {
-		width: 70%;
+		width: 100%;
+		padding: 0 15%;
 		> header {
 			height: 40px;
 			line-height: 40px;
 			text-align: center;
 			font-size: $fontSizeSmall;
 			position: relative;
-			a::after{
+			a::after {
 	            content: ">";
 				position: absolute;
 				right: 0;
