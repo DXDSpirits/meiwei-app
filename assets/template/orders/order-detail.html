@@ -55,9 +55,16 @@
 </div>
 <div class="section-ex">
 	<div>
-		<p class="title">已选增值服务(2项)</p>
+		<p class="title">已选增值服务</p>
 	</div>
 	<div class="ex-pictures">
-		<img src="" />
+		{{ #product_items }}
+		<div class="product-item">
+			<img src="{{ picture }}" />
+		</div>
+		{{ /product_items }}
 	</div>
+	<div class="delete-order">
+    <button class="btn-inverse btn-cancel">删除订单</button>
+</div>
 </div>

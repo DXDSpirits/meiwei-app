@@ -17,10 +17,11 @@
 		position: relative;
 		overflow: hidden;
 		> .tag {
-			display: none;
+			display: block;
 			position: absolute;
 			bottom: 0;
-			width: 100%;
+			left:6%;
+			width: 88%;
 			min-height: 2 * ($fontSizeMini + 2px);
 			background-color: $brown;
 			opacity: 0.9;

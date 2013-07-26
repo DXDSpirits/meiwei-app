@@ -2,9 +2,11 @@ MeiweiApp.Views.ProductCartItemList = MeiweiApp.CollectionView.extend({
 	ModelView: MeiweiApp.ModelView.extend({
 		tagName: "div",
 		className: "product-cart-item",
-		events: { "click .item-delete": "triggerDelete" },
+		events: { "click .delete-button": "triggerDelete" },
 		template: Mustache.compile('<img src="{{ picture }}" alt=""><div class="delete-button">移除</div>'),
-		triggerDelete: function(e) { }
+		triggerDelete: function() {
+			MeiweiApp.ProductCart.remove(this.model);
+		}
 	})
 });
 
@@ -101,6 +103,9 @@ MeiweiApp.Pages.RestaurantOrder = new (MeiweiApp.PageView.extend({
 	submitOrder: function(e) {
 		e.preventDefault();
 		var newOrder = new MeiweiApp.Models.Order();
+		var products = _.reduce(MeiweiApp.ProductCart.models, function(products, item){ 
+			return products + item.id + ',';
+		}, '');
 		newOrder.set({
 		    member: MeiweiApp.me.id,
 		    restaurant: this.restaurant.id,
@@ -109,14 +114,19 @@ MeiweiApp.Pages.RestaurantOrder = new (MeiweiApp.PageView.extend({
 		    personnum: this.$('input[name=personnum]').val(),
 		    contactname: this.$('input[name=contactname]').val() + this.$('input[name=contactgender]').val(),
 		    contactphone: this.$('input[name=contactphone]').val(),
-		    tables: this.options.tables,		
-		    other: this.$('textarea[name=other]').text()	
+		    tables: this.options.tables,
+		    other: this.$('textarea[name=other]').text(),
+		    products: products.slice(0, -1)
 		});
-		console.log(this.options.tables + "aaaaa")
-		newOrder.save({}, {error: function(model, xhr, options) {
-			var errors = JSON.parse(xhr.responseText);
-			console.log("Failed submitting new order. " + xhr.responseText);
-		}});
+		newOrder.save({}, {
+			error: function(model, xhr, options) {
+				var errors = JSON.parse(xhr.responseText);
+				console.log("Failed submitting new order. " + xhr.responseText);
+			},
+			success: function(model, xhr, options) {
+				MeiweiApp.goTo('OrderList');
+			}
+		});
 	},
 	renderOrderForm: function(model, response, options) {
 		this.$('.restaurant-info img').attr('src', this.restaurant.get('frontpic'));

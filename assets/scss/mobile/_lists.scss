@@ -29,6 +29,11 @@
 .order-list-item {
 	@extend %thumbnail-list-item;
 	@include text-overflow();
+	@include flex-box($orient:horizontal);
+	> .order-list-detail {
+		@include flexible();
+		width:0;
+	}
 }
 
 .simple-list-item {

@@ -64,9 +64,11 @@ MeiweiApp.goToPath = function(path) {
 
 MeiweiApp.goTo = function(pageName, options) {
 	var next = MeiweiApp.Pages[pageName];
-	MeiweiApp.history.stack.push(MeiweiApp.history.active);
-	MeiweiApp.history.active = next;
-	next.go(options);
+	if (next != MeiweiApp.history.active) {
+		MeiweiApp.history.stack.push(MeiweiApp.history.active);
+		MeiweiApp.history.active = next;
+		next.go(options);
+	}
 };
 
 MeiweiApp.goBack = function() {
@@ -83,10 +85,10 @@ MeiweiApp.goBack = function() {
 $.ajaxSetup({
     statusCode : {
         401: function() {
-            MeiweiApp.Pages.MemberLogin.go();
+            MeiweiApp.goTo('MemberLogin', {ref: MeiweiApp.history.active});
         },
         403: function() {
-            MeiweiApp.Pages.MemberLogin.go();
+            MeiweiApp.goTo('MemberLogin', {ref: MeiweiApp.history.active});
         }
     }
 });

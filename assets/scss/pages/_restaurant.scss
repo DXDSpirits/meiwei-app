@@ -137,12 +137,8 @@
 		
 	}
 	
-	.icon-favorite {
-		@include scale(1);
-		-webkit-transition: -webkit-transform .35s ease-in-out;
-		&.suceed {
-			@include scale(1.5);
-		}
+	.icon-favorite.suceed {
+		@include animation(jump .35s ease-in-out);
 	}
 	
 	.restaurant-reviews {
@@ -164,7 +160,11 @@
 
 }
 
-//@include keyframes-transform(enlarge, scale(1.5), scale(1));
+@-webkit-keyframes jump {
+	from { -webkit-transform: scale(1); }
+	30% { -webkit-transform: scale(1.5); }
+	to { -webkit-transform: scale(1); }
+}
 
 #view-restaurant-order {
 	.restaurant-info {
@@ -198,14 +198,15 @@
 	}
 	
 	.order-info, .contact-info, .floorplan-select, .product-select {
-		width: 70%;
+		width: 100%;
+		padding: 0 15%;
 		> header {
 			height: 40px;
 			line-height: 40px;
 			text-align: center;
 			font-size: $fontSizeSmall;
 			position: relative;
-			a::after{
+			a::after {
 	            content: ">";
 				position: absolute;
 				right: 0;

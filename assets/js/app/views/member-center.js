@@ -10,7 +10,7 @@ MeiweiApp.Views.MemberProfileBox = MeiweiApp.ModelView.extend({
 MeiweiApp.Views.FavoriteRestoCarousel = MeiweiApp.CollectionView.extend({
 	ModelView: MeiweiApp.ModelView.extend({
 		tagName: 'img',
-		template: Mustache.compile('{{{ restaurant.frontpic }}}'),
+		template: Mustache.compile('{{{ restaurantinfor.frontpic }}}'),
 		render: function() {
 			this.$el.attr('src', this.template(this.model.toJSON()));
 			return this;
@@ -26,14 +26,19 @@ MeiweiApp.Pages.MemberCenter = new (MeiweiApp.PageView.extend({
 		'click .member-center-nav li:nth-child(3)': 'gotoMyCredits',
 		'click .member-center-nav li:nth-child(4)': 'gotoMyFavorites',
 		'click .member-center-nav li:nth-child(5)': 'gotoMyContacts',
-		'click .member-center-nav li:nth-child(6)': 'gotoViewProducts'
+		'click .member-center-nav li:nth-child(6)': 'gotoViewProducts',
+		'click .logout-button': 'logout'
 	},
-	gotoMyProfile:      function() { MeiweiApp.goTo('MemberProfile'); },
+	gotoMyProfile:    function() { MeiweiApp.goTo('MemberProfile'); },
 	gotoMyOrder:      function() { MeiweiApp.goTo('OrderList'); },
 	gotoMyCredits:    function() { MeiweiApp.goTo('MemberCredits'); },
 	gotoMyFavorites:  function() { MeiweiApp.goTo('MemberFavorites'); },
 	gotoMyContacts:   function() { MeiweiApp.goTo('MemberContacts'); },
 	gotoViewProducts: function() { MeiweiApp.goTo('ProductPurchase'); },
+	logout:           function() {
+		MeiweiApp.me.logout();
+		MeiweiApp.goTo('Home');
+	},
 	initPage: function() {
 		this.favorites = new MeiweiApp.Collections.Favorites();
 		this.views = {

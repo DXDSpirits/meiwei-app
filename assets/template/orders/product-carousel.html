@@ -6,7 +6,7 @@
 	<div class="carousel" data-item="{{ product.id }}">
 		<div class="carousel-inner">
 			{{ #items }}
-			<div class="carousel-item" data-item="{{ id }}">
+			<div class="carousel-item {{ #selected }}selected{{ /selected }}" data-item="{{ id }}">
 				<div class="tag">
 					<p>￥{{ price }}</p>
 					<p>{{name}} {{ model }}</p>
