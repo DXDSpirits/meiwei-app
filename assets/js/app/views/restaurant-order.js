@@ -36,6 +36,8 @@ MeiweiApp.Views.RestaurantOrderForm = MeiweiApp.View.extend({
 	}
 });
 
+
+
 MeiweiApp.Pages.RestaurantOrder = new (MeiweiApp.PageView.extend({
 	events: {
 		'click .contact-info > header': 'selectContact',
@@ -46,6 +48,7 @@ MeiweiApp.Pages.RestaurantOrder = new (MeiweiApp.PageView.extend({
 	},
 	initPage: function() {
 		this.restaurant = new MeiweiApp.Models.Restaurant();
+		this.floorplans = new MeiweiApp.Collections.Floorplans();
 		this.views = {
 			orderForm: new MeiweiApp.Views.RestaurantOrderForm({
 				model: this.restaurant,
@@ -69,8 +72,19 @@ MeiweiApp.Pages.RestaurantOrder = new (MeiweiApp.PageView.extend({
 		this.$('input[name=contactphone]').val(contactphone);
 	},
 	selectSeat: function() {
+		this.floorplans.reset(this.restaurant.get('floorplans'));
+		this.floorplans.forEach( function(model){
+			model.set( "selected" , this.options.tables);
+			model.on('selected',function(){
+				var tables = arguments[0];
+				this.options.tables = JSON.stringify( $.extend(($.parseJSON(this.options.tables || null) || {}) , $.parseJSON(tables)) ) ;
+				if(tables && tables.length>0){
+					this.$(".floorplan-select > header span").text("(已选)");
+				}
+			}, this);
+		} , this);
 		MeiweiApp.goTo('RestaurantFloorplans', {
-			restaurantId: this.restaurant.id
+			floorplans: this.floorplans,
 		});	
 	},
 	selectProduct: function() {
@@ -100,8 +114,8 @@ MeiweiApp.Pages.RestaurantOrder = new (MeiweiApp.PageView.extend({
 		    personnum: this.$('input[name=personnum]').val(),
 		    contactname: this.$('input[name=contactname]').val() + this.$('input[name=contactgender]').val(),
 		    contactphone: this.$('input[name=contactphone]').val(),
+		    tables: this.options.tables,
 		    other: this.$('textarea[name=other]').text(),
-		    tables: this.$("input[name=tables]").val(),
 		    products: products.slice(0, -1)
 		});
 		newOrder.save({}, {
@@ -119,13 +133,6 @@ MeiweiApp.Pages.RestaurantOrder = new (MeiweiApp.PageView.extend({
 		this.$('.restaurant-info h1').html(this.restaurant.get('fullname'));
 		this.views.orderForm.render();
 		this.views.productCart.render();
-		
-		var tables ;
-		this.$("input[name=tables]").val(tables);
-		if(tables && tables.length>0){
-			this.$(".floorplan-select > header span").text("(已选)");
-		}
-		
 		this.showPage();
 	},
 	render: function(options) {
