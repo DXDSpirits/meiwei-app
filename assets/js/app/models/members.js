@@ -47,6 +47,7 @@ MeiweiApp.me = new (MeiweiApp.Models.Member.extend({
 	},
 	login: function(username, password, callback) {
 		Backbone.BasicAuth.set(username, password);
+		this.trigger('login');
 	},
 	logout: function(callback) {
 		Backbone.BasicAuth.clear();

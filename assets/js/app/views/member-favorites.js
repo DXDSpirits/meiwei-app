@@ -6,7 +6,7 @@ MeiweiApp.Views.FavoriteList = MeiweiApp.CollectionView.extend({
 		className: 'restaurant-list-item',
 		viewRestaurant: function() {
 			MeiweiApp.goTo('RestaurantDetail', {
-				restaurantId: this.model.get('restaurant').id
+				restaurantId: this.model.get('restaurant')
 			});
 		}
 	})
