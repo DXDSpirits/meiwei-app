@@ -136,16 +136,16 @@
 #view-member-favorites {
 	
 	.restaurant-list-item {
-		@include flex-box($orient:horizontal);
-	    > .order-list-detail {
-		    @include flexible();
-		    width:60%;
-		    overflow:hidden;
-	      }
-	    > .order-cancel {
-		    width:50px;
-		    @include flex-box($align:end);
-		    @include flexible();
-	      }
+		padding: 9px 30px 9px 99px;
+		section {
+			@include square(100%);
+		}
+	    > .delete-button {
+	    	padding: 32px 2px;
+			width: 30px;
+			position: absolute;
+			right: 0;
+			top: 0;
+	    }
 	}
 }
