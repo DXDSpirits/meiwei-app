@@ -10,7 +10,7 @@ MeiweiApp.Views.MemberProfileBox = MeiweiApp.ModelView.extend({
 MeiweiApp.Views.FavoriteRestoCarousel = MeiweiApp.CollectionView.extend({
 	ModelView: MeiweiApp.ModelView.extend({
 		tagName: 'img',
-		template: Mustache.compile('{{{ restaurant.frontpic }}}'),
+		template: Mustache.compile('{{{ restaurantinfor.frontpic }}}'),
 		render: function() {
 			this.$el.attr('src', this.template(this.model.toJSON()));
 			return this;
