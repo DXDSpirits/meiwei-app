@@ -42,14 +42,15 @@ MeiweiApp.CollectionView = Backbone.View.extend({
 MeiweiApp.PageView = Backbone.View.extend({
 	initialize: function() {
 		this.views = {};
+		_.bindAll(this, 'showPage', 'go', 'onClickLeftBtn', 'onClickRightBtn', 'initScroller');
 		
+		//These 2 lines should be after bindAll, in order to bind ClickBtn events propertly
 		new MBP.fastButton(this.$('.header-btn-left')[0], this.onClickLeftBtn);
 		new MBP.fastButton(this.$('.header-btn-right')[0], this.onClickRightBtn);
 		
 		if (this.initPage != null) {
 			this.initPage();
 		}
-		_.bindAll(this, 'showPage', 'go', 'onClickLeftBtn', 'onClickRightBtn', 'initScroller');
 	},
 	onClickLeftBtn: function() { MeiweiApp.goBack(); },
 	onClickRightBtn: function() {},
