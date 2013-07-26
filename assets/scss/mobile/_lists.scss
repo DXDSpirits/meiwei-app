@@ -29,6 +29,17 @@
 .order-list-item {
 	@extend %thumbnail-list-item;
 	@include text-overflow();
+	@include flex-box($orient:horizontal);
+	> .order-list-detail {
+		@include flexible();
+		width:60%;
+		overflow:hidden;
+	}
+	> .order-cancel {
+		width:50px;
+		@include flex-box($align:end);
+		@include flexible();
+	}
 }
 
 .simple-list-item {

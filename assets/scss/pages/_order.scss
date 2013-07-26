@@ -55,6 +55,15 @@
 			}
 		}
 	}
+	.delete-order {
+    	@include flex-box();
+    	padding:15px;
+    }
+    .btn-cancel {
+    	@include flexible();
+    	width:90%;
+    	
+    }
 }
 
 #view-product-purchase {
