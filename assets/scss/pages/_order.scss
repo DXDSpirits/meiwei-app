@@ -47,6 +47,15 @@
 			img { max-width: 60px; float: left; padding: 5px 5px 5px 0px; }
 		}
 	}
+	.delete-order {
+    	@include flex-box();
+    	padding:15px;
+    }
+    .btn-cancel {
+    	@include flexible();
+    	width:90%;
+    	
+    }
 }
 
 #view-product-purchase {

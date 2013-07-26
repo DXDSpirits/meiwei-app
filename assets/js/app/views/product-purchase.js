@@ -15,11 +15,12 @@ MeiweiApp.Views.ProductList = MeiweiApp.CollectionView.extend({
 		triggerSelect: function(e) {
 			var id = $(e.currentTarget).attr('data-item');
 			var item = this.model.items.get(id);
-			if (this.$el.hasClass('selected')) {
-				this.$el.removeClass('selected');
+			var itemView = e.currentTarget;
+			if ($(itemView).hasClass('selected')) {
+				$(itemView).removeClass('selected');
 				MeiweiApp.ProductCart.remove(item);
 			} else {
-				this.$el.addClass('selected');
+				$(itemView).addClass('selected');
 				MeiweiApp.ProductCart.add(item);
 			}
 		}
