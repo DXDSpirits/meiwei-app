@@ -42,9 +42,17 @@
 		border-style: solid;
 		border-color: $brownLight;
 		padding: 5px;
-		
 		.ex-pictures {
-			img { max-width: 60px; float: left; padding: 5px 5px 5px 0px; }
+			width: 100%;
+			@include clearfix();
+			.product-item {
+				width: 30%;
+				height: 100px;
+				float: left;
+				border: 1px solid $brown;
+				margin: 1.666667%;
+				img { @include square(100%); @include center-block(); }
+			}
 		}
 	}
 }
@@ -59,6 +67,16 @@
 		text-align: center;
 		p { font-size: $fontSizeMini; }
 		$carouselWidth: 150px;
+		.carousel-item {
+			position: relative;
+		}
+		.carousel-item.selected::after {
+			content: "";
+			@include icon-offset(5, 5);
+			position: absolute;
+			top: 1px;
+			right: 5px;
+		}
 	}
 	.viewport {
 		@include size(164px, 250px);
