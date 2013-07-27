@@ -63,9 +63,7 @@ MeiweiApp.Pages.MemberContacts = new(MeiweiApp.PageView.extend({
 			success: this.bindContactSelect
 		});
 	},
-	render: function(options) {
-		this.options = this.options || {};
-		_.extend(this.options, options);
+	render: function() {
 		this.getOnlineContacts();
 		this.showPage();
 	}

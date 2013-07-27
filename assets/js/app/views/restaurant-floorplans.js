@@ -153,10 +153,8 @@ MeiweiApp.Pages.RestaurantFloorplans = new (MeiweiApp.PageView.extend({
 			preventDefault: false
 		});
 	},
-	render: function(options) {
-		this.options = this.options || {};
-		_.extend(this.options, options);
-		this.floorplans.reset(options.floorplans.models);
+	render: function() {
+		this.floorplans.reset(this.options.floorplans.models);
 		this.views.floorplanNav.render();
 		this.views.floorplanList.render();
 		this.renderFloorplans();

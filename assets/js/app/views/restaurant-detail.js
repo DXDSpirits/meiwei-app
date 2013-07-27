@@ -92,15 +92,15 @@ MeiweiApp.Pages.RestaurantDetail = new (MeiweiApp.PageView.extend({
 		//this.carousel();
 		this.showPage();
 	},
-	render: function(options) {
-		this.options = this.options || {};
-		_.extend(this.options, options);
-		if (options.restaurant) {
-			this.restaurant.set(options.restaurant);
+	render: function() {
+		if (this.options.restaurant) {
+			this.restaurant.set(this.options.restaurant);
+			this.options.restaurant = null;
 			this.renderAll();
-		} else if (options.restaurantId) {
+		} else if (this.options.restaurantId) {
 			this.restaurant.clear();
-			this.restaurant.set({id: options.restaurantId});
+			this.restaurant.set({id: this.options.restaurantId});
+			this.options.restaurantId = null;
 			this.restaurant.fetch({ success: this.renderAll })
 		}
 	}

@@ -15,7 +15,7 @@ MeiweiApp.Router = new (Backbone.Router.extend({
 		this.route(/^restaurant\/(\d+)$/, 'restaurantDetail');
 		this.route(/^restaurant\/(\d+)\/order$/, 'restaurantOrder');
 		this.route('restaurant/search', 'restaurantSearch');
-		this.route(/^restaurant\/(\d+)\/floorplans$/, 'restaurantFloorplans');
+		//this.route(/^restaurant\/(\d+)\/floorplans$/, 'restaurantFloorplans');
 		
 		this.route('member', 'memberCenter');
 		this.route('member/login', 'memberLogin');
@@ -41,7 +41,7 @@ MeiweiApp.Router = new (Backbone.Router.extend({
 	restaurantDetail: function(rid) { MeiweiApp.Pages.RestaurantDetail.go({restaurantId: rid}); MeiweiApp.history.active = MeiweiApp.Pages.RestaurantDetail; },
 	restaurantSearch: function() { MeiweiApp.Pages.RestaurantSearch.go(); MeiweiApp.history.active = MeiweiApp.Pages.RestaurantSearch; },
 	restaurantOrder: function(rid) { MeiweiApp.Pages.RestaurantOrder.go({restaurantId: rid}); MeiweiApp.history.active = MeiweiApp.Pages.RestaurantOrder; },
-	restaurantFloorplans: function(rid) { MeiweiApp.Pages.RestaurantFloorplans.go({restaurantId: rid}); MeiweiApp.history.active = MeiweiApp.Pages.RestaurantFloorplans; },
+	//restaurantFloorplans: function(rid) { MeiweiApp.Pages.RestaurantFloorplans.go(); MeiweiApp.history.active = MeiweiApp.Pages.RestaurantFloorplans; },
 	
 	memberCenter: function() { MeiweiApp.Pages.MemberCenter.go(); MeiweiApp.history.active = MeiweiApp.Pages.MemberCenter; },
 	memberLogin: function() { MeiweiApp.Pages.MemberLogin.go(); MeiweiApp.history.active = MeiweiApp.Pages.MemberLogin; },

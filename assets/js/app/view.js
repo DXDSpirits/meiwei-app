@@ -61,13 +61,11 @@ MeiweiApp.PageView = Backbone.View.extend({
 			this.scroller.refresh();
 		}
 	},
-	go: function() {
+	go: function(options) {
 		$("#apploader").removeClass('hide');
-		if (_.isEmpty(arguments)) {
-			this.render({});
-		} else {
-			this.render(arguments[0]); // Pass arguments to render function;
-		}
+		this.options = this.options || {};
+		_.extend(this.options, options);
+		this.render();
 	},
 	showPage: function() {
 		window.scrollTo(0, 0);

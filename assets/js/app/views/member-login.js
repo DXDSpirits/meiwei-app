@@ -53,9 +53,7 @@ MeiweiApp.Pages.MemberLogin = new (MeiweiApp.PageView.extend({
 		}, this);
 	},
 	onClickLeftBtn: function() { MeiweiApp.goTo('Home'); },
-	render: function(options) {
-		this.options = this.options || {};
-		_.extend(this.options, options);
+	render: function() {
 		this.ref = this.options.ref;
 		this.loginForm.render();
 		this.logoutForm.render();

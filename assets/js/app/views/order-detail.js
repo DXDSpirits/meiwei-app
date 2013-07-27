@@ -21,10 +21,8 @@ MeiweiApp.Pages.OrderDetail = new (MeiweiApp.PageView.extend({
 			restaurantId: this.order.get('restaurant')
 		});
 	},
-	render: function(options) {
-		this.options = this.options || {};
-		_.extend(this.options, options);
-		this.order.set({id: options.orderId})
+	render: function() {
+		this.order.set({id: this.options.orderId})
 		$.when(
 			this.order.fetch()
 		).then(this.showPage);

@@ -5,7 +5,7 @@ MeiweiApp.Views.RecommendItem = MeiweiApp.ModelView.extend({
 	className: 'recommend-list-item',
 	template: MeiweiApp.Templates['recommend-list-item'],
 	viewRestaurant: function() {
-		var restaurantId = this.model.get('restaurant').id
+		var restaurantId = this.model.get('restaurant').id;
 		MeiweiApp.goTo('RestaurantDetail', {
 			restaurantId: restaurantId
 		});

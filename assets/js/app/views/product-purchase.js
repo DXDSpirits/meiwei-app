@@ -58,9 +58,7 @@ MeiweiApp.Pages.ProductPurchase = new (MeiweiApp.PageView.extend({
 			});
 		});
 	},
-	render: function(options) {
-		this.options = this.options || {};
-		_.extend(this.options, options);
+	render: function() {
 		$.when(
 			this.products.fetch({
 				data: {category: 1},
