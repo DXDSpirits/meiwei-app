@@ -9,6 +9,18 @@ MeiweiApp.Collection = Backbone.Collection.extend({
 		} else {
 			return response;
 		}
+	},
+	fetchNext: function() {
+		if (this.next) {
+			this.url = this.next;
+			this.fetch({reset: true});
+		}
+	},
+	fetchPrev: function() {
+		if (this.previous) {
+			this.url = this.previous;
+			this.fetch({reset: true});
+		}
 	}
 });
 
