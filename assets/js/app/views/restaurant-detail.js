@@ -89,7 +89,7 @@ MeiweiApp.Pages.RestaurantDetail = new (MeiweiApp.PageView.extend({
 		this.$('> header h1').html(this.restaurant.get('fullname'));
 		this.views.reviews.collection.url = this.restaurant.get('reviews');
 		this.views.pictures.collection.reset(this.restaurant.get('pictures'));
-		this.carousel();
+		//this.carousel();
 		this.showPage();
 	},
 	render: function(options) {

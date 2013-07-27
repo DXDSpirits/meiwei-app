@@ -73,7 +73,7 @@ MeiweiApp.Pages.MemberCenter = new (MeiweiApp.PageView.extend({
 			MeiweiApp.me.profile.fetch(),
 			this.favorites.fetch({reset: true})
 		).then(function() {
-			self.carousel();
+			//self.carousel();
 			self.showPage();
 		});
 	}
