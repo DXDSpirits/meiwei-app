@@ -56,7 +56,10 @@ MeiweiApp.PageView = Backbone.View.extend({
 	onClickRightBtn: function() {},
 	initScroller: function() {
 		if (this.scroller == null) {
-		    this.scroller = new IScroll(this.$('.scroll').selector);
+		    this.scroller = new IScroll(this.$('.scroll').selector, {
+		    	//click: true
+		    	preventDefault: false
+		    });
 		} else {
 			this.scroller.refresh();
 		}
@@ -74,6 +77,7 @@ MeiweiApp.PageView = Backbone.View.extend({
 			var $curPage = $('.view:not(".view-hidden")');
 			$curPage.addClass('view-hidden');
 			this.$el.removeClass('view-hidden');
+			this.initScroller();
 		}
 	}
 });

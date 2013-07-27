@@ -11,7 +11,7 @@
 }
 
 @mixin inline-field-set {
-	width: 0;
+	width: 1px; // A hack for iOS 5. width=0 seems wrong.
 	border-width: 0 1px 0 0;
 	&:last-child {
 		border-right-width: 0;
