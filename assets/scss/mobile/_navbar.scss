@@ -58,14 +58,14 @@
 	@include flex-box($orient: horizontal);
 	@include size(50px, 100%);
 	background-color: $brown;
-	> div {
+	> .filter {
 		@include flexible();
 		height: 20px;
 		text-align: center;
 		font-size: $fontSizeSmall;
 		color: $white;
 	}
-	.collapsible {
+	> .collapsible {
 		position: relative;
 		& > .collapsible-inner {
 			@include scrollable(5px);

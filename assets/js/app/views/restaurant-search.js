@@ -82,15 +82,15 @@ MeiweiApp.Pages.RestaurantSearch = new (MeiweiApp.PageView.extend({
 			}
 		});
 		_.bindAll(this, 'renderRestaurantList', 'filterRestaurant', 'bindCuisineFilters', 'bindCircleFilters');
-		this.initializeMap();
+		//this.initializeMap();
 	},
 	onClickRightBtn: function() {
 		this.$('.flipper').toggleClass('flip');
-		this.dropMarkers();
+		//this.dropMarkers();
 	},
 	renderRestaurantList: function() {
 		this.views.restaurantList.render();
-		this.dropMarkers();
+		//this.dropMarkers();
 	},
 	filterRestaurant: function(filter) {
 		this.restaurants.fetch({ reset: true, success: this.renderRestaurantList, data: filter });

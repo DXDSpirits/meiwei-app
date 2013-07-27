@@ -1,28 +1,3 @@
-/*
-//测试notification
-var d = new Date();
-d = d.getTime() + 60 * 1000; //60 seconds from now
-d = new Date(d);
-
-window.addNotification({
-	fireDate: d,
-	alertBody: "This is a local notification.",
-	repeatInterval: "daily",
-	soundName: "horn.caf",
-	badge: 0,
-	notificationId: 123,
-	foreground: function(notificationId) {
-		alert("Hello World! This alert was triggered by notification " + notificationId);
-		console.log(notificationId);
-	},
-	background: function(notificationId) {
-		alert("Hello World! This alert was triggered by notification " + notificationId);
-		console.log(notificationId);
-
-	}
-})
-*/
-
 
 MeiweiApp.Views.ContactList = MeiweiApp.CollectionView.extend({
 	ModelView: MeiweiApp.ModelView.extend({
@@ -62,9 +37,9 @@ MeiweiApp.Pages.MemberContacts = new(MeiweiApp.PageView.extend({
 			}, this)
 		}, this);
 	},
-	getLocalContacts: function(callback) {
+	getLocalContacts: function() {
 		var collection = this.views.contactList.collection;
-		var self = this;
+		alert(navigator.contacts)
 		navigator.contacts.find(
 			["displayName", "phoneNumbers"],
 			function(contacts) {
