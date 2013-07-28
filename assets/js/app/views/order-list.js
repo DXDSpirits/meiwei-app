@@ -13,6 +13,10 @@ MeiweiApp.Views.OrderList = MeiweiApp.CollectionView.extend({
 });
 
 MeiweiApp.Pages.OrderList = new (MeiweiApp.PageView.extend({
+	events: {
+		'click .filter-pending': 'getPendingOrders',
+		'click .filter-fulfilled': 'getFulfilledOrders'
+	},
 	initPage: function() {
 		this.orders = new MeiweiApp.Collections.Orders();
 		this.views = {
@@ -22,9 +26,24 @@ MeiweiApp.Pages.OrderList = new (MeiweiApp.PageView.extend({
 			})
 		}
 	},
+	getPendingOrders: function() {
+		this.orders.fetch({
+			reset: true,
+			data: { status: 'pending' }
+		});
+	},
+	getFulfilledOrders: function() {
+		this.orders.fetch({
+			reset: true,
+			data: { status: 'fulfilled' }
+		});
+	},
 	render: function() {
 		$.when(
-			this.orders.fetch({reset: true})
+			this.orders.fetch({
+				reset: true,
+				data: { status: 'pending' }
+			})
 		).then(this.showPage);
 	}
 }))({el: $("#view-order-list")});
