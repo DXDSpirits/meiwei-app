@@ -50,6 +50,9 @@ MeiweiApp.Views.Filter = MeiweiApp.CollectionView.extend({
 });
 
 MeiweiApp.Pages.RestaurantSearch = new (MeiweiApp.PageView.extend({
+	events: {
+		'keydown header input': 'searchKeywords'
+	},
 	initPage: function() {
 		this.restaurants = new MeiweiApp.Collections.Restaurants();
 		this.cuisines = new MeiweiApp.Collections.Cuisines();
@@ -91,6 +94,19 @@ MeiweiApp.Pages.RestaurantSearch = new (MeiweiApp.PageView.extend({
 	renderRestaurantList: function() {
 		this.views.restaurantList.render();
 		//this.dropMarkers();
+	},
+	searchKeywords: function(e) {
+		if (e.keyCode == 13) {
+			var keywords = this.$('header > input').val();
+			console.log(keywords);
+			this.restaurants.fetch({
+				reset: true,
+				success: this.renderRestaurantList,
+				data: {
+					keywords: keywords
+				}
+			});
+		}
 	},
 	filterRestaurant: function(filter) {
 		this.restaurants.fetch({ reset: true, success: this.renderRestaurantList, data: filter });
