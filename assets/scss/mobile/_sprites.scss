@@ -99,7 +99,7 @@
 // Rating Component
 @mixin rating($r) {
 	* { @include icon-star-large-full(); }
-	:nth-child(n + #{$r+1}) {
+	> :nth-child(n + #{$r+1}) {
 		@include icon-star-large-zero();
 	}
 }

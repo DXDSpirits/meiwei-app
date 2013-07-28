@@ -13,12 +13,10 @@ MeiweiApp.Views.ContactList = MeiweiApp.CollectionView.extend({
 
 MeiweiApp.Pages.MemberContacts = new(MeiweiApp.PageView.extend({
 	events: {
-		'click .filter-bar :nth-child(1)': 'selectOnline',
-		'click .filter-bar :nth-child(2)': 'selectLocal',
+		'click .filter-online': 'getOnlineContacts',
+		'click .filter-local': 'getLocalContacts',
 		'click simple-list-item': 'confirmSelect'
 	},
-	selectOnline: function() { this.getOnlineContacts(); },
-	selectLocal: function() { this.getLocalContacts(); },
 	confirmSelect: function() {  },
 	initPage: function() {
 		this.views = {
@@ -34,12 +32,13 @@ MeiweiApp.Pages.MemberContacts = new(MeiweiApp.PageView.extend({
 			contact.on("select", function() {
 				this.options.callback(contact.get('name'), contact.get('mobile'));
 				if (!this.options.multiple)	MeiweiApp.goBack();
-			}, this)
+			}, this);
 		}, this);
 	},
 	getLocalContacts: function() {
 		var collection = this.views.contactList.collection;
-		alert(navigator.contacts)
+		collection.reset();
+		var bindContactSelect = this.bindContactSelect;
 		navigator.contacts.find(
 			["displayName", "phoneNumbers"],
 			function(contacts) {
@@ -52,6 +51,7 @@ MeiweiApp.Pages.MemberContacts = new(MeiweiApp.PageView.extend({
 					});
 					collection.add(model);
 				}
+				bindContactSelect(collection);
 			},
 			function(e) {},
 			{ multiple: true }

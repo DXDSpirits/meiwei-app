@@ -65,7 +65,6 @@ MeiweiApp.Views.FloorplanList = MeiweiApp.CollectionView.extend({
 				this.options.size-=1;
 				delete this.seatMap[id][$t.attr("tableid")];
 			}
-			console.log(this.seatMap)
 		},
 		// getId: function(){
 			// this.idArray = [];

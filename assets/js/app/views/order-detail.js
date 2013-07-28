@@ -16,7 +16,6 @@ MeiweiApp.Pages.OrderDetail = new (MeiweiApp.PageView.extend({
 	onClickRightBtn: function() {
 		MeiweiApp.pendingOrder = this.order;
 		MeiweiApp.ProductCart.reset(this.order.get('product_items'))
-		console.log(this.order.get('product_items'));
 		MeiweiApp.goTo('RestaurantOrder', {
 			restaurantId: this.order.get('restaurant')
 		});
