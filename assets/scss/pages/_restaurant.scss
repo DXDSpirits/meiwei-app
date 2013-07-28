@@ -1,14 +1,3 @@
-@-webkit-keyframes flipinfromleft {
-	from { -webkit-transform: rotateY(180deg) scale(.65); opacity: 0; }
-	50% { opacity: .4; }
-	to { -webkit-transform: rotateY(0) scale(1); opacity: 1; }
-}
-
-@-webkit-keyframes flipouttoleft {
-	from { -webkit-transform: rotateY(0) scale(1); opacity: 1; }
-	50% { opacity: .4; }
-	to { -webkit-transform: rotateY(-180deg) scale(.65); opacity: 0; }
-}
 
 .flipper {
 	-webkit-perspective: 1000;
@@ -171,12 +160,6 @@
 
 }
 
-@-webkit-keyframes jump {
-	from { -webkit-transform: scale(1); }
-	30% { -webkit-transform: scale(1.5); }
-	to { -webkit-transform: scale(1); }
-}
-
 #view-restaurant-order {
 	.restaurant-info {
 		height:140px;
@@ -261,10 +244,6 @@
 	}
 }
 
-@-webkit-keyframes fadein {
-	from { opacity: 0; }
-	to { opacity: 1; }
-}
 
 #view-restaurant-floorplans {
 	.svg-canvas {
