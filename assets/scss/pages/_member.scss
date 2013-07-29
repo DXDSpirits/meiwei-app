@@ -99,14 +99,13 @@
 		}
 	}
 	
-	.scroll-inner {
-		$listItemHeight: 45px;
-		$listItemWidth: 93.75%;
-		$buttonWidth: 62.5%;
-		$listPadding: ($listItemWidth - $buttonWidth) / 2;
-		ul {
-			width: $listItemWidth;
-		}
+	$listItemHeight: 45px;
+	$listItemWidth: 93.75%;
+	$buttonWidth: 62.5%;
+	$listPadding: ($listItemWidth - $buttonWidth) / 2;
+	
+	ul.member-center-nav {
+		width: $listItemWidth;
 		li {
 			width: 100%;
 			height: $listItemHeight;
@@ -123,13 +122,13 @@
 			right: $listPadding;
 			font-weight: bold;
 		}
-		.logout-button {
-			background: transparent url($gradientShadowPathR) no-repeat top;
-			@include background-size(100% $listItemHeight);
-			width: $listItemWidth;
-			padding: 10px $listPadding;
-			button { width: 100%; }
-		}
+	}
+	.logout-button {
+		background: transparent url($gradientShadowPathR) no-repeat top;
+		@include background-size(100% $listItemHeight);
+		width: $listItemWidth;
+		padding: 10px $listPadding;
+		button { width: 100%; }
 	}
 }
 
