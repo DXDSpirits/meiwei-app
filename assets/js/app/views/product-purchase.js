@@ -43,6 +43,8 @@ MeiweiApp.Pages.ProductPurchase = new (MeiweiApp.PageView.extend({
 		};
 		_.bindAll(this, 'carousel');
 	},
+	onClickLeftBtn: function() { MeiweiApp.goBack(); },
+	onClickRightBtn: function() { MeiweiApp.goBack(); },
 	carousel: function() {
 		this.products.forEach(function(product) {
 			var selector = '.carousel[data-item="' + product.id + '"]';

@@ -3,7 +3,7 @@ MeiweiApp.Views.ProductCartItemList = MeiweiApp.CollectionView.extend({
 		tagName: "div",
 		className: "product-cart-item",
 		events: { "click .delete-button": "triggerDelete" },
-		template: Mustache.compile('<img src="{{ picture }}" alt=""><div class="delete-button">移除</div>'),
+		template: MeiweiApp.Templates['product-cart-item'],
 		triggerDelete: function() {
 			MeiweiApp.ProductCart.remove(this.model);
 		}
