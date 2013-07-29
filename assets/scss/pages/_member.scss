@@ -57,6 +57,7 @@
 	.favorite-resto-carousel {
 		height: 200px - 45px;
 		width: 100%;
+		z-index: -1;
 		position: relative;
 		img {
 			position: absolute;

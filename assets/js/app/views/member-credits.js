@@ -1,12 +1,13 @@
 
 MeiweiApp.Views.CreditList = MeiweiApp.CollectionView.extend({
 	ModelView: MeiweiApp.ModelView.extend({
-		template: Mustache.compile('<div class="span"><h1>{{amount}}</h1></div><div class="span"><small>{{reason}}</small></div>'),
-		className: 'simple-list-item'
+		template: MeiweiApp.Templates['member-credit-item'],
+		className: 'detail-list-item'
 	})
 });
 
 MeiweiApp.Pages.MemberCredits = new (MeiweiApp.PageView.extend({
+	onClickRightBtn: function() { MeiweiApp.goTo('ProductPurchase'); },
 	initPage: function() {
 		this.credits = new MeiweiApp.Collections.Credits();
 		this.views = {

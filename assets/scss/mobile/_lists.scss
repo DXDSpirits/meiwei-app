@@ -46,15 +46,33 @@
 	$itemHeight: 45px;
 	@include size($itemHeight, 100%);
 	padding: 0 17px;
-	border-width: 0 0 1px 0;
-	border-style: solid;
-	border-color: $brown;
+	@include border(0 0 1px 0, solid, $brown);
 	@include flex-box($orient: horizontal);
+	overflow: hidden;
 	> .span {
 		@include flexible();
 		@include text-overflow();
 		text-align: center;
 		max-height: $itemHeight;
 		width: 0;
+	}
+}
+
+.detail-list-item {
+	$itemHeight: 50px;
+	@include size($itemHeight, 100%);
+	padding: 5px 17px;
+	@include border(0 0 1px 0, solid, $brown);
+	@include flex-box($orient: horizontal, $align: baseline);
+	overflow: hidden;
+	font-size: $fontSizeMini;
+	> .span {
+		@include flexible();
+		text-align: right;
+	}
+	> .span-detail {
+		@include flexible(3);
+		text-align: left;
+		p { @include text-overflow(); }
 	}
 }
