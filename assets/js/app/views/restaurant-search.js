@@ -85,15 +85,15 @@ MeiweiApp.Pages.RestaurantSearch = new (MeiweiApp.PageView.extend({
 			}
 		});
 		_.bindAll(this, 'renderRestaurantList', 'filterRestaurant', 'bindCuisineFilters', 'bindCircleFilters');
-		//this.initializeMap();
+		this.initializeMap();
 	},
 	onClickRightBtn: function() {
 		this.$('.flipper').toggleClass('flip');
-		//this.dropMarkers();
+		this.dropMarkers();
 	},
 	renderRestaurantList: function() {
 		this.views.restaurantList.render();
-		//this.dropMarkers();
+		this.dropMarkers();
 	},
 	searchKeywords: function(e) {
 		if (e.keyCode == 13) {
@@ -138,14 +138,19 @@ MeiweiApp.Pages.RestaurantSearch = new (MeiweiApp.PageView.extend({
 		
 		this.map.setViewport(view);
 		
-		if(neighborhoods.length==1){ this.map.setZoom(18);
-		}else if(neighborhoods.length<5){ this.map.setZoom(15);
-		}else{ this.map.setZoom(12); }
+		if(neighborhoods.length == 1) {
+			this.map.setZoom(18);
+		} else if (neighborhoods.length<5) {
+			this.map.setZoom(15);
+		} else {
+			this.map.setZoom(12);
+		}
 		
 		this.map.setCenter(neighborhoods.length>0 ? neighborhoods[0].latlng : new BMap.Point(121.491, 31.233) );
 		
 		//for (var i = 0; i < this.markers.length; i++) this.markers[i].setMap(null);
 		this.markers = [];
+		this.map.clearOverlays();
 		
 		for (var i = 0; i < neighborhoods.length; i++) {
 			var marker = new BMap.Marker(neighborhoods[i].latlng , {enableMassClear:true});
@@ -163,7 +168,8 @@ MeiweiApp.Pages.RestaurantSearch = new (MeiweiApp.PageView.extend({
 	},
 	initializeMap: function () {
 		this.markers = [];
-		this.map = new BMap.Map("map_canvas");
+		this.map = new BMap.Map("map_canvas", {enableMapClick: false});
+		this.map.enableScrollWheelZoom();
 		this.map.centerAndZoom(new BMap.Point(121.491, 31.233), 12);
 	},
 	/*********************************************/
