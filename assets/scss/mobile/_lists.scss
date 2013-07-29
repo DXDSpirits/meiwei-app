@@ -53,6 +53,7 @@
 	> .span {
 		@include flexible();
 		@include text-overflow();
+		text-align: center;
 		max-height: $itemHeight;
 		width: 0;
 	}
