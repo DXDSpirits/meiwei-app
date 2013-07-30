@@ -119,7 +119,7 @@ MeiweiApp.Views.FloorplanList = MeiweiApp.CollectionView.extend({
 
 MeiweiApp.Pages.RestaurantFloorplans = new (MeiweiApp.PageView.extend({
 	onClickLeftBtn: function(){
-		
+		this.onClickRightBtn();
 	},onClickRightBtn: function() {
 		$.each(this.views.floorplanList.modelViews , function(){
 			if(this.options.size>0)
