@@ -116,7 +116,8 @@
 		
 		article {
 			padding: $baseLineHeight/2 0;
-			@include size(3 * $baseLineHeight, 100%);
+			//@include size(3 * $baseLineHeight, 100%);
+			width: 100%;
 			color: $brown;
 			p {
 				@include square(100%);
@@ -135,10 +136,6 @@
 			}
 		}
 		
-	}
-	
-	.icon-favorite.suceed {
-		@include animation(jump .35s ease-in-out);
 	}
 	
 	.restaurant-reviews {

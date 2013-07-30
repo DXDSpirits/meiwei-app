@@ -86,7 +86,7 @@ MeiweiApp.Pages.RestaurantDetail = new (MeiweiApp.PageView.extend({
 		var self = this;
 		fav.save({}, {success: function() {
 			self.$('.icon-favorite').addClass('suceed');
-			setTimeout(function() { self.$('.icon-favorite').removeClass('suceed'); }, 1000);
+			//setTimeout(function() { self.$('.icon-favorite').removeClass('suceed'); }, 1000);
 		}});
 	},
 	renderAll: function() {
