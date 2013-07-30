@@ -1,4 +1,6 @@
-<header><p>预订信息</p></header>
+<header>
+	<p>预订信息</p>
+</header>
 <form>
 	<fieldset>
 		<div class="inline-group">
@@ -8,11 +10,7 @@
 		<div class="inline-group">
 			<i class="icon-clock"></i>
 			<!--<input type="time" name="ordertime" min="19:00:00" max="20:00:00" value="{{ order.ordertime }}"/>-->
-			<select name="ordertime" value="{{ order.ordertime }}">
-				<option value="19:00">19:00</option>
-				<option value="20:00">20:00</option>
-				<option value="21:00">21:00</option>
-			</select>
+			<select name="ordertime"></select>
 			<i class="icon-group"></i>
 			<input type="text" name="personnum" value="{{ order.personnum }}"pattern="[0-9]*"/>
 		</div>

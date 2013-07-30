@@ -10,43 +10,87 @@ MeiweiApp.Views.ProductCartItemList = MeiweiApp.CollectionView.extend({
 	})
 });
 
-MeiweiApp.Views.RestaurantOrderForm = MeiweiApp.View.extend({
-	initialize: function() {
-		this.restaurant = this.model;
-		this.model = null;
+MeiweiApp.Views.RestaurantOrderContactForm = MeiweiApp.View.extend({
+	events: {
+		'click >header': 'selectContact',
+		'click .switch-gender': 'switchGender'
 	},
-	template: MeiweiApp.Templates['restaurant-order-form'],
-	render: function() {
-		var pending
-		if (MeiweiApp.pendingOrder == null) {
-			var today = new Date();
-			pending = {
-				orderdate: today.toJSON().slice(0, 10),
-				ordertime: '19:00:00',
-				personnum: 2
-			}
+	initialize: function() { _.bindAll(this, 'fillContact'); },
+	selectContact: function() {
+		MeiweiApp.goTo('MemberContacts', { multiple: false, callback: this.fillContact });
+	},
+	fillContact: function(contactname, contactphone) {
+		this.$('input[name=contactname]').val(contactname);
+		this.$('input[name=contactphone]').val(contactphone);
+	},
+	switchGender: function() {
+		var s = this.$('.switch-gender');
+		if ($(s).hasClass('on')) {
+			$(s).removeClass('on');
+			$(s).find('input').val($(s).find('label.text-off').text());
 		} else {
-			pending = MeiweiApp.pendingOrder.toJSON()
+			$(s).addClass('on');
+			$(s).find('input').val($(s).find('label.text-on').text());
 		}
-		this.$el.html(this.template({
-			restaurant: this.restaurant.toJSON(),
-			order: pending
-		}));
-		MWA.fixBlurScroll(this.$el);
+	},
+	template: MeiweiApp.Templates['restaurant-order-contact-form'],
+	render: function() {
+		this.$el.html(this.template());
+		return this;
 	}
 });
 
-
+MeiweiApp.Views.RestaurantOrderForm = MeiweiApp.View.extend({
+	initialize: function() {
+		this.restaurant = this.model;
+		this.hours = new MeiweiApp.Models.Hour();
+		this.pending = null;
+		this.model = null;
+	},
+	template: MeiweiApp.Templates['restaurant-order-form'],
+	renderHourList: function() {
+		var $select = this.$('select[name=ordertime]');
+		$select.empty();
+		$value = this.pending.ordertime;
+		this.hours.url = this.restaurant.get('hours');
+		this.hours.fetch({success: function(hours) {
+			var hour = hours.get('0');
+			for (var i=0; i<hour.length; i++) {
+				var item = hour[i];
+				var $option = $('<option></option>').val(item[0]).html(item[0] + ' ' + item[1]);
+				$select.append($option);
+			}
+			$select.val($value);
+		}});
+		
+	},
+	render: function() {
+		if (MeiweiApp.pendingOrder == null) {
+			var today = new Date();
+			this.pending = {
+				orderdate: today.toJSON().slice(0, 10),
+				ordertime: '19:00',
+				personnum: 2
+			}
+		} else {
+			this.pending = MeiweiApp.pendingOrder.toJSON()
+		}
+		this.$el.html(this.template({
+			restaurant: this.restaurant.toJSON(),
+			order: this.pending
+		}));
+		this.renderHourList();
+	}
+});
 
 MeiweiApp.Pages.RestaurantOrder = new (MeiweiApp.PageView.extend({
 	events: {
-		'click .contact-info > header': 'selectContact',
 		'click .floorplan-select > header': 'selectSeat',
 		'click .product-select > header': 'selectProduct',
 		'click .order-submit-button': 'submitOrder',
-		'click .switch-gender': 'switchGender'
 	},
 	initPage: function() {
+		_.bindAll(this, 'renderOrderForm');
 		this.restaurant = new MeiweiApp.Models.Restaurant();
 		this.floorplans = new MeiweiApp.Collections.Floorplans();
 		this.views = {
@@ -54,22 +98,14 @@ MeiweiApp.Pages.RestaurantOrder = new (MeiweiApp.PageView.extend({
 				model: this.restaurant,
 				el: this.$('.order-info')
 			}),
+			orderContactForm: new MeiweiApp.Views.RestaurantOrderContactForm({
+				el: this.$('.contact-info')
+			}),
 			productCart: new MeiweiApp.Views.ProductCartItemList({
-				collection: MeiweiApp.ProductCart,//this.productItems,
+				collection: MeiweiApp.ProductCart,
 				el: this.$('.product-cart')
 			})
 		};
-		_.bindAll(this, 'renderOrderForm', 'fillContact');
-	},
-	selectContact: function() {
-		MeiweiApp.goTo('MemberContacts', {
-			multiple: false, 
-			callback: this.fillContact
-		});
-	},
-	fillContact: function(contactname, contactphone) {
-		this.$('input[name=contactname]').val(contactname);
-		this.$('input[name=contactphone]').val(contactphone);
 	},
 	selectSeat: function() {
 		this.floorplans.reset(this.restaurant.get('floorplans'));
@@ -92,16 +128,6 @@ MeiweiApp.Pages.RestaurantOrder = new (MeiweiApp.PageView.extend({
 	},
 	selectProduct: function() {
 		MeiweiApp.goTo('ProductPurchase');
-	},
-	switchGender: function() {
-		var s = this.$('.switch-gender');
-		if ($(s).hasClass('on')) {
-			$(s).removeClass('on');
-			$(s).find('input').val($(s).find('label.text-off').text());
-		} else {
-			$(s).addClass('on');
-			$(s).find('input').val($(s).find('label.text-on').text());
-		}
 	},
 	submitOrder: function(e) {
 		e.preventDefault();
@@ -136,6 +162,7 @@ MeiweiApp.Pages.RestaurantOrder = new (MeiweiApp.PageView.extend({
 		this.$('.restaurant-info img').attr('src', this.restaurant.get('frontpic'));
 		this.$('.restaurant-info h1').html(this.restaurant.get('fullname'));
 		this.views.orderForm.render();
+		this.views.orderContactForm.render();
 		this.views.productCart.render();
 		this.showPage();
 	},

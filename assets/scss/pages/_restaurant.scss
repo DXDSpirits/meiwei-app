@@ -187,7 +187,9 @@
 	.inline-group {
 		border-right: none;
 	}
-	
+	select[name='ordertime'] {
+		@include flexible(3);
+	}
 	.order-info, .contact-info, .floorplan-select, .product-select {
 		width: 100%;
 		padding: 0 15%;
