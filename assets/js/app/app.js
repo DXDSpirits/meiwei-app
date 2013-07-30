@@ -17,9 +17,7 @@ var MeiweiApp = new (Backbone.View.extend({
 	log: function(msg) { console.log(msg) },
     
 	start: function() {	
-		//MWA.preventWindowScroll();
 		MeiweiApp.bindBasicAuth();
-		//Backbone.BasicAuth.set('dxdeat', '123abc');
 		Backbone.history.start();
 	}
 }))({el: document.body});

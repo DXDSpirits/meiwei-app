@@ -34,6 +34,7 @@ fieldset {
 }
 
 // Text fields
+select,
 textarea,
 input[type="search"],
 input[type="text"],
@@ -64,6 +65,8 @@ input[type="color"],
 	font-size: $baseFontSize;
 	padding: 8px 11px;
 	height: 44px;
+	
+	background-color: transparent;
 	-webkit-appearance: none;
 	
 	fieldset > & {
