@@ -84,7 +84,7 @@ MeiweiApp.goBack = function() {
 
 $.ajaxSetup({
     statusCode : {
-        401: function() {
+        499: function() {
             MeiweiApp.goTo('MemberLogin', {ref: MeiweiApp.history.active});
         },
         403: function() {
