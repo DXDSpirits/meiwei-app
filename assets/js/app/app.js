@@ -19,7 +19,7 @@ var MeiweiApp = new (Backbone.View.extend({
 	start: function() {	
 		//MWA.preventWindowScroll();
 		MeiweiApp.bindBasicAuth();
-		Backbone.BasicAuth.set('dxdeat', '123abc');
+		//Backbone.BasicAuth.set('dxdeat', '123abc');
 		Backbone.history.start();
 	}
 }))({el: document.body});
@@ -49,17 +49,7 @@ MeiweiApp.bindBasicAuth = function() {
 	};
 };
 
-
-
-$(function(){
+$(function() {
+	MeiweiApp.start();
 	document.addEventListener("deviceready", MeiweiApp.start, false);
 });
-
-/*'click a[data-router]': function(e) {
-	e.preventDefault();
-	Backbone.history.navigate(e.target.pathname, {trigger: true});
-},*/
-/*'touchstart .view>.scroll-inner': function(e) {
-	document.body.style.height = '600px';
-	setTimeout( function(){ window.scrollTo(0, 0); }, 0 );
-}*/

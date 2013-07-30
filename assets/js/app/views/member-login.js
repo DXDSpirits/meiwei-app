@@ -49,6 +49,7 @@ MeiweiApp.Pages.MemberLogin = new (MeiweiApp.PageView.extend({
 		this.registerForm = new MeiweiApp.Views.MemberRegisterForm({ el: this.$('.register-box') });
 		this.ref = MeiweiApp.Pages.Home
 		this.listenTo(MeiweiApp.me, 'login', function() {
+			MeiweiApp.me.profile.fetch(); // Validate login.
 			this.ref.go();
 		});
 	},

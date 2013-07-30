@@ -6,6 +6,7 @@ MeiweiApp.Views.OrderList = MeiweiApp.CollectionView.extend({
 		className: 'order-list-item',
 		viewOrder: function() {
 			MeiweiApp.goTo('OrderDetail', {
+				order: this.model.toJSON(),
 				orderId: this.model.id
 			});
 		}

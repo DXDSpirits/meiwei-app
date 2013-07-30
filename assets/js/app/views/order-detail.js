@@ -17,13 +17,17 @@ MeiweiApp.Pages.OrderDetail = new (MeiweiApp.PageView.extend({
 		MeiweiApp.pendingOrder = this.order;
 		MeiweiApp.ProductCart.reset(this.order.get('product_items'))
 		MeiweiApp.goTo('RestaurantOrder', {
+			restaurant: null,
 			restaurantId: this.order.get('restaurant')
 		});
 	},
 	render: function() {
-		this.order.set({id: this.options.orderId})
-		$.when(
-			this.order.fetch()
-		).then(this.showPage);
+		if (this.options.order) {
+			this.order.set(this.options.order);
+			this.showPage();
+		} else if (this.options.orderId) {
+			this.order.set({id: this.options.orderId})
+			this.order.fetch({ success: this.showPage })
+		}
 	}
 }))({el: $("#view-order-detail")});

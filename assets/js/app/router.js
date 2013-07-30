@@ -85,10 +85,14 @@ MeiweiApp.goBack = function() {
 $.ajaxSetup({
     statusCode : {
         499: function() {
-            MeiweiApp.goTo('MemberLogin', {ref: MeiweiApp.history.active});
+            MeiweiApp.Pages.MemberLogin.go({
+            	ref: MeiweiApp.history.active
+            });
         },
         403: function() {
-            MeiweiApp.goTo('MemberLogin', {ref: MeiweiApp.history.active});
+            MeiweiApp.Pages.MemberLogin.go({
+            	ref: MeiweiApp.history.active
+            });
         }
     }
 });
