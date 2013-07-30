@@ -73,15 +73,18 @@ MeiweiApp.Pages.RestaurantOrder = new (MeiweiApp.PageView.extend({
 	},
 	selectSeat: function() {
 		this.floorplans.reset(this.restaurant.get('floorplans'));
-		this.floorplans.forEach( function(model){
-			model.set( "selected" , this.options.tables);
-			model.on('selected',function(){
+		this.floorplans.forEach(function(model) {
+			model.set("selected", this.options.tables);
+			this.listenTo(model, 'selected', function() {
 				var tables = arguments[0];
-				this.options.tables = JSON.stringify( $.extend(($.parseJSON(this.options.tables || null) || {}) , $.parseJSON(tables)) ) ;
-				if(tables && tables.length>0){
+				this.options.tables = JSON.stringify(
+					$.extend(($.parseJSON(this.options.tables || null) || {}),
+					$.parseJSON(tables))
+				) ;
+				if(tables && tables.length > 0) {
 					this.$(".floorplan-select > header span").text("(已选)");
 				}
-			}, this);
+			});
 		} , this);
 		MeiweiApp.goTo('RestaurantFloorplans', {
 			floorplans: this.floorplans,

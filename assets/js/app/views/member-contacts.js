@@ -29,10 +29,10 @@ MeiweiApp.Pages.MemberContacts = new(MeiweiApp.PageView.extend({
 	},
 	bindContactSelect: function(collection, response, options) {
 		collection.forEach(function(contact) {
-			contact.on("select", function() {
+			this.listenTo(contact, "select", function() {
 				this.options.callback(contact.get('name'), contact.get('mobile'));
-				if (!this.options.multiple)	MeiweiApp.goBack();
-			}, this);
+				if (!this.options.multiple) MeiweiApp.goBack();
+			});
 		}, this);
 	},
 	getLocalContacts: function() {

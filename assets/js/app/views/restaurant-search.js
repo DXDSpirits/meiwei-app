@@ -113,13 +113,17 @@ MeiweiApp.Pages.RestaurantSearch = new (MeiweiApp.PageView.extend({
 	},
 	bindCuisineFilters: function(cuisines, response, options) {
 		var bindFilter = function(cuisine) {
-			cuisine.on("select", function() { this.filterRestaurant({cuisine: cuisine.id}); }, this);
+			this.listenTo(cuisine, "select", function() {
+				this.filterRestaurant({cuisine: cuisine.id});
+			});
 		};
 		cuisines.forEach(bindFilter, this);
 	},
 	bindCircleFilters: function(circles, response, options) {
 		var bindFilter = function(circle) {
-			circle.on("select", function() { this.filterRestaurant({circle: circle.id}); }, this);
+			this.listenTo(circle, "select", function() {
+				this.filterRestaurant({circle: circle.id});
+			});
 		};
 		circles.forEach(bindFilter, this);
 	},

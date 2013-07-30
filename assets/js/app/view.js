@@ -3,8 +3,8 @@ MeiweiApp.View = Backbone.View.extend({});
 
 MeiweiApp.ModelView = Backbone.View.extend({
 	initialize: function() {
-		this.model.on('change', this.render, this);
-		this.model.on('hide', this.remove, this);
+		this.listenTo(this.model, 'change', this.render);
+		this.listenTo(this.model, 'hide', this.remove);
 	},
 	template: Mustache.compile(""),
 	render: function() {
@@ -17,9 +17,9 @@ MeiweiApp.CollectionView = Backbone.View.extend({
 	ModelView: MeiweiApp.ModelView,
 	initialize: function() {
 		this.modelViews = [];
-		this.collection.on('reset', this.addAll, this);
-		this.collection.on('add', this.addOne, this);
-		this.collection.on('remove', this.removeOne, this);
+		this.listenTo(this.collection, 'reset', this.addAll);
+		this.listenTo(this.collection, 'add', this.addOne);
+		this.listenTo(this.collection, 'remove', this.removeOne);
 	},
 	removeOne: function(item) {
 		item.trigger('hide');
@@ -81,20 +81,3 @@ MeiweiApp.PageView = Backbone.View.extend({
 		}
 	}
 });
-
-/*var $me = this.$el;
-$me.on('webkitAnimationEnd', function(e) {
-	if (e.originalEvent.animationName == 'slideouttoleft') {
-		$me.removeClass('view-hiding');
-		$me.addClass('view-hidden');
-	} else if (e.originalEvent.animationName == 'slideinfromright') {
-		$me.removeClass('view-showing');
-	}
-});*/
-
-/*this.timeout = setTimeout(function() {
-	MeiweiApp.goTo('Home');
-	alert('There seems to be problem with your internet connection?');
-}, 5000);*/
-
-//clearTimeout(this.timeout);

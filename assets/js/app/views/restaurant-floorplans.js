@@ -2,7 +2,7 @@
 MeiweiApp.Views.FloorplanNav = MeiweiApp.CollectionView.extend({
 	ModelView: MeiweiApp.ModelView.extend({
 		initialize: function() {
-			this.model.on('select', this.onSelect, this );
+			this.listenTo(this.model, 'select', this.onSelect);
 		},
 		className: 'floorplan-nav-item',
 		template: Mustache.compile("{{caption}}"),
@@ -35,7 +35,7 @@ MeiweiApp.Views.FloorplanList = MeiweiApp.CollectionView.extend({
 		initialize: function() {
 			this.seatMap = {};
 			this.options={colorAvailable : "#669933",colorSelected : "#77513D",colorOccupied : "#E6E6E6" , maxSeat: 1 , size: 0};
-			this.model.on('select', this.onSelect, this);
+			this.listenTo(this.model, 'select', this.onSelect);
 		},
 		onSelect: function() {
 			this.$el.siblings().addClass('hide');

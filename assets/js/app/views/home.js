@@ -29,7 +29,7 @@ MeiweiApp.Pages.Home = new (MeiweiApp.PageView.extend({
 				el: this.$('.recommend-flow')
 			})
 		};
-		//this.recommend.items.on('reset', this.initScroller, this);
+		//this.listenTo(this.recommend.items, 'reset', this.initScroller);
 	},
 	gotoSearch: function() { MeiweiApp.goTo('RestaurantSearch'); },
 	hero: function() {
