@@ -38,14 +38,17 @@
 	@include flexible();
 }
 
-.view > header > input[type=search] {
-	@include border-radius(500px);
+.view > header > form {
 	@include flexible();
-	border: 1px solid $brown;
-	height: 26px;
-	padding: 0 15px;
-	font-size: $fontSizeSmall;
-  	line-height: $baseLineHeight;
+	> input[type=search] {
+		@include border-radius(500px);
+		width: 100%;
+		border: 1px solid $brown;
+		height: 26px;
+		padding: 0 15px;
+		font-size: $fontSizeSmall;
+	  	line-height: $baseLineHeight;
+	}
 }
 
 .view > header > .header-btn {

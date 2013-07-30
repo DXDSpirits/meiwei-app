@@ -12,6 +12,10 @@
 			{{ . }} {{  }}
 		{{ /hours_per_day.0 }}
 	</p>
-	<p><i class="icon-car"> </i>{{ parking }}</p>
-	<p><i class="icon-tag"> </i>{{ discount }}</p>
+	{{ #parkingAvailable }}
+		<p><i class="icon-car"> </i>{{ parking }}</p>
+	{{ /parkingAvailable }}
+	{{ #discountAvailable }}
+		<p><i class="icon-tag"> </i>{{ discount }}</p>
+	{{ /discountAvailable }}
 </section>

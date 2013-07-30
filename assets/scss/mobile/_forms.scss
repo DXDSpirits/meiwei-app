@@ -51,7 +51,7 @@ input[type="tel"],
 input[type="color"],
 .uneditable-input,
 .control-group {
-	@include clear-tap-highlight();
+	@include box-sizing(border-box);
 	@include box-shadow(none);
 	@include clear-outline();
 	@include placeholder($brownLight);

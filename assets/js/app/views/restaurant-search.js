@@ -53,7 +53,7 @@ MeiweiApp.Views.Filter = MeiweiApp.CollectionView.extend({
 
 MeiweiApp.Pages.RestaurantSearch = new (MeiweiApp.PageView.extend({
 	events: {
-		'keydown header input': 'searchKeywords'
+		'submit >header>form': 'searchKeywords'
 	},
 	initPage: function() {
 		this.restaurants = new MeiweiApp.Collections.Restaurants();
@@ -98,17 +98,16 @@ MeiweiApp.Pages.RestaurantSearch = new (MeiweiApp.PageView.extend({
 		this.dropMarkers();
 	},
 	searchKeywords: function(e) {
-		if (e.keyCode == 13) {
-			var keywords = this.$('header > input').val();
-			console.log(keywords);
-			this.restaurants.fetch({
-				reset: true,
-				success: this.renderRestaurantList,
-				data: {
-					keywords: keywords
-				}
-			});
-		}
+		e.preventDefault();
+		var keywords = this.$('>header input').val();
+		this.restaurants.fetch({
+			reset: true,
+			success: this.renderRestaurantList,
+			data: {
+				keywords: keywords
+			}
+		});
+		this.$('>header input').blur();
 	},
 	filterRestaurant: function(filter) {
 		this.restaurants.fetch({ reset: true, success: this.renderRestaurantList, data: filter });
@@ -186,5 +185,7 @@ MeiweiApp.Pages.RestaurantSearch = new (MeiweiApp.PageView.extend({
 			this.cuisines.fetch({ reset: true, success: this.bindCuisineFilters }),
 			this.circles.fetch({ reset: true, success: this.bindCircleFilters })
 		).then(this.showPage);
+		this.$('>header input').val('');
+		this.$('>header input').focus();
 	}
 }))({el: $("#view-restaurant-search")});
