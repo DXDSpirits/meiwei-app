@@ -7,11 +7,9 @@
 </article>
 <section class="information">
 	<p><i class="icon-map-marker-small"> </i>{{ address }}</p>
-	<p><i class="icon-clock"> </i>
-		{{ #hours_per_day.0 }}
-			{{ . }} {{  }}
-		{{ /hours_per_day.0 }}
-	</p>
+	{{ #workinghourAvailable }}
+		<p><i class="icon-clock"> </i>{{ workinghour }}</p>
+	{{ /workinghourAvailable }}
 	{{ #parkingAvailable }}
 		<p><i class="icon-car"> </i>{{ parking }}</p>
 	{{ /parkingAvailable }}

@@ -41,7 +41,11 @@ MeiweiApp.Views.RestaurantOrderContactForm = MeiweiApp.View.extend({
 });
 
 MeiweiApp.Views.RestaurantOrderForm = MeiweiApp.View.extend({
+	events: {
+		'change input[name=orderdate]': 'renderHourList'
+	},
 	initialize: function() {
+		_.bindAll(this, 'renderHourList');
 		this.restaurant = this.model;
 		this.hours = new MeiweiApp.Models.Hour();
 		this.pending = null;
@@ -49,20 +53,16 @@ MeiweiApp.Views.RestaurantOrderForm = MeiweiApp.View.extend({
 	},
 	template: MeiweiApp.Templates['restaurant-order-form'],
 	renderHourList: function() {
+		var date = new Date(this.$('input[name=orderdate]').val());
 		var $select = this.$('select[name=ordertime]');
 		$select.empty();
-		$value = this.pending.ordertime;
-		this.hours.url = this.restaurant.get('hours');
-		this.hours.fetch({success: function(hours) {
-			var hour = hours.get('0');
-			for (var i=0; i<hour.length; i++) {
-				var item = hour[i];
-				var $option = $('<option></option>').val(item[0]).html(item[0] + ' ' + item[1]);
-				$select.append($option);
-			}
-			$select.val($value);
-		}});
-		
+		var hour = this.hours.get(date.getDay().toString());
+		for (var i=0; i<hour.length; i++) {
+			var item = hour[i];
+			var $option = $('<option></option>').val(item[0]).html(item[0] + ' ' + item[1]);
+			$select.append($option);
+		}
+		$select.val(this.pending.ordertime);
 	},
 	render: function() {
 		if (MeiweiApp.pendingOrder == null) {
@@ -79,6 +79,7 @@ MeiweiApp.Views.RestaurantOrderForm = MeiweiApp.View.extend({
 			restaurant: this.restaurant.toJSON(),
 			order: this.pending
 		}));
+		this.hours.fetch({url: this.restaurant.get('hours'), async: false});
 		this.renderHourList();
 	}
 });

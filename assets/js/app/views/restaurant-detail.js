@@ -5,6 +5,7 @@ MeiweiApp.Views.RestaurantProfileBox = MeiweiApp.ModelView.extend({
 		var data = this.model.toJSON();
 		data.parkingAvailable = (!_.isEmpty(data.parking));
 		data.discountAvailable = (!_.isEmpty(data.discount));
+		data.workinghourAvailable = (!_.isEmpty(data.workinghour));
 		this.$el.html(this.template(data));
 		var self = this;
 		new MBP.fastButton(this.$('.order-button')[0], function() {
