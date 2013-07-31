@@ -11,11 +11,11 @@ MeiweiApp.Views.OrderPages = MeiweiApp.CollectionView.extend({
 		    return [f, p].join('');
 		},
 		onClickShareBtn : function(){
-	 		var content = this.$(".full-name").val()+this.$(".description").val();
+ 	 		var content = this.model.get('restaurantinfor').fullname;
 	 		if(content && content.length>120){
 	 			content = content.substring(0,120);
 	 		}
-	 		var pic = this.$(".frontpic").val();
+	 		var pic =  this.model.get('restaurantinfor').frontpic;
 	 		var link = this.getWeiboLink(screen, document, encodeURIComponent, '', '', 
 	 		pic, content, '', 'utf-8');
 	 		var ref = window.open( link ,'_blank', 'location=no');
