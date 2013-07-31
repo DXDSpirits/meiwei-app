@@ -47,8 +47,8 @@ MeiweiApp.Views.RestaurantOrderForm = MeiweiApp.View.extend({
 	initialize: function() {
 		_.bindAll(this, 'renderHourList');
 		this.restaurant = this.model;
+		this.defaultValues = null;
 		this.hours = new MeiweiApp.Models.Hour();
-		this.pending = null;
 		this.model = null;
 	},
 	template: MeiweiApp.Templates['restaurant-order-form'],
@@ -62,22 +62,22 @@ MeiweiApp.Views.RestaurantOrderForm = MeiweiApp.View.extend({
 			var $option = $('<option></option>').val(item[0]).html(item[0] + ' ' + item[1]);
 			$select.append($option);
 		}
-		$select.val(this.pending.ordertime);
+		$select.val(this.defaultValues.ordertime);
 	},
 	render: function() {
 		if (MeiweiApp.pendingOrder == null) {
 			var today = new Date();
-			this.pending = {
+			this.defaultValues = {
 				orderdate: today.toJSON().slice(0, 10),
 				ordertime: '19:00',
 				personnum: 2
-			}
+			};
 		} else {
-			this.pending = MeiweiApp.pendingOrder.toJSON()
+			this.defaultValues = MeiweiApp.pendingOrder.toJSON();
 		}
 		this.$el.html(this.template({
 			restaurant: this.restaurant.toJSON(),
-			order: this.pending
+			order: this.defaultValues
 		}));
 		this.hours.fetch({url: this.restaurant.get('hours'), async: false});
 		this.renderHourList();
@@ -85,6 +85,10 @@ MeiweiApp.Views.RestaurantOrderForm = MeiweiApp.View.extend({
 });
 
 MeiweiApp.Pages.RestaurantOrder = new (MeiweiApp.PageView.extend({
+	onClickLeftBtn: function() {
+		MeiweiApp.pendingOrder = null;
+		MeiweiApp.goBack();
+	},
 	events: {
 		'click .floorplan-select > header': 'selectSeat',
 		'click .product-select > header': 'selectProduct',
@@ -132,6 +136,10 @@ MeiweiApp.Pages.RestaurantOrder = new (MeiweiApp.PageView.extend({
 	},
 	submitOrder: function(e) {
 		e.preventDefault();
+		
+		var r = confirm("提交订单?")
+		if (r == false) return;
+
 		var newOrder = new MeiweiApp.Models.Order();
 		var products = _.reduce(MeiweiApp.ProductCart.models, function(products, item){ 
 			return products + item.id + ',';
@@ -140,7 +148,7 @@ MeiweiApp.Pages.RestaurantOrder = new (MeiweiApp.PageView.extend({
 		    member: MeiweiApp.me.id,
 		    restaurant: this.restaurant.id,
 		    orderdate: this.$('input[name=orderdate]').val(),
-		    ordertime: this.$('input[name=ordertime]').val(),
+		    ordertime: this.$('select[name=ordertime]').val(),
 		    personnum: this.$('input[name=personnum]').val(),
 		    //contactname: this.$('input[name=contactname]').val() + this.$('input[name=contactgender]').val(),
 		    contactname: this.$('input[name=contactname]').val(),
@@ -149,6 +157,10 @@ MeiweiApp.Pages.RestaurantOrder = new (MeiweiApp.PageView.extend({
 		    other: this.$('textarea[name=other]').text(),
 		    products: products.slice(0, -1)
 		});
+		if (MeiweiApp.pendingOrder != null) {
+			MeiweiApp.pendingOrder.cancel();
+			MeiweiApp.pendingOrder = null;
+		}
 		newOrder.save({}, {
 			error: function(model, xhr, options) {
 				var errors = JSON.parse(xhr.responseText);

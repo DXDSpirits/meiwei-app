@@ -1,10 +1,19 @@
 
 MeiweiApp.Views.OrderDetail = MeiweiApp.ModelView.extend({
-	template: MeiweiApp.Templates['order-detail']
+	template: MeiweiApp.Templates['order-detail'],
+	events: {
+		'click .btn-cancel': 'cancelOrder'
+	},
+	cancelOrder: function() {
+		this.model.cancel({success: function() {
+			MeiweiApp.goTo('OrderList');
+		}});
+	}
 });
 
 MeiweiApp.Pages.OrderDetail = new (MeiweiApp.PageView.extend({
 	initPage: function() {
+		_.bindAll(this, 'renderAll');
 		this.order = new MeiweiApp.Models.Order();
 		this.views = {
 			orderDetail: new MeiweiApp.Views.OrderDetail({
@@ -15,19 +24,29 @@ MeiweiApp.Pages.OrderDetail = new (MeiweiApp.PageView.extend({
 	},
 	onClickRightBtn: function() {
 		MeiweiApp.pendingOrder = this.order;
-		MeiweiApp.ProductCart.reset(this.order.get('product_items'))
+		MeiweiApp.ProductCart.reset(this.order.get('product_items'));
 		MeiweiApp.goTo('RestaurantOrder', {
 			restaurant: null,
 			restaurantId: this.order.get('restaurant')
 		});
 	},
+	renderAll: function() {
+		if (this.order.get('editable')) {
+			this.$('.header-btn-right i').attr('class', 'icon-edit');
+		} else {
+			this.$('.header-btn-right i').attr('class', 'icon-blank');
+			this.$('.btn-cancel').remove();
+			this.onClickRightBtn = function() {}
+		}
+		this.showPage();
+	},
 	render: function() {
 		if (this.options.order) {
 			this.order.set(this.options.order);
-			this.showPage();
+			this.renderAll();
 		} else if (this.options.orderId) {
-			this.order.set({id: this.options.orderId})
-			this.order.fetch({ success: this.showPage })
+			this.order.set({id: this.options.orderId});
+			this.order.fetch({ success: this.renderAll });
 		}
 	}
 }))({el: $("#view-order-detail")});

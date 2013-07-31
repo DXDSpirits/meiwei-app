@@ -3,11 +3,14 @@ MeiweiApp.Models.Order = MeiweiApp.Model.extend({
 	urlRoot: MeiweiApp.configs.APIHost + '/orders/order/',
 	parse: function(response) {
 		response.ordertime = response.ordertime.slice(0, 5);
+		response.editable = (response.status < 20);
 		return response;
 	},
-	cancel: function() {
+	cancel: function(options) {
+		options = options || {};
 		var url = this.url() + 'cancel/';
-		Backbone.sync('update', this, {url: url});
+		options.url = url;
+		Backbone.sync('update', this, options);
 	}
 });
 
