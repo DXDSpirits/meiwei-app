@@ -62,8 +62,8 @@ MeiweiApp.Views.FloorplanList = MeiweiApp.CollectionView.extend({
 			var self = this;
 			$.get(plan.get('path'), function(data) {
 				var svg = $(data).find('svg');
-				$(svg).attr('width', '100%');
-				$(svg).attr('height', '400px');
+				$(svg).attr('max-width', '100%');
+				$(svg).attr('max-height', '100%');
 				self.$el.html(svg);
 				self.model.trigger('select');
 			});
@@ -101,10 +101,11 @@ MeiweiApp.Pages.RestaurantFloorplans = new (MeiweiApp.PageView.extend({
 		var myScroll = new IScroll('.svg-canvas', {
 			scrollX: true,
 			freeScroll: true,
-			zoom: true,
+			/*zoom: true,
 			mouseWheel: true,
-			wheelAction: 'zoom',
-			preventDefault: false
+			wheelAction: 'zoom',*/
+			//preventDefault: false
+			click: true
 		});
 	},
 	render: function() {

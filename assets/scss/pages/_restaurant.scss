@@ -243,16 +243,16 @@
 
 #view-restaurant-floorplans {
 	svg {
-		[status="available"] { fill: #FFFFFF }
-		[status="selected"] { fill: #8B7D73 }
-		[status="occupied"] { fill: #E6E6E6 }
+		[status="available"] { fill: transparent; }
+		[status="selected"] { fill: #8B7D73; }
+		[status="occupied"] { fill: #E6E6E6; }
 	}
 	.svg-canvas {
 		@include flexible();
 		width: 100%;
 		overflow: hidden;
 		.svg-canvas-inner {
-			width: 100%;
+			@include size(400px, 800px);
 		}
 		.svg-item {
 			opacity: 1;
