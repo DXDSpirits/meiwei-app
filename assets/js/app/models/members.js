@@ -52,13 +52,15 @@ MeiweiApp.me = new (MeiweiApp.Models.Member.extend({
 	logout: function(callback) {
 		Backbone.BasicAuth.clear();
 	},
-	register: function(email, moblie, password, callback) {
-		$.ajax({
-			async: false, type: 'POST',
-			url: MeiweiApp.configs.APIHost + '/members/register/',
-			data: {"email": email, "mobile": mobile, "password": password},
-			success: function(data) {
-				MeiweiApp.me.login(data.username, password);
+	register: function(username, password, callback) {
+		var newUser = new MeiweiApp.Models.Member({ username: username, password: password });
+		newUser.save({}, {
+			async: false, 
+			success: function(model, response, options) {
+				MeiweiApp.me.login(username, password);
+			},
+			error: function(model, xhr, options) {
+				
 			}
 		});
 	}
