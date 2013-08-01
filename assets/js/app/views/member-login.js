@@ -2,24 +2,26 @@
 MeiweiApp.Views.MemberLoginForm = MeiweiApp.View.extend({
 	events: {
 		'click .login-button': 'login',
-		'click .register-button': 'register'
+		'click .register-button': 'register',
 	},
 	login: function(e) {
 		e.preventDefault();
 		username = this.$('input[name=username]').val();
 		password = this.$('input[name=password]').val();
 		MeiweiApp.me.login(username, password);
+		
 	},
 	register: function(e) {
 		e.preventDefault();
 		username = this.$('input[name=username]').val();
 		password = this.$('input[name=password]').val();
 		MeiweiApp.me.register(username, password);
+				
 	},
 	template: MeiweiApp.Templates['member-login-form'],
 	render: function() {
 		this.$el.html(this.template);
-		this.$('.info-text').html(123);
+		//this.$('.info-text').html(123);
 	}
 });
 
@@ -30,6 +32,16 @@ MeiweiApp.Pages.MemberLogin = new (MeiweiApp.PageView.extend({
 		this.listenTo(MeiweiApp.me, 'login', function() {
 			MeiweiApp.me.profile.fetch(); // Validate login.
 			this.ref.go();
+		});
+		this.listenTo(MeiweiApp.me,'errorMessage', function(xhr) {
+		 var error = JSON.parse(xhr.responseText);
+		 console.log(error);
+		 for (var k in error){
+		 	errorEle = k;
+		 	errorMsg = error[k];
+		 	break;
+		 }
+	     this.$('.info-text').html(errorEle + ": " + errorMsg);
 		});
 	},
 	onClickLeftBtn: function() { MeiweiApp.goTo('Home'); },
