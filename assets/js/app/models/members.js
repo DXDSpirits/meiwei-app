@@ -45,24 +45,23 @@ MeiweiApp.me = new (MeiweiApp.Models.Member.extend({
 		if (this.contacts == null) this.contacts = new MeiweiApp.Collections.Contacts();
 		if (this.profile == null) this.profile = new MeiweiApp.Models.Profile();
 	},
-	login: function(username, password, callback) {
-		Backbone.BasicAuth.set(username, password);
-		this.trigger('login');
-				
+	login: function(auth, options) {
+		Backbone.BasicAuth.set(auth.username, auth.password);
+		this.profile.clear();
+		this.profile.fetch({
+			success: options.success,
+			error: options.error
+		});
 	},
 	logout: function(callback) {
 		Backbone.BasicAuth.clear();
 	},
-	register: function(username, password, callback) {
+	register: function(auth, options) {
 		var newUser = new MeiweiApp.Models.Member({ username: username, password: password });
 		newUser.save({}, {
 			async: false, 
-			success: function(model, response, options) {
-				MeiweiApp.me.login(username, password);
-			},
-			error: function(model, xhr, options) {
-				MeiweiApp.me.trigger('errorMessage',xhr);		   	
-			}
+			success: options.success,
+			error: options.error
 		});
 	}
 }));

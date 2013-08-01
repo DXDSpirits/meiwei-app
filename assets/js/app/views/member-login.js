@@ -4,24 +4,44 @@ MeiweiApp.Views.MemberLoginForm = MeiweiApp.View.extend({
 		'click .login-button': 'login',
 		'click .register-button': 'register',
 	},
+	initialize: function() {
+		_.bindAll(this, 'displayError', 'onRegisterSuccess');
+	},
+	displayError: function(model, xhr, options) {
+		var error = JSON.parse(xhr.responseText);
+		for (var k in error) { $infoText.html(error[k]); break; }
+	},
+	onRegisterSuccess: function() {
+		MeiweiApp.me.login({username: username, password: password}, {
+			success: this.onLoginSuccess,
+			error: this.displayError
+		});
+	},
+	onLoginSuccess: function() {
+		MeiweiApp.Pages.MemberLogin.ref.go();
+	},
 	login: function(e) {
 		e.preventDefault();
 		username = this.$('input[name=username]').val();
 		password = this.$('input[name=password]').val();
-		MeiweiApp.me.login(username, password);
-		
+		MeiweiApp.me.login({username: username, password: password}, {
+			success: this.onLoginSuccess,
+			error: this.displayError
+		});
 	},
 	register: function(e) {
 		e.preventDefault();
 		username = this.$('input[name=username]').val();
 		password = this.$('input[name=password]').val();
-		MeiweiApp.me.register(username, password);
-				
+		$infoText = this.$('.info-text');
+		MeiweiApp.me.register({username: username, password: password}, {
+			success: this.onRegisterSuccess,
+			error: this.displayError
+		});
 	},
 	template: MeiweiApp.Templates['member-login-form'],
 	render: function() {
-		this.$el.html(this.template);
-		//this.$('.info-text').html(123);
+		this.$el.html(this.template());
 	}
 });
 
@@ -29,20 +49,6 @@ MeiweiApp.Pages.MemberLogin = new (MeiweiApp.PageView.extend({
 	initPage: function() {
 		this.loginForm = new MeiweiApp.Views.MemberLoginForm({ el: this.$('.login-box') });
 		this.ref = MeiweiApp.Pages.Home
-		this.listenTo(MeiweiApp.me, 'login', function() {
-			MeiweiApp.me.profile.fetch(); // Validate login.
-			this.ref.go();
-		});
-		this.listenTo(MeiweiApp.me,'errorMessage', function(xhr) {
-		 var error = JSON.parse(xhr.responseText);
-		 console.log(error);
-		 for (var k in error){
-		 	errorEle = k;
-		 	errorMsg = error[k];
-		 	break;
-		 }
-	     this.$('.info-text').html(errorEle + ": " + errorMsg);
-		});
 	},
 	onClickLeftBtn: function() { MeiweiApp.goTo('Home'); },
 	render: function() {
