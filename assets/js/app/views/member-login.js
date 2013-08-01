@@ -19,6 +19,7 @@ MeiweiApp.Views.MemberLoginForm = MeiweiApp.View.extend({
 	template: MeiweiApp.Templates['member-login-form'],
 	render: function() {
 		this.$el.html(this.template);
+		this.$('.info-text').html(123);
 	}
 });
 

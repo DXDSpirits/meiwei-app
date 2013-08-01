@@ -79,8 +79,6 @@ input[type="color"],
 	}
 }
 
-
-
 // Textarea
 textarea {
 	height: auto;
@@ -89,6 +87,11 @@ textarea {
 	text-indent: 0;
 }
 
+
+form .info-text {
+	margin: 10px 0;
+	font-size: $fontSizeMini;
+}
 
 //radio-button
 .control-group.switch {
