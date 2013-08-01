@@ -41,11 +41,11 @@ MeiweiApp.Pages.ProductPurchase = new (MeiweiApp.PageView.extend({
 				el: this.$('.scroll-inner')
 			})
 		};
-		this.carouselScrolls = []
 	},
 	onClickLeftBtn: function() { MeiweiApp.goBack(); },
 	onClickRightBtn: function() { MeiweiApp.goBack(); },
 	carousel: function() {
+		this.carouselScrolls = this.carouselScrolls || [];
 		for (var i=0; i<this.carouselScrolls.length; i++) this.carouselScrolls[i].destroy();
 		this.carouselScrolls.length = 0;
 		this.products.forEach(function(product) {
@@ -66,6 +66,17 @@ MeiweiApp.Pages.ProductPurchase = new (MeiweiApp.PageView.extend({
 
 /******************************************************************************************/
 
+MeiweiApp.Views.ProductItemDetail = MeiweiApp.ModelView.extend({
+	events: { "click .carousel-item": "onSelectItem" },
+	template: MeiweiApp.Templates['product-item-detail'],
+	render: function() {
+		this.$el.html(this.template(this.model.toJSON()));
+		this.$el.attr('data-item', this.model.id);
+		this.$el.addClass('show');
+		return this;
+	}
+});
+
 MeiweiApp.Views.ProductRedeemList = MeiweiApp.Views.ProductPurchaseList.extend({
 	ModelView: MeiweiApp.Views.ProductModelView.extend({
 		render: function() {
@@ -78,15 +89,29 @@ MeiweiApp.Views.ProductRedeemList = MeiweiApp.Views.ProductPurchaseList.extend({
 		onSelectItem: function(e) {
 			var $el = $(e.currentTarget);
 			var item = this.model.items.get($el.attr('data-item'));
-			console.log(item);
+			var detail = new MeiweiApp.Views.ProductItemDetail({
+				model: item,
+				el: MeiweiApp.Pages.ProductRedeem.$('.item-detail')
+			});
+			detail.render();
 		}
 	})
 });
 
 MeiweiApp.Pages.ProductRedeem = new (MeiweiApp.Pages.ProductPurchase.constructor.extend({
+	initPage: function() {
+		_.bindAll(this, 'carousel');
+		this.products = new MeiweiApp.Collections.Products();
+		this.views = {
+			productList: new MeiweiApp.Views.ProductRedeemList({
+				collection: this.products,
+				el: this.$('.scroll-inner')
+			})
+		};
+	},
 	render: function() {
 		$.when(
-			this.products.fetch({ data: {category: 2}, reset: true, success: this.carousel })
+			this.products.fetch({ data: {category: 1}, reset: true, success: this.carousel })
 		).then(this.showPage);
 	}
 }))({el: $("#view-product-redeem")});

@@ -75,16 +75,6 @@
 		margin: 5px 0;
 		text-align: center;
 		p { font-size: $fontSizeMini; }
-		.carousel-item {
-			position: relative;
-		}
-		.carousel-item.selected::after {
-			content: "";
-			@include icon-offset(5, 5);
-			position: absolute;
-			top: 1px;
-			right: 5px;
-		}
 	}
 	.viewport {
 		@include size(164px, 250px);
@@ -96,6 +86,29 @@
 	}
 	
 	@include carousel($carouselWidth: 150px);
+}
+
+#view-product-purchase .carousel-item.selected::after {
+	content: "";
+	@include icon-offset(5, 5);
+	position: absolute;
+	top: 1px;
+	right: 5px;
+}
+
+#view-product-redeem .item-detail {
+	position: fixed;
+	top: 65px;
+	left: 50%;
+	width: 250px;
+	height: 300px;
+	margin-left: -125px;
+	z-index: $zindexModal;
+	display: none;
+	&.show {
+		display: block;
+		@include animation(fadein .5s ease-in-out);
+	}
 }
 
 #view-attending {
