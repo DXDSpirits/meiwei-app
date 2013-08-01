@@ -69,10 +69,11 @@ MeiweiApp.goTo = function(pageName, options) {
 		MeiweiApp.history.active = next;
 		next.go(options);
 	}
+	if (pageName == 'Home') MeiweiApp.history.stack.length = 0;
 };
 
 MeiweiApp.goBack = function() {
-	if (!_.isEmpty(MeiweiApp.history.stack)) {
+	if (MeiweiApp.history.stack.length > 0) {
 		var prev = MeiweiApp.history.stack.pop();
 		MeiweiApp.history.active = prev;
 		prev.showPage();

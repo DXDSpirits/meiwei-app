@@ -34,6 +34,7 @@ MeiweiApp.Views.OrderPages = MeiweiApp.CollectionView.extend({
 });
 
 MeiweiApp.Pages.Attending = new (MeiweiApp.PageView.extend({
+	onClickLeftBtn: function() { MeiweiApp.goTo('Home'); },
 	initPage: function() {
 		this.orders = new MeiweiApp.Collections.Orders();
 		this.views = {

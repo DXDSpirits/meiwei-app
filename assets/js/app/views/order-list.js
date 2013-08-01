@@ -14,6 +14,7 @@ MeiweiApp.Views.OrderList = MeiweiApp.CollectionView.extend({
 });
 
 MeiweiApp.Pages.OrderList = new (MeiweiApp.PageView.extend({
+	onClickLeftBtn: function() { MeiweiApp.goTo('MemberCenter'); },
 	events: {
 		'click .filter-pending': 'getPendingOrders',
 		'click .filter-fulfilled': 'getFulfilledOrders'

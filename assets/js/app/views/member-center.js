@@ -20,6 +20,7 @@ MeiweiApp.Views.FavoriteRestoCarousel = MeiweiApp.CollectionView.extend({
 
 
 MeiweiApp.Pages.MemberCenter = new (MeiweiApp.PageView.extend({
+	onClickLeftBtn: function() { MeiweiApp.goTo('Home'); },
 	events: {
 		'click .member-center-nav > li:nth-child(1)': 'gotoMyProfile',
 		'click .member-center-nav > li:nth-child(2)': 'gotoMyOrder',

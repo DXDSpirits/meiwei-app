@@ -32,7 +32,10 @@ MeiweiApp.bindBasicAuth = function() {
 	Backbone.sync = function(method, model, options) {
 		if (typeof token !== "undefined" && token !== null) {
 			options.headers = options.headers || {};
-			_.extend(options.headers, { 'Authorization': 'Basic ' + token });
+			_.extend(options.headers, {
+				'Authorization': 'Basic ' + token,
+				'Accept-Language': 'zh'
+			});
 		}
 		return originalSync.call(model, method, model, options);
 	};

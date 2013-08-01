@@ -22,6 +22,7 @@ MeiweiApp.Views.FavoriteList = MeiweiApp.CollectionView.extend({
 });
 
 MeiweiApp.Pages.MemberFavorites = new (MeiweiApp.PageView.extend({
+	onClickLeftBtn: function() { MeiweiApp.goTo('MemberCenter'); },
 	initPage: function() {
 		this.favorites = new MeiweiApp.Collections.Favorites();
 		this.views = {
