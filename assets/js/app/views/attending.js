@@ -19,6 +19,16 @@ MeiweiApp.Views.OrderPages = MeiweiApp.CollectionView.extend({
 	 		var link = this.getWeiboLink(screen, document, encodeURIComponent, '', '', 
 	 		pic, content, '', 'utf-8');
 	 		var ref = window.open( link ,'_blank', 'location=no');
+		},
+		render: function() {
+			this.$el.html(this.template(this.model.toJSON()));
+			this.$('.section-qrcode').qrcode({
+				render	: "canvas",
+				text	: this.model.get('orderno'),
+				height: 130,
+				width:  130
+			});	
+			return this;
 		}
 	})
 });

@@ -131,8 +131,10 @@
 			@include flex-box($pack: end);
 			.section-qrcode {
 				 @include flex-box($pack: center);
-		         @include square(145px);
-		         @include center-block();   
+		         @include square(150px);
+		         @include center-block();
+		         padding: 10px;
+		         background-color: $white;
 			}
 			> header {
 				h1 { @include text-overflow(); }
