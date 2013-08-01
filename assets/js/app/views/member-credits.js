@@ -8,7 +8,7 @@ MeiweiApp.Views.CreditList = MeiweiApp.CollectionView.extend({
 
 MeiweiApp.Pages.MemberCredits = new (MeiweiApp.PageView.extend({
 	onClickLeftBtn: function() { MeiweiApp.goTo('MemberCenter'); },
-	onClickRightBtn: function() { MeiweiApp.goTo('ProductPurchase'); },
+	onClickRightBtn: function() { MeiweiApp.goTo('ProductRedeem'); },
 	initPage: function() {
 		this.credits = new MeiweiApp.Collections.Credits();
 		this.views = {

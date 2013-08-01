@@ -35,7 +35,7 @@
 		> img {
 			@include center-block();
 			@include border-radius(10px);
-			//border: 3px solid $brownLight;
+			border: 1px solid $brownLight;
 			height: 100%;
 			width: 100%;
 		}
