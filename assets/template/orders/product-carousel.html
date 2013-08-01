@@ -1,6 +1,6 @@
 <header>
 	<h1>{{ product.name }}</h1>
-	<p>{{ product.remark }}</p>
+	<p>{{ product.description }}</p>
 </header>
 <section class="viewport">
 	<div class="carousel" data-item="{{ product.id }}">
@@ -8,8 +8,8 @@
 			{{ #items }}
 			<div class="carousel-item {{ #selected }}selected{{ /selected }}" data-item="{{ id }}">
 				<div class="tag">
-					<p>￥{{ price }}</p>
-					<p>{{name}} {{ model }}</p>
+					<p>{{ name }}</p>
+					<p>{{ model }}</p>
 				</div>
 				<img src="{{ picture }}" alt="">
 			</div>

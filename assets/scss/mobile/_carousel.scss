@@ -19,9 +19,11 @@
 		> .tag {
 			display: block;
 			position: absolute;
-			bottom: 0;
-			left:6%;
-			width: 88%;
+			bottom: 5px;
+			width: $carouselWidth - 20px;
+			padding: 5px;
+			@include border-bottom-right-radius(10px);
+			@include border-bottom-left-radius(10px);
 			min-height: 2 * ($fontSizeMini + 2px);
 			background-color: $brown;
 			opacity: 0.9;
