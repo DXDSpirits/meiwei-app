@@ -1,6 +1,12 @@
 
 MeiweiApp.Models.ProductItem = MeiweiApp.Model.extend({
-	urlRoot: MeiweiApp.configs.APIHost + '/restaurants/productitem/'
+	urlRoot: MeiweiApp.configs.APIHost + '/restaurants/productitem/',
+	purchase: function(options) {
+		options = options || {};
+		var url = this.url() + 'purchase/';
+		options.url = url;
+		Backbone.sync('update', this, options)
+	}
 });
 
 MeiweiApp.Collections.ProductItems = MeiweiApp.Collection.extend({
@@ -9,11 +15,11 @@ MeiweiApp.Collections.ProductItems = MeiweiApp.Collection.extend({
 
 MeiweiApp.Models.Product = MeiweiApp.Model.extend({
 	initialize: function() {
-		if (this.items == null) this.items = new MeiweiApp.Collections.ProductItems();
+		this.items = this.items || new MeiweiApp.Collections.ProductItems();
 	},
 	urlRoot: MeiweiApp.configs.APIHost + '/restaurants/product/',
 	parse: function(response) {
-		this.initialize();
+		this.items = this.items || new MeiweiApp.Collections.ProductItems();
 		this.items.reset(response.productitem_set)
 		response.productitem_set = null;
 		return response;

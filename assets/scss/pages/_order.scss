@@ -96,21 +96,6 @@
 	right: 5px;
 }
 
-#view-product-redeem .item-detail {
-	position: fixed;
-	top: 65px;
-	left: 50%;
-	width: 250px;
-	height: 300px;
-	margin-left: -125px;
-	z-index: $zindexModal;
-	display: none;
-	&.show {
-		display: block;
-		@include animation(fadein .5s ease-in-out);
-	}
-}
-
 #view-attending {
 	.viewport {
 		@include size(100%, 300px);

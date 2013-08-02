@@ -1,0 +1,46 @@
+
+.dialog {
+	position: absolute;
+	top: 65px;
+	left: 50%;
+	width: 250px;
+	box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
+	@include border-radius(10px);
+	overflow: hidden;
+	margin-left: -125px;
+	z-index: $zindexModal;
+	background-color: $white;
+
+	> header {
+		width: auto;
+		height: 40px;
+		padding: 10px;
+		background-color: $brown;
+		color: $white;
+		text-align: center;
+		h1 { @include text-overflow(); }
+	}
+
+	.button-group {
+        padding: 5px;
+    }
+	.content {
+		min-height: 120px;
+		padding: 5px;
+		img { @include square(240px); }
+		p {
+			margin: 10px 0 0;
+			font-size: $fontSizeMini;
+		}
+	}
+}
+
+#dialog-overlay {
+	width: 100%;
+	height: 100%;
+	position: fixed;
+	top: 0;
+	left: 0;
+	background-color: rgba($brownLight, 0.7);
+	z-index: $zindexModal - 1;
+}

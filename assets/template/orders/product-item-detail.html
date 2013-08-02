@@ -1,2 +1,18 @@
-<img src="{{ picture }}" alt="">
-<p>{{ name }}</p>
+<header>
+	<h1>{{ name }}({{ model }})</h1>
+</header>
+<div class="content">
+	<img src="{{ picture }}" alt="">
+	<p>
+		{{ description }}
+	</p>
+	<p class="info-text hide">兑换成功，剩余积分: <span></span></p>
+</div>
+<div class="action button-group">
+	<button class="btn-cancel">
+		关闭
+	</button>
+	<button class="btn-confirm btn-inverse">
+		购买
+	</button>
+</div>

@@ -23,7 +23,10 @@ MeiweiApp.Collections.Contacts = MeiweiApp.Collection.extend({
 });
 
 MeiweiApp.Models.Credit = MeiweiApp.Model.extend({
-	urlRoot: MeiweiApp.configs.APIHost + '/members/credit/'
+	urlRoot: MeiweiApp.configs.APIHost + '/members/credit/',
+	parse: function(response) {
+		response.time_created = (new Date(response.time_created)).toLocaleString();
+	}
 });
 
 MeiweiApp.Collections.Credits = MeiweiApp.Collection.extend({

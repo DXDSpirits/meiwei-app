@@ -66,13 +66,41 @@ MeiweiApp.Pages.ProductPurchase = new (MeiweiApp.PageView.extend({
 
 /******************************************************************************************/
 
-MeiweiApp.Views.ProductItemDetail = MeiweiApp.ModelView.extend({
-	events: { "click .carousel-item": "onSelectItem" },
+MeiweiApp.Views.ProductItemDetail = MeiweiApp.View.extend({
+	className: 'dialog',
+	initialize: function() {
+		_.bindAll(this, 'closeDialog', 'confirmPurchase')
+	},
+	events: {
+		'click .btn-cancel': 'closeDialog',
+		'click .btn-confirm': 'confirmPurchase'
+	},
+	closeDialog: function() {
+		this.remove();
+		$('#dialog-overlay').hide();
+	},
+	confirmPurchase: function() {
+		var self = this;
+		this.model.purchase({
+			success: function(model, response, options) {
+				self.$('.btn-confirm').remove();
+				self.$('.content .info-text span').html(model.balance);
+				self.$('.content .info-text').show();
+			},
+			error: function(model, response, options) {
+				var error = JSON.parse(model.responseText);
+				self.$('.btn-confirm').remove();
+				self.$('.content .info-text').html(error.detail);
+				self.$('.content .info-text').show();
+			}
+		});
+	},
 	template: MeiweiApp.Templates['product-item-detail'],
 	render: function() {
 		this.$el.html(this.template(this.model.toJSON()));
-		this.$el.attr('data-item', this.model.id);
-		this.$el.addClass('show');
+		$('body').append(this.el);
+		$('#dialog-overlay').show();
+		this.delegateEvents();
 		return this;
 	}
 });
@@ -89,11 +117,10 @@ MeiweiApp.Views.ProductRedeemList = MeiweiApp.Views.ProductPurchaseList.extend({
 		onSelectItem: function(e) {
 			var $el = $(e.currentTarget);
 			var item = this.model.items.get($el.attr('data-item'));
-			var detail = new MeiweiApp.Views.ProductItemDetail({
-				model: item,
-				el: MeiweiApp.Pages.ProductRedeem.$('.item-detail')
-			});
-			detail.render();
+			var dialog = MeiweiApp.Pages.ProductRedeem.views.detailDialog;
+			dialog.remove();
+			dialog.model = item;
+			dialog.render();
 		}
 	})
 });
@@ -106,12 +133,13 @@ MeiweiApp.Pages.ProductRedeem = new (MeiweiApp.Pages.ProductPurchase.constructor
 			productList: new MeiweiApp.Views.ProductRedeemList({
 				collection: this.products,
 				el: this.$('.scroll-inner')
-			})
+			}),
+			detailDialog: new MeiweiApp.Views.ProductItemDetail()
 		};
 	},
 	render: function() {
 		$.when(
-			this.products.fetch({ data: {category: 1}, reset: true, success: this.carousel })
+			this.products.fetch({ data: {category: 2}, reset: true, success: this.carousel })
 		).then(this.showPage);
 	}
 }))({el: $("#view-product-redeem")});

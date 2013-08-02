@@ -1,28 +1,113 @@
 <!DOCTYPE html>
 <!--[if IEMobile 7 ]>    <html class="no-js iem7"> <![endif]-->
-<!--[if (gt IEMobile 7)|!(IEMobile)]><!--> <html class="no-js"> <!--<![endif]-->
-    <head>
-        <meta charset="utf-8">
-        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-        <title>Meiwei</title>
-        <meta name="description" content="">
-        <meta name="HandheldFriendly" content="True">
-        <meta name="MobileOptimized" content="320">
-        <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=0">
-        <meta http-equiv="cleartype" content="on">
-        
-        <!-- This script prevents links from opening in Mobile Safari. https://gist.github.com/1042026 -->
-        <script>(function(a,b,c){if(c in b&&b[c]){var d,e=a.location,f=/^(a|html)$/i;a.addEventListener("click",function(a){d=a.target;while(!f.test(d.nodeName))d=d.parentNode;"href"in d&&(d.href.indexOf("http")||~d.href.indexOf(e.host))&&(a.preventDefault(),e.href=d.href)},!1)}})(document,window.navigator,"standalone")</script>
+<!--[if (gt IEMobile 7)|!(IEMobile)]><!-->
+<html class="no-js">
+	<!--<![endif]-->
+	<head>
+		<meta charset="utf-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+		<title>Meiwei</title>
+		<meta name="description" content="">
+		<meta name="HandheldFriendly" content="True">
+		<meta name="MobileOptimized" content="320">
+		<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=0">
+		<meta http-equiv="cleartype" content="on">
 
-        <link rel="stylesheet" href="/assets/css/mobile.css">
-        <script src="/assets/js/vendor/modernizr-2.6.2.min.js"></script>
-        <style>
+		<!-- This script prevents links from opening in Mobile Safari. https://gist.github.com/1042026 -->
+		<script>
+			(function(a, b, c) {
+				if ( c in b && b[c]) {
+					var d, e = a.location, f = /^(a|html)$/i;
+					a.addEventListener("click", function(a) {
+						d = a.target;
+						while (!f.test(d.nodeName))
+						d = d.parentNode;
+						"href" in d && (d.href.indexOf("http") || ~d.href.indexOf(e.host)) && (a.preventDefault(), e.href = d.href)
+					}, !1)
+				}
+			})(document, window.navigator, "standalone")
+		</script>
+
+		<link rel="stylesheet" href="/assets/css/mobile.css">
+		<script src="/assets/js/vendor/modernizr-2.6.2.min.js"></script>
+		<style>
+            .dialog {
+                position: absolute;
+                top: 40%;
+                left: 40%;
+                min-width: 150px;
+                min-height: 155px;
+                z-index: 1000;
+                box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
+            }
+
+            .dialog .header {
+                width: auto;
+                height: 35px;
+                padding: 0px 35px 5px 5px;
+                font-size: 18px;
+                white-space: nowrap;
+                overflow: hidden;
+                background-color: #2D89EF;
+                color: #fff;
+                border: 1px solid #2D89EF;
+                border-bottom: 0 none;
+            }
+            .dialog .header div {
+                position: absolute;
+                right: -5px;
+                top: 5px;
+            }
+
+            .dialog .header button {
+                width: 24px !important;
+                height: 24px !important;
+                min-height: 24px;
+                min-width: 24px;
+            }
+
+            .dialog .header button [class^="icon-"] {
+                font-size: 11px;
+            }
+
+            .dialog .content {
+                min-height: 85px;
+                padding: 20px;
+                background-color: #FFFFFF;
+                border-left: 1px solid rgba(0, 0, 0, 0.2);
+                border-right: 1px solid rgba(0, 0, 0, 0.2);
+            }
+
+            .dialog .action {
+                position: relative;
+                bottom: 0;
+                width: auto;
+                height: 40px;
+                font-size: 18px;
+                text-align: center;
+                white-space: nowrap;
+                overflow: hidden;
+                background-color: #FFFFFF;
+                border-left: 1px solid rgba(0, 0, 0, 0.2);
+                border-right: 1px solid rgba(0, 0, 0, 0.2);
+                border-bottom: 1px solid rgba(0, 0, 0, 0.2);
+            }
+
+            .dialog #dialogOverlay {
+                width: 100%;
+                height: 100%;
+                position: fixed;
+                top: 0;
+                left: 0;
+                background-color: rgba(235, 235, 235, 0.5);
+                z-index: 1;
+            }
+
             .box {
-                
+
                 border: 1px solid #000000;
                 height: 300px;
                 width: 300px;
-                
                 display: -webkit-box;
                 -webkit-box-orient: vertical;
                 -webkit-box-direction: normal;
@@ -34,63 +119,74 @@
                 width: 50px;
                 border: 1px solid #000000;
             }
-            
+
             box-inner:nth-child(2) {
             }
-            
+
             .outer {
-            	width: 100px;
-            	height: 100px;
-            	padding: 10px;
-            	-webkit-box-sizing: border-box;
-            	border: 1px solid #000;
+                width: 100px;
+                height: 100px;
+                padding: 10px;
+                -webkit-box-sizing: border-box;
+                border: 1px solid #000;
             }
-            
+
             .inner {
-            	height: 100%;
-            	border: 1px solid #000;
-            	-webkit-box-sizing: border-box;
+                height: 100%;
+                border: 1px solid #000;
+                -webkit-box-sizing: border-box;
             }
-            
-        </style>
-    </head>
-    <body style="background-color: white;">
-        <!-- Page content Begin -->
-        
-        <div class="outer">
-        	<div class="inner">
-        		
-        	</div>
-        </div>
-        
-        <div class="box">
-            <div class="box-inner"></div>
-            <div class="box-inner"></div>
-            <div class="box-inner"></div>
-            <div class="box-inner"></div>
-            <div class="box-inner"></div>
-            <div class="box-inner"></div>
-            <div class="box-inner"></div>
-            <div class="box-inner"></div>
-            <div class="box-inner"></div>
-        </div>
-        
-        <i class="icon-member"></i>
-        <i class="icon-back"></i>
-        <i class="icon-cancel"></i>
-        <i class="icon-confirm"></i>
-        <i class="icon-edit"></i>
-        <i class="icon-plus"></i>
-        <i class="icon-setting"></i>
-        <i class="icon-share"></i>
-        <i class="icon-locate"></i>
-        <i class="icon-favorite"></i>
-        <i class="icon-map-marker"></i>
-        
-        <!-- Page content End -->
-        
-        <script src="/assets/js/vendor/jquery-2.0.2.min.js"></script>
-        <script src="/assets/js/plugin/helper.js"></script>
-        <script src="/assets/js/plugin/plugins.js"></script>
-    </body>
+
+		</style>
+	</head>
+	<body style="background-color: white;">
+		<!-- Page content Begin -->
+
+		<div class="dialog">
+			<div class="header">
+				<div>哈哈</div>
+				<button>关闭</button>
+			</div>
+			<div class="content">
+				这是一个对话框
+			</div>
+			<div id="dialogOverlay"></div>
+		</div> 
+
+		<div class="outer">
+			<div class="inner">
+
+			</div>
+		</div>
+
+		<div class="box">
+			<div class="box-inner"></div>
+			<div class="box-inner"></div>
+			<div class="box-inner"></div>
+			<div class="box-inner"></div>
+			<div class="box-inner"></div>
+			<div class="box-inner"></div>
+			<div class="box-inner"></div>
+			<div class="box-inner"></div>
+			<div class="box-inner"></div>
+		</div>
+
+		<i class="icon-member"></i>
+		<i class="icon-back"></i>
+		<i class="icon-cancel"></i>
+		<i class="icon-confirm"></i>
+		<i class="icon-edit"></i>
+		<i class="icon-plus"></i>
+		<i class="icon-setting"></i>
+		<i class="icon-share"></i>
+		<i class="icon-locate"></i>
+		<i class="icon-favorite"></i>
+		<i class="icon-map-marker"></i>
+
+		<!-- Page content End -->
+
+		<script src="/assets/js/vendor/jquery-2.0.2.min.js"></script>
+		<script src="/assets/js/plugin/helper.js"></script>
+		<script src="/assets/js/plugin/plugins.js"></script>
+	</body>
 </html>
