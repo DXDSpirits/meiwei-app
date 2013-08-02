@@ -5,39 +5,37 @@ MeiweiApp.Views.MemberLoginForm = MeiweiApp.View.extend({
 		'click .register-button': 'register',
 	},
 	initialize: function() {
-		_.bindAll(this, 'displayError', 'onRegisterSuccess');
+		_.bindAll(this, 'displayError');
 	},
 	displayError: function(model, xhr, options) {
+		var $infoText = this.$('.info-text');
 		var error = JSON.parse(xhr.responseText);
 		for (var k in error) { $infoText.html(error[k]); break; }
-	},
-	onRegisterSuccess: function() {
-		MeiweiApp.me.login({username: username, password: password}, {
-			success: this.onLoginSuccess,
-			error: this.displayError
-		});
 	},
 	onLoginSuccess: function() {
 		MeiweiApp.Pages.MemberLogin.ref.go();
 	},
 	login: function(e) {
 		e.preventDefault();
-		username = this.$('input[name=username]').val();
-		password = this.$('input[name=password]').val();
-		MeiweiApp.me.login({username: username, password: password}, {
-			success: this.onLoginSuccess,
-			error: this.displayError
-		});
+		var username = this.$('input[name=username]').val();
+		var password = this.$('input[name=password]').val();
+		if (username.length > 0 && password.length > 0) {
+			MeiweiApp.me.login({ username : username, password : password }, {
+				success : this.onLoginSuccess,
+				error : this.displayError
+			});
+		}
 	},
 	register: function(e) {
 		e.preventDefault();
-		username = this.$('input[name=username]').val();
-		password = this.$('input[name=password]').val();
-		$infoText = this.$('.info-text');
-		MeiweiApp.me.register({username: username, password: password}, {
-			success: this.onRegisterSuccess,
-			error: this.displayError
-		});
+		var username = this.$('input[name=username]').val();
+		var password = this.$('input[name=password]').val();
+		if (username.length > 0 && password.length > 0) {
+			MeiweiApp.me.register({username: username, password: password}, {
+				success: this.login,
+				error: this.displayError
+			});
+		}
 	},
 	template: MeiweiApp.Templates['member-login-form'],
 	render: function() {
@@ -52,6 +50,7 @@ MeiweiApp.Pages.MemberLogin = new (MeiweiApp.PageView.extend({
 	},
 	onClickLeftBtn: function() { MeiweiApp.goTo('Home'); },
 	render: function() {
+		MeiweiApp.me.logout();
 		if (this.options.ref) this.ref = this.options.ref;
 		this.loginForm.render();
 		this.showPage();
