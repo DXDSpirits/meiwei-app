@@ -46,18 +46,14 @@
 			padding: 20px 17px 5px;
 			-webkit-border-image: url($tagImagePath) 13 stretch;
 			opacity: 0;
-			@include translate3d(0, -45px, 0);
+			@include translate3d(-100%, -45px, 0);
 			@include transition(all .35s ease-in-out);
 		}
 		&.hero article {
 			opacity: 1;
+			@include translate3d(0, -45px, 0);
 			@include transition(all .35s ease-in-out);
 		}
-		
-		/*&.hero + .recommend-list-item {
-			opacity: 0;
-			@include transition(opacity .35s ease-in-out);
-		}*/
 		
 		> header {
 			color: $white;
@@ -69,13 +65,20 @@
 			h1 { @include text-overflow(); }
 			border: 13px solid transparent;
 			-webkit-border-image: url($tagImagePath) 13 stretch;
+			opacity: 1;
 			@include translate3d(0, 0, 0);
 			@include transition(all .35s ease-in-out);
 		}
 		
 		&.hero > header {
+			opacity: 0;
 			@include translate3d(0, -45px, 0);
 			@include transition(all .35s ease-in-out);
 		}
+		
+		/*&.hero + .recommend-list-item {
+			opacity: 0;
+			@include transition(opacity .35s ease-in-out);
+		}*/
 	}
 }
