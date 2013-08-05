@@ -36,7 +36,8 @@ MeiweiApp.CollectionView = Backbone.View.extend({
 		this.$el.append(modelView.render().el);
 	},
 	addAll: function() {
-		this.modelViews = [];
+		for (var i=0; i<this.modelViews.length; i++) this.modelViews[i].remove();
+		this.modelViews.length = 0;
 		var $list = [];
 		this.collection.forEach(function(item) {
 			var modelView = new this.ModelView({model: item});

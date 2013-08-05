@@ -97,18 +97,19 @@ MeiweiApp.Pages.RestaurantSearch = new (MeiweiApp.PageView.extend({
 	},
 	
 	refreshOnScroll: function() {
-		if (this.restaurants.next != null && this.scroller.y < this.scroller.maxScrollY && !this.preventRefresh) {
+		if (this.restaurants.length < 30 && this.scroller.y < this.scroller.maxScrollY && !this.preventRefresh) {
 			this.preventRefresh = true;
 			this.$('.scroll-infinite .scroll-inner').attr('data-hint', '正在加载...');
 			var self = this;
 			setTimeout(function() {
 				self.restaurants.fetchNext({ remove: false, success: self.refreshList });
-			}, 3000);
+			}, 1000);
 		}
 	},
 	
 	refreshList: function() {
-		var hintText = this.restaurants.next == null ? '': '上拉可刷新';
+		//var hintText = this.restaurants.next == null ? '': '上拉可刷新';
+		var hintText = this.restaurants.length >= 30 ? '': '上拉可刷新';
 		this.$('.scroll-infinite .scroll-inner').attr('data-hint', hintText);
 		this.initScroller();
 		if (this.$('.flipper').hasClass('flip')) this.dropMarkers();
