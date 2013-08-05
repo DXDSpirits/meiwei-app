@@ -26,6 +26,7 @@ MeiweiApp.Models.Credit = MeiweiApp.Model.extend({
 	urlRoot: MeiweiApp.configs.APIHost + '/members/credit/',
 	parse: function(response) {
 		response.time_created = (new Date(response.time_created)).toLocaleString();
+		return response;
 	}
 });
 
