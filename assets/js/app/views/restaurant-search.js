@@ -92,12 +92,14 @@ MeiweiApp.Pages.RestaurantSearch = new (MeiweiApp.PageView.extend({
 				$(this).removeClass('expand');
 			}
 		});
-		_.bindAll(this, 'refreshList', 'filterRestaurant', 'bindCuisineFilters', 'bindCircleFilters', 'refreshOnScroll');
+		_.bindAll(this, 'refreshList', 'refreshOnScroll', 'filterRestaurant', 
+					'bindCuisineFilters', 'bindCircleFilters');
 		this.initializeMap();
 	},
 	
 	refreshOnScroll: function() {
-		if (this.restaurants.length < 30 && this.scroller.y < this.scroller.maxScrollY && !this.preventRefresh) {
+		if (this.restaurants.next != null && this.restaurants.length < 30 && 
+				!this.preventRefresh && this.scroller.y < this.scroller.maxScrollY) {
 			this.preventRefresh = true;
 			this.$('.scroll-infinite .scroll-inner').attr('data-hint', '正在加载...');
 			var self = this;
@@ -109,7 +111,7 @@ MeiweiApp.Pages.RestaurantSearch = new (MeiweiApp.PageView.extend({
 	
 	refreshList: function() {
 		//var hintText = this.restaurants.next == null ? '': '上拉可刷新';
-		var hintText = this.restaurants.length >= 30 ? '': '上拉可刷新';
+		var hintText = (this.restaurants.next == null || this.restaurants.length >= 30) ? '': '上拉可刷新';
 		this.$('.scroll-infinite .scroll-inner').attr('data-hint', hintText);
 		this.initScroller();
 		if (this.$('.flipper').hasClass('flip')) this.dropMarkers();
