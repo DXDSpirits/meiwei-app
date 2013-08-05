@@ -23,6 +23,12 @@ MeiweiApp.CollectionView = Backbone.View.extend({
 	},
 	removeOne: function(item) {
 		item.trigger('hide');
+		for (var i=0; i<this.modelViews.length; i++) {
+			if (this.modelViews[i].model.id == item.id) {
+				this.modelViews.splice(i, 1);
+				break;
+			}
+		}
 	},
 	addOne: function(item) {
 		var modelView = new this.ModelView({model: item});
@@ -30,16 +36,14 @@ MeiweiApp.CollectionView = Backbone.View.extend({
 		this.$el.append(modelView.render().el);
 	},
 	addAll: function() {
-		this.$el.empty();
 		this.modelViews = [];
-		//this.collection.forEach(this.addOne, this);
 		var $list = [];
 		this.collection.forEach(function(item) {
 			var modelView = new this.ModelView({model: item});
 			this.modelViews.push(modelView);
 			$list.push(modelView.render().el);
 		}, this);
-		this.$el.append($list);
+		this.$el.html($list);
 	},
 	render: function() {
 	    this.addAll();
