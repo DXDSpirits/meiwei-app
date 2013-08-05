@@ -60,7 +60,7 @@ MeiweiApp.me = new (MeiweiApp.Models.Member.extend({
 		Backbone.BasicAuth.clear();
 	},
 	register: function(auth, options) {
-		var newUser = new MeiweiApp.Models.Member({ username: username, password: password });
+		var newUser = new MeiweiApp.Models.Member({ username: auth.username, password: auth.password });
 		newUser.save({}, {
 			async: false, 
 			success: options.success,
