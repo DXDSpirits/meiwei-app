@@ -57,7 +57,10 @@ MeiweiApp.Pages.RestaurantSearch = new (MeiweiApp.PageView.extend({
 		this.$('.flipper').toggleClass('flip');
 		this.dropMarkers();
 	},
-	events: { 'submit >header>form': 'searchKeywords' },
+	events: {
+		'submit >header>form': 'searchKeywords',
+		'touchmove .iscroll': 'refreshOnScroll'
+	},
 	initPage: function() {
 		this.restaurants = new MeiweiApp.Collections.Restaurants();
 		this.cuisines = new MeiweiApp.Collections.Cuisines();
@@ -80,7 +83,7 @@ MeiweiApp.Pages.RestaurantSearch = new (MeiweiApp.PageView.extend({
 				model: new MeiweiApp.Models.Restaurant(),
 				el: this.$('.map-marker-info')
 			})
-		}
+		};
 		this.$('.collapsible').on('click', function() {
 			if (!$(this).hasClass('expand')) {
 				$(this).siblings().removeClass('expand');
@@ -89,27 +92,37 @@ MeiweiApp.Pages.RestaurantSearch = new (MeiweiApp.PageView.extend({
 				$(this).removeClass('expand');
 			}
 		});
-		_.bindAll(this, 'renderRestaurantList', 'filterRestaurant', 'bindCuisineFilters', 'bindCircleFilters');
+		_.bindAll(this, 'refreshList', 'filterRestaurant', 'bindCuisineFilters', 'bindCircleFilters', 'refreshOnScroll');
 		this.initializeMap();
 	},
-	renderRestaurantList: function() {
-		this.views.restaurantList.render();
-		this.dropMarkers();
+	
+	refreshOnScroll: function() {
+		if (this.restaurants.next != null && this.scroller.y < this.scroller.maxScrollY && !this.preventRefresh) {
+			this.preventRefresh = true;
+			this.$('.scroll-infinite .scroll-inner').attr('data-hint', '正在加载...');
+			var self = this;
+			setTimeout(function() {
+				self.restaurants.fetchNext({ remove: false, success: self.refreshList });
+			}, 3000);
+		}
 	},
+	
+	refreshList: function() {
+		var hintText = this.restaurants.next == null ? '': '上拉可刷新';
+		this.$('.scroll-infinite .scroll-inner').attr('data-hint', hintText);
+		this.initScroller();
+		if (this.$('.flipper').hasClass('flip')) this.dropMarkers();
+		this.preventRefresh = false;
+	},
+	
 	searchKeywords: function(e) {
 		e.preventDefault();
 		var keywords = this.$('>header input').val();
-		this.restaurants.fetch({
-			reset: true,
-			success: this.renderRestaurantList,
-			data: {
-				keywords: keywords
-			}
-		});
+		this.restaurants.fetch({ reset: true, success: this.refreshList, data: { keywords: keywords } });
 		this.$('>header input').blur();
 	},
 	filterRestaurant: function(filter) {
-		this.restaurants.fetch({ reset: true, success: this.renderRestaurantList, data: filter });
+		this.restaurants.fetch({ reset: true, success: this.refreshList, data: filter });
 	},
 	bindCuisineFilters: function(cuisines, response, options) {
 		var bindFilter = function(cuisine) {
@@ -130,32 +143,16 @@ MeiweiApp.Pages.RestaurantSearch = new (MeiweiApp.PageView.extend({
 	
 	/*********************************************/
 	dropMarkers: function () {
-		var neighborhoods = [];
-		var view =[];
-		
+		var neighborhoods = [], view =[];
 		this.restaurants.forEach(function(item) {
 			var coord = item.get('coordinate');
-            var latlng = new BMap.Point(coord.longitude / 100000.0 , coord.latitude / 100000.0 );
+            var latlng = new BMap.Point(coord.longitude / 100000.0 , coord.latitude / 100000.0);
 			neighborhoods.push({latlng: latlng, resto: item.toJSON()});
 			view.push(latlng);
 		}, this);
-		
 		this.map.setViewport(view);
-		
-		if(neighborhoods.length == 1) {
-			this.map.setZoom(18);
-		} else if (neighborhoods.length<5) {
-			this.map.setZoom(15);
-		} else {
-			this.map.setZoom(12);
-		}
-		
-		this.map.setCenter(neighborhoods.length>0 ? neighborhoods[0].latlng : new BMap.Point(121.491, 31.233) );
-		
-		//for (var i = 0; i < this.markers.length; i++) this.markers[i].setMap(null);
-		this.markers = [];
+		this.markers.length = 0;
 		this.map.clearOverlays();
-		
 		for (var i = 0; i < neighborhoods.length; i++) {
 			var marker = new BMap.Marker(neighborhoods[i].latlng , {enableMassClear:true});
 			this.markers.push(marker);
@@ -166,13 +163,12 @@ MeiweiApp.Pages.RestaurantSearch = new (MeiweiApp.PageView.extend({
 	addMessage: function(marker, resto) {
 		var markerInfo = this.views.markerInfo;
 		marker.addEventListener('click', function () {
-			//markerInfo.model.set(resto);
 			markerInfo.toggle(resto);
 		});
 	},
 	initializeMap: function () {
 		this.markers = [];
-		this.map = new BMap.Map("map_canvas", {enableMapClick: false});
+		this.map = new BMap.Map("map_canvas", {enableMapClick: false, maxZoom: 18});
 		this.map.enableScrollWheelZoom();
 		this.map.centerAndZoom(new BMap.Point(121.491, 31.233), 12);
 	},
@@ -182,7 +178,7 @@ MeiweiApp.Pages.RestaurantSearch = new (MeiweiApp.PageView.extend({
 		this.showPage();
 		this.$('>header input').val('');
 		this.$('>header input').focus();
-		this.restaurants.fetch({ reset: true, success: this.renderRestaurantList });
+		this.restaurants.fetch({ reset: true, success: this.refreshList });
 		this.cuisines.fetch({ reset: true, success: this.bindCuisineFilters });
 		this.circles.fetch({ reset: true, success: this.bindCircleFilters });
 	}

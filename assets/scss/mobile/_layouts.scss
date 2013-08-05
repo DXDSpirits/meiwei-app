@@ -59,6 +59,11 @@ body {
 		width: 100%;
 		@include flex-box();
 	}
+	&.scroll-infinite > .scroll-inner::after {
+		content: attr(data-hint);
+		display: block;
+		line-height: 60px;
+	} 
 }
 
 #apploader {
