@@ -72,22 +72,26 @@ body {
 	top: 50%;
 	left: 50%;
 	z-index: 9999;
-	width: 100px;
-	height: 50px;
-	margin: -25px -50px;
+	width: 120px;
+	min-height: 50px;
+	margin: -25px -60px;
+	padding: 10px;
 	@include border-radius(10px);
 	background-color: $brownLight;
 	pointer-events: none;
-	opacity: 0.7;
-	-webkit-transition: opacity .35s;
-	transition: opacity .35s;
+	opacity: 1;
+	@include transition(opacity .35s ease-in-out);
 	&.hide {
 		opacity: 0;
+	}
+	.ajax-error {
+		font-size: $fontSizeMini;
+		text-align: center;
 	}
 }
 
 #apploader .loader{
-	-webkit-user-select: none;
+	@include user-select(none);
 	pointer-events: none;
 	height: 20px;
 	width: 20px;
@@ -98,5 +102,5 @@ body {
 	text-shadow: 0 1px #fff;
 	background: transparent url(../img/activity-indicator.png) no-repeat;
 	background-size: 20px auto;
-	-webkit-animation: loading-sprite 1s step-start infinite;
+	@include animation(loading-sprite 1s step-start infinite);
 }

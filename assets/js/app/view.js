@@ -71,8 +71,7 @@ MeiweiApp.PageView = Backbone.View.extend({
 		if (this.scroller == null) {
 			if (this.$('.iscroll').length > 0) {
 			    this.scroller = new IScroll(this.$('.iscroll').selector, {
-			    	click: true
-			    	//preventDefault: false
+			    	click: true //preventDefault: false
 				});
 			}
 		} else {
@@ -84,6 +83,13 @@ MeiweiApp.PageView = Backbone.View.extend({
 		this.options = this.options || {};
 		_.extend(this.options, options);
 		this.render();
+	},
+	ajaxError: function(model, response, options) {
+		$('#apploader .ajax-error').removeClass('hide');
+		setTimeout(function() {
+			$('#apploader .ajax-error').addClass('hide');
+			MeiweiApp.goBack();
+		}, 1000);
 	},
 	showPage: function() {
 		window.scrollTo(0, 0);

@@ -81,7 +81,8 @@ MeiweiApp.goBack = function() {
 		prev.showPage();
 	} else {
 		MeiweiApp.history.active = MeiweiApp.Pages.Home;
-		MeiweiApp.Pages.Home.go();
+		//MeiweiApp.Pages.Home.go();
+		MeiweiApp.Pages.Home.showPage();
 	}
 };
 

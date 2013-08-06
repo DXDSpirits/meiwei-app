@@ -11,36 +11,35 @@ var MeiweiApp = new (Backbone.View.extend({
 	configs: {
 		APIHost: "http://localhost:8000",
 		StaticHost: "http://localhost:8000",
-		MediaHost: "http://localhost:8000"
+		MediaHost: "http://localhost:8000",
+		timeout: 10000
 	},
-
-	log: function(msg) { console.log(msg) },
-    
+	
 	start: function() {	
-		MeiweiApp.bindBasicAuth();
+		MeiweiApp.bindCustomSync();
 		Backbone.history.start();
 	}
 }))({el: document.body});
 
-MeiweiApp.bindBasicAuth = function() {
+MeiweiApp.bindCustomSync = function() {
 	var token = null;
 	var encode = function(username, password) {
 		return btoa(username + ':' + password);
 	};
-	
+	var defaultOptions = {
+		timeout: MeiweiApp.configs.timeout,
+		headers : { 'Accept-Language': 'zh' }
+	};
 	var originalSync = Backbone.sync;
 	Backbone.sync = function(method, model, options) {
+		var options = _.defaults(options || {}, defaultOptions);
 		if (typeof token !== "undefined" && token !== null) {
 			options.headers = options.headers || {};
-			_.extend(options.headers, {
-				'Authorization': 'Basic ' + token,
-				'Accept-Language': 'zh'
-			});
+			_.extend(options.headers, { 'Authorization': 'Basic ' + token });
 		}
 		return originalSync.call(model, method, model, options);
 	};
-	
-	Backbone.BasicAuth = {
+	MeiweiApp.BasicAuth = {
 		set: function(username, password) {
 			token = encode(username, password);
 		},

@@ -50,7 +50,7 @@ MeiweiApp.me = new (MeiweiApp.Models.Member.extend({
 		if (this.profile == null) this.profile = new MeiweiApp.Models.Profile();
 	},
 	login: function(auth, options) {
-		Backbone.BasicAuth.set(auth.username, auth.password);
+		MeiweiApp.BasicAuth.set(auth.username, auth.password);
 		this.profile.clear();
 		this.profile.fetch({
 			success: options.success,
@@ -58,7 +58,7 @@ MeiweiApp.me = new (MeiweiApp.Models.Member.extend({
 		});
 	},
 	logout: function(callback) {
-		Backbone.BasicAuth.clear();
+		MeiweiApp.BasicAuth.clear();
 	},
 	register: function(auth, options) {
 		var newUser = new MeiweiApp.Models.Member({ username: auth.username, password: auth.password });
