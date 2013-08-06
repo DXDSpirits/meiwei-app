@@ -64,10 +64,12 @@
 		height: 250px;
 		overflow: hidden;
 		img {
-			position: absolute;
-			top: 0;
-			left: 0;
-	        @include square(100%);
+			@include square(100%);
+			display: none;
+	        &:first-child {
+	        	display: block;
+	        }
+	        
 		    //opacity: 0;
 		    @include transition(opacity 2s ease-in-out);
 		    &.front {

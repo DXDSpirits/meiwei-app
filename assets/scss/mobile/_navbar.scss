@@ -18,12 +18,14 @@
 	}
 	
 	opacity: 1;
-	@include transition(opacity $pageSwitchDuration ease-in-out);
+	visibility: visible;
+	@include animation(all $pageSwitchDuration ease-in-out);
 }
 
 .view-hidden > header {
 	opacity: 0;
-	@include transition(opacity $pageSwitchDuration ease-in-out);
+	visibility: hidden;
+	@include transition(all $pageSwitchDuration ease-in-out);
 }
 
 .view > header > h1 {

@@ -42,23 +42,20 @@ MeiweiApp.Pages.Home = new (MeiweiApp.PageView.extend({
 	},
 	initScroller: function() {
 		if (this.scroller == null) {
-		    this.scroller = new IScroll(this.$('.iscroll').selector, {
-				scrollX: false,
-				scrollY: true,
-				snap: true,
-				snapStepY: 300,
-				snapSpeed: 400,
-				click: true
-			});
-			this.hero();
-			this.scroller.on('scrollEnd', this.hero);
+			if (this.$('.iscroll').length > 0) {
+			    this.scroller = new IScroll(this.$('.iscroll').selector, {
+					snap: true, snapStepY: 300, click: true
+				});
+				this.hero();
+				this.scroller.on('scrollEnd', this.hero);
+			}
 		} else {
 			this.scroller.refresh();
 		}
 	},
 	render: function() {
 		$.when(
-			this.recommend.fetch({ reset: true, success: this.initScroller })
+			this.recommend.fetch({ reset: true })
 		).then(this.showPage);
 	}
 }))({el: $("#view-home")});
