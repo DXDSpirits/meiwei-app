@@ -7,6 +7,7 @@ MeiweiApp.Collections.RecommendItems = MeiweiApp.Collection.extend({
 });
 
 MeiweiApp.Models.Recommend = MeiweiApp.Model.extend({
+	name: 'MeiweiApp.Models.Recommend',
 	initialize: function() {
 		if (this.items == null) this.items = new MeiweiApp.Collections.RecommendItems();
 	},
@@ -14,7 +15,6 @@ MeiweiApp.Models.Recommend = MeiweiApp.Model.extend({
 	parse: function(response) {
 		this.initialize();
 		this.items.reset(response.recommenditem_set)
-		response.recommenditem_set = null;
 		return response;
 	}
 });

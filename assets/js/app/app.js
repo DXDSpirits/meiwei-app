@@ -31,12 +31,10 @@ MeiweiApp.bindSync = function() {
 		return btoa(username + ':' + password);
 	};
 	var auth = JSON.parse(localStorage.getItem('basic-auth'));
-	console.log(auth);
 	var token = auth && auth.username && auth.password ? encode(auth.username, auth.password) : null;
 	
 	var originalSync = Backbone.sync;
 	Backbone.sync = function(method, model, options) {
-		options.timeout = options.timeout || MeiweiApp.configs.timeout;
 		if (typeof token !== "undefined" && token !== null) {
 			options.headers = options.headers || {};
 			_.extend(options.headers, {

@@ -27,6 +27,24 @@ MeiweiApp.Collection = Backbone.Collection.extend({
 });
 
 MeiweiApp.Model = Backbone.Model.extend({
+	fetch: function(options) {
+		var originalFetch = Backbone.Model.prototype.fetch;
+		options = options || {};
+		options.timeout = options.timeout || MeiweiApp.configs.timeout;
+		var thisCollection = this;
+		var error = options.error;
+		options.error = function(collection, response, options) {
+			if (error) error(collection, response, options);
+		};
+		var success = options.success;
+		options.success = function(collection, response, options) {
+			if (thisCollection.name) {
+				localStorage.setItem(thisCollection.name, JSON.stringify(collection.toJSON()));
+			}
+			if (success) success(collection, response, options);
+		};
+		return originalFetch.call(this, options);
+	},
 	url: function() {
 		if (this.attributes.url) {
 			return this.attributes.url;
