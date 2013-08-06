@@ -31,6 +31,7 @@ MeiweiApp.bindSync = function() {
 		return btoa(username + ':' + password);
 	};
 	var auth = JSON.parse(localStorage.getItem('basic-auth'));
+	console.log(auth);
 	var token = auth && auth.username && auth.password ? encode(auth.username, auth.password) : null;
 	
 	var originalSync = Backbone.sync;
@@ -47,7 +48,7 @@ MeiweiApp.bindSync = function() {
 	};
 	MeiweiApp.BasicAuth = {
 		set: function(username, password) {
-			localStorage.setItem('auth', JSON.stringify({username: username, password: password}));
+			localStorage.setItem('basic-auth', JSON.stringify({username: username, password: password}));
 			token = encode(username, password);
 		},
 		clear: function() {

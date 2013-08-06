@@ -5,11 +5,6 @@ MeiweiApp.Views.MemberProfileForm = MeiweiApp.ModelView.extend({
 	render: function() {
 		this.$el.html(this.template(this.model.toJSON()));
 	},
-	displayError: function(model, xhr, options) {
-		var $infoText = this.$('.info-text');
-		var error = JSON.parse(xhr.responseText);
-		for (var k in error) { $infoText.html(error[k]); break; }
-	},
 	updateProfile: function(e) {
 		e.preventDefault();
 		MeiweiApp.me.profile.set({
@@ -20,16 +15,14 @@ MeiweiApp.Views.MemberProfileForm = MeiweiApp.ModelView.extend({
 			birthday: this.$('input[name=birthday]').val() || null,
 			anniversary: this.$('input[name=anniversary]').val() || null
 		});
+		var $infoText = this.$('.info-text');
 		MeiweiApp.me.profile.save({}, { 
 		    success: MeiweiApp.goBack,
 		    error: function(model, xhr, options) {
-                var $infoText = this.$('.info-text');
 	            var error = JSON.parse(xhr.responseText);
 		        for (var k in error) { $infoText.html(error[k]);  break; };
-		        
             }
-		     });
-		
+		});
 	}
 });
 

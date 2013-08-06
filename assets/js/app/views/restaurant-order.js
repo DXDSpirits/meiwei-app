@@ -161,15 +161,12 @@ MeiweiApp.Pages.RestaurantOrder = new (MeiweiApp.PageView.extend({
 			MeiweiApp.pendingOrder.cancel();
 			MeiweiApp.pendingOrder = null;
 		}
+		var $infoText = this.$('.info-text');
 		newOrder.save({}, {
+			success: function(model, xhr, options) { MeiweiApp.goTo('OrderList'); },
 			error: function(model, xhr, options) {
-				var $infoText = this.$('.info-text');
 	            var error = JSON.parse(xhr.responseText);
 		        for (var k in error) { $infoText.html(error[k]);  break; };
-		        
-			},
-			success: function(model, xhr, options) {
-				MeiweiApp.goTo('OrderList');
 			}
 		});
 	},
