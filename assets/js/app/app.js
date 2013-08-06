@@ -1,4 +1,9 @@
 
+$(function() {
+	MeiweiApp.start();
+	document.addEventListener("deviceready", MeiweiApp.start, false);
+});
+
 var MeiweiApp = new (Backbone.View.extend({
 	
 	Models: {},
@@ -16,40 +21,38 @@ var MeiweiApp = new (Backbone.View.extend({
 	},
 	
 	start: function() {	
-		MeiweiApp.bindCustomSync();
+		MeiweiApp.bindSync();
 		Backbone.history.start();
 	}
 }))({el: document.body});
 
-MeiweiApp.bindCustomSync = function() {
-	var token = null;
+MeiweiApp.bindSync = function() {
 	var encode = function(username, password) {
 		return btoa(username + ':' + password);
 	};
-	var defaultOptions = {
-		timeout: MeiweiApp.configs.timeout,
-		headers : { 'Accept-Language': 'zh' }
-	};
+	var auth = JSON.parse(localStorage.getItem('basic-auth'));
+	var token = auth && auth.username && auth.password ? encode(auth.username, auth.password) : null;
+	
 	var originalSync = Backbone.sync;
 	Backbone.sync = function(method, model, options) {
-		var options = _.defaults(options || {}, defaultOptions);
+		options.timeout = options.timeout || MeiweiApp.configs.timeout;
 		if (typeof token !== "undefined" && token !== null) {
 			options.headers = options.headers || {};
-			_.extend(options.headers, { 'Authorization': 'Basic ' + token });
+			_.extend(options.headers, {
+				'Authorization': 'Basic ' + token,
+				'Accept-Language': 'zh'
+			});
 		}
 		return originalSync.call(model, method, model, options);
 	};
 	MeiweiApp.BasicAuth = {
 		set: function(username, password) {
+			localStorage.setItem('auth', JSON.stringify({username: username, password: password}));
 			token = encode(username, password);
 		},
 		clear: function() {
+			localStorage.removeItem('basic-auth');
 			token = null;
 		}
 	};
 };
-
-$(function() {
-	MeiweiApp.start();
-	document.addEventListener("deviceready", MeiweiApp.start, false);
-});
