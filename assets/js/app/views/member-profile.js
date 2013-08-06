@@ -5,17 +5,31 @@ MeiweiApp.Views.MemberProfileForm = MeiweiApp.ModelView.extend({
 	render: function() {
 		this.$el.html(this.template(this.model.toJSON()));
 	},
+	displayError: function(model, xhr, options) {
+		var $infoText = this.$('.info-text');
+		var error = JSON.parse(xhr.responseText);
+		for (var k in error) { $infoText.html(error[k]); break; }
+	},
 	updateProfile: function(e) {
 		e.preventDefault();
 		MeiweiApp.me.profile.set({
-			nickname: this.$('input[name=nickname]').val(),
-			email: this.$('input[name=email]').val(),
-			mobile: this.$('input[name=mobile]').val(),
-			sexe: this.$('input[name=sexe]').val(),
-			birthday: this.$('input[name=birthday]').val(),
-			anniversary: this.$('input[name=anniversary]').val()
+			nickname: this.$('input[name=nickname]').val() || null,
+			email: this.$('input[name=email]').val() || null,
+			mobile: this.$('input[name=mobile]').val() || null,
+			sexe: this.$('input[name=sexe]').val() || null,
+			birthday: this.$('input[name=birthday]').val() || null,
+			anniversary: this.$('input[name=anniversary]').val() || null
 		});
-		MeiweiApp.me.profile.save({}, { success: MeiweiApp.goBack });
+		MeiweiApp.me.profile.save({}, { 
+		    success: MeiweiApp.goBack,
+		    error: function(model, xhr, options) {
+                var $infoText = this.$('.info-text');
+	            var error = JSON.parse(xhr.responseText);
+		        for (var k in error) { $infoText.html(error[k]);  break; };
+		        
+            }
+		     });
+		
 	}
 });
 

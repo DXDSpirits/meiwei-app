@@ -163,8 +163,10 @@ MeiweiApp.Pages.RestaurantOrder = new (MeiweiApp.PageView.extend({
 		}
 		newOrder.save({}, {
 			error: function(model, xhr, options) {
-				var errors = JSON.parse(xhr.responseText);
-				console.log("Failed submitting new order. " + xhr.responseText);
+				var $infoText = this.$('.info-text');
+	            var error = JSON.parse(xhr.responseText);
+		        for (var k in error) { $infoText.html(error[k]);  break; };
+		        
 			},
 			success: function(model, xhr, options) {
 				MeiweiApp.goTo('OrderList');
