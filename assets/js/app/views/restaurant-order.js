@@ -135,10 +135,7 @@ MeiweiApp.Pages.RestaurantOrder = new (MeiweiApp.PageView.extend({
 	},
 	submitOrder: function(e) {
 		e.preventDefault();
-		
-		var r = confirm("提交订单?")
-		if (r == false) return;
-
+		if (confirm("提交订单?") == false) return;
 		var newOrder = new MeiweiApp.Models.Order();
 		var products = _.reduce(MeiweiApp.ProductCart.models, function(products, item){ 
 			return products + item.id + ',';
@@ -146,14 +143,14 @@ MeiweiApp.Pages.RestaurantOrder = new (MeiweiApp.PageView.extend({
 		newOrder.set({
 		    member: MeiweiApp.me.id,
 		    restaurant: this.restaurant.id,
-		    orderdate: this.$('input[name=orderdate]').val(),
-		    ordertime: this.$('select[name=ordertime]').val(),
-		    personnum: this.$('input[name=personnum]').val(),
+		    orderdate: this.$('input[name=orderdate]').val() || null,
+		    ordertime: this.$('select[name=ordertime]').val() || null,
+		    personnum: this.$('input[name=personnum]').val() || null,
 		    //contactname: this.$('input[name=contactname]').val() + this.$('input[name=contactgender]').val(),
-		    contactname: this.$('input[name=contactname]').val(),
-		    contactphone: this.$('input[name=contactphone]').val(),
-		    tables: this.options.tables,
-		    other: this.$('textarea[name=other]').text(),
+		    contactname: this.$('input[name=contactname]').val() || null,
+		    contactphone: this.$('input[name=contactphone]').val() || null,
+		    tables: this.options.tables || null,
+		    other: this.$('textarea[name=other]').text() || null,
 		    products: products.slice(0, -1)
 		});
 		if (MeiweiApp.pendingOrder != null) {
@@ -165,7 +162,7 @@ MeiweiApp.Pages.RestaurantOrder = new (MeiweiApp.PageView.extend({
 			success: function(model, xhr, options) { MeiweiApp.goTo('OrderList'); },
 			error: function(model, xhr, options) {
 	            var error = JSON.parse(xhr.responseText);
-		        for (var k in error) { $infoText.html(error[k]);  break; };
+		        for (var k in error) { $infoText.html(error[k]);  break; }
 			}
 		});
 	},
