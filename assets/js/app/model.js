@@ -27,17 +27,18 @@ MeiweiApp.Collection = Backbone.Collection.extend({
 	fetch: function(options) {
 		options = options || {};
 		options.timeout = options.timeout || MeiweiApp.configs.timeout;
+		var key = options.url || this.url;
 		var error = options.error;
 		options.error = function(collection, response, options) {
-			if (collection.url) {
-				var localResp = localStorage.getItem(collection.url);
+			if (key) {
+				var localResp = localStorage.getItem(key);
 				if (localResp && options.success) return options.success(JSON.parse(localResp));
 			}
 			if (error) error(collection, response, options);
 		};
 		var success = options.success;
 		options.success = function(collection, response, options) {
-			if (collection.url) localStorage.setItem(collection.url, JSON.stringify(collection.toJSON()));
+			if (key) localStorage.setItem(key, JSON.stringify(collection.toJSON()));
 			if (success) success(collection, response, options);
 		};
 		return Backbone.Collection.prototype.fetch.call(this, options);
@@ -48,17 +49,18 @@ MeiweiApp.Model = Backbone.Model.extend({
 	fetch: function(options) {
 		options = options || {};
 		options.timeout = options.timeout || MeiweiApp.configs.timeout;
+		var key = options.url || (this.urlRoot ? this.url(): null);
 		var error = options.error;
 		options.error = function(model, response, options) {
-			if (model.urlRoot) {
-				var localResp = localStorage.getItem(model.urlRoot);
+			if (key) {
+				var localResp = localStorage.getItem(key);
 				if (localResp && options.success) return options.success(JSON.parse(localResp));
 			}
 			if (error) error(model, response, options);
 		};
 		var success = options.success;
 		options.success = function(model, response, options) {
-			if (model.urlRoot) localStorage.setItem(model.urlRoot, JSON.stringify(model.toJSON()));
+			if (key) localStorage.setItem(key, JSON.stringify(model.toJSON()));
 			if (success) success(model, response, options);
 		};
 		return Backbone.Model.prototype.fetch.call(this, options);

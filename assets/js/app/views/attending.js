@@ -60,6 +60,6 @@ MeiweiApp.Pages.Attending = new (MeiweiApp.PageView.extend({
 		this.showPage();
 	},
     render: function() {
-    	this.orders.fetch({ reset: true, success: this.renderPages });
+    	this.orders.fetch({ reset: true, data: { status: 'pending' }, success: this.renderPages });
     }
 }))({el: $("#view-attending")});

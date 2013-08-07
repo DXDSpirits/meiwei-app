@@ -51,6 +51,7 @@ MeiweiApp.Pages.Home = new (MeiweiApp.PageView.extend({
 			}
 		} else {
 			this.scroller.refresh();
+			this.hero();
 		}
 	},
 	render: function() {
