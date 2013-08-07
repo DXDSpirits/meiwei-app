@@ -19,8 +19,6 @@ MeiweiApp.Pages.MemberCredits = new (MeiweiApp.PageView.extend({
 		}
 	},
 	render: function() {
-		$.when(
-			this.credits.fetch({reset: true})
-		).then(this.showPage);
+		this.credits.fetch({reset: true, success: this.showPage});
 	}
 }))({el: $("#view-member-credits")});

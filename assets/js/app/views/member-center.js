@@ -69,13 +69,7 @@ MeiweiApp.Pages.MemberCenter = new (MeiweiApp.PageView.extend({
 		this.itv = setInterval(timedCount, 3000);
 	},
 	render: function() {
-		var self = this;
-		$.when(
-			MeiweiApp.me.profile.fetch(),
-			this.favorites.fetch({reset: true})
-		).then(function() {
-			//self.carousel();
-			self.showPage();
-		});
+		MeiweiApp.me.profile.fetch({success: this.showPage});
+		this.favorites.fetch({reset: true})
 	}
 }))({el: $("#view-member-center")});

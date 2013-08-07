@@ -47,8 +47,6 @@ MeiweiApp.Pages.MemberProfile = new (MeiweiApp.PageView.extend({
 		}
 	},
 	render: function() {
-		$.when(
-			MeiweiApp.me.profile.fetch()
-		).then(this.showPage);
+		MeiweiApp.me.profile.fetch({ success: this.showPage });
 	}
 }))({el: $("#view-member-profile")});

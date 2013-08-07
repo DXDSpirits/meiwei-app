@@ -41,11 +41,6 @@ MeiweiApp.Pages.OrderList = new (MeiweiApp.PageView.extend({
 		});
 	},
 	render: function() {
-		$.when(
-			this.orders.fetch({
-				reset: true,
-				data: { status: 'pending' }
-			})
-		).then(this.showPage);
+		this.orders.fetch({ reset: true, data: { status: 'pending' }, success: this.showPage });
 	}
 }))({el: $("#view-order-list")});

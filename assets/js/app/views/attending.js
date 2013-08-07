@@ -49,24 +49,17 @@ MeiweiApp.Pages.Attending = new (MeiweiApp.PageView.extend({
 		var items = this.$('.carousel > .carousel-inner > .carousel-item');
 		this.$('.carousel > .carousel-inner').css('width', items.length * $(items[0]).outerWidth());
 		if (this.scroller == null) {
-			this.scroller = new IScroll(this.$('.carousel').selector, {
-				scrollX: true,
-				scrollY: false,
-				momentum: false,
-				snap: true,
-				snapSpeed: 400,
-				preventDefault: false
-			});
+			if (this.$('.carousel').length > 0) {
+				this.scroller = new IScroll(this.$('.carousel').selector, {
+					scrollX: true, scrollY: false, momentum: false, snap: true,  click: true
+				});
+			}
 		} else {
 			this.scroller.refresh();
 		}
+		this.showPage();
 	},
     render: function() {
-        $.when(
-        	this.orders.fetch({
-        		reset: true,
-        		success: this.renderPages
-        	})
-        ).then(this.showPage);
+    	this.orders.fetch({ reset: true, success: this.renderPages });
     }
 }))({el: $("#view-attending")});

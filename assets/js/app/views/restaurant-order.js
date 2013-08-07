@@ -79,8 +79,7 @@ MeiweiApp.Views.RestaurantOrderForm = MeiweiApp.View.extend({
 			restaurant: this.restaurant.toJSON(),
 			order: this.defaultValues
 		}));
-		this.hours.fetch({url: this.restaurant.get('hours'), async: false});
-		this.renderHourList();
+		this.hours.fetch({url: this.restaurant.get('hours'), success: this.renderHourList });
 	}
 });
 

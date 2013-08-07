@@ -33,8 +33,6 @@ MeiweiApp.Pages.MemberFavorites = new (MeiweiApp.PageView.extend({
 		}
 	},
 	render: function() {
-		$.when(
-			this.favorites.fetch({reset: true})
-		).then(this.showPage);
+		this.favorites.fetch({reset: true, success: this.showPage});
 	}
 }))({el: $("#view-member-favorites")});

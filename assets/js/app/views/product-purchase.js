@@ -58,9 +58,11 @@ MeiweiApp.Pages.ProductPurchase = new (MeiweiApp.PageView.extend({
 		}, this);
 	},
 	render: function() {
-		$.when(
-			this.products.fetch({ data: {category: 1}, reset: true, success: this.carousel })
-		).then(this.showPage);
+		var self = this;
+		this.products.fetch({ data: {category: 1}, reset: true, success: function() {
+			self.carousel();
+			self.showPage();
+		}});
 	}
 }))({el: $("#view-product-purchase")});
 
@@ -138,8 +140,10 @@ MeiweiApp.Pages.ProductRedeem = new (MeiweiApp.Pages.ProductPurchase.constructor
 		};
 	},
 	render: function() {
-		$.when(
-			this.products.fetch({ data: {category: 2}, reset: true, success: this.carousel })
-		).then(this.showPage);
+		var self = this;
+		this.products.fetch({ data: {category: 2}, reset: true, success: function() {
+			self.carousel();
+			self.showPage();
+		}});
 	}
 }))({el: $("#view-product-redeem")});
