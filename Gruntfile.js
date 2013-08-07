@@ -6,6 +6,8 @@ module.exports = function(grunt) {
 			mwapp: {
 				options: {
 					sourceMap: 'assets/js/mw-app.map',
+					sourceMappingURL: 'mw-app.map',
+					sourceMapPrefix: 2,
 					mangle: false,
 					beautify: {
 						width: 80,
