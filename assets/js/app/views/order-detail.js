@@ -6,6 +6,7 @@ MeiweiApp.Views.OrderDetail = MeiweiApp.ModelView.extend({
 	},
 	cancelOrder: function() {
 		this.model.cancel({success: function() {
+			if (confirm("删除订单?") == false) return;
 			MeiweiApp.goTo('OrderList');
 		}});
 	}
