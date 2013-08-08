@@ -49,10 +49,10 @@
 
 // Placeholder text
 // -------------------------
-@mixin placeholder($color: $placeholderText) {
-	&:-moz-placeholder { color: $color; }
-	&:-ms-input-placeholder { color: $color; }
-	&::-webkit-input-placeholder { color: $color; }
+@mixin placeholder($color: $placeholderText, $fontSize: $baseFontSize, $lineHeight: $baseLineHeight) {
+	&:-moz-placeholder { color: $color; font-size: $fontSize; line-height: $lineHeight; }
+	&:-ms-input-placeholder { color: $color; font-size: $fontSize; line-height: $lineHeight; }
+	&::-webkit-input-placeholder { color: $color; font-size: $fontSize; line-height: $lineHeight; }
 }
 
 // Text overflow
