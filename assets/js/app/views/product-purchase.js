@@ -44,10 +44,10 @@ MeiweiApp.Pages.ProductPurchase = new (MeiweiApp.PageView.extend({
 	},
 	onClickLeftBtn: function() { MeiweiApp.goBack(); },
 	onClickRightBtn: function() {
-		if (this.options.caller == MeiweiApp.Pages.MemberCenter) {
-			MeiweiApp.goTo('RestaurantOrder', { restaurantId: 1 });
-		} else {
+		if (this.options.caller == MeiweiApp.Pages.RestaurantOrder) {
 			MeiweiApp.goBack();
+		} else {
+			MeiweiApp.goTo('RestaurantOrder', { restaurantId: 1 });
 		}
 	},
 	initScroller: function() {

@@ -170,6 +170,11 @@ MeiweiApp.Pages.RestaurantOrder = new (MeiweiApp.PageView.extend({
 		this.views.orderForm.render();
 		this.views.orderContactForm.render();
 		this.views.productCart.render();
+		if (_.isEmpty(this.restaurant.get('floorplans'))) {
+			this.$('.floorplan-select').addClass('hide');
+		} else {
+			this.$('.floorplan-select').removeClass('hide');
+		}
 		this.showPage();
 	},
 	render: function() {

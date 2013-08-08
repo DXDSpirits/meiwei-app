@@ -64,7 +64,8 @@
 		height: 250px;
 		overflow: hidden;
 		img {
-			@include square(100%);
+			width: 100%;
+			min-height: 100%;
 			display: none;
 	        &:first-child {
 	        	display: block;
