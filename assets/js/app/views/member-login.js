@@ -13,7 +13,7 @@ MeiweiApp.Views.MemberLoginForm = MeiweiApp.View.extend({
 		for (var k in error) { $infoText.html(error[k]); break; }
 	},
 	onLoginSuccess: function() {
-		MeiweiApp.Pages.MemberLogin.ref.go();
+		MeiweiApp.refreshActivePage();
 	},
 	login: function(e) {
 		e.preventDefault();
@@ -46,12 +46,10 @@ MeiweiApp.Views.MemberLoginForm = MeiweiApp.View.extend({
 MeiweiApp.Pages.MemberLogin = new (MeiweiApp.PageView.extend({
 	initPage: function() {
 		this.loginForm = new MeiweiApp.Views.MemberLoginForm({ el: this.$('.login-box') });
-		this.ref = MeiweiApp.Pages.Home
 	},
 	onClickLeftBtn: function() { MeiweiApp.goTo('Home'); },
 	render: function() {
 		MeiweiApp.me.logout();
-		if (this.options.ref) this.ref = this.options.ref;
 		this.loginForm.render();
 		this.showPage();
 	}

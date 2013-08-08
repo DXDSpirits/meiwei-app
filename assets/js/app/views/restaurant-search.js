@@ -4,8 +4,7 @@ MeiweiApp.Views.MarkerItemInfo = MeiweiApp.ModelView.extend({
 	template: MeiweiApp.Templates['restaurant-list-item'],
 	viewRestaurant: function() {
 		MeiweiApp.goTo('RestaurantDetail', {
-			restaurant: this.model.toJSON(),
-			restaurantId: this.model.id
+			restaurant: this.model.toJSON()
 		});
 	},
 	toggle: function(resto) {
@@ -30,8 +29,7 @@ MeiweiApp.Views.RestaurantListItem = MeiweiApp.ModelView.extend({
 	template: MeiweiApp.Templates['restaurant-list-item'],
 	viewRestaurant: function() {
 		MeiweiApp.goTo('RestaurantDetail', {
-			restaurant: this.model.toJSON(),
-			restaurantId: this.model.id
+			restaurant: this.model.toJSON()
 		});
 	}
 });

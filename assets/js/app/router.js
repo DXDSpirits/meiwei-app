@@ -69,16 +69,20 @@ MeiweiApp.goTo = function(pageName, options) {
 	if (next != MeiweiApp.history.active) {
 		MeiweiApp.history.stack.push(MeiweiApp.history.active);
 		MeiweiApp.history.active = next;
-		next.go(options);
+		MeiweiApp.history.active.go(options);
 	}
 	if (pageName == 'Home') MeiweiApp.history.stack.length = 0;
+};
+
+MeiweiApp.refreshActivePage = function() {
+	MeiweiApp.history.active.refresh();
 };
 
 MeiweiApp.goBack = function() {
 	if (MeiweiApp.history.stack.length > 0) {
 		var prev = MeiweiApp.history.stack.pop();
 		MeiweiApp.history.active = prev;
-		prev.showPage();
+		MeiweiApp.history.active.showPage();
 	} else {
 		MeiweiApp.history.active = MeiweiApp.Pages.Home;
 		MeiweiApp.Pages.Home.go();

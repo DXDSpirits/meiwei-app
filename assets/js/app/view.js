@@ -80,8 +80,12 @@ MeiweiApp.PageView = Backbone.View.extend({
 	},
 	go: function(options) {
 		$("#apploader").removeClass('hide');
-		this.options = this.options || {};
-		_.extend(this.options, options);
+		//this.options = this.options || {};
+		//_.extend(this.options, options);
+		this.options = options || {};
+		this.render();
+	},
+	refresh: function(options) {
 		this.render();
 	},
 	ajaxError: function(model, response, options) {
