@@ -44,12 +44,20 @@ MeiweiApp.Views.RestaurantOrderForm = MeiweiApp.View.extend({
 	events: {
 		'change input[name=orderdate]': 'renderHourList'
 	},
-	initialize: function() {
+	initialize: function(options) {
 		_.bindAll(this, 'renderHourList');
 		this.restaurant = this.model;
-		this.defaultValues = null;
-		this.hours = new MeiweiApp.Models.Hour();
 		this.model = null;
+		this.hours = new MeiweiApp.Models.Hour();
+		if (options.pendingOrder) {
+			this.defaultValues = options.pendingOrder.toJSON();
+		} else {
+			this.defaultValues = {
+				orderdate: (new Date()).toJSON().slice(0, 10),
+				ordertime: '19:00',
+				personnum: 2
+			};
+		}
 	},
 	template: MeiweiApp.Templates['restaurant-order-form'],
 	renderHourList: function() {
@@ -65,16 +73,6 @@ MeiweiApp.Views.RestaurantOrderForm = MeiweiApp.View.extend({
 		$select.val(this.defaultValues.ordertime);
 	},
 	render: function() {
-		if (MeiweiApp.pendingOrder == null) {
-			var today = new Date();
-			this.defaultValues = {
-				orderdate: today.toJSON().slice(0, 10),
-				ordertime: '19:00',
-				personnum: 2
-			};
-		} else {
-			this.defaultValues = MeiweiApp.pendingOrder.toJSON();
-		}
 		this.$el.html(this.template({
 			restaurant: this.restaurant.toJSON(),
 			order: this.defaultValues
@@ -100,7 +98,8 @@ MeiweiApp.Pages.RestaurantOrder = new (MeiweiApp.PageView.extend({
 		this.views = {
 			orderForm: new MeiweiApp.Views.RestaurantOrderForm({
 				model: this.restaurant,
-				el: this.$('.order-info')
+				el: this.$('.order-info'),
+				pendingOrder: this.options.pendingOrder
 			}),
 			orderContactForm: new MeiweiApp.Views.RestaurantOrderContactForm({
 				el: this.$('.contact-info')
@@ -141,30 +140,27 @@ MeiweiApp.Pages.RestaurantOrder = new (MeiweiApp.PageView.extend({
 			return products + item.id + ',';
 		}, '');
 		newOrder.set({
-		    member: MeiweiApp.me.id,
-		    restaurant: this.restaurant.id,
-		    orderdate: this.$('input[name=orderdate]').val() || null,
-		    ordertime: this.$('select[name=ordertime]').val() || null,
-		    personnum: this.$('input[name=personnum]').val() || null,
-		    //contactname: this.$('input[name=contactname]').val() + this.$('input[name=contactgender]').val(),
-		    contactname: this.$('input[name=contactname]').val() || null,
-		    contactphone: this.$('input[name=contactphone]').val() || null,
-		    tables: this.options.tables || null,
-		    other: this.$('textarea[name=other]').text() || null,
-		    products: products.slice(0, -1)
+			member: MeiweiApp.me.id,
+			restaurant: this.restaurant.id,
+			orderdate: this.$('input[name=orderdate]').val() || null,
+			ordertime: this.$('select[name=ordertime]').val() || null,
+			personnum: this.$('input[name=personnum]').val() || null,
+			//contactname: this.$('input[name=contactname]').val() + this.$('input[name=contactgender]').val(),
+			contactname: this.$('input[name=contactname]').val() || null,
+			contactphone: this.$('input[name=contactphone]').val() || null,
+			tables: this.options.tables || null,
+			other: this.$('textarea[name=other]').text() || null,
+			products: products.slice(0, -1)
 		});
-		if (MeiweiApp.pendingOrder != null) {
-			MeiweiApp.pendingOrder.cancel();
-			MeiweiApp.pendingOrder = null;
-		}
+		if (this.options.pendingOrder) this.options.pendingOrder.cancel();
 		var $infoText = this.$('.info-text');
 		var $scroll = this.$('.scroll');
 		newOrder.save({}, {
 			success: function(model, xhr, options) { MeiweiApp.goTo('OrderList'); },
 			error: function(model, xhr, options) {
 				$scroll.scrollTop(0);
-	            var error = JSON.parse(xhr.responseText);
-		        for (var k in error) { $infoText.html(error[k]);  break; }
+				var error = JSON.parse(xhr.responseText);
+				for (var k in error) { $infoText.html(error[k]);  break; }
 			}
 		});
 	},

@@ -43,7 +43,14 @@ MeiweiApp.Pages.ProductPurchase = new (MeiweiApp.PageView.extend({
 		};
 	},
 	onClickLeftBtn: function() { MeiweiApp.goBack(); },
-	onClickRightBtn: function() { MeiweiApp.goBack(); },
+	onClickRightBtn: function() {
+		console.log(this.options.caller);
+		if (this.options.caller == MeiweiApp.Pages.MemberCenter) {
+			MeiweiApp.goTo('RestaurantOrder', { restaurantId: 1 });
+		} else if (this.options.caller == MeiweiApp.Pages.RestaurantOrder) {
+			MeiweiApp.goBack();
+		}
+	},
 	carousel: function() {
 		this.carouselScrolls = this.carouselScrolls || [];
 		for (var i=0; i<this.carouselScrolls.length; i++) this.carouselScrolls[i].destroy();
@@ -66,7 +73,16 @@ MeiweiApp.Pages.ProductPurchase = new (MeiweiApp.PageView.extend({
 	}
 }))({el: $("#view-product-purchase")});
 
-/******************************************************************************************/
+
+/*****************************************************************************************************/
+/****************************************** ProductPurchase ******************************************/
+/*****************************************************************************************************/
+
+
+
+/*****************************************************************************************************/
+/******************************************* ProductRedeem *******************************************/
+/*****************************************************************************************************/
 
 MeiweiApp.Views.ProductItemDetail = MeiweiApp.View.extend({
 	className: 'dialog',
