@@ -25,7 +25,8 @@ MeiweiApp.Collections.Contacts = MeiweiApp.Collection.extend({
 MeiweiApp.Models.Credit = MeiweiApp.Model.extend({
 	urlRoot: MeiweiApp.configs.APIHost + '/members/credit/',
 	parse: function(response) {
-		response.time_created = (new Date(response.time_created)).toLocaleString();
+		var time = (new Date(response.time_created)).toISOString();
+		response.time_created = time.slice(0, 10) + ' ' + time.slice(11, 16);
 		return response;
 	}
 });

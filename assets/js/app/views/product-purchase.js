@@ -44,11 +44,19 @@ MeiweiApp.Pages.ProductPurchase = new (MeiweiApp.PageView.extend({
 	},
 	onClickLeftBtn: function() { MeiweiApp.goBack(); },
 	onClickRightBtn: function() {
-		console.log(this.options.caller);
 		if (this.options.caller == MeiweiApp.Pages.MemberCenter) {
 			MeiweiApp.goTo('RestaurantOrder', { restaurantId: 1 });
-		} else if (this.options.caller == MeiweiApp.Pages.RestaurantOrder) {
+		} else {
 			MeiweiApp.goBack();
+		}
+	},
+	initScroller: function() {
+		if (this.scroller == null) {
+			if (this.$('.iscroll').length > 0) {
+			    this.scroller = new IScroll(this.$('.iscroll').selector);
+			}
+		} else {
+			this.scroller.refresh();
 		}
 	},
 	carousel: function() {
