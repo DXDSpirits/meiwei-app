@@ -2,6 +2,7 @@
 	<fieldset>
 		<div class="inline-group">
 			<input type="text" name="nickname" value="{{ nickname }}" placeholder="姓名"/>
+			<!--
 			<div class="control-group switch off switch-gender">
 				<input type="hidden" name="sexe" value="0"/>
 				<label class="text-off">先生</label>
@@ -10,6 +11,11 @@
 				</div>
 				<label class="text-on">女士</label>
 			</div>
+			-->
+			<select name="sexe" value="">
+				<option value="0" {{ ^sexe }} selected {{ /sexe }}>先生</option>
+				<option value="1" {{ #sexe }} selected {{ /sexe }}>女士</option>
+			</select>
 		</div>
 		<div class="inline-group">
 			<i class="icon-envelope"></i>

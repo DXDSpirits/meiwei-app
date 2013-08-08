@@ -38,15 +38,13 @@
 }
 
 #view-member-profile {
-	.switch-gender {
-		@include flexible(2);
-	}
 	form {
 	    width: 90%;
 	    margin-top: 30px;
 	}
 	input[name=nickname] {
 		text-align: center;
+		@include flexible(2);
 	}
 	button {
 		width: 100%;

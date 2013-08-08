@@ -22,7 +22,7 @@ MeiweiApp.Pages.Home = new (MeiweiApp.PageView.extend({
 	events: { 'click header input': 'gotoSearch' },
 	initPage: function() {
 		_.bindAll(this, 'initScroller', 'hero');
-		this.recommend = new MeiweiApp.Models.Recommend({id: 2});
+		this.recommend = new MeiweiApp.Models.Recommend({id: 5});
 		this.views = {
 			recommendItems: new MeiweiApp.Views.RecommendItems({
 				collection: this.recommend.items,

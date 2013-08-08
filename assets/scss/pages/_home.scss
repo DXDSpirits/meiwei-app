@@ -40,6 +40,7 @@
 		article {
 			color: $white;
 			width: 100%;
+			min-height: 70px;
 			h1 { @include text-overflow(); font-size: 20px; }
 			p { font-size: $fontSizeMini; }
 			border: 1px solid transparent;
