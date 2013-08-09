@@ -84,12 +84,13 @@ MeiweiApp.goBack = function() {
 		var prev = MeiweiApp.history.stack.pop();
 		MeiweiApp.history.active = prev;
 		MeiweiApp.history.active.showPage();
-	} else {
+	} else if (MeiweiApp.history.active != MeiweiApp.Pages.Home) {
 		MeiweiApp.history.active = MeiweiApp.Pages.Home;
 		MeiweiApp.Pages.Home.go();
 	}
 };
 
+/*
 $.ajaxSetup({
     statusCode : {
         499: function() {
@@ -103,3 +104,4 @@ $.ajaxSetup({
         }
     }
 });
+*/

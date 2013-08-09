@@ -79,7 +79,7 @@ MeiweiApp.PageView = Backbone.View.extend({
 		}
 	},
 	go: function(options) {
-		$("#apploader").removeClass('hide');
+		//$("#apploader").removeClass('hide');
 		//this.options = this.options || {};
 		//_.extend(this.options, options);
 		this.options = options || {};
@@ -97,7 +97,7 @@ MeiweiApp.PageView = Backbone.View.extend({
 	},
 	showPage: function() {
 		window.scrollTo(0, 0);
-		$("#apploader").addClass('hide');
+		//$("#apploader").addClass('hide');
 		if (this.$el && this.$el.hasClass('view-hidden')) {
 			var $curPage = $('.view:not(".view-hidden")');
 			$curPage.addClass('view-hidden');

@@ -22,6 +22,7 @@ var MeiweiApp = new (Backbone.View.extend({
 	
 	start: function() {	
 		MeiweiApp.bindSync();
+		MeiweiApp.bindAjaxEvents();
 		Backbone.history.start();
 	}
 }))({el: document.body});
@@ -55,3 +56,28 @@ MeiweiApp.bindSync = function() {
 		}
 	};
 };
+
+MeiweiApp.bindAjaxEvents = function() {
+	var timeout = 0;
+	$(document).ajaxStart(function() {
+		$('#apploader').removeClass('hide');
+	});
+	$(document).ajaxStop(function() {
+		setTimeout(function() {
+			$('#apploader').addClass('hide');
+			timeout = 0;
+		}, timeout);
+	});
+	$(document).ajaxError(function(event, jqxhr, settings, exception) {
+		if (jqxhr.status == 401 || jqxhr.status == 403 || jqxhr.status == 409) {
+			MeiweiApp.Pages.MemberLogin.go({ ref: MeiweiApp.history.active });
+		} else if (settings.type == 'GET') {
+			$('#apploader .ajax-error').removeClass('hide');
+			timeout = 1000;
+			setTimeout(function() {
+				$('#apploader .ajax-error').addClass('hide');
+				MeiweiApp.goBack();
+			}, timeout + timeout / 2);
+		}
+	});
+}
