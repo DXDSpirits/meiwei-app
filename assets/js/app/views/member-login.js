@@ -5,7 +5,7 @@ MeiweiApp.Views.MemberLoginForm = MeiweiApp.View.extend({
 		'click .register-button': 'register',
 	},
 	initialize: function() {
-		_.bindAll(this, 'displayError');
+		_.bindAll(this, 'displayError', 'login', 'register', 'onLoginSuccess');
 	},
 	displayError: function(model, xhr, options) {
 		var $infoText = this.$('.info-text');
@@ -15,8 +15,7 @@ MeiweiApp.Views.MemberLoginForm = MeiweiApp.View.extend({
 	onLoginSuccess: function() {
 		MeiweiApp.refreshActivePage();
 	},
-	login: function(e) {
-		e.preventDefault();
+	login: function() {
 		var username = this.$('input[name=username]').val();
 		var password = this.$('input[name=password]').val();
 		if (username.length > 0 && password.length > 0) {
@@ -26,8 +25,7 @@ MeiweiApp.Views.MemberLoginForm = MeiweiApp.View.extend({
 			});
 		}
 	},
-	register: function(e) {
-		e.preventDefault();
+	register: function() {
 		var username = this.$('input[name=username]').val();
 		var password = this.$('input[name=password]').val();
 		if (username.length > 0 && password.length > 0) {
