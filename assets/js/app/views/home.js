@@ -21,7 +21,7 @@ MeiweiApp.Views.RecommendItems = MeiweiApp.CollectionView.extend({
 MeiweiApp.Pages.Home = new (MeiweiApp.PageView.extend({
 	onClickLeftBtn: function() { MeiweiApp.goTo('MemberCenter'); },
 	onClickRightBtn: function() { MeiweiApp.goTo('Attending'); },
-	events: { 'click header input': 'gotoSearch' },
+	events: { 'click header form': 'gotoSearch' },
 	initPage: function() {
 		_.bindAll(this, 'initScroller', 'hero');
 		this.recommend = new MeiweiApp.Models.Recommend({id: 5});

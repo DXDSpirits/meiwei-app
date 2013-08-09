@@ -42,6 +42,8 @@
 
 .view > header > form {
 	@include flexible();
+	height: 44px;
+	padding: 9px 0;
 	> input[type=search] {
 		@include border-radius(500px);
 		width: 100%;
