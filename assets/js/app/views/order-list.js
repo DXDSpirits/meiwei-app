@@ -19,7 +19,10 @@ MeiweiApp.Pages.OrderList = new (MeiweiApp.PageView.extend({
 		'click .filter-fulfilled': 'getFulfilledOrders'
 	},
 	initPage: function() {
+	
 		this.orders = new MeiweiApp.Collections.Orders();
+		//var fulfills = this.$('.filter-fulfilled');	    
+		//var pendings = this.$('.filter-pending');	    
 		this.views = {
 			orderList: new MeiweiApp.Views.OrderList({
 				collection: this.orders,
@@ -27,18 +30,34 @@ MeiweiApp.Pages.OrderList = new (MeiweiApp.PageView.extend({
 			})
 		}
 	},
+	
 	getPendingOrders: function() {
-		this.orders.fetch({
+		var fulfills = this.$('.filter-fulfilled');	    
+		var pendings = this.$('.filter-pending');	
+		if(!pendings.hasClass('selected')){ 
+	    fulfills.removeClass('selected');
+	    pendings.addClass('selected');
+	    this.orders.fetch({
 			reset: true,
 			data: { status: 'pending' }
 		});
+	    }
+		
 	},
 	getFulfilledOrders: function() {
-		this.orders.fetch({
+	    var fulfills = this.$('.filter-fulfilled');	    
+		var pendings = this.$('.filter-pending');	
+		if(!fulfills.hasClass('selected')){ 
+	    fulfills.addClass('selected');
+	    pendings.removeClass('selected');
+	    	this.orders.fetch({
 			reset: true,
 			data: { status: 'fulfilled' }
 		});
+	    }
+	
 	},
+	
 	render: function() {
 		this.orders.fetch({ reset: true, data: { status: 'pending' }, success: this.showPage });
 	}

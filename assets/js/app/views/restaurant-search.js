@@ -128,7 +128,10 @@ MeiweiApp.Pages.RestaurantSearch = new (MeiweiApp.PageView.extend({
 	bindCuisineFilters: function(cuisines, response, options) {
 		var bindFilter = function(cuisine) {
 			this.listenTo(cuisine, "select", function() {
-				this.filterRestaurant({cuisine: cuisine.id});
+			    var cuis = cuisine.get('name');
+			    this.$('.collapsible').last().find('span').html(cuis);	
+			    this.$('.collapsible').first().find('span').html('全部商圈');	
+			    this.filterRestaurant({cuisine: cuisine.id});
 			});
 		};
 		cuisines.forEach(bindFilter, this);
@@ -136,6 +139,9 @@ MeiweiApp.Pages.RestaurantSearch = new (MeiweiApp.PageView.extend({
 	bindCircleFilters: function(circles, response, options) {
 		var bindFilter = function(circle) {
 			this.listenTo(circle, "select", function() {
+			    var circ = circle.get('name');
+			    this.$('.collapsible').first().find('span').html(circ);	
+			    this.$('.collapsible').last().find('span').html('全部菜系');	
 				this.filterRestaurant({circle: circle.id});
 			});
 		};

@@ -59,6 +59,9 @@
 	@include flex-box($orient: horizontal);
 }
 
+.selected {
+		  background-color: $brownDark;
+		}
 .filter-bar {
 	@include flex-box($orient: horizontal);
 	@include size(50px, 100%);
@@ -70,7 +73,10 @@
 		text-align: center;
 		font-size: $fontSizeSmall;
 		color: $white;
+		
+		
 	}
+	
 	> .collapsible {
 		position: relative;
 		& > .collapsible-inner {
