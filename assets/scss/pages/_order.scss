@@ -47,7 +47,7 @@
 			@include clearfix();
 			.product-item {
 				width: 30%;
-				height: 100px;
+				//height: 100px;
 				float: left;
 				border: 1px solid $brown;
 				margin: 1.666667%;
@@ -77,7 +77,7 @@
 		p { font-size: $fontSizeMini; }
 	}
 	.viewport {
-		@include size(164px, 250px);
+		@include size(150px, 250px);
 		@include center-block();
 		padding: 5px 0;
 		overflow: hidden;
