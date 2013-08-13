@@ -1,6 +1,5 @@
 
 $(function() {
-	MeiweiApp.start();
 	document.addEventListener("deviceready", MeiweiApp.start, false);
 });
 
