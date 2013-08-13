@@ -174,7 +174,7 @@ MeiweiApp.Pages.RestaurantSearch = new (MeiweiApp.PageView.extend({
 		this.map.enableContinuousZoom();
 		this.map.disablePinchToZoom();
 		this.map.centerAndZoom(new BMap.Point(121.491, 31.233), 12);
-		this.map.addControl(new BMap.NavigationControl({anchor: BMAP_ANCHOR_BOTTOM_RIGHT, type: BMAP_NAVIGATION_CONTROL_ZOOM})); 
+		this.map.addControl(new BMap.NavigationControl({anchor: BMAP_ANCHOR_TOP_RIGHT, type: BMAP_NAVIGATION_CONTROL_ZOOM})); 
 	},
 	/*********************************************/
 	
