@@ -9,7 +9,8 @@
 			<div class="carousel-item {{ #selected }}selected{{ /selected }}" data-item="{{ id }}">
 				<div class="tag">
 					<p>{{ name }}</p>
-					<p>{{ model }}</p>
+					{{ #credit }}<p>{{ credit }}积分</p>{{ /credit }}
+					{{ ^credit }}<p>{{ description }}</p>{{ /credit }}
 				</div>
 				<img src="{{ picture }}" alt="">
 			</div>
