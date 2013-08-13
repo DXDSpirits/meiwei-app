@@ -101,7 +101,7 @@ MeiweiApp.Pages.RestaurantSearch = new (MeiweiApp.PageView.extend({
 			var self = this;
 			setTimeout(function() {
 				self.restaurants.fetchNext({ remove: false, success: self.refreshList });
-			}, 1000);
+			}, 2000);
 		}
 	},
 	

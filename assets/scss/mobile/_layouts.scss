@@ -41,7 +41,7 @@ body {
 	}
 }
 
-.view > .wrapper > .scroll{
+.view > .wrapper > .scroll {
 	@include flexible();
 	position: relative;
 	width: 100%;
@@ -50,6 +50,9 @@ body {
 	overflow-x: hidden;
 	-webkit-overflow-scrolling: touch;
 	
+	&.iscroll {
+		overflow: hidden;
+	}
 	&::-webkit-scrollbar {
 		display: none;
 	}

@@ -8,7 +8,6 @@
 		@include flex-box($pack: start);
 		$splitterWidth: 2px;
 		$itemHeight: 300px;
-		$itemHeight: 125px !default;
 		height: $itemHeight;
 		width: 100%;
 		overflow: hidden;
@@ -16,7 +15,7 @@
 		
 		img {
 			position: absolute;
-			z-index: -1;
+			//z-index: -1;
 			top: 0;
 			left: 0;
 			width: 100%;
@@ -26,15 +25,15 @@
 			border-width: 0 0 $splitterWidth;
 			border-style: solid;
 			border-color: $brown;
-			-webkit-filter: blur(3px); //sepia(50%);
-			-webkit-transition: -webkit-filter .36s ease-in-out;
-			@include backface-visibility(hidden);
+			//-webkit-filter: blur(3px); //sepia(50%);
+			//-webkit-transition: -webkit-filter .36s ease-in-out;
+			//@include backface-visibility(hidden);
 		}
 		
 		&.hero img {
-			-webkit-filter: blur(0);
-			-webkit-transition: -webkit-filter .36s ease-in-out;
-			@include backface-visibility(hidden);
+			//-webkit-filter: blur(0);
+			//-webkit-transition: -webkit-filter .36s ease-in-out;
+			//@include backface-visibility(hidden);
 		}
 		
 		article {
