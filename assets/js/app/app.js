@@ -36,6 +36,7 @@ MeiweiApp.bindSync = function() {
 	
 	var originalSync = Backbone.sync;
 	Backbone.sync = function(method, model, options) {
+		options.timeout = options.timeout || MeiweiApp.configs.timeout;
 		if (typeof token !== "undefined" && token !== null) {
 			options.headers = options.headers || {};
 			_.extend(options.headers, {

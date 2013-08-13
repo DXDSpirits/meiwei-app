@@ -26,7 +26,6 @@ MeiweiApp.Collection = Backbone.Collection.extend({
 	},
 	fetch: function(options) {
 		options = options || {};
-		options.timeout = options.timeout || MeiweiApp.configs.timeout;
 		var key = options.url || this.url;
 		var error = options.error;
 		options.error = function(collection, response, options) {
@@ -48,7 +47,6 @@ MeiweiApp.Collection = Backbone.Collection.extend({
 MeiweiApp.Model = Backbone.Model.extend({
 	fetch: function(options) {
 		options = options || {};
-		options.timeout = options.timeout || MeiweiApp.configs.timeout;
 		var key = options.url || (this.urlRoot ? this.url(): null);
 		var error = options.error;
 		options.error = function(model, response, options) {
