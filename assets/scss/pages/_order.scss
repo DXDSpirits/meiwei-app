@@ -46,8 +46,9 @@
 			width: 100%;
 			@include clearfix();
 			.product-item {
-				width: 30%;
+				//width: 30%;
 				//height: 100px;
+				@include square(65px);
 				float: left;
 				border: 1px solid $brown;
 				margin: 1.666667%;

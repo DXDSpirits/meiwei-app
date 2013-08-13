@@ -69,7 +69,7 @@ MeiweiApp.bindAjaxEvents = function() {
 		}, timeout);
 	});
 	$(document).ajaxError(function(event, jqxhr, settings, exception) {
-		if (jqxhr.status == 401 || jqxhr.status == 403 || jqxhr.status == 409) {
+		if (jqxhr.status == 401 || jqxhr.status == 403 || jqxhr.status == 499) {
 			MeiweiApp.Pages.MemberLogin.go({ ref: MeiweiApp.history.active });
 		} else if (settings.type == 'GET') {
 			$('#apploader .ajax-error').removeClass('hide');
