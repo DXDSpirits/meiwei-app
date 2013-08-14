@@ -42,6 +42,8 @@ body {
 }
 
 .view > .wrapper > .scroll {
+	background: url($backgroundBottomPath) no-repeat bottom, url($backgroundTopPath) no-repeat top;
+	@include background-size(contain, contain);
 	@include flexible();
 	position: relative;
 	width: 100%;
@@ -57,6 +59,7 @@ body {
 		display: none;
 	}
 	& > .scroll-inner {
+		background-color: $bodyBackground;
 		width: 100%;
 		@include flex-box();
 	}
