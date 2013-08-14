@@ -7,15 +7,18 @@ MeiweiApp.Views.MemberProfileBox = MeiweiApp.ModelView.extend({
 });
 
 
-MeiweiApp.Views.FavoriteRestoCarousel = MeiweiApp.CollectionView.extend({
-	ModelView: MeiweiApp.ModelView.extend({
-		tagName: 'img',
-		template: Mustache.compile('{{{ restaurantinfor.frontpic }}}'),
-		render: function() {
-			this.$el.attr('src', this.template(this.model.toJSON()));
-			return this;
-		}
-	})
+MeiweiApp.Views.FavoriteRestoCarousel = MeiweiApp.View.extend({
+	initialize: function() {
+		_.bindAll(this, 'render');
+	},
+	render: function() {
+		var ran = _.random(0, this.collection.length);
+		var model = this.collection.at(ran);
+		var html = $('<img></img>').attr('src', model.get('restaurantinfor').frontpic);
+		console.log(html);
+		this.$el.html(html);
+		return this;
+	}
 });
 
 
@@ -41,7 +44,6 @@ MeiweiApp.Pages.MemberCenter = new (MeiweiApp.PageView.extend({
 		MeiweiApp.goTo('Home');
 	},
 	initPage: function() {
-		_.bindAll(this, 'carousel');
 		this.favorites = new MeiweiApp.Collections.Favorites();
 		this.views = {
 			profileBox: new MeiweiApp.Views.MemberProfileBox({
@@ -54,27 +56,8 @@ MeiweiApp.Pages.MemberCenter = new (MeiweiApp.PageView.extend({
 			})
 		}
 	},
-	carousel: function() {
-		var itv = null;
-		if (itv) clearInterval(itv);
-		var A = this.$('.favorite-resto-carousel img');
-		var L = A.length;
-		var i = 0;
-		$(A[i]).addClass('front');
-		var timedCount = function() {
-			if (i >= L - 1) {
-				clearInterval(itv);
-				return;
-			}
-			$(A[i]).removeClass('front');
-			$(A[i]).addClass('back');
-			$(A[i + 1]).addClass('front');
-			i += 1;
-		};
-		itv = setInterval(timedCount, 3000);
-	},
 	render: function() {
 		MeiweiApp.me.profile.fetch({success: this.showPage});
-		this.favorites.fetch({reset: true, success: this.carousel});
+		this.favorites.fetch({reset: true, success: this.views.favoriteCarousel.render });
 	}
 }))({el: $("#view-member-center")});

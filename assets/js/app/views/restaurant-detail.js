@@ -70,6 +70,7 @@ MeiweiApp.Pages.RestaurantDetail = new (MeiweiApp.PageView.extend({
 		var L = A.length;
 		var i = 0;
 		$(A[i]).addClass('front');
+		return;
 		var timedCount = function() {
 			if (i >= L - 1) {
 				clearInterval(itv);
@@ -90,7 +91,6 @@ MeiweiApp.Pages.RestaurantDetail = new (MeiweiApp.PageView.extend({
 		var self = this;
 		fav.save({}, {success: function() {
 			self.$('.icon-favorite').addClass('suceed');
-			//setTimeout(function() { self.$('.icon-favorite').removeClass('suceed'); }, 1000);
 		}});
 	},
 	renderAll: function() {
@@ -107,6 +107,7 @@ MeiweiApp.Pages.RestaurantDetail = new (MeiweiApp.PageView.extend({
 		this.showPage();
 	},
 	render: function() {
+		this.$('.icon-favorite').removeClass('suceed');
 		if (this.options.restaurant) {
 			this.restaurant.set(this.options.restaurant);
 			this.renderAll();

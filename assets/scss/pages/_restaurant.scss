@@ -68,16 +68,16 @@
 			width: 100%;
 			min-height: 100%;
 			position: absolute;
-			top: 0;
+			bottom: 0;
 			visibility: hidden;
-		    &.back {
-		    	@include animation(fadeout 1s ease-in-out);
-		    }
-		    &.front {
-		    	visibility: visible;
-		   		@include animation(fadein 1s ease-in-out);
-		   	}
-		   	@include backface-visibility(hidden);
+			&.back {
+				@include animation(fadeout 1s ease-in-out);
+			}
+			&.front {
+				visibility: visible;
+				@include animation(fadein 1s ease-in-out);
+			}
+			@include backface-visibility(hidden);
 		}
 		&::after {
 			content: "";
