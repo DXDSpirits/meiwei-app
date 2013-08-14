@@ -55,6 +55,7 @@
 #view-restaurant-detail {
 	
 	.restaurant-pictures {
+		z-index: 0;
 		@include flex-box($orient: vertical);
 		//Make the pictures wrapper 2X wider.
 		width: 100%;
@@ -66,17 +67,17 @@
 		img {
 			width: 100%;
 			min-height: 100%;
-			display: none;
-	        &:first-child {
-	        	display: block;
-	        }
-	        
-		    //opacity: 0;
-		    @include transition(opacity 2s ease-in-out);
+			position: absolute;
+			top: 0;
+			visibility: hidden;
+		    &.back {
+		    	@include animation(fadeout 1s ease-in-out);
+		    }
 		    &.front {
-		   		opacity: 1;
-		   		@include transition(opacity 2s ease-in-out);
+		    	visibility: visible;
+		   		@include animation(fadein 1s ease-in-out);
 		   	}
+		   	@include backface-visibility(hidden);
 		}
 		&::after {
 			content: "";
@@ -90,8 +91,8 @@
 	}
 	
 	.restaurant-profile {
+		z-index: 1;
 		width: 90%;
-		
 		@include border(0 0 1px, solid, $brownLight);
 		
 		font-size: $fontSizeMini;
