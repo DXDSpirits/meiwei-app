@@ -8,7 +8,7 @@ MeiweiApp.Views.ContactList = MeiweiApp.CollectionView.extend({
 		triggerSelect: function(e) {
 			this.model.trigger("select");
 			this.$('i').attr('class', 'icon-select');
-			this.$el.siblings().find('i').attr('class', 'icon-circle');
+			this.$el.siblings().find('.icon-select').attr('class', 'icon-circle');
 		}
 	})
 });

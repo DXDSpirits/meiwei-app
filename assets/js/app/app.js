@@ -54,8 +54,8 @@ MeiweiApp.bindSync = function() {
 			localStorage.removeItem('basic-auth');
 			token = null;
 		}
-	};
-};
+	}
+}
 
 MeiweiApp.bindAjaxEvents = function() {
 	var timeout = 0;
@@ -73,11 +73,11 @@ MeiweiApp.bindAjaxEvents = function() {
 			MeiweiApp.Pages.MemberLogin.go({ ref: MeiweiApp.history.active });
 		} else if (settings.type == 'GET') {
 			$('#apploader .ajax-error').removeClass('hide');
-			timeout = 1000;
+			timeout = 3000;
 			setTimeout(function() {
 				$('#apploader .ajax-error').addClass('hide');
 				MeiweiApp.goBack();
-			}, timeout + timeout / 2);
+			}, timeout + 500);
 		}
 	});
 }
