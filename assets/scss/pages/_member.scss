@@ -54,27 +54,29 @@
 
 #view-member-center {
 	.favorite-resto-carousel {
+		z-index: 0;
 		height: 200px - 45px;
 		width: 100%;
 		position: relative;
 		img {
-			display: none;
-	        width: 100%;
-	        height: 200px;
-	        &:first-child {
-	        	display: block;
-	        }
-	        
-		    //opacity: 0;
-		    @include transition(opacity 2s ease-in-out);
+		   	width: 100%;
+			height: 200px;
+			position: absolute;
+			top: 0;
+			visibility: hidden;
+		    &.back {
+		    	@include animation(fadeout 1s ease-in-out);
+		    }
 		    &.front {
-		   		opacity: 1;
-		   		@include transition(opacity 2s ease-in-out);
+		    	visibility: visible;
+		   		@include animation(fadein 1s ease-in-out);
 		   	}
+		   	@include backface-visibility(hidden);
 		}
 	}
 	
 	.member-profile-box {
+		z-index: 1;
 		position: relative;
 		font-size: $fontSizeMini;
 		@include size(90px, 100%);
