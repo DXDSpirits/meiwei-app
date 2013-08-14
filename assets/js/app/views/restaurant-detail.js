@@ -64,20 +64,23 @@ MeiweiApp.Pages.RestaurantDetail = new (MeiweiApp.PageView.extend({
 		_.bindAll(this, 'renderAll', 'carousel');
 	},
 	carousel: function() {
-		if (this.itv) {
-			clearInterval(this.itv);
-		}
+		var itv = null;
+		if (itv) clearInterval(itv);
 		var A = this.$('.restaurant-pictures img');
 		var L = A.length;
 		var i = 0;
 		$(A[i]).addClass('front');
 		var timedCount = function() {
+			if (i >= L - 1) {
+				clearInterval(itv);
+				return;
+			}
 			$(A[i]).removeClass('front');
 			$(A[i]).addClass('back');
-			$(A[(i + 1) % L]).addClass('front');
-			i = (i + 1) % L; 
+			$(A[i + 1]).addClass('front');
+			i += 1;
 		}
-		this.itv = setInterval(timedCount, 3000);
+		itv = setInterval(timedCount, 3000);
 	},
 	onClickRightBtn: function() { this.addFavorite(); },
 	addFavorite: function() {
