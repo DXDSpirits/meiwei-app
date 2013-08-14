@@ -257,7 +257,7 @@
 		width: 100%;
 		overflow: hidden;
 		.svg-canvas-inner {
-			@include size(400px, 800px);
+			@include size(400px, 100%);
 		}
 	}
 	.floorplan-nav {

@@ -23,8 +23,8 @@ MeiweiApp.Views.Floorplan = MeiweiApp.View.extend({
 		this.$el.find("[status=selected]").attr("status", "available");
 		this.model = model;
   		var svg = model.get('svgString');
-  		$(svg).attr('max-width', '100%');
-		$(svg).attr('max-height', '100%');
+  		$(svg).attr('width', '100%');
+		$(svg).attr('height', '100%');
  		this.$el.html(svg);
 	},
 	selectSeat: function(e){
@@ -73,11 +73,14 @@ MeiweiApp.Pages.RestaurantFloorplans = new (MeiweiApp.PageView.extend({
 				el: this.$('.floorplan-nav')
 			})
 		}
-		_.bindAll(this , 'renderFloorplans');
 	},
-	renderFloorplans: function() {
+	initScroller: function() {
 		if (this.scroller == null) {
-			this.scroller = new IScroll('.svg-canvas', { scrollX: true, freeScroll: true, click: true });
+			this.scroller = new IScroll(this.$('.svg-canvas').selector, {
+				scrollX: true, freeScroll: true, click: true,
+				zoom: true, mouseWheel: true, wheelAction: 'zoom',
+				HWCompositing: false
+			});
 		} else {
 			this.scroller.refresh();
 		}
@@ -85,7 +88,7 @@ MeiweiApp.Pages.RestaurantFloorplans = new (MeiweiApp.PageView.extend({
 	render: function() {
 		this.floorplans.reset(this.options.floorplans.models);
 		this.views.floorplanList.render();
-		this.renderFloorplans();
+		this.initScroller();
 		this.showPage();
 	}
 }))({el: $("#view-restaurant-floorplans")});

@@ -152,6 +152,7 @@ MeiweiApp.Views.ProductRedeemList = MeiweiApp.Views.ProductPurchaseList.extend({
 });
 
 MeiweiApp.Pages.ProductRedeem = new (MeiweiApp.Pages.ProductPurchase.constructor.extend({
+	onClickRightBtn: function() { MeiweiApp.goBack(); },
 	initPage: function() {
 		_.bindAll(this, 'carousel');
 		this.products = new MeiweiApp.Collections.Products();
