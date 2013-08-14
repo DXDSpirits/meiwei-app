@@ -55,7 +55,8 @@ MeiweiApp.Views.RestaurantOrderForm = MeiweiApp.View.extend({
 	},
 	template: MeiweiApp.Templates['restaurant-order-form'],
 	renderHourList: function() {
-		var date = new Date(this.$('input[name=orderdate]').val());
+		var ymd = this.$('input[name=orderdate]').val().split('-');
+		var date = new Date(ymd[0], ymd[1], ymd[2]);
 		var $select = this.$('select[name=ordertime]');
 		$select.empty();
 		var hour = this.hours.get(date.getDay().toString());

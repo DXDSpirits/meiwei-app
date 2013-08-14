@@ -15,7 +15,6 @@ MeiweiApp.Views.FavoriteRestoCarousel = MeiweiApp.View.extend({
 		var ran = _.random(0, this.collection.length);
 		var model = this.collection.at(ran);
 		var html = $('<img></img>').attr('src', model.get('restaurantinfor').frontpic);
-		console.log(html);
 		this.$el.html(html);
 		return this;
 	}

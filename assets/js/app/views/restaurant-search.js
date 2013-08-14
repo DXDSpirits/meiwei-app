@@ -101,7 +101,7 @@ MeiweiApp.Pages.RestaurantSearch = new (MeiweiApp.PageView.extend({
 			var self = this;
 			setTimeout(function() {
 				self.restaurants.fetchNext({ remove: false, success: self.refreshList });
-			}, 2000);
+			}, 500);
 		}
 	},
 	
@@ -169,12 +169,16 @@ MeiweiApp.Pages.RestaurantSearch = new (MeiweiApp.PageView.extend({
 		});
 	},
 	initializeMap: function () {
-		this.markers = [];
-		this.map = new BMap.Map("map_canvas", {enableMapClick: false, maxZoom: 18});
-		this.map.enableContinuousZoom();
-		this.map.disablePinchToZoom();
-		this.map.centerAndZoom(new BMap.Point(121.491, 31.233), 12);
-		this.map.addControl(new BMap.NavigationControl({anchor: BMAP_ANCHOR_TOP_RIGHT, type: BMAP_NAVIGATION_CONTROL_ZOOM})); 
+		try {
+			this.markers = [];
+			this.map = new BMap.Map("map_canvas", {enableMapClick: false, maxZoom: 18});
+			this.map.enableContinuousZoom();
+			this.map.disablePinchToZoom();
+			this.map.centerAndZoom(new BMap.Point(121.491, 31.233), 12);
+			this.map.addControl(new BMap.NavigationControl({anchor: BMAP_ANCHOR_TOP_RIGHT, type: BMAP_NAVIGATION_CONTROL_ZOOM})); 
+		} catch (e) {
+			
+		}
 	},
 	/*********************************************/
 	

@@ -12,28 +12,16 @@
 		width: 100%;
 		overflow: hidden;
 		position: relative;
+		z-index: 0;
 		
 		img {
 			position: absolute;
-			//z-index: -1;
 			top: 0;
-			left: 0;
 			width: 100%;
 			min-height: 100%;
-			//height: $itemHeight;
-			//height: 2 * $itemHeight - $splitterWidth;
 			border-width: 0 0 $splitterWidth;
 			border-style: solid;
 			border-color: $brown;
-			//-webkit-filter: blur(3px); //sepia(50%);
-			//-webkit-transition: -webkit-filter .36s ease-in-out;
-			//@include backface-visibility(hidden);
-		}
-		
-		&.hero img {
-			//-webkit-filter: blur(0);
-			//-webkit-transition: -webkit-filter .36s ease-in-out;
-			//@include backface-visibility(hidden);
 		}
 		
 		article {

@@ -42,12 +42,11 @@ body {
 }
 
 .view > .wrapper > .scroll {
-	background: url($backgroundBottomPath) no-repeat bottom, url($backgroundTopPath) no-repeat top;
-	@include background-size(contain, contain);
+	background: url($backgroundBottomPath) no-repeat bottom;
+	@include background-size(contain);
 	@include flexible();
 	position: relative;
 	width: 100%;
-	//overflow: auto;
 	overflow-y: auto;
 	overflow-x: hidden;
 	-webkit-overflow-scrolling: touch;

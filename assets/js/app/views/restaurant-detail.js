@@ -102,7 +102,7 @@ MeiweiApp.Pages.RestaurantDetail = new (MeiweiApp.PageView.extend({
 			this.views.pictures.$el.html(html);
 		} else {
 			this.views.pictures.collection.reset(this.restaurant.get('pictures'));
-			this.carousel();
+			//this.carousel();
 		}
 		this.showPage();
 	},
