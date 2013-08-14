@@ -17,58 +17,37 @@ MeiweiApp.Views.FloorplanNav = MeiweiApp.CollectionView.extend({
 	})
 });
 
-MeiweiApp.Views.Floorplan = MeiweiApp.ModelView.extend({
+MeiweiApp.Views.Floorplan = MeiweiApp.View.extend({
 	events: {'click .table':'selectSeat'},
-	initialize: function() {
-		this.seatMap = {};
-		this.options = {
-			maxSeat: 1,
-			size: 0
-		};
-	},
 	onSelect: function(model) {
+		this.$el.find("[status=selected]").attr("status", "available");
+		this.model = model;
   		var svg = model.get('svgString');
- 		this.$el.empty();
   		$(svg).attr('max-width', '100%');
 		$(svg).attr('max-height', '100%');
  		this.$el.html(svg);
-		this.model = model;
 	},
-	tagName: "div",
-	className: "svg-item",
 	selectSeat: function(e){
 		var $t = $(e.target);
 		var id = this.model.get("id");
-		
-		if($t.attr("status")=="available") {
-			if( this.options.size >= this.options.maxSeat){
-				if(window.confirm("很抱歉，你所选桌位已超出预设数目！\n点击确认重新选择。")){
-					this.$el.find("[status=selected]").attr("status","available");
-					this.seatMap = {};
-					this.options.size = 0;
-				}
-				return;
-			}
+		if($t.attr("status") == "available") {
+			this.$el.find("[status=selected]").attr("status", "available");
 			$t.attr("status","selected");
-			this.options.size +=1;
-			if(!this.seatMap[id]) this.seatMap[id] = {};
-			this.seatMap[id][$t.attr("tableid")] = null;
-		} else if ($t.attr("status")=="selected"){
-			$t.attr("status","available");
-			this.options.size-=1;
-			delete this.seatMap[id][$t.attr("tableid")];
+			this.selectedSeat = id + '|' + $t.attr("tableid");
+		} else if ($t.attr("status") == "selected"){
+			$t.attr("status", "available");
+			this.selectedSeat = null;
 		}
 	},
 	render: function() {
 		var self = this;
-		$.each(this.collection.models,function(){
-			var m = this;
-			$.get(this.get('path'), function(data) {
+		this.collection.forEach(function(model) {
+			$.get(model.get('path'), function(data) {
 				var svg = $(data).find('svg');
 				$(svg).find('pattern .table').attr({'class': null, 'status': null});
- 				m.set("svgString" ,svg );
- 				self.listenTo( m , 'select' , function(){ self.onSelect(m) } );
- 				m.trigger('select');
+ 				model.set("svgString", svg);
+ 				self.listenTo(model, 'select', function() { self.onSelect(model); } );
+ 				model.trigger('select');
 			});
 		});
 		return this;
@@ -76,13 +55,9 @@ MeiweiApp.Views.Floorplan = MeiweiApp.ModelView.extend({
 });
 
 MeiweiApp.Pages.RestaurantFloorplans = new (MeiweiApp.PageView.extend({
-	onClickLeftBtn: function(){
-		this.onClickRightBtn();
-	},onClickRightBtn: function() {
-		$.each(this.views.floorplanList.modelViews , function(){
-			if(this.options.size>0)
-			this.model.trigger("selected",JSON.stringify(this.seatMap));
-		});
+	onClickLeftBtn: function() { this.onClickRightBtn(); },
+	onClickRightBtn: function() {
+		this.views.floorplanList.trigger("selected");
   		MeiweiApp.goBack();
  	},
 	initPage: function() {
@@ -102,15 +77,7 @@ MeiweiApp.Pages.RestaurantFloorplans = new (MeiweiApp.PageView.extend({
 	},
 	renderFloorplans: function() {
 		if (this.scroller == null) {
-			this.scroller = new IScroll('.svg-canvas', {
-				scrollX: true,
-				freeScroll: true,
-				/*zoom: true,
-				mouseWheel: true,
-				wheelAction: 'zoom',*/
-				//preventDefault: false
-				click: true
-			});
+			this.scroller = new IScroll('.svg-canvas', { scrollX: true, freeScroll: true, click: true });
 		} else {
 			this.scroller.refresh();
 		}

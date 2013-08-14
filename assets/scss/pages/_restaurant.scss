@@ -259,10 +259,6 @@
 		.svg-canvas-inner {
 			@include size(400px, 800px);
 		}
-		.svg-item {
-			opacity: 1;
-			@include animation(fadein .5s ease-in-out);
-		}
 	}
 	.floorplan-nav {
 		@include size(62px, 100%);
