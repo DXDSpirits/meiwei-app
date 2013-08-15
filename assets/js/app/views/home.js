@@ -41,7 +41,7 @@ MeiweiApp.Pages.Home = new (MeiweiApp.PageView.extend({
 		this.$('.hero').removeClass('hero');
 		modelViews[modelViews.length - y - 1].$el.addClass('hero');
 	},
-	initScroller: function() {
+	initScrollerOfHome: function() {
 		if (this.scroller == null) {
 			if (this.$('.iscroll').length > 0) {
 			    this.scroller = new IScroll(this.$('.iscroll').selector, {
