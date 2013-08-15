@@ -99,10 +99,10 @@
 
 #view-attending {
 	.viewport {
-		@include size(100%, 300px);
-		max-height: 500px;
-		@include center-block();
 		overflow: hidden;
+		//max-height: 500px;
+		@include size(100%, 300px);
+		@include center-block();
 		@include background-size(100% auto, 100% auto);
 	}
 	
@@ -112,25 +112,24 @@
 		position: relative;
 		
 		.section-header-img {
-			max-height: 140px;
-	        width: 230px;
+			height: 150px;
+	        width: 100%;
+	        margin: 10px 0;
 	       	overflow: hidden;
-	       	@include border-top-left-radius(5px);
-	       	@include border-top-right-radius(5px);
+	       	@include border-top-left-radius(15px);
+	       	@include border-top-right-radius(15px);
+	       	img { @include square(100%); }
 		}
 		
 		.order-detail {
-			@include size(390px, 85%);
+			width: 85%;
 			@include center-block();
 			@include flex-box($pack: end);
-			position: relative;
-			top: -50px;
 			.section-qrcode {
-				 @include flex-box($pack: center);
-		         @include square(150px);
-		         @include center-block();
-		         padding: 10px;
-		         background-color: $white;
+				display: none;
+		        @include square(150px);
+		        padding: 10px;
+		        background-color: $white;
 			}
 			> header {
 				h1 { @include text-overflow(); }
