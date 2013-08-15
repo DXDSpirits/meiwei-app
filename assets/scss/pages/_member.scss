@@ -53,6 +53,7 @@
 }
 
 #view-member-center {
+	@include scrollBottomBanner();
 	.favorite-resto-carousel {
 		z-index: 0;
 		height: 200px - 45px;
@@ -65,7 +66,6 @@
 			bottom: -45px;
 		}
 	}
-	
 	.member-profile-box {
 		z-index: 1;
 		position: relative;
@@ -92,12 +92,10 @@
 			margin: -5px 0;
 		}
 	}
-	
 	$listItemHeight: 45px;
 	$listItemWidth: 93.75%;
 	$buttonWidth: 62.5%;
 	$listPadding: ($listItemWidth - $buttonWidth) / 2;
-	
 	ul.member-center-nav {
 		width: $listItemWidth;
 		li {
@@ -127,7 +125,6 @@
 }
 
 #view-member-favorites {
-	
 	.restaurant-list-item {
 		padding: 9px 45px 9px 99px;
 		section { @include square(100%); }

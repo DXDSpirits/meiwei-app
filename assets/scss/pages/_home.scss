@@ -1,4 +1,6 @@
 #view-home {
+	@include scrollBottomBanner();
+	
 	.recommend-flow {
 		@include flex-box($orient: vertical, $direction: reverse);
 		width: 100%;
