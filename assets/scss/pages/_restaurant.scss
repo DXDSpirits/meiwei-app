@@ -53,7 +53,7 @@
 }
 
 #view-restaurant-detail {
-	
+	@include scrollBottomBanner();
 	.restaurant-pictures {
 		z-index: 0;
 		@include flex-box($orient: vertical);
@@ -76,15 +76,12 @@
 			-webkit-border-image: url($tagImagePath) 13 stretch;
 		}
 	}
-	
 	.restaurant-profile {
 		z-index: 1;
 		width: 90%;
 		@include border(0 0 1px, solid, $brownLight);
-		
 		font-size: $fontSizeMini;
 		line-height: $fontSizeMini;
-		
 		position: relative;
 		.rating {
 			position: absolute;
@@ -104,7 +101,6 @@
 			background: transparent url($bookButtonPath) no-repeat bottom left;
 			@include background-size(35px 35px);
 		}
-		
 		article {
 			padding: $baseLineHeight/2 0;
 			//@include size(3 * $baseLineHeight, 100%);
@@ -118,7 +114,6 @@
 			background: transparent url($gradientShadowPath) repeat-x bottom;
 			@include background-size(100% (3*$baseLineHeight));
 		}
-		
 		.information  {
 			color: $brownDark;
 			margin: 16px 0;
@@ -128,12 +123,10 @@
 		}
 		
 	}
-	
 	.restaurant-reviews {
 		width: 90%;
 		font-size: $fontSizeMini;
 	}
-	
 	.callus-button {
 		width: 90%;
 		padding: 20px 10%;
@@ -149,6 +142,7 @@
 }
 
 #view-restaurant-order {
+	@include scrollBottomBanner();
 	.restaurant-info {
 		height:140px;
         width:100%;
@@ -163,10 +157,7 @@
         }
         overflow: hidden;
 	}
-	
-	label {
-		margin:5px;
-	}
+	label { margin:5px; }
 	fieldset {
 		margin: 0;
 		border-width: 1px 0 0 0;

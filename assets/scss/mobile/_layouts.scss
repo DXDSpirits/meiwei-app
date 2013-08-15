@@ -41,9 +41,15 @@ body {
 	}
 }
 
+
+@mixin scrollBottomBanner() {
+	&.view > .wrapper > .scroll {
+		background: url($backgroundBottomPath) no-repeat bottom;
+		@include background-size(contain);
+	}
+}
+
 .view > .wrapper > .scroll {
-	background: url($backgroundBottomPath) no-repeat bottom;
-	@include background-size(contain);
 	@include flexible();
 	position: relative;
 	width: 100%;
