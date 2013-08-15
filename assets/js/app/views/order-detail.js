@@ -5,10 +5,16 @@ MeiweiApp.Views.OrderDetail = MeiweiApp.ModelView.extend({
 		'click .btn-cancel': 'cancelOrder'
 	},
 	cancelOrder: function() {
-		this.model.cancel({success: function() {
-			if (confirm("删除订单?") == false) return;
-			MeiweiApp.goTo('OrderList');
-		}});
+		var model = this.model;
+		var confirmCancel = function() {
+			model.cancel({success: function() { MeiweiApp.goTo('OrderList'); }});
+		}
+		try {
+			var callback = function(button) { if (button == 2) confirmCancel(); }
+			navigator.notification.confirm('请确认删除订单。', callback, '删除订单', ['取消', '确认']);
+		} catch (e) {
+			if (confirm("删除订单?") == true) confirmCancel();
+		}
 	}
 });
 

@@ -24,6 +24,10 @@ var MeiweiApp = new (Backbone.View.extend({
 		MeiweiApp.bindSync();
 		MeiweiApp.bindAjaxEvents();
 		Backbone.history.start();
+		navigator.splashscreen.show();
+		setTimeout(function() {
+			navigator.splashscreen.hide();
+		}, 3000);
 	}
 }))({el: document.body});
 

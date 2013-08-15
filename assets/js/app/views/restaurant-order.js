@@ -81,10 +81,10 @@ MeiweiApp.Pages.RestaurantOrder = new (MeiweiApp.PageView.extend({
 	events: {
 		'click .floorplan-select > header': 'selectSeat',
 		'click .product-select > header': 'selectProduct',
-		'click .order-submit-button': 'submitOrder',
+		'click .order-submit-button': 'askToSubmitOrder',
 	},
 	initPage: function() {
-		_.bindAll(this, 'renderOrderForm');
+		_.bindAll(this, 'renderOrderForm', 'submitOrder');
 		this.restaurant = new MeiweiApp.Models.Restaurant();
 		this.floorplans = new MeiweiApp.Collections.Floorplans();
 		this.views = {
@@ -123,9 +123,17 @@ MeiweiApp.Pages.RestaurantOrder = new (MeiweiApp.PageView.extend({
 	selectProduct: function() {
 		MeiweiApp.goTo('ProductPurchase');
 	},
-	submitOrder: function(e) {
+	askToSubmitOrder: function(e) {
 		e.preventDefault();
-		if (confirm("提交订单?") == false) return;
+		var submitOrder = this.submitOrder;
+		try {
+			var callback = function(button) { if (button == 2) submitOrder(); }
+			navigator.notification.confirm('订单被确认以后您会收到一条短信。', callback, '确认订单？', ['取消', '确认']);
+		} catch (e) {
+			if (confirm("提交订单?") == true) submitOrder();
+		}
+	},
+	submitOrder: function() {
 		var newOrder = new MeiweiApp.Models.Order();
 		var products = _.reduce(MeiweiApp.ProductCart.models, function(products, item){ 
 			return products + item.id + ',';
