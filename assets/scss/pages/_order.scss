@@ -127,7 +127,7 @@
 			@include flex-box($pack: end);
 			.section-qrcode {
 				display: none;
-		        @include square(150px);
+		        @include square(110px);
 		        padding: 10px;
 		        background-color: $white;
 			}
