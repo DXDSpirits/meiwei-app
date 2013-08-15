@@ -70,11 +70,11 @@ MeiweiApp.Pages.RestaurantSearch = new (MeiweiApp.PageView.extend({
 			}),
 			cuisineFilter: new MeiweiApp.Views.Filter({
 				collection: this.cuisines,
-				el: this.$('.filter.cuisine .collapsible-inner')
+				el: this.$('.filter.cuisine .collapsible-inner ul')
 			}),
 			circleFilter: new MeiweiApp.Views.Filter({
 				collection: this.circles,
-				el: this.$('.filter.circle .collapsible-inner')
+				el: this.$('.filter.circle .collapsible-inner ul')
 			}),
 			markerInfo: new MeiweiApp.Views.MarkerItemInfo({
 				model: new MeiweiApp.Models.Restaurant(),
@@ -123,6 +123,9 @@ MeiweiApp.Pages.RestaurantSearch = new (MeiweiApp.PageView.extend({
 		this.restaurants.fetch({ reset: true, success: this.refreshList, data: filter });
 	},
 	bindCuisineFilters: function(cuisines, response, options) {
+	    this.cuisineFilterScroller = new IScroll(this.$('.cuisine .collapsible-inner').selector, {
+	    	preventDefault: false
+		});
 		var bindFilter = function(cuisine) {
 			this.listenTo(cuisine, "select", function() {
 			    this.$('.cuisine > p > span').html(cuisine.get('name'));
@@ -133,6 +136,9 @@ MeiweiApp.Pages.RestaurantSearch = new (MeiweiApp.PageView.extend({
 		cuisines.forEach(bindFilter, this);
 	},
 	bindCircleFilters: function(circles, response, options) {
+		this.circleFilterScroller = new IScroll(this.$('.circle .collapsible-inner').selector, {
+	    	preventDefault: false
+		});
 		var bindFilter = function(circle) {
 			this.listenTo(circle, "select", function() {
 			    this.$('.circle > p > span').html(circle.get('name'));	

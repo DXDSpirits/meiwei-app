@@ -34,6 +34,7 @@ MeiweiApp.Pages.MemberContacts = new(MeiweiApp.PageView.extend({
 		_.bindAll(this, "bindContactSelect");
 	},
 	bindContactSelect: function(collection, response, options) {
+		this.initScroller();
 		collection.forEach(function(contact) {
 			this.listenTo(contact, "select", function() {
 				this.selectedContact = contact;
