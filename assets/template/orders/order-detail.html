@@ -1,70 +1,33 @@
-<!--
+
 <header>
-    <h3>{{ orderno }}</h3>
-    <h5>{{ ordersubmittime }} | status: {{ status }}</h5>
+	<img src="{{restaurantinfor.frontpic}}">
+	<h1>{{restaurantinfor.fullname}}</h1>
 </header>
-<article>
-	<p>{{ member }}</p>
-    <p>{{ restaurantinfor.fullname }}</p>
-    <p>{{ personnum }}</p>
-    <p>{{ orderdate }}</p>
-    <p>{{ ordertime }}</p>
-    <p>{{ contactname }} {{ contactphone }}</p>
-    <p>{{ other }}</p>
-    <p>{{ adminother }}</p>
-    <button class="button-modify-order">修改</button>
-</article>
--->
-<div class="section-header-img"><img src="{{restaurantinfor.frontpic}}"></div>
-<div class="section-header"><h1>{{restaurantinfor.fullname}}</h1></div>
-<div class="section-content">
-	<div>
-		<p class="title">订餐标号</p>
-		<p class="content">{{ orderno }}</p>
-	</div>
-	<div>
-		<p class="title">获得积分</p>
-		<p class="content">&nbsp;</p>
-	</div>
-</div>
-<div class="section-content">
-	<div>
-		<p class="title">订餐日期</p>
-		<p class="content">{{ orderdate }}</p>
-	</div>
-	<div>
-		<p class="title">订餐时间</p>
-		<p class="content">{{ ordertime }}</p>
-	</div>
-</div>
-<div class="section-content2">
-	<div>
-		<p class="title">就餐人数</p>
-		<p class="content">{{ personnum }}人</p>
-	</div>
-</div>
-<div class="section-content">
-	<div>
-		<p class="title">联系人</p>
-		<p class="content">{{ contactname }}</p>
-	</div>
-	<div>
-		<p class="title">手机号</p>
-		<p class="content">{{ contactphone }}</p>
-	</div>
-</div>
-<div class="section-ex">
-	<div>
-		<p class="title">已选增值服务</p>
-	</div>
-	<div class="ex-pictures">
+
+<section class="order-detail">
+	<table>
+		<tr><th colspan="2">订单号</th></tr>
+		<tr><td colspan="2">{{ orderno }}</td></tr>
+		<tr><th>订餐日期</th><th>订餐时间</th></tr>
+		<tr><td>{{ orderdate }}</td><td>{{ ordertime }}</td></tr>
+		<tr><th colspan="2">就餐人数</th></tr>
+		<tr><td colspan="2">{{ personnum }}人</td></tr>
+		<tr><th>联系人</th><th>手机号</th></tr>
+		<tr><td>{{ contactname }}</td><td>{{ contactphone }}</td></tr>
+	</table>
+</section>
+
+{{#product_items.length}}
+<section class="order-product">
+	<p>已选增值服务</p>
+	<div class="products">
 		{{ #product_items }}
 		<div class="product-item">
 			<img src="{{ picture }}" />
 		</div>
 		{{ /product_items }}
 	</div>
-	<div class="delete-order">
-    <button class="btn-inverse btn-cancel">删除订单</button>
-</div>
-</div>
+</section>
+{{/product_items.length}}
+
+<button class="btn-inverse btn-cancel">删除订单</button>
