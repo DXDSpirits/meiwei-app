@@ -12,10 +12,13 @@ MeiweiApp.Views.FavoriteRestoCarousel = MeiweiApp.View.extend({
 		_.bindAll(this, 'render');
 	},
 	render: function() {
-		var ran = _.random(0, this.collection.length);
-		var model = this.collection.at(ran);
-		var html = $('<img></img>').attr('src', model.get('restaurantinfor').frontpic);
-		this.$el.html(html);
+		var path = 'assets/img/default.png';
+		if (this.collection.length > 0) {
+			var ran = _.random(0, this.collection.length);
+			var model = this.collection.at(ran);
+			path = model.get('restaurantinfor').frontpic;
+		}
+		this.$el.html($('<img></img>').attr('src', path));
 		return this;
 	}
 });

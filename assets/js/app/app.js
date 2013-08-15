@@ -70,15 +70,22 @@ MeiweiApp.bindAjaxEvents = function() {
 		}, timeout);
 	});
 	$(document).ajaxError(function(event, jqxhr, settings, exception) {
+		var response = jqxhr.responseJSON || {};
 		if (jqxhr.status == 401 || jqxhr.status == 403 || jqxhr.status == 499) {
+			if (response.detail != 'Authentication credentials were not provided.') {
+				var text = $('#apploader .ajax-error').html();
+				$('#apploader .ajax-error').html(response.detail).removeClass('hide');
+				setTimeout(function() {
+					$('#apploader .ajax-error').html(text).addClass('hide');
+				}, (timeout = 2000) + 500);
+			}
 			MeiweiApp.Pages.MemberLogin.go({ ref: MeiweiApp.history.active });
 		} else if (settings.type == 'GET') {
 			$('#apploader .ajax-error').removeClass('hide');
-			timeout = 3000;
 			setTimeout(function() {
 				$('#apploader .ajax-error').addClass('hide');
 				MeiweiApp.goBack();
-			}, timeout + 500);
+			}, (timeout = 3000) + 500);
 		}
 	});
 }
