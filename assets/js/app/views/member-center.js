@@ -14,7 +14,7 @@ MeiweiApp.Views.FavoriteRestoCarousel = MeiweiApp.View.extend({
 	render: function() {
 		var path = 'assets/img/default.png';
 		if (this.collection.length > 0) {
-			var ran = _.random(0, this.collection.length);
+			var ran = _.random(0, this.collection.length - 1);
 			var model = this.collection.at(ran);
 			path = model.get('restaurantinfor').frontpic;
 		}
