@@ -94,6 +94,11 @@ form .info-text {
 	font-size: $fontSizeMini;
 }
 
+form label {
+	font-size: $fontSizeSmall;
+	color: $brown;
+}
+
 //radio-button
 .control-group.switch {
 	@include flex-box($orient: horizontal);
