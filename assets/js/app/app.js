@@ -20,12 +20,12 @@ var MeiweiApp = new (Backbone.View.extend({
 		timeout: 10000
 	},
 	
-	start: function() {	
+	start: function() {
+		MeiweiApp.showSplash();	
 		MeiweiApp.initClientErrors();
-		MeiweiApp.initSync();
 		MeiweiApp.initAjaxEvents();
+		MeiweiApp.initSync();
 		Backbone.history.start();
-		MeiweiApp.showSplash();
 	}
 }))({el: document.body});
 
@@ -35,9 +35,7 @@ MeiweiApp.showSplash = function() {
 		setTimeout(function() {
 			navigator.splashscreen.hide();
 		}, 3000);
-	} catch (e) {
-		MeiweiApp.handleError(e);
-	}
+	} catch (e) { }
 }
 
 MeiweiApp.initSync = function() {
