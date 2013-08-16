@@ -79,7 +79,8 @@
 	> .collapsible {
 		position: relative;
 		& > .collapsible-inner {
-			@include scrollable(5px);
+			//@include scrollable(5px);
+			overflow: hidden;
 			position: absolute;
 			z-index: $zindexPopover;
 			top: 50px;

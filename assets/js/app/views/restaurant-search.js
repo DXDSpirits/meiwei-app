@@ -126,6 +126,7 @@ MeiweiApp.Pages.RestaurantSearch = new (MeiweiApp.PageView.extend({
 	    this.cuisineFilterScroller = new IScroll(this.$('.cuisine .collapsible-inner').selector, {
 	    	preventDefault: false
 		});
+		this.cuisineFilterScroller.maxScrollY += 200;
 		var bindFilter = function(cuisine) {
 			this.listenTo(cuisine, "select", function() {
 			    this.$('.cuisine > p > span').html(cuisine.get('name'));
@@ -139,6 +140,7 @@ MeiweiApp.Pages.RestaurantSearch = new (MeiweiApp.PageView.extend({
 		this.circleFilterScroller = new IScroll(this.$('.circle .collapsible-inner').selector, {
 	    	preventDefault: false
 		});
+		this.circleFilterScroller.maxScrollY += 200;
 		var bindFilter = function(circle) {
 			this.listenTo(circle, "select", function() {
 			    this.$('.circle > p > span').html(circle.get('name'));	
