@@ -46,7 +46,6 @@ MeiweiApp.initSync = function() {
 	};
 	var auth = JSON.parse(localStorage.getItem('basic-auth'));
 	var token = auth && auth.username && auth.password ? encode(auth.username, auth.password) : null;
-	
 	var originalSync = Backbone.sync;
 	Backbone.sync = function(method, model, options) {
 		options.timeout = options.timeout || MeiweiApp.configs.timeout;

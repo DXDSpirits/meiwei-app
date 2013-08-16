@@ -1,16 +1,10 @@
 
 MeiweiApp.Models.Profile = MeiweiApp.Model.extend({
 	urlRoot: MeiweiApp.configs.APIHost + '/members/profile/',
-	parse: function(response) {
-		if (response.results != null) return response.results[0]; else return response;
-	}
 });
 
 MeiweiApp.Models.Member = MeiweiApp.Model.extend({
 	urlRoot: MeiweiApp.configs.APIHost + '/members/member/',
-	parse: function(response) {
-		if (response.results != null) return response.results[0]; else return response;
-	}
 });
 
 MeiweiApp.Models.Contact = MeiweiApp.Model.extend({
@@ -50,31 +44,33 @@ MeiweiApp.me = new (MeiweiApp.Models.Member.extend({
 		if (this.contacts == null) this.contacts = new MeiweiApp.Collections.Contacts();
 		if (this.profile == null) this.profile = new MeiweiApp.Models.Profile();
 	},
+	parse: function(response) {
+		if (_.isArray(response.results)) response = response.results[0];
+		this.profile.set(response.profile || {});
+		response.profile = null;
+		return response;
+	},
 	login: function(auth, options) {
 		MeiweiApp.BasicAuth.set(auth.username, auth.password);
-		this.profile.clear()
-		this.fetch();
-		this.profile.fetch({
-			success: options.success,
-			error: options.error
-		});
+		this.clear();
+		this.fetch({ success: options.success, error: options.error });
 	},
 	logout: function(callback) {
+		this.clear();
 		MeiweiApp.BasicAuth.clear();
 	},
 	register: function(auth, options) {
-		var newUser = new MeiweiApp.Models.Member({ username: auth.username, password: auth.password });
-		newUser.save({}, {
-			async: false,
+		var newUser = new MeiweiApp.Models.Member();
+		newUser.save({ username: auth.username, password: auth.password }, {
 			success: options.success,
 			error: options.error,
 			url: MeiweiApp.configs.APIHost + '/members/register/'
 		});
 	},
 	changePassword: function(password, options) {
+		this.set({password: password});
 		options = options || {};
-		var url = this.url() + 'change_password/';
-		options.url = url;
+		options.url = this.url() + 'change_password/';
 		var success = options.success;
 		options.success = function(model, response, options) {
 			var auth = MeiweiApp.BasicAuth.get();
@@ -82,7 +78,6 @@ MeiweiApp.me = new (MeiweiApp.Models.Member.extend({
 			MeiweiApp.BasicAuth.set(auth.username, auth.password)
 			if (success) success(model, response, options);
 		};
-		this.set({password: password});
 		Backbone.sync('update', this, options);
 	}
 }));

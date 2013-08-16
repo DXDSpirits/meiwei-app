@@ -34,20 +34,24 @@ MeiweiApp.Views.MemberPasswordForm = MeiweiApp.ModelView.extend({
 	},
 	updatePassword: function(e) {
 		e.preventDefault();
-		var password = this.$('input[name=password]').val() || null;
 		var $infoText = this.$('.info-text');
-		MeiweiApp.me.changePassword(password, { 
-			success: MeiweiApp.goBack,
-			error: function(model, xhr, options) {
-				var error = JSON.parse(xhr.responseText);
-				for (var k in error) { $infoText.html(error[k]); break; };
-			}
-		});
+		var password = this.$('input[name=password]').val() || null;
+		var passwordConfirm = this.$('input[name=password-conform]').val() || null;
+		if (password != passwordConfirm) {
+			$infoText.html('两次密码输入不一致，请重新输入。');
+		} else {
+			MeiweiApp.me.changePassword(password, { 
+				success: MeiweiApp.goBack,
+				error: function(model, xhr, options) {
+					var error = JSON.parse(xhr.responseText);
+					for (var k in error) { $infoText.html(error[k]); break; };
+				}
+			});
+		}
 	}
 });
 
 MeiweiApp.Pages.MemberProfile = new (MeiweiApp.PageView.extend({
-	events: { 'click .switch-gender': 'switchGender' },
 	initPage: function() {
 		this.views = {
 			profileForm: new MeiweiApp.Views.MemberProfileForm({
@@ -60,19 +64,7 @@ MeiweiApp.Pages.MemberProfile = new (MeiweiApp.PageView.extend({
 			})
 		};
 	},
-	switchGender: function() {
-		var s = this.$('.switch-gender');
-		if ($(s).hasClass('on')) {
-			$(s).removeClass('on');
-			$(s).find('input').val(0);
-		} else {
-			$(s).addClass('on');
-			$(s).find('input').val(1);
-		}
-	},
 	render: function() {
-		MeiweiApp.me.fetch();
-		MeiweiApp.me.profile.fetch({ success: this.showPage });
-		this.views.profileForm.render();
+		MeiweiApp.me.fetch({ success: this.showPage });
 	}
 }))({el: $("#view-member-profile")});
