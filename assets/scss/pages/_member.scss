@@ -38,9 +38,16 @@
 }
 
 #view-member-profile {
-	form {
+	.member-profile-form {
 	    width: 90%;
-	    margin-top: 30px;
+	    padding: 0 5%;
+	    margin: 20px 0 15px;
+	}
+	.member-password-form {
+	    width: 90%;
+	    padding: 0 5%;
+	    margin-bottom: 20px;
+	    @include border(2px 0 0 0, solid, $brown);
 	}
 	input[name=nickname] {
 		text-align: center;

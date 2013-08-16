@@ -52,7 +52,8 @@ MeiweiApp.me = new (MeiweiApp.Models.Member.extend({
 	},
 	login: function(auth, options) {
 		MeiweiApp.BasicAuth.set(auth.username, auth.password);
-		this.profile.clear();
+		this.profile.clear()
+		this.fetch();
 		this.profile.fetch({
 			success: options.success,
 			error: options.error
@@ -64,9 +65,24 @@ MeiweiApp.me = new (MeiweiApp.Models.Member.extend({
 	register: function(auth, options) {
 		var newUser = new MeiweiApp.Models.Member({ username: auth.username, password: auth.password });
 		newUser.save({}, {
-			async: false, 
+			async: false,
 			success: options.success,
-			error: options.error
+			error: options.error,
+			url: MeiweiApp.configs.APIHost + '/members/register/'
 		});
+	},
+	changePassword: function(password, options) {
+		options = options || {};
+		var url = this.url() + 'change_password/';
+		options.url = url;
+		var success = options.success;
+		options.success = function(model, response, options) {
+			var auth = MeiweiApp.BasicAuth.get();
+			auth.password = password;
+			MeiweiApp.BasicAuth.set(auth.username, auth.password)
+			if (success) success(model, response, options);
+		};
+		this.set({password: password});
+		Backbone.sync('update', this, options);
 	}
 }));

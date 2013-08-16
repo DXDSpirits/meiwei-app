@@ -26,13 +26,37 @@ MeiweiApp.Views.MemberProfileForm = MeiweiApp.ModelView.extend({
 	}
 });
 
+MeiweiApp.Views.MemberPasswordForm = MeiweiApp.ModelView.extend({
+	events: { 'submit': 'updatePassword' },
+	template: MeiweiApp.Templates['member-password-form'],
+	render: function() {
+		this.$el.html(this.template(this.model.toJSON()));
+	},
+	updatePassword: function(e) {
+		e.preventDefault();
+		var password = this.$('input[name=password]').val() || null;
+		var $infoText = this.$('.info-text');
+		MeiweiApp.me.changePassword(password, { 
+			success: MeiweiApp.goBack,
+			error: function(model, xhr, options) {
+				var error = JSON.parse(xhr.responseText);
+				for (var k in error) { $infoText.html(error[k]); break; };
+			}
+		});
+	}
+});
+
 MeiweiApp.Pages.MemberProfile = new (MeiweiApp.PageView.extend({
 	events: { 'click .switch-gender': 'switchGender' },
 	initPage: function() {
 		this.views = {
 			profileForm: new MeiweiApp.Views.MemberProfileForm({
 				model: MeiweiApp.me.profile,
-				el: this.$('.scroll .scroll-inner')
+				el: this.$('.member-profile-form')
+			}),
+			profileForm: new MeiweiApp.Views.MemberPasswordForm({
+				model: MeiweiApp.me,
+				el: this.$('.member-password-form')
 			})
 		};
 	},
@@ -47,6 +71,8 @@ MeiweiApp.Pages.MemberProfile = new (MeiweiApp.PageView.extend({
 		}
 	},
 	render: function() {
+		MeiweiApp.me.fetch();
 		MeiweiApp.me.profile.fetch({ success: this.showPage });
+		this.views.profileForm.render();
 	}
 }))({el: $("#view-member-profile")});

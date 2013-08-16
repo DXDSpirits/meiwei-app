@@ -57,13 +57,18 @@ MeiweiApp.initSync = function() {
 		return originalSync.call(model, method, model, options);
 	};
 	MeiweiApp.BasicAuth = {
+		get: function() {
+			return auth;
+		},
 		set: function(username, password) {
-			localStorage.setItem('basic-auth', JSON.stringify({username: username, password: password}));
+			auth = {username: username, password: password};
 			token = encode(username, password);
+			localStorage.setItem('basic-auth', JSON.stringify(auth));
 		},
 		clear: function() {
-			localStorage.removeItem('basic-auth');
+			auth = null;
 			token = null;
+			localStorage.removeItem('basic-auth');
 		}
 	}
 }
