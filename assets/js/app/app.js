@@ -21,15 +21,24 @@ var MeiweiApp = new (Backbone.View.extend({
 	},
 	
 	start: function() {	
+		MeiweiApp.bindClientErrors();
 		MeiweiApp.bindSync();
 		MeiweiApp.bindAjaxEvents();
 		Backbone.history.start();
+		MeiweiApp.showSplash();
+	}
+}))({el: document.body});
+
+MeiweiApp.showSplash = function() {
+	try {
 		navigator.splashscreen.show();
 		setTimeout(function() {
 			navigator.splashscreen.hide();
 		}, 3000);
+	} catch (e) {
+		MeiweiApp.handleError(e);
 	}
-}))({el: document.body});
+}
 
 MeiweiApp.bindSync = function() {
 	var encode = function(username, password) {
@@ -92,4 +101,18 @@ MeiweiApp.bindAjaxEvents = function() {
 			}, (timeout = 3000) + 500);
 		}
 	});
+}
+
+MeiweiApp.bindClientErrors = function() {
+	MeiweiApp.handleError = function(err) {
+		var error = new MeiweiApp.Models.ClientError();
+		error.save({message: err.message, detail: err.stack}, {global: false});
+		console.error(err.message);
+	}
+	window.onerror = function(message, filaName, lineNumber) {
+		var detail = [filaName, lineNumber].join(':');
+		var error = new MeiweiApp.Models.ClientError();
+		error.save({message: message, detail: detail}, {global: false});
+		console.error(message, detail);
+	}
 }

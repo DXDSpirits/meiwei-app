@@ -22,29 +22,41 @@ MeiweiApp.CollectionView = Backbone.View.extend({
 		this.listenTo(this.collection, 'remove', this.removeOne);
 	},
 	removeOne: function(item) {
-		item.trigger('hide');
-		for (var i=0; i<this.modelViews.length; i++) {
-			if (this.modelViews[i].model.id == item.id) {
-				this.modelViews.splice(i, 1);
-				break;
+		try {
+			item.trigger('hide');
+			for (var i=0; i<this.modelViews.length; i++) {
+				if (this.modelViews[i].model.id == item.id) {
+					this.modelViews.splice(i, 1);
+					break;
+				}
 			}
+		} catch (e) {
+			MeiweiApp.handleError(e);
 		}
 	},
 	addOne: function(item) {
-		var modelView = new this.ModelView({model: item});
-		this.modelViews.push(modelView);
-		this.$el.append(modelView.render().el);
-	},
-	addAll: function() {
-		for (var i=0; i<this.modelViews.length; i++) this.modelViews[i].remove();
-		this.modelViews.length = 0;
-		var $list = [];
-		this.collection.forEach(function(item) {
+		try {
 			var modelView = new this.ModelView({model: item});
 			this.modelViews.push(modelView);
-			$list.push(modelView.render().el);
-		}, this);
-		this.$el.html($list);
+			this.$el.append(modelView.render().el);
+		} catch (e) {
+			MeiweiApp.handleError(e);
+		}
+	},
+	addAll: function() {
+		try {
+			for (var i=0; i<this.modelViews.length; i++) this.modelViews[i].remove();
+			this.modelViews.length = 0;
+			var $list = [];
+			this.collection.forEach(function(item) {
+				var modelView = new this.ModelView({model: item});
+				this.modelViews.push(modelView);
+				$list.push(modelView.render().el);
+			}, this);
+			this.$el.html($list);
+		} catch (e) {
+			MeiweiApp.handleError(e);
+		}
 	},
 	render: function() {
 	    this.addAll();
@@ -70,35 +82,26 @@ MeiweiApp.PageView = Backbone.View.extend({
 	initScroller: function() {
 		if (this.scroller == null) {
 			if (this.$('.iscroll').length > 0) {
-			    this.scroller = new IScroll(this.$('.iscroll').selector, {
-			    	//click: true, 
-			    	preventDefault: false
-				});
+			    this.scroller = new IScroll(this.$('.iscroll').selector, { preventDefault: false });
 			}
 		} else {
 			this.scroller.refresh();
 		}
 	},
 	go: function(options) {
-		//$("#apploader").removeClass('hide');
-		//this.options = this.options || {};
-		//_.extend(this.options, options);
 		this.options = options || {};
-		this.render();
+		try {this.render();
+		} catch (e) {MeiweiApp.handleError(e); }
 	},
 	refresh: function(options) {
-		this.render();
-	},
-	ajaxError: function(model, response, options) {
-		$('#apploader .ajax-error').removeClass('hide');
-		setTimeout(function() {
-			$('#apploader .ajax-error').addClass('hide');
-			MeiweiApp.goBack();
-		}, 1000);
+		try {
+			this.render();
+		} catch (e) {
+			MeiweiApp.handleError(e);
+		}
 	},
 	showPage: function() {
 		window.scrollTo(0, 0);
-		//$("#apploader").addClass('hide');
 		if (this.$el && this.$el.hasClass('view-hidden')) {
 			var $curPage = $('.view:not(".view-hidden")');
 			$curPage.addClass('view-hidden');
