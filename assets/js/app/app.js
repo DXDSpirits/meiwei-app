@@ -21,9 +21,9 @@ var MeiweiApp = new (Backbone.View.extend({
 	},
 	
 	start: function() {	
-		MeiweiApp.bindClientErrors();
-		MeiweiApp.bindSync();
-		MeiweiApp.bindAjaxEvents();
+		MeiweiApp.initClientErrors();
+		MeiweiApp.initSync();
+		MeiweiApp.initAjaxEvents();
 		Backbone.history.start();
 		MeiweiApp.showSplash();
 	}
@@ -40,7 +40,7 @@ MeiweiApp.showSplash = function() {
 	}
 }
 
-MeiweiApp.bindSync = function() {
+MeiweiApp.initSync = function() {
 	var encode = function(username, password) {
 		return btoa(username + ':' + password);
 	};
@@ -50,12 +50,9 @@ MeiweiApp.bindSync = function() {
 	var originalSync = Backbone.sync;
 	Backbone.sync = function(method, model, options) {
 		options.timeout = options.timeout || MeiweiApp.configs.timeout;
+		_.extend((options.headers || (options.headers = {})), { 'Accept-Language': 'zh' });
 		if (typeof token !== "undefined" && token !== null) {
-			options.headers = options.headers || {};
-			_.extend(options.headers, {
-				'Authorization': 'Basic ' + token,
-				'Accept-Language': 'zh'
-			});
+			_.extend(options.headers, { 'Authorization': 'Basic ' + token });
 		}
 		return originalSync.call(model, method, model, options);
 	};
@@ -71,7 +68,7 @@ MeiweiApp.bindSync = function() {
 	}
 }
 
-MeiweiApp.bindAjaxEvents = function() {
+MeiweiApp.initAjaxEvents = function() {
 	var timeout = 0;
 	$(document).ajaxStart(function() {
 		$('#apploader').removeClass('hide');
@@ -103,7 +100,7 @@ MeiweiApp.bindAjaxEvents = function() {
 	});
 }
 
-MeiweiApp.bindClientErrors = function() {
+MeiweiApp.initClientErrors = function() {
 	MeiweiApp.handleError = function(err) {
 		var error = new MeiweiApp.Models.ClientError();
 		error.save({message: err.message, detail: err.stack}, {global: false});

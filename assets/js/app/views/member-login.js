@@ -8,6 +8,7 @@ MeiweiApp.Views.MemberLoginForm = MeiweiApp.View.extend({
 		_.bindAll(this, 'displayError', 'login', 'register', 'onLoginSuccess');
 	},
 	displayError: function(model, xhr, options) {
+		window.scrollTo(0, 0);
 		var $infoText = this.$('.info-text');
 		var error = JSON.parse(xhr.responseText);
 		for (var k in error) { $infoText.html(error[k]); break; }
