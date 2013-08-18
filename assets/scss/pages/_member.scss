@@ -86,7 +86,7 @@
 		}
 		.avatar {
 			@include square(90px);
-			border: 2px solid $brown;
+			//border: 2px solid $brown;
 			margin: 0 9%;
 			background-color: $white;
 		}

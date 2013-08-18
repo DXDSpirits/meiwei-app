@@ -85,10 +85,10 @@ body {
 	min-height: 50px;
 	margin: -25px -60px;
 	padding: 10px;
-	@include border-radius(10px);
+	@include border-radius(5px);
 	background-color: $brownLight;
 	pointer-events: none;
-	opacity: 1;
+	opacity: 0.9;
 	@include transition(opacity .35s ease-in-out);
 	&.hide {
 		opacity: 0;

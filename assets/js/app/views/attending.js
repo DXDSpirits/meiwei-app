@@ -23,7 +23,7 @@ MeiweiApp.Views.OrderPages = MeiweiApp.CollectionView.extend({
 			if ($('body').height() >= 530) {
 				this.$('.section-qrcode').show();
 				this.$('.section-qrcode').qrcode({
-					render: "canvas", text: this.model.get('orderno'), height: 90, width: 90
+					render: "canvas", text: this.model.get('orderno'), height: 100, width: 100
 				});
 				this.$('.order-detail').css({ 'position': 'relative', 'top': '-50px' });
 			}
