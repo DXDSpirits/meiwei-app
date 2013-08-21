@@ -11,6 +11,14 @@ MeiweiApp.Views.RecommendItem = MeiweiApp.ModelView.extend({
 		} else {
 			MeiweiApp.goTo('RestaurantDetail', { restaurantId: restaurantId });
 		}
+	},
+	render: function() {
+		var $el = this.$el;
+		this.$el.html(this.template(this.model.toJSON()));
+		var img = $('<img></img>').attr('src', this.model.get('restaurant').frontpic).load(function() {
+			$el.prepend(img);
+		});
+		return this;
 	}
 });
 
