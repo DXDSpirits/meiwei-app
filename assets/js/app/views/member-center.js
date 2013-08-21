@@ -59,7 +59,15 @@ MeiweiApp.Pages.MemberCenter = new (MeiweiApp.PageView.extend({
 		}
 	},
 	render: function() {
-		MeiweiApp.me.fetch({success: this.showPage});
-		this.favorites.fetch({reset: true, success: this.views.favoriteCarousel.render });
+		var self = this;
+		MeiweiApp.me.fetch({success: function() {
+			self.favorites.fetch({
+				reset: true,
+				success: function() {
+					self.views.favoriteCarousel.render();
+					self.showPage();
+				}
+			});
+		}});
 	}
 }))({el: $("#view-member-center")});

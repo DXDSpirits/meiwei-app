@@ -83,11 +83,13 @@
 		& > div {
 			float: left;
 			height: 90px;
+			&:first-child { width: 40%; }
+			&:last-child { width: 60%; }
 		}
 		.avatar {
 			@include square(90px);
 			//border: 2px solid $brown;
-			margin: 0 9%;
+			margin: 0 auto;
 			background-color: $white;
 		}
 		h1 {
@@ -98,6 +100,7 @@
 		}
 		p {
 			margin: -5px 0;
+			@include text-overflow();
 		}
 	}
 	$listItemHeight: 45px;

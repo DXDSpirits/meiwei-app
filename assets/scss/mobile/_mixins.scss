@@ -361,7 +361,8 @@
 
 // CSS3 webkit flexbox
 @mixin flexible($flex: 1) {
-	width: 1px;
+	min-width: 1px;
+	min-height: 1px;
 	-webkit-box-flex: $flex;
 }
 

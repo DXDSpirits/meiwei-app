@@ -3,7 +3,7 @@
 	@include flex-box($orient: horizontal);
 	@include size($navbarHeight, 100%);
 	//padding: 0 $navbarPadding;
-	position: fixed;
+	position: absolute;
 	top: 0;
 	z-index: $zindexFixedNavbar;
 	
