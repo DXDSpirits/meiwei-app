@@ -123,6 +123,7 @@ MeiweiApp.Pages.RestaurantSearch = new (MeiweiApp.PageView.extend({
 		this.restaurants.fetch({ reset: true, success: this.refreshList, data: filter });
 	},
 	bindCuisineFilters: function(cuisines, response, options) {
+		this.$('.circle > p > span').html('全部商圈');
 	    this.cuisineFilterScroller = new IScroll(this.$('.cuisine .collapsible-inner').selector, {
 	    	preventDefault: false
 		});
@@ -137,6 +138,7 @@ MeiweiApp.Pages.RestaurantSearch = new (MeiweiApp.PageView.extend({
 		cuisines.forEach(bindFilter, this);
 	},
 	bindCircleFilters: function(circles, response, options) {
+		this.$('.cuisine > p > span').html('全部菜系');
 		this.circleFilterScroller = new IScroll(this.$('.circle .collapsible-inner').selector, {
 	    	preventDefault: false
 		});
@@ -185,7 +187,7 @@ MeiweiApp.Pages.RestaurantSearch = new (MeiweiApp.PageView.extend({
 			this.map.centerAndZoom(new BMap.Point(121.491, 31.233), 12);
 			this.map.addControl(new BMap.NavigationControl({anchor: BMAP_ANCHOR_TOP_RIGHT, type: BMAP_NAVIGATION_CONTROL_ZOOM})); 
 		} catch (e) {
-			
+			MeiweiApp.handleError(e);
 		}
 	},
 	/*********************************************/

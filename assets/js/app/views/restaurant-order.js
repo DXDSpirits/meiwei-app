@@ -55,17 +55,21 @@ MeiweiApp.Views.RestaurantOrderForm = MeiweiApp.View.extend({
 	},
 	template: MeiweiApp.Templates['restaurant-order-form'],
 	renderHourList: function() {
-		var ymd = this.$('input[name=orderdate]').val().split('-');
-		var date = new Date(ymd[0], ymd[1] - 1, ymd[2]);
-		var $select = this.$('select[name=ordertime]');
-		$select.empty();
-		var hour = this.hours.get(date.getDay().toString());
-		for (var i=0; i<hour.length; i++) {
-			var item = hour[i];
-			var $option = $('<option></option>').val(item[0]).html(item[0] + ' ' + item[1]);
-			$select.append($option);
+		try {
+			var ymd = this.$('input[name=orderdate]').val().split('-');
+			var date = new Date(ymd[0], ymd[1] - 1, ymd[2]);
+			var $select = this.$('select[name=ordertime]');
+			$select.empty();
+			var hour = this.hours.get(date.getDay().toString());
+			for (var i=0; i<hour.length; i++) {
+				var item = hour[i];
+				var $option = $('<option></option>').val(item[0]).html(item[0] + ' ' + item[1]);
+				$select.append($option);
+			}
+			$select.val(this.defaultValues.ordertime);
+		} catch (e) {
+			MeiweiApp.handleError(e);
 		}
-		$select.val(this.defaultValues.ordertime);
 	},
 	render: function(defaultValues) {
 		this.defaultValues = defaultValues;
