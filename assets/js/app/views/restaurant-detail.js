@@ -102,9 +102,10 @@ MeiweiApp.Pages.RestaurantDetail = new (MeiweiApp.PageView.extend({
 		this.$('> header h1').html(this.restaurant.get('fullname'));
 		this.views.reviews.collection.url = this.restaurant.get('reviews');
 		var pictures = this.restaurant.get('pictures');
-		if (_.isEmpty(pictures)) {
-			var html = $('<img></img>').attr('src', MeiweiApp.Pages.RestaurantDetail.restaurant.get('frontpic'));
-			this.views.pictures.$el.html(html);
+		if (_.isEmpty(pictures) || true) {
+			var img = $('<img></img>').attr('src', MeiweiApp.Pages.RestaurantDetail.restaurant.get('frontpic'));
+			this.views.pictures.$el.html(img);
+			this.$('.bottom-banner').html(img.clone());
 		} else {
 			this.views.pictures.collection.reset(this.restaurant.get('pictures'));
 			//this.carousel();

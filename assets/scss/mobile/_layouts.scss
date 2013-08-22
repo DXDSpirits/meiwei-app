@@ -41,7 +41,19 @@ body {
 	}
 }
 
-
+.bottom-banner {
+	position: absolute;
+	bottom: 0;
+	@include size(100px, 100%);
+	z-index: -2;
+	overflow: visible;
+	img {
+		position: absolute;
+		bottom: 0;
+		width: 100%;
+		min-height: 100px;
+	}
+}
 @mixin scrollBottomBanner() {
 	&.view > .wrapper > .scroll {
 		background: url($backgroundBottomPath) no-repeat bottom;
@@ -72,7 +84,7 @@ body {
 		content: attr(data-hint);
 		display: block;
 		line-height: 60px;
-	} 
+	}
 }
 
 #apploader {

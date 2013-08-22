@@ -169,8 +169,10 @@ MeiweiApp.Pages.RestaurantOrder = new (MeiweiApp.PageView.extend({
 		});
 	},
 	renderOrderForm: function(model, response, options) {
-		this.$('.restaurant-info img').attr('src', this.restaurant.get('frontpic'));
-		this.$('.restaurant-info h1').html(this.restaurant.get('fullname'));
+		var img = $('<img></img>').attr('src', this.restaurant.get('frontpic'));
+		this.$('.restaurant-info').html(img);
+		this.$('.bottom-banner').html(img.clone());
+		$('<h1></h1>').html(this.restaurant.get('fullname')).appendTo(this.$('.restaurant-info'));
 		
 		var defaultValues;
 		if (this.options.pendingOrder) {

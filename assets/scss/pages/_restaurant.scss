@@ -53,18 +53,17 @@
 }
 
 #view-restaurant-detail {
-	@include scrollBottomBanner();
 	.restaurant-pictures {
 		z-index: 0;
 		@include flex-box($orient: vertical);
-		width: 100%;
+		@include size(200px, 100%);
 		position: relative;
-		
-		height: 250px;
-		overflow: hidden;
+		overflow: visible;
 		img {
 			width: 100%;
-			min-height: 100%;
+			min-height: 250px;
+			position: absolute;
+			bottom: 0;
 		}
 		&::after {
 			content: "";
@@ -140,20 +139,22 @@
 }
 
 #view-restaurant-order {
-	@include scrollBottomBanner();
 	.restaurant-info {
-		height:140px;
-        width:100%;
         @include size(170px, 100%);
+        padding-top: 140px;
+        position: relative;
+        overflow: visible;
         img {
-        	@include size(140px, 100%);
+        	width: 100%;
+        	min-height: 250px;
+        	position: absolute;
+        	bottom: 30px;
         }
         h1 {
         	font-size: $baseFontSize;
         	line-height: 30px;
         	text-align: center;
         }
-        overflow: hidden;
 	}
 	fieldset {
 		margin: 0;
