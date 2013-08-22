@@ -46,7 +46,7 @@ MeiweiApp.Pages.MemberCenter = new (MeiweiApp.PageView.extend({
 		MeiweiApp.goTo('Home');
 	},
 	initPage: function() {
-		this.favorites = new MeiweiApp.Collections.Favorites();
+		this.favorites = MeiweiApp.me.favorites;
 		this.views = {
 			profileBox: new MeiweiApp.Views.MemberProfileBox({
 				model: MeiweiApp.me.profile,

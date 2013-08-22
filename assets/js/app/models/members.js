@@ -41,6 +41,7 @@ MeiweiApp.Collections.Favorites = MeiweiApp.Collection.extend({
 
 MeiweiApp.me = new (MeiweiApp.Models.Member.extend({
 	initialize: function() {
+		if (this.favorites == null) this.favorites = new MeiweiApp.Collections.Favorites();
 		if (this.contacts == null) this.contacts = new MeiweiApp.Collections.Contacts();
 		if (this.profile == null) this.profile = new MeiweiApp.Models.Profile();
 	},

@@ -85,15 +85,20 @@ MeiweiApp.Pages.RestaurantDetail = new (MeiweiApp.PageView.extend({
 	},
 	onClickRightBtn: function() { this.addFavorite(); },
 	addFavorite: function() {
-		var fav = new MeiweiApp.Models.Favorite({
-			restaurant: this.restaurant.id
-		});
+		if (this.$('.icon-favorite').hasClass('suceed')) return;
 		var self = this;
-		fav.save({}, {success: function() {
-			self.$('.icon-favorite').addClass('suceed');
-		}});
+		MeiweiApp.me.favorites.create({restaurant: this.restaurant.id}, {
+			success: function() {
+				self.$('.icon-favorite').addClass('suceed');
+			}
+		});
 	},
 	renderAll: function() {
+		if (MeiweiApp.me.favorites.find(function(favorite) { return (this.restaurant.id == favorite.get('restaurant')); }, this)) {
+			this.$('.icon-favorite').addClass('suceed');
+		} else {
+			this.$('.icon-favorite').removeClass('suceed');
+		}
 		this.$('> header h1').html(this.restaurant.get('fullname'));
 		this.views.reviews.collection.url = this.restaurant.get('reviews');
 		var pictures = this.restaurant.get('pictures');
@@ -107,7 +112,6 @@ MeiweiApp.Pages.RestaurantDetail = new (MeiweiApp.PageView.extend({
 		this.showPage();
 	},
 	render: function() {
-		this.$('.icon-favorite').removeClass('suceed');
 		if (this.options.restaurant) {
 			this.restaurant.set(this.options.restaurant);
 			this.renderAll();
