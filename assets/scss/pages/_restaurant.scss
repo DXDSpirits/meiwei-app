@@ -157,7 +157,6 @@
         }
         overflow: hidden;
 	}
-	label { margin:5px; }
 	fieldset {
 		margin: 0;
 		border-width: 1px 0 0 0;
@@ -192,7 +191,7 @@
 		.switch-gender { @include flexible(3); }
 	}
 	.product-select {
-		background: transparent url($gradientShadowPath) no-repeat bottom;
+		background: transparent url($gradientShadowPathR) no-repeat top;
 		@include background-size(100% (3*$baseLineHeight));
 		.product-cart {
 			width: 100%;
@@ -217,8 +216,10 @@
 		}
 	}
 	.order-submit-button {
-		padding: 15px;
-		width: 70%;
+		background: transparent url($gradientShadowPathR) no-repeat top;
+		@include background-size(100% (3*$baseLineHeight));
+		padding: 15px 15%;
+		width: 100%;
 		.btn { width: 100%; }
 	}
 }

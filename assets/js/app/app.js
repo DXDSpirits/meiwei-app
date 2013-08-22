@@ -34,7 +34,7 @@ MeiweiApp.showSplash = function() {
 		navigator.splashscreen.show();
 		setTimeout(function() {
 			navigator.splashscreen.hide();
-		}, 3000);
+		}, 1000);
 	} catch (e) { }
 }
 
