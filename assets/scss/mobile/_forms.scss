@@ -12,7 +12,8 @@
 
 @mixin inline-field-set {
 	width: 1px; // A hack for iOS 5. width=0 seems wrong.
-	border-width: 0 1px 0 0;
+	//border-width: 0 1px 0 0;
+	border-width: 0;
 	&:last-child {
 		border-right-width: 0;
 	}
@@ -24,10 +25,10 @@ fieldset {
 	width: 100%;
 	margin: 15px 0;
 	overflow: hidden;
-	border: 1px solid $brownLight;
+	border: 1px solid $brownLighter;
 	.inline-group {
 		overflow: hidden;
-		border: 1px solid $brownLight;
+		border: 1px solid $brownLighter;
 		@include block-field-set();
 		@include flex-box($orient: horizontal);
 	}
@@ -57,7 +58,7 @@ input[type="color"],
 	@include clear-outline();
 	@include placeholder($brownLight);
 	@include border-radius(0);
-	border: 1px solid $brownLight;
+	border: 1px solid $brownLighter;
 	
 	display: block;
 	color: $brown;
@@ -104,20 +105,34 @@ form label {
 	@include flex-box($orient: horizontal);
 	font-size: $fontSizeMini;
 	padding: 0;
+	$switchInnerHeight: 30px;
 	.switch-inner {
-		@include size(20px, 36px);
+		@include size($switchInnerHeight, $switchInnerHeight * 2 + 10px);
 		@include border-radius(999px);
+		position: relative;
 		border: 1px solid $brown;
 	}
 	.switch-button {
-		@include square(18px);
+		@include square($switchInnerHeight - 2px);
 		@include border-radius(999px);
 		background-color: $brown;
 		@include translate3d(0, 0, 0);
-		-webkit-transition: -webkit-transform .36s ease-in-out;
+		-webkit-transition: -webkit-transform .2s linear;
+	}
+	label {
+		position: absolute;
+		top: 0;
+		left: 0;
+		padding: 0 10px;
+		line-height: $switchInnerHeight - 2px;
+		@include square(100%);
+		text-align: right;
 	}
 	&.on .switch-button {
-		@include translate3d(18px, 0, 0);
-		-webkit-transition: -webkit-transform .36s ease-in-out;
+		@include translate3d(40px, 0, 0);
+		-webkit-transition: -webkit-transform .2s linear;
+	}
+	&.on label {
+		text-align: left;
 	}
 }

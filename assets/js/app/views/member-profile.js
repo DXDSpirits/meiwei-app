@@ -1,9 +1,24 @@
 
 MeiweiApp.Views.MemberProfileForm = MeiweiApp.ModelView.extend({
-	events: { 'submit': 'updateProfile' },
+	events: {
+		'submit': 'updateProfile',
+		'click .switch-gender': 'switchGender'
+	},
 	template: MeiweiApp.Templates['member-profile-form'],
 	render: function() {
 		this.$el.html(this.template(this.model.toJSON()));
+	},
+	switchGender: function() {
+		var switchGender = this.$('.switch-gender');
+		if (switchGender.hasClass('on')) {
+			switchGender.removeClass('on').addClass('off');
+			switchGender.find('input').val(0);
+			switchGender.find('label').html(switchGender.find('label').attr('data-off'));
+		} else {
+			switchGender.removeClass('off').addClass('on');
+			switchGender.find('input').val(1);
+			switchGender.find('label').html(switchGender.find('label').attr('data-on'));
+		}
 	},
 	updateProfile: function(e) {
 		e.preventDefault();
@@ -11,7 +26,7 @@ MeiweiApp.Views.MemberProfileForm = MeiweiApp.ModelView.extend({
 			nickname: this.$('input[name=nickname]').val() || null,
 			email: this.$('input[name=email]').val() || null,
 			mobile: this.$('input[name=mobile]').val() || null,
-			sexe: this.$('select[name=sexe]').val() || null,
+			sexe: this.$('input[name=sexe]').val() || null,
 			birthday: this.$('input[name=birthday]').val() || null,
 			anniversary: this.$('input[name=anniversary]').val() || null
 		});

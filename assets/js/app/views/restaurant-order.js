@@ -26,13 +26,15 @@ MeiweiApp.Views.RestaurantOrderContactForm = MeiweiApp.View.extend({
 		this.$('input[name=contactphone]').val(contactphone);
 	},
 	switchGender: function() {
-		var s = this.$('.switch-gender');
-		if ($(s).hasClass('on')) {
-			$(s).removeClass('on');
-			$(s).find('input').val($(s).find('label.text-off').text());
+		var switchGender = this.$('.switch-gender');
+		if (switchGender.hasClass('on')) {
+			switchGender.removeClass('on').addClass('off');
+			switchGender.find('input').val(0);
+			switchGender.find('label').html(switchGender.find('label').attr('data-off'));
 		} else {
-			$(s).addClass('on');
-			$(s).find('input').val($(s).find('label.text-on').text());
+			switchGender.removeClass('off').addClass('on');
+			switchGender.find('input').val(1);
+			switchGender.find('label').html(switchGender.find('label').attr('data-on'));
 		}
 	},
 	template: MeiweiApp.Templates['restaurant-order-contact-form'],
@@ -148,7 +150,6 @@ MeiweiApp.Pages.RestaurantOrder = new (MeiweiApp.PageView.extend({
 			orderdate: this.$('input[name=orderdate]').val() || null,
 			ordertime: this.$('select[name=ordertime]').val() || null,
 			personnum: this.$('input[name=personnum]').val() || null,
-			//contactname: this.$('input[name=contactname]').val() + this.$('input[name=contactgender]').val(),
 			contactname: this.$('input[name=contactname]').val() || null,
 			contactphone: this.$('input[name=contactphone]').val() || null,
 			tables: this.options.tables || null,
@@ -192,6 +193,7 @@ MeiweiApp.Pages.RestaurantOrder = new (MeiweiApp.PageView.extend({
 			this.$('.floorplan-select').removeClass('hide');
 		}
 		this.showPage();
+		this.$('input[name=orderdate]').focus();
 	},
 	render: function() {
 		if (this.options.restaurant) {

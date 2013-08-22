@@ -6,6 +6,7 @@
 $brownDark:             #482614 !default;
 $brown:                 #8B7D73 !default;
 $brownLight:            #C5BEB9 !default;
+$brownLighter:          lighten($brownLight, 15%);
 $white:                 #FFF !default;
 
 
