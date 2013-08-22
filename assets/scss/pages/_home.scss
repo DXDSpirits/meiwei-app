@@ -29,15 +29,25 @@
 		article {
 			color: $white;
 			width: 100%;
-			min-height: 70px;
+			//min-height: 70px;
 			h1 { @include text-overflow(); font-size: 20px; }
 			p { font-size: $fontSizeMini; }
 			border: 1px solid transparent;
 			padding: 20px 17px 5px;
-			-webkit-border-image: url($tagImagePath) 13 stretch;
+			//-webkit-border-image: url($tagImagePath) 13 stretch;
 			opacity: 0;
-			@include translate3d(-100%, -45px, 0);
+			@include translate3d(0, -45px, 0);
 			@include transition(all .35s ease-in-out);
+			
+			position: relative;
+			.order-button {
+				@include size(70px, 70px);
+				position: absolute;
+				top: 115px;
+				right: 0px;
+				background: transparent url($bookButtonPath) no-repeat center;
+				@include background-size(35px 35px);
+			}
 		}
 		&.hero article {
 			opacity: 1;

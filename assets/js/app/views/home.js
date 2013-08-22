@@ -1,6 +1,9 @@
 
 MeiweiApp.Views.RecommendItem = MeiweiApp.ModelView.extend({
-	events: { 'click': 'viewRestaurant' },
+	events: {
+		'click img, article h1, article p': 'viewRestaurant',
+		'click .order-button': 'bookResaurant'
+	},
 	tagName: 'section',
 	className: 'recommend-list-item',
 	template: MeiweiApp.Templates['recommend-list-item'],
@@ -10,6 +13,14 @@ MeiweiApp.Views.RecommendItem = MeiweiApp.ModelView.extend({
 			MeiweiApp.goTo('ProductPurchase');
 		} else {
 			MeiweiApp.goTo('RestaurantDetail', { restaurantId: restaurantId });
+		}
+	},
+	bookResaurant: function() {
+		var restaurantId = this.model.get('restaurant').id;
+		if (restaurantId == 1) {
+			MeiweiApp.goTo('ProductPurchase');
+		} else {
+			MeiweiApp.goTo('RestaurantOrder', { restaurantId: restaurantId });
 		}
 	},
 	render: function() {
@@ -49,18 +60,18 @@ MeiweiApp.Pages.Home = new (MeiweiApp.PageView.extend({
 		this.$('.hero').removeClass('hero');
 		modelViews[modelViews.length - y - 1].$el.addClass('hero');
 	},
-	initScrollerOfHome: function() {
+	initScroller: function() {
 		if (this.scroller == null) {
 			if (this.$('.iscroll').length > 0) {
 			    this.scroller = new IScroll(this.$('.iscroll').selector, {
 					snap: true, snapStepY: 300, click: true
 				});
-				//this.hero();
-				//this.scroller.on('scrollEnd', this.hero);
+				this.hero();
+				this.scroller.on('scrollEnd', this.hero);
 			}
 		} else {
 			this.scroller.refresh();
-			//this.hero();
+			this.hero();
 		}
 	},
 	render: function() {
