@@ -110,12 +110,13 @@ form label {
 		@include size($switchInnerHeight, $switchInnerHeight * 2 + 10px);
 		@include border-radius(999px);
 		position: relative;
-		border: 1px solid $brown;
+		border: 1px solid $brownLight;
 	}
 	.switch-button {
 		@include square($switchInnerHeight - 2px);
 		@include border-radius(999px);
-		background-color: $brown;
+		background-color: $white;
+		box-shadow: 0 0 1px $brownDark;
 		@include translate3d(0, 0, 0);
 		-webkit-transition: -webkit-transform .2s linear;
 	}
@@ -128,11 +129,18 @@ form label {
 		@include square(100%);
 		text-align: right;
 	}
+}
+
+.control-group.switch.on {
+	.switch-inner {
+		background-color: $brown;
+	}
 	&.on .switch-button {
 		@include translate3d(40px, 0, 0);
 		-webkit-transition: -webkit-transform .2s linear;
 	}
 	&.on label {
 		text-align: left;
+		color: $white;
 	}
 }

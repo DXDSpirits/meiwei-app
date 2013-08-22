@@ -1,5 +1,5 @@
 %thumbnail-list-item {
-	@include border(0 0 1px 0, solid, $brownDark);
+	@include border(0 0 1px 0, solid, $brownLighter);
 	@include size(90px, 100%);
 	padding: 9px 17px 9px 99px;
 	overflow: hidden;
@@ -46,7 +46,7 @@
 	$itemHeight: 45px;
 	@include size($itemHeight, 100%);
 	padding: 0 17px;
-	@include border(0 0 1px 0, solid, $brown);
+	@include border(0 0 1px 0, solid, $brownLighter);
 	@include flex-box($orient: horizontal);
 	overflow: hidden;
 	> .span {
@@ -62,7 +62,7 @@
 	$itemHeight: 50px;
 	@include size($itemHeight, 100%);
 	padding: 5px 17px;
-	@include border(0 0 1px 0, solid, $brown);
+	@include border(0 0 1px 0, solid, $brownLighter);
 	@include flex-box($orient: horizontal, $align: baseline);
 	overflow: hidden;
 	font-size: $fontSizeMini;

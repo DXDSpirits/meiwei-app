@@ -42,9 +42,16 @@
 	}
 	.product-box {
 		width: 100%;
-		margin: 5px 0;
-		text-align: center;
-		p { font-size: $fontSizeMini; }
+		//margin: 5px 0;
+		header {
+			padding: 10px 10px 0;
+			text-align: center;
+		}
+		p {
+			font-size: $fontSizeMini;
+			line-height: $fontSizeMini + 2px;
+			min-height: 5px;
+		}
 	}
 	.viewport {
 		@include size(150px, 250px);

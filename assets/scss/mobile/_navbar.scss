@@ -95,4 +95,13 @@
 			@include transition(height .35s ease-in-out);
 		}
 	}
+	
+	.spliter {
+		width: 0;
+		height: 30px;
+		border-right: 1px solid darken($brown, 5%);
+		border-left: 1px solid lighten($brown, 5%);
+		background-color: $brown;
+		margin: 12px 0 8px;
+	}
 }
