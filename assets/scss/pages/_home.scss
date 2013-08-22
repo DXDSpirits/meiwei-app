@@ -24,6 +24,7 @@
 			border-width: 0 0 $splitterWidth;
 			border-style: solid;
 			border-color: $brown;
+			@include backface-visibility(hidden);
 		}
 		
 		article {
@@ -49,6 +50,7 @@
 				@include background-size(35px 35px);
 			}
 		}
+		
 		&.hero article {
 			opacity: 1;
 			@include translate3d(0, -45px, 0);
