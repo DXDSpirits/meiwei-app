@@ -73,10 +73,17 @@ MeiweiApp.initSync = function() {
 MeiweiApp.initAjaxEvents = function() {
 	var timeout = 0;
 	$(document).ajaxStart(function() {
-		$('#apploader').removeClass('hide');
+		$('#apploader').addClass('waiting');
+		setTimeout(function() {
+			if ($('#apploader').hasClass('waiting')) {
+				$('#apploader').removeClass('waiting');
+				$('#apploader').removeClass('hide');
+			}
+		}, 1000);
 	});
 	$(document).ajaxStop(function() {
 		setTimeout(function() {
+			$('#apploader').removeClass('waiting');
 			$('#apploader').addClass('hide');
 			timeout = 0;
 		}, timeout);
