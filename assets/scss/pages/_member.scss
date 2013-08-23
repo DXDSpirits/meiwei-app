@@ -120,10 +120,12 @@
 			@include background-size(100% $listItemHeight);
 		}
 		li::after {
-			content: ">";
+			content: "";
 			position: absolute;
+			top: ($listItemHeight - 26px) / 2;
 			right: $listPadding;
 			font-weight: bold;
+			@include icon-offset(3, 4);
 		}
 	}
 	.logout-button {

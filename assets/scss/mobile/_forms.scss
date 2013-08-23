@@ -133,7 +133,7 @@ form label {
 
 .control-group.switch.on {
 	.switch-inner {
-		background-color: $brown;
+		background-color: $brownLight;
 	}
 	&.on .switch-button {
 		@include translate3d(40px, 0, 0);

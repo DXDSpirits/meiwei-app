@@ -177,9 +177,11 @@
 			font-size: $fontSizeSmall;
 			position: relative;
 			a::after {
-	            content: ">";
+	            content: "";
 				position: absolute;
-				right: 0;
+				top: (40px - 26px) / 2;
+				right: 20px;
+				@include icon-offset(3, 4);
 			}
 		}
 		background: transparent url($gradientShadowPathR) no-repeat top;
