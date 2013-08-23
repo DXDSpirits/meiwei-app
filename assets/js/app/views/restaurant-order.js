@@ -6,6 +6,7 @@ MeiweiApp.Views.ProductCartItemList = MeiweiApp.CollectionView.extend({
 		template: MeiweiApp.Templates['product-cart-item'],
 		triggerDelete: function() {
 			MeiweiApp.ProductCart.remove(this.model);
+			MeiweiApp.Pages.RestaurantOrder.scroller.refresh();
 		}
 	})
 });
