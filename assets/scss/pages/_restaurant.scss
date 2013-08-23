@@ -63,16 +63,17 @@
 			width: 100%;
 			min-height: 250px;
 			position: absolute;
+			z-index: -1;
 			bottom: 0;
 		}
-		&::after {
+		&::before {
 			content: "";
-			display: block;
 			position: absolute;
+			z-index: 0;
 			bottom: 0;
-			@include size(55px, 100%);
-			border: 1px solid transparent;
-			-webkit-border-image: url($tagImagePath) 13 stretch;
+			@include size(90px, 100%);
+			background: transparent url($blackShadowPath) no-repeat top;
+			@include background-size(100%, 90px);
 		}
 	}
 	.restaurant-profile {
@@ -233,7 +234,7 @@
 		[status="occupied"] { fill: #E6E6E6; }
 	}
 	.svg-canvas {
-		@include flexible();
+		@include flexible($orient: vertical);
 		width: 100%;
 		overflow: hidden;
 		.svg-canvas-inner {

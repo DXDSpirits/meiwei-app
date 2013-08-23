@@ -16,8 +16,18 @@
 		position: relative;
 		z-index: 0;
 		
+		&::before {
+			content: "";
+			position: absolute;
+			z-index: 0;
+			@include size(100px, 100%);
+			background: transparent url($blackShadowPathR) no-repeat top;
+			@include background-size(100%, 100px);
+		}
+		
 		img {
 			position: absolute;
+			z-index: -1;
 			top: 0;
 			width: 100%;
 			min-height: 100%;
