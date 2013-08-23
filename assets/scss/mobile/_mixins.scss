@@ -360,9 +360,12 @@
 }
 
 // CSS3 webkit flexbox
-@mixin flexible($flex: 1) {
-	min-width: 1px;
-	min-height: 1px;
+@mixin flexible($flex: 1, $orient: horizontal) {
+	@if ($orient == horizontal) {
+		width: 1px;
+	} else {
+		height: 1px;
+	}
 	-webkit-box-flex: $flex;
 }
 
@@ -373,6 +376,6 @@
 	-webkit-box-pack: $pack;
 	-webkit-box-align: $align;
 	> .flexible {
-		@include flexible();
+		@include flexible(1, $orient);
 	}
 }

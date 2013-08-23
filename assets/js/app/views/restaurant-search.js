@@ -118,6 +118,8 @@ MeiweiApp.Pages.RestaurantSearch = new (MeiweiApp.PageView.extend({
 		var keywords = this.$('>header input').val();
 		this.restaurants.fetch({ reset: true, success: this.refreshList, data: { keywords: keywords } });
 		this.$('>header input').blur();
+		this.$('.circle > p > span').html('全部商圈');
+		this.$('.cuisine > p > span').html('全部菜系');
 	},
 	filterRestaurant: function(filter) {
 		this.restaurants.fetch({ reset: true, success: this.refreshList, data: filter });
