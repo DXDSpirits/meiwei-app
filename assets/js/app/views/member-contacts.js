@@ -44,22 +44,23 @@ MeiweiApp.Pages.MemberContacts = new(MeiweiApp.PageView.extend({
 	getLocalContacts: function() {
 	    this.$('.filter-online').removeClass('selected');
 	    this.$('.filter-local').addClass('selected');
-		var collection = this.views.contactList.collection;
-		collection.reset();
+		var contactCollection = this.views.contactList.collection;
 		var bindContactSelect = this.bindContactSelect;
 		navigator.contacts.find(
 			["displayName", "phoneNumbers"],
 			function(contacts) {
+				var localCollection = new MeiweiApp.Collections.Contacts();
+				contacts = _.sortBy(contacts, function (contact) { return contact.displayName; });
 				for (i = 0; i < contacts.length; i++) {
-					var model = new MeiweiApp.Models.Contact();
-					model.set({
+					var model = new MeiweiApp.Models.Contact({
 						id: contacts[i].id,
 						name: contacts[i].displayName,
 						mobile: contacts[i].phoneNumbers ? contacts[i].phoneNumbers[0].value: ""
 					});
-					collection.add(model);
+					localCollection.add(model);
 				}
-				bindContactSelect(collection);
+				contactCollection.reset(localCollection.models);
+				bindContactSelect(contactCollection);
 			},
 			function(e) {},
 			{ multiple: true }
