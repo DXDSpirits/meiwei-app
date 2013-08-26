@@ -43,12 +43,12 @@
 .view > header > form {
 	@include flexible();
 	height: 44px;
-	padding: 9px 0;
+	padding: 5px 0;
 	> input[type=search] {
 		@include border-radius(500px);
 		width: 100%;
 		border: 1px solid $brown;
-		height: 26px;
+		height: 34px;
 		padding: 0 15px;
 		font-size: $fontSizeSmall;
 	  	line-height: $baseLineHeight;
@@ -98,6 +98,7 @@
 			height: 200px;
 			@include transition(height .35s ease-in-out);
 		}
+		&:active, &.active, &.selected { background-color: transparent; }
 	}
 	
 	.spliter {

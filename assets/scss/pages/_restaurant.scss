@@ -26,7 +26,10 @@
 		.cuisine li, .circle li, .sort li {
 			line-height: 30px;
 			padding: 0 17px;
-			@include border(0 0 1px 0, dotted, $brownLight);
+			//@include border(0 0 1px 0, dotted, $brownLight);
+			border-bottom: 1px solid darken($brown, 5%);
+			border-top: 1px solid lighten($brown, 5%);
+			&:active, &.active { background-color: $brownDark; }
 		}
 	}
 	.map_canvas {
