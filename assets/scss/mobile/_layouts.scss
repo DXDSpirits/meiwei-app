@@ -104,9 +104,10 @@ body {
 	margin: -30px -60px;
 	padding: 10px;
 	@include border-radius(5px);
-	background-color: $brownLight;
+	//background-color: $brownLight;
+	background-color: transparent;
 	pointer-events: none;
-	opacity: 0.9;
+	//opacity: 0.9;
 	@include transition(opacity .35s ease-in-out);
 	.ajax-error {
 		font-size: $fontSizeMini;

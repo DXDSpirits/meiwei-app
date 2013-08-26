@@ -128,6 +128,9 @@
 			background: transparent url($gradientShadowPathR) no-repeat top;
 			@include background-size(100% $listItemHeight);
 		}
+		li:active {
+			background: $brownLight;
+		}
 		li::after {
 			content: "";
 			position: absolute;

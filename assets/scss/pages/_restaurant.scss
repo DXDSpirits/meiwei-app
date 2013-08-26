@@ -177,16 +177,25 @@
 			text-align: center;
 			font-size: $fontSizeSmall;
 			position: relative;
-			a::after {
-	            content: "";
-				position: absolute;
-				top: (40px - 26px) / 2;
-				right: 20px;
-				@include icon-offset(3, 4);
-			}
+			h1 {
+	        	font-size: $baseFontSize;
+	        	text-align: center;
+	        }
 		}
 		background: transparent url($gradientShadowPathR) no-repeat top;
 		@include background-size(100% (3*$baseLineHeight));
+	}
+	.contact-info, .floorplan-select, .product-select {
+		header:active {
+			background: $brownLight;
+		}
+		h1::after {
+            content: "";
+			position: absolute;
+			top: (40px - 26px) / 2;
+			right: 20px;
+			@include icon-offset(3, 4);
+		}
 	}
 	.contact-info {
 		input[name="contactname"] { @include flexible(2); }

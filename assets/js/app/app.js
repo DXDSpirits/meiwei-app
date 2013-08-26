@@ -17,7 +17,7 @@ var MeiweiApp = new (Backbone.View.extend({
 		APIHost: "http://api.clubmeiwei.com",
 		StaticHost: "http://api.clubmeiwei.com",
 		MediaHost: "http://api.clubmeiwei.com",
-		timeout: 10000
+		timeout: 30000
 	},
 	
 	start: function() {
@@ -73,17 +73,10 @@ MeiweiApp.initSync = function() {
 MeiweiApp.initAjaxEvents = function() {
 	var timeout = 0;
 	$(document).ajaxStart(function() {
-		$('#apploader').addClass('waiting');
-		setTimeout(function() {
-			if ($('#apploader').hasClass('waiting')) {
-				$('#apploader').removeClass('waiting');
-				$('#apploader').removeClass('hide');
-			}
-		}, 1000);
+		$('#apploader').removeClass('hide');
 	});
 	$(document).ajaxStop(function() {
 		setTimeout(function() {
-			$('#apploader').removeClass('waiting');
 			$('#apploader').addClass('hide');
 			timeout = 0;
 		}, timeout);
