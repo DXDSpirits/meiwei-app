@@ -17,6 +17,7 @@ MeiweiApp.Views.MemberLoginForm = MeiweiApp.View.extend({
 		MeiweiApp.refreshActivePage();
 	},
 	login: function() {
+		window.scrollTo(0, 0);
 		var username = this.$('input[name=username]').val();
 		var password = this.$('input[name=password]').val();
 		if (username.length > 0 && password.length > 0) {
@@ -27,6 +28,7 @@ MeiweiApp.Views.MemberLoginForm = MeiweiApp.View.extend({
 		}
 	},
 	register: function() {
+		window.scrollTo(0, 0);
 		var username = this.$('input[name=username]').val();
 		var password = this.$('input[name=password]').val();
 		if (username.length > 0 && password.length > 0) {

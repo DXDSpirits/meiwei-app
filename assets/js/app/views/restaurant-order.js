@@ -27,6 +27,7 @@ MeiweiApp.Views.RestaurantOrderContactForm = MeiweiApp.View.extend({
 		this.$('input[name=contactphone]').val(contactphone);
 	},
 	switchGender: function() {
+		window.scrollTo(0, 0);
 		var switchGender = this.$('.switch-gender');
 		if (switchGender.hasClass('on')) {
 			switchGender.removeClass('on').addClass('off');
