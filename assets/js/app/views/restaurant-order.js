@@ -12,12 +12,10 @@ MeiweiApp.Views.ProductCartItemList = MeiweiApp.CollectionView.extend({
 });
 
 MeiweiApp.Views.RestaurantOrderContactForm = MeiweiApp.View.extend({
-	events: {
-		'click >header': 'selectContact',
-		'click .switch-gender': 'switchGender'
-	},
 	initialize: function(options) {
-		_.bindAll(this, 'fillContact');
+		_.bindAll(this, 'fillContact', 'switchGender', 'switchGender');
+		new MBP.fastButton(this.$('>header')[0], this.selectContact);
+		new MBP.fastButton(this.$('.switch-gender')[0], this.switchGender);
 	},
 	selectContact: function() {
 		MeiweiApp.goTo('MemberContacts', { multiple: false, callback: this.fillContact });
@@ -39,10 +37,11 @@ MeiweiApp.Views.RestaurantOrderContactForm = MeiweiApp.View.extend({
 			switchGender.find('label').html(switchGender.find('label').attr('data-on'));
 		}
 	},
-	template: MeiweiApp.Templates['restaurant-order-contact-form'],
+	//template: MeiweiApp.Templates['restaurant-order-contact-form'],
 	render: function(defaultValues) {
 		this.defaultValues = defaultValues;
-		this.$el.html(this.template(defaultValues));
+		this.$('input[name=contactname]').val(defaultValues.contactname);
+		this.$('input[name=contactphone]').val(defaultValues.contactphone);
 		return this;
 	}
 });
@@ -57,7 +56,7 @@ MeiweiApp.Views.RestaurantOrderForm = MeiweiApp.View.extend({
 		this.model = null;
 		this.hours = new MeiweiApp.Models.Hour();
 	},
-	template: MeiweiApp.Templates['restaurant-order-form'],
+	//template: MeiweiApp.Templates['restaurant-order-form'],
 	renderHourList: function() {
 		try {
 			var ymd = this.$('input[name=orderdate]').val().split('-');
@@ -77,22 +76,17 @@ MeiweiApp.Views.RestaurantOrderForm = MeiweiApp.View.extend({
 	},
 	render: function(defaultValues) {
 		this.defaultValues = defaultValues;
-		this.$el.html(this.template({
-			restaurant: this.restaurant.toJSON(),
-			order: defaultValues
-		}));
+		this.$('input[name=orderdate]').val(defaultValues.orderdate);
+		this.$('input[name=personnum]').val(defaultValues.personnum);
+		this.$('input[name=other]').val(defaultValues.other);
 		this.hours.fetch({url: this.restaurant.get('hours'), success: this.renderHourList });
 	}
 });
 
 MeiweiApp.Pages.RestaurantOrder = new (MeiweiApp.PageView.extend({
-	events: {
-		'click .floorplan-select > header': 'selectSeat',
-		'click .product-select > header': 'selectProduct',
-		'click .order-submit-button': 'askToSubmitOrder',
-	},
 	initPage: function() {
-		_.bindAll(this, 'renderOrderForm', 'submitOrder');
+		_.bindAll(this, 'renderOrderForm', 'submitOrder', 
+				'selectSeat', 'selectProduct', 'askToSubmitOrder');
 		this.restaurant = new MeiweiApp.Models.Restaurant();
 		this.floorplans = new MeiweiApp.Collections.Floorplans();
 		this.views = {
@@ -108,6 +102,9 @@ MeiweiApp.Pages.RestaurantOrder = new (MeiweiApp.PageView.extend({
 				el: this.$('.product-cart')
 			})
 		};
+		new MBP.fastButton(this.$('.floorplan-select > header')[0], this.selectSeat);
+		new MBP.fastButton(this.$('.product-select > header')[0], this.selectProduct);
+		new MBP.fastButton(this.$('.order-submit-button')[0], this.askToSubmitOrder);
 	},
 	selectSeat: function() {
 		this.floorplans.reset(this.restaurant.get('floorplans'));
@@ -123,7 +120,6 @@ MeiweiApp.Pages.RestaurantOrder = new (MeiweiApp.PageView.extend({
 				}
 			}
 		});
-		
 		MeiweiApp.goTo('RestaurantFloorplans', {
 			floorplans: this.floorplans,
 		});	

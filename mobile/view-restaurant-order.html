@@ -12,8 +12,50 @@
 		<div class="scroll iscroll">
 			<div class="scroll-inner">
 				<header class="restaurant-info"></header>
-				<section class="order-info"></section>
-				<section class="contact-info"></section>
+				<section class="order-info">
+					<header><h1>预订信息</h1></header>
+					<form>
+						<p class="info-text"></p>
+						<fieldset>
+							<div class="inline-group">
+								<i class="icon-calendar"></i>
+								<input type="date" name="orderdate" />
+							</div>
+							<div class="inline-group">
+								<i class="icon-clock"></i>
+								<select name="ordertime"></select>
+								<i class="icon-group"></i>
+								<input type="text" name="personnum" pattern="[0-9]*" />
+							</div>
+							<div class="order-detail inline-group">
+								<i class="icon-pencil"></i>
+								<input type="text" name="other" placeholder="备注" />
+							</div>
+						</fieldset>
+					</form>
+				</section>
+				<section class="contact-info">
+					<header><h1>选择预订人</h1></header>
+					<form>
+						<fieldset>
+							<div class="inline-group">
+								<i class="icon-member-small"></i>
+								<input type="text" name="contactname" placeholder="联系人"/>
+								<div class="control-group switch off switch-gender">
+									<div class="switch-inner">
+										<input type="hidden" name="contactgender" value="0"/>
+										<label class="text-on" data-off="先生" data-on="女士">先生</label>
+										<div class="switch-button"></div>
+									</div>
+								</div>
+							</div>
+							<div class="inline-group">
+								<i class="icon-phone"></i>
+								<input type="tel" name="contactphone" placeholder="手机号" />
+							</div>
+						</fieldset>
+					</form>
+				</section>
 				<section class="floorplan-select">
 					<header><h1>桌位选择</h1><span></span></header>
 				</section>
