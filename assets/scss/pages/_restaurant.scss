@@ -84,7 +84,7 @@
 		width: 90%;
 		//@include border(0 0 1px, solid, $brownLight);
 		font-size: $fontSizeMini;
-		line-height: $fontSizeMini;
+		line-height: $fontSizeMini + 4px;
 		position: relative;
 		.rating {
 			position: absolute;
@@ -120,7 +120,16 @@
 		.information  {
 			color: $brownDark;
 			padding: 5px 0;
-			p { margin: 10px 0; }
+			> div {
+				min-height: 26px;
+				padding: 7px 0 7px 26px;
+				position: relative;
+				i {
+					position: absolute;
+					left: 0;
+					top: 0;
+				}
+			}
 		}
 		
 	}

@@ -6,14 +6,29 @@
 	<p>{{ description }}</p>
 </article>
 <section class="information">
-	<p><i class="icon-map-marker-small"> </i>{{ address }}</p>
+	<div>
+		<i class="icon-map-marker-small"></i>
+		<p>{{{ address }}}</p>
+	</div>
+	
 	{{ #workinghourAvailable }}
-		<p><i class="icon-clock"> </i>{{ workinghour }}</p>
+	<div>
+		<i class="icon-clock"></i>
+		<p>{{{ workinghour }}}</p>
+	</div>
 	{{ /workinghourAvailable }}
+	
 	{{ #parkingAvailable }}
-		<p><i class="icon-car"> </i>{{ parking }}</p>
+	<div>
+		<i class="icon-car"></i>
+		<p>{{{ parking }}}</p>
+	</div>
 	{{ /parkingAvailable }}
+	
 	{{ #discountAvailable }}
-		<p><i class="icon-tag"> </i>{{ discount }}</p>
+	<div>
+		<i class="icon-tag"></i>
+		<p>{{{ discount }}}</p>
+	</div>
 	{{ /discountAvailable }}
 </section>
