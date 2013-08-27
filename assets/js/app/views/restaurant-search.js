@@ -56,17 +56,19 @@ MeiweiApp.Pages.RestaurantSearch = new (MeiweiApp.PageView.extend({
 		this.dropMarkers();
 	},
 	events: {
-		'submit >header>form': 'searchKeywords',
-		'touchmove .iscroll': 'refreshOnScroll'
+		'submit >header>form': 'searchKeywords'
 	},
 	initPage: function() {
+		_.bindAll(this, 'refreshList', 'filterRestaurant', 'bindCuisineFilters', 'bindCircleFilters', 'fetchPrev', 'fetchNext');
+		new MBP.fastButton(this.$('.page-prev')[0], this.fetchPrev);
+		new MBP.fastButton(this.$('.page-next')[0], this.fetchNext);
 		this.restaurants = new MeiweiApp.Collections.Restaurants();
 		this.cuisines = new MeiweiApp.Collections.Cuisines();
 		this.circles = new MeiweiApp.Collections.Circles();
 		this.views = {
 			restaurantList: new MeiweiApp.Views.RestaurantList({
 				collection: this.restaurants,
-				el: this.$('.scroll-inner')
+				el: this.$('.restaurant-list')
 			}),
 			cuisineFilter: new MeiweiApp.Views.Filter({
 				collection: this.cuisines,
@@ -89,69 +91,63 @@ MeiweiApp.Pages.RestaurantSearch = new (MeiweiApp.PageView.extend({
 				$(this).removeClass('expand');
 			}
 		});
-		_.bindAll(this, 'refreshList', 'refreshOnScroll', 'filterRestaurant', 'bindCuisineFilters', 'bindCircleFilters');
 		this.initializeMap();
 	},
-	
-	refreshOnScroll: function() {
-		if (this.restaurants.next != null && this.restaurants.length < 30 && 
-				!this.preventRefresh && this.scroller.y < this.scroller.maxScrollY) {
-			this.preventRefresh = true;
-			this.$('.scroll-infinite .scroll-inner').attr('data-hint', '正在加载...');
-			var self = this;
-			setTimeout(function() {
-				self.restaurants.fetchNext({ remove: false, success: self.refreshList });
-			}, 500);
-		}
+	fetchNext: function() {
+		this.scroller.scrollTo(0, 0, 360);
+		var self = this;
+		setTimeout(function() {
+			self.restaurants.fetchNext({ success: self.refreshList });
+		}, 360);
 	},
-	
-	refreshList: function() {
+	fetchPrev: function() {
+		this.scroller.scrollTo(0, 0, 360);
+		var self = this;
+		setTimeout(function() {
+			self.restaurants.fetchPrev({ success: self.refreshList });
+		}, 360);
+	},
+	refreshList: function(collection, xhr, options) {
+		var cuisine = options.data && options.data.cuisine && this.cuisines.where({id: options.data.cuisine})[0];
+		this.$('.cuisine > p > span').html(cuisine ? cuisine.get('name') : '全部菜系');
+		var circle = options.data && options.data.circle && this.circles.where({id: options.data.circle})[0];
+		this.$('.circle > p > span').html(circle ? circle.get('name') : '全部商圈');
 		if (this.restaurants.length == 0) {
-			this.$('.scroll-infinite .scroll-inner').prepend('<p style="margin: 15px;">没有找到满足的餐厅，请尝试搜索其他关键字，或者选择菜系和商圈</p>');
+			this.$('.restaurant-list').prepend('<p style="padding: 15px;">没有找到合适的餐厅，请尝试搜索其他关键字，或者选择菜系和商圈</p>');
 		}
-		var hintText = (this.restaurants.next == null || this.restaurants.length >= 30) ? '': '上拉可刷新';
-		this.$('.scroll-infinite .scroll-inner').attr('data-hint', hintText);
+		this.$('.page-next').toggleClass('hide', (this.restaurants.next == null));
+		this.$('.page-prev').toggleClass('hide', (this.restaurants.previous == null));
 		this.initScroller();
 		if (this.$('.flipper').hasClass('flip')) this.dropMarkers();
-		this.preventRefresh = false;
 	},
-	
 	searchKeywords: function(e) {
 		e.preventDefault();
 		var keywords = this.$('>header input').val();
 		this.restaurants.fetch({ reset: true, success: this.refreshList, data: { keywords: keywords } });
 		this.$('>header input').blur();
-		this.$('.circle > p > span').html('全部商圈');
-		this.$('.cuisine > p > span').html('全部菜系');
 	},
 	filterRestaurant: function(filter) {
 		this.restaurants.fetch({ reset: true, success: this.refreshList, data: filter });
 	},
 	bindCuisineFilters: function(cuisines, response, options) {
-		this.$('.circle > p > span').html('全部商圈');
 	    this.cuisineFilterScroller = new IScroll(this.$('.cuisine .collapsible-inner').selector, {
 	    	preventDefault: false
 		});
 		this.cuisineFilterScroller.maxScrollY += 200;
 		var bindFilter = function(cuisine) {
 			this.listenTo(cuisine, "select", function() {
-			    this.$('.cuisine > p > span').html(cuisine.get('name'));
-			    this.$('.circle > p > span').html('全部商圈');
 			    this.filterRestaurant({cuisine: cuisine.id});
 			});
 		};
 		cuisines.forEach(bindFilter, this);
 	},
 	bindCircleFilters: function(circles, response, options) {
-		this.$('.cuisine > p > span').html('全部菜系');
 		this.circleFilterScroller = new IScroll(this.$('.circle .collapsible-inner').selector, {
 	    	preventDefault: false
 		});
 		this.circleFilterScroller.maxScrollY += 200;
 		var bindFilter = function(circle) {
 			this.listenTo(circle, "select", function() {
-			    this.$('.circle > p > span').html(circle.get('name'));	
-			    this.$('.cuisine > p > span').html('全部菜系');
 				this.filterRestaurant({circle: circle.id});
 			});
 		};

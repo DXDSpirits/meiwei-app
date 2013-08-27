@@ -1,3 +1,7 @@
+%thumbnail-list {
+	width: 100%;
+}
+
 %thumbnail-list-item {
 	@include border(0 0 1px 0, solid, $brownLighter);
 	@include size(90px, 100%);
@@ -19,10 +23,10 @@
 	}
 }
 
-.thumbnail-list-item {
-	@extend %thumbnail-list-item;
-}
+.thumbnail-list { @extend %thumbnail-list; }
+.thumbnail-list-item { @extend %thumbnail-list-item; }
 
+.restaurant-list { @extend %thumbnail-list; }
 .restaurant-list-item {
 	@extend %thumbnail-list-item;
 	.rating {
@@ -32,6 +36,7 @@
 	}
 }
 
+.order-list { @extend %thumbnail-list; }
 .order-list-item {
 	@extend %thumbnail-list-item;
 	@include text-overflow();
@@ -42,6 +47,7 @@
 	}
 }
 
+.simple-list { width: 100%; }
 .simple-list-item {
 	$itemHeight: 45px;
 	@include size($itemHeight, 100%);
@@ -58,6 +64,7 @@
 	}
 }
 
+.detail-list { width: 100%; }
 .detail-list-item {
 	$itemHeight: 50px;
 	@include size($itemHeight, 100%);
@@ -75,4 +82,9 @@
 		text-align: left;
 		p { @include text-overflow(); }
 	}
+}
+
+.page-nav {
+	width: 100%;
+	padding: 10px;
 }

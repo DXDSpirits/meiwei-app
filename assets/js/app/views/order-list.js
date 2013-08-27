@@ -19,11 +19,14 @@ MeiweiApp.Pages.OrderList = new (MeiweiApp.PageView.extend({
 		'click .filter-fulfilled': 'getFulfilledOrders'
 	},
 	initPage: function() {
+		_.bindAll(this, 'refreshList', 'fetchPrev', 'fetchNext');
+		new MBP.fastButton(this.$('.page-prev')[0], this.fetchPrev);
+		new MBP.fastButton(this.$('.page-next')[0], this.fetchNext);
 		this.orders = new MeiweiApp.Collections.Orders();
 		this.views = {
 			orderList: new MeiweiApp.Views.OrderList({
 				collection: this.orders,
-				el: this.$('.scroll .scroll-inner')
+				el: this.$('.order-list')
 			})
 		}
 	},
@@ -33,7 +36,7 @@ MeiweiApp.Pages.OrderList = new (MeiweiApp.PageView.extend({
 		this.orders.fetch({
 			reset : true,
 			data : { status : 'pending' },
-			success: this.initScroller
+			success: this.refreshList
 		});
 	},
 	getFulfilledOrders: function() {
@@ -42,11 +45,26 @@ MeiweiApp.Pages.OrderList = new (MeiweiApp.PageView.extend({
 		this.orders.fetch({
 			reset: true,
 			data: { status: 'fulfilled' },
-			success: this.initScroller
+			success: this.refreshList
 		});
 	},
+	fetchNext: function() {
+		this.scroller.scrollTo(0, 0, 360);
+		var self = this;
+		setTimeout(function() { self.orders.fetchNext({ success: self.refreshList }); }, 360);
+	},
+	fetchPrev: function() {
+		this.scroller.scrollTo(0, 0, 360);
+		var self = this;
+		setTimeout(function() { self.orders.fetchPrev({ success: self.refreshList }); }, 360);
+	},
+	refreshList: function() {
+		this.$('.page-next').toggleClass('hide', (this.orders.next == null));
+		this.$('.page-prev').toggleClass('hide', (this.orders.previous == null));
+		this.initScroller();
+	},
 	render: function() {
-		this.getPendingOrders();
 		this.showPage();
+		this.getPendingOrders();
 	}
 }))({el: $("#view-order-list")});

@@ -23,15 +23,34 @@ MeiweiApp.Views.FavoriteList = MeiweiApp.CollectionView.extend({
 MeiweiApp.Pages.MemberFavorites = new (MeiweiApp.PageView.extend({
 	onClickLeftBtn: function() { MeiweiApp.goTo('MemberCenter'); },
 	initPage: function() {
+		_.bindAll(this, 'refreshList', 'fetchPrev', 'fetchNext');
+		new MBP.fastButton(this.$('.page-prev')[0], this.fetchPrev);
+		new MBP.fastButton(this.$('.page-next')[0], this.fetchNext);
 		this.favorites = MeiweiApp.me.favorites;
 		this.views = {
 			favoriteList: new MeiweiApp.Views.FavoriteList({
 				collection: this.favorites,
-				el: this.$('.scroll-inner')
+				el: this.$('.restaurant-list')
 			})
 		}
 	},
+	fetchNext: function() {
+		this.scroller.scrollTo(0, 0, 360);
+		var self = this;
+		setTimeout(function() { self.favorites.fetchNext({ success: self.refreshList }); }, 360);
+	},
+	fetchPrev: function() {
+		this.scroller.scrollTo(0, 0, 360);
+		var self = this;
+		setTimeout(function() { self.favorites.fetchPrev({ success: self.refreshList }); }, 360);
+	},
+	refreshList: function() {
+		this.$('.page-next').toggleClass('hide', (this.favorites.next == null));
+		this.$('.page-prev').toggleClass('hide', (this.favorites.previous == null));
+		this.initScroller();
+	},
 	render: function() {
-		this.favorites.fetch({reset: true, success: this.showPage});
+		this.showPage();
+		this.favorites.fetch({reset: true, success: this.refreshList});
 	}
 }))({el: $("#view-member-favorites")});
