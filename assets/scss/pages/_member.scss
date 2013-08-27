@@ -129,7 +129,7 @@
 			@include background-size(100% $listItemHeight);
 		}
 		li:active {
-			background: $brownLight;
+			background: $brownLighter;
 		}
 		li::after {
 			content: "";

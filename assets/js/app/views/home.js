@@ -58,7 +58,9 @@ MeiweiApp.Pages.Home = new (MeiweiApp.PageView.extend({
 		var y = this.scroller.currentPage.pageY;
 		var modelViews = this.views.recommendItems.modelViews;
 		this.$('.hero').removeClass('hero');
-		modelViews[modelViews.length - y - 1].$el.addClass('hero');
+		if (modelViews[modelViews.length - y - 1]) {
+			modelViews[modelViews.length - y - 1].$el.addClass('hero');
+		}
 	},
 	initScroller: function() {
 		if (this.scroller == null) {
@@ -75,6 +77,7 @@ MeiweiApp.Pages.Home = new (MeiweiApp.PageView.extend({
 		}
 	},
 	render: function() {
-		this.recommend.fetch({ reset: true, success: this.showPage });
+		this.showPage();
+		this.recommend.fetch({ reset: true, success: this.initScroller });
 	}
 }))({el: $("#view-home")});

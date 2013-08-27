@@ -1,5 +1,5 @@
 #view-home {
-	@include scrollBottomBanner();
+	//@include scrollBottomBanner();
 	
 	.recommend-flow {
 		@include flex-box($orient: vertical, $direction: reverse);
