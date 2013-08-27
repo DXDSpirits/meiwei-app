@@ -25,26 +25,23 @@ MeiweiApp.Views.FavoriteRestoCarousel = MeiweiApp.View.extend({
 
 
 MeiweiApp.Pages.MemberCenter = new (MeiweiApp.PageView.extend({
-	onClickLeftBtn: function() { MeiweiApp.goTo('Home'); },
-	events: {
-		'click .member-center-nav > li:nth-child(1)': 'gotoMyProfile',
-		'click .member-center-nav > li:nth-child(2)': 'gotoMyOrder',
-		'click .member-center-nav > li:nth-child(3)': 'gotoMyCredits',
-		'click .member-center-nav > li:nth-child(4)': 'gotoMyFavorites',
-		'click .member-center-nav > li:nth-child(5)': 'gotoViewProducts',
-		'click .logout-button': 'logout'
-	},
+	onClickLeftBtn:   function() { MeiweiApp.goTo('Home'); },
 	gotoMyProfile:    function() { MeiweiApp.goTo('MemberProfile'); },
 	gotoMyOrder:      function() { MeiweiApp.goTo('OrderList'); },
 	gotoMyCredits:    function() { MeiweiApp.goTo('MemberCredits'); },
 	gotoMyFavorites:  function() { MeiweiApp.goTo('MemberFavorites'); },
-	gotoMyContacts:   function() { MeiweiApp.goTo('MemberContacts'); },
 	gotoViewProducts: function() { MeiweiApp.goTo('ProductPurchase'); },
 	logout:           function() {
 		MeiweiApp.me.logout();
 		MeiweiApp.goTo('Home');
 	},
 	initPage: function() {
+		new MBP.fastButton(this.$('.member-center-nav > li:nth-child(1)')[0], this.gotoMyProfile);
+		new MBP.fastButton(this.$('.member-center-nav > li:nth-child(2)')[0], this.gotoMyOrder);
+		new MBP.fastButton(this.$('.member-center-nav > li:nth-child(3)')[0], this.gotoMyCredits);
+		new MBP.fastButton(this.$('.member-center-nav > li:nth-child(4)')[0], this.gotoMyFavorites);
+		new MBP.fastButton(this.$('.member-center-nav > li:nth-child(5)')[0], this.gotoViewProducts);
+		new MBP.fastButton(this.$('.logout-button')[0], this.logout);
 		this.favorites = MeiweiApp.me.favorites;
 		this.views = {
 			profileBox: new MeiweiApp.Views.MemberProfileBox({
