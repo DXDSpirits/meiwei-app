@@ -35,14 +35,14 @@ MeiweiApp.Pages.MemberFavorites = new (MeiweiApp.PageView.extend({
 		}
 	},
 	fetchNext: function() {
-		this.scroller.scrollTo(0, 0, 360);
+		this.scroller.scrollTo(0, 0, 1000);
 		var self = this;
-		setTimeout(function() { self.favorites.fetchNext({ success: self.refreshList }); }, 360);
+		setTimeout(function() { self.favorites.fetchNext({ success: self.refreshList }); }, 1000);
 	},
 	fetchPrev: function() {
-		this.scroller.scrollTo(0, 0, 360);
+		this.scroller.scrollTo(0, 0, 1000);
 		var self = this;
-		setTimeout(function() { self.favorites.fetchPrev({ success: self.refreshList }); }, 360);
+		setTimeout(function() { self.favorites.fetchPrev({ success: self.refreshList }); }, 1000);
 	},
 	refreshList: function() {
 		this.$('.page-next').toggleClass('hide', (this.favorites.next == null));

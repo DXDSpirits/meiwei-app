@@ -94,18 +94,18 @@ MeiweiApp.Pages.RestaurantSearch = new (MeiweiApp.PageView.extend({
 		this.initializeMap();
 	},
 	fetchNext: function() {
-		this.scroller.scrollTo(0, 0, 360);
+		this.scroller.scrollTo(0, 0, 1000);
 		var self = this;
 		setTimeout(function() {
 			self.restaurants.fetchNext({ success: self.refreshList });
-		}, 360);
+		}, 1000);
 	},
 	fetchPrev: function() {
-		this.scroller.scrollTo(0, 0, 360);
+		this.scroller.scrollTo(0, 0, 1000);
 		var self = this;
 		setTimeout(function() {
 			self.restaurants.fetchPrev({ success: self.refreshList });
-		}, 360);
+		}, 1000);
 	},
 	refreshList: function(collection, xhr, options) {
 		var cuisine = options.data && options.data.cuisine && this.cuisines.where({id: options.data.cuisine})[0];
