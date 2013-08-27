@@ -106,6 +106,9 @@ MeiweiApp.Pages.RestaurantSearch = new (MeiweiApp.PageView.extend({
 	},
 	
 	refreshList: function() {
+		if (this.restaurants.length == 0) {
+			this.$('.scroll-infinite .scroll-inner').prepend('<p style="margin: 15px;">没有找到满足的餐厅，请尝试搜索其他关键字，或者选择菜系和商圈</p>');
+		}
 		var hintText = (this.restaurants.next == null || this.restaurants.length >= 30) ? '': '上拉可刷新';
 		this.$('.scroll-infinite .scroll-inner').attr('data-hint', hintText);
 		this.initScroller();
@@ -168,7 +171,10 @@ MeiweiApp.Pages.RestaurantSearch = new (MeiweiApp.PageView.extend({
 		this.markers.length = 0;
 		this.map.clearOverlays();
 		for (var i = 0; i < neighborhoods.length; i++) {
-			var marker = new BMap.Marker(neighborhoods[i].latlng , {enableMassClear:true});
+			
+			var meiweiIcon = new BMap.Icon("assets/img/mapmarker.png", new BMap.Size(25, 25), {imageSize: new BMap.Size(25, 25)});
+			
+			var marker = new BMap.Marker(neighborhoods[i].latlng , {enableMassClear:true, icon:meiweiIcon});
 			this.markers.push(marker);
 			this.map.addOverlay(marker);
 			this.addMessage(marker, neighborhoods[i].resto);
