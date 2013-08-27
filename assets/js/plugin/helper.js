@@ -122,7 +122,7 @@
 
     MBP.fastButton.prototype.onTouchStart = function(event) {
         var element = event.target || event.srcElement;
-        event.stopPropagation();
+        //event.stopPropagation();
         element.addEventListener('touchend', this, false);
         document.body.addEventListener('touchmove', this, false);
         this.startX = event.touches[0].clientX;
