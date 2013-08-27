@@ -64,7 +64,6 @@ MeiweiApp.Pages.OrderList = new (MeiweiApp.PageView.extend({
 		this.initScroller();
 	},
 	render: function() {
-		this.showPage();
 		this.getPendingOrders();
 	}
 }))({el: $("#view-order-list")});

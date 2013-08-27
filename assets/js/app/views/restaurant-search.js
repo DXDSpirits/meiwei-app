@@ -197,7 +197,6 @@ MeiweiApp.Pages.RestaurantSearch = new (MeiweiApp.PageView.extend({
 	/*********************************************/
 	
 	render: function() {
-		this.showPage();
 		this.$('>header input').val('');
 		this.$('>header input').focus();
 		this.restaurants.fetch({ reset: true, success: this.refreshList });

@@ -52,6 +52,5 @@ MeiweiApp.Pages.MemberLogin = new (MeiweiApp.PageView.extend({
 	render: function() {
 		MeiweiApp.me.logout();
 		this.loginForm.render();
-		this.showPage();
 	}
 }))({el: $("#view-member-login")});

@@ -56,7 +56,6 @@ MeiweiApp.Pages.Attending = new (MeiweiApp.PageView.extend({
 		} else {
 			this.scroller.refresh();
 		}
-		this.showPage();
 	},
     render: function() {
     	this.orders.fetch({ reset: true, data: { status: 'pending' }, success: this.renderPages });

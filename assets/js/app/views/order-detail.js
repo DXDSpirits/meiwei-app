@@ -44,7 +44,7 @@ MeiweiApp.Pages.OrderDetail = new (MeiweiApp.PageView.extend({
 			this.$('.btn-cancel').remove();
 			this.onClickRightBtn = function() {}
 		}
-		this.showPage();
+		this.initScroller();
 	},
 	render: function() {
 		if (this.options.order) {

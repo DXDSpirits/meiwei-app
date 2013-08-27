@@ -89,6 +89,5 @@ MeiweiApp.Pages.RestaurantFloorplans = new (MeiweiApp.PageView.extend({
 		this.floorplans.reset(this.options.floorplans.models);
 		this.views.floorplanList.render();
 		this.initScroller();
-		this.showPage();
 	}
 }))({el: $("#view-restaurant-floorplans")});

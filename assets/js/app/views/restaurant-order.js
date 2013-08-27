@@ -192,7 +192,7 @@ MeiweiApp.Pages.RestaurantOrder = new (MeiweiApp.PageView.extend({
 		} else {
 			this.$('.floorplan-select').removeClass('hide');
 		}
-		this.showPage();
+		this.initScroller();
 		this.$('input[name=orderdate]').focus();
 	},
 	render: function() {

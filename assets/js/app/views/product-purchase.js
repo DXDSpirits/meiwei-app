@@ -50,15 +50,6 @@ MeiweiApp.Pages.ProductPurchase = new (MeiweiApp.PageView.extend({
 			MeiweiApp.goTo('RestaurantOrder', { restaurantId: 1 });
 		}
 	},
-	initScroller: function() {
-		if (this.scroller == null) {
-			if (this.$('.iscroll').length > 0) {
-			    this.scroller = new IScroll(this.$('.iscroll').selector);
-			}
-		} else {
-			this.scroller.refresh();
-		}
-	},
 	carousel: function() {
 		this.carouselScrolls = this.carouselScrolls || [];
 		for (var i=0; i<this.carouselScrolls.length; i++) this.carouselScrolls[i].destroy();
@@ -76,7 +67,7 @@ MeiweiApp.Pages.ProductPurchase = new (MeiweiApp.PageView.extend({
 		var self = this;
 		this.products.fetch({ data: {category: 1}, reset: true, success: function() {
 			self.carousel();
-			self.showPage();
+			self.initScroller();
 		}});
 	}
 }))({el: $("#view-product-purchase")});
@@ -168,7 +159,7 @@ MeiweiApp.Pages.ProductRedeem = new (MeiweiApp.Pages.ProductPurchase.constructor
 		var self = this;
 		this.products.fetch({ data: {category: 2}, reset: true, success: function() {
 			self.carousel();
-			self.showPage();
+			self.initScroller();
 		}});
 	}
 }))({el: $("#view-product-redeem")});

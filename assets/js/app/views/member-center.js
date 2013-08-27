@@ -61,7 +61,6 @@ MeiweiApp.Pages.MemberCenter = new (MeiweiApp.PageView.extend({
 				reset: true,
 				success: function() {
 					self.views.favoriteCarousel.render();
-					self.showPage();
 				}
 			});
 		}});

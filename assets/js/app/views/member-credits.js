@@ -19,13 +19,13 @@ MeiweiApp.Pages.MemberCredits = new (MeiweiApp.PageView.extend({
 		}
 	},
 	render: function() {
-		$page = this;
+		var self = this;
 		this.credits.fetch({
 			reset: true,
 			success: function(collection) {
 				var balance = _.reduce(collection.pluck('amount'), function(a,b) { return a + b; } );
-				$page.$('> header > h1 > span').html('(' + balance + ')');
-				$page.showPage();
+				self.$('> header > h1 > span').html('(' + balance + ')');
+				self.initScroller();
 			}
 		});
 	}

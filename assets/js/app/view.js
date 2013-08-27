@@ -90,10 +90,15 @@ MeiweiApp.PageView = Backbone.View.extend({
 	},
 	go: function(options) {
 		this.options = options || {};
-		try {this.render();
-		} catch (e) {MeiweiApp.handleError(e); }
+		this.showPage();
+		try {
+			this.render();
+		} catch (e) {
+			MeiweiApp.handleError(e);
+		}
 	},
-	refresh: function(options) {
+	refresh: function() {
+		this.showPage();
 		try {
 			this.render();
 		} catch (e) {

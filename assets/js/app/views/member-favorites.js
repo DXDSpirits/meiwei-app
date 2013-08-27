@@ -50,7 +50,6 @@ MeiweiApp.Pages.MemberFavorites = new (MeiweiApp.PageView.extend({
 		this.initScroller();
 	},
 	render: function() {
-		this.showPage();
 		this.favorites.fetch({reset: true, success: this.refreshList});
 	}
 }))({el: $("#view-member-favorites")});
