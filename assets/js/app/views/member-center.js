@@ -31,8 +31,7 @@ MeiweiApp.Pages.MemberCenter = new (MeiweiApp.PageView.extend({
 		'click .member-center-nav > li:nth-child(2)': 'gotoMyOrder',
 		'click .member-center-nav > li:nth-child(3)': 'gotoMyCredits',
 		'click .member-center-nav > li:nth-child(4)': 'gotoMyFavorites',
-//		'click .member-center-nav > li:nth-child(5)': 'gotoMyContacts',
-		'click .member-center-nav > li:nth-child(6)': 'gotoViewProducts',
+		'click .member-center-nav > li:nth-child(5)': 'gotoViewProducts',
 		'click .logout-button': 'logout'
 	},
 	gotoMyProfile:    function() { MeiweiApp.goTo('MemberProfile'); },
