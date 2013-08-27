@@ -32,12 +32,14 @@
 			color: white;
 			text-align: center;
 		}
-		> img {
-			@include center-block();
+		> .img {
 			@include border-radius(10px);
 			border: 1px solid $brownLight;
-			height: 100%;
-			width: 100%;
+			overflow: hidden;
+			&, & img {
+				height: 100%;
+				width: 100%;
+			} 
 		}
 	}
 
