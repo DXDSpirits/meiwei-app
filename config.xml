@@ -12,4 +12,5 @@
     <preference name="webviewbounce" value="true" />
     <preference name="DisallowOverscroll" value="true" />
     <preference name="AutoHideSplashScreen" value="false" />
+    <preference name="KeyboardDisplayRequiresUserAction" value="false" />
 </widget>

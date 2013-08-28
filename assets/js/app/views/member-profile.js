@@ -81,6 +81,12 @@ MeiweiApp.Pages.MemberProfile = new (MeiweiApp.PageView.extend({
 		};
 	},
 	render: function() {
-		MeiweiApp.me.fetch({ success: this.initScroller });
+		var self = this;
+		MeiweiApp.me.fetch({
+			success: function() {
+				self.initScroller();
+				self.$('input[name=nickname]').focus();
+			}
+		});
 	}
 }))({el: $("#view-member-profile")});
