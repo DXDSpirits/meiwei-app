@@ -58,8 +58,8 @@ MeiweiApp.Pages.Home = new (MeiweiApp.PageView.extend({
 		var y = this.scroller.currentPage.pageY;
 		var modelViews = this.views.recommendItems.modelViews;
 		this.$('.hero').removeClass('hero');
-		if (modelViews[modelViews.length - y - 1]) {
-			modelViews[modelViews.length - y - 1].$el.addClass('hero');
+		if (y > 0 && modelViews[y-1]) {
+			modelViews[y-1].$el.addClass('hero');
 		}
 	},
 	initScroller: function() {

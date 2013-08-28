@@ -13,7 +13,7 @@ MeiweiApp.Views.FavoriteList = MeiweiApp.CollectionView.extend({
 			});
 		},
 		deleteFav: function(e) {
-			this.$('.icon-favorite').removeClass('suceed');
+			this.$('.icon-favorite').removeClass('succeed');
 			var self = this;
 			setTimeout(function() { self.model.destroy(); }, 350);
 		}
