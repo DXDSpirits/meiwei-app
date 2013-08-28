@@ -155,6 +155,7 @@ MeiweiApp.Pages.RestaurantOrder = new (MeiweiApp.PageView.extend({
 			products: products.slice(0, -1)
 		});
 		if (this.options.pendingOrder) this.options.pendingOrder.cancel();
+		this.$('.info-text').html('');
 		var $infoText = this.$('.info-text');
 		var $scroll = this.$('.scroll');
 		newOrder.save({}, {

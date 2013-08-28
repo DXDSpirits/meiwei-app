@@ -1,16 +1,20 @@
 
 MeiweiApp.Views.RestaurantProfileBox = MeiweiApp.ModelView.extend({
-	template: MeiweiApp.Templates['restaurant-profile-box'],
 	render: function() {
-		var data = this.model.toJSON();
-		data.parkingAvailable = (!_.isEmpty(data.parking));
-		data.discountAvailable = (!_.isEmpty(data.discount));
-		data.workinghourAvailable = (!_.isEmpty(data.workinghour));
-		this.$el.html(this.template(data));
-		var self = this;
+		var resto = this.model.toJSON();
+		this.$('article p').html(resto.description);
+		this.$('.address').toggleClass('hide', _.isEmpty(resto.address));
+		this.$('.address p').html(resto.address);
+		this.$('.workinghour').toggleClass('hide', _.isEmpty(resto.workinghour));
+		this.$('.workinghour p').html(resto.workinghour);
+		this.$('.parking').toggleClass('hide', _.isEmpty(resto.parking));
+		this.$('.parking p').html(resto.parking);
+		this.$('.discount').toggleClass('hide', _.isEmpty(resto.discount));
+		this.$('.discount p').html(resto.discount);
+		this.$('.rating').attr('class', 'rating r-' + resto.score);
 		new MBP.fastButton(this.$('.order-button')[0], function() {
 			MeiweiApp.goTo('RestaurantOrder', {
-				restaurant: self.model.toJSON()
+				restaurant: resto
 			});
 		});
 		return this;

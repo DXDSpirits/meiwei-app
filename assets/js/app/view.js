@@ -67,11 +67,14 @@ MeiweiApp.CollectionView = Backbone.View.extend({
 MeiweiApp.PageView = Backbone.View.extend({
 	initialize: function() {
 		this.views = {};
-		_.bindAll(this, 'showPage', 'go', 'onClickLeftBtn', 'onClickRightBtn', 'initScroller');
+		_.bindAll(this, 'showPage', 'go', 'render', 'onClickLeftBtn', 'onClickRightBtn', 'initScroller');
 		
 		//These 2 lines should be after bindAll, in order to bind ClickBtn events propertly
 		new MBP.fastButton(this.$('.header-btn-left')[0], this.onClickLeftBtn);
 		new MBP.fastButton(this.$('.header-btn-right')[0], this.onClickRightBtn);
+		
+		var minHeight = this.$('.scroll').height() + 1;
+		this.$('.scroll-inner').css('min-height', minHeight + 'px');
 		
 		if (this.initPage != null) {
 			this.initPage();
@@ -92,19 +95,25 @@ MeiweiApp.PageView = Backbone.View.extend({
 	go: function(options) {
 		this.options = options || {};
 		this.showPage();
-		try {
-			this.render();
-		} catch (e) {
-			MeiweiApp.handleError(e);
-		}
+		var render = this.render;
+		setTimeout(function() {
+			try {
+				render();
+			} catch (e) {
+				MeiweiApp.handleError(e);
+			}
+		}, 500);
 	},
 	refresh: function() {
 		this.showPage();
-		try {
-			this.render();
-		} catch (e) {
-			MeiweiApp.handleError(e);
-		}
+		var render = this.render;
+		setTimeout(function() {
+			try {
+				render();
+			} catch (e) {
+				MeiweiApp.handleError(e);
+			}
+		}, 500);
 	},
 	showPage: function() {
 		window.scrollTo(0, 0);

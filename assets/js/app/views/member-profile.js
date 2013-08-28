@@ -9,6 +9,7 @@ MeiweiApp.Views.MemberProfileForm = MeiweiApp.ModelView.extend({
 		this.$el.html(this.template(this.model.toJSON()));
 	},
 	switchGender: function() {
+		window.scrollTo(0, 0);
 		var switchGender = this.$('.switch-gender');
 		if (switchGender.hasClass('on')) {
 			switchGender.removeClass('on').addClass('off');
