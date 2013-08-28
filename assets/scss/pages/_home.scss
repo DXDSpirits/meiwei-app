@@ -7,7 +7,7 @@
 	}
 	
 	.recommend-list-item {
-		@include flex-box($pack: start);
+		@include flex-box($orient: vertical, $pack: start);
 		$splitterWidth: 2px;
 		$itemHeight: 300px;
 		height: $itemHeight;

@@ -37,11 +37,11 @@
 	line-height: $navbarHeight;
 	
 	@include text-overflow();
-	@include flexible();
+	@include flexible($orient: horizontal);
 }
 
 .view > header > form {
-	@include flexible();
+	@include flexible($orient: horizontal);
 	height: 44px;
 	padding: 5px 0;
 	> input[type=search] {
@@ -71,7 +71,7 @@
 	@include size(50px, 100%);
 	background-color: $brown;
 	> .filter {
-		@include flexible();
+		@include flexible($orient: horizontal);
 		height: 50px;
 		line-height: 50px;
 		text-align: center;

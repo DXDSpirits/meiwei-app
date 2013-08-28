@@ -75,7 +75,7 @@ input[type="color"],
 	}
 	
 	fieldset .inline-group > & {
-		@include flexible();
+		@include flexible($orient: horizontal);
 		@include inline-field-set();
 	}
 }

@@ -45,7 +45,7 @@ input[type="submit"], button, .btn {
 .button-group {
 	@include flex-box($orient: horizontal);
 	input[type="submit"], button, .btn {
-		@include flexible();
+		@include flexible($orient: horizontal);
 		margin-right: 10px;
 		&:last-child {
 			margin-right: 0;

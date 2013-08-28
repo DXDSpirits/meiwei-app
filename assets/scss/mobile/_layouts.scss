@@ -78,7 +78,7 @@ body {
 	& > .scroll-inner {
 		background-color: $bodyBackground;
 		width: 100%;
-		@include flex-box();
+		@include flex-box($orient: vertical, $pack: start);
 	}
 	&.scroll-infinite > .scroll-inner::after {
 		content: attr(data-hint);
@@ -95,7 +95,7 @@ body {
 }
 
 #apploader .loader {
-	@include flex-box();
+	@include flex-box($orient: vertical);
 	position: absolute;
 	top: 50%;
 	left: 50%;

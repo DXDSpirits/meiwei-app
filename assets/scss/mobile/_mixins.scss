@@ -363,7 +363,7 @@
 @mixin flexible($flex: 1, $orient: horizontal) {
 	@if ($orient == horizontal) {
 		width: 1px;
-	} else {
+	} @else {
 		height: 1px;
 	}
 	-webkit-box-flex: $flex;

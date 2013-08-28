@@ -100,7 +100,7 @@
 		.order-detail {
 			width: 85%;
 			@include center-block();
-			@include flex-box($pack: end);
+			@include flex-box($orient: vertical, $pack: end);
 			.section-qrcode {
 				display: none;
 		        @include square(110px);

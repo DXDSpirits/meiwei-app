@@ -51,7 +51,6 @@
 	}
 	input[name=nickname] {
 		text-align: center;
-		@include flexible(2);
 	}
 	button {
 		width: 100%;
