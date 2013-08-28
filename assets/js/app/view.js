@@ -79,10 +79,11 @@ MeiweiApp.PageView = Backbone.View.extend({
 	},
 	onClickLeftBtn: function() { MeiweiApp.goBack(); },
 	onClickRightBtn: function() {},
-	initScroller: function() {
+	initScroller: function(options) {
+		options = options || { preventDefault: false };
 		if (this.scroller == null) {
 			if (this.$('.iscroll').length > 0) {
-			    this.scroller = new IScroll(this.$('.iscroll').selector, { preventDefault: false });
+			    this.scroller = new IScroll(this.$('.iscroll').selector, options);
 			}
 		} else {
 			this.scroller.refresh();
