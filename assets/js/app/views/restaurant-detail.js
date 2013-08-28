@@ -1,5 +1,15 @@
 
-MeiweiApp.Views.RestaurantProfileBox = MeiweiApp.ModelView.extend({
+MeiweiApp.Views.RestaurantProfileBox = MeiweiApp.View.extend({
+	initialize: function() {
+		this.listenTo(this.model, 'change', this.render);
+		_.bindAll(this, 'goToOrder');
+		new MBP.fastButton(this.$('.order-button')[0], this.goToOrder);
+	},
+	goToOrder: function() {
+		MeiweiApp.goTo('RestaurantOrder', {
+			restaurant: this.model.toJSON()
+		});
+	},
 	render: function() {
 		var resto = this.model.toJSON();
 		this.$('article p').html(resto.description);
@@ -12,11 +22,6 @@ MeiweiApp.Views.RestaurantProfileBox = MeiweiApp.ModelView.extend({
 		this.$('.discount').toggleClass('hide', _.isEmpty(resto.discount));
 		this.$('.discount p').html(resto.discount);
 		this.$('.rating').attr('class', 'rating r-' + resto.score);
-		new MBP.fastButton(this.$('.order-button')[0], function() {
-			MeiweiApp.goTo('RestaurantOrder', {
-				restaurant: resto
-			});
-		});
 		return this;
 	}
 });
@@ -78,11 +83,10 @@ MeiweiApp.Pages.RestaurantDetail = new (MeiweiApp.PageView.extend({
 		});
 	},
 	renderAll: function() {
-		if (MeiweiApp.me.favorites.find(function(favorite) { return (this.restaurant.id == favorite.get('restaurant')); }, this)) {
-			this.$('.icon-favorite').addClass('suceed');
-		} else {
-			this.$('.icon-favorite').removeClass('suceed');
-		}
+		var succeed = MeiweiApp.me.favorites.find(function(favorite) {
+			return (this.restaurant.id == favorite.get('restaurant'));
+		}, this);
+		this.$('.icon-favorite').toggleClass('suceed', (succeed != null));
 		this.$('> header h1').html(this.restaurant.get('fullname'));
 		var pictures = this.restaurant.get('pictures');
 		if (_.isEmpty(pictures) || true) {
