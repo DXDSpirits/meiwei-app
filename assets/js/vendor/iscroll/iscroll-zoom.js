@@ -469,10 +469,10 @@ IScroll.prototype = {
 
 		// Slow down if outside of the boundaries
 		if ( newX > 0 || newX < this.maxScrollX ) {
-			newX = this.options.bounce ? this.x + deltaX / 3 : newX > 0 ? 0 : this.maxScrollX;
+			newX = this.options.bounce ? this.x + deltaX / 10 : newX > 0 ? 0 : this.maxScrollX;
 		}
 		if ( newY > 0 || newY < this.maxScrollY ) {
-			newY = this.options.bounce ? this.y + deltaY / 3 : newY > 0 ? 0 : this.maxScrollY;
+			newY = this.options.bounce ? this.y + deltaY / 10 : newY > 0 ? 0 : this.maxScrollY;
 		}
 
 		this.directionX = deltaX > 0 ? -1 : deltaX < 0 ? 1 : 0;
