@@ -1,10 +1,27 @@
 
-MeiweiApp.View = Backbone.View.extend({});
+MeiweiApp.View = Backbone.View.extend({
+	bindFastButton: function(el, handler) {
+		this.fastButtons = this.fastButtons || [];
+		this.fastButtons.push(new MBP.fastButton(el.length && el.length >= 1 ? el[0] : el, handler));
+	},
+	clearFastButtons: function() {
+		if (!_.isEmpty(this.fastButtons)) {
+			
+		}
+	},
+	remove: function() {
+		this.clearFastButtons();
+		this.$el.remove();
+		this.stopListening();
+		return this;
+    },
+});
 
-MeiweiApp.ModelView = Backbone.View.extend({
+MeiweiApp.ModelView = MeiweiApp.View.extend({
 	initialize: function() {
 		this.listenTo(this.model, 'change', this.render);
 		this.listenTo(this.model, 'hide', this.remove);
+		if (this.initModelView) this.initModelView();
 	},
 	template: Mustache.compile(""),
 	render: function() {
@@ -13,13 +30,14 @@ MeiweiApp.ModelView = Backbone.View.extend({
 	}
 });
 
-MeiweiApp.CollectionView = Backbone.View.extend({
+MeiweiApp.CollectionView = MeiweiApp.View.extend({
 	ModelView: MeiweiApp.ModelView,
 	initialize: function() {
 		this.modelViews = [];
 		this.listenTo(this.collection, 'reset', this.addAll);
 		this.listenTo(this.collection, 'add', this.addOne);
 		this.listenTo(this.collection, 'remove', this.removeOne);
+		if (this.initCollectionView) this.initCollectionView();
 	},
 	removeOne: function(item) {
 		try {
@@ -64,21 +82,19 @@ MeiweiApp.CollectionView = Backbone.View.extend({
 	}
 });
 
-MeiweiApp.PageView = Backbone.View.extend({
+MeiweiApp.PageView = MeiweiApp.View.extend({
 	initialize: function() {
 		this.views = {};
 		_.bindAll(this, 'showPage', 'go', 'render', 'reset', 'onClickLeftBtn', 'onClickRightBtn', 'initScroller');
 		
 		//These 2 lines should be after bindAll, in order to bind ClickBtn events propertly
-		new MBP.fastButton(this.$('.header-btn-left')[0], this.onClickLeftBtn);
-		new MBP.fastButton(this.$('.header-btn-right')[0], this.onClickRightBtn);
+		this.bindFastButton(this.$('.header-btn-left'), this.onClickLeftBtn);
+		this.bindFastButton(this.$('.header-btn-right'), this.onClickRightBtn);
 		
 		var minHeight = this.$('.scroll').height() + 1;
 		this.$('.scroll-inner').css('min-height', minHeight + 'px');
 		
-		if (this.initPage != null) {
-			this.initPage();
-		}
+		if (this.initPage) this.initPage();
 	},
 	onClickLeftBtn: function() { MeiweiApp.goBack(); },
 	onClickRightBtn: function() {},

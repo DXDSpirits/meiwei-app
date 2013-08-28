@@ -1,27 +1,16 @@
 
 MeiweiApp.Views.RecommendItem = MeiweiApp.ModelView.extend({
-	events: {
-		'click img, article h1, article p': 'viewRestaurant',
-		'click .order-button': 'bookResaurant'
-	},
 	tagName: 'section',
 	className: 'recommend-list-item',
 	template: MeiweiApp.Templates['recommend-list-item'],
-	viewRestaurant: function() {
-		var restaurantId = this.model.get('restaurant').id;
-		if (restaurantId == 1) {
-			MeiweiApp.goTo('ProductPurchase');
-		} else {
-			MeiweiApp.goTo('RestaurantDetail', { restaurantId: restaurantId });
-		}
+	initModelView: function() {
+		_.bindAll(this, 'viewRestaurant');
+		this.bindFastButton(this.$el, this.viewRestaurant);
 	},
-	bookResaurant: function() {
+	viewRestaurant: function(e) {
 		var restaurantId = this.model.get('restaurant').id;
-		if (restaurantId == 1) {
-			MeiweiApp.goTo('ProductPurchase');
-		} else {
-			MeiweiApp.goTo('RestaurantOrder', { restaurantId: restaurantId });
-		}
+		var dest = (e.target || e.srcElement) == this.$('.order-button')[0] ? 'RestaurantOrder' : 'RestaurantDetail';
+		MeiweiApp.goTo(dest, { restaurantId: restaurantId });
 	},
 	render: function() {
 		var self = this;
@@ -66,7 +55,7 @@ MeiweiApp.Pages.Home = new (MeiweiApp.PageView.extend({
 		if (this.scroller == null) {
 			if (this.$('.iscroll').length > 0) {
 			    this.scroller = new IScroll(this.$('.iscroll').selector, {
-					snap: true, snapStepY: 300, preventDefault: false
+					snap: true, snapStepY: 300
 				});
 				this.hero();
 				this.scroller.on('scrollEnd', this.hero);
