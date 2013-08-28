@@ -167,6 +167,9 @@ MeiweiApp.Pages.RestaurantOrder = new (MeiweiApp.PageView.extend({
 			}
 		});
 	},
+	reset: function() {
+		this.$('.wrapper').addClass('rendering');
+	},
 	renderOrderForm: function(model, response, options) {
 		var img = $('<img></img>').attr('src', this.restaurant.get('frontpic'));
 		this.$('.restaurant-info').html(img);
@@ -195,6 +198,7 @@ MeiweiApp.Pages.RestaurantOrder = new (MeiweiApp.PageView.extend({
 		}
 		this.initScroller();
 		this.$('input[name=orderdate]').focus();
+		this.$('.wrapper').removeClass('rendering');
 	},
 	render: function() {
 		if (this.options.restaurant) {

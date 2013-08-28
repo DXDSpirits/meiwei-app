@@ -113,7 +113,7 @@
 }
 
 // Favorite
-.icon-favorite.suceed {
+.icon-favorite.succeed {
 	@include icon-offset(7, 6);
 	@include animation(jump .35s ease-in-out);
 }

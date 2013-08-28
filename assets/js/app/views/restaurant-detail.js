@@ -74,19 +74,23 @@ MeiweiApp.Pages.RestaurantDetail = new (MeiweiApp.PageView.extend({
 	},
 	onClickRightBtn: function() { this.addFavorite(); },
 	addFavorite: function() {
-		if (this.$('.icon-favorite').hasClass('suceed')) return;
+		if (this.$('.icon-favorite').hasClass('succeed')) return;
 		var self = this;
 		MeiweiApp.me.favorites.create({restaurant: this.restaurant.id}, {
 			success: function() {
-				self.$('.icon-favorite').addClass('suceed');
+				self.$('.icon-favorite').addClass('succeed');
 			}
 		});
+	},
+	reset: function() {
+		this.$('.wrapper').addClass('rendering');
+		this.$('> header h1').empty();
 	},
 	renderAll: function() {
 		var succeed = MeiweiApp.me.favorites.find(function(favorite) {
 			return (this.restaurant.id == favorite.get('restaurant'));
 		}, this);
-		this.$('.icon-favorite').toggleClass('suceed', (succeed != null));
+		this.$('.icon-favorite').toggleClass('succeed', (succeed != null));
 		this.$('> header h1').html(this.restaurant.get('fullname'));
 		var pictures = this.restaurant.get('pictures');
 		if (_.isEmpty(pictures) || true) {
@@ -98,6 +102,7 @@ MeiweiApp.Pages.RestaurantDetail = new (MeiweiApp.PageView.extend({
 			//this.carousel();
 		}
 		this.initScroller();
+		this.$('.wrapper').removeClass('rendering');
 	},
 	render: function() {
 		if (this.options.restaurant) {
