@@ -45,10 +45,10 @@
 		overflow: hidden;
 		position: relative;
 		z-index: 0;
-		border-width: 0 0 $splitterWidth;
-		border-style: solid;
-		border-color: $brown;
 		> img {
+			border-width: ($splitterWidth/2) 0;
+			border-style: solid;
+			border-color: $brown;
 			position: absolute;
 			z-index: -1;
 			top: 0;

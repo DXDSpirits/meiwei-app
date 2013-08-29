@@ -23,7 +23,7 @@ MeiweiApp.Views.MasterHero = MeiweiApp.View.extend({
 				el: this.$('.indicator')[0],
 				resize: false
 			}
-		})
+		});
 		this.scroller.goToPage(1,0);
 	},
 	render: function() {
