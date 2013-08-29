@@ -2,11 +2,14 @@
 MeiweiApp.Views.MemberProfileForm = MeiweiApp.ModelView.extend({
 	events: {
 		'submit': 'updateProfile',
-		'click .switch-gender': 'switchGender'
 	},
 	template: MeiweiApp.Templates['member-profile-form'],
+	initModelView: function() {
+		_.bindAll(this, 'switchGender');
+	},
 	render: function() {
 		this.$el.html(this.template(this.model.toJSON()));
+		this.bindFastButton(this.$('.switch-gender'), this.switchGender);
 	},
 	switchGender: function() {
 		window.scrollTo(0, 0);

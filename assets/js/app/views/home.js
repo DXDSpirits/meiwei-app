@@ -95,7 +95,7 @@ MeiweiApp.Pages.Home = new (MeiweiApp.PageView.extend({
 		if (this.scroller == null) {
 			if (this.$('.iscroll').length > 0) {
 			    this.scroller = new IScroll(this.$('.iscroll').selector, {
-					snap: true, snapStepY: 300
+					snap: true, snapStepY: 300, snapSpeed: 1000
 				});
 				this.hero();
 				this.scroller.on('scrollEnd', this.hero);
