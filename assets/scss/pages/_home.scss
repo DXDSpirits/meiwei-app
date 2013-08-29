@@ -6,39 +6,57 @@
 		width: 100%;
 	}
 	
-	$splitterWidth: 2px;
-	$itemHeight: 300px;
+	.master-hero {
+		.viewport {
+			@include size(200px, 100%);
+			@include center-block();
+			margin-top: 10px;
+			padding: 5px 0;
+			overflow: hidden;
+		}
+		.indicator {
+			position: relative;
+			width: 85px;
+			height: 10px;
+			margin: 5px auto;
+			background: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAB4AAAAUBAMAAABohZD3AAAACXBIWXMAAAsTAAALEwEAmpwYAAAAB3RJTUUH3QUGCDYztyDUJgAAAB1pVFh0Q29tbWVudAAAAAAAQ3JlYXRlZCB3aXRoIEdJTVBkLmUHAAAAGFBMVEUAAADNzc3Nzc3Nzc3Nzc3Nzc3Nzc3///8aWwwLAAAABnRSTlMAX5Ks3/nRD0HIAAAAAWJLR0QHFmGI6wAAAFtJREFUGFdjYGBgEHYNMWRAAJE0IHCEc5nSwEABxleD8JOgXMY0KBCA8FlgfAcIXwzGT4TwzWD8ZAjfDcZPgfDDYPxU7Hx09ejmoduH7h5096L7B8O/6OGBGl4APYg8TQ0XAScAAAAASUVORK5CYII=);
+			@include background-size(15px 10px);
+			.dotty {
+				position: absolute;
+				width: 10px;
+				height: 10px;
+				border-radius: 10px;
+				background: #777;
+			}
+		}
+		@include carousel($carouselWidth: 200px);
+		.carousel-item > .img {
+			border: none;
+			@include box-shadow(0 0 5px $brownLight);
+		}
+	}
 	
 	.master-hero, .recommend-list-item {
+		@include flex-box($orient: vertical, $pack: start);
+		$splitterWidth: 2px;
+		$itemHeight: 300px;
 		height: $itemHeight;
 		width: 100%;
 		overflow: hidden;
 		position: relative;
 		z-index: 0;
-	}
-	
-	.recommend-list-item {
-		@include flex-box($orient: vertical, $pack: start);
-		&::before {
-			content: "";
-			position: absolute;
-			z-index: 0;
-			@include size(100px, 100%);
-			background: transparent url($blackShadowPathR) no-repeat top;
-			@include background-size(100%, 100px);
-		}
-		img {
+		border-width: 0 0 $splitterWidth;
+		border-style: solid;
+		border-color: $brown;
+		> img {
 			position: absolute;
 			z-index: -1;
 			top: 0;
 			width: 100%;
 			min-height: 100%;
-			border-width: 0 0 $splitterWidth;
-			border-style: solid;
-			border-color: $brown;
 			@include backface-visibility(hidden);
 		}
-		article {
+		> article {
 			color: $white;
 			width: 100%;
 			//min-height: 70px;
@@ -61,7 +79,7 @@
 				@include background-size(35px 35px);
 			}
 		}
-		&.hero article {
+		&.hero > article {
 			opacity: 1;
 			@include translate3d(0, -45px, 0);
 			@include transition(all .35s ease-in-out);
@@ -84,6 +102,17 @@
 			opacity: 0;
 			@include translate3d(0, -45px, 0);
 			@include transition(all .35s ease-in-out);
+		}
+	}
+	
+	.recommend-list-item {
+		&::before {
+			content: "";
+			position: absolute;
+			z-index: 0;
+			@include size(100px, 100%);
+			background: transparent url($blackShadowPathR) no-repeat top;
+			@include background-size(100%, 100px);
 		}
 	}
 }

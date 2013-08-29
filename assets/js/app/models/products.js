@@ -10,6 +10,7 @@ MeiweiApp.Models.ProductItem = MeiweiApp.Model.extend({
 });
 
 MeiweiApp.Collections.ProductItems = MeiweiApp.Collection.extend({
+	url: MeiweiApp.configs.APIHost + '/restaurants/productitem/',
 	model: MeiweiApp.Models.ProductItem
 });
 

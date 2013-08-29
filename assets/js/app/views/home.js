@@ -1,4 +1,41 @@
 
+MeiweiApp.Views.MasterHero = MeiweiApp.View.extend({
+	initialize: function() {
+		this.productItems = new MeiweiApp.Collections.ProductItems();
+		_.bindAll(this, 'renderCarousel', 'viewProducts');
+		this.bindFastButton(this.$el, this.viewProducts);
+	},
+	template: MeiweiApp.Templates['product-carousel'],
+	viewProducts: function(e) {
+		MeiweiApp.goTo('ProductPurchase');
+	},
+	renderCarousel: function() {
+		this.$el.append(this.template({
+			items: _.first(this.productItems.toJSON(), 6)
+		}));
+		this.$('>header').html('<h1>美位私人管家</h1>');
+		var items = $('.carousel-inner > .carousel-item');
+		this.$('.carousel-inner').css('width', items.length * $(items[0]).outerWidth());
+		this.$('.indicator').removeClass('hide').css('width', items.length * 15 - 5);
+		this.scroller = new IScroll(this.$('.carousel').selector, {
+			scrollX: true, scrollY: false, momentum: false, snap: true,
+			indicators: {
+				el: this.$('.indicator')[0],
+				resize: false
+			}
+		})
+		this.scroller.goToPage(1,0);
+	},
+	render: function() {
+		this.productItems.fetch({
+			reset: true,
+			success: this.renderCarousel,
+			data: {recommend: 1}
+		});
+		return this;
+	}
+});
+
 MeiweiApp.Views.RecommendItem = MeiweiApp.ModelView.extend({
 	tagName: 'section',
 	className: 'recommend-list-item',
@@ -34,12 +71,15 @@ MeiweiApp.Pages.Home = new (MeiweiApp.PageView.extend({
 		_.bindAll(this, 'initScroller', 'hero');
 		this.recommend = new MeiweiApp.Models.Recommend({id: 5});
 		this.views = {
+			masterHero: new MeiweiApp.Views.MasterHero({
+				el: this.$('.master-hero')
+			}),
 			recommendItems: new MeiweiApp.Views.RecommendItems({
 				collection: this.recommend.items,
 				el: this.$('.recommend-flow')
 			})
 		};
-		//this.listenTo(this.recommend.items, 'reset', this.initScroller);
+		this.views.masterHero.render();
 	},
 	gotoSearch: function() { MeiweiApp.goTo('RestaurantSearch'); },
 	hero: function() {
