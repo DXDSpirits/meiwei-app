@@ -23,7 +23,6 @@ var MeiweiApp = new (Backbone.View.extend({
 	
 	start: function() {
 		MeiweiApp.showSplash();	
-		MeiweiApp.initClientErrors();
 		MeiweiApp.initAjaxEvents();
 		MeiweiApp.initSync();
 		Backbone.history.start();
@@ -103,16 +102,15 @@ MeiweiApp.initAjaxEvents = function() {
 	});
 }
 
-MeiweiApp.initClientErrors = function() {
-	MeiweiApp.handleError = function(err) {
-		var error = new MeiweiApp.Models.ClientError();
-		error.save({message: err.message, detail: err.stack}, {global: false});
-		console.error(err.message);
-	}
-	window.onerror = function(message, filaName, lineNumber) {
-		var detail = [filaName, lineNumber].join(':');
-		var error = new MeiweiApp.Models.ClientError();
-		error.save({message: message, detail: detail}, {global: false});
-		console.error(message, detail);
-	}
-}
+MeiweiApp.handleError = function(err) {
+	var error = new MeiweiApp.Models.ClientError();
+	error.save({message: err.message, detail: err.stack}, {global: false});
+	console.error(err.message);
+};
+
+window.onerror = function(message, filaName, lineNumber) {
+	var detail = [filaName, lineNumber].join(':');
+	var error = new MeiweiApp.Models.ClientError();
+	error.save({message: message, detail: detail}, {global: false});
+	console.error(message, detail);
+};
