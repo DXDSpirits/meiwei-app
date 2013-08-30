@@ -36,10 +36,17 @@
 		}
 	}
 	
-	.master-hero, .recommend-list-item {
-		@include flex-box($orient: vertical, $pack: start);
-		$itemHeight: 300px;
+	$itemHeight: 150px;
+	
+	.recommend-list-item {
+		width: 100%;
 		height: $itemHeight;
+		overflow: visible;
+	}
+	
+	.master-hero, .recommend-list-item .item-wrapper {
+		@include flex-box($orient: vertical, $pack: start);
+		height: $itemHeight * 2;
 		width: 100%;
 		overflow: hidden;
 		position: relative;
@@ -54,7 +61,7 @@
 			z-index: -1;
 			top: 0;
 			width: 100%;
-			min-height: $itemHeight + 1px;
+			min-height: $itemHeight * 2 + 1px;
 			@include backface-visibility(hidden);
 		}
 		> article {
@@ -79,11 +86,6 @@
 				@include background-size(35px 35px);
 			}
 		}
-		&.hero > article {
-			opacity: 1;
-			@include translate3d(0, -45px, 0);
-			@include transition(all .35s ease-in-out);
-		}
 		> header {
 			position: relative;
 			z-index: 0;
@@ -98,13 +100,21 @@
 			opacity: 1;
 			@include transition(opacity .35s ease-in-out);
 		}
-		&.hero > header {
+	}
+	
+	.recommend-list-item.hero .item-wrapper {
+		> article {
+			opacity: 1;
+			@include translate3d(0, -45px, 0);
+			@include transition(all .35s ease-in-out);
+		}
+		> header {
 			opacity: 0;
 			@include transition(opacity .35s ease-in-out);
 		}
 	}
 	
-	.recommend-list-item {
+	.recommend-list-item .item-wrapper {
 		&::before {
 			content: "";
 			position: absolute;

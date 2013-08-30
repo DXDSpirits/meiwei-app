@@ -53,7 +53,7 @@ MeiweiApp.Views.RecommendItem = MeiweiApp.ModelView.extend({
 		var self = this;
 		var img = $('<img></img>').attr('src', this.model.get('restaurant').frontpic).load(function() {
 			self.$el.html(self.template(self.model.toJSON()));
-			self.$el.prepend(img);
+			self.$('.item-wrapper').prepend(img);
 		});
 		return this;
 	}
@@ -66,9 +66,12 @@ MeiweiApp.Views.RecommendItems = MeiweiApp.CollectionView.extend({
 MeiweiApp.Pages.Home = new (MeiweiApp.PageView.extend({
 	onClickLeftBtn: function() { MeiweiApp.goTo('MemberCenter'); },
 	onClickRightBtn: function() { MeiweiApp.goTo('Attending'); },
-	events: { 'click header form': 'gotoSearch' },
+	events: {
+		'click header form': 'gotoSearch',
+		'touchmove .scroll': 'handleScroll'
+	},
 	initPage: function() {
-		_.bindAll(this, 'initScroller', 'hero');
+		_.bindAll(this, 'initScroller', 'hero', 'handleScroll');
 		this.recommend = new MeiweiApp.Models.Recommend({id: 5});
 		this.views = {
 			masterHero: new MeiweiApp.Views.MasterHero({
@@ -81,21 +84,41 @@ MeiweiApp.Pages.Home = new (MeiweiApp.PageView.extend({
 		};
 		this.views.masterHero.render();
 	},
+	handleScroll: function(e) {
+		var modelViews = this.views.recommendItems.modelViews;
+		var scroller = this.scroller;
+		var page = this.scroller.currentPage.pageY;
+		var delta = 150 * page + this.scroller.y;
+		if (delta < 0) {
+			var add = parseInt((-delta) / 150);
+			delta = -((-delta) % 150);
+			if (modelViews[page+add])
+				modelViews[page+add].$('.item-wrapper').css('-webkit-transform', 'translate3d(0, ' + delta + 'px, 0)');
+		} else {
+			var add = parseInt(delta / 150) + 1;
+			delta = delta % 150;
+			if (modelViews[page-add])
+				modelViews[page-add].$('.item-wrapper').css('-webkit-transform', 'translate3d(0, ' + (-150 + delta) + 'px, 0)');
+		}
+	},
 	gotoSearch: function() { MeiweiApp.goTo('RestaurantSearch'); },
 	hero: function() {
-		var x = this.scroller.currentPage.pageX;
-		var y = this.scroller.currentPage.pageY;
+		var page = this.scroller.currentPage.pageY - 1;
 		var modelViews = this.views.recommendItems.modelViews;
 		this.$('.hero').removeClass('hero');
-		if (y > 0 && modelViews[y-1]) {
-			modelViews[y-1].$el.addClass('hero');
+		if (page >= 0 && modelViews[page]) {
+			modelViews[page].$el.addClass('hero');
+			modelViews[page].$('.item-wrapper').css('-webkit-transform', 'translate3d(0, -150px, 0)');
+		}
+		if (modelViews[page+1]) {
+			modelViews[page+1].$('.item-wrapper').css('-webkit-transform', 'translate3d(0, 0, 0)');
 		}
 	},
 	initScroller: function() {
 		if (this.scroller == null) {
 			if (this.$('.iscroll').length > 0) {
 			    this.scroller = new IScroll(this.$('.iscroll').selector, {
-					snap: true, snapStepY: 300, snapSpeed: 1000
+					snap: true, snapStepY: 150, snapSpeed: 300
 				});
 				this.hero();
 				this.scroller.on('scrollEnd', this.hero);
