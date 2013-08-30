@@ -86,7 +86,7 @@
 			z-index: -1;
 			@include size(60px, 100%);
 			background: transparent url($blackShadowPath) no-repeat top;
-			@include background-size(100%, 60px);
+			@include background-size(100% 60px);
 		}
 		& > div {
 			float: left;

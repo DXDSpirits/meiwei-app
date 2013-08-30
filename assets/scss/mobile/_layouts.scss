@@ -83,6 +83,15 @@ body {
 		background-color: $bodyBackground;
 		width: 100%;
 		@include flex-box($orient: vertical, $pack: start);
+		position: relative;
+		&::after {
+			content: "";
+			position: absolute;
+			bottom: -50px;
+			@include size(50px, 100%);
+			background: transparent url($blackShadowPathR) no-repeat top;
+			@include background-size(100% 50px);
+		}
 	}
 	&.scroll-infinite > .scroll-inner::after {
 		content: attr(data-hint);
