@@ -67,11 +67,10 @@ MeiweiApp.Pages.Home = new (MeiweiApp.PageView.extend({
 	onClickLeftBtn: function() { MeiweiApp.goTo('MemberCenter'); },
 	onClickRightBtn: function() { MeiweiApp.goTo('Attending'); },
 	events: {
-		'click header form': 'gotoSearch',
-		'touchmove .scroll': 'handleScroll'
+		'click header form': 'gotoSearch'
 	},
 	initPage: function() {
-		_.bindAll(this, 'initScroller', 'hero', 'handleScroll');
+		_.bindAll(this, 'initScroller', 'hero', 'handleScroll', 'handleScrollEnd');
 		this.recommend = new MeiweiApp.Models.Recommend({id: 5});
 		this.views = {
 			masterHero: new MeiweiApp.Views.MasterHero({
@@ -85,21 +84,51 @@ MeiweiApp.Pages.Home = new (MeiweiApp.PageView.extend({
 		this.views.masterHero.render();
 	},
 	handleScroll: function(e) {
+		var snapStep = 150;
 		var modelViews = this.views.recommendItems.modelViews;
-		var scroller = this.scroller;
-		var page = this.scroller.currentPage.pageY;
-		var delta = 150 * page + this.scroller.y;
+		var page = parseInt(-this.scroller.y / snapStep);
+		var delta = snapStep * page + this.scroller.y;
 		if (delta < 0) {
-			var add = parseInt((-delta) / 150);
-			delta = -((-delta) % 150);
+			var add = parseInt((-delta) / snapStep);
+			this.newPage = page + add;
+			delta = -((-delta) % snapStep);
 			if (modelViews[page+add])
 				modelViews[page+add].$('.item-wrapper').css('-webkit-transform', 'translate3d(0, ' + delta + 'px, 0)');
 		} else {
-			var add = parseInt(delta / 150) + 1;
-			delta = delta % 150;
+			var add = parseInt(delta / snapStep) + 1;
+			this.newPage = page - add;
+			delta = delta % snapStep;
 			if (modelViews[page-add])
-				modelViews[page-add].$('.item-wrapper').css('-webkit-transform', 'translate3d(0, ' + (-150 + delta) + 'px, 0)');
+				modelViews[page-add].$('.item-wrapper').css('-webkit-transform', 'translate3d(0, ' + (-snapStep + delta) + 'px, 0)');
 		}
+	},
+	handleScrollEnd: function() {
+		var snapStep = 150;
+		var modelViews = this.views.recommendItems.modelViews;
+		var page = parseInt(-this.scroller.y / snapStep);
+		var delta = snapStep * page + this.scroller.y;
+		if (delta == 0) {
+			return;
+		}
+		if (page >= (this.currentPage || 0)) {
+			page += 1;
+		}
+		this.scroller.scrollTo(0, -snapStep * (page), 500);
+		this.currentPage = page;
+		
+		for (var i=0; i<modelViews.length; i++) {
+			modelViews[i].$('.item-wrapper').addClass('snaping');
+			if (i < page) {
+				modelViews[i].$('.item-wrapper').css('-webkit-transform', 'translate3d(0, -150px, 0)');
+			} else {
+				modelViews[i].$('.item-wrapper').css('-webkit-transform', 'translate3d(0, 0, 0)');
+			}
+		}
+		setTimeout(function() {
+			for (var i=0; i<modelViews.length; i++) {
+				modelViews[i].$('.item-wrapper').removeClass('snaping');
+			}
+		}, 500);
 	},
 	gotoSearch: function() { MeiweiApp.goTo('RestaurantSearch'); },
 	hero: function() {
@@ -108,24 +137,25 @@ MeiweiApp.Pages.Home = new (MeiweiApp.PageView.extend({
 		this.$('.hero').removeClass('hero');
 		if (page >= 0 && modelViews[page]) {
 			modelViews[page].$el.addClass('hero');
-			modelViews[page].$('.item-wrapper').css('-webkit-transform', 'translate3d(0, -150px, 0)');
-		}
-		if (modelViews[page+1]) {
-			modelViews[page+1].$('.item-wrapper').css('-webkit-transform', 'translate3d(0, 0, 0)');
 		}
 	},
 	initScroller: function() {
 		if (this.scroller == null) {
 			if (this.$('.iscroll').length > 0) {
 			    this.scroller = new IScroll(this.$('.iscroll').selector, {
-					snap: true, snapStepY: 150, snapSpeed: 300
+					//snap: true, snapStepY: 150, snapSpeed: 500, momentum: false
+					momentum: false
 				});
-				this.hero();
-				this.scroller.on('scrollEnd', this.hero);
+				//this.hero();
+				//this.scroller.on('scrollEnd', this.hero);
+				this.scroller.on('scrollMove', this.handleScroll);
+				this.scroller.on('scrollEnd', this.handleScrollEnd);
+				//this.scroller.on('gotPage', this.handleScrollEnd);
+				//this.scroller.on('flick', this.handleScrollEnd);
 			}
 		} else {
 			this.scroller.refresh();
-			this.hero();
+			//this.hero();
 		}
 	},
 	render: function() {
