@@ -2,6 +2,8 @@
 /assets/js/mw-app.*
 /assets/js/app/app-local.js
 /assets/js/app/templates.js
+/assets/js/plugin/iscroll/iscroll-min.js
+/assets/js/plugin/iscroll/iscroll.map
 /node_modules/
 /.sass-cache/
 index.html
