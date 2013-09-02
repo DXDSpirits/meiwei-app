@@ -55,7 +55,7 @@ MeiweiApp.Views.MemberPasswordForm = MeiweiApp.ModelView.extend({
 		e.preventDefault();
 		var $infoText = this.$('.info-text');
 		var password = this.$('input[name=password]').val() || null;
-		var passwordConfirm = this.$('input[name=password-conform]').val() || null;
+		var passwordConfirm = this.$('input[name=password-confirm]').val() || null;
 		if (password != passwordConfirm) {
 			$infoText.html('两次密码输入不一致，请重新输入。');
 		} else {

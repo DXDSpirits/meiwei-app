@@ -58,6 +58,7 @@ MeiweiApp.me = new (MeiweiApp.Models.Member.extend({
 	},
 	logout: function(callback) {
 		this.clear();
+		localStorage.clear();
 		MeiweiApp.BasicAuth.clear();
 	},
 	register: function(auth, options) {
