@@ -47,19 +47,19 @@ MeiweiApp.me = new (MeiweiApp.Models.Member.extend({
 	},
 	parse: function(response) {
 		if (_.isArray(response.results)) response = response.results[0];
-		this.profile.set(response.profile || {});
-		response.profile = null;
+		if (response.profile) this.profile.set(response.profile);
 		return response;
 	},
 	login: function(auth, options) {
 		MeiweiApp.BasicAuth.set(auth.username, auth.password);
 		this.clear();
 		this.fetch({ success: options.success, error: options.error });
+		this.trigger('login');
 	},
 	logout: function(callback) {
 		this.clear();
-		localStorage.clear();
 		MeiweiApp.BasicAuth.clear();
+		this.trigger('logout');
 	},
 	register: function(auth, options) {
 		var newUser = new MeiweiApp.Models.Member();

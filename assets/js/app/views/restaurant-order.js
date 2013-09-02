@@ -85,7 +85,7 @@ MeiweiApp.Views.RestaurantOrderForm = MeiweiApp.View.extend({
 		this.$('input[name=orderdate]').val(defaultValues.orderdate);
 		this.$('input[name=personnum]').val(defaultValues.personnum);
 		this.$('input[name=other]').val(defaultValues.other);
-		this.hours.fetch({lazy: true, url: this.restaurant.get('hours'), success: this.renderHourList });
+		this.hours.fetch({url: this.restaurant.get('hours'), success: this.renderHourList });
 	}
 });
 
@@ -212,7 +212,7 @@ MeiweiApp.Pages.RestaurantOrder = new (MeiweiApp.PageView.extend({
 			this.renderOrderForm();
 		} else if (this.options.restaurantId) {
 			this.restaurant.set({id: this.options.restaurantId});
-			this.restaurant.fetch({ lazy: true, success: this.renderOrderForm });
+			this.restaurant.fetch({ success: this.renderOrderForm });
 		}
 	}
 }))({el: $("#view-restaurant-order")});

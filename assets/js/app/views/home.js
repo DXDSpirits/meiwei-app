@@ -71,6 +71,7 @@ MeiweiApp.Pages.Home = new (MeiweiApp.PageView.extend({
 	},
 	initPage: function() {
 		this.snapStep = 300;
+		this.lazy = 30 * 60 * 1000;
 		_.bindAll(this, 'initScroller', 'hero', 'handleScroll', 'handleScrollEnd');
 		this.recommend = new MeiweiApp.Models.Recommend({id: 5});
 		this.views = {
@@ -155,6 +156,6 @@ MeiweiApp.Pages.Home = new (MeiweiApp.PageView.extend({
 		}
 	},
 	render: function() {
-		this.recommend.fetch({ reset: true, lazy: true, success: this.initScroller });
+		this.recommend.fetch({ reset: true, success: this.initScroller });
 	}
 }))({el: $("#view-home")});

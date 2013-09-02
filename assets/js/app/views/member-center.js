@@ -33,12 +33,15 @@ MeiweiApp.Pages.MemberCenter = new (MeiweiApp.PageView.extend({
 		MeiweiApp.goTo('Home');
 	},
 	initPage: function() {
-		new MBP.fastButton(this.$('.member-center-nav > li:nth-child(1)')[0], this.gotoMyProfile);
-		new MBP.fastButton(this.$('.member-center-nav > li:nth-child(2)')[0], this.gotoMyOrder);
-		new MBP.fastButton(this.$('.member-center-nav > li:nth-child(3)')[0], this.gotoMyCredits);
-		new MBP.fastButton(this.$('.member-center-nav > li:nth-child(4)')[0], this.gotoMyFavorites);
-		new MBP.fastButton(this.$('.member-center-nav > li:nth-child(5)')[0], this.gotoViewProducts);
-		new MBP.fastButton(this.$('.logout-button')[0], this.logout);
+		this.lazy = 5 * 60 * 1000;
+		this.listenTo(MeiweiApp.me, 'logout', function() { this.lastRender = null; });
+		this.listenTo(MeiweiApp.me, 'login', function() { this.lastRender = null; });
+		this.bindFastButton(this.$('.member-center-nav > li:nth-child(1)'), this.gotoMyProfile);
+		this.bindFastButton(this.$('.member-center-nav > li:nth-child(2)'), this.gotoMyOrder);
+		this.bindFastButton(this.$('.member-center-nav > li:nth-child(3)'), this.gotoMyCredits);
+		this.bindFastButton(this.$('.member-center-nav > li:nth-child(4)'), this.gotoMyFavorites);
+		this.bindFastButton(this.$('.member-center-nav > li:nth-child(5)'), this.gotoViewProducts);
+		this.bindFastButton(this.$('.logout-button'), this.logout);
 		this.favorites = MeiweiApp.me.favorites;
 		this.views = {
 			profileBox: new MeiweiApp.Views.MemberProfileBox({
@@ -56,11 +59,10 @@ MeiweiApp.Pages.MemberCenter = new (MeiweiApp.PageView.extend({
 		MeiweiApp.me.fetch({success: function() {
 			self.favorites.fetch({
 				reset: true,
-				lazy: true,
 				success: function() {
 					self.views.favoriteCarousel.render();
 				}
 			});
-		}, lazy: true});
+		}});
 	}
 }))({el: $("#view-member-center")});

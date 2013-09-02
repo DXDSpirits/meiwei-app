@@ -33,6 +33,7 @@ MeiweiApp.Views.ProductPurchaseList = MeiweiApp.CollectionView.extend({
 
 MeiweiApp.Pages.ProductPurchase = new (MeiweiApp.PageView.extend({
 	initPage: function() {
+		this.lazy = 24 * 60 * 60 * 1000;
 		_.bindAll(this, 'carousel');
 		this.products = new MeiweiApp.Collections.Products();
 		this.views = {
@@ -65,7 +66,7 @@ MeiweiApp.Pages.ProductPurchase = new (MeiweiApp.PageView.extend({
 	},
 	render: function() {
 		var self = this;
-		this.products.fetch({ data: {category: 1}, reset: true, lazy: true, success: function() {
+		this.products.fetch({ data: {category: 1}, reset: true, success: function() {
 			self.carousel();
 			self.initScroller();
 		}});
@@ -145,6 +146,7 @@ MeiweiApp.Views.ProductRedeemList = MeiweiApp.Views.ProductPurchaseList.extend({
 MeiweiApp.Pages.ProductRedeem = new (MeiweiApp.Pages.ProductPurchase.constructor.extend({
 	onClickRightBtn: function() { MeiweiApp.goBack(); },
 	initPage: function() {
+		this.lazy = 24 * 60 * 60 * 1000;
 		_.bindAll(this, 'carousel');
 		this.products = new MeiweiApp.Collections.Products();
 		this.views = {
@@ -157,7 +159,7 @@ MeiweiApp.Pages.ProductRedeem = new (MeiweiApp.Pages.ProductPurchase.constructor
 	},
 	render: function() {
 		var self = this;
-		this.products.fetch({ data: {category: 2}, reset: true, lazy: true, success: function() {
+		this.products.fetch({ data: {category: 2}, reset: true, success: function() {
 			self.carousel();
 			self.initScroller();
 		}});

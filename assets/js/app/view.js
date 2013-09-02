@@ -87,15 +87,12 @@ MeiweiApp.CollectionView = MeiweiApp.View.extend({
 MeiweiApp.PageView = MeiweiApp.View.extend({
 	initialize: function() {
 		this.views = {};
-		_.bindAll(this, 'showPage', 'go', 'render', 'reset', 'onClickLeftBtn', 'onClickRightBtn', 'initScroller');
-		
+		_.bindAll(this, 'showPage', 'go', 'refresh', 'render', 'reset', 
+						'onClickLeftBtn', 'onClickRightBtn', 'initScroller');
 		//These 2 lines should be after bindAll, in order to bind ClickBtn events propertly
 		this.bindFastButton(this.$('.header-btn-left'), this.onClickLeftBtn);
 		this.bindFastButton(this.$('.header-btn-right'), this.onClickRightBtn);
-		
-		var minHeight = this.$('.scroll').height() + 1;
-		this.$('.scroll-inner').css('min-height', minHeight + 'px');
-		
+		this.$('.scroll-inner').css('min-height', (this.$('.scroll').height() + 1) + 'px');
 		if (this.initPage) this.initPage();
 	},
 	onClickLeftBtn: function() { MeiweiApp.goBack(); },
@@ -110,28 +107,52 @@ MeiweiApp.PageView = MeiweiApp.View.extend({
 			this.scroller.refresh();
 		}
 	},
+	initPageNav: function(page, collection) {
+		page.fetchNext = function() {
+			if (page.scroller) page.scroller.scrollTo(0, 0, 1000);
+			setTimeout(function() {
+				collection.fetchNext({success: function(collection, xhr, options) {
+					page.resetNavigator(collection, xhr, options);
+				}});
+			}, 1000);
+		};
+		page.fetchPrev = function() {
+			if (page.scroller) page.scroller.scrollTo(0, 0, 1000);
+			setTimeout(function() {
+				collection.fetchPrev({success: function(collection, xhr, options) {
+					page.resetNavigator(collection, xhr, options);
+				}});
+			}, 1000);
+		};
+		page.resetNavigator = function() {
+			page.$('.page-nav').toggleClass('hidden', (collection.next == null && collection.previous == null));
+			page.$('.page-next').toggleClass('hidden', (collection.next == null));
+			page.$('.page-prev').toggleClass('hidden', (collection.previous == null));
+			if (page.scroller) page.initScroller();
+		};
+		page.bindFastButton(page.$('.page-prev'), page.fetchPrev);
+		page.bindFastButton(page.$('.page-next'), page.fetchNext);
+		page.listenTo(collection, 'reset', page.resetNavigator);
+	},
 	go: function(options) {
 		this.options = options || {};
 		this.reset();
 		this.showPage();
+		if (this.lazy) {
+			if ((new Date()) - (this.lastRender || 0) < this.lazy) return;
+			this.lastRender = new Date();
+		}
 		var render = this.render;
 		setTimeout(function() {
-			try {
-				render();
-			} catch (e) {
-				MeiweiApp.handleError(e);
-			}
+			try { render(); } catch (e) { MeiweiApp.handleError(e); }
 		}, 500);
 	},
 	refresh: function() {
 		this.showPage();
+		this.lastRender = new Date();
 		var render = this.render;
 		setTimeout(function() {
-			try {
-				render();
-			} catch (e) {
-				MeiweiApp.handleError(e);
-			}
+			try { render(); } catch (e) { MeiweiApp.handleError(e); }
 		}, 500);
 	},
 	reset: function() {},

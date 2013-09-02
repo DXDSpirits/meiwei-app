@@ -111,7 +111,7 @@ MeiweiApp.Pages.RestaurantDetail = new (MeiweiApp.PageView.extend({
 		} else if (this.options.restaurantId) {
 			this.restaurant.clear();
 			this.restaurant.set({id: this.options.restaurantId});
-			this.restaurant.fetch({ lazy: true, success: this.renderAll })
+			this.restaurant.fetch({ success: this.renderAll })
 		}
 	}
 }))({el: $("#view-restaurant-detail")});

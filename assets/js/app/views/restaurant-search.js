@@ -59,9 +59,8 @@ MeiweiApp.Pages.RestaurantSearch = new (MeiweiApp.PageView.extend({
 		'submit >header>form': 'searchKeywords'
 	},
 	initPage: function() {
-		_.bindAll(this, 'refreshList', 'filterRestaurant', 'bindCuisineFilters', 'bindCircleFilters', 'fetchPrev', 'fetchNext');
-		new MBP.fastButton(this.$('.page-prev')[0], this.fetchPrev);
-		new MBP.fastButton(this.$('.page-next')[0], this.fetchNext);
+		this.lazy = 24 * 60 * 60 * 1000;
+		_.bindAll(this, 'refreshList', 'filterRestaurant', 'bindCuisineFilters', 'bindCircleFilters');
 		this.restaurants = new MeiweiApp.Collections.Restaurants();
 		this.cuisines = new MeiweiApp.Collections.Cuisines();
 		this.circles = new MeiweiApp.Collections.Circles();
@@ -92,20 +91,7 @@ MeiweiApp.Pages.RestaurantSearch = new (MeiweiApp.PageView.extend({
 			}
 		});
 		this.initializeMap();
-	},
-	fetchNext: function() {
-		this.scroller.scrollTo(0, 0, 1000);
-		var self = this;
-		setTimeout(function() {
-			self.restaurants.fetchNext({ success: self.refreshList });
-		}, 1000);
-	},
-	fetchPrev: function() {
-		this.scroller.scrollTo(0, 0, 1000);
-		var self = this;
-		setTimeout(function() {
-			self.restaurants.fetchPrev({ success: self.refreshList });
-		}, 1000);
+		this.initPageNav(this, this.restaurants);
 	},
 	refreshList: function(collection, xhr, options) {
 		var cuisine = options.data && options.data.cuisine && this.cuisines.where({id: options.data.cuisine})[0];
@@ -115,9 +101,6 @@ MeiweiApp.Pages.RestaurantSearch = new (MeiweiApp.PageView.extend({
 		if (this.restaurants.length == 0) {
 			this.$('.restaurant-list').prepend('<p style="padding: 15px;">没有找到合适的餐厅，请尝试搜索其他关键字，或者选择菜系和商圈</p>');
 		}
-		this.$('.page-next').toggleClass('hide', (this.restaurants.next == null));
-		this.$('.page-prev').toggleClass('hide', (this.restaurants.previous == null));
-		this.initScroller();
 		if (this.$('.flipper').hasClass('flip')) this.dropMarkers();
 	},
 	searchKeywords: function(e) {
@@ -199,8 +182,8 @@ MeiweiApp.Pages.RestaurantSearch = new (MeiweiApp.PageView.extend({
 	render: function() {
 		this.$('>header input').val('');
 		this.$('>header input').focus();
-		this.restaurants.fetch({ lazy: true, reset: true, success: this.refreshList });
-		this.cuisines.fetch({ lazy: true, reset: true, success: this.bindCuisineFilters });
-		this.circles.fetch({ lazy: true, reset: true, success: this.bindCircleFilters });
+		this.restaurants.fetch({ reset: true, success: this.refreshList });
+		this.cuisines.fetch({ reset: true, success: this.bindCuisineFilters });
+		this.circles.fetch({ reset: true, success: this.bindCircleFilters });
 	}
 }))({el: $("#view-restaurant-search")});

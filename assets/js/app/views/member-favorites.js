@@ -23,7 +23,6 @@ MeiweiApp.Views.FavoriteList = MeiweiApp.CollectionView.extend({
 MeiweiApp.Pages.MemberFavorites = new (MeiweiApp.PageView.extend({
 	onClickLeftBtn: function() { MeiweiApp.goTo('MemberCenter'); },
 	initPage: function() {
-		_.bindAll(this, 'refreshList', 'fetchPrev', 'fetchNext');
 		new MBP.fastButton(this.$('.page-prev')[0], this.fetchPrev);
 		new MBP.fastButton(this.$('.page-next')[0], this.fetchNext);
 		this.favorites = MeiweiApp.me.favorites;
@@ -33,23 +32,9 @@ MeiweiApp.Pages.MemberFavorites = new (MeiweiApp.PageView.extend({
 				el: this.$('.restaurant-list')
 			})
 		}
-	},
-	fetchNext: function() {
-		this.scroller.scrollTo(0, 0, 1000);
-		var self = this;
-		setTimeout(function() { self.favorites.fetchNext({ success: self.refreshList }); }, 1000);
-	},
-	fetchPrev: function() {
-		this.scroller.scrollTo(0, 0, 1000);
-		var self = this;
-		setTimeout(function() { self.favorites.fetchPrev({ success: self.refreshList }); }, 1000);
-	},
-	refreshList: function() {
-		this.$('.page-next').toggleClass('hide', (this.favorites.next == null));
-		this.$('.page-prev').toggleClass('hide', (this.favorites.previous == null));
-		this.initScroller();
+		this.initPageNav(this, this.favorites);
 	},
 	render: function() {
-		this.favorites.fetch({reset: true, success: this.refreshList});
+		this.favorites.fetch({ reset: true });
 	}
 }))({el: $("#view-member-favorites")});

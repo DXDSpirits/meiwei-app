@@ -24,6 +24,9 @@ MeiweiApp.Pages.MemberContacts = new(MeiweiApp.PageView.extend({
 		MeiweiApp.goBack();
 	},
 	initPage: function() {
+		this.lazy = 5 * 60 * 1000;
+		this.listenTo(MeiweiApp.me, 'logout', function() { this.lastRender = null; });
+		this.listenTo(MeiweiApp.me, 'login', function() { this.lastRender = null; });
 		this.views = {
 			contactList: new MeiweiApp.Views.ContactList({
 				collection: new MeiweiApp.Collections.Contacts(),
@@ -73,14 +76,10 @@ MeiweiApp.Pages.MemberContacts = new(MeiweiApp.PageView.extend({
 	    this.$('.filter-local').removeClass('selected');
 		this.views.contactList.collection.fetch({
 			reset: true,
-			lazy: true,
 			success: this.bindContactSelect
 		});
 	},
-	
 	render: function() {
 		this.getOnlineContacts();
 	}
-}))({
-	el: $("#view-member-contacts")
-});
+}))({ el: $("#view-member-contacts") });
