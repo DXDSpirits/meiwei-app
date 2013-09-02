@@ -73,6 +73,7 @@ MeiweiApp.Pages.MemberContacts = new(MeiweiApp.PageView.extend({
 	    this.$('.filter-local').removeClass('selected');
 		this.views.contactList.collection.fetch({
 			reset: true,
+			lazy: true,
 			success: this.bindContactSelect
 		});
 	},

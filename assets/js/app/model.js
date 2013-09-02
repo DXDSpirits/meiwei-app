@@ -37,10 +37,8 @@ MeiweiApp.Collection = Backbone.Collection.extend({
 			if (localResp) {
 				try {
 					var localJSON = JSON.parse(localResp);
-					if (MeiweiApp.getCurrentTime() - (localJSON.time || 0) < 5 * 60 * 1000) {
+					if (options.lazy && MeiweiApp.getCurrentTime() - (localJSON.time || 0) < 5 * 60 * 1000) {
 						var method = options.reset ? 'reset' : 'set';
-						aaa = this;
-						bbb = localJSON;
 				        this[method](this.parse(localJSON.collection, options), options);
 						if (options.success) options.success(this, localJSON.collection, options);
 						this.trigger('sync', this, localJSON.collection, options);
@@ -76,7 +74,7 @@ MeiweiApp.Model = Backbone.Model.extend({
 			if (localResp) {
 				try {
 					var localJSON = JSON.parse(localResp);
-					if (MeiweiApp.getCurrentTime() - (localJSON.time || 0) < 5 * 60 * 1000) {
+					if (options.lazy && MeiweiApp.getCurrentTime() - (localJSON.time || 0) < 5 * 60 * 1000) {
 						if (!this.set(this.parse(localJSON.model, options), options)) return false;
 						if (options.success) options.success(this, localJSON.model, options);
 						this.trigger('sync', this, localJSON.model, options);

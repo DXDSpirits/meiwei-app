@@ -199,8 +199,8 @@ MeiweiApp.Pages.RestaurantSearch = new (MeiweiApp.PageView.extend({
 	render: function() {
 		this.$('>header input').val('');
 		this.$('>header input').focus();
-		this.restaurants.fetch({ reset: true, success: this.refreshList });
-		this.cuisines.fetch({ reset: true, success: this.bindCuisineFilters });
-		this.circles.fetch({ reset: true, success: this.bindCircleFilters });
+		this.restaurants.fetch({ lazy: true, reset: true, success: this.refreshList });
+		this.cuisines.fetch({ lazy: true, reset: true, success: this.bindCuisineFilters });
+		this.circles.fetch({ lazy: true, reset: true, success: this.bindCircleFilters });
 	}
 }))({el: $("#view-restaurant-search")});

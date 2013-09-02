@@ -46,7 +46,7 @@ MeiweiApp.Views.Floorplan = MeiweiApp.View.extend({
 				var svg = $(data).find('svg');
 				$(svg).find('pattern .table').attr({'class': null, 'status': null});
  				model.set("svgString", svg);
- 				self.listenTo(model, 'select', function() { self.onSelect(model); } );
+ 				self.listenTo(model, 'select', function() { self.onSelect(model); });
  				model.trigger('select');
 			});
 		});

@@ -56,10 +56,11 @@ MeiweiApp.Pages.MemberCenter = new (MeiweiApp.PageView.extend({
 		MeiweiApp.me.fetch({success: function() {
 			self.favorites.fetch({
 				reset: true,
+				lazy: true,
 				success: function() {
 					self.views.favoriteCarousel.render();
 				}
 			});
-		}});
+		}, lazy: true});
 	}
 }))({el: $("#view-member-center")});

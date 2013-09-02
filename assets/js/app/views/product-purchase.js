@@ -65,7 +65,7 @@ MeiweiApp.Pages.ProductPurchase = new (MeiweiApp.PageView.extend({
 	},
 	render: function() {
 		var self = this;
-		this.products.fetch({ data: {category: 1}, reset: true, success: function() {
+		this.products.fetch({ data: {category: 1}, reset: true, lazy: true, success: function() {
 			self.carousel();
 			self.initScroller();
 		}});
@@ -157,7 +157,7 @@ MeiweiApp.Pages.ProductRedeem = new (MeiweiApp.Pages.ProductPurchase.constructor
 	},
 	render: function() {
 		var self = this;
-		this.products.fetch({ data: {category: 2}, reset: true, success: function() {
+		this.products.fetch({ data: {category: 2}, reset: true, lazy: true, success: function() {
 			self.carousel();
 			self.initScroller();
 		}});
