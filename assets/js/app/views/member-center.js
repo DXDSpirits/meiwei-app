@@ -8,9 +8,6 @@ MeiweiApp.Views.MemberProfileBox = MeiweiApp.ModelView.extend({
 
 
 MeiweiApp.Views.FavoriteRestoCarousel = MeiweiApp.View.extend({
-	initialize: function() {
-		_.bindAll(this, 'render');
-	},
 	render: function() {
 		var path = 'assets/img/default.png';
 		if (this.collection.length > 0) {
