@@ -15,7 +15,13 @@ MeiweiApp.Views.RestaurantOrderContactForm = MeiweiApp.View.extend({
 	initialize: function(options) {
 		_.bindAll(this, 'fillContact', 'selectContact', 'switchGender');
 		new MBP.fastButton(this.$('>header')[0], this.selectContact);
-		new MBP.fastButton(this.$('.switch-gender')[0], this.switchGender);
+		var btn = new MBP.fastButton(this.$('.switch-gender')[0], this.switchGender);
+		var switchGender = this.$('.switch-gender');
+		btn.onTouchMove = function(event) {
+			if (Math.abs(event.touches[0].clientY - this.startY) > 10) btn.reset(event);
+			if (switchGender.hasClass('on') && event.touches[0].clientX - btn.startX > 10) btn.reset(event);
+			if (switchGender.hasClass('off') && event.touches[0].clientX - btn.startX < -10) btn.reset(event);
+		}
 	},
 	selectContact: function() {
 		MeiweiApp.goTo('MemberContacts', { multiple: false, callback: this.fillContact });

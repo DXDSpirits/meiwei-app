@@ -77,7 +77,7 @@ module.exports = function(grunt) {
 					'assets/js/app/*.js',
 					'assets/js/app/models/*.js',
 					'assets/js/app/views/*.js',
-					'assets/js/plugin/iscroll/*.js'
+					'assets/js/plugin/iscroll/iscroll.js'
 				],
 				tasks: ['uglify']
 			},

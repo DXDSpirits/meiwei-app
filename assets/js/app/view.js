@@ -2,7 +2,9 @@
 MeiweiApp.View = Backbone.View.extend({
 	bindFastButton: function(el, handler) {
 		this.fastButtons = this.fastButtons || [];
-		this.fastButtons.push(new MBP.fastButton(el.length && el.length >= 1 ? el[0] : el, handler));
+		var btn = new MBP.fastButton(el.length && el.length >= 1 ? el[0] : el, handler);
+		this.fastButtons.push(btn);
+		return btn;
 	},
 	clearFastButtons: function() {
 		if (!_.isEmpty(this.fastButtons)) {

@@ -1,15 +1,17 @@
 
-MeiweiApp.Views.MemberProfileForm = MeiweiApp.ModelView.extend({
+MeiweiApp.Views.MemberProfileForm = MeiweiApp.View.extend({
 	events: {
 		'submit': 'updateProfile',
 	},
-	template: MeiweiApp.Templates['member-profile-form'],
-	initModelView: function() {
-		_.bindAll(this, 'switchGender');
-	},
-	render: function() {
-		this.$el.html(this.template(this.model.toJSON()));
-		this.bindFastButton(this.$('.switch-gender'), this.switchGender);
+	initialize: function() {
+		_.bindAll(this, 'switchGender', 'render');
+		var btn = this.bindFastButton(this.$('.switch-gender'), this.switchGender);
+		var switchGender = this.$('.switch-gender');
+		btn.onTouchMove = function(event) {
+			if (Math.abs(event.touches[0].clientY - this.startY) > 10) btn.reset(event);
+			if (switchGender.hasClass('on') && event.touches[0].clientX - btn.startX > 10) btn.reset(event);
+			if (switchGender.hasClass('off') && event.touches[0].clientX - btn.startX < -10) btn.reset(event);
+		}
 	},
 	switchGender: function() {
 		window.scrollTo(0, 0);
@@ -42,15 +44,24 @@ MeiweiApp.Views.MemberProfileForm = MeiweiApp.ModelView.extend({
 		        for (var k in error) { $infoText.html(error[k]);  break; };
             }
 		});
+	},
+	render: function() {
+		var profile = MeiweiApp.me.profile.toJSON();
+		this.$('input[name=nickname]').val(profile.nickname);
+		this.$('input[name=email]').val(profile.email);
+		this.$('input[name=mobile]').val(profile.mobile);
+		this.$('input[name=birthday]').val(profile.birthday);
+		this.$('input[name=anniversary]').val(profile.anniversary);
+		this.$('input[name=sexe]').val(profile.sexe);
+		this.$('.switch-gender').toggleClass('on', (profile.sexe == 1)).toggleClass('off', (profile.sexe == 0));
+		this.$('.switch-gender label').html(
+			this.$('.switch-gender label').attr('data-' + (profile.sexe == 1 ? 'on' : 'off'))
+		);
 	}
 });
 
-MeiweiApp.Views.MemberPasswordForm = MeiweiApp.ModelView.extend({
+MeiweiApp.Views.MemberPasswordForm = MeiweiApp.View.extend({
 	events: { 'submit': 'updatePassword' },
-	template: MeiweiApp.Templates['member-password-form'],
-	render: function() {
-		this.$el.html(this.template(this.model.toJSON()));
-	},
 	updatePassword: function(e) {
 		e.preventDefault();
 		var $infoText = this.$('.info-text');
@@ -67,6 +78,10 @@ MeiweiApp.Views.MemberPasswordForm = MeiweiApp.ModelView.extend({
 				}
 			});
 		}
+	},
+	render: function() {
+		this.$('input').val('');
+		this.$('.info-text').html('');
 	}
 });
 
@@ -74,22 +89,16 @@ MeiweiApp.Pages.MemberProfile = new (MeiweiApp.PageView.extend({
 	initPage: function() {
 		this.views = {
 			profileForm: new MeiweiApp.Views.MemberProfileForm({
-				model: MeiweiApp.me.profile,
 				el: this.$('.member-profile-form')
 			}),
-			profileForm: new MeiweiApp.Views.MemberPasswordForm({
-				model: MeiweiApp.me,
+			passwordForm: new MeiweiApp.Views.MemberPasswordForm({
 				el: this.$('.member-password-form')
 			})
 		};
 	},
 	render: function() {
-		var self = this;
-		MeiweiApp.me.fetch({
-			success: function() {
-				self.initScroller();
-				self.$('input[name=nickname]').focus();
-			}
-		});
+		this.$('input[name=nickname]').focus();
+		this.views.passwordForm.render();
+		MeiweiApp.me.fetch({ success: this.views.profileForm.render });
 	}
 }))({el: $("#view-member-profile")});
