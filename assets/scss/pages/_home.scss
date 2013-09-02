@@ -14,37 +14,18 @@
 			padding: 5px 0;
 			overflow: hidden;
 		}
-		.indicator {
-			position: relative;
-			width: 85px;
-			height: 10px;
-			margin: 5px auto;
-			background: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAB4AAAAUBAMAAABohZD3AAAACXBIWXMAAAsTAAALEwEAmpwYAAAAB3RJTUUH3QUGCDYztyDUJgAAAB1pVFh0Q29tbWVudAAAAAAAQ3JlYXRlZCB3aXRoIEdJTVBkLmUHAAAAGFBMVEUAAADNzc3Nzc3Nzc3Nzc3Nzc3Nzc3///8aWwwLAAAABnRSTlMAX5Ks3/nRD0HIAAAAAWJLR0QHFmGI6wAAAFtJREFUGFdjYGBgEHYNMWRAAJE0IHCEc5nSwEABxleD8JOgXMY0KBCA8FlgfAcIXwzGT4TwzWD8ZAjfDcZPgfDDYPxU7Hx09ejmoduH7h5096L7B8O/6OGBGl4APYg8TQ0XAScAAAAASUVORK5CYII=);
-			@include background-size(15px 10px);
-			.dotty {
-				position: absolute;
-				width: 10px;
-				height: 10px;
-				border-radius: 10px;
-				background: #777;
-			}
-		}
 		@include carousel($carouselWidth: 200px);
-		.carousel-item > .img {
-			border: none;
-			@include box-shadow(0 0 5px $brownLight);
-		}
 	}
 	
 	$itemHeight: 150px;
 	
 	.recommend-list-item {
 		width: 100%;
-		height: $itemHeight;
+		height: $itemHeight * 2;
 		overflow: visible;
-		&:last-child {
+		/*&:last-child {
 			height: $itemHeight * 2;
-		}
+		}*/
 	}
 	
 	.master-hero, .recommend-list-item .item-wrapper {
@@ -123,10 +104,9 @@
 	.recommend-list-item .item-wrapper::before {
 		content: "";
 		position: absolute;
-		top: -50px;
 		z-index: 1;
 		@include size(50px, 100%);
-		background: transparent url($blackShadowPath) no-repeat top;
+		background: transparent url($blackShadowPathR) no-repeat top;
 		@include background-size(100% 50px);
 	}
 }

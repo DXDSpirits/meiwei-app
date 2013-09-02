@@ -70,6 +70,7 @@ MeiweiApp.Pages.Home = new (MeiweiApp.PageView.extend({
 		'click header form': 'gotoSearch'
 	},
 	initPage: function() {
+		this.snapStep = 300;
 		_.bindAll(this, 'initScroller', 'hero', 'handleScroll', 'handleScrollEnd');
 		this.recommend = new MeiweiApp.Models.Recommend({id: 5});
 		this.views = {
@@ -84,36 +85,34 @@ MeiweiApp.Pages.Home = new (MeiweiApp.PageView.extend({
 		this.views.masterHero.render();
 	},
 	handleScroll: function(e) {
-		var snapStep = 150;
 		var modelViews = this.views.recommendItems.modelViews;
-		var page = parseInt(-this.scroller.y / snapStep);
-		var delta = snapStep * page + this.scroller.y;
+		var page = parseInt(-this.scroller.y / this.snapStep);
+		var delta = this.snapStep * page + this.scroller.y;
 		if (delta < 0) {
-			var add = parseInt((-delta) / snapStep);
+			var add = parseInt((-delta) / this.snapStep);
 			this.newPage = page + add;
-			delta = -((-delta) % snapStep);
+			delta = -((-delta) % this.snapStep);
 			if (modelViews[page+add])
 				modelViews[page+add].$('.item-wrapper').css('-webkit-transform', 'translate3d(0, ' + delta + 'px, 0)');
 		} else {
-			var add = parseInt(delta / snapStep) + 1;
+			var add = parseInt(delta / this.snapStep) + 1;
 			this.newPage = page - add;
-			delta = delta % snapStep;
+			delta = delta % this.snapStep;
 			if (modelViews[page-add])
-				modelViews[page-add].$('.item-wrapper').css('-webkit-transform', 'translate3d(0, ' + (-snapStep + delta) + 'px, 0)');
+				modelViews[page-add].$('.item-wrapper').css('-webkit-transform', 'translate3d(0, ' + (-this.snapStep + delta) + 'px, 0)');
 		}
 	},
 	handleScrollEnd: function() {
-		var snapStep = 150;
 		var modelViews = this.views.recommendItems.modelViews;
-		var page = parseInt(-this.scroller.y / snapStep);
-		var delta = snapStep * page + this.scroller.y;
+		var page = parseInt(-this.scroller.y / this.snapStep);
+		var delta = this.snapStep * page + this.scroller.y;
 		if (delta == 0) {
 			return;
 		}
 		if (page >= (this.currentPage || 0)) {
 			page += 1;
 		}
-		this.scroller.scrollTo(0, -snapStep * (page), 500);
+		this.scroller.scrollTo(0, -this.snapStep * (page), 350);
 		this.currentPage = page;
 		
 		for (var i=0; i<modelViews.length; i++) {
@@ -128,7 +127,7 @@ MeiweiApp.Pages.Home = new (MeiweiApp.PageView.extend({
 			for (var i=0; i<modelViews.length; i++) {
 				modelViews[i].$('.item-wrapper').removeClass('snaping');
 			}
-		}, 500);
+		}, 350);
 	},
 	gotoSearch: function() { MeiweiApp.goTo('RestaurantSearch'); },
 	hero: function() {
@@ -143,19 +142,16 @@ MeiweiApp.Pages.Home = new (MeiweiApp.PageView.extend({
 		if (this.scroller == null) {
 			if (this.$('.iscroll').length > 0) {
 			    this.scroller = new IScroll(this.$('.iscroll').selector, {
-					//snap: true, snapStepY: 150, snapSpeed: 500, momentum: false
-					momentum: false
+					snap: true, snapStepY: this.snapStep, snapSpeed: 350//, momentum: false
 				});
-				//this.hero();
-				//this.scroller.on('scrollEnd', this.hero);
-				this.scroller.on('scrollMove', this.handleScroll);
-				this.scroller.on('scrollEnd', this.handleScrollEnd);
-				//this.scroller.on('gotPage', this.handleScrollEnd);
-				//this.scroller.on('flick', this.handleScrollEnd);
+				this.hero();
+				this.scroller.on('scrollEnd', this.hero);
+				//this.scroller.on('scrollMove', this.handleScroll);
+				//this.scroller.on('scrollEnd', this.handleScrollEnd);
 			}
 		} else {
 			this.scroller.refresh();
-			//this.hero();
+			this.hero();
 		}
 	},
 	render: function() {

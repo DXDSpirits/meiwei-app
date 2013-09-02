@@ -27,6 +27,18 @@ module.exports = function(grunt) {
 						'assets/js/app/bootstrap.js'
 					]
 				}
+			},
+			iscroll: {
+				options: {
+					sourceMap: 'assets/js/plugin/iscroll/iscroll.map',
+					sourceMappingURL: 'iscroll.map',
+					sourceMapPrefix: 4,
+				},
+				files: {
+					'assets/js/plugin/iscroll/iscroll-min.js': [
+						'assets/js/plugin/iscroll/iscroll.js'
+					]
+				}
 			}
 		},
 		sass: {
@@ -64,7 +76,8 @@ module.exports = function(grunt) {
 				files: [
 					'assets/js/app/*.js',
 					'assets/js/app/models/*.js',
-					'assets/js/app/views/*.js'
+					'assets/js/app/views/*.js',
+					'assets/js/plugin/iscroll/*.js'
 				],
 				tasks: ['uglify']
 			},
