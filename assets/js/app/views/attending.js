@@ -1,7 +1,10 @@
 
 MeiweiApp.Views.OrderPages = MeiweiApp.CollectionView.extend({
 	ModelView: MeiweiApp.ModelView.extend({
-		events: {'click .btn-share' : 'onClickShareBtn' },
+		events: {
+			'click .btn-share-weixin' : 'onClickWeixinBtn',
+			'click .btn-share-weibo' : 'onClickWeiboBtn'
+		},
 		template: MeiweiApp.Templates['order-attending'],
 		className: 'order-page-item carousel-item',
 		getWeiboLink : function(s, d, e, r, l, p, t, z, c) {
@@ -10,13 +13,23 @@ MeiweiApp.Views.OrderPages = MeiweiApp.CollectionView.extend({
 		    	'&content=', c || 'gb2312', '&pic=', e(p || ''), '&ralateUid=', '3058840707'].join('');
 		    return [f, p].join('');
 		},
-		onClickShareBtn : function(){
+		onClickWeiboBtn : function(){
  	 		var restaurantinfor = this.model.get('restaurantinfor');
  	 		var content  = '我在 #' + restaurantinfor.fullname + ' (' + restaurantinfor.address + ') ';
 	 		var pic =  this.model.get('restaurantinfor').frontpic;
 	 		var link = this.getWeiboLink(screen, document, encodeURIComponent, 'http://www.clubmeiwei.com', 'http://www.clubmeiwei.com', 
 	 									pic, content, 'http://www.clubmeiwei.com/restaurant/view/' + this.model.get('restaurant'), 'utf-8');
 	 		var ref = window.open( link ,'_blank', 'location=no');
+		},
+		onClickWeixinBtn: function() {
+			var restaurantinfor = this.model.get('restaurantinfor');
+			var id = restaurantinfor.id;
+ 	 		var content  = '我在' + restaurantinfor.fullname + '(' + restaurantinfor.address + ')';
+	 		var pic =  this.model.get('restaurantinfor').frontpic;
+			var command = [id, content, content, pic];
+			var success = function() {};
+			var fail = function() {};
+			Cordova.exec(success, fail, "Weixin", "sendAppContent", command);
 		},
 		render: function() {
 			this.$el.html(this.template(this.model.toJSON()));
