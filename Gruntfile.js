@@ -66,20 +66,20 @@ module.exports = function(grunt) {
 				}
 			}
 		},
-		jshint: {
-			all: [
-				'assets/js/app/*.js'
-			]
-		},
 		watch: {
-			scripts: {
+			scripts_mwapp: {
 				files: [
 					'assets/js/app/*.js',
 					'assets/js/app/models/*.js',
-					'assets/js/app/views/*.js',
+					'assets/js/app/views/*.js'
+				],
+				tasks: ['uglify:mwapp']
+			},
+			scripts_iscroll: {
+				files: [
 					'assets/js/plugin/iscroll/iscroll.js'
 				],
-				tasks: ['uglify']
+				tasks: ['uglify:iscroll']
 			},
 			stylesheets: {
 				files: [
