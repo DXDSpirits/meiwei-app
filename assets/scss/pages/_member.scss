@@ -96,9 +96,11 @@
 		}
 		.avatar {
 			@include square(90px);
-			//border: 2px solid $brown;
+			border: 2px solid $brown;
 			margin: 0 auto;
 			background-color: $white;
+			overflow: hidden;
+			img { @include square(100%); }
 		}
 		h1 {
 			color: $white;
