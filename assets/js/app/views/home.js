@@ -10,10 +10,10 @@ MeiweiApp.Views.MasterHero = MeiweiApp.View.extend({
 		MeiweiApp.goTo('ProductPurchase');
 	},
 	renderCarousel: function() {
-		this.$el.append(this.template({
-			items: _.first(this.productItems.toJSON(), 6)
+		this.$el.html(this.template({
+			items: _.first(this.productItems.toJSON(), 6),
+			product: {name: '美位私人管家'}
 		}));
-		this.$('>header').html('<h1>美位私人管家</h1>');
 		var items = $('.carousel-inner > .carousel-item');
 		this.$('.carousel-inner').css('width', items.length * $(items[0]).outerWidth());
 		this.$('.indicator').removeClass('hide').css('width', items.length * 15 - 5);
