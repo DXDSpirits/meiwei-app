@@ -492,9 +492,12 @@ IScroll.prototype = {
 
 /* REPLACE END: _move */
 
+		this._execEvent('scrollMoving');
 	},
 
 	_end: function (e) {
+		this._execEvent('scrollEnding');
+		
 		if ( !this.enabled || utils.eventType[e.type] !== this.initiated ) {
 			return;
 		}

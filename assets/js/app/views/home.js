@@ -69,14 +69,14 @@ MeiweiApp.Pages.Home = new (MeiweiApp.PageView.extend({
 	onClickLeftBtn: function() { MeiweiApp.goTo('MemberCenter'); },
 	onClickRightBtn: function() { MeiweiApp.goTo('Attending'); },
 	initPage: function() {
-		this.snapStep = 300;
+		this.snapStep = 250;
 		this.lazy = 30 * 60 * 1000;
 		_.bindAll(this, 'initScroller', 'hero', 'handleScroll', 'handleScrollEnd');
 		this.bindFastButton(this.$('>header form'), function() { MeiweiApp.goTo('RestaurantSearch'); });
 		this.recommend = new MeiweiApp.Models.Recommend({id: 5});
 		this.views = {
 			masterHero: new MeiweiApp.Views.MasterHero({
-				el: this.$('.master-hero')
+				el: this.$('.master-hero .item-wrapper')
 			}),
 			recommendItems: new MeiweiApp.Views.RecommendItems({
 				collection: this.recommend.items,
@@ -85,48 +85,26 @@ MeiweiApp.Pages.Home = new (MeiweiApp.PageView.extend({
 		};
 	},
 	handleScroll: function(e) {
-		var modelViews = this.views.recommendItems.modelViews;
-		var page = parseInt(-this.scroller.y / this.snapStep);
-		var delta = this.snapStep * page + this.scroller.y;
-		if (delta < 0) {
-			var add = parseInt((-delta) / this.snapStep);
-			this.newPage = page + add;
-			delta = -((-delta) % this.snapStep);
-			if (modelViews[page+add])
-				modelViews[page+add].$('.item-wrapper').css('-webkit-transform', 'translate3d(0, ' + delta + 'px, 0)');
-		} else {
-			var add = parseInt(delta / this.snapStep) + 1;
-			this.newPage = page - add;
-			delta = delta % this.snapStep;
-			if (modelViews[page-add])
-				modelViews[page-add].$('.item-wrapper').css('-webkit-transform', 'translate3d(0, ' + (-this.snapStep + delta) + 'px, 0)');
+		if (this.scroller.directionY == 1) {
+			var distY = Math.max(-50, this.scroller.distY);
+			distY = - distY * distY / 50;
+			var hero = this.$('.hero').length > 0 ? this.$('.hero') : this.$('.master-hero');
+			var nextAll = this.$('.hero').length > 0 ? this.$('.hero').nextAll() : this.$('.recommend-list-item');
+			hero.find('.item-wrapper').css('-webkit-transform', 'translate3d(0, ' + distY + 'px, 0)');
+			var i = 3;
+			nextAll.each(function() {
+				var newDistY = Math.min(0, distY * 2 / i);
+				$(this).find('.item-wrapper').css('-webkit-transform', 'translate3d(0, ' + newDistY + 'px, 0)');
+				i += 1;
+			});
 		}
 	},
 	handleScrollEnd: function() {
-		var modelViews = this.views.recommendItems.modelViews;
-		var page = parseInt(-this.scroller.y / this.snapStep);
-		var delta = this.snapStep * page + this.scroller.y;
-		if (delta == 0) {
-			return;
-		}
-		if (page >= (this.currentPage || 0)) {
-			page += 1;
-		}
-		this.scroller.scrollTo(0, -this.snapStep * (page), 350);
-		this.currentPage = page;
-		
-		for (var i=0; i<modelViews.length; i++) {
-			modelViews[i].$('.item-wrapper').addClass('snaping');
-			if (i < page) {
-				modelViews[i].$('.item-wrapper').css('-webkit-transform', 'translate3d(0, -150px, 0)');
-			} else {
-				modelViews[i].$('.item-wrapper').css('-webkit-transform', 'translate3d(0, 0, 0)');
-			}
-		}
+		this.$('.item-wrapper').addClass('snaping');
+		this.$('.item-wrapper').css('-webkit-transform', 'translate3d(0, 0, 0)');
+		var self = this;
 		setTimeout(function() {
-			for (var i=0; i<modelViews.length; i++) {
-				modelViews[i].$('.item-wrapper').removeClass('snaping');
-			}
+			self.$('.item-wrapper').removeClass('snaping');
 		}, 350);
 	},
 	hero: function() {
@@ -141,12 +119,13 @@ MeiweiApp.Pages.Home = new (MeiweiApp.PageView.extend({
 		if (this.scroller == null) {
 			if (this.$('.iscroll').length > 0) {
 			    this.scroller = new IScroll(this.$('.iscroll').selector, {
-					snap: true, snapStepY: this.snapStep, snapSpeed: 350//, momentum: false
+					snap: true, snapStepY: this.snapStep, snapSpeed: 350, bounceEasing: 'quadratic'
+					//, momentum: false
 				});
 				this.hero();
 				this.scroller.on('scrollEnd', this.hero);
-				//this.scroller.on('scrollMove', this.handleScroll);
-				//this.scroller.on('scrollEnd', this.handleScrollEnd);
+				this.scroller.on('scrollMoving', this.handleScroll);
+				this.scroller.on('scrollEnding', this.handleScrollEnd);
 			}
 		} else {
 			this.scroller.refresh();
