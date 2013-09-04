@@ -27,6 +27,7 @@ MeiweiApp.Views.MasterHero = MeiweiApp.View.extend({
 		this.scroller.goToPage(1,0);
 	},
 	render: function() {
+		this.rendered = true;
 		this.productItems.fetch({
 			reset: true,
 			success: this.renderCarousel,
@@ -152,7 +153,7 @@ MeiweiApp.Pages.Home = new (MeiweiApp.PageView.extend({
 		}
 	},
 	render: function() {
-		this.views.masterHero.render();
+		if (!this.views.masterHero.rendered) this.views.masterHero.render();
 		this.recommend.fetch({ reset: true, success: this.initScroller });
 	}
 }))({el: $("#view-home")});

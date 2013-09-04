@@ -24,6 +24,7 @@ var MeiweiApp = new (Backbone.View.extend({
 	start: function() {
 		MeiweiApp.showSplash();	
 		MeiweiApp.initAjaxEvents();
+		MeiweiApp.initLang();
 		MeiweiApp.initSync();
 		Backbone.history.start();
 	}
@@ -36,7 +37,13 @@ MeiweiApp.showSplash = function() {
 			navigator.splashscreen.hide();
 		}, 1000);
 	} catch (e) { }
-}
+};
+
+MeiweiApp.initLang = function() {
+	var langCode = localStorage.getItem('lang-code') || 'zh';
+	MeiweiApp.setLang = function(lang) { localStorage.setItem('lang-code', (langCode = lang)); };
+	MeiweiApp.getLang = function() { return langCode; };
+};
 
 MeiweiApp.initSync = function() {
 	var encode = function(username, password) {
@@ -47,7 +54,7 @@ MeiweiApp.initSync = function() {
 	var originalSync = Backbone.sync;
 	Backbone.sync = function(method, model, options) {
 		options.timeout = options.timeout || MeiweiApp.configs.timeout;
-		_.extend((options.headers || (options.headers = {})), { 'Accept-Language': 'zh' });
+		_.extend((options.headers || (options.headers = {})), { 'Accept-Language': MeiweiApp.getLang() });
 		if (typeof token !== "undefined" && token !== null) {
 			_.extend(options.headers, { 'Authorization': 'Basic ' + token });
 		}
@@ -68,7 +75,7 @@ MeiweiApp.initSync = function() {
 			localStorage.removeItem('basic-auth');
 		}
 	}
-}
+};
 
 MeiweiApp.initAjaxEvents = function() {
 	var timeout = 0;
@@ -100,7 +107,7 @@ MeiweiApp.initAjaxEvents = function() {
 			}, (timeout = 3000) + 500);
 		}
 	});
-}
+};
 
 MeiweiApp.handleError = function(err) {
 	var error = new MeiweiApp.Models.ClientError();
