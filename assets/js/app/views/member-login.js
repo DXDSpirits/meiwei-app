@@ -32,7 +32,8 @@ MeiweiApp.Views.MemberLoginForm = MeiweiApp.View.extend({
 			this.$('input').val('');
 			this.$('.info-text').html('');
 			this.$('input[name=username]').attr('placeholder', '输入手机或邮箱登录');
-			this.$('input[name=password-confirm]').addClass('hidden');
+			//this.$('input[name=password-confirm]').addClass('hidden');
+			this.$('input[name=password-confirm]').remove();
 			this.$('.login-button').css('-webkit-box-flex', '2');
 			this.$('.register-button').css('-webkit-box-flex', '1');			this.status = 'login';
 		}
@@ -63,7 +64,8 @@ MeiweiApp.Views.MemberLoginForm = MeiweiApp.View.extend({
 			this.$('input').val('');
 			this.$('.info-text').html('');
 			this.$('input[name=username]').attr('placeholder', '请使用手机或邮箱注册');
-			this.$('input[name=password-confirm]').removeClass('hidden');
+			//this.$('input[name=password-confirm]').removeClass('hidden');
+			this.$('input[name=password]').after('<input type="password" name="password-confirm" placeholder="确认密码"/>');
 			this.$('.register-button').css('-webkit-box-flex', '2');
 			this.$('.login-button').css('-webkit-box-flex', '1');
 			this.status = 'register';

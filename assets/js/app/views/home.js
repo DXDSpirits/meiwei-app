@@ -14,6 +14,7 @@ MeiweiApp.Views.MasterHero = MeiweiApp.View.extend({
 			items: _.first(this.productItems.toJSON(), 6),
 			product: {name: '美位私人管家'}
 		}));
+		this.$el.prepend('<img src="assets/img/hero.png" />')
 		var items = $('.carousel-inner > .carousel-item');
 		this.$('.carousel-inner').css('width', items.length * $(items[0]).outerWidth());
 		this.$('.indicator').removeClass('hide').css('width', items.length * 15 - 5);
