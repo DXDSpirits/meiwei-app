@@ -137,15 +137,16 @@ MeiweiApp.PageView = MeiweiApp.View.extend({
 	go: function(options) {
 		this.options = options || {};
 		this.reset();
-		this.showPage();
-		if (this.lazy) {
-			if ((new Date()) - (this.lastRender || 0) < this.lazy) return;
+		if (!this.lazy || (new Date()) - (this.lastRender || 0) > this.lazy) {
+			var render = this.render;
+			this.$('.wrapper').one('webkitAnimationEnd', function(e) {
+				if (e.originalEvent.animationName == "slideinfromright") {
+					render();
+				}
+			});
 			this.lastRender = new Date();
 		}
-		var render = this.render;
-		setTimeout(function() {
-			try { render(); } catch (e) { MeiweiApp.handleError(e); }
-		}, 500);
+		this.showPage();
 	},
 	refresh: function() {
 		this.showPage();
