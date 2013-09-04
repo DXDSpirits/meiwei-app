@@ -83,7 +83,6 @@ MeiweiApp.Pages.Home = new (MeiweiApp.PageView.extend({
 				el: this.$('.recommend-flow')
 			})
 		};
-		this.views.masterHero.render();
 	},
 	handleScroll: function(e) {
 		var modelViews = this.views.recommendItems.modelViews;
@@ -156,6 +155,7 @@ MeiweiApp.Pages.Home = new (MeiweiApp.PageView.extend({
 		}
 	},
 	render: function() {
+		this.views.masterHero.render();
 		this.recommend.fetch({ reset: true, success: this.initScroller });
 	}
 }))({el: $("#view-home")});

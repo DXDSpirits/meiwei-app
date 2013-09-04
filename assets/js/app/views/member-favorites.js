@@ -15,7 +15,10 @@ MeiweiApp.Views.FavoriteList = MeiweiApp.CollectionView.extend({
 		deleteFav: function(e) {
 			this.$('.icon-favorite').removeClass('succeed');
 			var self = this;
-			setTimeout(function() { self.model.destroy(); }, 350);
+			setTimeout(function() {
+				self.model.destroy();
+				MeiweiApp.Pages.MemberFavorites.initScroller();
+			}, 350);
 		}
 	})
 });
@@ -23,8 +26,6 @@ MeiweiApp.Views.FavoriteList = MeiweiApp.CollectionView.extend({
 MeiweiApp.Pages.MemberFavorites = new (MeiweiApp.PageView.extend({
 	onClickLeftBtn: function() { MeiweiApp.goTo('MemberCenter'); },
 	initPage: function() {
-		new MBP.fastButton(this.$('.page-prev')[0], this.fetchPrev);
-		new MBP.fastButton(this.$('.page-next')[0], this.fetchNext);
 		this.favorites = MeiweiApp.me.favorites;
 		this.views = {
 			favoriteList: new MeiweiApp.Views.FavoriteList({
