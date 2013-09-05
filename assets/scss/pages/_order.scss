@@ -52,6 +52,7 @@
 			line-height: $fontSizeMini + 2px;
 			min-height: 5px;
 		}
+		@include backface-visibility(hidden);
 	}
 	.viewport {
 		@include size(150px, 250px);

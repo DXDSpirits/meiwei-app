@@ -18,6 +18,7 @@
 			overflow: hidden;
 		}
 		@include carousel($carouselWidth: $itemHeight - 80px);
+		@include backface-visibility(hidden);
 	}
 	
 	.master-hero, .recommend-list-item {
