@@ -3,7 +3,9 @@
 /assets/js/app/app-local.js
 /assets/js/app/templates.js
 /assets/js/plugin/iscroll/iscroll-min.js
-/assets/js/plugin/iscroll/iscroll.map
+/assets/js/plugin/iscroll/iscroll-min.map
+/assets/js/plugin/i18n/i18n-min.js
+/assets/js/plugin/i18n/i18n-min.map
 /node_modules/
 /.sass-cache/
 index.html

@@ -22,6 +22,7 @@
         "grunt-contrib-watch": "~0.4.4",
         "grunt-concurrent": "~0.2.0",
         "mime": "~1.2.9",
-        "grunt-shell": "~0.2.2"
+        "grunt-shell": "~0.2.2",
+        "grunt-gettext": "~0.1.0"
     }
 }

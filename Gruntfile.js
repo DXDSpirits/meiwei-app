@@ -1,5 +1,6 @@
 module.exports = function(grunt) {
-
+	var _ = grunt.util._;
+	var locales = ["zh-CN"];
 	grunt.initConfig({
 		pkg: grunt.file.readJSON('package.json'),
 		uglify: {
@@ -30,13 +31,26 @@ module.exports = function(grunt) {
 			},
 			iscroll: {
 				options: {
-					sourceMap: 'assets/js/plugin/iscroll/iscroll.map',
-					sourceMappingURL: 'iscroll.map',
+					sourceMap: 'assets/js/plugin/iscroll/iscroll-min.map',
+					sourceMappingURL: 'iscroll-min.map',
 					sourceMapPrefix: 4,
 				},
 				files: {
 					'assets/js/plugin/iscroll/iscroll-min.js': [
 						'assets/js/plugin/iscroll/iscroll.js'
+					]
+				}
+			},
+			i18n: {
+				options: {
+					sourceMap: 'assets/js/plugin/i18n/i18n-min.map',
+					sourceMappingURL: 'i18n-min.map',
+					sourceMapPrefix: 4,
+				},
+				files: {
+					'assets/js/plugin/i18n/i18n-min.js': [
+						'assets/js/plugin/i18n/icu.js',
+						'assets/js/plugin/i18n/translate.js'
 					]
 				}
 			}
@@ -66,35 +80,47 @@ module.exports = function(grunt) {
 				}
 			}
 		},
+		xgettext : {
+			options : {
+				functionName : "_i",
+				potFile : "locale/messages.pot",
+				//processMessage: function(message) { ... }
+			},
+			target : {
+				files : {
+					handlebars : [],
+					javascript : ['assets/js/mw-app.js']
+				}
+			}
+		},
+		po2json: {
+			target: { 
+				files: _.object(
+					_.map(locales, function(locale) { return "locale/" + locale + ".js"; }),
+					_.map(locales, function(locale) { return "locale/" + locale + ".po"; })
+				)
+			}, 
+			options: { requireJs: true }
+		},
 		watch: {
 			scripts_mwapp: {
-				files: [
-					'assets/js/app/*.js',
-					'assets/js/app/models/*.js',
-					'assets/js/app/views/*.js'
-				],
+				files: ['assets/js/app/*.js', 'assets/js/app/models/*.js', 'assets/js/app/views/*.js'],
 				tasks: ['uglify:mwapp']
 			},
 			scripts_iscroll: {
-				files: [
-					'assets/js/plugin/iscroll/iscroll.js'
-				],
+				files: ['assets/js/plugin/iscroll/iscroll.js'],
 				tasks: ['uglify:iscroll']
 			},
+			scripts_i18n: {
+				files: ['assets/js/plugin/i18n/icu.js', 'assets/js/plugin/i18n/translate.js'],
+				tasks: ['uglify:i18n']
+			},
 			stylesheets: {
-				files: [
-					'assets/scss/*.scss',
-					'assets/scss/mobile/*.scss',
-					'assets/scss/font-awesome/*.scss',
-					'assets/scss/pages/*.scss'
-				],
+				files: ['assets/scss/*.scss', 'assets/scss/mobile/*.scss', 'assets/scss/font-awesome/*.scss', 'assets/scss/pages/*.scss'],
 				tasks: ['sass']
 			},
 			templates: {
-				files: [
-					'assets/template/*.html',
-					'assets/template/*/*.html'
-				],
+				files: ['assets/template/*.html', 'assets/template/*/*.html'],
 				tasks: ['templates']
 			},
 			html: {
@@ -133,16 +159,38 @@ module.exports = function(grunt) {
 					logConcurrentOutput: true
 				}
 			}
+		},
+		shell: {
+			options: {
+				failOnError: true,
+				stdout: true
+			},
+			msgmerge: {
+				command: _.map(locales, function(locale) {
+					var po = "locale/" + locale + ".po";
+					return "if [ -f \"" + po + "\" ]; then\n" +
+						   "    echo \"Updating " + po + "\"\n" +
+						   "    msgmerge " + po + " locale/messages.pot > .new.po.tmp\n" +
+						   "    if [ $? -ne 0 ]; then\n" +
+						   "        echo \"Msgmerge failed with exit code $?\"\n" +
+						   "        exit $?\n" +
+						   "    fi\n" +
+						   "    mv .new.po.tmp " + po + "\n" +
+						   "fi\n";
+				}).join("")
+			}
 		}
 	});
-
+	
 	grunt.loadTasks('tasks');
 	grunt.loadNpmTasks('grunt-contrib-uglify');
 	grunt.loadNpmTasks('grunt-contrib-jshint');
 	grunt.loadNpmTasks('grunt-contrib-sass');
 	grunt.loadNpmTasks('grunt-includes');
+	grunt.loadNpmTasks('grunt-gettext');
 	grunt.loadNpmTasks('grunt-contrib-watch');
 	grunt.loadNpmTasks('grunt-concurrent');
+	grunt.loadNpmTasks('grunt-shell');
 
 	// Configurable port number
 	var port = grunt.option('port');

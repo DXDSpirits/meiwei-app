@@ -81,6 +81,6 @@
 		return result;
 	};
 	
-	window._ = translate;
+	window._i = translate;
 
 })();
