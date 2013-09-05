@@ -124,8 +124,8 @@ MeiweiApp.Pages.Home = new (MeiweiApp.PageView.extend({
 				});
 				this.hero();
 				this.scroller.on('scrollEnd', this.hero);
-				this.scroller.on('scrollMoving', this.handleScroll);
-				this.scroller.on('scrollEnding', this.handleScrollEnd);
+				//this.scroller.on('scrollMoving', this.handleScroll);
+				//this.scroller.on('scrollEnding', this.handleScrollEnd);
 			}
 		} else {
 			this.scroller.refresh();
