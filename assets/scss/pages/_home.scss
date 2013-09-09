@@ -34,7 +34,7 @@
 		@include flex-box($orient: vertical, $pack: start);
 		height: $wrapperHeight;
 		width: 100%;
-		//overflow: hidden;
+		overflow: hidden;
 		position: relative;
 		z-index: 0;
 		h1 {
@@ -51,12 +51,12 @@
 			@include backface-visibility(hidden);
 		}
 		> article {
+			h1 { font-size: $fontSizeLarge + 2px; margin-bottom: 5px; }
+			p { font-size: $fontSizeMini; }
 			position: relative;
 			z-index: 2;
 			color: $white;
 			width: 100%;
-			h1 { font-size: $fontSizeLarge + 2px; }
-			p { font-size: $fontSizeMini; }
 			border: 1px solid transparent;
 			padding: 20px 17px 5px;
 			opacity: 0;
@@ -99,8 +99,8 @@
 		content: "";
 		position: absolute;
 		z-index: 1;
-		@include size(50px, 100%);
+		@include size(90px, 100%);
 		background: transparent url($blackShadowPathR) no-repeat top;
-		@include background-size(100% 50px);
+		@include background-size(100% 90px);
 	}
 }

@@ -43,7 +43,7 @@ MeiweiApp.Collection = Backbone.Collection.extend({
 	},
 	fetch: function(options) {
 		options = options || {};
-		MeiweiApp.initCache(this, options);
+		//MeiweiApp.initCache(this, options);
 		return Backbone.Collection.prototype.fetch.call(this, options);
 	},
 });
@@ -51,7 +51,7 @@ MeiweiApp.Collection = Backbone.Collection.extend({
 MeiweiApp.Model = Backbone.Model.extend({
 	fetch: function(options) {
 		options = options || {};
-		MeiweiApp.initCache(this, options);
+		//MeiweiApp.initCache(this, options);
 		return Backbone.Model.prototype.fetch.call(this, options);
 	},
 	url: function() {

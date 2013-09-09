@@ -10,6 +10,7 @@ MeiweiApp.Views.MasterHero = MeiweiApp.View.extend({
 		MeiweiApp.goTo('ProductPurchase');
 	},
 	renderCarousel: function() {
+		if (this.scroller) this.scroller.destroy();
 		this.$el.html(this.template({
 			items: _.first(this.productItems.toJSON(), 6),
 			product: {name: '美位私人管家'}
@@ -20,15 +21,16 @@ MeiweiApp.Views.MasterHero = MeiweiApp.View.extend({
 		this.$('.indicator').removeClass('hide').css('width', items.length * 15 - 5);
 		this.scroller = new IScroll(this.$('.carousel').selector, {
 			scrollX: true, scrollY: false, momentum: false, snap: true,
-			indicators: {
-				el: this.$('.indicator')[0],
-				resize: false
-			}
+			indicators: { el: this.$('.indicator')[0], resize: false }
 		});
 		this.scroller.goToPage(1,0);
 	},
 	render: function() {
 		this.rendered = true;
+		if (bootstrap && bootstrap.Home && bootstrap.Home.products) {
+			this.productItems.reset(bootstrap.Home.products);
+			this.renderCarousel();
+		}
 		this.productItems.fetch({
 			reset: true,
 			success: this.renderCarousel,
@@ -134,6 +136,10 @@ MeiweiApp.Pages.Home = new (MeiweiApp.PageView.extend({
 	},
 	render: function() {
 		if (!this.views.masterHero.rendered) this.views.masterHero.render();
+		if (bootstrap && bootstrap.Home && bootstrap.Home.recommend) {
+			this.recommend.items.reset(bootstrap.Home.recommend);
+			this.initScroller();
+		}
 		this.recommend.fetch({ reset: true, success: this.initScroller });
 	}
 }))({el: $("#view-home")});
