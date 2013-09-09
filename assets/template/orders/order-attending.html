@@ -12,8 +12,10 @@
 		<tr><td colspan="2">{{ orderno }}</td></tr>
 		<tr><th>订餐日期</th><th>订餐时间</th></tr>
 		<tr><td>{{ orderdate }}</td><td>{{ ordertime }}</td></tr>
-		<tr><th colspan="2">订餐折扣</th></tr>
-		<tr><td colspan="2">无</td></tr>
+		{{#discount}}
+			<tr><th colspan="2">订餐折扣</th></tr>
+			<tr><td colspan="2">{{ discount }}</td></tr>
+		{{/discount}}
 	</table>
 	<div class="button-group">
 		<button class="btn btn-share-weixin">告诉微信好友</button>
