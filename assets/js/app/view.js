@@ -35,29 +35,17 @@ MeiweiApp.ModelView = MeiweiApp.View.extend({
 MeiweiApp.CollectionView = MeiweiApp.View.extend({
 	ModelView: MeiweiApp.ModelView,
 	initialize: function() {
-		this.modelViews = [];
 		this.listenTo(this.collection, 'reset', this.addAll);
 		this.listenTo(this.collection, 'add', this.addOne);
 		this.listenTo(this.collection, 'remove', this.removeOne);
 		if (this.initCollectionView) this.initCollectionView();
 	},
 	removeOne: function(item) {
-		try {
-			item.trigger('hide');
-			for (var i=0; i<this.modelViews.length; i++) {
-				if (this.modelViews[i].model.id == item.id) {
-					this.modelViews.splice(i, 1);
-					break;
-				}
-			}
-		} catch (e) {
-			MeiweiApp.handleError(e);
-		}
+		item.trigger('hide');
 	},
 	addOne: function(item) {
 		try {
 			var modelView = new this.ModelView({model: item});
-			this.modelViews.push(modelView);
 			this.$el.append(modelView.render().el);
 		} catch (e) {
 			MeiweiApp.handleError(e);
@@ -65,12 +53,9 @@ MeiweiApp.CollectionView = MeiweiApp.View.extend({
 	},
 	addAll: function() {
 		try {
-			for (var i=0; i<this.modelViews.length; i++) this.modelViews[i].remove();
-			this.modelViews.length = 0;
 			var $list = [];
 			this.collection.forEach(function(item) {
 				var modelView = new this.ModelView({model: item});
-				this.modelViews.push(modelView);
 				$list.push(modelView.render().el);
 			}, this);
 			this.$el.html($list);
