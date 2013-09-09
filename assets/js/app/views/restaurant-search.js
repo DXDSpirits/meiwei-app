@@ -56,8 +56,10 @@ MeiweiApp.Pages.RestaurantSearch = new (MeiweiApp.PageView.extend({
 		this.dropMarkers();
 	},
 	events: {
-		'submit >header>form': 'searchKeywords'
+		'submit >header>form': 'searchKeywords',
+		'focus >header input': 'clearFormInput'
 	},
+	clearFormInput: function() { this.$('>header input').val(''); },
 	initPage: function() {
 		this.lazy = 24 * 60 * 60 * 1000;
 		_.bindAll(this, 'refreshList', 'filterRestaurant', 'bindCuisineFilters', 'bindCircleFilters');
@@ -180,7 +182,6 @@ MeiweiApp.Pages.RestaurantSearch = new (MeiweiApp.PageView.extend({
 	/*********************************************/
 	
 	render: function() {
-		this.$('>header input').val('');
 		this.$('>header input').focus();
 		this.restaurants.fetch({ reset: true, success: this.refreshList });
 		this.cuisines.fetch({ reset: true, success: this.bindCuisineFilters });
