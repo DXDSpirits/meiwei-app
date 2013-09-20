@@ -54,9 +54,17 @@
 	@include size(50px, 53px);
 	padding-bottom: 6px;
 	@include flex-box($orient: horizontal);
-	&:active, &.active {
-		background-color: rgba($brownLight, 0.3);
-		//box-shadow: inset 0 0 2px $brown;
+	i { position: relative; }
+	i.pressed::before, &.pressed i::before {
+		content: "";
+		position: absolute;
+		top: 3px;
+		right: 3px;
+		bottom: 3px;
+		left: 3px;
+		background-color: rgba($brown, 0.3);
+		border-radius: 50%;
+		box-shadow: 0 0 30px rgba($brown, 1);
 	}
 }
 

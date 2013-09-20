@@ -14,7 +14,7 @@ MeiweiApp.Views.ProductCartItemList = MeiweiApp.CollectionView.extend({
 MeiweiApp.Views.RestaurantOrderContactForm = MeiweiApp.View.extend({
 	initialize: function(options) {
 		_.bindAll(this, 'fillContact', 'selectContact', 'switchGender');
-		new MBP.fastButton(this.$('>header')[0], this.selectContact);
+		new MBP.fastButton(this.$('>header h1')[0], this.selectContact);
 		var btn = new MBP.fastButton(this.$('.switch-gender')[0], this.switchGender);
 		var switchGender = this.$('.switch-gender');
 		btn.onTouchMove = function(event) {

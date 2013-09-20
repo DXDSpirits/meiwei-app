@@ -206,10 +206,10 @@
 		@include background-size(100% (3*$baseLineHeight));
 	}
 	.contact-info, .floorplan-select, .product-select {
-		header:active {
+		header h1.pressed {
 			background: $brownLighter;
 		}
-		h1::after {
+		header h1::after {
             content: "";
 			position: absolute;
 			top: (40px - 26px) / 2;
