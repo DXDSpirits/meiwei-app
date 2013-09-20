@@ -125,7 +125,7 @@ MeiweiApp.PageView = MeiweiApp.View.extend({
 		if (!this.lazy || (new Date()) - (this.lastRender || 0) > this.lazy) {
 			var render = this.render;
 			this.$('.wrapper').one('webkitAnimationEnd', function(e) {
-				if (e.originalEvent.animationName == "slideinfromright") {
+				if (e.originalEvent.animationName == "fadein") {
 					render();
 				}
 			});

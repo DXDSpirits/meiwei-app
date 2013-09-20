@@ -59,7 +59,10 @@
 }
 
 #view-member-center {
-	@include scrollBottomBanner();
+	&.view > .wrapper > .scroll {
+		background: url($backgroundBottomPath) no-repeat bottom;
+		@include background-size(contain);
+	}
 	.favorite-resto-carousel {
 		z-index: 0;
 		height: 200px - 45px;

@@ -20,28 +20,27 @@ body {
 	padding: $navbarHeight 0 0 0;
 	margin: 0;
 	overflow: hidden;
-	
-	&.view-hidden {
-		pointer-events: none;
-	}
-	
 	& > .wrapper {
 		@include flex-box($orient: vertical);
 		@include size(100%, 100%);
 		background-color: $bodyBackground;
 		position: relative;
-		@include translate3d(0, 0, 0);
-		@include animation(slideinfromright $pageSwitchDuration ease-in-out);
-		@include transition(opacity .1s ease-in-out);
 		&.rendering {
 			opacity: 0;
+			visibility: hidden;
 		}
+		opacity: 1;
+		visibility: visible;
+		@include animation(fadein $pageSwitchDuration ease-in-out);
 	}
-	
-	&.view-hidden > .wrapper {
+}
+
+.view.view-hidden {
+	pointer-events: none;
+	& > .wrapper {
+		opacity: 0;
 		visibility: hidden;
-		@include translate3d(100%, 0, 0);
-		@include animation(slideouttoleft $pageSwitchDuration ease-in-out);
+		@include animation(fadeout $pageSwitchDuration ease-in-out);
 	}
 }
 
@@ -56,12 +55,6 @@ body {
 		bottom: 0;
 		width: 100%;
 		min-height: 100px;
-	}
-}
-@mixin scrollBottomBanner() {
-	&.view > .wrapper > .scroll {
-		background: url($backgroundBottomPath) no-repeat bottom;
-		@include background-size(contain);
 	}
 }
 

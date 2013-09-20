@@ -6,7 +6,6 @@
 	position: absolute;
 	top: 0;
 	z-index: $zindexFixedNavbar;
-	
 	&::before {
 		content: " ";
 		background: transparent url($bannerImagePath) repeat-x;
@@ -16,16 +15,15 @@
 		z-index: -1;
 		//margin: 0 (-$navbarPadding);
 	}
-	
 	opacity: 1;
 	visibility: visible;
-	@include animation(all $pageSwitchDuration ease-in-out);
+	@include animation(fadein $pageSwitchDuration ease-in-out);
 }
 
-.view-hidden > header {
+.view.view-hidden > header {
 	opacity: 0;
 	visibility: hidden;
-	@include transition(all $pageSwitchDuration ease-in-out);
+	@include animation(fadeout $pageSwitchDuration ease-in-out);
 }
 
 .view > header > h1 {

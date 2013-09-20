@@ -168,16 +168,20 @@ MeiweiApp.Pages.RestaurantSearch = new (MeiweiApp.PageView.extend({
 		});
 	},
 	initializeMap: function () {
-		try {
-			this.markers = [];
-			this.map = new BMap.Map("map_canvas", {enableMapClick: false, maxZoom: 18});
-			this.map.enableContinuousZoom();
-			this.map.disablePinchToZoom();
-			this.map.centerAndZoom(new BMap.Point(121.491, 31.233), 12);
-			this.map.addControl(new BMap.NavigationControl({anchor: BMAP_ANCHOR_TOP_RIGHT, type: BMAP_NAVIGATION_CONTROL_ZOOM})); 
-		} catch (e) {
-			MeiweiApp.handleError(e);
-		}
+		var self = this;
+		var script = 'http://api.map.baidu.com/getscript?v=2.0&ak=D8b53e29c40828bb6b29865e8131db68&services=&t=20130916114116';
+		$.getScript(script, function() {
+			try {
+				self.markers = [];
+				self.map = new BMap.Map("map_canvas", {enableMapClick: false, maxZoom: 18});
+				self.map.enableContinuousZoom();
+				self.map.disablePinchToZoom();
+				self.map.centerAndZoom(new BMap.Point(121.491, 31.233), 12);
+				self.map.addControl(new BMap.NavigationControl({anchor: BMAP_ANCHOR_TOP_RIGHT, type: BMAP_NAVIGATION_CONTROL_ZOOM}));
+			} catch (e) {
+				MeiweiApp.handleError(e);
+			}
+		});
 	},
 	/*********************************************/
 	

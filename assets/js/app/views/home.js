@@ -85,6 +85,7 @@ MeiweiApp.Pages.Home = new (MeiweiApp.PageView.extend({
 				el: this.$('.recommend-flow')
 			})
 		};
+		this.listenTo(this.recommend.items, 'reset', this.initScroller);
 	},
 	handleScroll: function(e) {
 		if (this.scroller.directionY == 1) {
@@ -138,8 +139,7 @@ MeiweiApp.Pages.Home = new (MeiweiApp.PageView.extend({
 		if (!this.views.masterHero.rendered) this.views.masterHero.render();
 		if (bootstrap && bootstrap.Home && bootstrap.Home.recommend) {
 			this.recommend.items.reset(bootstrap.Home.recommend);
-			this.initScroller();
 		}
-		this.recommend.fetch({ reset: true, success: this.initScroller });
+		this.recommend.fetch({ reset: true });
 	}
 }))({el: $("#view-home")});
