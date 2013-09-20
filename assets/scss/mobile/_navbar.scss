@@ -15,15 +15,12 @@
 		z-index: -1;
 		//margin: 0 (-$navbarPadding);
 	}
-	opacity: 1;
-	visibility: visible;
-	@include animation(fadein $pageSwitchDuration ease-in-out);
+	@include transition(all $pageSwitchDuration ease-in-out);
 }
 
 .view.view-hidden > header {
 	opacity: 0;
 	visibility: hidden;
-	@include animation(fadeout $pageSwitchDuration ease-in-out);
 }
 
 .view > header > h1 {

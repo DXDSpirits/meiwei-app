@@ -29,9 +29,7 @@ body {
 			opacity: 0;
 			visibility: hidden;
 		}
-		opacity: 1;
-		visibility: visible;
-		@include animation(fadein $pageSwitchDuration ease-in-out);
+		@include transition(all $pageSwitchDuration ease-in-out);
 	}
 }
 
@@ -40,7 +38,6 @@ body {
 	& > .wrapper {
 		opacity: 0;
 		visibility: hidden;
-		@include animation(fadeout $pageSwitchDuration ease-in-out);
 	}
 }
 
