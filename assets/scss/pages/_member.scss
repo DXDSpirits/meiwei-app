@@ -107,12 +107,10 @@
 		}
 		h1 {
 			color: $white;
-			margin: 13px 0;
+			margin: 13px 0 8px;
 			font-size: $fontSizeLarge;
-			//text-shadow: 1px 1px 3px $brownDark;
 		}
 		p {
-			margin: -5px 0;
 			@include text-overflow();
 		}
 	}
