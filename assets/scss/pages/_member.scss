@@ -69,10 +69,20 @@
 		width: 100%;
 		position: relative;
 		img {
+		   	position: absolute;
+			bottom: -45px;
+			z-index: 0;
 		   	width: 100%;
 			min-height: 200px;
+		}
+		&::after {
+			content: "";
 			position: absolute;
 			bottom: -45px;
+			z-index: 1;
+			@include size(200px, 100%);
+			background: transparent url($blackShadowPath) no-repeat top;
+			@include background-size(100% 400px);
 		}
 	}
 	.member-profile-box {
@@ -82,15 +92,6 @@
 		@include size(90px, 100%);
 		margin-bottom: 10px;
 		@include clearfix();
-		&::before {
-			content: "";
-			position: absolute;
-			top: -15px;
-			z-index: -1;
-			@include size(60px, 100%);
-			background: transparent url($blackShadowPath) no-repeat top;
-			@include background-size(100% 60px);
-		}
 		& > div {
 			float: left;
 			height: 90px;

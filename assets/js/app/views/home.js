@@ -54,10 +54,10 @@ MeiweiApp.Views.RecommendItem = MeiweiApp.ModelView.extend({
 		MeiweiApp.goTo(dest, { restaurantId: restaurantId });
 	},
 	render: function() {
-		var self = this;
+		this.$el.html(this.template(this.model.toJSON()));
+		var $wrapper = this.$('.item-wrapper');
 		var img = $('<img></img>').attr('src', this.model.get('restaurant').frontpic).load(function() {
-			self.$el.html(self.template(self.model.toJSON()));
-			self.$('.item-wrapper').prepend(img);
+			$wrapper.prepend(img);
 		});
 		return this;
 	}

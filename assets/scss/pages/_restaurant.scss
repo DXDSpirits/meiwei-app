@@ -73,9 +73,9 @@
 			content: "";
 			position: absolute;
 			bottom: 0;
-			@include size(50px, 100%);
+			@include size(200px, 100%);
 			background: transparent url($blackShadowPath) no-repeat top;
-			@include background-size(100% 50px);
+			@include background-size(100% 400px);
 		}
 	}
 	.restaurant-profile {
@@ -166,9 +166,9 @@
 			content: "";
 			position: absolute;
 			bottom: 30px;
-			@include size(50px, 100%);
+			@include size(150px, 100%);
 			background: transparent url($blackShadowPath) no-repeat top;
-			@include background-size(100% 50px);
+			@include background-size(100% 300px);
 		}
         h1 {
         	font-size: $baseFontSize;

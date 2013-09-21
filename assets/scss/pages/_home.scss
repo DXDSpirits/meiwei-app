@@ -98,8 +98,9 @@
 		content: "";
 		position: absolute;
 		z-index: 1;
-		@include size(90px, 100%);
+		@include size($itemHeight, 100%);
 		background: transparent url($blackShadowPathR) no-repeat top;
-		@include background-size(100% 90px);
+		@include background-size(100% $itemHeight);
+		opacity: 0.4;
 	}
 }

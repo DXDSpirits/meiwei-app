@@ -42,7 +42,7 @@ body {
 	}
 }
 
-.bottom-banner {
+.view > .wrapper > .bottom-banner {
 	position: absolute;
 	bottom: 0;
 	@include size(100px, 100%);
@@ -78,10 +78,10 @@ body {
 		&::after {
 			content: "";
 			position: absolute;
-			bottom: -50px;
-			@include size(50px, 100%);
-			background: transparent url($blackShadowPathR) no-repeat top;
-			@include background-size(100% 50px);
+			bottom: -200px;
+			@include size(200px, 100%);
+			background: transparent url($blackShadowPathR) no-repeat bottom;
+			@include background-size(100% 300px);
 		}
 	}
 	&.scroll-infinite > .scroll-inner::after {
