@@ -58,13 +58,12 @@
 	i.pressed::before, &.pressed i::before {
 		content: "";
 		position: absolute;
-		top: 3px;
-		right: 3px;
-		bottom: 3px;
-		left: 3px;
-		background-color: rgba($brown, 0.3);
-		border-radius: 50%;
-		box-shadow: 0 0 30px rgba($brown, 1);
+		top: -12px;
+		right: -12px;
+		bottom: -12px;
+		left: -12px;
+		background: url($spotLightPath) no-repeat center;
+		@include background-size(contain);
 	}
 }
 
