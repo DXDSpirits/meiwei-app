@@ -6,17 +6,14 @@ MeiweiApp.View = Backbone.View.extend({
 		this.fastButtons.push(btn);
 		return btn;
 	},
-	clearFastButtons: function() {
-		if (!_.isEmpty(this.fastButtons)) {
-			
+	displayError: function($el, text) {
+		try {
+			var error = JSON.parse(text);
+			for (var k in error) { $el.html(error[k]);  break; };
+		} catch (e) {
+			$el.html(text);
 		}
-	},
-	remove: function() {
-		this.clearFastButtons();
-		this.$el.remove();
-		this.stopListening();
-		return this;
-    },
+	}
 });
 
 MeiweiApp.ModelView = MeiweiApp.View.extend({
@@ -98,7 +95,6 @@ MeiweiApp.PageView = MeiweiApp.View.extend({
 	onClickLeftBtn: function() { MeiweiApp.goBack(); },
 	onClickRightBtn: function() {},
 	initScroller: function(options) {
-		options = options || { preventDefault: false };
 		if (this.scroller == null) {
 			if (this.$('.iscroll').length > 0) {
 			    this.scroller = new IScroll(this.$('.iscroll').selector, options);

@@ -1,7 +1,5 @@
 
 $(function() {
-	//document.addEventListener('touchmove', function (e) { e.preventDefault(); }, false);
-	MBP.preventScrolling();
 	document.addEventListener("deviceready", MeiweiApp.start, false);
 });
 

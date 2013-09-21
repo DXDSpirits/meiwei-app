@@ -88,11 +88,9 @@ MeiweiApp.Views.ProductItemDetail = MeiweiApp.DialogView.extend({
 	className: 'dialog product-detail',
 	template: MeiweiApp.Templates['product-item-detail'],
 	initDialogView: function() {
-		_.bindAll(this, 'confirmPurchase')
-	},
-	events: {
-		'click .btn-cancel': 'closeDialog',
-		'click .btn-confirm': 'confirmPurchase'
+		_.bindAll(this, 'closeDialog', 'confirmPurchase');
+		this.bindFastButton(this.$('.btn-cancel'), this.closeDialog);
+		this.bindFastButton(this.$('.btn-confirm'), this.confirmPurchase);
 	},
 	confirmPurchase: function() {
 		var self = this;

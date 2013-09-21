@@ -14,10 +14,6 @@ MeiweiApp.Views.ContactList = MeiweiApp.CollectionView.extend({
 });
 
 MeiweiApp.Pages.MemberContacts = new(MeiweiApp.PageView.extend({
-	events: {
-		'click .filter-online': 'getOnlineContacts',
-		'click .filter-local': 'getLocalContacts',
-	},
 	onClickRightBtn: function() {
 		if (this.options && this.options.callback)
 			this.options.callback(this.selectedContact.get('name'), this.selectedContact.get('mobile'));
@@ -34,7 +30,9 @@ MeiweiApp.Pages.MemberContacts = new(MeiweiApp.PageView.extend({
 			})
 		};
 		this.selectedContact = null;
-		_.bindAll(this, "bindContactSelect");
+		_.bindAll(this, 'bindContactSelect', 'getOnlineContacts', 'getLocalContacts');
+		this.bindFastButton(this.$('.filter-online'), this.getOnlineContacts);
+		this.bindFastButton(this.$('.filter-local'), this.getLocalContacts);
 	},
 	bindContactSelect: function(collection, response, options) {
 		this.initScroller();

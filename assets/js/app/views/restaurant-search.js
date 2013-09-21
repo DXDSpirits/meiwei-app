@@ -1,7 +1,10 @@
 
 MeiweiApp.Views.MarkerItemInfo = MeiweiApp.ModelView.extend({
-	events: { 'click': 'viewRestaurant' },
 	template: MeiweiApp.Templates['restaurant-list-item'],
+	initModelView: function() {
+		_.bindAll(this, 'viewRestaurant');
+		this.bindFastButton(this.$el, this.viewRestaurant);
+	},
 	viewRestaurant: function() {
 		MeiweiApp.goTo('RestaurantDetail', {
 			restaurant: this.model.toJSON()
@@ -23,10 +26,13 @@ MeiweiApp.Views.MarkerItemInfo = MeiweiApp.ModelView.extend({
 });
 
 MeiweiApp.Views.RestaurantListItem = MeiweiApp.ModelView.extend({
-	events: { 'click': 'viewRestaurant' },
 	tagName: 'section',
 	className: 'restaurant-list-item',
 	template: MeiweiApp.Templates['restaurant-list-item'],
+	initModelView: function() {
+		_.bindAll(this, 'viewRestaurant');
+		this.bindFastButton(this.$el, this.viewRestaurant);
+	},
 	viewRestaurant: function() {
 		MeiweiApp.goTo('RestaurantDetail', {
 			restaurant: this.model.toJSON()
@@ -42,7 +48,10 @@ MeiweiApp.Views.Filter = MeiweiApp.CollectionView.extend({
 	ModelView: MeiweiApp.ModelView.extend({
 		tagName: 'li',
 		template: Mustache.compile('{{name}}'),
-		events: { 'click': 'selectFilter' },
+		initModelView: function() {
+			_.bindAll(this, 'selectFilter');
+			this.bindFastButton(this.$el, this.selectFilter);
+		},
 		selectFilter: function() {
 			this.model.trigger('select');
 		}
@@ -62,7 +71,9 @@ MeiweiApp.Pages.RestaurantSearch = new (MeiweiApp.PageView.extend({
 	clearFormInput: function() { this.$('>header input').val(''); },
 	initPage: function() {
 		this.lazy = 24 * 60 * 60 * 1000;
-		_.bindAll(this, 'refreshList', 'filterRestaurant', 'bindCuisineFilters', 'bindCircleFilters');
+		_.bindAll(this, 'refreshList', 'filterRestaurant',
+					'bindCuisineFilters', 'bindCircleFilters',
+					'toggleCuisineFilters', 'toggleCircleFilters');
 		this.restaurants = new MeiweiApp.Collections.Restaurants();
 		this.cuisines = new MeiweiApp.Collections.Cuisines();
 		this.circles = new MeiweiApp.Collections.Circles();
@@ -84,14 +95,8 @@ MeiweiApp.Pages.RestaurantSearch = new (MeiweiApp.PageView.extend({
 				el: this.$('.map-marker-info')
 			})
 		};
-		this.$('.collapsible').on('click', function() {
-			if (!$(this).hasClass('expand')) {
-				$(this).siblings().removeClass('expand');
-				$(this).addClass('expand');
-			} else {
-				$(this).removeClass('expand');
-			}
-		});
+		this.bindFastButton(this.$('.collapsible.circle'), this.toggleCircleFilters);
+		this.bindFastButton(this.$('.collapsible.cuisine'), this.toggleCuisineFilters);
 		this.initializeMap();
 		this.initPageNav(this, this.restaurants);
 	},
@@ -114,10 +119,16 @@ MeiweiApp.Pages.RestaurantSearch = new (MeiweiApp.PageView.extend({
 	filterRestaurant: function(filter) {
 		this.restaurants.fetch({ reset: true, success: this.refreshList, data: filter });
 	},
+	toggleCuisineFilters: function() {
+		this.$('.collapsible.circle').removeClass('expand');
+		this.$('.collapsible.cuisine').toggleClass('expand');
+	},
+	toggleCircleFilters: function() {
+		this.$('.collapsible.cuisine').removeClass('expand');
+		this.$('.collapsible.circle').toggleClass('expand');
+	},
 	bindCuisineFilters: function(cuisines, response, options) {
-	    this.cuisineFilterScroller = new IScroll(this.$('.cuisine .collapsible-inner').selector, {
-	    	preventDefault: false
-		});
+	    this.cuisineFilterScroller = new IScroll(this.$('.cuisine .collapsible-inner').selector);
 		this.cuisineFilterScroller.maxScrollY += 200;
 		var bindFilter = function(cuisine) {
 			this.listenTo(cuisine, "select", function() {
@@ -127,9 +138,7 @@ MeiweiApp.Pages.RestaurantSearch = new (MeiweiApp.PageView.extend({
 		cuisines.forEach(bindFilter, this);
 	},
 	bindCircleFilters: function(circles, response, options) {
-		this.circleFilterScroller = new IScroll(this.$('.circle .collapsible-inner').selector, {
-	    	preventDefault: false
-		});
+		this.circleFilterScroller = new IScroll(this.$('.circle .collapsible-inner').selector);
 		this.circleFilterScroller.maxScrollY += 200;
 		var bindFilter = function(circle) {
 			this.listenTo(circle, "select", function() {

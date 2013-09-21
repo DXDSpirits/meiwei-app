@@ -1,9 +1,10 @@
 
 MeiweiApp.Views.OrderPages = MeiweiApp.CollectionView.extend({
 	ModelView: MeiweiApp.ModelView.extend({
-		events: {
-			'click .btn-share-weixin' : 'onClickWeixinBtn',
-			'click .btn-share-weibo' : 'onClickWeiboBtn'
+		initModelView: function() {
+			_.bindAll(this, 'onClickWeixinBtn', 'onClickWeiboBtn');
+			this.bindFastButton(this.$('.btn-share-weixin'), this.onClickWeixinBtn);
+			this.bindFastButton(this.$('.btn-share-weibo'), this.onClickWeiboBtn);
 		},
 		template: MeiweiApp.Templates['order-attending'],
 		className: 'order-page-item carousel-item',

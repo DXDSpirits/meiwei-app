@@ -1,8 +1,9 @@
 
 MeiweiApp.Views.MemberAnniversaryForm = MeiweiApp.View.extend({
-	events: {
-		'click .save-button': 'save',
-		'click .delete-button': 'remove',
+	initialize: function() {
+		_.bindAll(this, 'save', 'remove');
+		this.bindFastButton(this.$('.save-button'), this.save);
+		this.bindFastButton(this.$('.delete-button'), this.remove);
 	},
 	save: function(e) {
 		e.preventDefault();
@@ -10,14 +11,13 @@ MeiweiApp.Views.MemberAnniversaryForm = MeiweiApp.View.extend({
 			date: this.$('input[name=date]').val() || null,
 			description: this.$('input[name=description]').val() || null
 		});
-		var $infoText = this.$('.info-text');
+		var self = this;
 		this.anniversary.save({}, { 
 		    success: function() {
-		    	MeiweiApp.goTo('MemberAnniversaries');
+				MeiweiApp.goTo('MemberAnniversaries');
 		    },
 		    error: function(model, xhr, options) {
-	            var error = JSON.parse(xhr.responseText);
-		        for (var k in error) { $infoText.html(error[k]);  break; };
+				self.displayError(self.$('.info-text'), xhr.responseText);
             }
 		});
 	},

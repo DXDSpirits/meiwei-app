@@ -1,20 +1,18 @@
 
 MeiweiApp.Views.MemberLoginForm = MeiweiApp.View.extend({
-	events: {
-		'click .login-button': 'login',
-		'click .register-button': 'register',
-	},
 	initialize: function() {
-		_.bindAll(this, 'displayError', 'login', 'register', 'onLoginSuccess');
-	},
-	displayError: function(model, xhr, options) {
-		window.scrollTo(0, 0);
-		var $infoText = this.$('.info-text');
-		var error = JSON.parse(xhr.responseText);
-		for (var k in error) { $infoText.html(error[k]); break; }
+		_.bindAll(this, 'login', 'register', 'onLoginSuccess', 'onLoginFail', 'onRegisterFail');
+		this.bindFastButton(this.$('.login-button'), this.login);
+		this.bindFastButton(this.$('.register-button'), this.register);
 	},
 	onLoginSuccess: function() {
 		MeiweiApp.refreshActivePage();
+	},
+	onLoginFail: function(model, xhr, options) {
+		this.displayError(this.$('.info-text'), xhr.responseText);
+	},
+	onRegisterFail: function(model, xhr, options) {
+		this.displayError(this.$('.info-text'), xhr.responseText);
 	},
 	login: function() {
 		window.scrollTo(0, 0);
@@ -23,8 +21,7 @@ MeiweiApp.Views.MemberLoginForm = MeiweiApp.View.extend({
 			var password = this.$('input[name=password]').val();
 			if (username.length > 0 && password.length > 0) {
 				MeiweiApp.me.login({ username : username, password : password }, {
-					success : this.onLoginSuccess,
-					error : this.displayError
+					success : this.onLoginSuccess, error : this.onLoginFail
 				});
 			}
 		} else {
@@ -48,15 +45,15 @@ MeiweiApp.Views.MemberLoginForm = MeiweiApp.View.extend({
 				this.$('.info-text').html('两次密码输入不一致，请重新输入。');
 			} else if (username && password) {
 				var onLoginSuccess = this.onLoginSuccess;
-				var displayError = this.displayError;
+				var onLoginFail = this.onLoginFail;
 				MeiweiApp.me.register({username: username, password: password}, {
 					success: function() {
 						MeiweiApp.me.login({ username : username, password : password }, {
 							success : onLoginSuccess,
-							error : displayError
+							error : onLoginFail
 						});
 					},
-					error: displayError
+					error: this.onRegisterFail
 				});
 			}
 		} else {

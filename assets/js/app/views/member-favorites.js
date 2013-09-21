@@ -2,11 +2,12 @@
 MeiweiApp.Views.FavoriteList = MeiweiApp.CollectionView.extend({
 	ModelView: MeiweiApp.ModelView.extend({
 		template: MeiweiApp.Templates['favorite-list-item'],
-		events: {
-			'click section': 'viewRestaurant',
-			'click .delete-button': 'deleteFav',
-		},
 		className: 'restaurant-list-item',
+		initModelView: function() {
+			_.bindAll(this, 'viewRestaurant', 'deleteFav');
+			this.bindFastButton(this.$('section'), this.viewRestaurant);
+			this.bindFastButton(this.$('.delete-button'), this.deleteFav);
+		},
 		viewRestaurant: function() {
 			MeiweiApp.goTo('RestaurantDetail', {
 				restaurantId: this.model.get('restaurant')

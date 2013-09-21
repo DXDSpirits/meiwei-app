@@ -1,10 +1,8 @@
 
 MeiweiApp.Views.MemberProfileForm = MeiweiApp.View.extend({
-	events: {
-		'submit': 'updateProfile',
-	},
 	initialize: function() {
-		_.bindAll(this, 'switchGender', 'render');
+		_.bindAll(this, 'switchGender', 'render', 'updateProfile');
+		this.bindFastButton(this.$('button'), this.updateProfile);
 		var btn = this.bindFastButton(this.$('.switch-gender'), this.switchGender);
 		var switchGender = this.$('.switch-gender');
 		btn.onTouchMove = function(event) {
@@ -35,12 +33,11 @@ MeiweiApp.Views.MemberProfileForm = MeiweiApp.View.extend({
 			sexe: this.$('input[name=sexe]').val() || null,
 			birthday: this.$('input[name=birthday]').val() || null
 		});
-		var $infoText = this.$('.info-text');
+		var self = this;
 		MeiweiApp.me.profile.save({}, { 
 		    success: MeiweiApp.goBack,
 		    error: function(model, xhr, options) {
-	            var error = JSON.parse(xhr.responseText);
-		        for (var k in error) { $infoText.html(error[k]);  break; };
+		        self.displayError(self.$('.info-text'), xhr.responseText);
             }
 		});
 	},
@@ -55,24 +52,27 @@ MeiweiApp.Views.MemberProfileForm = MeiweiApp.View.extend({
 		this.$('.switch-gender label').html(
 			this.$('.switch-gender label').attr('data-' + (profile.sexe == 1 ? 'on' : 'off'))
 		);
+		this.$('.info-text').html('');
 	}
 });
 
 MeiweiApp.Views.MemberPasswordForm = MeiweiApp.View.extend({
-	events: { 'submit': 'updatePassword' },
+	initialize: function() {
+		_.bindAll(this, 'updatePassword');
+		this.bindFastButton(this.$('button'), this.updatePassword);
+	},
 	updatePassword: function(e) {
 		e.preventDefault();
-		var $infoText = this.$('.info-text');
 		var password = this.$('input[name=password]').val() || null;
 		var passwordConfirm = this.$('input[name=password-confirm]').val() || null;
 		if (password != passwordConfirm) {
-			$infoText.html('两次密码输入不一致，请重新输入。');
+			this.$('.info-text').html('两次密码输入不一致，请重新输入。');
 		} else {
+			var self = this;
 			MeiweiApp.me.changePassword(password, { 
 				success: MeiweiApp.goBack,
 				error: function(model, xhr, options) {
-					var error = JSON.parse(xhr.responseText);
-					for (var k in error) { $infoText.html(error[k]); break; };
+					self.displayError(self.$('.info-text'), xhr.responseText);
 				}
 			});
 		}

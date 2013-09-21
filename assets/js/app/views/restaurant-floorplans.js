@@ -1,12 +1,13 @@
 
 MeiweiApp.Views.FloorplanNav = MeiweiApp.CollectionView.extend({
 	ModelView: MeiweiApp.ModelView.extend({
-		initialize: function() {
-			this.listenTo(this.model, 'select', this.onSelect);
-		},
 		className: 'floorplan-nav-item',
 		template: Mustache.compile("{{caption}}"),
-		events: { 'click' : 'triggerSelect' },
+		initModelView: function() {
+			this.listenTo(this.model, 'select', this.onSelect);
+			_.bindAll(this, 'triggerSelect');
+			this.bindFastButton(this.$el, this.triggerSelect);
+		},
 		triggerSelect: function() {
 			this.model.trigger('select');
 		},
@@ -18,7 +19,10 @@ MeiweiApp.Views.FloorplanNav = MeiweiApp.CollectionView.extend({
 });
 
 MeiweiApp.Views.Floorplan = MeiweiApp.View.extend({
-	events: {'click .table':'selectSeat'},
+	initialize: function() {
+		_.bindAll(this, 'selectSeat');
+		this.bindFastButton(this.$('.table'), this.selectSeat);
+	},
 	onSelect: function(model) {
 		this.$el.find("[status=selected]").attr("status", "available");
 		this.model = model;

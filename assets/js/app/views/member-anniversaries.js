@@ -3,7 +3,10 @@ MeiweiApp.Views.AnnversaryList = MeiweiApp.CollectionView.extend({
 	ModelView: MeiweiApp.ModelView.extend({
 		template: MeiweiApp.Templates['member-anniversary-item'],
 		className: 'anniversary-list-item',
-		events: { 'click': 'modify' },
+		initModelView: function() {
+			_.bindAll(this, 'modify');
+			this.bindFastButton(this.$el, this.modify);
+		},
 		modify: function() {
 			MeiweiApp.goTo('MemberAnniversariyDetail', {
 				anniversary: this.model
