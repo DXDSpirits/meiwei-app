@@ -33,8 +33,7 @@ MeiweiApp.Views.MemberProfileForm = MeiweiApp.View.extend({
 			email: this.$('input[name=email]').val() || null,
 			mobile: this.$('input[name=mobile]').val() || null,
 			sexe: this.$('input[name=sexe]').val() || null,
-			birthday: this.$('input[name=birthday]').val() || null,
-			anniversary: this.$('input[name=anniversary]').val() || null
+			birthday: this.$('input[name=birthday]').val() || null
 		});
 		var $infoText = this.$('.info-text');
 		MeiweiApp.me.profile.save({}, { 
@@ -51,7 +50,6 @@ MeiweiApp.Views.MemberProfileForm = MeiweiApp.View.extend({
 		this.$('input[name=email]').val(profile.email);
 		this.$('input[name=mobile]').val(profile.mobile);
 		this.$('input[name=birthday]').val(profile.birthday);
-		this.$('input[name=anniversary]').val(profile.anniversary);
 		this.$('input[name=sexe]').val(profile.sexe);
 		this.$('.switch-gender').toggleClass('on', (profile.sexe == 1)).toggleClass('off', (profile.sexe == 0));
 		this.$('.switch-gender label').html(

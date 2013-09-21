@@ -80,11 +80,11 @@ MeiweiApp.initSync = function() {
 MeiweiApp.initAjaxEvents = function() {
 	var timeout = 0;
 	$(document).ajaxStart(function() {
-		$('#apploader').removeClass('hide');
+		$('#apploader').removeClass('hidden');
 	});
 	$(document).ajaxStop(function() {
 		setTimeout(function() {
-			$('#apploader').addClass('hide');
+			$('#apploader').addClass('hidden');
 			timeout = 0;
 		}, timeout);
 	});
@@ -93,16 +93,16 @@ MeiweiApp.initAjaxEvents = function() {
 		if (jqxhr.status == 401 || jqxhr.status == 403 || jqxhr.status == 499) {
 			if (response.detail != 'Authentication credentials were not provided.') {
 				var text = $('#apploader .ajax-error').html();
-				$('#apploader .ajax-error').html(response.detail).removeClass('hide');
+				$('#apploader .ajax-error').html(response.detail).removeClass('hidden');
 				setTimeout(function() {
-					$('#apploader .ajax-error').html(text).addClass('hide');
+					$('#apploader .ajax-error').html(text).addClass('hidden');
 				}, (timeout = 2000) + 500);
 			}
 			MeiweiApp.Pages.MemberLogin.go({ ref: MeiweiApp.history.active });
 		} else if (settings.type == 'GET') {
-			$('#apploader .ajax-error').removeClass('hide');
+			$('#apploader .ajax-error').removeClass('hidden');
 			setTimeout(function() {
-				$('#apploader .ajax-error').addClass('hide');
+				$('#apploader .ajax-error').addClass('hidden');
 				//MeiweiApp.goBack();
 			}, (timeout = 3000) + 500);
 		}

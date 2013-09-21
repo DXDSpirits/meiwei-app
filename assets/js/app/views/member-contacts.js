@@ -49,11 +49,11 @@ MeiweiApp.Pages.MemberContacts = new(MeiweiApp.PageView.extend({
 	    this.$('.filter-local').addClass('selected');
 		var contactCollection = this.views.contactList.collection;
 		var bindContactSelect = this.bindContactSelect;
-		$('#apploader').removeClass('hide');
+		$('#apploader').removeClass('hidden');
 		navigator.contacts.find(
 			["displayName", "phoneNumbers"],
 			function(contacts) {
-				$('#apploader').addClass('hide');
+				$('#apploader').addClass('hidden');
 				var localCollection = new MeiweiApp.Collections.Contacts();
 				contacts = _.sortBy(contacts, function (contact) { return contact.displayName; });
 				for (i = 0; i < contacts.length; i++) {
@@ -67,7 +67,7 @@ MeiweiApp.Pages.MemberContacts = new(MeiweiApp.PageView.extend({
 				contactCollection.reset(localCollection.models);
 				bindContactSelect(contactCollection);
 			},
-			function(e) { $('#apploader').addClass('hide'); },
+			function(e) { $('#apploader').addClass('hidden'); },
 			{ multiple: true }
 		);
 	},

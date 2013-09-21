@@ -167,3 +167,37 @@
 	    }
 	}
 }
+
+#view-member-anniversaries {
+	.anniversary-list-item {
+		@include clearfix();
+		@include border(0 0 1px 0, solid, $brownLighter);
+		@include size(50px, 100%);
+		.date-icon, .date-desc {
+			float: left;
+			height: 100%;
+		}
+		.date-icon {
+			padding: 12px;
+			width: 80px;
+			span {
+				display: inline-block;
+				width: 30px;
+				text-align: right;
+				font-weight: bold;
+				vertical-align: middle;
+			}
+		}
+		.date-desc {
+			padding: 15px;
+		}
+	}
+	.month {
+		background-color: $brownLight;
+		width: 100%;
+		height: 30px;
+		padding: 0 17px;
+		line-height: 30px;
+		color: $white;
+	}
+}

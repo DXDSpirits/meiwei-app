@@ -84,18 +84,15 @@ MeiweiApp.Pages.ProductPurchase = new (MeiweiApp.PageView.extend({
 /******************************************* ProductRedeem *******************************************/
 /*****************************************************************************************************/
 
-MeiweiApp.Views.ProductItemDetail = MeiweiApp.View.extend({
-	className: 'dialog',
-	initialize: function() {
-		_.bindAll(this, 'closeDialog', 'confirmPurchase')
+MeiweiApp.Views.ProductItemDetail = MeiweiApp.DialogView.extend({
+	className: 'dialog product-detail',
+	template: MeiweiApp.Templates['product-item-detail'],
+	initDialogView: function() {
+		_.bindAll(this, 'confirmPurchase')
 	},
 	events: {
 		'click .btn-cancel': 'closeDialog',
 		'click .btn-confirm': 'confirmPurchase'
-	},
-	closeDialog: function() {
-		this.remove();
-		$('#dialog-overlay').hide();
 	},
 	confirmPurchase: function() {
 		var self = this;
@@ -113,11 +110,9 @@ MeiweiApp.Views.ProductItemDetail = MeiweiApp.View.extend({
 			}
 		});
 	},
-	template: MeiweiApp.Templates['product-item-detail'],
 	render: function() {
 		this.$el.html(this.template(this.model.toJSON()));
-		$('body').append(this.el);
-		$('#dialog-overlay').show();
+		this.openDialog();
 		this.delegateEvents();
 		return this;
 	}

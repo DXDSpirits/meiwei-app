@@ -69,6 +69,21 @@ MeiweiApp.CollectionView = MeiweiApp.View.extend({
 	}
 });
 
+MeiweiApp.DialogView = MeiweiApp.View.extend({
+	initialize: function() {
+		_.bindAll(this, 'closeDialog', 'openDialog');
+		if (this.initDialogView) this.initDialogView();
+	},
+	closeDialog: function() {
+		this.remove();
+		$('#dialog-overlay').addClass('hidden');
+	},
+	openDialog: function() {
+		$('body').append(this.el);
+		$('#dialog-overlay').removeClass('hidden');
+	}
+});
+
 MeiweiApp.PageView = MeiweiApp.View.extend({
 	initialize: function() {
 		this.views = {};

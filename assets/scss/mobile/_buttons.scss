@@ -35,11 +35,15 @@ input[type="submit"], button, .btn {
 	}
 	
 	&.btn-inverse.active,
-	&.btn-inverse:active{
+	&.btn-inverse:active {
 		color: $brownDark;
 		background-color: $white;
 	}
-
+	
+	&.btn-block-level {
+		display: block;
+		width: 100%;
+	}
 }
 
 .button-group {

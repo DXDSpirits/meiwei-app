@@ -30,6 +30,21 @@ MeiweiApp.Collections.Credits = MeiweiApp.Collection.extend({
 	model: MeiweiApp.Models.Credit
 });
 
+MeiweiApp.Models.Anniversary = MeiweiApp.Model.extend({
+	urlRoot: MeiweiApp.configs.APIHost + '/members/anniversary/',
+	parse: function(response) {
+		var date = (new Date(response.date)).toISOString();
+		response.month = date.slice(5, 7);
+		response.day = date.slice(8, 10);
+		return response;
+	}
+});
+
+MeiweiApp.Collections.Anniversaries = MeiweiApp.Collection.extend({
+	url: MeiweiApp.configs.APIHost + '/members/anniversary/',
+	model: MeiweiApp.Models.Anniversary
+});
+
 MeiweiApp.Models.Favorite = MeiweiApp.Model.extend({
 	urlRoot: MeiweiApp.configs.APIHost + '/members/favorite/'
 });

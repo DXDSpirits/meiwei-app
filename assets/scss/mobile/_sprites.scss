@@ -88,6 +88,8 @@
 .icon-envelope				{ @include icon-offset(6, 5); }
 .icon-pencil				{ @include icon-offset(7, 5); }
 
+.icon-calendar-large		{ @include icon-offset(6, 6); }
+
 // Rating Component
 @mixin icon-star-large-full		{ @include icon-offset(0, 6); width: 20px; }
 @mixin icon-star-large-zero		{ @include icon-offset(1, 6); width: 20px; }

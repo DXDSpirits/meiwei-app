@@ -62,6 +62,7 @@ MeiweiApp.Pages.MemberCenter = new (MeiweiApp.PageView.extend({
 	gotoMyCredits:    function() { MeiweiApp.goTo('MemberCredits'); },
 	gotoMyFavorites:  function() { MeiweiApp.goTo('MemberFavorites'); },
 	gotoViewProducts: function() { MeiweiApp.goTo('ProductPurchase'); },
+	gotoMyAnniversaries: function() { MeiweiApp.goTo('MemberAnniversaries'); },
 	logout:           function() {
 		MeiweiApp.me.logout();
 		MeiweiApp.goTo('Home');
@@ -75,6 +76,7 @@ MeiweiApp.Pages.MemberCenter = new (MeiweiApp.PageView.extend({
 		this.bindFastButton(this.$('.member-center-nav > li:nth-child(3)'), this.gotoMyCredits);
 		this.bindFastButton(this.$('.member-center-nav > li:nth-child(4)'), this.gotoMyFavorites);
 		this.bindFastButton(this.$('.member-center-nav > li:nth-child(5)'), this.gotoViewProducts);
+		this.bindFastButton(this.$('.member-center-nav > li:nth-child(6)'), this.gotoMyAnniversaries);
 		this.bindFastButton(this.$('.logout-button'), this.logout);
 		this.favorites = MeiweiApp.me.favorites;
 		this.views = {
