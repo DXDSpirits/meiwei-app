@@ -51,8 +51,6 @@ input[type="submit"], button, .btn {
 	input[type="submit"], button, .btn {
 		@include flexible($orient: horizontal);
 		margin-right: 10px;
-		&:last-child {
-			margin-right: 0;
-		}
 	}
+	margin-right: -10px;
 }

@@ -56,14 +56,14 @@ input[type="color"],
 	@include box-sizing(border-box);
 	@include box-shadow(none);
 	@include clear-outline();
-	@include placeholder($brownLight);
 	@include border-radius(0);
 	border: 1px solid $brownLighter;
 	
 	display: block;
 	color: $brown;
 	font-family: $sansFontFamily;
-	//font-size: $fontSizeSmall;
+	font-size: $fontSizeSmall;
+	@include placeholder($brownLight, $fontSizeSmall);
 	padding: 8px 11px;
 	height: 44px;
 	
@@ -98,6 +98,7 @@ form .info-text {
 form label {
 	font-size: $fontSizeSmall;
 	color: $brown;
+	vertical-align: middle;
 }
 
 //radio-button

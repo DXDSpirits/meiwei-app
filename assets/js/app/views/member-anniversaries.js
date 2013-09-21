@@ -2,7 +2,13 @@
 MeiweiApp.Views.AnnversaryList = MeiweiApp.CollectionView.extend({
 	ModelView: MeiweiApp.ModelView.extend({
 		template: MeiweiApp.Templates['member-anniversary-item'],
-		className: 'anniversary-list-item'
+		className: 'anniversary-list-item',
+		events: { 'click': 'modify' },
+		modify: function() {
+			MeiweiApp.goTo('MemberAnniversariyDetail', {
+				anniversary: this.model
+			});
+		}
 	}),
 	addAll: function() {
 		var $list = [];
@@ -21,7 +27,9 @@ MeiweiApp.Views.AnnversaryList = MeiweiApp.CollectionView.extend({
 
 MeiweiApp.Pages.MemberAnniversaries = new (MeiweiApp.PageView.extend({
 	onClickLeftBtn: function() { MeiweiApp.goTo('MemberCenter'); },
-	onClickRightBtn: function() { MeiweiApp.goTo('MemberAnniversariyDetail'); },
+	onClickRightBtn: function() {
+		MeiweiApp.goTo('MemberAnniversariyDetail');
+	},
 	initPage: function() {
 		this.anniversaries = new MeiweiApp.Collections.Anniversaries();
 		this.views = {

@@ -35,6 +35,8 @@
 .icon-cancel				{ @include icon-offset(4, 0); }
 //.icon-cancel:active			{ @include icon-offset(5, 0); }
 
+.icon-gift					{ @include icon-offset(6, 0); }
+
 .icon-confirm				{ @include icon-offset(0, 1); }
 //.icon-confirm:active		{ @include icon-offset(1, 1); }
 
@@ -79,7 +81,7 @@
 .icon-clock					{ @include icon-offset(6, 4); }
 .icon-clock					{ @include icon-offset(7, 4); }
 
-.icon-gift					{ @include icon-offset(0, 5); }
+.icon-gift-light			{ @include icon-offset(0, 5); }
 .icon-edit-light			{ @include icon-offset(1, 5); }
 .icon-left-light			{ @include icon-offset(2, 5); }
 .icon-right-light			{ @include icon-offset(3, 5); }
