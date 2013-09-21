@@ -1,9 +1,8 @@
 
 MeiweiApp.Views.RestaurantProfileBox = MeiweiApp.View.extend({
-	initialize: function() {
+	events: { 'tap .order-button': 'goToOrder' },
+	initView: function() {
 		this.listenTo(this.model, 'change', this.render);
-		_.bindAll(this, 'goToOrder');
-		new MBP.fastButton(this.$('.order-button')[0], this.goToOrder);
 	},
 	goToOrder: function() {
 		MeiweiApp.goTo('RestaurantOrder', {

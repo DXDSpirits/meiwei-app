@@ -1,9 +1,11 @@
 
 MeiweiApp.Views.MemberLoginForm = MeiweiApp.View.extend({
-	initialize: function() {
+	events: {
+		'tap .login-button': 'login',
+		'tap .register-button': 'register'
+	},
+	initView: function() {
 		_.bindAll(this, 'login', 'register', 'onLoginSuccess', 'onLoginFail', 'onRegisterFail');
-		this.bindFastButton(this.$('.login-button'), this.login);
-		this.bindFastButton(this.$('.register-button'), this.register);
 	},
 	onLoginSuccess: function() {
 		MeiweiApp.refreshActivePage();

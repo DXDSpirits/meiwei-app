@@ -2,8 +2,8 @@
 MeiweiApp.Views.ProductModelView = MeiweiApp.ModelView.extend({
 	tagName: "section",
 	className: "product-box",
-	events: { "click .carousel-item": "onSelectItem" },
 	template: MeiweiApp.Templates['product-carousel'],
+	events: { 'tap .carousel-item': 'onSelectItem' },
 	render: function() {
 		this.model.items.forEach(function(item) {
 			item.set({selected: (MeiweiApp.ProductCart.get(item.id) != null)});
@@ -33,7 +33,8 @@ MeiweiApp.Views.ProductPurchaseList = MeiweiApp.CollectionView.extend({
 
 MeiweiApp.Pages.ProductPurchase = new (MeiweiApp.PageView.extend({
 	initPage: function() {
-		this.lazy = 24 * 60 * 60 * 1000;
+		//this.lazy = 24 * 60 * 60 * 1000;
+		//TODO lazy will prevent refreshing 'selected' status
 		_.bindAll(this, 'carousel');
 		this.products = new MeiweiApp.Collections.Products();
 		this.views = {
@@ -60,9 +61,20 @@ MeiweiApp.Pages.ProductPurchase = new (MeiweiApp.PageView.extend({
 			var items = $(selector).find('.carousel-inner > .carousel-item');
 			$(selector).find('.carousel-inner').css('width', items.length * $(items[0]).outerWidth());
 			this.carouselScrolls.push(new IScroll(selector, {
-				scrollX: true, scrollY: false, momentum: false, snap: true, click: true 
+				scrollX: true, scrollY: false, momentum: false, snap: true, tap: true
 			}));
 		}, this);
+	},
+	initScroller: function() {
+		if (this.scroller == null) {
+			if (this.$('.iscroll').length > 0) {
+			    this.scroller = new IScroll(this.$('.iscroll').selector, {
+			    	tap: false, tagName: /^(INPUT|TEXTAREA|SELECT)$/
+			    });
+			}
+		} else {
+			this.scroller.refresh();
+		}
 	},
 	render: function() {
 		var self = this;
@@ -84,13 +96,22 @@ MeiweiApp.Pages.ProductPurchase = new (MeiweiApp.PageView.extend({
 /******************************************* ProductRedeem *******************************************/
 /*****************************************************************************************************/
 
-MeiweiApp.Views.ProductItemDetail = MeiweiApp.DialogView.extend({
+MeiweiApp.Views.ProductItemDetail = MeiweiApp.View.extend({
 	className: 'dialog product-detail',
 	template: MeiweiApp.Templates['product-item-detail'],
-	initDialogView: function() {
-		_.bindAll(this, 'closeDialog', 'confirmPurchase');
-		this.bindFastButton(this.$('.btn-cancel'), this.closeDialog);
-		this.bindFastButton(this.$('.btn-confirm'), this.confirmPurchase);
+	events: {
+		'click .btn-cancel': 'closeDialog',
+		'click .btn-confirm': 'confirmPurchase'
+	},
+	closeDialog: function() {
+		this.remove();
+		$('#dialog-overlay').addClass('hidden');
+		this.undelegateEvents();
+	},
+	openDialog: function() {
+		$('body').append(this.el);
+		$('#dialog-overlay').removeClass('hidden');
+		this.delegateEvents();
 	},
 	confirmPurchase: function() {
 		var self = this;
@@ -111,7 +132,6 @@ MeiweiApp.Views.ProductItemDetail = MeiweiApp.DialogView.extend({
 	render: function() {
 		this.$el.html(this.template(this.model.toJSON()));
 		this.openDialog();
-		this.delegateEvents();
 		return this;
 	}
 });

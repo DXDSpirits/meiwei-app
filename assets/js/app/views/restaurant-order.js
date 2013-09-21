@@ -1,9 +1,8 @@
 MeiweiApp.Views.ProductCartItemList = MeiweiApp.CollectionView.extend({
 	ModelView: MeiweiApp.ModelView.extend({
-		tagName: "div",
-		className: "product-cart-item",
-		events: { "click .delete-button": "triggerDelete" },
+		className: 'product-cart-item',
 		template: MeiweiApp.Templates['product-cart-item'],
+		events: { 'tap .delete-button': 'triggerDelete' },
 		triggerDelete: function() {
 			MeiweiApp.ProductCart.remove(this.model);
 			MeiweiApp.Pages.RestaurantOrder.scroller.refresh();
@@ -12,10 +11,10 @@ MeiweiApp.Views.ProductCartItemList = MeiweiApp.CollectionView.extend({
 });
 
 MeiweiApp.Views.RestaurantOrderContactForm = MeiweiApp.View.extend({
-	initialize: function(options) {
-		_.bindAll(this, 'fillContact', 'selectContact', 'switchGender');
-		new MBP.fastButton(this.$('>header h1')[0], this.selectContact);
-		var btn = new MBP.fastButton(this.$('.switch-gender')[0], this.switchGender);
+	events: { 'tap >header h1': 'selectContact' },
+	initView: function(options) {
+		_.bindAll(this, 'fillContact', 'switchGender');
+		var btn = this.bindFastButton(this.$('.switch-gender'), this.switchGender);
 		var switchGender = this.$('.switch-gender');
 		btn.onTouchMove = function(event) {
 			if (Math.abs(event.touches[0].clientY - this.startY) > 10) btn.reset(event);
@@ -56,7 +55,7 @@ MeiweiApp.Views.RestaurantOrderForm = MeiweiApp.View.extend({
 	events: {
 		'change input[name=orderdate]': 'renderHourList'
 	},
-	initialize: function() {
+	initView: function() {
 		_.bindAll(this, 'renderHourList');
 		this.restaurant = this.model;
 		this.model = null;
@@ -90,9 +89,15 @@ MeiweiApp.Views.RestaurantOrderForm = MeiweiApp.View.extend({
 });
 
 MeiweiApp.Pages.RestaurantOrder = new (MeiweiApp.PageView.extend({
+	events: {
+		'fastclick .header-btn-left': 'onClickLeftBtn',
+		'fastclick .header-btn-right': 'onClickRightBtn',
+		'tap .floorplan-select > header': 'selectSeat',
+		'tap .product-select > header': 'selectProduct',
+		'tap .order-submit-button': 'askToSubmitOrder',
+	},
 	initPage: function() {
-		_.bindAll(this, 'renderOrderForm', 'submitOrder', 
-				'selectSeat', 'selectProduct', 'askToSubmitOrder');
+		_.bindAll(this, 'renderOrderForm', 'submitOrder');
 		this.restaurant = new MeiweiApp.Models.Restaurant();
 		this.floorplans = new MeiweiApp.Collections.Floorplans();
 		this.views = {
@@ -108,9 +113,6 @@ MeiweiApp.Pages.RestaurantOrder = new (MeiweiApp.PageView.extend({
 				el: this.$('.product-cart')
 			})
 		};
-		new MBP.fastButton(this.$('.floorplan-select > header')[0], this.selectSeat);
-		new MBP.fastButton(this.$('.product-select > header')[0], this.selectProduct);
-		new MBP.fastButton(this.$('.order-submit-button')[0], this.askToSubmitOrder);
 	},
 	selectSeat: function() {
 		this.floorplans.reset(this.restaurant.get('floorplans'));

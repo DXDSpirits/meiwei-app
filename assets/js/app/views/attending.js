@@ -1,10 +1,9 @@
 
 MeiweiApp.Views.OrderPages = MeiweiApp.CollectionView.extend({
 	ModelView: MeiweiApp.ModelView.extend({
-		initModelView: function() {
-			_.bindAll(this, 'onClickWeixinBtn', 'onClickWeiboBtn');
-			this.bindFastButton(this.$('.btn-share-weixin'), this.onClickWeixinBtn);
-			this.bindFastButton(this.$('.btn-share-weibo'), this.onClickWeiboBtn);
+		events: {
+			'tap .btn-share-weixin': 'onClickWeixinBtn',
+			'tap .btn-share-weibo': 'onClickWeiboBtn'
 		},
 		template: MeiweiApp.Templates['order-attending'],
 		className: 'order-page-item carousel-item',
@@ -64,7 +63,7 @@ MeiweiApp.Pages.Attending = new (MeiweiApp.PageView.extend({
 		if (this.scroller == null) {
 			if (this.$('.carousel').length > 0) {
 				this.scroller = new IScroll(this.$('.carousel').selector, {
-					scrollX: true, scrollY: false, momentum: false, snap: true,  click: true
+					scrollX: true, scrollY: false, momentum: false, snap: true, tap: true
 				});
 			}
 		} else {

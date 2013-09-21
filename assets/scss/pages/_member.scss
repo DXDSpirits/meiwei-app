@@ -131,7 +131,7 @@
 			background: transparent url($gradientShadowPathR) no-repeat top;
 			@include background-size(100% $listItemHeight);
 		}
-		li.pressed {
+		li.pressed, li:active {
 			background: rgba($brownLight, 0.3);
 		}
 		li::after {

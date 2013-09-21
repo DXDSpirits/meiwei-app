@@ -1,12 +1,12 @@
 
 MeiweiApp.Views.ContactList = MeiweiApp.CollectionView.extend({
 	ModelView: MeiweiApp.ModelView.extend({
-		tagName: "div",
-		className: "simple-list-item",
-		events: { "click": "triggerSelect" },
+		tagName: 'div',
+		className: 'simple-list-item',
 		template: MeiweiApp.Templates['contact-list-item'],
+		events: { 'tap': 'triggerSelect' },
 		triggerSelect: function(e) {
-			this.model.trigger("select");
+			this.model.trigger('select');
 			this.$('i').attr('class', 'icon-select');
 			this.$el.siblings().find('.icon-select').attr('class', 'icon-circle');
 		}
@@ -14,6 +14,12 @@ MeiweiApp.Views.ContactList = MeiweiApp.CollectionView.extend({
 });
 
 MeiweiApp.Pages.MemberContacts = new(MeiweiApp.PageView.extend({
+	events: {
+		'fastclick .header-btn-left': 'onClickLeftBtn',
+		'fastclick .header-btn-right': 'onClickRightBtn',
+		'fastclick .filter-online': 'getOnlineContacts',
+		'fastclick .filter-local': 'getLocalContacts'
+	},
 	onClickRightBtn: function() {
 		if (this.options && this.options.callback)
 			this.options.callback(this.selectedContact.get('name'), this.selectedContact.get('mobile'));
@@ -30,9 +36,7 @@ MeiweiApp.Pages.MemberContacts = new(MeiweiApp.PageView.extend({
 			})
 		};
 		this.selectedContact = null;
-		_.bindAll(this, 'bindContactSelect', 'getOnlineContacts', 'getLocalContacts');
-		this.bindFastButton(this.$('.filter-online'), this.getOnlineContacts);
-		this.bindFastButton(this.$('.filter-local'), this.getLocalContacts);
+		_.bindAll(this, 'bindContactSelect');
 	},
 	bindContactSelect: function(collection, response, options) {
 		this.initScroller();

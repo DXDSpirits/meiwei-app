@@ -1,8 +1,10 @@
 
 MeiweiApp.Views.MemberProfileForm = MeiweiApp.View.extend({
-	initialize: function() {
-		_.bindAll(this, 'switchGender', 'render', 'updateProfile');
-		this.bindFastButton(this.$('button'), this.updateProfile);
+	events: {
+		'tap button': 'updateProfile'
+	},
+	initView: function() {
+		_.bindAll(this, 'switchGender', 'render');
 		var btn = this.bindFastButton(this.$('.switch-gender'), this.switchGender);
 		var switchGender = this.$('.switch-gender');
 		btn.onTouchMove = function(event) {
@@ -57,9 +59,8 @@ MeiweiApp.Views.MemberProfileForm = MeiweiApp.View.extend({
 });
 
 MeiweiApp.Views.MemberPasswordForm = MeiweiApp.View.extend({
-	initialize: function() {
-		_.bindAll(this, 'updatePassword');
-		this.bindFastButton(this.$('button'), this.updatePassword);
+	events: {
+		'tap button': 'updatePassword'
 	},
 	updatePassword: function(e) {
 		e.preventDefault();

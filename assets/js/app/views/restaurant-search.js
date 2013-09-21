@@ -1,10 +1,7 @@
 
 MeiweiApp.Views.MarkerItemInfo = MeiweiApp.ModelView.extend({
 	template: MeiweiApp.Templates['restaurant-list-item'],
-	initModelView: function() {
-		_.bindAll(this, 'viewRestaurant');
-		this.bindFastButton(this.$el, this.viewRestaurant);
-	},
+	events: { 'fastclick': 'viewRestaurant' },
 	viewRestaurant: function() {
 		MeiweiApp.goTo('RestaurantDetail', {
 			restaurant: this.model.toJSON()
@@ -29,10 +26,7 @@ MeiweiApp.Views.RestaurantListItem = MeiweiApp.ModelView.extend({
 	tagName: 'section',
 	className: 'restaurant-list-item',
 	template: MeiweiApp.Templates['restaurant-list-item'],
-	initModelView: function() {
-		_.bindAll(this, 'viewRestaurant');
-		this.bindFastButton(this.$el, this.viewRestaurant);
-	},
+	events: { 'tap': 'viewRestaurant' },
 	viewRestaurant: function() {
 		MeiweiApp.goTo('RestaurantDetail', {
 			restaurant: this.model.toJSON()
@@ -48,10 +42,7 @@ MeiweiApp.Views.Filter = MeiweiApp.CollectionView.extend({
 	ModelView: MeiweiApp.ModelView.extend({
 		tagName: 'li',
 		template: Mustache.compile('{{name}}'),
-		initModelView: function() {
-			_.bindAll(this, 'selectFilter');
-			this.bindFastButton(this.$el, this.selectFilter);
-		},
+		events: { 'tap': 'selectFilter' },
 		selectFilter: function() {
 			this.model.trigger('select');
 		}
@@ -65,15 +56,17 @@ MeiweiApp.Pages.RestaurantSearch = new (MeiweiApp.PageView.extend({
 		this.dropMarkers();
 	},
 	events: {
+		'fastclick .header-btn-left': 'onClickLeftBtn',
+		'fastclick .header-btn-right': 'onClickRightBtn',
+		'fastclick .collapsible.circle p': 'toggleCircleFilters',
+		'fastclick .collapsible.cuisine p': 'toggleCuisineFilters',
 		'submit >header>form': 'searchKeywords',
 		'focus >header input': 'clearFormInput'
 	},
 	clearFormInput: function() { this.$('>header input').val(''); },
 	initPage: function() {
 		this.lazy = 24 * 60 * 60 * 1000;
-		_.bindAll(this, 'refreshList', 'filterRestaurant',
-					'bindCuisineFilters', 'bindCircleFilters',
-					'toggleCuisineFilters', 'toggleCircleFilters');
+		_.bindAll(this, 'refreshList', 'filterRestaurant', 'bindCuisineFilters', 'bindCircleFilters');
 		this.restaurants = new MeiweiApp.Collections.Restaurants();
 		this.cuisines = new MeiweiApp.Collections.Cuisines();
 		this.circles = new MeiweiApp.Collections.Circles();
@@ -95,8 +88,6 @@ MeiweiApp.Pages.RestaurantSearch = new (MeiweiApp.PageView.extend({
 				el: this.$('.map-marker-info')
 			})
 		};
-		this.bindFastButton(this.$('.collapsible.circle'), this.toggleCircleFilters);
-		this.bindFastButton(this.$('.collapsible.cuisine'), this.toggleCuisineFilters);
 		this.initializeMap();
 		this.initPageNav(this, this.restaurants);
 	},
@@ -128,7 +119,9 @@ MeiweiApp.Pages.RestaurantSearch = new (MeiweiApp.PageView.extend({
 		this.$('.collapsible.circle').toggleClass('expand');
 	},
 	bindCuisineFilters: function(cuisines, response, options) {
-	    this.cuisineFilterScroller = new IScroll(this.$('.cuisine .collapsible-inner').selector);
+	    this.cuisineFilterScroller = new IScroll(this.$('.cuisine .collapsible-inner').selector, {
+	    	tap: true
+	    });
 		this.cuisineFilterScroller.maxScrollY += 200;
 		var bindFilter = function(cuisine) {
 			this.listenTo(cuisine, "select", function() {
@@ -138,7 +131,9 @@ MeiweiApp.Pages.RestaurantSearch = new (MeiweiApp.PageView.extend({
 		cuisines.forEach(bindFilter, this);
 	},
 	bindCircleFilters: function(circles, response, options) {
-		this.circleFilterScroller = new IScroll(this.$('.circle .collapsible-inner').selector);
+		this.circleFilterScroller = new IScroll(this.$('.circle .collapsible-inner').selector, {
+			tap: true
+		});
 		this.circleFilterScroller.maxScrollY += 200;
 		var bindFilter = function(circle) {
 			this.listenTo(circle, "select", function() {

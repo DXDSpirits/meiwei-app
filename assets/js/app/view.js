@@ -1,5 +1,9 @@
 
 MeiweiApp.View = Backbone.View.extend({
+	initialize: function() {
+		this.addFastButtons();
+		if (this.initView) this.initView();
+	},
 	bindFastButton: function(el, handler) {
 		this.fastButtons = this.fastButtons || [];
 		var btn = new MBP.fastButton(el.length && el.length >= 1 ? el[0] : el, handler);
@@ -13,11 +17,31 @@ MeiweiApp.View = Backbone.View.extend({
 		} catch (e) {
 			$el.html(text);
 		}
-	}
+	},
+	addFastButtons: function() {
+        var EVENT_NAME = 'fastclick';
+        var events = (_.isFunction(this.events) ? this.events() : this.events) || {};
+        var that = this;
+        function byEventName(key) {
+            return key.substr(0, EVENT_NAME.length + 1) === EVENT_NAME + ' ' || key === EVENT_NAME;
+        }
+        function toJustSelectors(key) {
+            return key.substr(EVENT_NAME.length + 1);
+        }
+        function toMatchingElements(selector) {
+            return selector === "" ? [that.el] : that.$(selector).toArray();
+        }
+        function registerTrigger(element) {
+            new MBP.fastButton(element, function() {
+                $(element).trigger(EVENT_NAME);
+            });
+        }
+        _.chain(events).keys().filter(byEventName).map(toJustSelectors).map(toMatchingElements).flatten().each(registerTrigger);
+    }
 });
 
 MeiweiApp.ModelView = MeiweiApp.View.extend({
-	initialize: function() {
+	initView: function() {
 		this.listenTo(this.model, 'change', this.render);
 		this.listenTo(this.model, 'hide', this.remove);
 		if (this.initModelView) this.initModelView();
@@ -31,7 +55,7 @@ MeiweiApp.ModelView = MeiweiApp.View.extend({
 
 MeiweiApp.CollectionView = MeiweiApp.View.extend({
 	ModelView: MeiweiApp.ModelView,
-	initialize: function() {
+	initView: function() {
 		this.listenTo(this.collection, 'reset', this.addAll);
 		this.listenTo(this.collection, 'add', this.addOne);
 		this.listenTo(this.collection, 'remove', this.removeOne);
@@ -66,38 +90,26 @@ MeiweiApp.CollectionView = MeiweiApp.View.extend({
 	}
 });
 
-MeiweiApp.DialogView = MeiweiApp.View.extend({
-	initialize: function() {
-		_.bindAll(this, 'closeDialog', 'openDialog');
-		if (this.initDialogView) this.initDialogView();
-	},
-	closeDialog: function() {
-		this.remove();
-		$('#dialog-overlay').addClass('hidden');
-	},
-	openDialog: function() {
-		$('body').append(this.el);
-		$('#dialog-overlay').removeClass('hidden');
-	}
-});
-
 MeiweiApp.PageView = MeiweiApp.View.extend({
-	initialize: function() {
+	events: {
+		'fastclick .header-btn-left': 'onClickLeftBtn',
+		'fastclick .header-btn-right': 'onClickRightBtn'
+	},
+	initView: function() {
 		this.views = {};
 		_.bindAll(this, 'showPage', 'go', 'refresh', 'render', 'reset', 
 						'onClickLeftBtn', 'onClickRightBtn', 'initScroller');
-		//These 2 lines should be after bindAll, in order to bind ClickBtn events propertly
-		this.bindFastButton(this.$('.header-btn-left'), this.onClickLeftBtn);
-		this.bindFastButton(this.$('.header-btn-right'), this.onClickRightBtn);
 		this.$('.scroll-inner').css('min-height', (this.$('.scroll').height() + 1) + 'px');
 		if (this.initPage) this.initPage();
 	},
 	onClickLeftBtn: function() { MeiweiApp.goBack(); },
 	onClickRightBtn: function() {},
-	initScroller: function(options) {
+	initScroller: function() {
 		if (this.scroller == null) {
 			if (this.$('.iscroll').length > 0) {
-			    this.scroller = new IScroll(this.$('.iscroll').selector, options);
+			    this.scroller = new IScroll(this.$('.iscroll').selector, {
+			    	tap: true, tagName: /^(INPUT|TEXTAREA|SELECT)$/
+			    });
 			}
 		} else {
 			this.scroller.refresh();

@@ -3,10 +3,9 @@ MeiweiApp.Views.FloorplanNav = MeiweiApp.CollectionView.extend({
 	ModelView: MeiweiApp.ModelView.extend({
 		className: 'floorplan-nav-item',
 		template: Mustache.compile("{{caption}}"),
+		events: { 'tap': 'triggerSelect' },
 		initModelView: function() {
 			this.listenTo(this.model, 'select', this.onSelect);
-			_.bindAll(this, 'triggerSelect');
-			this.bindFastButton(this.$el, this.triggerSelect);
 		},
 		triggerSelect: function() {
 			this.model.trigger('select');
@@ -19,10 +18,7 @@ MeiweiApp.Views.FloorplanNav = MeiweiApp.CollectionView.extend({
 });
 
 MeiweiApp.Views.Floorplan = MeiweiApp.View.extend({
-	initialize: function() {
-		_.bindAll(this, 'selectSeat');
-		this.bindFastButton(this.$('.table'), this.selectSeat);
-	},
+	events: { 'tap .table': 'selectSeat' },
 	onSelect: function(model) {
 		this.$el.find("[status=selected]").attr("status", "available");
 		this.model = model;
@@ -81,7 +77,7 @@ MeiweiApp.Pages.RestaurantFloorplans = new (MeiweiApp.PageView.extend({
 	initScroller: function() {
 		if (this.scroller == null) {
 			this.scroller = new IScroll(this.$('.svg-canvas').selector, {
-				scrollX: true, freeScroll: true, click: true,
+				scrollX: true, freeScroll: true, tap: true,
 				zoom: true, mouseWheel: true, wheelAction: 'zoom',
 				HWCompositing: false
 			});

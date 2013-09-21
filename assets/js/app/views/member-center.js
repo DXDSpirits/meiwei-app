@@ -1,9 +1,6 @@
 
 MeiweiApp.Views.MemberProfileBox = MeiweiApp.View.extend({
-	initialize: function() {
-		_.bindAll(this, 'changeAvatar');
-		this.bindFastButton(this.$('.avatar'), this.changeAvatar);
-	},
+	events: { 'tap .avatar': 'changeAvatar' },
 	changeAvatar: function() {
 		function onSuccess(imageData) {
 			localStorage.setItem('avatar', imageData);
@@ -56,14 +53,25 @@ MeiweiApp.Views.FavoriteRestoCarousel = MeiweiApp.View.extend({
 
 
 MeiweiApp.Pages.MemberCenter = new (MeiweiApp.PageView.extend({
-	onClickLeftBtn:   function() { MeiweiApp.goTo('Home'); },
-	gotoMyProfile:    function() { MeiweiApp.goTo('MemberProfile'); },
-	gotoMyOrder:      function() { MeiweiApp.goTo('OrderList'); },
-	gotoMyCredits:    function() { MeiweiApp.goTo('MemberCredits'); },
-	gotoMyFavorites:  function() { MeiweiApp.goTo('MemberFavorites'); },
-	gotoViewProducts: function() { MeiweiApp.goTo('ProductPurchase'); },
+	events: {
+		'fastclick .header-btn-left': 'onClickLeftBtn',
+		'fastclick .header-btn-right': 'onClickRightBtn',
+		'tap .member-center-nav > li:nth-child(1)': 'gotoMyProfile',
+		'tap .member-center-nav > li:nth-child(2)': 'gotoMyOrder',
+		'tap .member-center-nav > li:nth-child(3)': 'gotoMyCredits',
+		'tap .member-center-nav > li:nth-child(4)': 'gotoMyFavorites',
+		'tap .member-center-nav > li:nth-child(5)': 'gotoViewProducts',
+		'tap .member-center-nav > li:nth-child(6)': 'gotoMyAnniversaries',
+		'tap .logout-button': 'logout'
+	},
+	onClickLeftBtn:      function() { MeiweiApp.goTo('Home'); },
+	gotoMyProfile:       function() { MeiweiApp.goTo('MemberProfile'); },
+	gotoMyOrder:         function() { MeiweiApp.goTo('OrderList'); },
+	gotoMyCredits:       function() { MeiweiApp.goTo('MemberCredits'); },
+	gotoMyFavorites:     function() { MeiweiApp.goTo('MemberFavorites'); },
+	gotoViewProducts:    function() { MeiweiApp.goTo('ProductPurchase'); },
 	gotoMyAnniversaries: function() { MeiweiApp.goTo('MemberAnniversaries'); },
-	logout:           function() {
+	logout: function() {
 		MeiweiApp.me.logout();
 		MeiweiApp.goTo('Home');
 	},
@@ -71,13 +79,6 @@ MeiweiApp.Pages.MemberCenter = new (MeiweiApp.PageView.extend({
 		this.lazy = 5 * 60 * 1000;
 		this.listenTo(MeiweiApp.me, 'logout', function() { this.lastRender = null; });
 		this.listenTo(MeiweiApp.me, 'login', function() { this.lastRender = null; });
-		this.bindFastButton(this.$('.member-center-nav > li:nth-child(1)'), this.gotoMyProfile);
-		this.bindFastButton(this.$('.member-center-nav > li:nth-child(2)'), this.gotoMyOrder);
-		this.bindFastButton(this.$('.member-center-nav > li:nth-child(3)'), this.gotoMyCredits);
-		this.bindFastButton(this.$('.member-center-nav > li:nth-child(4)'), this.gotoMyFavorites);
-		this.bindFastButton(this.$('.member-center-nav > li:nth-child(5)'), this.gotoViewProducts);
-		this.bindFastButton(this.$('.member-center-nav > li:nth-child(6)'), this.gotoMyAnniversaries);
-		this.bindFastButton(this.$('.logout-button'), this.logout);
 		this.favorites = MeiweiApp.me.favorites;
 		this.views = {
 			profileBox: new MeiweiApp.Views.MemberProfileBox({

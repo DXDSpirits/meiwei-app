@@ -27,13 +27,13 @@ input[type="submit"], button, .btn {
 	@include border-radius($baseBorderRadius);
 
 	&.btn-inverse,
-	&.pressed {
+	&:active, &.pressed {
 		color: $white;
 		background-color: $brown;
 		outline: 0;
 	}
 	
-	&.btn-inverse.pressed {
+	&.btn-inverse:active, &.btn-inverse.pressed {
 		color: $brownDark;
 		background-color: $white;
 	}

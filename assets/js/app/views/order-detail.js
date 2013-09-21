@@ -1,10 +1,7 @@
 
 MeiweiApp.Views.OrderDetail = MeiweiApp.ModelView.extend({
 	template: MeiweiApp.Templates['order-detail'],
-	initModelView: function() {
-		_.bindAll(this, 'cancelOrder');
-		this.bindFastButton(this.$('.btn-cancel'), this.cancelOrder);
-	},
+	events: { 'tap .btn-cancel': 'cancelOrder' },
 	cancelOrder: function() {
 		var model = this.model;
 		var confirmCancel = function() {

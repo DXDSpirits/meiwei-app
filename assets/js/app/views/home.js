@@ -1,9 +1,9 @@
 
 MeiweiApp.Views.MasterHero = MeiweiApp.View.extend({
-	initialize: function() {
+	events: { 'tap': 'viewProducts' },
+	initView: function() {
 		this.productItems = new MeiweiApp.Collections.ProductItems();
-		_.bindAll(this, 'renderCarousel', 'viewProducts');
-		this.bindFastButton(this.$el, this.viewProducts);
+		_.bindAll(this, 'renderCarousel');
 	},
 	template: MeiweiApp.Templates['product-carousel'],
 	viewProducts: function(e) {
@@ -44,14 +44,18 @@ MeiweiApp.Views.RecommendItem = MeiweiApp.ModelView.extend({
 	tagName: 'section',
 	className: 'recommend-list-item',
 	template: MeiweiApp.Templates['recommend-list-item'],
-	initModelView: function() {
-		_.bindAll(this, 'viewRestaurant');
-		this.bindFastButton(this.$el, this.viewRestaurant);
+	events: {
+		'tap': 'viewRestaurant',
+		'tap .order-button': 'gotoOrder'
 	},
 	viewRestaurant: function(e) {
 		var restaurantId = this.model.get('restaurant').id;
-		var dest = (e.target || e.srcElement) == this.$('.order-button')[0] ? 'RestaurantOrder' : 'RestaurantDetail';
-		MeiweiApp.goTo(dest, { restaurantId: restaurantId });
+		MeiweiApp.goTo('RestaurantDetail', { restaurantId: restaurantId });
+	},
+	gotoOrder: function(e) {
+		e.stopPropagation();
+		var restaurantId = this.model.get('restaurant').id;
+		MeiweiApp.goTo('RestaurantOrder', { restaurantId: restaurantId });
 	},
 	render: function() {
 		this.$el.html(this.template(this.model.toJSON()));
@@ -70,11 +74,15 @@ MeiweiApp.Views.RecommendItems = MeiweiApp.CollectionView.extend({
 MeiweiApp.Pages.Home = new (MeiweiApp.PageView.extend({
 	onClickLeftBtn: function() { MeiweiApp.goTo('MemberCenter'); },
 	onClickRightBtn: function() { MeiweiApp.goTo('Attending'); },
+	events: {
+		'fastclick .header-btn-left': 'onClickLeftBtn',
+		'fastclick .header-btn-right': 'onClickRightBtn',
+		'fastclick >header form': 'goToSearch'
+	},
 	initPage: function() {
 		this.snapStep = 250;
 		this.lazy = 30 * 60 * 1000;
-		_.bindAll(this, 'initScroller', 'hero', 'handleScroll', 'handleScrollEnd');
-		this.bindFastButton(this.$('>header form'), function() { MeiweiApp.goTo('RestaurantSearch'); });
+		_.bindAll(this, 'hero');
 		this.recommend = new MeiweiApp.Models.Recommend({id: 5});
 		this.views = {
 			masterHero: new MeiweiApp.Views.MasterHero({
@@ -87,29 +95,7 @@ MeiweiApp.Pages.Home = new (MeiweiApp.PageView.extend({
 		};
 		this.listenTo(this.recommend.items, 'reset', this.initScroller);
 	},
-	handleScroll: function(e) {
-		if (this.scroller.directionY == 1) {
-			var distY = Math.max(-50, this.scroller.distY);
-			distY = - distY * distY / 50;
-			var hero = this.$('.hero').length > 0 ? this.$('.hero') : this.$('.master-hero');
-			var nextAll = this.$('.hero').length > 0 ? this.$('.hero').nextAll() : this.$('.recommend-list-item');
-			hero.find('.item-wrapper').css('-webkit-transform', 'translate3d(0, ' + distY + 'px, 0)');
-			var i = 3;
-			nextAll.each(function() {
-				var newDistY = Math.min(0, distY * 2 / i);
-				$(this).find('.item-wrapper').css('-webkit-transform', 'translate3d(0, ' + newDistY + 'px, 0)');
-				i += 1;
-			});
-		}
-	},
-	handleScrollEnd: function() {
-		this.$('.item-wrapper').addClass('snaping');
-		this.$('.item-wrapper').css('-webkit-transform', 'translate3d(0, 0, 0)');
-		var self = this;
-		setTimeout(function() {
-			self.$('.item-wrapper').removeClass('snaping');
-		}, 350);
-	},
+	goToSearch: function() { MeiweiApp.goTo('RestaurantSearch') },
 	hero: function() {
 		var page = this.scroller.currentPage.pageY - 1;
 		var newHero = this.$('.recommend-list-item')[page];
@@ -122,13 +108,10 @@ MeiweiApp.Pages.Home = new (MeiweiApp.PageView.extend({
 		if (this.scroller == null) {
 			if (this.$('.iscroll').length > 0) {
 			    this.scroller = new IScroll(this.$('.iscroll').selector, {
-					snap: true, snapStepY: this.snapStep, snapSpeed: 350, bounceEasing: 'quadratic'
-					//, momentum: false
+			    	tap: true, snap: true, snapStepY: this.snapStep
 				});
 				this.hero();
 				this.scroller.on('scrollEnd', this.hero);
-				//this.scroller.on('scrollMoving', this.handleScroll);
-				//this.scroller.on('scrollEnding', this.handleScrollEnd);
 			}
 		} else {
 			this.scroller.refresh();
