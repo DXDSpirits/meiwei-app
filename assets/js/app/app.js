@@ -41,6 +41,11 @@ MeiweiApp.initLang = function() {
 	var langCode = localStorage.getItem('lang-code') || 'zh';
 	MeiweiApp.setLang = function(lang) { localStorage.setItem('lang-code', (langCode = lang)); };
 	MeiweiApp.getLang = function() { return langCode; };
+	if (langCode == 'en') {
+		$('[data-i18n]').each(function() {
+			$(this).html($(this).attr('data-i18n'));
+		});
+	}
 };
 
 MeiweiApp.initSync = function() {
