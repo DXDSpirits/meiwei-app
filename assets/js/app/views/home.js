@@ -53,7 +53,7 @@ MeiweiApp.Views.RecommendItem = MeiweiApp.ModelView.extend({
 		MeiweiApp.goTo('RestaurantDetail', { restaurantId: restaurantId });
 	},
 	gotoOrder: function(e) {
-		e.stopPropagation();
+		if (stopPropagation) e.stopPropagation();
 		var restaurantId = this.model.get('restaurant').id;
 		MeiweiApp.goTo('RestaurantOrder', { restaurantId: restaurantId });
 	},

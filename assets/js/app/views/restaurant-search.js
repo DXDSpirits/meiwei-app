@@ -52,8 +52,12 @@ MeiweiApp.Views.Filter = MeiweiApp.CollectionView.extend({
 MeiweiApp.Pages.RestaurantSearch = new (MeiweiApp.PageView.extend({
 	onClickLeftBtn: function() { MeiweiApp.goTo('Home'); },
 	onClickRightBtn: function() {
-		this.$('.flipper').toggleClass('flip');
-		this.dropMarkers();
+		if (this.$('.flipper').hasClass('flip')) {
+			this.$('.flipper').removeClass('flip');
+		} else if (BMap) {
+			this.$('.flipper').addClass('flip');
+			this.dropMarkers();
+		}
 	},
 	events: {
 		'fastclick .header-btn-left': 'onClickLeftBtn',
@@ -99,10 +103,10 @@ MeiweiApp.Pages.RestaurantSearch = new (MeiweiApp.PageView.extend({
 		if (this.restaurants.length == 0) {
 			this.$('.restaurant-list').prepend('<p style="padding: 15px;">没有找到合适的餐厅，请尝试搜索其他关键字，或者选择菜系和商圈</p>');
 		}
-		if (this.$('.flipper').hasClass('flip')) this.dropMarkers();
+		if (this.$('.flipper').hasClass('flip') && BMap) this.dropMarkers();
 	},
 	searchKeywords: function(e) {
-		e.preventDefault();
+		if (e.preventDefault) e.preventDefault();
 		var keywords = this.$('>header input').val();
 		this.restaurants.fetch({ reset: true, success: this.refreshList, data: { keywords: keywords } });
 		this.$('>header input').blur();
@@ -145,6 +149,7 @@ MeiweiApp.Pages.RestaurantSearch = new (MeiweiApp.PageView.extend({
 	
 	/*********************************************/
 	dropMarkers: function () {
+		if (!BMap) return;
 		var neighborhoods = [], view =[];
 		this.restaurants.forEach(function(item) {
 			var coord = item.get('coordinate');
@@ -156,9 +161,7 @@ MeiweiApp.Pages.RestaurantSearch = new (MeiweiApp.PageView.extend({
 		this.markers.length = 0;
 		this.map.clearOverlays();
 		for (var i = 0; i < neighborhoods.length; i++) {
-			
 			var meiweiIcon = new BMap.Icon("assets/img/mapmarker.png", new BMap.Size(25, 25), {imageSize: new BMap.Size(25, 25)});
-			
 			var marker = new BMap.Marker(neighborhoods[i].latlng , {enableMassClear:true, icon:meiweiIcon});
 			this.markers.push(marker);
 			this.map.addOverlay(marker);
@@ -175,16 +178,13 @@ MeiweiApp.Pages.RestaurantSearch = new (MeiweiApp.PageView.extend({
 		var self = this;
 		var script = 'http://api.map.baidu.com/getscript?v=2.0&ak=D8b53e29c40828bb6b29865e8131db68&services=&t=20130916114116';
 		$.getScript(script, function() {
-			try {
-				self.markers = [];
-				self.map = new BMap.Map("map_canvas", {enableMapClick: false, maxZoom: 18});
-				self.map.enableContinuousZoom();
-				self.map.disablePinchToZoom();
-				self.map.centerAndZoom(new BMap.Point(121.491, 31.233), 12);
-				self.map.addControl(new BMap.NavigationControl({anchor: BMAP_ANCHOR_TOP_RIGHT, type: BMAP_NAVIGATION_CONTROL_ZOOM}));
-			} catch (e) {
-				MeiweiApp.handleError(e);
-			}
+			if (!BMap) return;
+			self.markers = [];
+			self.map = new BMap.Map("map_canvas", {enableMapClick: false, maxZoom: 18});
+			self.map.enableContinuousZoom();
+			self.map.disablePinchToZoom();
+			self.map.centerAndZoom(new BMap.Point(121.491, 31.233), 12);
+			self.map.addControl(new BMap.NavigationControl({anchor: BMAP_ANCHOR_TOP_RIGHT, type: BMAP_NAVIGATION_CONTROL_ZOOM}));
 		});
 	},
 	/*********************************************/

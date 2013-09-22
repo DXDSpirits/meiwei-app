@@ -1,14 +1,8 @@
 
 MeiweiApp.View = Backbone.View.extend({
 	initialize: function() {
-		this.addFastButtons();
+		this.delegateFastButtons();
 		if (this.initView) this.initView();
-	},
-	bindFastButton: function(el, handler) {
-		this.fastButtons = this.fastButtons || [];
-		var btn = new MBP.fastButton(el.length && el.length >= 1 ? el[0] : el, handler);
-		this.fastButtons.push(btn);
-		return btn;
 	},
 	displayError: function($el, text) {
 		try {
@@ -18,7 +12,13 @@ MeiweiApp.View = Backbone.View.extend({
 			$el.html(text);
 		}
 	},
-	addFastButtons: function() {
+	bindFastButton: function(el, handler) {
+		this.fastButtons = this.fastButtons || [];
+		var btn = new MBP.fastButton(el.length && el.length >= 1 ? el[0] : el, handler);
+		this.fastButtons.push(btn);
+		return btn;
+	},
+	delegateFastButtons: function() {
         var EVENT_NAME = 'fastclick';
         var events = (_.isFunction(this.events) ? this.events() : this.events) || {};
         var that = this;
@@ -42,13 +42,16 @@ MeiweiApp.View = Backbone.View.extend({
 
 MeiweiApp.ModelView = MeiweiApp.View.extend({
 	initView: function() {
-		this.listenTo(this.model, 'change', this.render);
-		this.listenTo(this.model, 'hide', this.remove);
+		if (this.model) {
+			this.listenTo(this.model, 'change', this.render);
+			this.listenTo(this.model, 'hide', this.remove);
+		}
 		if (this.initModelView) this.initModelView();
 	},
 	template: Mustache.compile(""),
 	render: function() {
-		this.$el.html(this.template(this.model.toJSON()));
+		var attrs = this.model ? this.model.toJSON() : {};
+		this.$el.html(this.template(attrs));
 		return this;
 	}
 });
@@ -56,32 +59,28 @@ MeiweiApp.ModelView = MeiweiApp.View.extend({
 MeiweiApp.CollectionView = MeiweiApp.View.extend({
 	ModelView: MeiweiApp.ModelView,
 	initView: function() {
-		this.listenTo(this.collection, 'reset', this.addAll);
-		this.listenTo(this.collection, 'add', this.addOne);
-		this.listenTo(this.collection, 'remove', this.removeOne);
+		if (this.collection) {
+			this.listenTo(this.collection, 'reset', this.addAll);
+			this.listenTo(this.collection, 'add', this.addOne);
+			this.listenTo(this.collection, 'remove', this.removeOne);
+		}
 		if (this.initCollectionView) this.initCollectionView();
 	},
 	removeOne: function(item) {
 		item.trigger('hide');
 	},
 	addOne: function(item) {
-		try {
-			var modelView = new this.ModelView({model: item});
-			this.$el.append(modelView.render().el);
-		} catch (e) {
-			MeiweiApp.handleError(e);
-		}
+		var modelView = new this.ModelView({model: item});
+		this.$el.append(modelView.render().el);
 	},
 	addAll: function() {
-		try {
+		if (this.collection) {
 			var $list = [];
 			this.collection.forEach(function(item) {
 				var modelView = new this.ModelView({model: item});
 				$list.push(modelView.render().el);
 			}, this);
 			this.$el.html($list);
-		} catch (e) {
-			MeiweiApp.handleError(e);
 		}
 	},
 	render: function() {
@@ -147,20 +146,14 @@ MeiweiApp.PageView = MeiweiApp.View.extend({
 		this.reset();
 		this.showPage();
 		if (!this.lazy || (new Date()) - (this.lastRender || 0) > this.lazy) {
-			var render = this.render;
-			setTimeout(function() {
-				try { render(); } catch (e) { MeiweiApp.handleError(e); }
-			}, 350);
+			setTimeout(this.render, 350);
 			this.lastRender = new Date();
 		}
 	},
 	refresh: function() {
 		this.showPage();
 		this.lastRender = new Date();
-		var render = this.render;
-		setTimeout(function() {
-			try { render(); } catch (e) { MeiweiApp.handleError(e); }
-		}, 350);
+		setTimeout(this.render, 350);
 	},
 	reset: function() {},
 	showPage: function() {

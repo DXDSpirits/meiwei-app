@@ -61,23 +61,20 @@ MeiweiApp.Views.RestaurantOrderForm = MeiweiApp.View.extend({
 		this.model = null;
 		this.hours = new MeiweiApp.Models.Hour();
 	},
-	//template: MeiweiApp.Templates['restaurant-order-form'],
 	renderHourList: function() {
-		try {
-			var ymd = this.$('input[name=orderdate]').val().split('-');
-			var date = new Date(ymd[0], ymd[1] - 1, ymd[2]);
-			var $select = this.$('select[name=ordertime]');
-			$select.empty();
-			var hour = this.hours.get(date.getDay().toString());
+		var ymd = this.$('input[name=orderdate]').val().split('-');
+		var day = (ymd.length == 3 ? (new Date(ymd[0], ymd[1] - 1, ymd[2])).getDay().toString() : '0');
+		var $select = this.$('select[name=ordertime]');
+		$select.empty();
+		var hour = this.hours.get(day);
+		if (hour && hour.length > 0) {
 			for (var i=0; i<hour.length; i++) {
 				var item = hour[i];
 				var $option = $('<option></option>').val(item[0]).html(item[0] + ' ' + item[1]);
 				$select.append($option);
 			}
-			$select.val(this.defaultValues.ordertime);
-		} catch (e) {
-			MeiweiApp.handleError(e);
 		}
+		$select.val(this.defaultValues.ordertime);
 	},
 	render: function(defaultValues) {
 		this.defaultValues = defaultValues;
@@ -136,12 +133,12 @@ MeiweiApp.Pages.RestaurantOrder = new (MeiweiApp.PageView.extend({
 		MeiweiApp.goTo('ProductPurchase');
 	},
 	askToSubmitOrder: function(e) {
-		e.preventDefault();
+		if (e.preventDefault) e.preventDefault();
 		var submitOrder = this.submitOrder;
-		try {
+		if (navigator.notification && _.isFunction(navigator.notification.confirm)) {
 			var callback = function(button) { if (button == 2) submitOrder(); }
 			navigator.notification.confirm('订单被确认以后您会收到一条短信。', callback, '确认订单？', ['取消', '确认']);
-		} catch (e) {
+		} else {
 			if (confirm("提交订单?") == true) submitOrder();
 		}
 	},

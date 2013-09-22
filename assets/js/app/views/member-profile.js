@@ -27,7 +27,7 @@ MeiweiApp.Views.MemberProfileForm = MeiweiApp.View.extend({
 		}
 	},
 	updateProfile: function(e) {
-		e.preventDefault();
+		if (e.preventDefault) e.preventDefault();
 		MeiweiApp.me.profile.set({
 			nickname: this.$('input[name=nickname]').val() || null,
 			email: this.$('input[name=email]').val() || null,
@@ -63,7 +63,7 @@ MeiweiApp.Views.MemberPasswordForm = MeiweiApp.View.extend({
 		'tap button': 'updatePassword'
 	},
 	updatePassword: function(e) {
-		e.preventDefault();
+		if (e.preventDefault) e.preventDefault();
 		var password = this.$('input[name=password]').val() || null;
 		var passwordConfirm = this.$('input[name=password-confirm]').val() || null;
 		if (password != passwordConfirm) {

@@ -5,7 +5,7 @@ MeiweiApp.Views.MemberAnniversaryForm = MeiweiApp.View.extend({
 		'tap .delete-button': 'deleteItem',
 	},
 	saveItem: function(e) {
-		e.preventDefault();
+		if (e.preventDefault) e.preventDefault();
 		this.anniversary.set({
 			date: this.$('input[name=date]').val() || null,
 			description: this.$('input[name=description]').val() || null
