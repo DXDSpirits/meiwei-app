@@ -65,6 +65,7 @@ MeiweiApp.Pages.MemberCenter = new (MeiweiApp.PageView.extend({
 		'tap .logout-button': 'logout'
 	},
 	onClickLeftBtn:      function() { MeiweiApp.goTo('Home'); },
+	onClickRightBtn:      function() { MeiweiApp.goTo('Settings'); },
 	gotoMyProfile:       function() { MeiweiApp.goTo('MemberProfile'); },
 	gotoMyOrder:         function() { MeiweiApp.goTo('OrderList'); },
 	gotoMyCredits:       function() { MeiweiApp.goTo('MemberCredits'); },

@@ -54,12 +54,13 @@
 	@include border(0 0 1px 0, solid, $brownLighter);
 	@include flex-box($orient: horizontal);
 	overflow: hidden;
+	&:first-child {
+        border-top-width: 1px;
+    }
 	> .span {
 		@include flexible($orient: horizontal);
 		@include text-overflow();
-		text-align: center;
 		max-height: $itemHeight;
-		width: 0;
 	}
 }
 

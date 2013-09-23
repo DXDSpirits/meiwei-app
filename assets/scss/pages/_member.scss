@@ -207,3 +207,22 @@
 		width: 80%;
 	}
 }
+
+#view-settings {
+    > section {
+        margin-top: 20px;
+    }
+    .lang-opt {
+        display: inline-block;
+        height: 37px;
+        line-height: 37px;
+        margin: 3px 0;
+        padding: 0 10px;
+        &.selected {
+            font-weight: bold;
+            color: $white;
+            background-color: $brown;
+            border-radius: 3px;
+        }
+    }
+}
