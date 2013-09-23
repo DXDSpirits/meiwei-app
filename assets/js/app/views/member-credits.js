@@ -16,7 +16,7 @@ MeiweiApp.Pages.MemberCredits = new (MeiweiApp.PageView.extend({
 				collection: this.credits,
 				el: this.$('.scroll-inner')
 			})
-		}
+		};
 	},
 	render: function() {
 		var self = this;

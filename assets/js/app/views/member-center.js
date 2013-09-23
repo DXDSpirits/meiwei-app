@@ -89,7 +89,7 @@ MeiweiApp.Pages.MemberCenter = new (MeiweiApp.PageView.extend({
 				collection: this.favorites,
 				el: this.$('.favorite-resto-carousel')
 			})
-		}
+		};
 	},
 	render: function() {
 		this.views.profileBox.render();

@@ -11,7 +11,7 @@ MeiweiApp.Views.MemberProfileForm = MeiweiApp.View.extend({
 			if (Math.abs(event.touches[0].clientY - this.startY) > 10) btn.reset(event);
 			if (switchGender.hasClass('on') && event.touches[0].clientX - btn.startX > 10) btn.reset(event);
 			if (switchGender.hasClass('off') && event.touches[0].clientX - btn.startX < -10) btn.reset(event);
-		}
+		};
 	},
 	switchGender: function() {
 		window.scrollTo(0, 0);

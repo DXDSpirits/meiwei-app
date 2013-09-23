@@ -48,7 +48,7 @@ MeiweiApp.Pages.RestaurantDetail = new (MeiweiApp.PageView.extend({
 				collection: new MeiweiApp.Collections.Pictures(),
 				el: this.$('.restaurant-pictures')
 			})
-		}
+		};
 		_.bindAll(this, 'renderAll', 'carousel');
 	},
 	carousel: function() {
@@ -68,7 +68,7 @@ MeiweiApp.Pages.RestaurantDetail = new (MeiweiApp.PageView.extend({
 			$(A[i]).addClass('back');
 			$(A[i + 1]).addClass('front');
 			i += 1;
-		}
+		};
 		itv = setInterval(timedCount, 3000);
 	},
 	onClickRightBtn: function() { this.addFavorite(); },
@@ -110,7 +110,7 @@ MeiweiApp.Pages.RestaurantDetail = new (MeiweiApp.PageView.extend({
 		} else if (this.options.restaurantId) {
 			this.restaurant.clear();
 			this.restaurant.set({id: this.options.restaurantId});
-			this.restaurant.fetch({ success: this.renderAll })
+			this.restaurant.fetch({ success: this.renderAll });
 		}
 	}
 }))({el: $("#view-restaurant-detail")});

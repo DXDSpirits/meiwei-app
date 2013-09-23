@@ -92,7 +92,7 @@ MeiweiApp.me = new (MeiweiApp.Models.Member.extend({
 		options.success = function(model, response, options) {
 			var auth = MeiweiApp.BasicAuth.get();
 			auth.password = password;
-			MeiweiApp.BasicAuth.set(auth.username, auth.password)
+			MeiweiApp.BasicAuth.set(auth.username, auth.password);
 			if (success) success(model, response, options);
 		};
 		Backbone.sync('update', this, options);

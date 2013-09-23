@@ -3,7 +3,7 @@ MeiweiApp.Views.FloorplanNav = MeiweiApp.CollectionView.extend({
 	ModelView: MeiweiApp.ModelView.extend({
 		className: 'floorplan-nav-item',
 		template: Mustache.compile("{{caption}}"),
-		events: { 'tap': 'triggerSelect' },
+		events: { 'fastclick': 'triggerSelect' },
 		initModelView: function() {
 			this.listenTo(this.model, 'select', this.onSelect);
 		},
@@ -72,7 +72,7 @@ MeiweiApp.Pages.RestaurantFloorplans = new (MeiweiApp.PageView.extend({
 				collection: this.floorplans,
 				el: this.$('.floorplan-nav')
 			})
-		}
+		};
 	},
 	initScroller: function() {
 		if (this.scroller == null) {

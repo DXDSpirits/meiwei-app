@@ -37,7 +37,7 @@ MeiweiApp.Pages.MemberAnniversaries = new (MeiweiApp.PageView.extend({
 				collection: this.anniversaries,
 				el: this.$('.scroll-inner')
 			})
-		}
+		};
 	},
 	render: function() {
 		this.anniversaries.fetch({ reset: true, success: this.initScroller });

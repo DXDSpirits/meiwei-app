@@ -81,7 +81,7 @@ MeiweiApp.Pages.MemberLogin = new (MeiweiApp.PageView.extend({
 	initPage: function() {
 		this.views = {
 			loginForm: new MeiweiApp.Views.MemberLoginForm({ el: this.$('.login-box') })
-		}
+		};
 	},
 	onClickLeftBtn: function() { MeiweiApp.goTo('Home'); },
 	render: function() {

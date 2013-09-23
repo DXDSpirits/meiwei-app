@@ -47,31 +47,33 @@ MeiweiApp.Pages.MemberContacts = new(MeiweiApp.PageView.extend({
 		}, this);
 	},
 	getLocalContacts: function() {
-	    this.$('.filter-online').removeClass('selected');
-	    this.$('.filter-local').addClass('selected');
-		var contactCollection = this.views.contactList.collection;
-		var bindContactSelect = this.bindContactSelect;
-		$('#apploader').removeClass('hidden');
-		navigator.contacts.find(
-			["displayName", "phoneNumbers"],
-			function(contacts) {
-				$('#apploader').addClass('hidden');
-				var localCollection = new MeiweiApp.Collections.Contacts();
-				contacts = _.sortBy(contacts, function (contact) { return contact.displayName; });
-				for (i = 0; i < contacts.length; i++) {
-					var model = new MeiweiApp.Models.Contact({
-						id: contacts[i].id,
-						name: contacts[i].displayName,
-						mobile: contacts[i].phoneNumbers ? contacts[i].phoneNumbers[0].value: ""
-					});
-					localCollection.add(model);
-				}
-				contactCollection.reset(localCollection.models);
-				bindContactSelect(contactCollection);
-			},
-			function(e) { $('#apploader').addClass('hidden'); },
-			{ multiple: true }
-		);
+	    if (navigator.contacts && _.isFunction(navigator.contacts.find)) {
+    	    this.$('.filter-online').removeClass('selected');
+    	    this.$('.filter-local').addClass('selected');
+    		var contactCollection = this.views.contactList.collection;
+    		var bindContactSelect = this.bindContactSelect;
+    		$('#apploader').removeClass('hidden');
+    		navigator.contacts.find(
+    			["displayName", "phoneNumbers"],
+    			function(contacts) {
+    				$('#apploader').addClass('hidden');
+    				var localCollection = new MeiweiApp.Collections.Contacts();
+    				contacts = _.sortBy(contacts, function (contact) { return contact.displayName; });
+    				for (i = 0; i < contacts.length; i++) {
+    					var model = new MeiweiApp.Models.Contact({
+    						id: contacts[i].id,
+    						name: contacts[i].displayName,
+    						mobile: contacts[i].phoneNumbers ? contacts[i].phoneNumbers[0].value: ""
+    					});
+    					localCollection.add(model);
+    				}
+    				contactCollection.reset(localCollection.models);
+    				bindContactSelect(contactCollection);
+    			},
+    			function(e) { $('#apploader').addClass('hidden'); },
+    			{ multiple: true }
+    		);
+		}
 	},
 	getOnlineContacts: function() {
 	    this.$('.filter-online').addClass('selected');

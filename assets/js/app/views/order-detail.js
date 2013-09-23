@@ -6,9 +6,9 @@ MeiweiApp.Views.OrderDetail = MeiweiApp.ModelView.extend({
 		var model = this.model;
 		var confirmCancel = function() {
 			model.cancel({success: function() { MeiweiApp.goTo('OrderList'); }});
-		}
+		};
 		if (navigator.notification && _.isFunction(navigator.notification.confirm)) {
-			var callback = function(button) { if (button == 2) confirmCancel(); }
+			var callback = function(button) { if (button == 2) confirmCancel(); };
 			navigator.notification.confirm('请确认删除订单。', callback, '删除订单', ['取消', '确认']);
 		} else {
 			if (confirm("删除订单?") == true) confirmCancel();
@@ -25,7 +25,7 @@ MeiweiApp.Pages.OrderDetail = new (MeiweiApp.PageView.extend({
 				model: this.order,
 				el: this.$('.scroll .scroll-inner')
 			})
-		}
+		};
 	},
 	onClickRightBtn: function() {
 		MeiweiApp.ProductCart.reset(this.order.get('product_items'));
@@ -40,7 +40,7 @@ MeiweiApp.Pages.OrderDetail = new (MeiweiApp.PageView.extend({
 		} else {
 			this.$('.header-btn-right i').attr('class', 'icon-blank');
 			this.$('.btn-cancel').remove();
-			this.onClickRightBtn = function() {}
+			this.onClickRightBtn = function() {};
 		}
 		this.initScroller();
 	},

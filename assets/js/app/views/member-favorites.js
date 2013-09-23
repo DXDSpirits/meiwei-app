@@ -32,7 +32,7 @@ MeiweiApp.Pages.MemberFavorites = new (MeiweiApp.PageView.extend({
 				collection: this.favorites,
 				el: this.$('.restaurant-list')
 			})
-		}
+		};
 		this.initPageNav(this, this.favorites);
 	},
 	render: function() {

@@ -5,7 +5,7 @@ MeiweiApp.Models.ProductItem = MeiweiApp.Model.extend({
 		options = options || {};
 		var url = this.url() + 'purchase/';
 		options.url = url;
-		Backbone.sync('update', this, options)
+		Backbone.sync('update', this, options);
 	}
 });
 
@@ -21,7 +21,7 @@ MeiweiApp.Models.Product = MeiweiApp.Model.extend({
 	urlRoot: MeiweiApp.configs.APIHost + '/restaurants/product/',
 	parse: function(response) {
 		this.items = this.items || new MeiweiApp.Collections.ProductItems();
-		this.items.reset(response.productitem_set)
+		this.items.reset(response.productitem_set);
 		response.productitem_set = null;
 		return response;
 	}

@@ -20,7 +20,7 @@ MeiweiApp.Views.RestaurantOrderContactForm = MeiweiApp.View.extend({
 			if (Math.abs(event.touches[0].clientY - this.startY) > 10) btn.reset(event);
 			if (switchGender.hasClass('on') && event.touches[0].clientX - btn.startX > 10) btn.reset(event);
 			if (switchGender.hasClass('off') && event.touches[0].clientX - btn.startX < -10) btn.reset(event);
-		}
+		};
 	},
 	selectContact: function() {
 		MeiweiApp.goTo('MemberContacts', { multiple: false, callback: this.fillContact });
@@ -136,7 +136,7 @@ MeiweiApp.Pages.RestaurantOrder = new (MeiweiApp.PageView.extend({
 		if (e.preventDefault) e.preventDefault();
 		var submitOrder = this.submitOrder;
 		if (navigator.notification && _.isFunction(navigator.notification.confirm)) {
-			var callback = function(button) { if (button == 2) submitOrder(); }
+			var callback = function(button) { if (button == 2) submitOrder(); };
 			navigator.notification.confirm('订单被确认以后您会收到一条短信。', callback, '确认订单？', ['取消', '确认']);
 		} else {
 			if (confirm("提交订单?") == true) submitOrder();

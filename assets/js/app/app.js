@@ -77,7 +77,7 @@ MeiweiApp.initSync = function() {
 			token = null;
 			localStorage.removeItem('basic-auth');
 		}
-	}
+	};
 };
 
 MeiweiApp.initAjaxEvents = function() {

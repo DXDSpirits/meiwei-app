@@ -15,7 +15,7 @@ MeiweiApp.Views.MasterHero = MeiweiApp.View.extend({
 			items: _.first(this.productItems.toJSON(), 6),
 			product: {name: '美位私人管家'}
 		}));
-		this.$el.prepend('<img src="assets/img/hero.png" />')
+		this.$el.prepend('<img src="assets/img/hero.png" />');
 		var items = this.$('.carousel-inner > .carousel-item');
 		this.$('.carousel-inner').css('width', items.length * $(items[0]).outerWidth());
 		this.$('.indicator').removeClass('hide').css('width', items.length * 15 - 5);
@@ -53,7 +53,7 @@ MeiweiApp.Views.RecommendItem = MeiweiApp.ModelView.extend({
 		MeiweiApp.goTo('RestaurantDetail', { restaurantId: restaurantId });
 	},
 	gotoOrder: function(e) {
-		if (stopPropagation) e.stopPropagation();
+		if (e.stopPropagation) e.stopPropagation();
 		var restaurantId = this.model.get('restaurant').id;
 		MeiweiApp.goTo('RestaurantOrder', { restaurantId: restaurantId });
 	},
@@ -95,7 +95,7 @@ MeiweiApp.Pages.Home = new (MeiweiApp.PageView.extend({
 		};
 		this.listenTo(this.recommend.items, 'reset', this.initScroller);
 	},
-	goToSearch: function() { MeiweiApp.goTo('RestaurantSearch') },
+	goToSearch: function() { MeiweiApp.goTo('RestaurantSearch'); },
 	hero: function() {
 		var page = this.scroller.currentPage.pageY - 1;
 		var newHero = this.$('.recommend-list-item')[page];
