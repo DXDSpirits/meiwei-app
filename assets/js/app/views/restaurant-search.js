@@ -148,24 +148,27 @@ MeiweiApp.Pages.RestaurantSearch = new (MeiweiApp.PageView.extend({
 	
 	/*********************************************/
 	dropMarkers: function () {
-		if (!this.map) this.initializeMap();
-		var neighborhoods = [], view =[];
-		this.restaurants.forEach(function(item) {
-			var coord = item.get('coordinate');
-            var latlng = new BMap.Point(coord.longitude / 100000.0 , coord.latitude / 100000.0);
-			neighborhoods.push({latlng: latlng, resto: item.toJSON()});
-			view.push(latlng);
-		}, this);
-		this.map.setViewport(view);
-		this.markers.length = 0;
-		this.map.clearOverlays();
-		for (var i = 0; i < neighborhoods.length; i++) {
-			var meiweiIcon = new BMap.Icon("assets/img/mapmarker.png", new BMap.Size(25, 25), {imageSize: new BMap.Size(25, 25)});
-			var marker = new BMap.Marker(neighborhoods[i].latlng , {enableMassClear:true, icon:meiweiIcon});
-			this.markers.push(marker);
-			this.map.addOverlay(marker);
-			this.addMessage(marker, neighborhoods[i].resto);
-		}
+		if (!this.map) {
+		    this.initializeMap();
+		} else {
+    		var neighborhoods = [], view =[];
+    		this.restaurants.forEach(function(item) {
+    			var coord = item.get('coordinate');
+                var latlng = new BMap.Point(coord.longitude / 100000.0 , coord.latitude / 100000.0);
+    			neighborhoods.push({latlng: latlng, resto: item.toJSON()});
+    			view.push(latlng);
+    		}, this);
+    		this.map.setViewport(view);
+    		this.markers.length = 0;
+    		this.map.clearOverlays();
+    		for (var i = 0; i < neighborhoods.length; i++) {
+    			var meiweiIcon = new BMap.Icon("assets/img/mapmarker.png", new BMap.Size(25, 25), {imageSize: new BMap.Size(25, 25)});
+    			var marker = new BMap.Marker(neighborhoods[i].latlng , {enableMassClear:true, icon:meiweiIcon});
+    			this.markers.push(marker);
+    			this.map.addOverlay(marker);
+    			this.addMessage(marker, neighborhoods[i].resto);
+    		}
+    	}
 	},
 	addMessage: function(marker, resto) {
 		var markerInfo = this.views.markerInfo;
@@ -177,12 +180,14 @@ MeiweiApp.Pages.RestaurantSearch = new (MeiweiApp.PageView.extend({
 		var self = this;
 		var script = 'http://api.map.baidu.com/getscript?v=2.0&ak=D8b53e29c40828bb6b29865e8131db68';
 		$.getScript(script, function() {
+		    if (!window.BMap) return;
 			self.markers = [];
 			self.map = new BMap.Map('map_canvas', {enableMapClick: false, maxZoom: 18});
 			self.map.enableContinuousZoom();
 			self.map.disablePinchToZoom();
-			self.map.centerAndZoom(new BMap.Point(121.491, 31.233), 12);
+			self.map.centerAndZoom(new BMap.Point(MeiweiApp.coords.longitude, MeiweiApp.coords.latitude), 15);
 			self.map.addControl(new BMap.NavigationControl({anchor: BMAP_ANCHOR_TOP_RIGHT, type: BMAP_NAVIGATION_CONTROL_ZOOM}));
+			self.dropMarkers();
 		});
 	},
 	/*********************************************/
