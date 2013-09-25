@@ -23,6 +23,7 @@ var MeiweiApp = new (Backbone.View.extend({
 		MeiweiApp.showSplash();	
 		MeiweiApp.initAjaxEvents();
 		MeiweiApp.initLang();
+		MeiweiApp.initGeolocation();
 		MeiweiApp.initSync();
 		Backbone.history.start();
 	}
@@ -46,12 +47,23 @@ MeiweiApp.initLang = function() {
 	}
 	MeiweiApp.setLang = function(lang) {
 	    localStorage.setItem('lang-code', (langCode = lang));
-	    //window.location.href = '/';
 	    MeiweiApp.initLang();
 	};
 	MeiweiApp.getLang = function() { return langCode; };
 	MeiweiApp.initLang();
 };
+
+MeiweiApp.initGeolocation = function() {
+	var onSuccess = function(position) {
+		MeiweiApp.coords.latitude = position.coords.latitude;
+		MeiweiApp.coords.longitude = position.coords.longitude;
+	};
+	var onError = function() {
+		
+	};
+	MeiweiApp.coords = { longitude: 121.491, latitude: 31.233 };
+	navigator.geolocation.getCurrentPosition(onSuccess, onError);
+}
 
 MeiweiApp.initSync = function() {
 	var encode = function(username, password) {
