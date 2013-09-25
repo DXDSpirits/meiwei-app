@@ -54,7 +54,7 @@ MeiweiApp.Pages.RestaurantSearch = new (MeiweiApp.PageView.extend({
 	onClickRightBtn: function() {
 		if (this.$('.flipper').hasClass('flip')) {
 			this.$('.flipper').removeClass('flip');
-		} else if (BMap) {
+		} else {
 			this.$('.flipper').addClass('flip');
 			this.dropMarkers();
 		}
@@ -92,7 +92,6 @@ MeiweiApp.Pages.RestaurantSearch = new (MeiweiApp.PageView.extend({
 				el: this.$('.map-marker-info')
 			})
 		};
-		this.initializeMap();
 		this.initPageNav(this, this.restaurants);
 	},
 	refreshList: function(collection, xhr, options) {
@@ -103,7 +102,7 @@ MeiweiApp.Pages.RestaurantSearch = new (MeiweiApp.PageView.extend({
 		if (this.restaurants.length == 0) {
 			this.$('.restaurant-list').prepend('<p style="padding: 15px;">没有找到合适的餐厅，请尝试搜索其他关键字，或者选择菜系和商圈</p>');
 		}
-		if (this.$('.flipper').hasClass('flip') && BMap) this.dropMarkers();
+		if (this.$('.flipper').hasClass('flip')) this.dropMarkers();
 	},
 	searchKeywords: function(e) {
 		if (e.preventDefault) e.preventDefault();
@@ -149,7 +148,7 @@ MeiweiApp.Pages.RestaurantSearch = new (MeiweiApp.PageView.extend({
 	
 	/*********************************************/
 	dropMarkers: function () {
-		if (!BMap) return;
+		if (!this.map) this.initializeMap();
 		var neighborhoods = [], view =[];
 		this.restaurants.forEach(function(item) {
 			var coord = item.get('coordinate');
@@ -176,11 +175,10 @@ MeiweiApp.Pages.RestaurantSearch = new (MeiweiApp.PageView.extend({
 	},
 	initializeMap: function () {
 		var self = this;
-		var script = 'http://api.map.baidu.com/getscript?v=2.0&ak=D8b53e29c40828bb6b29865e8131db68&services=&t=20130916114116';
+		var script = 'http://api.map.baidu.com/getscript?v=2.0&ak=D8b53e29c40828bb6b29865e8131db68';
 		$.getScript(script, function() {
-			if (!BMap) return;
 			self.markers = [];
-			self.map = new BMap.Map("map_canvas", {enableMapClick: false, maxZoom: 18});
+			self.map = new BMap.Map('map_canvas', {enableMapClick: false, maxZoom: 18});
 			self.map.enableContinuousZoom();
 			self.map.disablePinchToZoom();
 			self.map.centerAndZoom(new BMap.Point(121.491, 31.233), 12);
