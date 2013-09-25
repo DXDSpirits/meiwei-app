@@ -830,10 +830,10 @@ IScroll.prototype = {
 		eventType(window, 'orientationchange', this);
 		eventType(window, 'resize', this);
 
-		eventType(this.wrapper, 'mousedown', this);
-		eventType(target, 'mousemove', this);
-		eventType(target, 'mousecancel', this);
-		eventType(target, 'mouseup', this);
+		//eventType(this.wrapper, 'mousedown', this);
+		//eventType(target, 'mousemove', this);
+		//eventType(target, 'mousecancel', this);
+		//eventType(target, 'mouseup', this);
 
 		if ( utils.hasPointer ) {
 			eventType(this.wrapper, 'MSPointerDown', this);

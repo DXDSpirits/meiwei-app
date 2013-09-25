@@ -137,8 +137,8 @@ MeiweiApp.PageView = MeiweiApp.View.extend({
 			page.$('.page-prev').toggleClass('hidden', (collection.previous == null));
 			if (page.scroller) page.initScroller();
 		};
-		page.bindFastButton(page.$('.page-prev'), page.fetchPrev);
-		page.bindFastButton(page.$('.page-next'), page.fetchNext);
+		page.$el.on('tap', '.page-prev', page.fetchPrev);
+		page.$el.on('tap', '.page-next', page.fetchNext);
 		page.listenTo(collection, 'reset', page.resetNavigator);
 	},
 	go: function(options) {
