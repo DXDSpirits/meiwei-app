@@ -45,8 +45,8 @@
 		border: 1px solid $brown;
 		height: 34px;
 		padding: 0 15px;
-		font-size: $fontSizeSmall;
-	  	line-height: $baseLineHeight;
+	  	line-height: 34px;
+	  	@include placeholder($brownLight, $fontSizeSmall, 34px);
 	}
 }
 
