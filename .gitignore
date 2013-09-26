@@ -1,5 +1,6 @@
 /assets/css/
 /assets/js/mw-app.*
+/assets/js/mw-app-min.*
 /assets/js/app/app-local.js
 /assets/js/app/templates.js
 /assets/js/plugin/iscroll/iscroll-min.js

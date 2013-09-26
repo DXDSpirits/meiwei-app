@@ -3,11 +3,30 @@ module.exports = function(grunt) {
 	var locales = ["zh-CN"];
 	grunt.initConfig({
 		pkg: grunt.file.readJSON('package.json'),
+		concat: {
+		    mwapp: {
+                src: [
+                    'assets/js/app/_open.js',
+                    'assets/js/app/app.js',
+                    'assets/js/app/app-local.js',
+                    'assets/js/app/i18n.js',
+                    'assets/js/app/templates.js',
+                    'assets/js/app/model.js',
+                    'assets/js/app/models/*.js',
+                    'assets/js/app/view.js',
+                    'assets/js/app/views/*.js',
+                    'assets/js/app/router.js',
+                    'assets/js/app/bootstrap.js',
+                    'assets/js/app/_close.js',
+                ],
+                dest: 'assets/js/mw-app.js'
+            }
+		},
 		uglify: {
 			mwapp: {
 				options: {
-					sourceMap: 'assets/js/mw-app.map',
-					sourceMappingURL: 'mw-app.map',
+					sourceMap: 'assets/js/mw-app-min.map',
+					sourceMappingURL: 'mw-app-min.map',
 					sourceMapPrefix: 2,
 					mangle: false,
 					beautify: {
@@ -16,17 +35,8 @@ module.exports = function(grunt) {
 					}
 				},
 				files: {
-					'assets/js/mw-app.js': [
-						'assets/js/app/app.js',
-						'assets/js/app/app-local.js',
-						'assets/js/app/i18n.js',
-						'assets/js/app/templates.js',
-						'assets/js/app/model.js',
-						'assets/js/app/models/*.js',
-						'assets/js/app/view.js',
-						'assets/js/app/views/*.js',
-						'assets/js/app/router.js',
-						'assets/js/app/bootstrap.js'
+					'assets/js/mw-app-min.js': [
+						'assets/js/mw-app.js'
 					]
 				}
 			},
@@ -106,7 +116,7 @@ module.exports = function(grunt) {
 		watch: {
 			scripts_mwapp: {
 				files: ['assets/js/app/*.js', 'assets/js/app/models/*.js', 'assets/js/app/views/*.js'],
-				tasks: ['uglify:mwapp']
+				tasks: ['concat:mwapp', 'uglify:mwapp']
 			},
 			scripts_iscroll: {
 				files: ['assets/js/plugin/iscroll/iscroll.js'],
@@ -155,7 +165,7 @@ module.exports = function(grunt) {
 		},
 		concurrent: {
 		    dist: {
-                tasks: ['sass', 'includes', 'templates', 'uglify'],
+                tasks: ['sass', 'includes', 'templates', 'concat', 'uglify'],
                 options: { logConcurrentOutput: true }
             },
 			server: {
@@ -188,6 +198,7 @@ module.exports = function(grunt) {
 	});
 	
 	grunt.loadTasks('tasks');
+	grunt.loadNpmTasks('grunt-contrib-concat');
 	grunt.loadNpmTasks('grunt-contrib-uglify');
 	grunt.loadNpmTasks('grunt-contrib-jshint');
 	grunt.loadNpmTasks('grunt-contrib-sass');

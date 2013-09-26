@@ -128,7 +128,7 @@ MeiweiApp.i18n = {
         "en": "Local Contacts"
     },
     "Redeem": {
-        "zh": "积分兑换",
+        "zh": "兑换",
         "en": "Redeem"
     },
     "Anniversary": {

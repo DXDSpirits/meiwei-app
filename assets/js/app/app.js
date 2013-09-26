@@ -1,8 +1,4 @@
 
-$(function() {
-	document.addEventListener("deviceready", MeiweiApp.start, false);
-});
-
 var MeiweiApp = new (Backbone.View.extend({
 	
 	Models: {},
@@ -20,6 +16,9 @@ var MeiweiApp = new (Backbone.View.extend({
 	},
 	
 	start: function() {
+	    if (window.device && window.device.version && parseFloat(window.device.version) === 7.0) {
+            $('html').addClass('iOS7');
+        }
 		MeiweiApp.showSplash();	
 		MeiweiApp.initAjaxEvents();
 		MeiweiApp.initLang();
