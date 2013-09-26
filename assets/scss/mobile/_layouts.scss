@@ -29,7 +29,7 @@ body {
 		@include size(100%, 100%);
 		background-color: $bodyBackground;
 		position: relative;
-		z-index: 0;
+		//z-index: 0;
 		&.rendering::after {
 		    content: "";
 		    position: absolute;
