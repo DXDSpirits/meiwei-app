@@ -1,5 +1,5 @@
 
-var MeiweiApp = new (Backbone.View.extend({
+MeiweiApp = new (Backbone.View.extend({
 	
 	Models: {},
 	Views: {},

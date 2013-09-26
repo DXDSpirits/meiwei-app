@@ -20,10 +20,16 @@ MeiweiApp.Views.MasterHero = MeiweiApp.View.extend({
 		this.$('.carousel-inner').css('width', items.length * $(items[0]).outerWidth());
 		this.$('.indicator').removeClass('hide').css('width', items.length * 15 - 5);
 		this.scroller = new IScroll(this.$('.carousel').selector, {
-			scrollX: true, scrollY: false, momentum: false, snap: true,
+			tap: true, scrollX: true, scrollY: false, momentum: false, snap: true,
 			indicators: { el: this.$('.indicator')[0], resize: false }
 		});
-		this.scroller.goToPage(1,0);
+		this.scroller.goToPage(1, 0);
+		this.scroller.on('scrollStart', function() {
+		    MeiweiApp.Pages.Home.scroller.disable();
+		});
+		this.scroller.on('scrollEnding', function() {
+            MeiweiApp.Pages.Home.scroller.enable();
+        });
 	},
 	render: function() {
 		this.rendered = true;
