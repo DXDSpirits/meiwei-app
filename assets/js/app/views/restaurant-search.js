@@ -31,6 +31,25 @@ MeiweiApp.Views.RestaurantListItem = MeiweiApp.ModelView.extend({
 		MeiweiApp.goTo('RestaurantDetail', {
 			restaurant: this.model.toJSON()
 		});
+	},
+	calculateDistance: function(lat, lon) {
+	    var lat1=lat*Math.PI/18000000, lon1 = lon*Math.PI/18000000;
+	    var lat2=MeiweiApp.coords.latitude*Math.PI/180, lon2=MeiweiApp.coords.longitude*Math.PI/180;
+	    var R = 6371;
+	    var x = (lon2-lon1) * Math.cos((lat1+lat2)/2);
+        var y = (lat2-lat1);
+        var d = Math.sqrt(x*x + y*y) * R;
+        if (d > 1) {
+            return (parseInt(d * 10) / 10) + 'km';
+        } else {
+            return (d * 1000) + 'm';
+        }
+	},
+	render: function() {
+	    var attrs = this.model ? this.model.toJSON() : {};
+	    attrs.distance = this.calculateDistance(attrs.coordinate.latitude, attrs.coordinate.longitude);
+        this.$el.html(this.template(attrs));
+        return this;
 	}
 });
 
