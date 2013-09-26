@@ -77,7 +77,7 @@ MeiweiApp.Pages.Home = new (MeiweiApp.PageView.extend({
 	events: {
 		'fastclick .header-btn-left': 'onClickLeftBtn',
 		'fastclick .header-btn-right': 'onClickRightBtn',
-		'fastclick >header form': 'goToSearch'
+		'fastclick >header h1': 'goToSearch'
 	},
 	initPage: function() {
 		this.snapStep = 250;

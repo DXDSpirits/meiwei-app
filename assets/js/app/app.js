@@ -41,7 +41,8 @@ MeiweiApp.initLang = function() {
 	var langCode = localStorage.getItem('lang-code') || 'zh';
 	MeiweiApp.initLang = function() {
         $('[data-i18n]').each(function() {
-            $(this).html(MeiweiApp.i18n[$(this).attr('data-i18n')][langCode]);
+            var msg = MeiweiApp.i18n[$(this).attr('data-i18n')];
+            if (msg) $(this).html(msg[langCode]);
         });
 	}
 	MeiweiApp.setLang = function(lang) {

@@ -144,16 +144,22 @@ MeiweiApp.PageView = MeiweiApp.View.extend({
 	go: function(options) {
 		this.options = options || {};
 		this.reset();
-		this.showPage();
 		if (!this.lazy || (new Date()) - (this.lastRender || 0) > this.lazy) {
-			setTimeout(this.render, 350);
 			this.lastRender = new Date();
+			var render = this.render;
+			this.$('.wrapper').one('webkitAnimationEnd', function(e) {
+                if (e.originalEvent.animationName == "fadein") render();
+            });
 		}
+		this.showPage();
 	},
 	refresh: function() {
-		this.showPage();
 		this.lastRender = new Date();
-		setTimeout(this.render, 350);
+		var render = this.render;
+        this.$('.wrapper').one('webkitAnimationEnd', function(e) {
+            if (e.originalEvent.animationName == "fadein") render();
+        });
+		this.showPage();
 	},
 	reset: function() {},
 	showPage: function() {

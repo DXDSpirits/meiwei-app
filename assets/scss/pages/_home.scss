@@ -1,5 +1,15 @@
 #view-home {
 	
+	> header h1 {
+	    @include border-radius(22px);
+	    border: 1px solid $brownDark;
+	    margin: 5px 0;
+	    padding: 0 15px;
+	    font-size: 14px;
+	    line-height: 34px;
+	    text-align: left;
+	}
+	
 	.recommend-flow {
 		@include flex-box($orient: vertical);
 		width: 100%;
