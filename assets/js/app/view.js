@@ -148,7 +148,7 @@ MeiweiApp.PageView = MeiweiApp.View.extend({
 			this.lastRender = new Date();
 			var render = this.render;
 			this.$('.wrapper').one('webkitAnimationEnd', function(e) {
-                if (e.originalEvent.animationName == "fadein") render();
+                if (e.originalEvent.animationName == "slideinfromright") render();
             });
 		}
 		this.showPage();
@@ -157,7 +157,7 @@ MeiweiApp.PageView = MeiweiApp.View.extend({
 		this.lastRender = new Date();
 		var render = this.render;
         this.$('.wrapper').one('webkitAnimationEnd', function(e) {
-            if (e.originalEvent.animationName == "fadein") render();
+            if (e.originalEvent.animationName == "slideinfromright") render();
         });
 		this.showPage();
 	},

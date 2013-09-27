@@ -1,4 +1,4 @@
-
+''
 MeiweiApp.Views.ProductModelView = MeiweiApp.ModelView.extend({
 	tagName: "section",
 	className: "product-box",
@@ -61,7 +61,7 @@ MeiweiApp.Pages.ProductPurchase = new (MeiweiApp.PageView.extend({
 			var items = $(selector).find('.carousel-inner > .carousel-item');
 			$(selector).find('.carousel-inner').css('width', items.length * $(items[0]).outerWidth());
 			this.carouselScrolls.push(new IScroll(selector, {
-				scrollX: true, scrollY: false, momentum: false, snap: true, tap: true
+				scrollX: true, scrollY: false, momentum: true, snap: true, tap: true
 			}));
 		}, this);
 	},
