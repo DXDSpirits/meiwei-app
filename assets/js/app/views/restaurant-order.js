@@ -161,14 +161,12 @@ MeiweiApp.Pages.RestaurantOrder = new (MeiweiApp.PageView.extend({
 		});
 		if (this.options.pendingOrder) this.options.pendingOrder.cancel();
 		this.$('.info-text').html('');
-		var $infoText = this.$('.info-text');
-		var $scroll = this.$('.scroll');
+		var self = this;
 		newOrder.save({}, {
 			success: function(model, xhr, options) { MeiweiApp.goTo('OrderList'); },
 			error: function(model, xhr, options) {
-				$scroll.scrollTop(0);
-				var error = JSON.parse(xhr.responseText);
-				for (var k in error) { $infoText.html(error[k]);  break; }
+				self.$('.scroll').scrollTop(0);
+				self.displayError(self.$('.info-text'), xhr.responseText);
 			}
 		});
 	},
