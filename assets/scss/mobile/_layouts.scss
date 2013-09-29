@@ -32,11 +32,8 @@ body {
 		@include size(100%, 100%);
 		background-color: $bodyBackground;
 		position: relative;
-		&.rendering::after {
-		    content: "";
-		    position: absolute;
-		    top: 0; right: 0; bottom: 0; left: 0;
-		    background-color: $white;
+		&.rendering {
+		    opacity: 0;
 		}
 		//@include transition(all $pageSwitchDuration ease-in-out);
 		@include backface-visibility(hidden);
