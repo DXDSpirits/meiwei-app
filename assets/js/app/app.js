@@ -1,6 +1,8 @@
 
 MeiweiApp = new (Backbone.View.extend({
 	
+	Version: '1.0',
+	
 	Models: {},
 	Views: {},
 	Collections: {},
