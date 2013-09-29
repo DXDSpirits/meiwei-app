@@ -40,19 +40,20 @@ body {
 	}
 }
 
-.view.view-hidden {
+.view.next, .view.prev, .view.view-hidden {
 	pointer-events: none;
-	& > .wrapper {
-		visibility: hidden;
-		@include translate3d(100%, 0, 0);
-	}
 }
 
-.view.next .wrapper {
+.view.view-hidden > .wrapper {
+	visibility: hidden;
+	@include translate3d(100%, 0, 0);
+}
+
+.view.next > .wrapper {
     @include animation(slideinfromright $pageSwitchDuration ease-in-out);
 }
 
-.view.prev .wrapper {
+.view.prev > .wrapper {
     @include animation(slideouttoleft $pageSwitchDuration ease-in-out);
 }
 
