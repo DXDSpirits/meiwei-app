@@ -64,7 +64,7 @@ MeiweiApp.i18n = {
         "en": "Reservations"
     },
     "Credits": {
-        "zh": "我的积分<span></span>",
+        "zh": "我的积分",
         "en": "Credits"
     },
     "Favorites": {
@@ -72,7 +72,7 @@ MeiweiApp.i18n = {
         "en": "Favorites"
     },
     "Services": {
-        "zh": "增值服务",
+        "zh": "私人管家",
         "en": "Services"
     },
     "Anniversaries": {

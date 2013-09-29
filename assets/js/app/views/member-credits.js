@@ -24,7 +24,7 @@ MeiweiApp.Pages.MemberCredits = new (MeiweiApp.PageView.extend({
 			reset: true,
 			success: function(collection) {
 				var balance = _.reduce(collection.pluck('amount'), function(a,b) { return a + b; } );
-				self.$('> header > h1 > span').html('(' + balance + ')');
+				self.$('> header > h1 > .balance').html('(' + balance + ')');
 				self.initScroller();
 			}
 		});
