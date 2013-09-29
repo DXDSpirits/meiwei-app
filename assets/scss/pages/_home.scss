@@ -1,5 +1,17 @@
 #view-home {
 	
+	&.first-visit::after {
+        content: "";
+        position: absolute;
+        top: 0;
+        right: 0;
+        bottom: 0;
+        left: 0;
+        z-index: 9999;
+        background: transparent url('../img/getstarted/view-home.png') no-repeat top;
+        @include background-size(500px, 1000px)
+    }
+	
 	> header h1 {
 	    @include border-radius(22px);
 	    border: 1px solid $brownDark;

@@ -32,7 +32,6 @@ MeiweiApp.Views.MasterHero = MeiweiApp.View.extend({
         });
 	},
 	render: function() {
-		this.rendered = true;
 		if (bootstrap && bootstrap.Home && bootstrap.Home.products) {
 			this.productItems.reset(bootstrap.Home.products);
 			this.renderCarousel();
@@ -124,8 +123,19 @@ MeiweiApp.Pages.Home = new (MeiweiApp.PageView.extend({
 			this.hero();
 		}
 	},
+	firstVisit: function() {
+        var key = 'visited-view-home';
+        if (!localStorage.getItem(key)) {
+            this.$el.addClass('first-visit');
+            this.$el.one('click', function() {
+                $(this).removeClass('first-visit');
+                localStorage.setItem(key, true);
+            });
+        }
+    },
 	render: function() {
-		if (!this.views.masterHero.rendered) this.views.masterHero.render();
+	    this.firstVisit();
+		this.views.masterHero.render();
 		if (bootstrap && bootstrap.Home && bootstrap.Home.recommend) {
 			this.recommend.items.reset(bootstrap.Home.recommend);
 		}

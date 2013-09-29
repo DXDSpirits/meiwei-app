@@ -35,23 +35,25 @@ body {
 		&.rendering {
 		    opacity: 0;
 		}
-		//@include transition(all $pageSwitchDuration ease-in-out);
 		@include backface-visibility(hidden);
-		//@include animation(fadein $pageSwitchDuration ease-in-out);
 		@include translate3d(0, 0, 0);
-		@include animation(slideinfromright $pageSwitchDuration ease-in-out);
 	}
 }
 
 .view.view-hidden {
 	pointer-events: none;
 	& > .wrapper {
-		//opacity: 0;
 		visibility: hidden;
-		//@include animation(fadeout $pageSwitchDuration ease-in-out);
 		@include translate3d(100%, 0, 0);
-		@include animation(slideouttoleft $pageSwitchDuration ease-in-out);
 	}
+}
+
+.view.next .wrapper {
+    @include animation(slideinfromright $pageSwitchDuration ease-in-out);
+}
+
+.view.prev .wrapper {
+    @include animation(slideouttoleft $pageSwitchDuration ease-in-out);
 }
 
 .view > .wrapper > .bottom-banner {

@@ -1,24 +1,24 @@
 
 MeiweiApp.View = Backbone.View.extend({
-	initialize: function() {
-		this.delegateFastButtons();
-		if (this.initView) this.initView();
-	},
-	displayError: function($el, text) {
-		try {
-			var error = JSON.parse(text);
-			for (var k in error) { $el.html(error[k]);  break; };
-		} catch (e) {
-			$el.html(text);
-		}
-	},
-	bindFastButton: function(el, handler) {
-		this.fastButtons = this.fastButtons || [];
-		var btn = new MBP.fastButton(el.length && el.length >= 1 ? el[0] : el, handler);
-		this.fastButtons.push(btn);
-		return btn;
-	},
-	delegateFastButtons: function() {
+    initialize: function() {
+        this.delegateFastButtons();
+        if (this.initView) this.initView();
+    },
+    displayError: function($el, text) {
+        try {
+            var error = JSON.parse(text);
+            for (var k in error) { $el.html(error[k]);  break; };
+        } catch (e) {
+            $el.html(text);
+        }
+    },
+    bindFastButton: function(el, handler) {
+        this.fastButtons = this.fastButtons || [];
+        var btn = new MBP.fastButton(el.length && el.length >= 1 ? el[0] : el, handler);
+        this.fastButtons.push(btn);
+        return btn;
+    },
+    delegateFastButtons: function() {
         var EVENT_NAME = 'fastclick';
         var events = (_.isFunction(this.events) ? this.events() : this.events) || {};
         var that = this;
@@ -41,134 +41,143 @@ MeiweiApp.View = Backbone.View.extend({
 });
 
 MeiweiApp.ModelView = MeiweiApp.View.extend({
-	initView: function() {
-		if (this.model) {
-			this.listenTo(this.model, 'change', this.render);
-			this.listenTo(this.model, 'hide', this.remove);
-		}
-		if (this.initModelView) this.initModelView();
-	},
-	template: Mustache.compile(""),
-	render: function() {
-		var attrs = this.model ? this.model.toJSON() : {};
-		this.$el.html(this.template(attrs));
-		return this;
-	}
+    initView: function() {
+        if (this.model) {
+            this.listenTo(this.model, 'change', this.render);
+            this.listenTo(this.model, 'hide', this.remove);
+        }
+        if (this.initModelView) this.initModelView();
+    },
+    template: Mustache.compile(""),
+    render: function() {
+        var attrs = this.model ? this.model.toJSON() : {};
+        this.$el.html(this.template(attrs));
+        return this;
+    }
 });
 
 MeiweiApp.CollectionView = MeiweiApp.View.extend({
-	ModelView: MeiweiApp.ModelView,
-	initView: function() {
-		if (this.collection) {
-			this.listenTo(this.collection, 'reset', this.addAll);
-			this.listenTo(this.collection, 'add', this.addOne);
-			this.listenTo(this.collection, 'remove', this.removeOne);
-		}
-		if (this.initCollectionView) this.initCollectionView();
-	},
-	removeOne: function(item) {
-		item.trigger('hide');
-	},
-	addOne: function(item) {
-		var modelView = new this.ModelView({model: item});
-		this.$el.append(modelView.render().el);
-	},
-	addAll: function() {
-		if (this.collection) {
-			var $list = [];
-			this.collection.forEach(function(item) {
-				var modelView = new this.ModelView({model: item});
-				$list.push(modelView.render().el);
-			}, this);
-			this.$el.html($list);
-		}
-	},
-	render: function() {
-	    this.addAll();
-	    return this;
-	}
+    ModelView: MeiweiApp.ModelView,
+    initView: function() {
+        if (this.collection) {
+            this.listenTo(this.collection, 'reset', this.addAll);
+            this.listenTo(this.collection, 'add', this.addOne);
+            this.listenTo(this.collection, 'remove', this.removeOne);
+        }
+        if (this.initCollectionView) this.initCollectionView();
+    },
+    removeOne: function(item) {
+        item.trigger('hide');
+    },
+    addOne: function(item) {
+        var modelView = new this.ModelView({model: item});
+        this.$el.append(modelView.render().el);
+    },
+    addAll: function() {
+        if (this.collection) {
+            var $list = [];
+            this.collection.forEach(function(item) {
+                var modelView = new this.ModelView({model: item});
+                $list.push(modelView.render().el);
+            }, this);
+            this.$el.html($list);
+        }
+    },
+    render: function() {
+        this.addAll();
+        return this;
+    }
 });
 
 MeiweiApp.PageView = MeiweiApp.View.extend({
-	events: {
-		'fastclick .header-btn-left': 'onClickLeftBtn',
-		'fastclick .header-btn-right': 'onClickRightBtn'
-	},
-	initView: function() {
-		this.views = {};
-		_.bindAll(this, 'showPage', 'go', 'refresh', 'render', 'reset', 
-						'onClickLeftBtn', 'onClickRightBtn', 'initScroller');
-		this.$('.scroll-inner').css('min-height', (this.$('.scroll').height() + 1) + 'px');
-		if (this.initPage) this.initPage();
-	},
-	onClickLeftBtn: function() { MeiweiApp.goBack(); },
-	onClickRightBtn: function() {},
-	initScroller: function() {
-		if (this.scroller == null) {
-			if (this.$('.iscroll').length > 0) {
-			    this.scroller = new IScroll(this.$('.iscroll').selector, {
-			    	tap: true, tagName: /^(INPUT|TEXTAREA|SELECT)$/
-			    });
-			}
-		} else {
-			this.scroller.refresh();
-		}
-	},
-	initPageNav: function(page, collection) {
-		page.fetchNext = function() {
-			if (page.scroller) page.scroller.scrollTo(0, 0, 1000);
-			setTimeout(function() {
-				collection.fetchNext({success: function(collection, xhr, options) {
-					page.resetNavigator(collection, xhr, options);
-				}});
-			}, 1000);
-		};
-		page.fetchPrev = function() {
-			if (page.scroller) page.scroller.scrollTo(0, 0, 1000);
-			setTimeout(function() {
-				collection.fetchPrev({success: function(collection, xhr, options) {
-					page.resetNavigator(collection, xhr, options);
-				}});
-			}, 1000);
-		};
-		page.resetNavigator = function() {
-			page.$('.page-nav').toggleClass('hidden', (collection.next == null && collection.previous == null));
-			page.$('.page-next').toggleClass('hidden', (collection.next == null));
-			page.$('.page-prev').toggleClass('hidden', (collection.previous == null));
-			if (page.scroller) page.initScroller();
-		};
-		page.$el.on('tap', '.page-prev', page.fetchPrev);
-		page.$el.on('tap', '.page-next', page.fetchNext);
-		page.listenTo(collection, 'reset', page.resetNavigator);
-	},
-	go: function(options) {
-		this.options = options || {};
-		this.reset();
-		if (!this.lazy || (new Date()) - (this.lastRender || 0) > this.lazy) {
-			this.lastRender = new Date();
-			var render = this.render;
-			this.$('.wrapper').one('webkitAnimationEnd', function(e) {
+    events: {
+        'fastclick .header-btn-left': 'onClickLeftBtn',
+        'fastclick .header-btn-right': 'onClickRightBtn'
+    },
+    initView: function() {
+        this.views = {};
+        _.bindAll(this, 'showPage', 'go', 'refresh', 'render', 'reset', 
+                        'onClickLeftBtn', 'onClickRightBtn', 'initScroller');
+        this.$('.scroll-inner').css('min-height', (this.$('.scroll').height() + 1) + 'px');
+        if (this.initPage) this.initPage();
+    },
+    onClickLeftBtn: function() { MeiweiApp.goBack(); },
+    onClickRightBtn: function() {},
+    initScroller: function() {
+        if (this.scroller == null) {
+            if (this.$('.iscroll').length > 0) {
+                this.scroller = new IScroll(this.$('.iscroll').selector, {
+                    tap: true, tagName: /^(INPUT|TEXTAREA|SELECT)$/
+                });
+            }
+        } else {
+            this.scroller.refresh();
+        }
+    },
+    initPageNav: function(page, collection) {
+        page.fetchNext = function() {
+            if (page.scroller) page.scroller.scrollTo(0, 0, 1000);
+            setTimeout(function() {
+                collection.fetchNext({success: function(collection, xhr, options) {
+                    page.resetNavigator(collection, xhr, options);
+                }});
+            }, 1000);
+        };
+        page.fetchPrev = function() {
+            if (page.scroller) page.scroller.scrollTo(0, 0, 1000);
+            setTimeout(function() {
+                collection.fetchPrev({success: function(collection, xhr, options) {
+                    page.resetNavigator(collection, xhr, options);
+                }});
+            }, 1000);
+        };
+        page.resetNavigator = function() {
+            page.$('.page-nav').toggleClass('hidden', (collection.next == null && collection.previous == null));
+            page.$('.page-next').toggleClass('hidden', (collection.next == null));
+            page.$('.page-prev').toggleClass('hidden', (collection.previous == null));
+            if (page.scroller) page.initScroller();
+        };
+        page.$el.on('tap', '.page-prev', page.fetchPrev);
+        page.$el.on('tap', '.page-next', page.fetchNext);
+        page.listenTo(collection, 'reset', page.resetNavigator);
+    },
+    go: function(options) {
+        this.options = options || {};
+        this.reset();
+        if (!this.lazy || (new Date()) - (this.lastRender || 0) > this.lazy) {
+            this.lastRender = new Date();
+            var render = this.render;
+            this.$('.wrapper').one('webkitAnimationEnd', function(e) {
                 if (e.originalEvent.animationName == "slideinfromright") render();
             });
-		}
-		this.showPage();
-	},
-	refresh: function() {
-		this.lastRender = new Date();
-		var render = this.render;
+        }
+        this.showPage();
+    },
+    refresh: function() {
+        this.lastRender = new Date();
+        var render = this.render;
         this.$('.wrapper').one('webkitAnimationEnd', function(e) {
             if (e.originalEvent.animationName == "slideinfromright") render();
         });
-		this.showPage();
-	},
-	reset: function() {},
-	showPage: function() {
-		window.scrollTo(0, 0);
-		if (this.$el && this.$el.hasClass('view-hidden')) {
-			var $curPage = $('.view:not(".view-hidden")');
-			$curPage.addClass('view-hidden');
-			this.$el.removeClass('view-hidden');
-			this.initScroller();
-		}
-	}
+        this.showPage();
+    },
+    reset: function() {},
+    showPage: function() {
+        window.scrollTo(0, 0);
+        if (this.$el && this.$el.hasClass('view-hidden')) {
+            var $curPage = $('.view:not(".view-hidden")');
+            var $nextPage = this.$el;
+            $curPage.addClass('view-hidden');
+            $curPage.addClass('prev');
+            $curPage.find('.wrapper').one('webkitAnimationEnd', function(e) {
+                if (e.originalEvent.animationName == "slideouttoleft") $curPage.removeClass('prev');
+            });
+            $nextPage.removeClass('view-hidden');
+            $nextPage.addClass('next');
+            $nextPage.find('.wrapper').one('webkitAnimationEnd', function(e) {
+                if (e.originalEvent.animationName == "slideinfromright") $nextPage.removeClass('next');
+            });
+            this.initScroller();
+        }
+    }
 });
