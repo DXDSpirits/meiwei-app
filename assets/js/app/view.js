@@ -99,6 +99,14 @@ MeiweiApp.PageView = MeiweiApp.View.extend({
         _.bindAll(this, 'showPage', 'go', 'refresh', 'render', 'reset', 
                         'onClickLeftBtn', 'onClickRightBtn', 'initScroller');
         this.$('.scroll-inner').css('min-height', (this.$('.scroll').height() + 1) + 'px');
+        var $el = this.$el;
+        this.$('.wrapper').on('webkitAnimationEnd', function(e) {
+            if (e.originalEvent.animationName == "slideouttoleft") {
+            	$el.trigger('pageClose');
+            } else if (e.originalEvent.animationName == "slideinfromright") {;
+            	$el.trigger('pageOpen');
+            }
+        });
         if (this.initPage) this.initPage();
     },
     onClickLeftBtn: function() { MeiweiApp.goBack(); },
@@ -146,19 +154,13 @@ MeiweiApp.PageView = MeiweiApp.View.extend({
         this.reset();
         if (!this.lazy || (new Date()) - (this.lastRender || 0) > this.lazy) {
             this.lastRender = new Date();
-            var render = this.render;
-            this.$('.wrapper').one('webkitAnimationEnd', function(e) {
-                if (e.originalEvent.animationName == "slideinfromright") render();
-            });
+            this.$el.one('pageOpen', this.render);
         }
         this.showPage();
     },
     refresh: function() {
         this.lastRender = new Date();
-        var render = this.render;
-        this.$('.wrapper').one('webkitAnimationEnd', function(e) {
-            if (e.originalEvent.animationName == "slideinfromright") render();
-        });
+        this.$el.one('pageOpen', this.render);
         this.showPage();
     },
     reset: function() {},
@@ -169,13 +171,13 @@ MeiweiApp.PageView = MeiweiApp.View.extend({
             var $nextPage = this.$el;
             $curPage.addClass('view-hidden');
             $curPage.addClass('prev');
-            $curPage.find('.wrapper').one('webkitAnimationEnd', function(e) {
-                if (e.originalEvent.animationName == "slideouttoleft") $curPage.removeClass('prev');
+            $curPage.one('pageClose', function(e) {
+                $curPage.removeClass('prev');
             });
             $nextPage.removeClass('view-hidden');
             $nextPage.addClass('next');
-            $nextPage.find('.wrapper').one('webkitAnimationEnd', function(e) {
-                if (e.originalEvent.animationName == "slideinfromright") $nextPage.removeClass('next');
+            $nextPage.one('pageOpen', function(e) {
+                $nextPage.removeClass('next');
             });
             this.initScroller();
         }
