@@ -19,47 +19,53 @@
 	background-position: $x * (-26px)  $y * (-26px);
 }
 
-//[class^="icon-"],
-//[class*=" icon-"] {
-//	@include icon-display();
-//}
-
 .icon-blank              	{ @include icon-offset(8, 8); }
 
 .icon-member              	{ @include icon-offset(0, 0); }
-//.icon-member:active			{ @include icon-offset(1, 0); }
+.icon-member.pressed,
+.pressed .icon-member		{ @include icon-offset(1, 0); }
 
 .icon-back					{ @include icon-offset(2, 0); }
-//.icon-back:active			{ @include icon-offset(3, 0); }
+.icon-back.pressed,
+.pressed .icon-back			{ @include icon-offset(3, 0); }
 
 .icon-cancel				{ @include icon-offset(4, 0); }
-//.icon-cancel:active			{ @include icon-offset(5, 0); }
+.icon-cancel.pressed,
+.pressed .icon-cancel		{ @include icon-offset(5, 0); }
 
 .icon-gift					{ @include icon-offset(6, 0); }
 
 .icon-confirm				{ @include icon-offset(0, 1); }
-//.icon-confirm:active		{ @include icon-offset(1, 1); }
+.icon-confirm.pressed,
+.pressed .icon-confirm		{ @include icon-offset(1, 1); }
 
 .icon-edit					{ @include icon-offset(2, 1); }
-//.icon-edit:active			{ @include icon-offset(3, 1); }
+.icon-edit.pressed,
+.pressed .icon-edit			{ @include icon-offset(3, 1); }
 
 .icon-plus					{ @include icon-offset(4, 1); }
-//.icon-plus:active			{ @include icon-offset(5, 1); }
+.icon-plus.pressed,
+.pressed .icon-plus			{ @include icon-offset(5, 1); }
 
 .icon-setting				{ @include icon-offset(6, 1); }
-//.icon-setting:active		{ @include icon-offset(7, 1); }
+.icon-setting.pressed,
+.pressed .icon-setting		{ @include icon-offset(7, 1); }
 
 .icon-locate				{ @include icon-offset(0, 2); }
-//.icon-locate:active			{ @include icon-offset(1, 2); }
+.icon-locate.pressed,
+.pressed .icon-locate		{ @include icon-offset(1, 2); }
 
 .icon-favorite				{ @include icon-offset(2, 2); }
-//.icon-favorite:active		{ @include icon-offset(3, 2); }
+.icon-favorite.pressed,
+.pressed .icon-favorite		{ @include icon-offset(3, 2); }
 
 .icon-map-marker			{ @include icon-offset(4, 2); }
-//.icon-map-marker:active		{ @include icon-offset(5, 2); }
+.icon-map-marker.pressed,
+.pressed .icon-map-marker	{ @include icon-offset(5, 2); }
 
 .icon-share					{ @include icon-offset(6, 2); }
-//.icon-share:active			{ @include icon-offset(7, 2); }
+.icon-share.pressed,
+.pressed .icon-share		{ @include icon-offset(7, 2); }
 
 .icon-map-marker-small		{ @include icon-offset(0, 3); }
 .icon-car					{ @include icon-offset(1, 3); }

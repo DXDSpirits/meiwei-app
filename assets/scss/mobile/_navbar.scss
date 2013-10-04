@@ -54,17 +54,17 @@
 	@include size(50px, 53px);
 	padding-bottom: 6px;
 	@include flex-box($orient: horizontal);
-	i, p { position: relative; }
-	i.pressed::before, &.pressed i::before, p.pressed::before, &.pressed p::before {
-		content: "";
-		position: absolute;
-		top: -12px;
-		right: -12px;
-		bottom: -12px;
-		left: -12px;
-		background: url($spotLightPath) no-repeat left;
-		@include background-size(contain);
-	}
+	//i, p { position: relative; }
+	//i.pressed::before, &.pressed i::before, p.pressed::before, &.pressed p::before {
+	//	content: "";
+	//	position: absolute;
+	//	top: -12px;
+	//	right: -12px;
+	//	bottom: -12px;
+	//	left: -12px;
+	//	background: url($spotLightPath) no-repeat left;
+	//	@include background-size(contain);
+	//}
 }
 
 
