@@ -173,11 +173,13 @@ MeiweiApp.PageView = MeiweiApp.View.extend({
             $curPage.addClass('prev');
             $curPage.one('pageClose', function(e) {
                 $curPage.removeClass('prev');
+                $curPage.find('input').attr('readonly', true);
             });
             $nextPage.removeClass('view-hidden');
             $nextPage.addClass('next');
             $nextPage.one('pageOpen', function(e) {
                 $nextPage.removeClass('next');
+                $nextPage.find('input').attr('readonly', false);
             });
             this.initScroller();
         }

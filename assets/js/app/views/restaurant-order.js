@@ -200,7 +200,7 @@ MeiweiApp.Pages.RestaurantOrder = new (MeiweiApp.PageView.extend({
 			this.$('.floorplan-select').removeClass('hide');
 		}
 		this.initScroller();
-		this.$('input[name=orderdate]').focus();
+		//this.$('input[name=orderdate]').focus();
 		this.$('.wrapper').removeClass('rendering');
 	},
 	render: function() {

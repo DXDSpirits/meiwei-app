@@ -96,7 +96,7 @@ MeiweiApp.Pages.MemberProfile = new (MeiweiApp.PageView.extend({
 		};
 	},
 	render: function() {
-		this.$('input[name=nickname]').focus();
+		//this.$('input[name=nickname]').focus();
 		this.views.passwordForm.render();
 		MeiweiApp.me.fetch({ success: this.views.profileForm.render });
 	}
