@@ -14,7 +14,7 @@ MeiweiApp = new (Backbone.View.extend({
 		APIHost: "http://api.clubmeiwei.com",
 		StaticHost: "http://api.clubmeiwei.com",
 		MediaHost: "http://api.clubmeiwei.com",
-		timeout: 10000
+		ajaxTimeout: 5000
 	},
 	
 	start: function() {
@@ -84,7 +84,7 @@ MeiweiApp.initSync = function() {
 	var token = auth && auth.username && auth.password ? encode(auth.username, auth.password) : null;
 	var originalSync = Backbone.sync;
 	Backbone.sync = function(method, model, options) {
-		options.timeout = options.timeout || MeiweiApp.configs.timeout;
+		options.timeout = options.timeout || MeiweiApp.configs.ajaxTimeout;
 		_.extend((options.headers || (options.headers = {})), { 'Accept-Language': MeiweiApp.getLang() });
 		if (typeof token !== "undefined" && token !== null) {
 			_.extend(options.headers, { 'Authorization': 'Basic ' + token });

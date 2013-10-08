@@ -108,7 +108,7 @@ $zindexModal:             1050 !default;
 
 // Animations
 // -------------------------
-$pageSwitchDuration:      .35s !default;
+$pageSwitchDuration:      .5s !default;
 
 
 // Input placeholder text color
@@ -118,6 +118,7 @@ $placeholderText:         $brownLight !default;
 
 // Images Paths
 // -------------------------
+$activityIndicator:       "../img/activity-indicator-white.png" !default;
 $bannerImagePath:         "../img/navbar@2x.png" !default;
 $gradientShadowPath:      "../img/gradient-shadow@2x.png" !default;
 $gradientShadowPathR:     "../img/gradient-shadow-r@2x.png" !default;
