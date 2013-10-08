@@ -6,13 +6,15 @@ MeiweiApp.Views.MemberProfileBox = MeiweiApp.View.extend({
 			localStorage.setItem('avatar', imageData);
 		    this.$('.avatar img')[0].src = "data:image/jpeg;base64," + imageData;
 		}
-		navigator.camera.getPicture(
-			function(imageData) { onSuccess(imageData); }, function() {}, {
-				quality: 50, allowEdit: true, encodingType: Camera.EncodingType.JPEG,
-				destinationType: Camera.DestinationType.DATA_URL,
-				sourceType: Camera.PictureSourceType.PHOTOLIBRARY
-			}
-		);
+		if (navigator.camera && _.isFunction(navigator.camera.getPicture)) {
+    		navigator.camera.getPicture(
+    			function(imageData) { onSuccess(imageData); }, function() {}, {
+    				quality: 50, allowEdit: true, encodingType: Camera.EncodingType.JPEG,
+    				destinationType: Camera.DestinationType.DATA_URL,
+    				sourceType: Camera.PictureSourceType.PHOTOLIBRARY
+    			}
+    		);
+    	}
 	},
 	render: function() {
 		MeiweiApp.me.fetch({
@@ -25,7 +27,7 @@ MeiweiApp.Views.MemberProfileBox = MeiweiApp.View.extend({
 				if (imageData) {
 					options.view.$('.avatar img')[0].src = "data:image/jpeg;base64," + imageData;
 				} else {
-					options.view.$('.avatar img')[0].src = "assets/img/logo@2x.png";
+					options.view.$('.avatar img')[0].src = "assets/img/default-avatar@2x.png";
 				}
 			}, view: this
 		});

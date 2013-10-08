@@ -29,7 +29,9 @@ MeiweiApp.Views.OrderPages = MeiweiApp.CollectionView.extend({
             var command = [id, content, content, pic];
             var success = function() {};
             var fail = function() {};
-            Cordova.exec(success, fail, "Weixin", "sendAppContent", command);
+            if (window.Cordova) {
+                Cordova.exec(success, fail, "Weixin", "sendAppContent", command);
+            }
         },
         render: function() {
             this.$el.html(this.template(this.model.toJSON()));

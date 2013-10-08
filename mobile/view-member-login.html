@@ -18,14 +18,25 @@
 						<fieldset>
 							<input type="text" name="username" placeholder="手机/邮箱" />
 							<input type="password" name="password" placeholder="密码" />
-							<!--<input type="password" name="password-confirm" placeholder="确认密码" class="hidden" />-->
 						</fieldset>
 					</form>
-					<div class="button-group">
-						<button class="login-button btn-inverse" data-i18n="Login">登录</button>
-						<button class="register-button" data-i18n="Register">注册</button>
-					</div>
+				    <button class="login-button btn-inverse btn-block-level" data-i18n="Login">登录</button>
 				</section>
+				<section class="register-box hidden">
+                    <form>
+                        <p class="info-text"></p>
+                        <fieldset>
+                            <input type="text" name="username" placeholder="手机/邮箱" />
+                            <input type="password" name="password" placeholder="密码" />
+                            <input type="password" name="password-confirm" placeholder="确认密码" />
+                        </fieldset>
+                    </form>
+                    <button class="register-button btn-inverse btn-block-level" data-i18n="Register">注册</button>
+                </section>
+                <section class="login-register-switch">
+                    <button class="register-switch btn-block-level" data-i18n="Register">注册</button>
+                    <button class="login-switch btn-block-level hidden" data-i18n="Login">登录</button>
+                </section>
 				<section class="social-box hidden">
 					<header data-i18n="Social Login">公共帐号登录</header>
 					<section class="social-icons">
