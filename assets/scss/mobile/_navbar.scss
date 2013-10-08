@@ -90,15 +90,14 @@
 			position: absolute;
 			z-index: $zindexPopover;
 			top: 50px;
-			height: 0;
+			height: 200px;
+			visibility: hidden;
 			background-color: $brown;
 			color: $white;
 			width: 100%;
-			//@include transition(height .35s ease-in-out);
 		}
 		&.expand > .collapsible-inner {
-			height: 200px;
-			//@include transition(height .35s ease-in-out);
+			visibility: visible;
 		}
 		&:active, &.active, &.selected { background-color: transparent; }
 	}

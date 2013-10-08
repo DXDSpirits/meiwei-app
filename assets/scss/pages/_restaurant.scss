@@ -30,6 +30,11 @@
 			//border-bottom: 1px solid darken($brown, 5%);
 			border-top: 1px solid lighten($brown, 5%);
 			&:active, &.pressed { background-color: $brownDark; }
+			&.subtitle {
+			    font-weight: bold;
+			    font-size: $baseFontSize;
+			    background-color: darken($brown, 5%);
+			}
 		}
 	}
 	.map_canvas {
