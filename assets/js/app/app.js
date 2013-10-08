@@ -1,7 +1,7 @@
 
 MeiweiApp = new (Backbone.View.extend({
 	
-	Version: '1.0',
+	Version: '1.3',
 	
 	Models: {},
 	Views: {},
@@ -21,7 +21,8 @@ MeiweiApp = new (Backbone.View.extend({
 	    if (window.device && window.device.version && parseFloat(window.device.version) === 7.0) {
             $('html').addClass('iOS7');
         }
-		MeiweiApp.showSplash();	
+        MeiweiApp.initVersion();
+		MeiweiApp.showSplash();
 		MeiweiApp.initAjaxEvents();
 		MeiweiApp.initLang();
 		MeiweiApp.initGeolocation();
@@ -37,6 +38,16 @@ MeiweiApp.showSplash = function() {
 			navigator.splashscreen.hide();
 		}, 1000);
 	}
+};
+
+MeiweiApp.initVersion = function() {
+    var pVersion = localStorage.getItem('version-code') || '1.0';
+    if (MeiweiApp.Version != pVersion) {
+        var basicauth = localStorage.getItem('basic-auth');
+        localStorage.clear();
+        localStorage.setItem('version-code', MeiweiApp.Version);
+        if (basicauth) localStorage.setItem('basic-auth', basicauth);
+    }
 };
 
 MeiweiApp.initLang = function() {
@@ -60,9 +71,7 @@ MeiweiApp.initGeolocation = function() {
 		MeiweiApp.coords.latitude = position.coords.latitude;
 		MeiweiApp.coords.longitude = position.coords.longitude;
 	};
-	var onError = function() {
-		
-	};
+	var onError = function() { };
 	MeiweiApp.coords = { longitude: 121.491, latitude: 31.233 };
 	navigator.geolocation.getCurrentPosition(onSuccess, onError);
 }
