@@ -38,13 +38,12 @@
 
 #view-product-purchase, #view-product-redeem {
 	.scroll-inner {
-		padding: 15px 17px 0;
+		padding: 15px 0;
 	}
 	.product-box {
 		width: 100%;
-		//margin: 5px 0;
 		header {
-			padding: 10px 10px 0;
+			padding: 10px 20px 0;
 			text-align: center;
 		}
 		p {
@@ -55,7 +54,7 @@
 		@include backface-visibility(hidden);
 	}
 	.viewport {
-		@include size(150px, 250px);
+		@include size(150px, 100%);
 		@include center-block();
 		padding: 5px 0;
 		overflow: hidden;

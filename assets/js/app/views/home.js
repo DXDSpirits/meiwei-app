@@ -18,7 +18,7 @@ MeiweiApp.Views.MasterHero = MeiweiApp.View.extend({
 		this.$el.prepend('<img src="assets/img/hero.png" />');
 		var items = this.$('.carousel-inner > .carousel-item');
 		this.$('.carousel-inner').css('width', items.length * $(items[0]).outerWidth());
-		this.$('.indicator').removeClass('hide').css('width', items.length * 15 - 5);
+		//this.$('.indicator').removeClass('hidden').css('width', items.length * 15 - 5);
 		this.scroller = new IScroll(this.$('.carousel').selector, {
 			tap: true, scrollX: true, scrollY: false/*, momentum: true, snap: true,
 			indicators: { el: this.$('.indicator')[0], resize: false }*/
