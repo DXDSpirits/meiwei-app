@@ -94,11 +94,11 @@
 			background-color: $brown;
 			color: $white;
 			width: 100%;
-			@include transition(height .35s ease-in-out);
+			//@include transition(height .35s ease-in-out);
 		}
 		&.expand > .collapsible-inner {
 			height: 200px;
-			@include transition(height .35s ease-in-out);
+			//@include transition(height .35s ease-in-out);
 		}
 		&:active, &.active, &.selected { background-color: transparent; }
 	}

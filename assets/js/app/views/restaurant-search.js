@@ -47,7 +47,7 @@ MeiweiApp.Views.RestaurantListItem = MeiweiApp.ModelView.extend({
 	},
 	render: function() {
 	    var attrs = this.model ? this.model.toJSON() : {};
-	    attrs.distance = this.calculateDistance(attrs.coordinate.latitude, attrs.coordinate.longitude);
+	    if (attrs.coordinate) attrs.distance = this.calculateDistance(attrs.coordinate.latitude, attrs.coordinate.longitude);
         this.$el.html(this.template(attrs));
         return this;
 	}
@@ -175,9 +175,11 @@ MeiweiApp.Pages.RestaurantSearch = new (MeiweiApp.PageView.extend({
     		var neighborhoods = [], view =[];
     		this.restaurants.forEach(function(item) {
     			var coord = item.get('coordinate');
-                var latlng = new BMap.Point(coord.longitude / 100000.0 , coord.latitude / 100000.0);
-    			neighborhoods.push({latlng: latlng, resto: item.toJSON()});
-    			view.push(latlng);
+    			if (coord) {
+                    var latlng = new BMap.Point(coord.longitude / 100000.0 , coord.latitude / 100000.0);
+                    neighborhoods.push({latlng: latlng, resto: item.toJSON()});
+                    view.push(latlng);
+                }
     		}, this);
     		this.map.setViewport(view);
     		this.markers.length = 0;

@@ -17,7 +17,7 @@ MeiweiApp.i18n = {
     },
     "Reserve": {
         "zh": "订餐",
-        "en": "Reserve"
+        "en": "Book"
     },
     "Call Us": {
         "zh": "客服电话",
@@ -30,10 +30,6 @@ MeiweiApp.i18n = {
     "Select Contact": {
         "zh": "选择预订人",
         "en": "Select Contact"
-    },
-    "": {
-        "zh": "先生",
-        "en": ""
     },
     "Select Seat": {
         "zh": "桌位选择",
@@ -174,5 +170,24 @@ MeiweiApp.i18n = {
     "Language": {
         "zh": "语言",
         "en": "Language"
+    },
+    "Search Hint": {
+        "zh": "输入关键字搜索餐厅",
+        "en": "Search Restaurants"
+    },
+    "No Orders! Go and Book!": {
+        "zh": "还没有订单，赶紧预订！",
+        "en": "No Orders! Go and Book!"
     }
+};
+
+MeiweiApp.CheckI18n = function() {
+    var newMsg = [];
+    $('[data-i18n]').each(function() {
+        var msg = $(this).attr('data-i18n');
+        if (!MeiweiApp.i18n[msg]) {
+            newMsg.push(msg);
+        }
+    });
+    return newMsg;
 };
