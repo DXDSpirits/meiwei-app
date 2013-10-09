@@ -96,7 +96,6 @@ MeiweiApp.Pages.RestaurantOrder = new (MeiweiApp.PageView.extend({
 	initPage: function() {
 		_.bindAll(this, 'renderOrderForm', 'submitOrder');
 		this.restaurant = new MeiweiApp.Models.Restaurant();
-		this.floorplans = new MeiweiApp.Collections.Floorplans();
 		this.views = {
 			orderForm: new MeiweiApp.Views.RestaurantOrderForm({
 				model: this.restaurant,
@@ -112,22 +111,13 @@ MeiweiApp.Pages.RestaurantOrder = new (MeiweiApp.PageView.extend({
 		};
 	},
 	selectSeat: function() {
-		this.floorplans.reset(this.restaurant.get('floorplans'));
-		this.listenTo(this.floorplans, 'selected', function() {
-			var selectedSeats = this.floorplans.selectedSeats;
-			if (selectedSeats) {
-				this.options.tables = JSON.stringify(
-					$.extend(($.parseJSON(this.options.tables || null) || {}),
-					$.parseJSON(tables))
-				) ;
-				if(tables && tables.length > 0) {
-					this.$(".floorplan-select > header span").text("(已选)");
-				}
-			}
-		});
+	    var self = this;
 		MeiweiApp.goTo('RestaurantFloorplans', {
-			floorplans: this.floorplans,
-		});	
+		    floorplans: this.restaurant.get('floorplans'),
+		    onSelected: function(selectedSeats) {
+		        self.selectedSeats = selectedSeats;
+		    } 
+		});
 	},
 	selectProduct: function() {
 		MeiweiApp.goTo('ProductPurchase');
@@ -155,7 +145,7 @@ MeiweiApp.Pages.RestaurantOrder = new (MeiweiApp.PageView.extend({
 			personnum: this.$('input[name=personnum]').val() || null,
 			contactname: this.$('input[name=contactname]').val() || null,
 			contactphone: this.$('input[name=contactphone]').val() || null,
-			tables: this.options.tables || null,
+			tables: this.selectedSeats || null,
 			other: this.$('textarea[name=other]').text() || null,
 			products: products.slice(0, -1)
 		});

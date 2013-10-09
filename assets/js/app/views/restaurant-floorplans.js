@@ -57,7 +57,7 @@ MeiweiApp.Views.Floorplan = MeiweiApp.View.extend({
 MeiweiApp.Pages.RestaurantFloorplans = new (MeiweiApp.PageView.extend({
 	onClickLeftBtn: function() { this.onClickRightBtn(); },
 	onClickRightBtn: function() {
-		this.views.floorplanList.trigger("selected");
+		this.options.onSelected(this.views.floorplanList.selectedSeat);
   		MeiweiApp.goBack();
  	},
 	initPage: function() {
@@ -86,7 +86,7 @@ MeiweiApp.Pages.RestaurantFloorplans = new (MeiweiApp.PageView.extend({
 		}
 	},
 	render: function() {
-		this.floorplans.reset(this.options.floorplans.models);
+		this.floorplans.reset(this.options.floorplans);
 		this.views.floorplanList.render();
 		this.initScroller();
 	}
