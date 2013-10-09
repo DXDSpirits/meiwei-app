@@ -127,9 +127,14 @@ MeiweiApp.Pages.RestaurantOrder = new (MeiweiApp.PageView.extend({
 		var submitOrder = this.submitOrder;
 		if (navigator.notification && _.isFunction(navigator.notification.confirm)) {
 			var callback = function(button) { if (button == 2) submitOrder(); };
-			navigator.notification.confirm('订单被确认以后您会收到一条短信。', callback, '确认订单？', ['取消', '确认']);
+			navigator.notification.confirm(
+			    MeiweiApp._('An SMS will be sent to you to inform you the order has been confirmed'),
+			    callback,
+			    MeiweiApp._('Confirm Order'),
+			    [MeiweiApp._('Cancel'), MeiweiApp._('Confirm')]
+			);
 		} else {
-			if (confirm("提交订单?") == true) submitOrder();
+			if (confirm(MeiweiApp._('Confirm Order')) == true) submitOrder();
 		}
 	},
 	submitOrder: function() {

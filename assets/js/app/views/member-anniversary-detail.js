@@ -31,7 +31,9 @@ MeiweiApp.Views.MemberAnniversaryForm = MeiweiApp.View.extend({
 		if (this.anniversary.isNew()) {
 			this.$('.delete-button').remove();
 		} else if (this.$('.delete-button').length == 0) {
-			this.$('.button-group').append('<button class="delete-button">删除</button>');
+			this.$('.button-group').append(
+			    '<button class="delete-button">' + MeiweiApp._('Delete') + '</button>'
+			);
 		}
 		this.$('input[name=date]').val(this.anniversary.get('date'));
 		this.$('input[name=description]').val(this.anniversary.get('description'));

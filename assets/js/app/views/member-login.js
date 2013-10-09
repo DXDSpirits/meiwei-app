@@ -50,7 +50,7 @@ MeiweiApp.Views.MemberRegisterForm = MeiweiApp.View.extend({
         var password = this.$('input[name=password]').val() || null;
         var passwordConfirm = this.$('input[name=password-confirm]').val() || null;
         if (password != passwordConfirm) {
-            this.$('.info-text').html('两次密码输入不一致，请重新输入。');
+            this.$('.info-text').html(MeiweiApp._('两次密码输入不一致，请重新输入。'));
         } else if (username && password) {
             var onLoginSuccess = this.onLoginSuccess;
             var onLoginFail = this.onLoginFail;

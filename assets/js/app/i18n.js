@@ -1,184 +1,212 @@
 MeiweiApp.i18n = {
-    "Circles": {
-        "zh": "全部商圈",
-        "en": "Circles"
+    'Circles': {
+        zh: '全部商圈',
+        en: 'Circles'
     },
-    "Cuisines": {
-        "zh": "全部菜系",
-        "en": "Cuisines"
+    'Cuisines': {
+        zh: '全部菜系',
+        en: 'Cuisines'
     },
-    "Next Page": {
-        "zh": "上一页",
-        "en": "Next Page"
+    'Next Page': {
+        zh: '上一页',
+        en: 'Next Page'
     },
-    "Previous Page": {
-        "zh": "下一页",
-        "en": "Previous Page"
+    'Previous Page': {
+        zh: '下一页',
+        en: 'Previous Page'
     },
-    "Reserve": {
-        "zh": "订餐",
-        "en": "Book"
+    'Reserve': {
+        zh: '订餐',
+        en: 'Book'
     },
-    "Call Us": {
-        "zh": "客服电话",
-        "en": "Call Us"
+    'Call Us': {
+        zh: '客服电话',
+        en: 'Call Us'
     },
-    "Reservation Detail": {
-        "zh": "预订信息",
-        "en": "Reservation Detail"
+    'Reservation Detail': {
+        zh: '预订信息',
+        en: 'Reservation Detail'
     },
-    "Select Contact": {
-        "zh": "选择预订人",
-        "en": "Select Contact"
+    'Select Contact': {
+        zh: '选择预订人',
+        en: 'Select Contact'
     },
-    "Select Seat": {
-        "zh": "桌位选择",
-        "en": "Select Seat"
+    'Select Seat': {
+        zh: '桌位选择',
+        en: 'Select Seat'
     },
-    "Select Service": {
-        "zh": "增值服务",
-        "en": "Select Service"
+    'Submit Order': {
+        zh: '提交订单',
+        en: 'Submit Order'
     },
-    "Submit Order": {
-        "zh": "提交订单",
-        "en": "Submit Order"
+    'Floorplan': {
+        zh: '桌位',
+        en: 'Floorplan'
     },
-    "Floorplan": {
-        "zh": "桌位",
-        "en": "Floorplan"
+    'Member Center': {
+        zh: '用户中心',
+        en: 'Member Center'
     },
-    "Member Center": {
-        "zh": "用户中心",
-        "en": "Member Center"
+    'Profile': {
+        zh: '我的资料',
+        en: 'Profile'
     },
-    "Profile": {
-        "zh": "我的资料",
-        "en": "Profile"
+    'Reservations': {
+        zh: '我的订单',
+        en: 'Reservations'
     },
-    "Reservations": {
-        "zh": "我的订单",
-        "en": "Reservations"
+    'Credits': {
+        zh: '我的积分',
+        en: 'Credits'
     },
-    "Credits": {
-        "zh": "我的积分",
-        "en": "Credits"
+    'Favorites': {
+        zh: '我的收藏',
+        en: 'Favorites'
     },
-    "Favorites": {
-        "zh": "我的收藏",
-        "en": "Favorites"
+    'Concierge': {
+        zh: '美位私人管家',
+        en: 'Concierge'
     },
-    "Services": {
-        "zh": "私人管家",
-        "en": "Services"
+    'Concierge Services': {
+        zh: '私人管家服务',
+        en: 'Concierge Services'
     },
-    "Anniversaries": {
-        "zh": "纪念日",
-        "en": "Anniversaries"
+    'Anniversaries': {
+        zh: '纪念日',
+        en: 'Anniversaries'
     },
-    "Logout": {
-        "zh": "退出登录",
-        "en": "Logout"
+    'Logout': {
+        zh: '退出登录',
+        en: 'Logout'
     },
-    "Login": {
-        "zh": "登录",
-        "en": "Login"
+    'Login': {
+        zh: '登录',
+        en: 'Login'
     },
-    "Register": {
-        "zh": "注册",
-        "en": "Register"
+    'Register': {
+        zh: '注册',
+        en: 'Register'
     },
-    "Social Login": {
-        "zh": "公共帐号登录",
-        "en": "Social Login"
+    'Social Login': {
+        zh: '公共帐号登录',
+        en: 'Social Login'
     },
-    "Email": {
-        "zh": "邮箱",
-        "en": "Email"
+    'Email': {
+        zh: '邮箱',
+        en: 'Email'
     },
-    "Mobile": {
-        "zh": "手机",
-        "en": "Mobile"
+    'Mobile': {
+        zh: '手机',
+        en: 'Mobile'
     },
-    "Birthday": {
-        "zh": "生日",
-        "en": "Birthday"
+    'Birthday': {
+        zh: '生日',
+        en: 'Birthday'
     },
-    "Save": {
-        "zh": "保存",
-        "en": "Save"
+    'Save': {
+        zh: '保存',
+        en: 'Save'
     },
-    "Modify Password": {
-        "zh": "修改密码",
-        "en": "Modify Password"
+    'Modify Password': {
+        zh: '修改密码',
+        en: 'Modify Password'
     },
-    "Contacts": {
-        "zh": "我的联系人",
-        "en": "Contacts"
+    'Contacts': {
+        zh: '我的联系人',
+        en: 'Contacts'
     },
-    "Online Contacts": {
-        "zh": "美位联系人",
-        "en": "Online Contacts"
+    'Online Contacts': {
+        zh: '美位联系人',
+        en: 'Online Contacts'
     },
-    "Local Contacts": {
-        "zh": "手机通讯录",
-        "en": "Local Contacts"
+    'Local Contacts': {
+        zh: '手机通讯录',
+        en: 'Local Contacts'
     },
-    "Redeem": {
-        "zh": "兑换",
-        "en": "Redeem"
+    'Redeem': {
+        zh: '兑换',
+        en: 'Redeem'
     },
-    "Anniversary": {
-        "zh": "纪念日",
-        "en": "Anniversary"
+    'Anniversary': {
+        zh: '纪念日',
+        en: 'Anniversary'
     },
-    "Add": {
-        "zh": "添加",
-        "en": "Add"
+    'Add': {
+        zh: '添加',
+        en: 'Add'
     },
-    "Title": {
-        "zh": "标题",
-        "en": "Title"
+    'Title': {
+        zh: '标题',
+        en: 'Title'
     },
-    "Date": {
-        "zh": "日期",
-        "en": "Date"
+    'Date': {
+        zh: '日期',
+        en: 'Date'
     },
-    "Delete": {
-        "zh": "删除",
-        "en": "Delete"
+    'Delete': {
+        zh: '删除',
+        en: 'Delete'
     },
-    "Pending Orders": {
-        "zh": "未完成订单",
-        "en": "Pending Orders"
+    'Pending Orders': {
+        zh: '未完成订单',
+        en: 'Pending Orders'
     },
-    "Fulfilled Orders": {
-        "zh": "已完成订单",
-        "en": "Fulfilled Orders"
+    'Fulfilled Orders': {
+        zh: '已完成订单',
+        en: 'Fulfilled Orders'
     },
-    "Detail": {
-        "zh": "详情",
-        "en": "Detail"
+    'Detail': {
+        zh: '详情',
+        en: 'Detail'
     },
-    "Checkin": {
-        "zh": "签到 &amp; 分享",
-        "en": "Checkin"
+    'Checkin': {
+        zh: '签到 &amp; 分享',
+        en: 'Checkin'
     },
-    "Settings": {
-        "zh": "设置",
-        "en": "Settings"
+    'Settings': {
+        zh: '设置',
+        en: 'Settings'
     },
-    "Language": {
-        "zh": "语言",
-        "en": "Language"
+    'Language': {
+        zh: '语言',
+        en: 'Language'
     },
-    "Search Hint": {
-        "zh": "输入关键字搜索餐厅",
-        "en": "Search Restaurants"
+    'Search Hint': {
+        zh: '输入关键字搜索餐厅',
+        en: 'Search Restaurants'
     },
-    "No Orders! Go and Book!": {
-        "zh": "还没有订单，赶紧预订！",
-        "en": "No Orders! Go and Book!"
-    }
+    'No Orders! Go and Book!': {
+        zh: '还没有订单，赶紧预订！',
+        en: 'No Orders! Go and Book!'
+    },
+    '两次密码输入不一致，请重新输入。': {
+        zh: '',
+        en: ''
+    },
+    'Please confirm the cancellation': {
+        zh: '请确认删除订单',
+        en: 'Cancel Order'
+    },
+    'An SMS will be sent to you to inform you the order has been confirmed': {
+        zh: '订单被确认以后您会收到一条短信',
+        en: 'An SMS will be sent to you to inform you the order has been confirmed'
+    },
+    'Cancel Order': {
+        zh: '删除订单',
+        en: 'Cancel Order'
+    },
+    'Confirm Order': {
+        zh: '确认订单',
+        en: 'Confirm Order'
+    },
+    'Confirm': {
+        zh: '确认',
+        en: 'Confirm'
+    },
+    'Cancel': {
+        zh: '取消',
+        en: 'Cancel'
+    },
 };
 
 MeiweiApp.CheckI18n = function() {

@@ -52,10 +52,13 @@ MeiweiApp.initVersion = function() {
 
 MeiweiApp.initLang = function() {
     var langCode = localStorage.getItem('lang-code') || 'zh';
+    MeiweiApp._ = function(msgId) {
+        var msg = MeiweiApp.i18n[msgId];
+        return msg ? msg[langCode] : msgId;
+    };
     MeiweiApp.initLang = function() {
         $('[data-i18n]').each(function() {
-            var msg = MeiweiApp.i18n[$(this).attr('data-i18n')];
-            if (msg) $(this).html(msg[langCode]);
+            $(this).html(MeiweiApp._($(this).attr('data-i18n')));
         });
     }
     MeiweiApp.setLang = function(lang) {

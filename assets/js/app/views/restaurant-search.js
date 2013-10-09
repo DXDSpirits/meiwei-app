@@ -133,11 +133,13 @@ MeiweiApp.Pages.RestaurantSearch = new (MeiweiApp.PageView.extend({
 	},
 	refreshList: function(collection, xhr, options) {
 		var cuisine = options.data && options.data.cuisine && this.cuisines.where({id: options.data.cuisine})[0];
-		this.$('.cuisine > p > span').html(cuisine ? cuisine.get('name') : '全部菜系');
+		this.$('.cuisine > p > span').html(cuisine ? cuisine.get('name') : MeiweiApp._('Cuisines'));
 		var circle = options.data && options.data.circle && this.circles.where({id: options.data.circle})[0];
-		this.$('.circle > p > span').html(circle ? circle.get('name') : '全部商圈');
+		this.$('.circle > p > span').html(circle ? circle.get('name') : MeiweiApp._('Circles'));
 		if (this.restaurants.length == 0) {
-			this.$('.restaurant-list').prepend('<p style="padding: 15px;">没有找到合适的餐厅，请尝试搜索其他关键字，或者选择菜系和商圈</p>');
+			this.$('.restaurant-list').prepend(
+			    '<p style="padding: 15px;">没有找到合适的餐厅，请尝试搜索其他关键字，或者选择菜系和商圈</p>'
+			);
 		}
 		if (this.$('.flipper').hasClass('flip')) this.dropMarkers();
 	},

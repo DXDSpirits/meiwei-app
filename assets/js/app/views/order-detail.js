@@ -9,9 +9,14 @@ MeiweiApp.Views.OrderDetail = MeiweiApp.ModelView.extend({
 		};
 		if (navigator.notification && _.isFunction(navigator.notification.confirm)) {
 			var callback = function(button) { if (button == 2) confirmCancel(); };
-			navigator.notification.confirm('请确认删除订单。', callback, '删除订单', ['取消', '确认']);
+			navigator.notification.confirm(
+			    MeiweiApp._('Please confirm the cancellation'), 
+			    callback,
+			    MeiweiApp._('Cancel Order'),
+			    [MeiweiApp._('Cancel'), MeiweiApp._('Confirm')]
+			);
 		} else {
-			if (confirm("删除订单?") == true) confirmCancel();
+			if (confirm(MeiweiApp._('Cancel Order')) == true) confirmCancel();
 		}
 	}
 });
