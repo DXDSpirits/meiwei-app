@@ -40,7 +40,7 @@ body {
 	}
 }
 
-.view.next, .view.prev, .view.view-hidden {
+.view.view-next, .view.view-prev, .view.view-hidden {
 	pointer-events: none;
 }
 
@@ -49,12 +49,14 @@ body {
 	@include translate3d(100%, 0, 0);
 }
 
-.view.next > .wrapper {
+.view.view-next > .wrapper {
     @include animation(slideinfromright $pageSwitchDuration ease-in-out);
+    -webkit-animation-fill-mode: forwards;
 }
 
-.view.prev > .wrapper {
+.view.view-prev > .wrapper {
     @include animation(slideouttoleft $pageSwitchDuration ease-in-out);
+    -webkit-animation-fill-mode: forwards;
 }
 
 .view > .wrapper > .bottom-banner {
