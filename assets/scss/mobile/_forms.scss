@@ -63,10 +63,10 @@ input[type="color"],
 	color: $brown;
 	font-family: $sansFontFamily;
 	font-size: $fontSizeSmall;
-	@include placeholder($brownLight, $fontSizeSmall, 28px);
-	padding: 8px 11px;
+	@include placeholder($brownLight, 14px, 14px);
+	padding: 14px 11px;
 	height: 44px;
-	line-height: 28px;
+	line-height: 14px;
 	
 	background-color: transparent;
 	-webkit-appearance: none;

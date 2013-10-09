@@ -44,9 +44,9 @@
 		width: 100%;
 		border: 1px solid $brown;
 		height: 34px;
-		padding: 0 15px;
-	  	line-height: 34px;
-	  	@include placeholder($brownLight, $fontSizeSmall, 34px);
+		padding: 9px 15px;
+	  	line-height: 14px;
+	  	@include placeholder($brownLight, 14px, 14px);
 	}
 }
 
