@@ -103,7 +103,7 @@ MeiweiApp.PageView = MeiweiApp.View.extend({
         this.$('.wrapper').on('webkitAnimationEnd', function(e) {
             if (e.originalEvent.animationName == "slideouttoleft") {
             	$el.trigger('pageClose');
-            } else if (e.originalEvent.animationName == "slideinfromright") {;
+            } else if (e.originalEvent.animationName == "slideinfromright") {
             	$el.trigger('pageOpen');
             }
         });
@@ -154,13 +154,21 @@ MeiweiApp.PageView = MeiweiApp.View.extend({
         this.reset();
         if (!this.lazy || (new Date()) - (this.lastRender || 0) > this.lazy) {
             this.lastRender = new Date();
-            this.$el.one('pageOpen', this.render);
+            var render = this.render, rendered = false, pageOpen = function() {
+            	if (!rendered) { rendered = true; render(); }
+            };
+            this.$el.one('pageOpen', pageOpen);
+            setTimeout(pageOpen, 1000);
         }
         this.showPage();
     },
     refresh: function() {
         this.lastRender = new Date();
-        this.$el.one('pageOpen', this.render);
+        var render = this.render, rendered = false, pageOpen = function() {
+        	if (!rendered) { rendered = true; render(); }
+        };
+        this.$el.one('pageOpen', pageOpen);
+        setTimeout(pageOpen, 1000);
         this.showPage();
     },
     reset: function() {},
@@ -168,19 +176,31 @@ MeiweiApp.PageView = MeiweiApp.View.extend({
         window.scrollTo(0, 0);
         if (this.$el && this.$el.hasClass('view-hidden')) {
             var $curPage = $('.view:not(".view-hidden")');
-            var $nextPage = this.$el;
+            var curPageClosed = false, closeCurPage = function() {
+            	if (!curPageClosed) {
+            		curPageClosed = true;
+	            	$curPage.removeClass('view-prev');
+	                $curPage.find('input').attr('readonly', true);
+	            }
+            };
             $curPage.addClass('view-hidden');
             $curPage.addClass('view-prev');
-            $curPage.one('pageClose', function(e) {
-                $curPage.removeClass('view-prev');
-                $curPage.find('input').attr('readonly', true);
-            });
+            $curPage.one('pageClose', closeCurPage);
+            setTimeout(closeCurPage, 1000);
+            
+            var $nextPage = this.$el;
+            var nextPageOpened = false, openNextPage = function() {
+            	if (!nextPageOpened) {
+            		nextPageOpened = true;
+	                $nextPage.removeClass('view-next');
+	                $nextPage.find('input').attr('readonly', false);
+	            }
+            };
             $nextPage.removeClass('view-hidden');
             $nextPage.addClass('view-next');
-            $nextPage.one('pageOpen', function(e) {
-                $nextPage.removeClass('view-next');
-                $nextPage.find('input').attr('readonly', false);
-            });
+            $nextPage.one('pageOpen', openNextPage);
+            setTimeout(openNextPage, 1000);
+            
             this.initScroller();
         }
     }
