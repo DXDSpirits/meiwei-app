@@ -188,8 +188,8 @@ MeiweiApp.i18n = {
         en: 'No Orders! Go and Book!'
     },
     '两次密码输入不一致，请重新输入。': {
-        zh: '',
-        en: ''
+        zh: '两次密码输入不一致，请重新输入。',
+        en: '两次密码输入不一致，请重新输入。'
     },
     'Please confirm the cancellation': {
         zh: '请确认删除订单',
@@ -218,6 +218,14 @@ MeiweiApp.i18n = {
     'Close': {
         zh: '关闭',
         en: 'Close'
+    },
+    'Yes': {
+        zh: '是',
+        en: 'Yes'
+    },
+    'No': {
+        zh: '否',
+        en: 'No'
     },
     'Order No': {
         zh: '订单号',
@@ -258,6 +266,14 @@ MeiweiApp.i18n = {
     'Successfully! You have': {
         zh: '兑换成功！您还有',
         en: 'Successfully! You have '
+    },
+    'Share Meiwei with your friends': {
+        zh: '和朋友们分享美位',
+        en: 'Share Meiwei with your friends'
+    },
+    'You will receive a gift after sharing': {
+        zh: '分享后可以得到精美礼品一份',
+        en: 'You will receive a gift after sharing'
     }
 };
 

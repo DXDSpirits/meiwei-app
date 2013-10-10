@@ -14,19 +14,21 @@ MeiweiApp.Views.OrderPages = MeiweiApp.CollectionView.extend({
             return [f, p].join('');
         },
         onClickWeiboBtn : function() {
-              var restaurantinfor = this.model.get('restaurantinfor');
-              var content  = '我在 #' + restaurantinfor.fullname + ' (' + restaurantinfor.address + ') ';
-             var pic =  this.model.get('restaurantinfor').frontpic;
-             var link = this.getWeiboLink(screen, document, encodeURIComponent, 'http://www.clubmeiwei.com', 'http://www.clubmeiwei.com', 
-                                         pic, content, 'http://www.clubmeiwei.com/restaurant/view/' + this.model.get('restaurant'), 'utf-8');
-             var ref = window.open( link ,'_blank', 'location=no');
+            var restaurantinfor = this.model.get('restaurantinfor');
+            var url = 'http://www.clubmeiwei.com/restaurant/view/' + this.model.get('restaurant');
+            var content  = '我在 #' + restaurantinfor.fullname + ' (' + restaurantinfor.address + ') ';
+            var pic =  this.model.get('restaurantinfor').frontpic;
+            var link = this.getWeiboLink(screen, document, encodeURIComponent, 
+                                         'http://www.clubmeiwei.com', 'http://www.clubmeiwei.com', 
+                                         pic, content, url, 'utf-8');
+            var ref = window.open( link ,'_blank', 'location=no');
         },
         onClickWeixinBtn: function() {
             var restaurantinfor = this.model.get('restaurantinfor');
-            var id = restaurantinfor.id;
-              var content  = '我在' + restaurantinfor.fullname + '(' + restaurantinfor.address + ')';
-             var pic =  this.model.get('restaurantinfor').frontpic;
-            var command = [id, content, content, pic];
+            var url = 'http://www.clubmeiwei.com/restaurant/view/' + this.model.get('restaurant');
+            var content  = '我在' + restaurantinfor.fullname + '(' + restaurantinfor.address + ')';
+            var pic =  this.model.get('restaurantinfor').frontpic;
+            var command = [url, content, content, pic];
             var success = function() {};
             var fail = function() {};
             if (window.Cordova) {

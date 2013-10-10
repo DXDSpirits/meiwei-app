@@ -212,6 +212,10 @@
 #view-settings {
     .scroll-inner > section {
         margin-top: 20px;
+        width: 100%;
+    }
+    .settings-share {
+        padding: 0 10px;
     }
     .lang-opt {
         display: inline-block;
