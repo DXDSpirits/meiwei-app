@@ -6,20 +6,20 @@
 
 <section class="order-detail">
 	<table>
-		<tr><th colspan="2">订单号</th></tr>
+		<tr><th colspan="2" data-i18n="Order No">订单号</th></tr>
 		<tr><td colspan="2">{{ orderno }}</td></tr>
-		<tr><th>订餐日期</th><th>订餐时间</th></tr>
+		<tr><th data-i18n="Order Date">订餐日期</th><th data-i18n="Order Time">订餐时间</th></tr>
 		<tr><td>{{ orderdate }}</td><td>{{ ordertime }}</td></tr>
-		<tr><th colspan="2">就餐人数</th></tr>
-		<tr><td colspan="2">{{ personnum }}人</td></tr>
-		<tr><th>联系人</th><th>手机号</th></tr>
+		<tr><th colspan="2" data-i18n="Peoples">就餐人数</th></tr>
+		<tr><td colspan="2">{{ personnum }}</td></tr>
+		<tr><th data-i18n="Contact">联系人</th><th data-i18n="Mobile">手机号</th></tr>
 		<tr><td>{{ contactname }}</td><td>{{ contactphone }}</td></tr>
 	</table>
 </section>
 
 {{#product_items.length}}
 <section class="order-product">
-	<p>已选增值服务</p>
+	<p data-i18n="Concierge Services">私人管家服务</p>
 	<div class="products">
 		{{ #product_items }}
 		<div class="product-item">
@@ -30,4 +30,4 @@
 </section>
 {{/product_items.length}}
 
-<button class="btn-inverse btn-cancel">删除订单</button>
+<button class="btn-inverse btn-cancel" data-i18n="Delete">删除</button>

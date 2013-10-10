@@ -52,6 +52,7 @@ MeiweiApp.ModelView = MeiweiApp.View.extend({
     render: function() {
         var attrs = this.model ? this.model.toJSON() : {};
         this.$el.html(this.template(attrs));
+        MeiweiApp.initLang(this.$el);
         return this;
     }
 });

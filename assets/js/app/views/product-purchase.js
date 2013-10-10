@@ -118,7 +118,7 @@ MeiweiApp.Views.ProductItemDetail = MeiweiApp.View.extend({
 		this.model.purchase({
 			success: function(model, response, options) {
 				self.$('.btn-confirm').remove();
-				self.$('.content .info-text span').html(model.balance);
+				self.$('.content .info-text .balance').html(model.balance);
 				self.$('.content .info-text').show();
 			},
 			error: function(model, response, options) {
@@ -131,6 +131,7 @@ MeiweiApp.Views.ProductItemDetail = MeiweiApp.View.extend({
 	},
 	render: function() {
 		this.$el.html(this.template(this.model.toJSON()));
+		MeiweiApp.initLang(this.$el);
 		this.openDialog();
 		return this;
 	}

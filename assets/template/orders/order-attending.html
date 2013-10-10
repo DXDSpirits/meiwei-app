@@ -8,17 +8,17 @@
 	<header><h1>{{ restaurantinfor.fullname }}</h1></header>
 	
 	<table>
-		<tr><th colspan="2">订单号</th></tr>
+		<tr><th colspan="2" data-i18n="Order No">订单号</th></tr>
 		<tr><td colspan="2">{{ orderno }}</td></tr>
-		<tr><th>订餐日期</th><th>订餐时间</th></tr>
+		<tr><th>订餐日期</th><th data-i18n="Order Time">订餐时间</th></tr>
 		<tr><td>{{ orderdate }}</td><td>{{ ordertime }}</td></tr>
 		{{#discount}}
-			<tr><th colspan="2">订餐折扣</th></tr>
+			<tr><th colspan="2" data-i18n="Discount">订餐折扣</th></tr>
 			<tr><td colspan="2">{{ discount }}</td></tr>
 		{{/discount}}
 	</table>
 	<div class="button-group">
-		<button class="btn btn-share-weixin">告诉微信好友</button>
-		<button class="btn btn-inverse btn-share-weibo">分享到微博</button>
+		<button class="btn btn-share-weixin" data-i18n="Share to Moments">告诉微信好友</button>
+		<button class="btn btn-inverse btn-share-weibo" data-i18n="Share to Weibo">分享到微博</button>
 	</div>
 </div>

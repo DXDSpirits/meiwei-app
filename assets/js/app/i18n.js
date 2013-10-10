@@ -47,24 +47,28 @@ MeiweiApp.i18n = {
         zh: '用户中心',
         en: 'Member Center'
     },
+    'My': {
+        zh: '我的',
+        en: 'My '
+    },
     'Profile': {
-        zh: '我的资料',
+        zh: '资料',
         en: 'Profile'
     },
     'Reservations': {
-        zh: '我的订单',
+        zh: '订单',
         en: 'Reservations'
     },
     'Credits': {
-        zh: '我的积分',
+        zh: '积分',
         en: 'Credits'
     },
     'Favorites': {
-        zh: '我的收藏',
+        zh: '收藏',
         en: 'Favorites'
     },
     'Concierge': {
-        zh: '美位私人管家',
+        zh: '私人管家',
         en: 'Concierge'
     },
     'Concierge Services': {
@@ -111,8 +115,12 @@ MeiweiApp.i18n = {
         zh: '修改密码',
         en: 'Modify Password'
     },
+    'Contact': {
+        zh: '联系人',
+        en: 'Contact'
+    },
     'Contacts': {
-        zh: '我的联系人',
+        zh: '联系人',
         en: 'Contacts'
     },
     'Online Contacts': {
@@ -123,9 +131,9 @@ MeiweiApp.i18n = {
         zh: '手机通讯录',
         en: 'Local Contacts'
     },
-    'Redeem': {
-        zh: '兑换',
-        en: 'Redeem'
+    'Gifts': {
+        zh: '礼品',
+        en: 'Gifts'
     },
     'Anniversary': {
         zh: '纪念日',
@@ -207,15 +215,69 @@ MeiweiApp.i18n = {
         zh: '取消',
         en: 'Cancel'
     },
+    'Close': {
+        zh: '关闭',
+        en: 'Close'
+    },
+    'Order No': {
+        zh: '订单号',
+        en: 'Order No'
+    },
+    'Order Date': {
+        zh: '订单日期',
+        en: 'Date'
+    },
+    'Order Time': {
+        zh: '订单时间',
+        en: 'Time'
+    },
+    'Peoples': {
+        zh: '人数',
+        en: 'Peoples'
+    },
+    'Discount': {
+        zh: '折扣',
+        en: 'Discount'
+    },
+    'Share to Moments': {
+        zh: '分享到朋友圈',
+        en: 'Share to Moments'
+    },
+    'Share to Weibo': {
+        zh: '分享到微博',
+        en: 'Share to Weibo'
+    },
+    'Purchase': {
+        zh: '兑换',
+        en: 'Purchase'
+    },
+    'credits left. One of our customer service will contact you soon as possible.': {
+        zh: '剩余积分。我们的客服会马上联系您。',
+        en: ' credits left. One of our customer service will contact you soon as possible.'
+    },
+    'Successfully! You have': {
+        zh: '兑换成功！您还有',
+        en: 'Successfully! You have '
+    }
 };
 
 MeiweiApp.CheckI18n = function() {
     var newMsg = [];
+    var checkExist = function(el) {
+        var msg = $(el).attr('data-i18n');
+        if (!MeiweiApp.i18n[msg]) newMsg.push(msg);
+    }
     $('[data-i18n]').each(function() {
-        var msg = $(this).attr('data-i18n');
-        if (!MeiweiApp.i18n[msg]) {
-            newMsg.push(msg);
-        }
+        checkExist(this);
     });
+    for (var i in MeiweiApp.Templates) {
+        var template = MeiweiApp.Templates[i]();
+        $(template).find('[data-i18n]').each(function() {
+            checkExist(this);
+        });
+        $(template).filter('[data-i18n]').each(function() {
+            checkExist(this);
+        });
+    }
     return newMsg;
 };

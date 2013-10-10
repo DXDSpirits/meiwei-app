@@ -56,11 +56,12 @@ MeiweiApp.initLang = function() {
         var msg = MeiweiApp.i18n[msgId];
         return msg ? msg[langCode] : msgId;
     };
-    MeiweiApp.initLang = function() {
-        $('[data-i18n]').each(function() {
+    MeiweiApp.initLang = function(context) {
+        context = context || document;
+        $(context).find('[data-i18n]').each(function() {
             $(this).html(MeiweiApp._($(this).attr('data-i18n')));
         });
-    }
+    };
     MeiweiApp.setLang = function(lang) {
         localStorage.setItem('lang-code', (langCode = lang));
         MeiweiApp.initLang();

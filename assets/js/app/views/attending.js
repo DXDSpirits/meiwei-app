@@ -35,6 +35,7 @@ MeiweiApp.Views.OrderPages = MeiweiApp.CollectionView.extend({
         },
         render: function() {
             this.$el.html(this.template(this.model.toJSON()));
+            MeiweiApp.initLang(this.$el);
             if ($('body').height() >= 530) {
                 this.$('.section-qrcode').show();
                 this.$('.section-qrcode').qrcode({
