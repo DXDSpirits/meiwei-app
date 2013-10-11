@@ -7,6 +7,7 @@ MeiweiApp.Views.MemberLoginForm = MeiweiApp.View.extend({
 		_.bindAll(this, 'login', 'onLoginSuccess', 'onLoginFail');
 	},
 	onLoginSuccess: function() {
+	    this.$('.info-text').html('');
 		MeiweiApp.refreshActivePage();
 	},
 	onLoginFail: function(model, xhr, options) {
@@ -36,6 +37,7 @@ MeiweiApp.Views.MemberRegisterForm = MeiweiApp.View.extend({
         _.bindAll(this, 'register', 'onLoginSuccess', 'onLoginFail', 'onRegisterFail');
     },
     onLoginSuccess: function() {
+        this.$('.info-text').html('');
         MeiweiApp.refreshActivePage();
     },
     onLoginFail: function(model, xhr, options) {
