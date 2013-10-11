@@ -43,10 +43,10 @@ MeiweiApp.showSplash = function() {
 MeiweiApp.initVersion = function() {
     var pVersion = localStorage.getItem('version-code') || '1.0';
     if (MeiweiApp.Version != pVersion) {
-        var basicauth = localStorage.getItem('basic-auth');
+        var authToken = localStorage.getItem('auth-token');
         localStorage.clear();
         localStorage.setItem('version-code', MeiweiApp.Version);
-        if (basicauth) localStorage.setItem('basic-auth', basicauth);
+        if (authToken) localStorage.setItem('auth-token', authToken);
     }
 };
 
@@ -81,33 +81,27 @@ MeiweiApp.initGeolocation = function() {
 }
 
 MeiweiApp.initSync = function() {
-    var encode = function(username, password) {
-        return btoa(username + ':' + password);
-    };
-    var auth = JSON.parse(localStorage.getItem('basic-auth'));
-    var token = auth && auth.username && auth.password ? encode(auth.username, auth.password) : null;
+    var authToken = localStorage.getItem('auth-token');
     var originalSync = Backbone.sync;
     Backbone.sync = function(method, model, options) {
         options.timeout = options.timeout || MeiweiApp.configs.ajaxTimeout;
         _.extend((options.headers || (options.headers = {})), { 'Accept-Language': MeiweiApp.getLang() });
-        if (typeof token !== "undefined" && token !== null) {
-            _.extend(options.headers, { 'Authorization': 'Basic ' + token });
+        if (typeof authToken !== "undefined" && authToken !== null) {
+            _.extend(options.headers, { 'Authorization': 'Token ' + authToken });
         }
         return originalSync.call(model, method, model, options);
     };
-    MeiweiApp.BasicAuth = {
+    MeiweiApp.TokenAuth = {
         get: function() {
-            return auth;
+            return authToken;
         },
-        set: function(username, password) {
-            auth = {username: username, password: password};
-            token = encode(username, password);
-            localStorage.setItem('basic-auth', JSON.stringify(auth));
+        set: function(token) {
+            authToken = token;
+            localStorage.setItem('auth-token', authToken);
         },
         clear: function() {
-            auth = null;
-            token = null;
-            localStorage.removeItem('basic-auth');
+            authToken = null;
+            localStorage.removeItem('auth-token');
         }
     };
 };

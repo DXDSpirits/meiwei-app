@@ -66,14 +66,20 @@ MeiweiApp.me = new (MeiweiApp.Models.Member.extend({
 		return response;
 	},
 	login: function(auth, options) {
-		MeiweiApp.BasicAuth.set(auth.username, auth.password);
-		this.clear();
-		this.fetch({ success: options.success, error: options.error });
-		this.trigger('login');
+	    this.clear().set(auth);
+	    options = options || {};
+        options.url = MeiweiApp.configs.APIHost + '/members/login/';
+        var success = options.success;
+        options.success = function(model, response, options) {
+            MeiweiApp.TokenAuth.set(response.token);
+            if (success) success(model, response, options);
+            model.trigger('login');
+        };
+        this.save({}, options);
 	},
 	logout: function(callback) {
 		this.clear();
-		MeiweiApp.BasicAuth.clear();
+		MeiweiApp.TokenAuth.clear();
 		this.trigger('logout');
 	},
 	register: function(auth, options) {
@@ -88,13 +94,6 @@ MeiweiApp.me = new (MeiweiApp.Models.Member.extend({
 		this.set({password: password});
 		options = options || {};
 		options.url = this.url() + 'change_password/';
-		var success = options.success;
-		options.success = function(model, response, options) {
-			var auth = MeiweiApp.BasicAuth.get();
-			auth.password = password;
-			MeiweiApp.BasicAuth.set(auth.username, auth.password);
-			if (success) success(model, response, options);
-		};
 		Backbone.sync('update', this, options);
 	}
 }));
