@@ -128,6 +128,7 @@ MeiweiApp.initAjaxEvents = function() {
                     $('#apploader .ajax-error').html(text).addClass('hidden');
                 }, (timeout = 2000) + 500);
             }
+            MeiweiApp.TokenAuth.clear();
             MeiweiApp.Pages.MemberLogin.go({ ref: MeiweiApp.history.active });
         } else if (settings.type == 'GET' && jqxhr.statusText != 'abort') {
             $('#apploader .ajax-error').removeClass('hidden');
