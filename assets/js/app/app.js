@@ -48,6 +48,31 @@ MeiweiApp.initVersion = function() {
         localStorage.setItem('version-code', MeiweiApp.Version);
         if (authToken) localStorage.setItem('auth-token', authToken);
     }
+    var app = new MeiweiApp.Models.App();
+    app.fetch({success: function(model, response, options) {
+        var version = model.get('version');
+        if (version && version != MeiweiApp.Version) {
+            if (navigator.notification && _.isFunction(navigator.notification.confirm)) {
+                var callback = function(button) {
+                    if (button == 2) {
+                        if (window.device && device.platform == 'iOS') {
+                            var url = 'https://itunes.apple.com/app/id689668571';
+                            var ref = window.open(url ,'_blank', 'location=no');
+                        } else {
+                            var url = 'http://web.clubmeiwei.com/ad/apppromo';
+                            var ref = window.open(url ,'_blank', 'location=no');
+                        }
+                    }
+                };
+                navigator.notification.confirm(
+                    MeiweiApp._('New version is available, go to update?'),
+                    callback,
+                    MeiweiApp._('Update Available'),
+                    [MeiweiApp._('Cancel'), MeiweiApp._('Confirm')]
+                );
+            }
+        }
+    }});
 };
 
 MeiweiApp.initLang = function() {

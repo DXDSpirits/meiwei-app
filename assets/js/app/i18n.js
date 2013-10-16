@@ -278,6 +278,14 @@ MeiweiApp.i18n = {
     'You will receive a gift after sharing': {
         zh: '分享后可以得到精美礼品一份',
         en: 'You will receive a gift after sharing'
+    },
+    'Update Available': {
+        zh: '更新提示',
+        en: 'Update Available'
+    },
+    'New version is available, go to update?': {
+        zh: '好消息！美位手机应用更新啦，前往下载？',
+        en: 'New version is available, go to update?'
     }
 };
 
