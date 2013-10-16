@@ -99,19 +99,12 @@ MeiweiApp.Pages.MemberCenter = new (MeiweiApp.PageView.extend({
 		this.views.favoriteCarousel.render();
 		var key = 'visited-view-member-center';
 		if (!localStorage.getItem(key)) {
-		    if (navigator.notification && _.isFunction(navigator.notification.confirm)) {
-		        localStorage.setItem(key, true);
-                var callback = function(button) { if (button == 2) MeiweiApp.goTo('Settings'); };
-                navigator.notification.confirm(
-                    MeiweiApp._('You will receive a gift after sharing'),
-                    callback,
-                    MeiweiApp._('Share Meiwei with your friends'),
-                    [MeiweiApp._('No'), MeiweiApp._('Yes')]
-                );
-            } else {
-                localStorage.setItem(key, true);
-                if (confirm(MeiweiApp._('Share Meiwei with your friends')) == true) MeiweiApp.goTo('Settings');
-            }
+		    localStorage.setItem(key, true);
+		    MeiweiApp.showConfirmDialog(
+		        MeiweiApp._('Share Meiwei with your friends'),
+		        MeiweiApp._('You will receive a gift after sharing'),
+		        function() { MeiweiApp.goTo('Settings'); }
+		    );
 		}
 	}
 }))({el: $("#view-member-center")});

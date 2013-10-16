@@ -28,12 +28,7 @@ MeiweiApp.Views.OrderPages = MeiweiApp.CollectionView.extend({
             var url = 'http://www.clubmeiwei.com/restaurant/view/' + this.model.get('restaurant');
             var content  = '我在' + restaurantinfor.fullname + '(' + restaurantinfor.address + ')';
             var pic =  this.model.get('restaurantinfor').frontpic;
-            var command = [url, content, content, pic];
-            var success = function() {};
-            var fail = function() {};
-            if (window.Cordova) {
-                Cordova.exec(success, fail, "Weixin", "sendAppContent", command);
-            }
+            MeiweiApp.shareToMoments(url, content, pic);
         },
         render: function() {
             this.$el.html(this.template(this.model.toJSON()));

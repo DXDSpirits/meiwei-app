@@ -38,12 +38,7 @@ MeiweiApp.Pages.Settings = new (MeiweiApp.PageView.extend({
         var url = 'http://web.clubmeiwei.com/ad/apppromo?ref=' + MeiweiApp.me.id;
         var content  = '美位网手机应用华丽登场土豪时代，快来体验高品质订餐和贴心的私人管家服务！ ';
         var pic =  'http://web.clubmeiwei.com/assets/img/apppromo.jpg';
-        var command = [url, content, content, pic];
-        var success = function() {};
-        var fail = function() {};
-        if (window.Cordova) {
-            Cordova.exec(success, fail, "Weixin", "sendAppContent", command);
-        }
+        MeiweiApp.shareToMoments(url, content, pic);
     },
     render: function() {
         MeiweiApp.me.fetch();

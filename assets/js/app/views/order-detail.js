@@ -4,20 +4,13 @@ MeiweiApp.Views.OrderDetail = MeiweiApp.ModelView.extend({
 	events: { 'tap .btn-cancel': 'cancelOrder' },
 	cancelOrder: function() {
 		var model = this.model;
-		var confirmCancel = function() {
-			model.cancel({success: function() { MeiweiApp.goTo('OrderList'); }});
-		};
-		if (navigator.notification && _.isFunction(navigator.notification.confirm)) {
-			var callback = function(button) { if (button == 2) confirmCancel(); };
-			navigator.notification.confirm(
-			    MeiweiApp._('Please confirm the cancellation'), 
-			    callback,
-			    MeiweiApp._('Cancel Order'),
-			    [MeiweiApp._('Cancel'), MeiweiApp._('Confirm')]
-			);
-		} else {
-			if (confirm(MeiweiApp._('Cancel Order')) == true) confirmCancel();
-		}
+		MeiweiApp.showConfirmDialog(
+		    MeiweiApp._('Cancel Order'),
+		    MeiweiApp._('Please confirm the cancellation'),
+		    function() {
+		        model.cancel({success: function() { MeiweiApp.goTo('OrderList'); }});
+		    }
+		);
 	}
 });
 

@@ -9,6 +9,7 @@ module.exports = function(grunt) {
                     'assets/js/app/_open.js',
                     'assets/js/app/app.js',
                     'assets/js/app/app-local.js',
+                    'assets/js/app/utils.js',
                     'assets/js/app/i18n.js',
                     'assets/js/app/templates.js',
                     'assets/js/app/model.js',
