@@ -32,7 +32,7 @@ MeiweiApp.Views.MasterHero = MeiweiApp.View.extend({
         });
 	},
 	render: function() {
-		if (bootstrap && bootstrap.Home && bootstrap.Home.products) {
+		if (window.bootstrap && bootstrap.Home && bootstrap.Home.products) {
 			this.productItems.reset(bootstrap.Home.products);
 			this.renderCarousel();
 		}
@@ -136,7 +136,7 @@ MeiweiApp.Pages.Home = new (MeiweiApp.PageView.extend({
 	render: function() {
 	    this.firstVisit();
 		this.views.masterHero.render();
-		if (bootstrap && bootstrap.Home && bootstrap.Home.recommend) {
+		if (window.bootstrap && bootstrap.Home && bootstrap.Home.recommend) {
 			this.recommend.items.reset(bootstrap.Home.recommend);
 		}
 		this.recommend.fetch({ reset: true });
