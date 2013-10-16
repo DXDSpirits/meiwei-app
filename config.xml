@@ -1,17 +1,14 @@
 <?xml version='1.0' encoding='utf-8'?>
-<widget id="com.meiwei.app" version="1.0.0" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
-    <name>MeiweiApp</name>
-    <description>
-        中高端服务平台
-    </description>
-    <author email="dxd.spirits@gmail.com" href="http://www.clubmeiwei.com">
-        Xindong Ding
-    </author>
-    <access origin="*" />
-    <preference name="fullscreen" value="true" />
-    <preference name="webviewbounce" value="true" />
-    <preference name="DisallowOverscroll" value="true" />
-    <preference name="AutoHideSplashScreen" value="false" />
-    <preference name="KeyboardDisplayRequiresUserAction" value="false" />
-    <content src="index.html" />
+<widget id="com.meiwei.app" version="1.4.0">
+	<name>MeiweiApp</name>
+	<description>中高端服务平台</description>
+	<author email="dxd.spirits@gmail.com" href="http://www.clubmeiwei.com">Xindong Ding</author>
+	<access origin="*" />
+	<preference name="fullscreen" value="true" />
+	<preference name="webviewbounce" value="true" />
+	<preference name="DisallowOverscroll" value="true" />
+	<preference name="AutoHideSplashScreen" value="false" />
+	<preference name="KeyboardDisplayRequiresUserAction" value="false" />
+	<preference name="splashscreen" value="splash" />
+	<content src="index.html" />
 </widget>
