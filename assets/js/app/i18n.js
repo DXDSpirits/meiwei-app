@@ -7,6 +7,10 @@ MeiweiApp.i18n = {
         zh: '全部菜系',
         en: 'Cuisines'
     },
+    'Recommends': {
+        zh: '美位榜单',
+        en: 'Recommends'
+    },
     'Next Page': {
         zh: '上一页',
         en: 'Next Page'

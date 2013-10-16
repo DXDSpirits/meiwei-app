@@ -51,19 +51,6 @@ module.exports = function(grunt) {
 						'assets/js/plugin/iscroll/iscroll.js'
 					]
 				}
-			},
-			i18n: {
-				options: {
-					sourceMap: 'assets/js/plugin/i18n/i18n-min.map',
-					sourceMappingURL: 'i18n-min.map',
-					sourceMapPrefix: 4,
-				},
-				files: {
-					'assets/js/plugin/i18n/i18n-min.js': [
-						'assets/js/plugin/i18n/icu.js',
-						'assets/js/plugin/i18n/translate.js'
-					]
-				}
 			}
 		},
 		sass: {
@@ -121,10 +108,6 @@ module.exports = function(grunt) {
 			scripts_iscroll: {
 				files: ['assets/js/plugin/iscroll/iscroll.js'],
 				tasks: ['uglify:iscroll']
-			},
-			scripts_i18n: {
-				files: ['assets/js/plugin/i18n/icu.js', 'assets/js/plugin/i18n/translate.js'],
-				tasks: ['uglify:i18n']
 			},
 			stylesheets: {
 				files: ['assets/scss/*.scss', 'assets/scss/mobile/*.scss', 'assets/scss/font-awesome/*.scss', 'assets/scss/pages/*.scss'],

@@ -57,6 +57,17 @@ MeiweiApp.Views.RestaurantList = MeiweiApp.CollectionView.extend({
 	ModelView: MeiweiApp.Views.RestaurantListItem
 });
 
+MeiweiApp.Views.RecommendFilter = MeiweiApp.CollectionView.extend({
+    ModelView: MeiweiApp.ModelView.extend({
+        tagName: 'li',
+        template: Mustache.compile('{{name}}'),
+        events: { 'tap': 'selectFilter' },
+        selectFilter: function() {
+            this.model.trigger('select');
+        }
+    })
+});
+
 MeiweiApp.Views.CuisineFilter = MeiweiApp.CollectionView.extend({
 	ModelView: MeiweiApp.ModelView.extend({
 		tagName: 'li',
@@ -99,7 +110,7 @@ MeiweiApp.Pages.RestaurantSearch = new (MeiweiApp.PageView.extend({
 		'fastclick .header-btn-right': 'onClickRightBtn',
 		'fastclick .collapsible.circle p': 'toggleCircleFilters',
 		'fastclick .collapsible.cuisine p': 'toggleCuisineFilters',
-		'fastclick .collapsible.cuisine p': 'toggleCuisineFilters',
+		'fastclick .collapsible.recommend p': 'toggleRecommendFilters',
 		'tap .scroll-inner': 'closeFilters',
 		'submit >header>form': 'searchKeywords',
 		'focus >header input': 'clearFormInput'
@@ -107,15 +118,20 @@ MeiweiApp.Pages.RestaurantSearch = new (MeiweiApp.PageView.extend({
 	clearFormInput: function() { this.$('>header input').val(''); },
 	initPage: function() {
 		this.lazy = 24 * 60 * 60 * 1000;
-		_.bindAll(this, 'refreshList', 'filterRestaurant', 'bindCuisineFilters', 'bindCircleFilters');
+		_.bindAll(this, 'refreshList', 'filterRestaurant', 'bindCuisineFilters', 'bindCircleFilters', 'bindRecommendFilters');
 		this.restaurants = new MeiweiApp.Collections.Restaurants();
 		this.cuisines = new MeiweiApp.Collections.Cuisines();
 		this.circles = new MeiweiApp.Collections.Circles();
+		this.recommends = new MeiweiApp.Collections.Recommends();
 		this.views = {
 			restaurantList: new MeiweiApp.Views.RestaurantList({
 				collection: this.restaurants,
 				el: this.$('.restaurant-list')
 			}),
+			recommendFilter: new MeiweiApp.Views.CuisineFilter({
+                collection: this.recommends,
+                el: this.$('.filter.recommend .collapsible-inner ul')
+            }),
 			cuisineFilter: new MeiweiApp.Views.CuisineFilter({
 				collection: this.cuisines,
 				el: this.$('.filter.cuisine .collapsible-inner ul')
@@ -132,6 +148,8 @@ MeiweiApp.Pages.RestaurantSearch = new (MeiweiApp.PageView.extend({
 		this.initPageNav(this, this.restaurants);
 	},
 	refreshList: function(collection, xhr, options) {
+	    var recommend = options.data && options.data.recommend && this.recommends.where({id: options.data.recommend})[0];
+        this.$('.recommend > p > span').html(recommend ? recommend.get('name') : MeiweiApp._('Recommends'));
 		var cuisine = options.data && options.data.cuisine && this.cuisines.where({id: options.data.cuisine})[0];
 		this.$('.cuisine > p > span').html(cuisine ? cuisine.get('name') : MeiweiApp._('Cuisines'));
 		var circle = options.data && options.data.circle && this.circles.where({id: options.data.circle})[0];
@@ -152,22 +170,35 @@ MeiweiApp.Pages.RestaurantSearch = new (MeiweiApp.PageView.extend({
 	filterRestaurant: function(filter) {
 		this.restaurants.fetch({ reset: true, success: this.refreshList, data: filter });
 	},
+	toggleRecommendFilters: function() {
+        this.$('.collapsible.circle, .collapsible.cuisine').removeClass('expand');
+        this.$('.collapsible.recommend').toggleClass('expand');
+    },
 	toggleCuisineFilters: function() {
-		this.$('.collapsible.circle').removeClass('expand');
+		this.$('.collapsible.circle, .collapsible.recommend').removeClass('expand');
 		this.$('.collapsible.cuisine').toggleClass('expand');
 	},
 	toggleCircleFilters: function() {
-		this.$('.collapsible.cuisine').removeClass('expand');
+		this.$('.collapsible.cuisine, .collapsible.recommend').removeClass('expand');
 		this.$('.collapsible.circle').toggleClass('expand');
 	},
 	closeFilters: function() {
+	    this.$('.collapsible.recommend').removeClass('expand');
 	    this.$('.collapsible.cuisine').removeClass('expand');
         this.$('.collapsible.circle').removeClass('expand');
 	},
+	bindRecommendFilters: function(recommends, response, options) {
+        this.recommendFilterScroller = new IScroll(this.$('.recommend .collapsible-inner').selector, { tap: true });
+        var bindFilter = function(recommend) {
+            this.listenTo(recommend, "select", function() {
+                this.filterRestaurant({recommend: recommend.id});
+                this.$('.collapsible.recommend').removeClass('expand');
+            });
+        };
+        recommends.forEach(bindFilter, this);
+    },
 	bindCuisineFilters: function(cuisines, response, options) {
-	    this.cuisineFilterScroller = new IScroll(this.$('.cuisine .collapsible-inner').selector, {
-	    	tap: true
-	    });
+	    this.cuisineFilterScroller = new IScroll(this.$('.cuisine .collapsible-inner').selector, { tap: true });
 		var bindFilter = function(cuisine) {
 			this.listenTo(cuisine, "select", function() {
 			    this.filterRestaurant({cuisine: cuisine.id});
@@ -177,9 +208,7 @@ MeiweiApp.Pages.RestaurantSearch = new (MeiweiApp.PageView.extend({
 		cuisines.forEach(bindFilter, this);
 	},
 	bindCircleFilters: function(circles, response, options) {
-		this.circleFilterScroller = new IScroll(this.$('.circle .collapsible-inner').selector, {
-			tap: true
-		});
+		this.circleFilterScroller = new IScroll(this.$('.circle .collapsible-inner').selector, { tap: true });
 		var bindFilter = function(circle) {
 			this.listenTo(circle, "select", function() {
 				this.filterRestaurant({circle: circle.id});
@@ -240,6 +269,7 @@ MeiweiApp.Pages.RestaurantSearch = new (MeiweiApp.PageView.extend({
 	render: function() {
 		this.$('>header input').focus();
 		this.restaurants.fetch({ reset: true, success: this.refreshList });
+		this.recommends.fetch({ reset: true, success: this.bindRecommendFilters });
 		this.cuisines.fetch({ reset: true, success: this.bindCuisineFilters });
 		this.circles.fetch({ reset: true, success: this.bindCircleFilters });
 	}

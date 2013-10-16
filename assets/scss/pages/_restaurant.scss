@@ -23,7 +23,8 @@
 
 #view-restaurant-search {
 	.filter-bar {
-		.cuisine li, .circle li, .sort li {
+		.recommend li, .cuisine li, .circle li, .sort li {
+		    @include text-overflow();
 			line-height: 30px;
 			padding: 0 17px;
 			//@include border(0 0 1px 0, dotted, $brownLight);
