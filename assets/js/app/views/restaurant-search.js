@@ -57,18 +57,7 @@ MeiweiApp.Views.RestaurantList = MeiweiApp.CollectionView.extend({
 	ModelView: MeiweiApp.Views.RestaurantListItem
 });
 
-MeiweiApp.Views.RecommendFilter = MeiweiApp.CollectionView.extend({
-    ModelView: MeiweiApp.ModelView.extend({
-        tagName: 'li',
-        template: Mustache.compile('{{name}}'),
-        events: { 'tap': 'selectFilter' },
-        selectFilter: function() {
-            this.model.trigger('select');
-        }
-    })
-});
-
-MeiweiApp.Views.CuisineFilter = MeiweiApp.CollectionView.extend({
+MeiweiApp.Views.SearchFilter = MeiweiApp.CollectionView.extend({
 	ModelView: MeiweiApp.ModelView.extend({
 		tagName: 'li',
 		template: Mustache.compile('{{name}}'),
@@ -79,7 +68,7 @@ MeiweiApp.Views.CuisineFilter = MeiweiApp.CollectionView.extend({
 	})
 });
 
-MeiweiApp.Views.CircleFilter = MeiweiApp.Views.CuisineFilter.extend({
+MeiweiApp.Views.CircleFilter = MeiweiApp.Views.SearchFilter.extend({
     addAll: function() {
         var $list = [];
         for (var i=0; i<this.collection.length; i++) {
@@ -87,13 +76,23 @@ MeiweiApp.Views.CircleFilter = MeiweiApp.Views.CuisineFilter.extend({
             var item = this.collection.at(i);
             var modelView = new this.ModelView({model: item});
             if (lastItem == null || item.get('district').id != lastItem.get('district').id) {
-                $list.push($('<li class="subtitle"></li>').html(item.get('district').name));
+                var subTitleView = new (this.ModelView.extend({
+                    className: 'subtitle',
+                    template: Mustache.compile('{{district.name}}'),
+                    selectFilter: function() {
+                        this.model.trigger('select-district');
+                    }
+                }))({model: item});
+                $list.push(subTitleView.render().el);
             }
             $list.push(modelView.render().el);
         }
         this.$el.html($list);
     },
 });
+
+MeiweiApp.Views.RecommendFilter = MeiweiApp.Views.SearchFilter;
+MeiweiApp.Views.CuisineFilter = MeiweiApp.Views.SearchFilter;
 
 MeiweiApp.Pages.RestaurantSearch = new (MeiweiApp.PageView.extend({
 	onClickLeftBtn: function() { MeiweiApp.goTo('Home'); },
@@ -148,12 +147,6 @@ MeiweiApp.Pages.RestaurantSearch = new (MeiweiApp.PageView.extend({
 		this.initPageNav(this, this.restaurants);
 	},
 	refreshList: function(collection, xhr, options) {
-	    var recommend = options.data && options.data.recommend && this.recommends.where({id: options.data.recommend})[0];
-        this.$('.recommend > p > span').html(recommend ? recommend.get('name') : MeiweiApp._('Recommends'));
-		var cuisine = options.data && options.data.cuisine && this.cuisines.where({id: options.data.cuisine})[0];
-		this.$('.cuisine > p > span').html(cuisine ? cuisine.get('name') : MeiweiApp._('Cuisines'));
-		var circle = options.data && options.data.circle && this.circles.where({id: options.data.circle})[0];
-		this.$('.circle > p > span').html(circle ? circle.get('name') : MeiweiApp._('Circles'));
 		if (this.restaurants.length == 0) {
 			this.$('.restaurant-list').prepend(
 			    '<p style="padding: 15px;">没有找到合适的餐厅，请尝试搜索其他关键字，或者选择菜系和商圈</p>'
@@ -171,26 +164,29 @@ MeiweiApp.Pages.RestaurantSearch = new (MeiweiApp.PageView.extend({
 		this.restaurants.fetch({ reset: true, success: this.refreshList, data: filter });
 	},
 	toggleRecommendFilters: function() {
-        this.$('.collapsible.circle, .collapsible.cuisine').removeClass('expand');
         this.$('.collapsible.recommend').toggleClass('expand');
     },
 	toggleCuisineFilters: function() {
-		this.$('.collapsible.circle, .collapsible.recommend').removeClass('expand');
 		this.$('.collapsible.cuisine').toggleClass('expand');
 	},
 	toggleCircleFilters: function() {
-		this.$('.collapsible.cuisine, .collapsible.recommend').removeClass('expand');
 		this.$('.collapsible.circle').toggleClass('expand');
 	},
 	closeFilters: function() {
-	    this.$('.collapsible.recommend').removeClass('expand');
-	    this.$('.collapsible.cuisine').removeClass('expand');
-        this.$('.collapsible.circle').removeClass('expand');
+	    this.$('.collapsible.recommend, .collapsible.cuisine, .collapsible.circle').removeClass('expand');
 	},
+	resetFilters: function() {
+	    this.$('.collapsible.recommend, .collapsible.cuisine, .collapsible.circle').removeClass('expand');
+        this.$('.recommend > p > span').html(MeiweiApp._('Recommends'));
+        this.$('.cuisine > p > span').html(MeiweiApp._('Cuisines'));
+        this.$('.circle > p > span').html(MeiweiApp._('Circles'));
+    },
 	bindRecommendFilters: function(recommends, response, options) {
         this.recommendFilterScroller = new IScroll(this.$('.recommend .collapsible-inner').selector, { tap: true });
         var bindFilter = function(recommend) {
             this.listenTo(recommend, "select", function() {
+                this.resetFilters();
+                this.$('.recommend > p > span').html(recommend.get('name'));
                 this.filterRestaurant({recommend: recommend.id});
                 this.$('.collapsible.recommend').removeClass('expand');
             });
@@ -201,6 +197,8 @@ MeiweiApp.Pages.RestaurantSearch = new (MeiweiApp.PageView.extend({
 	    this.cuisineFilterScroller = new IScroll(this.$('.cuisine .collapsible-inner').selector, { tap: true });
 		var bindFilter = function(cuisine) {
 			this.listenTo(cuisine, "select", function() {
+			    this.resetFilters();
+			    this.$('.cuisine > p > span').html(cuisine.get('name'));
 			    this.filterRestaurant({cuisine: cuisine.id});
 			    this.$('.collapsible.cuisine').removeClass('expand');
 			});
@@ -211,9 +209,17 @@ MeiweiApp.Pages.RestaurantSearch = new (MeiweiApp.PageView.extend({
 		this.circleFilterScroller = new IScroll(this.$('.circle .collapsible-inner').selector, { tap: true });
 		var bindFilter = function(circle) {
 			this.listenTo(circle, "select", function() {
+				this.resetFilters();
+				this.$('.circle > p > span').html(circle.get('name'));
 				this.filterRestaurant({circle: circle.id});
 				this.$('.collapsible.circle').removeClass('expand');
 			});
+			this.listenTo(circle, "select-district", function() {
+			    this.resetFilters();
+			    this.$('.circle > p > span').html(circle.get('district').name);
+                this.filterRestaurant({district: circle.get('district').id});
+                this.$('.collapsible.circle').removeClass('expand');
+            });
 		};
 		circles.forEach(bindFilter, this);
 	},
