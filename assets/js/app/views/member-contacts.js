@@ -21,7 +21,7 @@ $(function() {
     		'fastclick .filter-local': 'getLocalContacts'
     	},
     	onClickRightBtn: function() {
-    		if (this.options && this.options.callback)
+    		if (this.options && this.options.callback && this.selectedContact)
     			this.options.callback(this.selectedContact.get('name'), this.selectedContact.get('mobile'));
     		MeiweiApp.goBack();
     	},

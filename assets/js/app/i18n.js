@@ -223,12 +223,12 @@ MeiweiApp.i18n = {
         zh: '还没有订单，赶紧预订！',
         en: 'No Orders! Go and Book!'
     },
-    '两次密码输入不一致，请重新输入。': {
+    "Password doesn't match.": {
         zh: '两次密码输入不一致，请重新输入。',
-        en: '两次密码输入不一致，请重新输入。'
+        en: "Password doesn't match."
     },
     'Please confirm the cancellation': {
-        zh: '请确认删除订单',
+        zh: '请确认取消订单',
         en: 'Cancel Order'
     },
     'An SMS will be sent to you to inform you the order has been confirmed': {
@@ -236,7 +236,7 @@ MeiweiApp.i18n = {
         en: 'An SMS will be sent to you to inform you the order has been confirmed'
     },
     'Cancel Order': {
-        zh: '删除订单',
+        zh: '取消订单',
         en: 'Cancel Order'
     },
     'Confirm Order': {
