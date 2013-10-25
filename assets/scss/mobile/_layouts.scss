@@ -105,6 +105,15 @@ body {
 		@include flex-box($orient: vertical, $pack: start);
 		position: relative;
 	}
+	& > .scroll-hint {
+	    position: absolute;
+	    top: 15px;
+	    z-index: -1;
+	    text-align: center;
+	    width: 100%;
+	    color: $brown;
+	    font-weight: bold;
+	}
 }
 
 #apploader {
