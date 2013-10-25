@@ -127,7 +127,7 @@ $(function() {
     				collection: this.restaurants,
     				el: this.$('.restaurant-list')
     			}),
-    			recommendFilter: new MeiweiApp.Views.CuisineFilter({
+    			recommendFilter: new MeiweiApp.Views.RecommendFilter({
                     collection: this.recommends,
                     el: this.$('.filter.recommend .collapsible-inner ul')
                 }),
@@ -164,13 +164,13 @@ $(function() {
     		this.restaurants.fetch({ reset: true, success: this.refreshList, data: filter });
     	},
     	toggleRecommendFilters: function() {
-            this.$('.collapsible.recommend').toggleClass('expand');
+            this.$('.collapsible.recommend').toggleClass('expand').siblings().removeClass('expand');
         },
     	toggleCuisineFilters: function() {
-    		this.$('.collapsible.cuisine').toggleClass('expand');
+    		this.$('.collapsible.cuisine').toggleClass('expand').siblings().removeClass('expand');
     	},
     	toggleCircleFilters: function() {
-    		this.$('.collapsible.circle').toggleClass('expand');
+    		this.$('.collapsible.circle').toggleClass('expand').siblings().removeClass('expand');
     	},
     	closeFilters: function() {
     	    this.$('.collapsible.recommend, .collapsible.cuisine, .collapsible.circle').removeClass('expand');

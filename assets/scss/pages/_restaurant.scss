@@ -280,12 +280,13 @@
 		}
 	}
 	.floorplan-nav {
-		@include size(62px, 100%);
+		width: 100%;
 		text-align: center;
+		margin: 10px 0;
 		.floorplan-nav-item {
 			display: inline-block;
 			padding: 5px 10px;
-			margin: 15px 5px;
+			margin: 5px;
 			border: 1px solid $brown;
 			@include border-radius(5px);
 			&.selected {

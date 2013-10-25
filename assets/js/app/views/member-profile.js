@@ -50,11 +50,14 @@ $(function() {
             this.$('input[name=mobile]').val(profile.mobile);
             this.$('input[name=birthday]').val(profile.birthday);
             this.$('input[name=sexe]').val(profile.sexe);
+            this.$('.info-text').html('');
+            
+            //TODO: A little tricky ... in order to display i18n properly
+            this.switchGender();
             if (this.$('.switch-gender').hasClass('on') && profile.sexe == 0 ||
                 this.$('.switch-gender').hasClass('off') && profile.sexe == 1) {
                 this.switchGender();
             }
-            this.$('.info-text').html('');
         }
     });
     
