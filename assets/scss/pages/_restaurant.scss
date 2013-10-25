@@ -201,12 +201,12 @@
 		> header {
 			margin: 0 -21.4285714%;
 			height: 40px;
-			line-height: 40px;
 			text-align: center;
 			font-size: $fontSizeSmall;
 			position: relative;
 			h1 {
 	        	font-size: $baseFontSize;
+	        	line-height: 40px;
 	        	text-align: center;
 	        }
 		}

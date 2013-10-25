@@ -18,14 +18,17 @@ cite    { font-style: normal; }
 
 h1 {
 	font-size: $fontSizeLarge;
+	line-height: 1.4;
 }
 
 h2 {
 	font-size: $baseFontSize;
+	font-weight: bold;
 }
 
 h3 {
 	font-size: $fontSizeSmall;
+	font-weight: bold;
 }
 
 h4, h5, h6 {

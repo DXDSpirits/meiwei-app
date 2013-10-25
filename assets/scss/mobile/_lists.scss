@@ -5,7 +5,7 @@
 %thumbnail-list-item {
 	@include border(0 0 1px 0, solid, $brownLighter);
 	@include size(90px, 100%);
-	padding: 9px 17px 9px 99px;
+	padding: 6px 17px 6px 99px;
 	overflow: hidden;
 	position: relative;
 	img {
@@ -14,13 +14,10 @@
 		left: 0;
 		@include square(89px);
 	}
-	h1 {
+	h1, h2, h3, p {
 		@include text-overflow();
 	}
-	p {
-		@include text-overflow();
-		font-size: $fontSizeMini;
-	}
+	font-size: $fontSizeMini;
 }
 
 .thumbnail-list { @extend %thumbnail-list; }
@@ -41,7 +38,6 @@
 	@extend %thumbnail-list-item;
 	@include text-overflow();
 	@include flex-box($orient:horizontal);
-	padding: 6px 17px 6px 99px;
 	> .order-list-detail {
 		@include flexible($orient: horizontal);
 	}

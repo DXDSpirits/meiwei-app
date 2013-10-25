@@ -70,19 +70,20 @@ $(function() {
     
     MeiweiApp.Views.CircleFilter = MeiweiApp.Views.SearchFilter.extend({
         addAll: function() {
+            var DistrictModelView = this.ModelView.extend({
+                className: 'subtitle',
+                template: Mustache.compile('{{district.name}}'),
+                selectFilter: function() {
+                    this.model.trigger('select-district');
+                }
+            });
             var $list = [];
             for (var i=0; i<this.collection.length; i++) {
                 var lastItem = (i == 0 ? null : this.collection.at(i-1));
                 var item = this.collection.at(i);
                 var modelView = new this.ModelView({model: item});
                 if (lastItem == null || item.get('district').id != lastItem.get('district').id) {
-                    var subTitleView = new (this.ModelView.extend({
-                        className: 'subtitle',
-                        template: Mustache.compile('{{district.name}}'),
-                        selectFilter: function() {
-                            this.model.trigger('select-district');
-                        }
-                    }))({model: item});
+                    var subTitleView = new DistrictModelView({model: item});
                     $list.push(subTitleView.render().el);
                 }
                 $list.push(modelView.render().el);

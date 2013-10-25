@@ -155,7 +155,7 @@
 
 #view-member-favorites {
 	.restaurant-list-item {
-		padding: 9px 45px 9px 99px;
+		padding-right: 45px;
 		section { @include square(100%); }
 		p { white-space: normal; }
 	    > .delete-button {
