@@ -1,6 +1,10 @@
 $(function() {
-    MeiweiApp.Views.MemberProfileBox = MeiweiApp.View.extend({
+    var MemberProfileBox = MeiweiApp.View.extend({
     	events: { 'tap .avatar': 'changeAvatar' },
+    	initView: function() {
+    	    _.bindAll(this, 'updateProfile');
+            this.listenTo(MeiweiApp.me.profile, 'change', this.updateProfile);
+        },
     	changeAvatar: function() {
     		function onSuccess(imageData) {
     			localStorage.setItem('avatar', imageData);
@@ -16,25 +20,23 @@ $(function() {
         		);
         	}
     	},
+    	updateProfile: function() {
+    	    var profile = MeiweiApp.me.profile.toJSON();
+    	    this.$('[data-field=nickname]').html(profile.nickname);
+            this.$('[data-field=mobile]').html(profile.mobile);
+            this.$('[data-field=email]').html(profile.email);
+    	},
     	render: function() {
-    		MeiweiApp.me.fetch({
-    			success: function(model, response, options) {
-    				var profile = MeiweiApp.me.profile.toJSON();
-    				options.view.$('[data-field=nickname]').html(profile.nickname);
-    				options.view.$('[data-field=mobile]').html(profile.mobile);
-    				options.view.$('[data-field=email]').html(profile.email);
-    				var imageData = localStorage.getItem('avatar');
-    				if (imageData) {
-    					options.view.$('.avatar img')[0].src = "data:image/jpeg;base64," + imageData;
-    				} else {
-    					options.view.$('.avatar img')[0].src = "assets/img/default-avatar@2x.png";
-    				}
-    			}, view: this
-    		});
+    	    var imageData = localStorage.getItem('avatar');
+            if (imageData) {
+                this.$('.avatar img')[0].src = "data:image/jpeg;base64," + imageData;
+            } else {
+                this.$('.avatar img')[0].src = "assets/img/default-avatar@2x.png";
+            }
+    		MeiweiApp.me.fetch();
     		return this;
-    	}
+        }
     });
-    
     
     MeiweiApp.Views.FavoriteRestoCarousel = MeiweiApp.View.extend({
     	render: function() {
@@ -52,7 +54,6 @@ $(function() {
     		return this;
     	}
     });
-    
     
     MeiweiApp.Pages.MemberCenter = new (MeiweiApp.PageView.extend({
     	events: {
@@ -84,7 +85,7 @@ $(function() {
     		this.listenTo(MeiweiApp.me, 'login', function() { this.lastRender = null; });
     		this.favorites = MeiweiApp.me.favorites;
     		this.views = {
-    			profileBox: new MeiweiApp.Views.MemberProfileBox({
+    			profileBox: new MemberProfileBox({
     				model: MeiweiApp.me.profile,
     				el: this.$('.member-profile-box')
     			}),

@@ -17,13 +17,10 @@ $(function() {
     		}));
     		this.$el.prepend('<img src="assets/img/hero.png" />');
     		var items = this.$('.carousel-inner > .carousel-item');
-    		this.$('.carousel-inner').css('width', items.length * $(items[0]).outerWidth());
-    		//this.$('.indicator').removeClass('hidden').css('width', items.length * 15 - 5);
+        	this.$('.carousel-inner').css('width', items.length * $(items[0]).outerWidth());
     		this.scroller = new IScroll(this.$('.carousel').selector, {
-    			tap: true, scrollX: true, scrollY: false/*, momentum: true, snap: true,
-    			indicators: { el: this.$('.indicator')[0], resize: false }*/
+    			tap: true, scrollX: true, scrollY: false
     		});
-    		//this.scroller.goToPage(1, 0);
     		this.scroller.on('scrollStart', function() {
     		    MeiweiApp.Pages.Home.scroller.disable();
     		});
@@ -102,18 +99,18 @@ $(function() {
     	},
     	goToSearch: function() { MeiweiApp.goTo('RestaurantSearch'); },
     	hero: function() {
-    		var page = this.scroller.currentPage.pageY - 1;
-    		var newHero = this.$('.recommend-list-item')[page];
-    		if (newHero) {
-    			this.$('.hero').removeClass('hero');
-    			$(newHero).addClass('hero');
-    		}
+    		var wrapperHeight = 250;
+    		if (this.scroller.y <= 0) {
+    		    this.$('.hero').removeClass('hero');
+        		var page = parseInt((-this.scroller.y) / wrapperHeight);
+        		this.$('.recommend-list-item').slice(Math.max(page - 1, 0), page + 2).addClass('hero');
+        	}
     	},
     	initScroller: function() {
     		if (this.scroller == null) {
     			if (this.$('.iscroll').length > 0) {
     			    this.scroller = new IScroll(this.$('.iscroll').selector, {
-    			    	tap: true, snap: true, snapStepY: this.snapStep
+    			    	tap: true
     				});
     				this.hero();
     				this.scroller.on('scrollEnd', this.hero);

@@ -216,6 +216,9 @@
     }
     .settings-share {
         padding: 0 10px;
+        button, .btn {
+            font-size: $fontSizeSmall;
+        }
     }
     .lang-opt {
         display: inline-block;
