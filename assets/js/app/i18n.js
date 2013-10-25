@@ -27,6 +27,14 @@ MeiweiApp.i18n = {
         zh: '客服电话',
         en: 'Call Us'
     },
+    'Mr.': {
+        zh: '先生',
+        en: 'Mr.'
+    },
+    'Ms.': {
+        zh: '小姐',
+        en: 'Ms.'
+    },
     'Reservation Detail': {
         zh: '预订信息',
         en: 'Reservation Detail'
@@ -46,6 +54,10 @@ MeiweiApp.i18n = {
     'Floorplan': {
         zh: '桌位',
         en: 'Floorplan'
+    },
+    'Remarks': {
+        zh: '备注',
+        en: 'Remarks'
     },
     'Member Center': {
         zh: '用户中心',
@@ -103,6 +115,10 @@ MeiweiApp.i18n = {
         zh: '公共帐号登录',
         en: 'Social Login'
     },
+    'Name': {
+        zh: '姓名',
+        en: 'Name'
+    },
     'Email': {
         zh: '邮箱',
         en: 'Email'
@@ -110,6 +126,10 @@ MeiweiApp.i18n = {
     'Mobile': {
         zh: '手机',
         en: 'Mobile'
+    },
+    'Mobile/Email': {
+        zh: '手机/邮箱',
+        en: 'Mobile/Email'
     },
     'Birthday': {
         zh: '生日',
@@ -122,6 +142,14 @@ MeiweiApp.i18n = {
     'Modify Password': {
         zh: '修改密码',
         en: 'Modify Password'
+    },
+    'Confirm Password': {
+        zh: '确认密码',
+        en: 'Confirm Password'
+    },
+    'Password': {
+        zh: '密码',
+        en: 'Password'
     },
     'Contact': {
         zh: '联系人',
@@ -305,17 +333,19 @@ MeiweiApp.CheckI18n = function() {
     var newMsg = [];
     var checkExist = function(el) {
         var msg = $(el).attr('data-i18n');
-        if (!MeiweiApp.i18n[msg]) newMsg.push(msg);
+        if (msg && !MeiweiApp.i18n[msg]) newMsg.push(msg);
+        msg = $(el).attr('data-placeholder-i18n');
+        if (msg && !MeiweiApp.i18n[msg]) newMsg.push(msg);
     }
-    $('[data-i18n]').each(function() {
+    $('[data-i18n], [data-placeholder-i18n]').each(function() {
         checkExist(this);
     });
     for (var i in MeiweiApp.Templates) {
         var template = MeiweiApp.Templates[i]();
-        $(template).find('[data-i18n]').each(function() {
+        $(template).find('[data-i18n], [data-i18n-placeholder]').each(function() {
             checkExist(this);
         });
-        $(template).filter('[data-i18n]').each(function() {
+        $(template).filter('[data-i18n], [data-i18n-placeholder]').each(function() {
             checkExist(this);
         });
     }

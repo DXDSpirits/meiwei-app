@@ -77,6 +77,9 @@ MeiweiApp.initLang = function() {
         $(context).find('[data-i18n]').each(function() {
             $(this).html(MeiweiApp._($(this).attr('data-i18n')));
         });
+        $(context).find('[data-placeholder-i18n]').each(function() {
+            $(this).attr('placeholder', MeiweiApp._($(this).attr('data-placeholder-i18n')));
+        });
     };
     MeiweiApp.setLang = function(lang) {
         localStorage.setItem('lang-code', (langCode = lang));

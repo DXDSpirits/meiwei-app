@@ -36,11 +36,11 @@ $(function() {
             if (switchGender.hasClass('on')) {
                 switchGender.removeClass('on').addClass('off');
                 switchGender.find('input').val(0);
-                switchGender.find('label').html(switchGender.find('label').attr('data-off'));
+                switchGender.find('label').html(MeiweiApp._('Mr.'));
             } else {
                 switchGender.removeClass('off').addClass('on');
                 switchGender.find('input').val(1);
-                switchGender.find('label').html(switchGender.find('label').attr('data-on'));
+                switchGender.find('label').html(MeiweiApp._('Ms.'));
             }
         },
         //template: MeiweiApp.Templates['restaurant-order-contact-form'],
@@ -48,6 +48,7 @@ $(function() {
             this.defaultValues = defaultValues;
             if (defaultValues.contactname) this.$('input[name=contactname]').val(defaultValues.contactname);
             if (defaultValues.contactphone) this.$('input[name=contactphone]').val(defaultValues.contactphone);
+            this.switchGender();
             return this;
         }
     });
