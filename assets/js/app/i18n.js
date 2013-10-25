@@ -71,6 +71,10 @@ MeiweiApp.i18n = {
         zh: '收藏',
         en: 'Favorites'
     },
+    'Meiwei Concierge': {
+        zh: '美位私人管家',
+        en: 'Meiwei Concierge'
+    },
     'Concierge': {
         zh: '私人管家',
         en: 'Concierge'
@@ -286,7 +290,15 @@ MeiweiApp.i18n = {
     'New version is available, go to update?': {
         zh: '好消息！美位手机应用更新啦，前往下载？',
         en: 'New version is available, go to update?'
-    }
+    },
+    'Restart Application': {
+        zh: '重启应用',
+        en: 'Restart Application'
+    },
+    'An application restart is required to apply language setting. Restart now?': {
+        zh: '重启应用后语言设置才能生效。现在就重启？',
+        en: 'An application restart is required to apply language setting. Restart now?'
+    },
 };
 
 MeiweiApp.CheckI18n = function() {

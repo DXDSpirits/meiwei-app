@@ -16,7 +16,7 @@ $(function() {
             onClickWeiboBtn : function() {
                 var restaurantinfor = this.model.get('restaurantinfor');
                 var url = 'http://www.clubmeiwei.com/restaurant/view/' + this.model.get('restaurant');
-                var content  = '我在 #' + restaurantinfor.fullname + ' (' + restaurantinfor.address + ') ';
+                var content  = '我在 #' + restaurantinfor.fullname + '，有神马推荐菜？ 地址：' + restaurantinfor.address;
                 var pic =  this.model.get('restaurantinfor').frontpic;
                 var link = this.getWeiboLink(screen, document, encodeURIComponent, 
                                              'http://www.clubmeiwei.com', 'http://www.clubmeiwei.com', 
@@ -26,7 +26,7 @@ $(function() {
             onClickWeixinBtn: function() {
                 var restaurantinfor = this.model.get('restaurantinfor');
                 var url = 'http://www.clubmeiwei.com/restaurant/view/' + this.model.get('restaurant');
-                var content  = '我在' + restaurantinfor.fullname + '(' + restaurantinfor.address + ')';
+                var content  = '我在' + restaurantinfor.fullname + '，有神马推荐菜？ 地址' + restaurantinfor.address;
                 var pic =  this.model.get('restaurantinfor').frontpic;
                 MeiweiApp.shareToMoments(url, content, pic);
             },

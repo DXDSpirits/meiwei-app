@@ -8,15 +8,24 @@ $(function() {
             'tap .btn-share-weibo': 'onClickWeiboBtn'
         },
         initPage: function() { },
+        askToRestartApp: function() {
+            MeiweiApp.showConfirmDialog(
+                MeiweiApp._('Restart Application'),
+                MeiweiApp._('An application restart is required to apply language setting. Restart now?'),
+                function() { window.location.reload(); }
+            );
+        },
         switchToZh: function() {
             this.$('.lang-opt.zh').addClass('selected');
             this.$('.lang-opt.en').removeClass('selected');
             MeiweiApp.setLang('zh');
+            this.askToRestartApp();
         },
         switchToEn: function() {
             this.$('.lang-opt.en').addClass('selected');
             this.$('.lang-opt.zh').removeClass('selected');
             MeiweiApp.setLang('en');
+            this.askToRestartApp();
         },
         getWeiboLink : function(s, d, e, r, l, p, t, z, c) {
             var f = 'http://v.t.sina.com.cn/share/share.php?appkey=', u = z || d.location,
@@ -27,8 +36,8 @@ $(function() {
         onClickWeiboBtn : function() {
             if (!MeiweiApp.me.id) MeiweiApp.me.fetch();
             var url = 'http://web.clubmeiwei.com/ad/apppromo?ref=' + MeiweiApp.me.id;
-            var content  = '美位网手机应用华丽登场土豪时代，快来体验高品质订餐和贴心的私人管家服务！ ';
-            var pic =  'http://web.clubmeiwei.com/assets/img/apppromo.jpg';
+            var content  = '美位网手机应用华丽登场土豪时代，快来体验高品质订餐和贴心的私人管家服务！';
+            var pic = 'http://web.clubmeiwei.com/assets/img/apppromo.jpg';
             var link = this.getWeiboLink(screen, document, encodeURIComponent,
                                          'http://www.clubmeiwei.com', 'http://www.clubmeiwei.com',
                                          pic, content, url, 'utf-8');
@@ -37,16 +46,13 @@ $(function() {
         onClickWeixinBtn: function() {
             if (!MeiweiApp.me.id) MeiweiApp.me.fetch();
             var url = 'http://web.clubmeiwei.com/ad/apppromo?ref=' + MeiweiApp.me.id;
-            var content  = '美位网手机应用华丽登场土豪时代，快来体验高品质订餐和贴心的私人管家服务！ ';
-            var pic =  'http://web.clubmeiwei.com/assets/img/apppromo.jpg';
+            var content  = '美位网手机应用华丽登场土豪时代，快来体验高品质订餐和贴心的私人管家服务！';
+            var pic = 'http://web.clubmeiwei.com/assets/img/apppromo.jpg';
             MeiweiApp.shareToMoments(url, content, pic);
         },
         render: function() {
-            if (MeiweiApp.getLang() == 'en') {
-                this.switchToEn();
-            } else {
-                this.switchToZh();
-            }
+            this.$('.lang-opt.zh').toggleClass('selected', MeiweiApp.getLang() == 'zh');
+            this.$('.lang-opt.en').toggleClass('selected', MeiweiApp.getLang() == 'en');
         }
     }))({el: $("#view-settings")});
 });

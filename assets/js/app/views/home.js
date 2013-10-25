@@ -13,7 +13,7 @@ $(function() {
     		if (this.scroller) this.scroller.destroy();
     		this.$el.html(this.template({
     			items: _.first(this.productItems.toJSON(), 6),
-    			product: {name: MeiweiApp._('Concierge')}
+    			product: {name: MeiweiApp._('Meiwei Concierge')}
     		}));
     		this.$el.prepend('<img src="assets/img/hero.png" />');
     		var items = this.$('.carousel-inner > .carousel-item');
