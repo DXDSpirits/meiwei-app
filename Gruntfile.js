@@ -15,10 +15,10 @@ module.exports = function(grunt) {
                     'assets/js/app/model.js',
                     'assets/js/app/models/*.js',
                     'assets/js/app/view.js',
-                    'assets/js/app/views/*.js',
                     'assets/js/app/router.js',
                     'assets/js/app/bootstrap.js',
                     'assets/js/app/_close.js',
+                    'assets/js/app/views/*.js',
                 ],
                 dest: 'assets/js/mw-app.js'
             }
