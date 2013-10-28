@@ -51,12 +51,17 @@
 }
 
 .view > header > .header-btn {
-	@include size(50px, 53px);
+	height: 50px;
+    width: -webkit-max-content;
+    min-width: 53px;
 	padding-bottom: 6px;
 	@include flex-box($orient: horizontal);
 	p {
 	    text-align: center;
 	    @include flexible($orient: horizontal);
+	    @include text-overflow();
+	    width: -webkit-max-content;
+        margin: 0 10px;
 	}
 	&.pressed p, p.pressed {
 	    color: $brownLight;
