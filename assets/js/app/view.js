@@ -203,7 +203,7 @@ MeiweiApp.PageView = MeiweiApp.View.extend({
             	if (!curPageClosed) {
             		curPageClosed = true;
 	            	$curPage.removeClass('view-prev');
-	                $curPage.find('input').attr('readonly', true);
+	                $curPage.find('.wrapper input').attr('readonly', true);
 	            }
             };
             $curPage.addClass('view-hidden');
@@ -216,7 +216,7 @@ MeiweiApp.PageView = MeiweiApp.View.extend({
             	if (!nextPageOpened) {
             		nextPageOpened = true;
 	                $nextPage.removeClass('view-next');
-	                $nextPage.find('input').attr('readonly', false);
+	                $nextPage.find('.wrapper input').attr('readonly', false);
 	            }
             };
             $nextPage.removeClass('view-hidden');
