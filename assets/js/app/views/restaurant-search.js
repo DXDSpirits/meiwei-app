@@ -117,7 +117,6 @@ $(function() {
     	},
     	clearFormInput: function() { this.$('>header input').val(''); },
     	initPage: function() {
-    		this.lazy = 24 * 60 * 60 * 1000;
     		_.bindAll(this, 'refreshList', 'filterRestaurant', 'bindCuisineFilters', 'bindCircleFilters', 'bindRecommendFilters');
     		this.restaurants = new MeiweiApp.Collections.Restaurants();
     		this.cuisines = new MeiweiApp.Collections.Cuisines();
