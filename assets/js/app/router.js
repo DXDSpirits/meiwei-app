@@ -99,19 +99,3 @@ MeiweiApp.goBack = function() {
 		MeiweiApp.Pages.Home.go();
 	}
 };
-
-/*
-$.ajaxSetup({
-    statusCode : {
-        499: function() {
-            MeiweiApp.Pages.MemberLogin.go({ ref: MeiweiApp.history.active });
-        },
-        401: function() {
-            MeiweiApp.Pages.MemberLogin.go({ ref: MeiweiApp.history.active });
-        },
-        403: function() {
-            MeiweiApp.Pages.MemberLogin.go({ ref: MeiweiApp.history.active });
-        }
-    }
-});
-*/
