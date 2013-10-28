@@ -117,7 +117,6 @@ $(function() {
     	},
     	clearFormInput: function() { this.$('>header input').val(''); },
     	initPage: function() {
-    	    this.lazy = 24 * 60 * 60 * 1000;
     		_.bindAll(this, 'refreshList', 'filterRestaurant', 'bindCuisineFilters', 'bindCircleFilters', 'bindRecommendFilters');
     		this.restaurants = new MeiweiApp.Collections.Restaurants();
     		this.cuisines = new MeiweiApp.Collections.Cuisines();
@@ -275,10 +274,12 @@ $(function() {
     	
     	render: function() {
     		this.$('>header input').focus();
-    		this.restaurants.fetch({ reset: true, success: this.refreshList });
-    		this.recommends.fetch({ reset: true, success: this.bindRecommendFilters });
-    		this.cuisines.fetch({ reset: true, success: this.bindCuisineFilters });
-    		this.circles.fetch({ reset: true, success: this.bindCircleFilters });
+    		if (this.checkLazy(24 * 60)) {
+        		this.restaurants.fetch({ reset: true, success: this.refreshList });
+        		this.recommends.fetch({ reset: true, success: this.bindRecommendFilters });
+        		this.cuisines.fetch({ reset: true, success: this.bindCuisineFilters });
+        		this.circles.fetch({ reset: true, success: this.bindCircleFilters });
+            }
     	}
     }))({el: $("#view-restaurant-search")});
 });

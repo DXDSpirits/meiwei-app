@@ -33,8 +33,6 @@ $(function() {
     
     MeiweiApp.Pages.ProductPurchase = new (MeiweiApp.PageView.extend({
     	initPage: function() {
-    		//this.lazy = 24 * 60 * 60 * 1000;
-    		//TODO lazy will prevent refreshing 'selected' status
     		_.bindAll(this, 'carousel');
     		this.products = new MeiweiApp.Collections.Products();
     		this.views = {
@@ -78,10 +76,16 @@ $(function() {
     	},
     	render: function() {
     		var self = this;
-    		this.products.fetch({ data: {category: 1}, reset: true, success: function() {
-    			self.carousel();
-    			self.initScroller();
-    		}});
+    		var onSuccess = function() {
+    		    self.carousel();
+                self.initScroller();
+    		}
+    		if (this.checkLazy(24 * 60)) {
+                this.products.fetch({ data: {category: 1}, reset: true, success: onSuccess});
+            } else {
+                this.views.productList.render();
+                onSuccess();
+            }
     	}
     }))({el: $("#view-product-purchase")});
     
@@ -160,7 +164,6 @@ $(function() {
     MeiweiApp.Pages.ProductRedeem = new (MeiweiApp.Pages.ProductPurchase.constructor.extend({
     	onClickRightBtn: function() { MeiweiApp.goBack(); },
     	initPage: function() {
-    		this.lazy = 24 * 60 * 60 * 1000;
     		_.bindAll(this, 'carousel');
     		this.products = new MeiweiApp.Collections.Products();
     		this.views = {
@@ -172,11 +175,13 @@ $(function() {
     		};
     	},
     	render: function() {
-    		var self = this;
-    		this.products.fetch({ data: {category: 2}, reset: true, success: function() {
-    			self.carousel();
-    			self.initScroller();
-    		}});
+    	    if (this.checkLazy(24 * 60)) {
+        		var self = this;
+        		this.products.fetch({ data: {category: 2}, reset: true, success: function() {
+        			self.carousel();
+        			self.initScroller();
+        		}});
+        	}
     	}
     }))({el: $("#view-product-redeem")});
 });

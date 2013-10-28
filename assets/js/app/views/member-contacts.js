@@ -28,7 +28,6 @@ $(function() {
     		MeiweiApp.goBack();
     	},
     	initPage: function() {
-    		this.lazy = 5 * 60 * 1000;
     		this.listenTo(MeiweiApp.me, 'logout', function() { this.lastRender = null; });
     		this.listenTo(MeiweiApp.me, 'login', function() { this.lastRender = null; });
     		this.views = {
@@ -86,7 +85,9 @@ $(function() {
     		});
     	},
     	render: function() {
-    		this.getOnlineContacts();
+    	    if (this.checkLazy(60)) {
+    	        this.getOnlineContacts();
+    		}
     	}
     }))({ el: $("#view-member-contacts") });
 });

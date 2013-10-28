@@ -83,7 +83,6 @@ $(function() {
     	},
     	initPage: function() {
     		this.snapStep = 250;
-    		this.lazy = 30 * 60 * 1000;
     		_.bindAll(this, 'hero');
     		this.recommend = new MeiweiApp.Models.Recommend({id: 5});
     		this.views = {
@@ -132,11 +131,13 @@ $(function() {
         },
     	render: function() {
     	    //this.firstVisit();
-    		this.views.masterHero.render();
-    		if (window.bootstrap && bootstrap.Home && bootstrap.Home.recommend) {
-    			this.recommend.items.reset(bootstrap.Home.recommend);
-    		}
-    		this.recommend.fetch({ reset: true });
+    	    if (this.checkLazy(30)) {
+        		this.views.masterHero.render();
+        		if (window.bootstrap && bootstrap.Home && bootstrap.Home.recommend) {
+        			this.recommend.items.reset(bootstrap.Home.recommend);
+        		}
+        		this.recommend.fetch({ reset: true });
+        	}
     	}
     }))({el: $("#view-home")});
 });

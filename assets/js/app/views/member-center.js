@@ -80,7 +80,6 @@ $(function() {
     		MeiweiApp.goTo('Home');
     	},
     	initPage: function() {
-    		this.lazy = 5 * 60 * 1000;
     		this.listenTo(MeiweiApp.me, 'logout', function() { this.lastRender = null; });
     		this.listenTo(MeiweiApp.me, 'login', function() { this.lastRender = null; });
     		this.favorites = MeiweiApp.me.favorites;
@@ -96,8 +95,10 @@ $(function() {
     		};
     	},
     	render: function() {
-    		this.views.profileBox.render();
-    		this.views.favoriteCarousel.render();
+    	    if (this.checkLazy(60)) {
+        		this.views.profileBox.render();
+        		this.views.favoriteCarousel.render();
+            }
     		var key = 'visited-view-member-center';
     		if (!localStorage.getItem(key)) {
     		    localStorage.setItem(key, true);

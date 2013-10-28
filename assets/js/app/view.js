@@ -172,17 +172,22 @@ MeiweiApp.PageView = MeiweiApp.View.extend({
             }
         });
     },
+    checkLazy: function(timeout) { // timeout in minutes
+        if ((new Date()) - (this.lastRender || 0) > timeout * 60 * 1000) {
+            this.lastRender = new Date();
+            return true;
+        } else {
+            return false;
+        }
+    },
     go: function(options) {
         this.options = options || {};
         this.reset();
-        if (!this.lazy || (new Date()) - (this.lastRender || 0) > this.lazy) {
-            this.lastRender = new Date();
-            var render = this.render, rendered = false, pageOpen = function() {
-            	if (!rendered) { rendered = true; render(); }
-            };
-            this.$el.one('pageOpen', pageOpen);
-            setTimeout(pageOpen, 1000);
-        }
+        var render = this.render, rendered = false, pageOpen = function() {
+        	if (!rendered) { rendered = true; render(); }
+        };
+        this.$el.one('pageOpen', pageOpen);
+        setTimeout(pageOpen, 1000);
         this.showPage();
     },
     refresh: function() {
