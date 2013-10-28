@@ -54,6 +54,13 @@
 	@include size(50px, 53px);
 	padding-bottom: 6px;
 	@include flex-box($orient: horizontal);
+	p {
+	    text-align: center;
+	    @include flexible($orient: horizontal);
+	}
+	&.pressed p, p.pressed {
+	    color: $brownLight;
+	}
 	//i, p { position: relative; }
 	//i.pressed::before, &.pressed i::before, p.pressed::before, &.pressed p::before {
 	//	content: "";

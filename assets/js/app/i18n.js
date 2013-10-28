@@ -203,8 +203,12 @@ MeiweiApp.i18n = {
         zh: '详情',
         en: 'Detail'
     },
-    'Checkin': {
+    'CheckinAndShare': {
         zh: '签到 &amp; 分享',
+        en: 'Checkin &amp; Share'
+    },
+    'Checkin': {
+        zh: '签到',
         en: 'Checkin'
     },
     'Settings': {
