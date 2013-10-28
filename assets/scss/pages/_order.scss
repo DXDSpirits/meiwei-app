@@ -63,6 +63,17 @@
 	}
 	
 	@include carousel($carouselWidth: 150px);
+	
+	.callus-button {
+        .btn {
+            text-indent: -5px;
+            font-size: $fontSizeMini;
+        }
+        position: absolute;
+        bottom: 10px;
+        left: 10px;
+        opacity: 0.7;
+    }
 }
 
 #view-product-purchase .carousel-item.selected::after {
