@@ -131,7 +131,7 @@ $(function() {
             }
         },
     	render: function() {
-    	    this.firstVisit();
+    	    //this.firstVisit();
     		this.views.masterHero.render();
     		if (window.bootstrap && bootstrap.Home && bootstrap.Home.recommend) {
     			this.recommend.items.reset(bootstrap.Home.recommend);

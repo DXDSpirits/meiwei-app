@@ -125,3 +125,25 @@
 		opacity: 0.4;
 	}
 }
+
+#view-getstarted {
+    padding: 0;
+    > header::before {
+        background: none;
+    }
+    .viewport {
+        overflow: hidden;
+        width: 240px;
+        height: 430px;
+    }
+    @include carousel($carouselWidth: 240px);
+    .indicator {
+        width: 55px;
+    }
+    .carousel-item {
+        padding: 0;
+    }
+    img {
+        width: 240px;
+    }
+}

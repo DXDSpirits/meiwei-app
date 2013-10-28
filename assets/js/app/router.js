@@ -11,6 +11,7 @@ MeiweiApp.Router = new (Backbone.Router.extend({
 		this.route('', 'index');
 		
 		this.route('home', 'home');
+		this.route('getstarted', 'getStarted');
 		
 		this.route(/^restaurant\/(\d+)$/, 'restaurantDetail');
 		this.route(/^restaurant\/(\d+)\/order$/, 'restaurantOrder');
@@ -35,10 +36,16 @@ MeiweiApp.Router = new (Backbone.Router.extend({
 		this.route('settings', 'settings');
 	},
 	
-	//index: function() { MeiweiApp.Router.navigate('home', {trigger: true}); },
-	
-	index: function() { MeiweiApp.Pages.Home.go(); MeiweiApp.history.active = MeiweiApp.Pages.Home; },
+	index: function() {
+	    if (localStorage.getItem('first-time')) {
+	        MeiweiApp.Pages.Home.go(); MeiweiApp.history.active = MeiweiApp.Pages.Home;
+	    } else {
+	        localStorage.setItem('first-time', true)
+	        MeiweiApp.Pages.GetStarted.go(); MeiweiApp.history.active = MeiweiApp.Pages.GetStarted;
+	    }
+	},
 	home: function() { MeiweiApp.Pages.Home.go(); MeiweiApp.history.active = MeiweiApp.Pages.Home; },
+	getStarted: function() { MeiweiApp.Pages.GetStarted.go(); MeiweiApp.history.active = MeiweiApp.Pages.GetStarted; },
 	
 	restaurantDetail: function(rid) { MeiweiApp.Pages.RestaurantDetail.go({restaurantId: rid}); MeiweiApp.history.active = MeiweiApp.Pages.RestaurantDetail; },
 	restaurantSearch: function() { MeiweiApp.Pages.RestaurantSearch.go(); MeiweiApp.history.active = MeiweiApp.Pages.RestaurantSearch; },
