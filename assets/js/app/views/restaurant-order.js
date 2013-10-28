@@ -26,29 +26,37 @@ $(function() {
         selectContact: function() {
             MeiweiApp.goTo('MemberContacts', { multiple: false, callback: this.fillContact });
         },
-        fillContact: function(contactname, contactphone) {
+        fillContact: function(contactname, contactphone, contactgender) {
             this.$('input[name=contactname]').val(contactname);
             this.$('input[name=contactphone]').val(contactphone);
+            this.switchGender(contactgender);
         },
-        switchGender: function() {
+        switchGender: function(gender) {
             window.scrollTo(0, 0);
             var switchGender = this.$('.switch-gender');
-            if (switchGender.hasClass('on')) {
+            var switchOff = function() {
                 switchGender.removeClass('on').addClass('off');
                 switchGender.find('input').val(0);
                 switchGender.find('label').html(MeiweiApp._('Mr.'));
-            } else {
+            };
+            var switchOn = function() {
                 switchGender.removeClass('off').addClass('on');
                 switchGender.find('input').val(1);
                 switchGender.find('label').html(MeiweiApp._('Ms.'));
+            }
+            if (gender == 0) {
+                switchOff();
+            } else if (gender == 1) {
+                switchOn();
+            } else {
+                if (switchGender.hasClass('on')) switchOff(); else switchOn();
             }
         },
         //template: MeiweiApp.Templates['restaurant-order-contact-form'],
         render: function(defaultValues) {
             this.defaultValues = defaultValues;
-            if (defaultValues.contactname) this.$('input[name=contactname]').val(defaultValues.contactname);
-            if (defaultValues.contactphone) this.$('input[name=contactphone]').val(defaultValues.contactphone);
-            this.switchGender();
+            if (defaultValues.contactname)
+                this.fillContact(defaultValues.contactname, defaultValues.contactphone, defaultValues.contactgender);
             return this;
         }
     });
@@ -144,9 +152,10 @@ $(function() {
                 ordertime: this.$('select[name=ordertime]').val() || null,
                 personnum: this.$('input[name=personnum]').val() || null,
                 contactname: this.$('input[name=contactname]').val() || null,
+                contactgender: this.$('input[name=contactgender]').val() || null,
                 contactphone: this.$('input[name=contactphone]').val() || null,
                 tables: this.selectedSeats || null,
-                other: this.$('textarea[name=other]').text() || null,
+                other: this.$('input[name=other]').val() || null,
                 products: products.slice(0, -1)
             });
             if (this.options.pendingOrder) this.options.pendingOrder.cancel();

@@ -13,17 +13,25 @@ $(function() {
                 if (switchGender.hasClass('off') && event.touches[0].clientX - btn.startX < -10) btn.reset(event);
             };
         },
-        switchGender: function() {
+        switchGender: function(gender) {
             window.scrollTo(0, 0);
             var switchGender = this.$('.switch-gender');
-            if (switchGender.hasClass('on')) {
+            var switchOff = function() {
                 switchGender.removeClass('on').addClass('off');
                 switchGender.find('input').val(0);
                 switchGender.find('label').html(MeiweiApp._('Mr.'));
-            } else {
+            };
+            var switchOn = function() {
                 switchGender.removeClass('off').addClass('on');
                 switchGender.find('input').val(1);
                 switchGender.find('label').html(MeiweiApp._('Ms.'));
+            }
+            if (gender == 0) {
+                switchOff();
+            } else if (gender == 1) {
+                switchOn();
+            } else {
+                if (switchGender.hasClass('on')) switchOff(); else switchOn();
             }
         },
         updateProfile: function(e) {
@@ -52,12 +60,7 @@ $(function() {
             this.$('input[name=sexe]').val(profile.sexe);
             this.$('.info-text').html('');
             
-            //TODO: A little tricky ... in order to display i18n properly
-            this.switchGender();
-            if (this.$('.switch-gender').hasClass('on') && profile.sexe == 0 ||
-                this.$('.switch-gender').hasClass('off') && profile.sexe == 1) {
-                this.switchGender();
-            }
+            this.switchGender(profile.sexe);
         }
     });
     

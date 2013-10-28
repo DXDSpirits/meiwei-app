@@ -22,7 +22,9 @@ $(function() {
     	},
     	onClickRightBtn: function() {
     		if (this.options && this.options.callback && this.selectedContact)
-    			this.options.callback(this.selectedContact.get('name'), this.selectedContact.get('mobile'));
+    			this.options.callback(this.selectedContact.get('name'),
+    			                      this.selectedContact.get('mobile'),
+    			                      this.selectedContact.get('sexe'));
     		MeiweiApp.goBack();
     	},
     	initPage: function() {
