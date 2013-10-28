@@ -1,15 +1,8 @@
 $(function() {
     MeiweiApp.Views.ContactList = MeiweiApp.CollectionView.extend({
     	ModelView: MeiweiApp.ModelView.extend({
-    		tagName: 'div',
-    		className: 'simple-list-item',
+    		className: 'simple-list-item contact-item',
     		template: MeiweiApp.Templates['contact-list-item'],
-    		events: { 'tap': 'triggerSelect' },
-    		triggerSelect: function(e) {
-    			this.model.trigger('select');
-    			this.$('i').attr('class', 'icon-select');
-    			this.$el.siblings().find('.icon-select').attr('class', 'icon-circle');
-    		}
     	})
     });
     
@@ -18,7 +11,8 @@ $(function() {
     		'fastclick .header-btn-left': 'onClickLeftBtn',
     		'fastclick .header-btn-right': 'onClickRightBtn',
     		'fastclick .filter-online': 'getOnlineContacts',
-    		'fastclick .filter-local': 'getLocalContacts'
+    		'fastclick .filter-local': 'getLocalContacts',
+    		'tap .contact-item': 'selectContact'
     	},
     	onClickRightBtn: function() {
     		if (this.options && this.options.callback && this.selectedContact)
@@ -36,23 +30,25 @@ $(function() {
     				el: this.$('.scroll-inner')
     			})
     		};
-    		this.selectedContact = null;
-    		_.bindAll(this, 'bindContactSelect');
+    		this.selectedContact = new MeiweiApp.Models.Contact();
     	},
-    	bindContactSelect: function(collection, response, options) {
-    		this.initScroller();
-    		collection.forEach(function(contact) {
-    			this.listenTo(contact, "select", function() {
-    				this.selectedContact = contact;
-    			});
-    		}, this);
+    	selectContact: function(e) {
+    	    var item = e.currentTarget;
+    	    this.selectedContact.set({
+    	        name: $(item).find('[data-field="name"]').html(),
+    	        mobile: $(item).find('[data-field="mobile"]').html(),
+    	        sexe: $(item).find('[data-field="sexe"]').html(),
+    	    });
+    	    console.log(this.selectedContact.toJSON());
+    	    $(item).find('i').attr('class', 'icon-select');
+            $(item).siblings().find('.icon-select').attr('class', 'icon-circle');
     	},
     	getLocalContacts: function() {
     	    if (navigator.contacts && _.isFunction(navigator.contacts.find)) {
         	    this.$('.filter-online').removeClass('selected');
         	    this.$('.filter-local').addClass('selected');
         		var contactCollection = this.views.contactList.collection;
-        		var bindContactSelect = this.bindContactSelect;
+        		var initScroller = this.initScroller;
         		$('#apploader').removeClass('invisible');
         		navigator.contacts.find(
         			["displayName", "phoneNumbers"],
@@ -69,7 +65,7 @@ $(function() {
         					localCollection.add(model);
         				}
         				contactCollection.reset(localCollection.models);
-        				bindContactSelect(contactCollection);
+        				initScroller();
         			},
         			function(e) { $('#apploader').addClass('invisible'); },
         			{ multiple: true }
@@ -81,7 +77,7 @@ $(function() {
     	    this.$('.filter-local').removeClass('selected');
     		this.views.contactList.collection.fetch({
     			reset: true,
-    			success: this.bindContactSelect
+    			success: this.initScroller
     		});
     	},
     	render: function() {
