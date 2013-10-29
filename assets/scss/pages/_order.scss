@@ -42,28 +42,50 @@
 	}
 	.product-box {
 		width: 100%;
+		font-size: $fontSizeMini;
+		line-height: 1.4;
 		header {
-			padding: 10px 20px 0;
-			text-align: center;
-		}
-		p {
-			font-size: $fontSizeMini;
-			line-height: $fontSizeMini + 2px;
-			min-height: 5px;
-		}
-		@include backface-visibility(hidden);
+            padding: 10px 20px 0;
+            text-align: center;
+        }
 	}
-	.viewport {
-		@include size(150px, 100%);
-		@include center-block();
-		padding: 5px 0;
-		overflow: hidden;
-		background: url($gradientShadowPath) repeat-x bottom, url($gradientShadowPathR) repeat-x top;
-		@include background-size(100% auto, 100% auto);
+	.stack {
+	    @include clearfix();
+	    padding: 5px 20px;
 	}
-	
-	@include carousel($carouselWidth: 150px);
-	
+	.stack-item {
+	    position: relative;
+	    float: left;
+        background-color: $white;
+        @include border-radius(10px);
+        border: 1px solid $brownLighter;
+        width: 47.5%;
+        margin-bottom: 10px;
+        &:nth-child(2n+1) {
+            margin-right: 5%;
+        }
+        padding: 5px;
+        .img {
+            @include border-top-left-radius(10px);
+            @include border-top-right-radius(10px);
+            overflow: hidden;
+            position: relative;
+            .ar {
+                padding-bottom: 100%;
+            }
+            img {
+                position: absolute;
+                top: 0;
+                left: 0;
+                @include square(100%);
+            }
+        }
+        .tag {
+            margin-top: 5px;
+            padding: 3px;
+            border-top: 1px solid $brownLighter;
+        }
+	}
 	.callus-button {
         .btn {
             text-indent: -5px;
@@ -76,12 +98,12 @@
     }
 }
 
-#view-product-purchase .carousel-item.selected::after {
+#view-product-purchase .stack-item.selected::after {
 	content: "";
 	@include icon-offset(5, 5);
 	position: absolute;
-	top: 1px;
-	right: 5px;
+	top: 0;
+	right: 0;
 }
 
 #view-attending {

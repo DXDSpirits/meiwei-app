@@ -1,0 +1,22 @@
+<header>
+	<h1>{{ product.name }}</h1>
+	<p>{{ product.description }}</p>
+</header>
+<div class="stack" data-item="{{ product.id }}">
+	{{ #items }}
+	<div class="stack-item {{ #selected }}selected{{ /selected }}" data-item="{{ id }}">
+		<div class="img">
+		    <div class="ar"></div>
+			<img src="{{ picture }}" alt="">
+		</div>
+		<div class="tag">
+            <p>{{ name }}</p>
+            {{ #credit }}<p>{{ credit }}积分</p>{{ /credit }}
+            {{ ^credit }}<p>{{ description }}</p>{{ /credit }}
+        </div>
+	</div>
+	{{ /items }}
+</div>
+<div class="indicator hidden">
+	<div class="dotty"></div>
+</div>

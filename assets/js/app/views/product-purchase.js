@@ -2,8 +2,8 @@ $(function() {
     MeiweiApp.Views.ProductModelView = MeiweiApp.ModelView.extend({
     	tagName: "section",
     	className: "product-box",
-    	template: MeiweiApp.Templates['product-carousel'],
-    	events: { 'tap .carousel-item': 'onSelectItem' },
+    	template: MeiweiApp.Templates['product-stack'],
+    	events: { 'tap .stack-item': 'onSelectItem' },
     	render: function() {
     		this.model.items.forEach(function(item) {
     			item.set({selected: (MeiweiApp.ProductCart.get(item.id) != null)});
@@ -33,7 +33,6 @@ $(function() {
     
     MeiweiApp.Pages.ProductPurchase = new (MeiweiApp.PageView.extend({
     	initPage: function() {
-    		_.bindAll(this, 'carousel');
     		this.products = new MeiweiApp.Collections.Products();
     		this.views = {
     			productList: new MeiweiApp.Views.ProductPurchaseList({
@@ -50,41 +49,12 @@ $(function() {
     			MeiweiApp.goTo('RestaurantOrder', { restaurantId: 1 });
     		}
     	},
-    	carousel: function() {
-    		this.carouselScrolls = this.carouselScrolls || [];
-    		for (var i=0; i<this.carouselScrolls.length; i++) this.carouselScrolls[i].destroy();
-    		this.carouselScrolls.length = 0;
-    		this.products.forEach(function(product) {
-    			var selector = '.carousel[data-item="' + product.id + '"]';
-    			var items = $(selector).find('.carousel-inner > .carousel-item');
-    			$(selector).find('.carousel-inner').css('width', items.length * $(items[0]).outerWidth());
-    			this.carouselScrolls.push(new IScroll(selector, {
-    				scrollX: true, scrollY: false, momentum: true, snap: false, tap: true
-    			}));
-    		}, this);
-    	},
-    	initScroller: function() {
-    		if (this.scroller == null) {
-    			if (this.$('.iscroll').length > 0) {
-    			    this.scroller = new IScroll(this.$('.iscroll').selector, {
-    			    	tap: false, tagName: /^(INPUT|TEXTAREA|SELECT)$/
-    			    });
-    			}
-    		} else {
-    			this.scroller.refresh();
-    		}
-    	},
     	render: function() {
-    		var self = this;
-    		var onSuccess = function() {
-    		    self.carousel();
-                self.initScroller();
-    		}
     		if (this.checkLazy(24 * 60)) {
-                this.products.fetch({ data: {category: 1}, reset: true, success: onSuccess});
+                this.products.fetch({ data: {category: 1}, reset: true, success: this.initScroller });
             } else {
                 this.views.productList.render();
-                onSuccess();
+                this.initScroller();
             }
     	}
     }))({el: $("#view-product-purchase")});
@@ -164,7 +134,6 @@ $(function() {
     MeiweiApp.Pages.ProductRedeem = new (MeiweiApp.Pages.ProductPurchase.constructor.extend({
     	onClickRightBtn: function() { MeiweiApp.goBack(); },
     	initPage: function() {
-    		_.bindAll(this, 'carousel');
     		this.products = new MeiweiApp.Collections.Products();
     		this.views = {
     			productList: new MeiweiApp.Views.ProductRedeemList({
@@ -176,11 +145,7 @@ $(function() {
     	},
     	render: function() {
     	    if (this.checkLazy(24 * 60)) {
-        		var self = this;
-        		this.products.fetch({ data: {category: 2}, reset: true, success: function() {
-        			self.carousel();
-        			self.initScroller();
-        		}});
+        		this.products.fetch({ data: {category: 2}, reset: true, success: this.initScroller});
         	}
     	}
     }))({el: $("#view-product-redeem")});
