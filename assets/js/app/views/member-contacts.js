@@ -58,12 +58,12 @@ $(function() {
         				contacts = _.sortBy(contacts, function (contact) { return contact.displayName; });
         				for (var i = 0; i < contacts.length; i++) {
         				    if (contacts[i].displayName && contacts[i].phoneNumbers) {
-        				        for (var j = 0; j< contacts[i].phoneNumbers; j++) {
-        				            if (contacts[i].phoneNumbers[j]) {
+        				        for (var j = 0; j< contacts[i].phoneNumbers.length; j++) {
+        				            if (contacts[i].phoneNumbers[j].value) {
             				            var model = new MeiweiApp.Models.Contact({
                                             id: contacts[i].id,
                                             name: contacts[i].displayName,
-                                            mobile: contacts[i].phoneNumbers[j]
+                                            mobile: contacts[i].phoneNumbers[j].value
                                         });
                                         localCollection.add(model);
                                     }
