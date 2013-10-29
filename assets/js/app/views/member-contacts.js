@@ -56,13 +56,19 @@ $(function() {
         				$('#apploader').addClass('invisible');
         				var localCollection = new MeiweiApp.Collections.Contacts();
         				contacts = _.sortBy(contacts, function (contact) { return contact.displayName; });
-        				for (i = 0; i < contacts.length; i++) {
-        					var model = new MeiweiApp.Models.Contact({
-        						id: contacts[i].id,
-        						name: contacts[i].displayName,
-        						mobile: contacts[i].phoneNumbers ? contacts[i].phoneNumbers[0].value: ""
-        					});
-        					localCollection.add(model);
+        				for (var i = 0; i < contacts.length; i++) {
+        				    if (contacts[i].displayName && contacts[i].phoneNumbers) {
+        				        for (var j = 0; j< contacts[i].phoneNumbers; j++) {
+        				            if (contacts[i].phoneNumbers[j]) {
+            				            var model = new MeiweiApp.Models.Contact({
+                                            id: contacts[i].id,
+                                            name: contacts[i].displayName,
+                                            mobile: contacts[i].phoneNumbers[j]
+                                        });
+                                        localCollection.add(model);
+                                    }
+        				        }
+        				    }
         				}
         				contactCollection.reset(localCollection.models);
         				initScroller();
