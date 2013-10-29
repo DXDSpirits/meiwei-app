@@ -24,9 +24,7 @@ $(function() {
     	},
     	searchContacts: function(e) {
             if (e.preventDefault) e.preventDefault();
-            var filter = this.$('>header input').val();
-            this.getLocalContacts(filter)
-            this.$('>header input').blur();
+            this.getLocalContacts();
         },
     	initPage: function() {
     		this.listenTo(MeiweiApp.me, 'logout', function() { this.lastRender = null; });
@@ -49,12 +47,13 @@ $(function() {
     	    $(item).find('i').attr('class', 'icon-select');
             $(item).siblings().find('.icon-select').attr('class', 'icon-circle');
     	},
-    	getLocalContacts: function(filter) {
+    	getLocalContacts: function() {
     	    if (navigator.contacts && _.isFunction(navigator.contacts.find)) {
         	    this.$('.filter-online').removeClass('selected');
         	    this.$('.filter-local').addClass('selected');
         		var contactCollection = this.views.contactList.collection;
         		var initScroller = this.initScroller;
+        		var keywords = this.$('>header input').val();
         		$('#apploader').removeClass('invisible');
         		navigator.contacts.find(
         			["displayName", "phoneNumbers"],
@@ -63,7 +62,8 @@ $(function() {
         				var localCollection = new MeiweiApp.Collections.Contacts();
         				contacts = _.sortBy(contacts, function (contact) { return contact.displayName; });
         				for (var i = 0; i < contacts.length; i++) {
-        				    if (contacts[i].displayName && contacts[i].phoneNumbers) {
+        				    if (contacts[i].displayName && contacts[i].phoneNumbers &&
+        				        contacts[i].displayName.indexOf(keywords) != -1) {
         				        for (var j = 0; j< contacts[i].phoneNumbers.length; j++) {
         				            if (contacts[i].phoneNumbers[j].value) {
             				            var model = new MeiweiApp.Models.Contact({
@@ -80,7 +80,7 @@ $(function() {
         				initScroller();
         			},
         			function(e) { $('#apploader').addClass('invisible'); },
-        			{ filter: filter, multiple: true }
+        			{ filter: "", multiple: true }
         		);
     		}
     	},
