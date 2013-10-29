@@ -42,7 +42,7 @@ $(function() {
             if (d > 1) {
                 return (parseInt(d * 10) / 10) + 'km';
             } else {
-                return (d * 1000) + 'm';
+                return parseInt(d * 1000) + 'm';
             }
     	},
     	render: function() {
@@ -102,7 +102,8 @@ $(function() {
     			this.$('.flipper').removeClass('flip');
     		} else {
     			this.$('.flipper').addClass('flip');
-    			this.dropMarkers();
+    			//this.dropMarkers();
+    			this.filterRestaurant({ lng: MeiweiApp.coords.longitude, lat: MeiweiApp.coords.latitude });
     		}
     	},
     	events: {
