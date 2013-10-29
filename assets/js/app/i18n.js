@@ -223,6 +223,10 @@ MeiweiApp.i18n = {
         zh: '输入关键字搜索餐厅',
         en: 'Search Restaurants'
     },
+    'Search Contacts Hint': {
+        zh: '输入姓名',
+        en: 'Search Contacts'
+    },
     'No Orders! Go and Book!': {
         zh: '还没有订单，赶紧预订！',
         en: 'No Orders! Go and Book!'

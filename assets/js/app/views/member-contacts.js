@@ -12,7 +12,8 @@ $(function() {
     		'fastclick .header-btn-right': 'onClickRightBtn',
     		'fastclick .filter-online': 'getOnlineContacts',
     		'fastclick .filter-local': 'getLocalContacts',
-    		'tap .contact-item': 'selectContact'
+    		'tap .contact-item': 'selectContact',
+    		'submit >header>form': 'searchContacts',
     	},
     	onClickRightBtn: function() {
     		if (this.options && this.options.callback && this.selectedContact)
@@ -21,6 +22,12 @@ $(function() {
     			                      this.selectedContact.get('sexe'));
     		MeiweiApp.goBack();
     	},
+    	searchContacts: function(e) {
+            if (e.preventDefault) e.preventDefault();
+            var filter = this.$('>header input').val();
+            this.getLocalContacts(filter)
+            this.$('>header input').blur();
+        },
     	initPage: function() {
     		this.listenTo(MeiweiApp.me, 'logout', function() { this.lastRender = null; });
     		this.listenTo(MeiweiApp.me, 'login', function() { this.lastRender = null; });
@@ -39,11 +46,10 @@ $(function() {
     	        mobile: $(item).find('[data-field="mobile"]').html(),
     	        sexe: $(item).find('[data-field="sexe"]').html(),
     	    });
-    	    console.log(this.selectedContact.toJSON());
     	    $(item).find('i').attr('class', 'icon-select');
             $(item).siblings().find('.icon-select').attr('class', 'icon-circle');
     	},
-    	getLocalContacts: function() {
+    	getLocalContacts: function(filter) {
     	    if (navigator.contacts && _.isFunction(navigator.contacts.find)) {
         	    this.$('.filter-online').removeClass('selected');
         	    this.$('.filter-local').addClass('selected');
@@ -74,7 +80,7 @@ $(function() {
         				initScroller();
         			},
         			function(e) { $('#apploader').addClass('invisible'); },
-        			{ multiple: true }
+        			{ filter: filter, multiple: true }
         		);
     		}
     	},
