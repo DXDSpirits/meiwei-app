@@ -23,6 +23,10 @@ MeiweiApp.i18n = {
         zh: '订餐',
         en: 'Book'
     },
+    'Reviews': {
+        zh: '评论',
+        en: 'Reviews'
+    },
     'Call Us': {
         zh: '客服电话',
         en: 'Call Us'

@@ -137,12 +137,42 @@
 				}
 			}
 		}
-		
 	}
 	.restaurant-reviews {
-		width: 90%;
-		font-size: $fontSizeMini;
-	}
+	    font-size: $fontSizeMini;
+        width: 90%;
+        background: transparent url($gradientShadowPathR) no-repeat top;
+        @include background-size(100% (3*$baseLineHeight));
+        > header {
+            height: 36px;
+            padding-top: 8px;
+            font-size: $fontSizeSmall;
+            h1 {
+                font-size: $fontSizeSmall;
+                span { vertical-align: middle; }
+            }
+        }
+        .review-list-item {
+            background: transparent url($gradientShadowPathR) no-repeat top;
+            @include background-size(100% (3*$baseLineHeight+20px));
+            //border: 1px solid $brownLighter;
+            padding: 10px 20px;
+            margin: 5px 0;
+            @include clearfix();
+            .avatar {
+                @include square(50px);
+                float: right;
+                margin: 0 0 10px 0;
+                background: url("../img/rabbit-boy.png") no-repeat top;
+                @include background-size(contain);
+            }
+            &:nth-child(2n) .avatar {
+                float: left;
+                margin: 0 10px 10px 0;
+                background-image: url('../img/rabbit-girl.png');
+            }
+        }
+    }
 	.callus-button {
 		width: 90%;
 		padding: 20px 10%;

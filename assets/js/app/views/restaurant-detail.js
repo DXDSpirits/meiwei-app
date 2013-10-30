@@ -1,5 +1,5 @@
 $(function() {
-    MeiweiApp.Views.RestaurantProfileBox = MeiweiApp.View.extend({
+    var ProfileBox = MeiweiApp.View.extend({
     	events: { 'tap .order-button': 'goToOrder' },
     	initView: function() {
     		this.listenTo(this.model, 'change', this.render);
@@ -25,7 +25,7 @@ $(function() {
     	}
     });
     
-    MeiweiApp.Views.RestaurantPictureList = MeiweiApp.CollectionView.extend({
+    var PictureList = MeiweiApp.CollectionView.extend({
     	ModelView: MeiweiApp.ModelView.extend({
     		tagName: 'img',
     		template: Mustache.compile('{{{ path }}}'),
@@ -36,40 +36,24 @@ $(function() {
     	})
     });
     
+    var ReviewList = MeiweiApp.CollectionView.extend({
+        ModelView: MeiweiApp.ModelView.extend({
+            template: Mustache.compile('<div class="avatar"></div><p>{{{ comments }}}</p>'),
+            className: 'review-list-item',
+        })
+    });
+    
     MeiweiApp.Pages.RestaurantDetail = new (MeiweiApp.PageView.extend({
     	initPage: function() {
     		this.restaurant = new MeiweiApp.Models.Restaurant();
+    		this.pictures = new MeiweiApp.Collections.Pictures();
+    		this.reviews = new MeiweiApp.Collections.Reviews();
     		this.views = {
-    			restaurantProfileBox: new MeiweiApp.Views.RestaurantProfileBox({
-    				model: this.restaurant,
-    				el: this.$('.restaurant-profile')
-    			}),
-    			pictures: new MeiweiApp.Views.RestaurantPictureList({
-    				collection: new MeiweiApp.Collections.Pictures(),
-    				el: this.$('.restaurant-pictures')
-    			})
+    			restaurantProfileBox: new ProfileBox({ model: this.restaurant, el: this.$('.restaurant-profile') }),
+    			pictures: new PictureList({ collection: this.pictures, el: this.$('.restaurant-pictures') }),
+    			reviews: new ReviewList({ collection: this.reviews, el: this.$('.restaurant-reviews > div') })
     		};
-    		_.bindAll(this, 'renderAll', 'carousel');
-    	},
-    	carousel: function() {
-    		var itv = null;
-    		if (itv) clearInterval(itv);
-    		var A = this.$('.restaurant-pictures img');
-    		var L = A.length;
-    		var i = 0;
-    		$(A[i]).addClass('front');
-    		return;
-    		var timedCount = function() {
-    			if (i >= L - 1) {
-    				clearInterval(itv);
-    				return;
-    			}
-    			$(A[i]).removeClass('front');
-    			$(A[i]).addClass('back');
-    			$(A[i + 1]).addClass('front');
-    			i += 1;
-    		};
-    		itv = setInterval(timedCount, 3000);
+    		_.bindAll(this, 'renderAll');
     	},
     	onClickRightBtn: function() { this.addFavorite(); },
     	addFavorite: function() {
@@ -97,11 +81,19 @@ $(function() {
     			this.views.pictures.$el.html(img);
     			this.$('.bottom-banner').html(img.clone());
     		} else {
-    			this.views.pictures.collection.reset(this.restaurant.get('pictures'));
-    			//this.carousel();
+    			this.pictures.reset(this.restaurant.get('pictures'));
     		}
     		this.initScroller();
     		this.$('.wrapper').removeClass('rendering');
+    		var self = this;
+    		this.reviews.fetch({ reset: true, url: this.restaurant.get('reviews'), success: function(collection) {
+    		    if (collection.length > 0) {
+    		        self.$('.restaurant-reviews').removeClass('hidden');
+    		    } else {
+    		        self.$('.restaurant-reviews').addClass('hidden');
+    		    }
+    		    self.initScroller();
+    		}});
     	},
     	render: function() {
     		if (this.options.restaurant) {
