@@ -102,8 +102,12 @@ $(function() {
     			this.$('.flipper').removeClass('flip');
     		} else {
     			this.$('.flipper').addClass('flip');
-    			//this.dropMarkers();
-    			this.filterRestaurant({ lng: MeiweiApp.coords.longitude, lat: MeiweiApp.coords.latitude });
+    			MeiweiApp.initGeolocation(function() {
+    			    MeiweiApp.Pages.RestaurantSearch.filterRestaurant({
+    			        lng: MeiweiApp.coords.longitude,
+    			        lat: MeiweiApp.coords.latitude
+    			    });
+    			});
     		}
     	},
     	events: {

@@ -89,10 +89,11 @@ MeiweiApp.initLang = function() {
     MeiweiApp.initLang();
 };
 
-MeiweiApp.initGeolocation = function() {
+MeiweiApp.initGeolocation = function(callback) {
     var onSuccess = function(position) {
         MeiweiApp.coords.latitude = position.coords.latitude;
         MeiweiApp.coords.longitude = position.coords.longitude;
+        if (callback) callback();
     };
     var onError = function() { };
     MeiweiApp.coords = { longitude: 121.491, latitude: 31.233 };
