@@ -223,6 +223,28 @@
 		margin-top: 20px;
 		width: 80%;
 	}
+	.inspritions {
+	    padding: 20px 0;
+	    @include clearfix();
+	    text-align: center;
+	    .span1, .span2, .span3 {
+	        //float: left;
+	        display: inline-block;
+	        margin: 0 3px;
+	        line-height: 35px;
+	    }
+	    .span3 {
+	        font-size: 20px;
+	        color: $brown;
+	    }
+	    .span2 {
+	        font-size: 17px;
+	    }
+	    .span1 {
+	        font-size: 14px;
+	        font-weight: bold;
+	    }
+	}
 }
 
 #view-settings {
