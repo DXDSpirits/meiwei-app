@@ -168,7 +168,7 @@ MeiweiApp.i18n = {
         en: 'Local Contacts'
     },
     'Gifts': {
-        zh: '礼品',
+        zh: '兑换礼品',
         en: 'Gifts'
     },
     'Anniversary': {

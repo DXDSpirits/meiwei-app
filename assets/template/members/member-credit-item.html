@@ -2,7 +2,7 @@
 	<p>{{reason}}</p>
 	<p>{{time_created}}</p>
 </div>
-<div class="span">
-	<strong>{{amount}}</strong>
-	<p>交易成功</p>
+<div class="span {{#positive}}positive{{/positive}}{{#negative}}negative{{/negative}}">
+	<strong>{{#positive}}+{{/positive}}{{amount}}</strong>
+	<!--<p>交易成功</p>-->
 </div>

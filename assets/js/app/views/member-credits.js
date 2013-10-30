@@ -1,5 +1,5 @@
 $(function() {
-    MeiweiApp.Views.CreditList = MeiweiApp.CollectionView.extend({
+    var CreditList = MeiweiApp.CollectionView.extend({
     	ModelView: MeiweiApp.ModelView.extend({
     		template: MeiweiApp.Templates['member-credit-item'],
     		className: 'detail-list-item'
@@ -7,12 +7,17 @@ $(function() {
     });
     
     MeiweiApp.Pages.MemberCredits = new (MeiweiApp.PageView.extend({
+        events: {
+            'fastclick .header-btn-left': 'onClickLeftBtn',
+            'fastclick .header-btn-right': 'onClickRightBtn',
+            'fastclick .redeem-btn': 'goToProductRedeem'
+        },
     	onClickLeftBtn: function() { MeiweiApp.goTo('MemberCenter'); },
-    	onClickRightBtn: function() { MeiweiApp.goTo('ProductRedeem'); },
+    	goToProductRedeem: function() { MeiweiApp.goTo('ProductRedeem'); },
     	initPage: function() {
     		this.credits = new MeiweiApp.Collections.Credits();
     		this.views = {
-    			creditList: new MeiweiApp.Views.CreditList({
+    			creditList: new CreditList({
     				collection: this.credits,
     				el: this.$('.scroll-inner')
     			})

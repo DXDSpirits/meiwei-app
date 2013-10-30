@@ -21,6 +21,8 @@ MeiweiApp.Models.Credit = MeiweiApp.Model.extend({
 	parse: function(response) {
 		var time = (new Date(response.time_created)).toISOString();
 		response.time_created = time.slice(0, 10) + ' ' + time.slice(11, 16);
+		response.positive = (response.amount > 0);
+		response.negative = (response.amount < 0);
 		return response;
 	}
 });

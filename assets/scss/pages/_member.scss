@@ -168,6 +168,22 @@
 	}
 }
 
+#view-member-credits {
+    .redeem-btn {
+        width: 100%;
+        height: 50px;
+        padding: 12px;
+        text-align: center;
+        background-color: $brown;
+        color: $white;
+        span { vertical-align: middle; }
+    }
+    .detail-list-item {
+        .positive { color: #27AE60; }
+        .negative { color: #E74C3C; }
+    }
+}
+
 #view-member-anniversaries {
 	.anniversary-list-item {
 		@include clearfix();
