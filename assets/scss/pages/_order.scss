@@ -47,6 +47,8 @@
 		header {
             padding: 10px 20px 0;
             text-align: center;
+            background: transparent url($gradientShadowPathR) no-repeat top;
+            @include background-size(100% 60px);
         }
 	}
 	.stack {
@@ -70,9 +72,7 @@
             @include border-top-right-radius(10px);
             overflow: hidden;
             position: relative;
-            .ar {
-                padding-bottom: 100%;
-            }
+            .ar { padding-bottom: 100%; }
             img {
                 position: absolute;
                 top: 0;
@@ -84,6 +84,7 @@
             margin-top: 5px;
             padding: 3px;
             border-top: 1px solid $brownLighter;
+            p { @include text-overflow(); }
         }
 	}
 	.callus-button {

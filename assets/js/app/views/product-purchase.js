@@ -12,6 +12,7 @@ $(function() {
     			product: this.model.toJSON(),
     			items: this.model.items.toJSON()
     		}));
+    		MeiweiApp.initLang(this.$el);
     		return this;
     	},
     	onSelectItem: function(e) {
@@ -118,6 +119,7 @@ $(function() {
     				product: this.model.toJSON(),
     				items: this.model.items.toJSON()
     			}));
+    			MeiweiApp.initLang(this.$el);
     			return this;
     		},
     		onSelectItem: function(e) {

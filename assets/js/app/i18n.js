@@ -307,9 +307,9 @@ MeiweiApp.i18n = {
         zh: '兑换',
         en: 'Purchase'
     },
-    'credits left. One of our customer service will contact you soon as possible.': {
+    'credits left. One of our customer service will contact you as soon as possible.': {
         zh: '剩余积分。我们的客服会马上联系您。',
-        en: ' credits left. One of our customer service will contact you soon as possible.'
+        en: ' credits left. One of our customer service will contact you as soon as possible.'
     },
     'Successfully! You have': {
         zh: '兑换成功！您还有',

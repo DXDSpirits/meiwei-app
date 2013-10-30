@@ -1,13 +1,14 @@
 <header>
-	<h1>{{ name }}({{ credit }} <span data-i18n="Credits">积分</span>)</h1>
+	<h1>{{ credit }} <span data-i18n="Credits">积分</span></h1>
 </header>
 <div class="content">
 	<img src="{{ picture }}" alt="">
+	<p><strong>{{ name }}</strong></p>
 	<p>{{ description }}</p>
 	<p class="info-text hide">
 	    <span data-i18n="Successfully! You have">兑换成功，您还有</span>
 	    <span class="balance"></span>
-	    <span data-i18n="credits left. One of our customer service will contact you soon as possible.">剩余积分。我们的客服会马上联系您。</span>
+	    <span data-i18n="credits left. One of our customer service will contact you as soon as possible.">剩余积分。我们的客服会马上联系您。</span>
 	</p>
 </div>
 <div class="action button-group">
