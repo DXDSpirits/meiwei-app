@@ -12,15 +12,14 @@
 	@include animation(fadein .35s ease-in-out);
 	position: absolute;
 	z-index: $zindexModal;
-	top: 65px;
+	top: 60px;
 	left: 50%;
-	width: 250px;
+	width: 240px;
 	box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
 	@include border-radius(10px);
 	overflow: hidden;
 	margin-left: -125px;
 	background-color: $white;
-
 	> header {
 		width: auto;
 		height: 40px;
@@ -30,17 +29,20 @@
 		text-align: center;
 		h1 { @include text-overflow(); }
 	}
-
 	.button-group {
         padding: 5px;
     }
 	.content {
 		min-height: 120px;
 		padding: 5px;
-		img { @include square(240px); }
+		img {
+		    @include square(150px);
+		    @include center-block();
+		}
 		p {
-			margin: 10px 0 0;
+			margin: 5px 0 0;
 			font-size: $fontSizeMini;
+			text-align: center;
 		}
 	}
 }

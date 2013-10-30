@@ -45,10 +45,8 @@
 		font-size: $fontSizeMini;
 		line-height: 1.4;
 		header {
-            padding: 10px 20px 0;
+            padding: 5px 20px;
             text-align: center;
-            background: transparent url($gradientShadowPathR) no-repeat top;
-            @include background-size(100% 60px);
         }
 	}
 	.stack {
@@ -84,7 +82,6 @@
             margin-top: 5px;
             padding: 3px;
             border-top: 1px solid $brownLighter;
-            p { @include text-overflow(); }
         }
 	}
 	.callus-button {
