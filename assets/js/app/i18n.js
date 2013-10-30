@@ -12,11 +12,11 @@ MeiweiApp.i18n = {
         en: 'Recommends'
     },
     'Next Page': {
-        zh: '上一页',
+        zh: '下一页',
         en: 'Next Page'
     },
     'Previous Page': {
-        zh: '下一页',
+        zh: '上一页',
         en: 'Previous Page'
     },
     'Reserve': {
