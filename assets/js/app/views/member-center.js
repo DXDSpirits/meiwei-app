@@ -1,10 +1,6 @@
 $(function() {
-    var MemberProfileBox = MeiweiApp.View.extend({
+    var MemberProfileBox = MeiweiApp.ModelView.extend({
     	events: { 'tap .avatar': 'changeAvatar' },
-    	initView: function() {
-    	    _.bindAll(this, 'updateProfile');
-            this.listenTo(MeiweiApp.me.profile, 'change', this.updateProfile);
-        },
     	changeAvatar: function() {
     		function onSuccess(imageData) {
     			localStorage.setItem('avatar', imageData);
@@ -33,26 +29,21 @@ $(function() {
             } else {
                 this.$('.avatar img')[0].src = "assets/img/default-avatar@2x.png";
             }
-    		MeiweiApp.me.fetch();
+    		this.updateProfile();
     		return this;
         }
     });
     
-    MeiweiApp.Views.FavoriteRestoCarousel = MeiweiApp.View.extend({
-    	render: function() {
-    		this.collection.fetch({
-    			success: function(collection, response, options) {
-    				var path = 'assets/img/default.png';
-    				if (collection.length > 0) {
-    					var ran = _.random(0, collection.length - 1);
-    					var model = collection.at(ran);
-    					path = model.get('restaurantinfor').frontpic;
-    				}
-    				options.view.$el.html($('<img></img>').attr('src', path));
-    			}, reset: true, view: this 
-    		});
-    		return this;
-    	}
+    MeiweiApp.Views.FavoriteRestoCarousel = MeiweiApp.CollectionView.extend({
+        addAll: function() {
+            var path = 'assets/img/default.png';
+            if (this.collection.length > 0) {
+                var ran = _.random(0, this.collection.length - 1);
+                var model = this.collection.at(ran);
+                path = model.get('restaurantinfor').frontpic;
+            }
+            this.$el.html($('<img></img>').attr('src', path));
+        }
     });
     
     MeiweiApp.Pages.MemberCenter = new (MeiweiApp.PageView.extend({
@@ -93,21 +84,26 @@ $(function() {
     				el: this.$('.favorite-resto-carousel')
     			})
     		};
+    		_.bindAll(this, 'askToShare');
+    	},
+    	askToShare: function() {
+	        var key = 'visited-view-member-center';
+	        var lastTime = localStorage.getItem(key);
+            if (!lastTime || !(new Date() - new Date(lastTime)) || 
+                new Date() - new Date(lastTime) > 30 * 24 * 60 * 60 * 1000) {
+                localStorage.setItem(key, (new Date()).toISOString());
+                MeiweiApp.showConfirmDialog(
+                    MeiweiApp._('Share Meiwei with your friends'),
+                    MeiweiApp._('You will receive a gift after sharing'),
+                    function() { MeiweiApp.goTo('Settings'); }
+                );
+            }
     	},
     	render: function() {
     	    if (this.checkLazy(60)) {
-        		this.views.profileBox.render();
-        		this.views.favoriteCarousel.render();
+        		MeiweiApp.me.fetch({ success: this.askToShare });
+        		this.favorites.fetch({ reset: true });
             }
-    		var key = 'visited-view-member-center';
-    		if (!localStorage.getItem(key)) {
-    		    localStorage.setItem(key, true);
-    		    MeiweiApp.showConfirmDialog(
-    		        MeiweiApp._('Share Meiwei with your friends'),
-    		        MeiweiApp._('You will receive a gift after sharing'),
-    		        function() { MeiweiApp.goTo('Settings'); }
-    		    );
-    		}
     	}
     }))({el: $("#view-member-center")});
 });
