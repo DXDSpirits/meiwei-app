@@ -60,6 +60,7 @@
 	    text-align: center;
 	    @include flexible($orient: horizontal);
 	    @include text-overflow();
+	    width: auto;
 	    width: -webkit-max-content;
         margin: 0 10px;
 	}
