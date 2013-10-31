@@ -29,11 +29,11 @@ $(function() {
     	},
     	render: function() {
     		if (this.anniversary.isNew()) {
-    			this.$('.delete-button').remove();
-    		} else if (this.$('.delete-button').length == 0) {
-    			this.$('.button-group').append(
-    			    '<button class="delete-button">' + MeiweiApp._('Delete') + '</button>'
-    			);
+    			this.$('.delete-button').addClass('hidden');
+    			this.$('.inspritions').removeClass('hidden');
+    		} else {
+    			this.$('.delete-button').removeClass('hidden');
+    			this.$('.inspritions').addClass('hidden');
     		}
     		this.$('input[name=date]').val(this.anniversary.get('date'));
     		this.$('input[name=description]').val(this.anniversary.get('description'));
@@ -41,12 +41,20 @@ $(function() {
     });
     
     MeiweiApp.Pages.MemberAnniversariyDetail = new (MeiweiApp.PageView.extend({
+        events: {
+            'fastclick .header-btn-left': 'onClickLeftBtn',
+            'tap .inspritions > span': 'fillInsprition'
+        },
     	initPage: function() {
     		this.views = {
     			anniversaryForm: new MeiweiApp.Views.MemberAnniversaryForm({
     				el: this.$('.anniversary-detail-form')
     			}),
     		};
+    	},
+    	fillInsprition: function(e) {
+    	    var span = e.currentTarget;
+    	    this.$('input[name="description"]').val($(span).html());
     	},
     	render: function() {
     		this.views.anniversaryForm.anniversary = this.options.anniversary ? 
