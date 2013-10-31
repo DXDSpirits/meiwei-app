@@ -6,3 +6,7 @@ MeiweiApp.Models.ClientError = MeiweiApp.Model.extend({
 MeiweiApp.Models.App = MeiweiApp.Model.extend({
     urlRoot: MeiweiApp.configs.APIHost + '/clients/app/'
 });
+
+MeiweiApp.Models.Ad = MeiweiApp.Model.extend({
+    urlRoot: MeiweiApp.configs.APIHost + '/clients/ad/'
+});

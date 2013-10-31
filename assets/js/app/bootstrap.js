@@ -1,6 +1,6 @@
-var bootstrap = {};
+MeiweiApp.Bootstrap = {};
 
-bootstrap.Home = {
+MeiweiApp.Bootstrap.Home = {
 	recommend: [
 		{
             "id": 18, 
@@ -116,6 +116,6 @@ bootstrap.Home = {
     ]
 };
 
-for (var key in bootstrap) {
+for (var key in MeiweiApp.Bootstrap) {
 	//localStorage.setItem(key, JSON.stringify(bootstrap[key]));
 }

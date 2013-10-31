@@ -1,13 +1,20 @@
 $(function() {
-    MeiweiApp.Views.MasterHero = MeiweiApp.View.extend({
+    var MasterHero = MeiweiApp.View.extend({
+    	template: MeiweiApp.Templates['product-carousel'],
     	events: { 'tap': 'viewProducts' },
     	initView: function() {
     		this.productItems = new MeiweiApp.Collections.ProductItems();
-    		_.bindAll(this, 'renderCarousel');
+    		this.ad = new MeiweiApp.Models.Ad();
+    		_.bindAll(this, 'renderCarousel', 'renderAd', 'renderConcierge');
     	},
-    	template: MeiweiApp.Templates['product-carousel'],
-    	viewProducts: function(e) {
-    		MeiweiApp.goTo('ProductPurchase');
+    	viewProducts: function() {
+    	    if (this.ad.get('target') == 'external') {
+                window.open(this.ad.get('uri'), '_blank', 'location=no');
+            } else if (this.ad.get('target') == 'internal') {
+                MeiweiApp.goTo(this.ad.get('uri'));
+            } else {
+                MeiweiApp.goTo('ProductPurchase');
+            }
     	},
     	renderCarousel: function() {
     		if (this.scroller) this.scroller.destroy();
@@ -18,31 +25,31 @@ $(function() {
     		this.$el.prepend('<img src="assets/img/hero.png" />');
     		var items = this.$('.carousel-inner > .carousel-item');
         	this.$('.carousel-inner').css('width', items.length * $(items[0]).outerWidth());
-    		this.scroller = new IScroll(this.$('.carousel').selector, {
-    			tap: true, scrollX: true, scrollY: false
-    		});
-    		this.scroller.on('scrollStart', function() {
-    		    MeiweiApp.Pages.Home.scroller.disable();
-    		});
-    		this.scroller.on('scrollEnding', function() {
-                MeiweiApp.Pages.Home.scroller.enable();
-            });
+    		this.scroller = new IScroll(this.$('.carousel').selector, {tap: true, scrollX: true, scrollY: false});
+    		this.scroller.on('scrollStart', function() { MeiweiApp.Pages.Home.scroller.disable(); });
+    		this.scroller.on('scrollEnding', function() { MeiweiApp.Pages.Home.scroller.enable(); });
     	},
+    	renderConcierge: function() {
+            if (MeiweiApp.Bootstrap.Home && MeiweiApp.Bootstrap.Home.products) {
+                this.productItems.reset(MeiweiApp.Bootstrap.Home.products);
+                this.renderCarousel();
+            }
+            this.productItems.fetch({ reset: true, success: this.renderCarousel, data: {recommend: 1} });
+        },
+        renderAd: function() {
+            if (this.ad.get('online')) {
+                this.$el.html(this.ad.get('template'));
+            } else {
+                this.renderConcierge();
+            }
+        },
     	render: function() {
-    		if (window.bootstrap && bootstrap.Home && bootstrap.Home.products) {
-    			this.productItems.reset(bootstrap.Home.products);
-    			this.renderCarousel();
-    		}
-    		this.productItems.fetch({
-    			reset: true,
-    			success: this.renderCarousel,
-    			data: {recommend: 1}
-    		});
+    		this.ad.fetch({success: this.renderAd, error: this.renderConcierge});
     		return this;
     	}
     });
     
-    MeiweiApp.Views.RecommendItem = MeiweiApp.ModelView.extend({
+    var RecommendItem = MeiweiApp.ModelView.extend({
     	tagName: 'section',
     	className: 'recommend-list-item',
     	template: MeiweiApp.Templates['recommend-list-item'],
@@ -69,8 +76,8 @@ $(function() {
     	}
     });
     
-    MeiweiApp.Views.RecommendItems = MeiweiApp.CollectionView.extend({
-    	ModelView: MeiweiApp.Views.RecommendItem
+    var RecommendItems = MeiweiApp.CollectionView.extend({
+    	ModelView: RecommendItem
     });
     
     MeiweiApp.Pages.Home = new (MeiweiApp.PageView.extend({
@@ -86,10 +93,10 @@ $(function() {
     		_.bindAll(this, 'hero');
     		this.recommend = new MeiweiApp.Models.Recommend({id: 5});
     		this.views = {
-    			masterHero: new MeiweiApp.Views.MasterHero({
+    			masterHero: new MasterHero({
     				el: this.$('.master-hero .item-wrapper')
     			}),
-    			recommendItems: new MeiweiApp.Views.RecommendItems({
+    			recommendItems: new RecommendItems({
     				collection: this.recommend.items,
     				el: this.$('.recommend-flow')
     			})
@@ -133,8 +140,8 @@ $(function() {
     	    //this.firstVisit();
     	    if (this.checkLazy(30)) {
         		this.views.masterHero.render();
-        		if (window.bootstrap && bootstrap.Home && bootstrap.Home.recommend) {
-        			this.recommend.items.reset(bootstrap.Home.recommend);
+        		if (MeiweiApp.Bootstrap.Home && MeiweiApp.Bootstrap.Home.recommend) {
+        			this.recommend.items.reset(MeiweiApp.Bootstrap.Home.recommend);
         		}
         		this.recommend.fetch({ reset: true });
         	}
