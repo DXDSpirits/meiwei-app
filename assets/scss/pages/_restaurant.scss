@@ -209,6 +209,7 @@
 			@include background-size(100% 300px);
 		}
         h1 {
+            @include text-overflow();
         	font-size: $baseFontSize;
         	line-height: 30px;
         	text-align: center;
