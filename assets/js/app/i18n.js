@@ -339,6 +339,10 @@ MeiweiApp.i18n = {
         zh: '重启应用后语言设置才能生效。现在就重启？',
         en: 'An application restart is required to apply language setting. Restart now?'
     },
+    'Show More Restaurants': {
+        zh: '更多餐厅',
+        en: 'More Restaurants'
+    },
 };
 
 MeiweiApp.CheckI18n = function() {

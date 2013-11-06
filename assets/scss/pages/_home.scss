@@ -124,6 +124,12 @@
 		@include background-size(100% $itemHeight);
 		opacity: 0.4;
 	}
+	
+	.show-more {
+	    padding: 15px 30px;
+	    text-align: center;
+	    color: $brown;
+	}
 }
 
 #view-getstarted {

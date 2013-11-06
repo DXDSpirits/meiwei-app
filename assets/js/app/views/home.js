@@ -1,4 +1,5 @@
 $(function() {
+    var timeWaitToRefresh = 60 * 1000;
     var MasterHero = MeiweiApp.View.extend({
     	template: MeiweiApp.Templates['product-carousel'],
     	events: { 'tap': 'viewProducts' },
@@ -34,7 +35,12 @@ $(function() {
                 this.productItems.reset(MeiweiApp.Bootstrap.Home.products);
                 this.renderCarousel();
             }
-            this.productItems.fetch({ reset: true, success: this.renderCarousel, data: {recommend: 1} });
+            var self = this;
+            setTimeout(function() {
+                self.productItems.fetch({
+                    reset: true, success: self.renderCarousel, data: {recommend: 1}
+                });
+            }, timeWaitToRefresh);
         },
         renderAd: function() {
             if (this.ad.get('online')) {
@@ -86,11 +92,11 @@ $(function() {
     	events: {
     		'fastclick .header-btn-left': 'onClickLeftBtn',
     		'fastclick .header-btn-right': 'onClickRightBtn',
-    		'fastclick >header h1': 'goToSearch'
+    		'fastclick >header h1, .show-more': 'goToSearch'
     	},
     	initPage: function() {
     		this.snapStep = 250;
-    		_.bindAll(this, 'hero');
+    		_.bindAll(this, 'hero', 'renderAll');
     		this.recommend = new MeiweiApp.Models.Recommend({id: 5});
     		this.views = {
     			masterHero: new MasterHero({
@@ -101,7 +107,6 @@ $(function() {
     				el: this.$('.recommend-flow')
     			})
     		};
-    		this.listenTo(this.recommend.items, 'reset', this.initScroller);
     	},
     	goToSearch: function() { MeiweiApp.goTo('RestaurantSearch'); },
     	hero: function() {
@@ -126,6 +131,10 @@ $(function() {
     			this.hero();
     		}
     	},
+    	renderAll: function() {
+    	    this.$('.show-more').removeClass('hidden');
+    	    this.initScroller();
+    	},
     	firstVisit: function() {
             var key = 'visited-view-home';
             if (!localStorage.getItem(key)) {
@@ -142,8 +151,12 @@ $(function() {
         		this.views.masterHero.render();
         		if (MeiweiApp.Bootstrap.Home && MeiweiApp.Bootstrap.Home.recommend) {
         			this.recommend.items.reset(MeiweiApp.Bootstrap.Home.recommend);
+        			this.renderAll();
         		}
-        		this.recommend.fetch({ reset: true });
+        		var self = this;
+        		setTimeout(function() {
+        		    self.recommend.fetch({ reset: true, success: self.renderAll });
+        		}, timeWaitToRefresh);
         	}
     	}
     }))({el: $("#view-home")});
