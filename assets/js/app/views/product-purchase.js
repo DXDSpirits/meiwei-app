@@ -34,6 +34,7 @@ $(function() {
     
     MeiweiApp.Pages.ProductPurchase = new (MeiweiApp.PageView.extend({
     	initPage: function() {
+    	    _.bindAll(this, 'renderAll');
     		this.products = new MeiweiApp.Collections.Products();
     		this.views = {
     			productList: new MeiweiApp.Views.ProductPurchaseList({
@@ -50,12 +51,21 @@ $(function() {
     			MeiweiApp.goTo('RestaurantOrder', { restaurantId: 1 });
     		}
     	},
+    	renderAll: function() {
+    	    this.initScroller();
+    	    if (this.options.itemId) {
+    	        var item = this.$('.stack-item[data-item=' + this.options.itemId + ']');
+    	        this.scroller.scrollToElement(item.closest('.product-box')[0]);
+    	    } else {
+    	        this.scroller.scrollTo(0, 0);
+    	    }
+    	},
     	render: function() {
     		if (this.checkLazy(24 * 60)) {
-                this.products.fetch({ data: {category: 1}, reset: true, success: this.initScroller });
+                this.products.fetch({ data: {category: 1}, reset: true, success: this.renderAll });
             } else {
                 this.views.productList.render();
-                this.initScroller();
+                this.renderAll();
             }
     	}
     }))({el: $("#view-product-purchase")});

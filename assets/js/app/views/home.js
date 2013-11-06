@@ -2,19 +2,20 @@ $(function() {
     var timeWaitToRefresh = 60 * 1000;
     var MasterHero = MeiweiApp.View.extend({
     	template: MeiweiApp.Templates['product-carousel'],
-    	events: { 'tap': 'viewProducts' },
+    	events: { 'tap .carousel-item': 'viewProducts' },
     	initView: function() {
     		this.productItems = new MeiweiApp.Collections.ProductItems();
     		this.ad = new MeiweiApp.Models.Ad();
     		_.bindAll(this, 'renderCarousel', 'renderAd', 'renderConcierge');
     	},
-    	viewProducts: function() {
-    	    if (this.ad.get('target') == 'external') {
+    	viewProducts: function(e) {
+    	    if (this.ad.get('online') && this.ad.get('target') == 'external') {
                 window.open(this.ad.get('uri'), '_blank', 'location=no');
-            } else if (this.ad.get('target') == 'internal') {
+            } else if (this.ad.get('online') && this.ad.get('target') == 'internal') {
                 MeiweiApp.goTo(this.ad.get('uri'));
             } else {
-                MeiweiApp.goTo('ProductPurchase');
+                var el = e.currentTarget;
+                MeiweiApp.goTo('ProductPurchase', {itemId: +$(el).attr('data-item')});
             }
     	},
     	renderCarousel: function() {
