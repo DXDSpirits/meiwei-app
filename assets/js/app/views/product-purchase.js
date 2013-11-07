@@ -12,6 +12,12 @@ $(function() {
     			product: this.model.toJSON(),
     			items: this.model.items.toJSON()
     		}));
+    		var items = this.model.items;
+    		this.$('.stack-item').each(function() {
+    		    var id = +$(this).attr('data-item');
+    		    var localImage = 'assets/img/bootstrap/product/'+ id +'.jpg';
+    		    MeiweiApp.preloadImage($(this).find('.img img'), localImage, items.get(id).get('picture'));
+    		});
     		MeiweiApp.initLang(this.$el);
     		return this;
     	},

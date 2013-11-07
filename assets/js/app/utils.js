@@ -23,3 +23,12 @@ MeiweiApp.shareToMoments = function(url, content, pic) {
         Cordova.exec(success, fail, "Weixin", "sendAppContent", command);
     }
 }
+
+MeiweiApp.preloadImage = function(el, src_preload, src) {
+    el.attr('src', src_preload);
+    var image = new Image();
+    image.onload = function() {
+        el.replaceWith(image);
+    };
+    image.src = src;
+}
