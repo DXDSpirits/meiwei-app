@@ -295,7 +295,6 @@
 	}
 }
 
-
 #view-restaurant-floorplans {
 	svg {
 		[status="available"] { fill: transparent; }
@@ -326,4 +325,19 @@
 			} 
 		}
 	}
+}
+
+#view-restaurant-pictures {
+    .wrapper { background-color: rgba(0, 0, 0, 0.9); }
+    .picture-item {
+        @include flex-box();
+    }
+    @media (min-width: 300px) {
+        .viewport { width: 280px; }
+        @include carousel($carouselWidth: 280px);
+    }
+    @media (max-width: 299px) {
+        .viewport { width: 240px; }
+        @include carousel($carouselWidth: 240px);
+    }
 }

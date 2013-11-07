@@ -342,7 +342,7 @@ MeiweiApp.i18n = {
     'Show More Restaurants': {
         zh: '更多餐厅',
         en: 'More Restaurants'
-    },
+    }
 };
 
 MeiweiApp.CheckI18n = function() {

@@ -44,6 +44,11 @@ $(function() {
     });
     
     MeiweiApp.Pages.RestaurantDetail = new (MeiweiApp.PageView.extend({
+        events: {
+            'fastclick .header-btn-left': 'onClickLeftBtn',
+            'fastclick .header-btn-right': 'onClickRightBtn',
+            'tap .restaurant-pictures': 'viewPictures'
+        },
     	initPage: function() {
     		this.restaurant = new MeiweiApp.Models.Restaurant();
     		this.pictures = new MeiweiApp.Collections.Pictures();
@@ -56,6 +61,9 @@ $(function() {
     		_.bindAll(this, 'renderAll');
     	},
     	onClickRightBtn: function() { this.addFavorite(); },
+    	viewPictures: function() {
+    	    MeiweiApp.goTo('RestaurantPictures', {pictures: this.restaurant.get('pictures')});
+    	},
     	addFavorite: function() {
     		if (this.$('.icon-favorite').hasClass('succeed')) return;
     		var self = this;
