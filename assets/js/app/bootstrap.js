@@ -1,7 +1,20 @@
-MeiweiApp.Bootstrap = {};
+MeiweiApp.Bootstrap = {
+    set: function(key, json) {
+        try {
+            localStorage.setItem('bootstrap-' + key, JSON.stringify(json));
+        } catch (e) { }
+    },
+    get: function(key) {
+        try {
+            return JSON.parse(localStorage.getItem('bootstrap-' + key));
+        } catch (e) {
+            return {};
+        }
+    }
+};
 
 MeiweiApp.Bootstrap.Home = {
-	recommend: [
+	recommends: [
         {
             "id": 299, 
             "order": 2, 
@@ -281,6 +294,7 @@ MeiweiApp.Bootstrap.Home = {
     ]
 };
 
-for (var key in MeiweiApp.Bootstrap) {
-	//localStorage.setItem(key, JSON.stringify(bootstrap[key]));
-}
+if (!MeiweiApp.Bootstrap.get('home-recommends'))
+    MeiweiApp.Bootstrap.set('home-recommends', MeiweiApp.Bootstrap.Home.recommends);
+if (!MeiweiApp.Bootstrap.get('home-products'))
+    MeiweiApp.Bootstrap.set('home-products', MeiweiApp.Bootstrap.Home.products);

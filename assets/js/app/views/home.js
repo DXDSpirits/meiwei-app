@@ -19,6 +19,7 @@ $(function() {
             }
     	},
     	renderCarousel: function() {
+    	    MeiweiApp.Bootstrap.set('home-products', this.productItems.toJSON());
     		if (this.scroller) this.scroller.destroy();
     		this.$el.html(this.template({
     			items: _.first(this.productItems.toJSON(), 6),
@@ -38,8 +39,9 @@ $(function() {
     		this.scroller.on('scrollEnding', function() { MeiweiApp.Pages.Home.scroller.enable(); });
     	},
     	renderConcierge: function() {
-            if (MeiweiApp.Bootstrap.Home && MeiweiApp.Bootstrap.Home.products) {
-                this.productItems.reset(MeiweiApp.Bootstrap.Home.products);
+    	    var products = MeiweiApp.Bootstrap.get('home-products');
+            if (products) {
+                this.productItems.reset(products);
                 this.renderCarousel();
             }
             var self = this;
@@ -139,6 +141,7 @@ $(function() {
     		}
     	},
     	renderAll: function() {
+    	    MeiweiApp.Bootstrap.set('home-recommends', this.recommend.items.toJSON());
     	    this.$('.show-more').removeClass('hidden');
     	    this.initScroller();
     	},
@@ -156,8 +159,9 @@ $(function() {
     	    //this.firstVisit();
     	    if (this.checkLazy(30)) {
         		this.views.masterHero.render();
-        		if (MeiweiApp.Bootstrap.Home && MeiweiApp.Bootstrap.Home.recommend) {
-        			this.recommend.items.reset(MeiweiApp.Bootstrap.Home.recommend);
+        		var recommends = MeiweiApp.Bootstrap.get('home-recommends');
+        		if (recommends) {
+        			this.recommend.items.reset(recommends);
         			this.renderAll();
         		}
         		var self = this;
