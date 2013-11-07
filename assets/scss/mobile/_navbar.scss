@@ -107,7 +107,8 @@
 			visibility: hidden;
 			background-color: $brown;
 			color: $white;
-			width: 150%;
+			max-width: 200%;
+			min-width: 150%;
 		}
 		&:last-child .collapsible-inner {
             right: 0;
