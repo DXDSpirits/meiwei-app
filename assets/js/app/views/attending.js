@@ -2,18 +2,23 @@ $(function() {
     MeiweiApp.Views.OrderPages = MeiweiApp.CollectionView.extend({
         ModelView: MeiweiApp.ModelView.extend({
             events: {
+                'tap': 'goToOrderDetail',
                 'tap .btn-share-weixin': 'onClickWeixinBtn',
                 'tap .btn-share-weibo': 'onClickWeiboBtn'
             },
             template: MeiweiApp.Templates['order-attending'],
             className: 'order-page-item carousel-item',
+            goToOrderDetail: function() {
+                MeiweiApp.goTo('OrderDetail', { order: this.model.toJSON() });
+            },
             getWeiboLink : function(s, d, e, r, l, p, t, z, c) {
                 var f = 'http://v.t.sina.com.cn/share/share.php?appkey=', u = z || d.location,
                 p = ['&url=', e(u), '&title=', e(t || d.title), '&source=', e(r), '&sourceUrl=', e(l), 
                     '&content=', c || 'gb2312', '&pic=', e(p || ''), '&ralateUid=', '3058840707'].join('');
                 return [f, p].join('');
             },
-            onClickWeiboBtn : function() {
+            onClickWeiboBtn : function(e) {
+                if (e.stopPropagation) e.stopPropagation();
                 var restaurantinfor = this.model.get('restaurantinfor');
                 var url = 'http://www.clubmeiwei.com/restaurant/view/' + this.model.get('restaurant');
                 var content  = '我在 #' + restaurantinfor.fullname + '，有神马推荐菜？ 地址：' + restaurantinfor.address;
@@ -23,7 +28,8 @@ $(function() {
                                              pic, content, url, 'utf-8');
                 var ref = window.open( link ,'_blank', 'location=no');
             },
-            onClickWeixinBtn: function() {
+            onClickWeixinBtn: function(e) {
+                if (e.stopPropagation) e.stopPropagation();
                 var restaurantinfor = this.model.get('restaurantinfor');
                 var url = 'http://www.clubmeiwei.com/restaurant/view/' + this.model.get('restaurant');
                 var content  = '我在' + restaurantinfor.fullname + '，有神马推荐菜？ 地址' + restaurantinfor.address;

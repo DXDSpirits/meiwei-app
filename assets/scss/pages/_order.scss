@@ -155,5 +155,9 @@
 				button { font-size: $fontSizeMini; }
 			}
 		}
+		.discount-text {
+		    width: 200px;
+		    @include text-overflow();
+		}
 	}
 }

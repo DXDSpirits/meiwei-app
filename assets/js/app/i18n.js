@@ -342,6 +342,14 @@ MeiweiApp.i18n = {
     'Show More Restaurants': {
         zh: '更多餐厅',
         en: 'More Restaurants'
+    },
+    'No Discount': {
+        zh: '更多餐厅',
+        en: 'No Discount'
+    },
+    'Click for Detail': {
+        zh: '点击查看详情',
+        en: 'Click for Detail'
     }
 };
 
