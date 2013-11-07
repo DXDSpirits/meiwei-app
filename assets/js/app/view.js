@@ -125,20 +125,20 @@ MeiweiApp.PageView = MeiweiApp.View.extend({
     },
     initPageNav: function(page, collection) {
         page.fetchNext = function() {
-            if (page.scroller) page.scroller.scrollTo(0, 0, 1000);
+            if (page.scroller) page.scroller.scrollTo(0, 0, 350);
             setTimeout(function() {
                 collection.fetchNext({success: function(collection, xhr, options) {
                     page.resetNavigator(collection, xhr, options);
                 }});
-            }, 1000);
+            }, 350);
         };
         page.fetchPrev = function() {
-            if (page.scroller) page.scroller.scrollTo(0, 0, 1000);
+            if (page.scroller) page.scroller.scrollTo(0, 0, 350);
             setTimeout(function() {
                 collection.fetchPrev({success: function(collection, xhr, options) {
                     page.resetNavigator(collection, xhr, options);
                 }});
-            }, 1000);
+            }, 350);
         };
         page.resetNavigator = function() {
             page.$('.page-nav').toggleClass('hidden', (collection.next == null && collection.previous == null));
