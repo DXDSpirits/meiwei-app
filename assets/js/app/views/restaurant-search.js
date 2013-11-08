@@ -1,5 +1,5 @@
 $(function() {
-    MeiweiApp.Views.MarkerItemInfo = MeiweiApp.ModelView.extend({
+    var MarkerItemInfo = MeiweiApp.ModelView.extend({
     	template: MeiweiApp.Templates['restaurant-list-item'],
     	events: { 'fastclick': 'viewRestaurant' },
     	viewRestaurant: function() {
@@ -22,7 +22,7 @@ $(function() {
     	}
     });
     
-    MeiweiApp.Views.RestaurantListItem = MeiweiApp.ModelView.extend({
+    var RestaurantListItem = MeiweiApp.ModelView.extend({
     	tagName: 'section',
     	className: 'restaurant-list-item',
     	template: MeiweiApp.Templates['restaurant-list-item'],
@@ -53,11 +53,11 @@ $(function() {
     	}
     });
     
-    MeiweiApp.Views.RestaurantList = MeiweiApp.CollectionView.extend({
-    	ModelView: MeiweiApp.Views.RestaurantListItem
+    var RestaurantList = MeiweiApp.CollectionView.extend({
+    	ModelView: RestaurantListItem
     });
     
-    MeiweiApp.Views.SearchFilter = MeiweiApp.CollectionView.extend({
+    var SearchFilter = MeiweiApp.CollectionView.extend({
     	ModelView: MeiweiApp.ModelView.extend({
     		tagName: 'li',
     		template: Mustache.compile('{{name}}'),
@@ -68,7 +68,7 @@ $(function() {
     	})
     });
     
-    MeiweiApp.Views.CircleFilter = MeiweiApp.Views.SearchFilter.extend({
+    var CircleFilter = SearchFilter.extend({
         addAll: function() {
             var DistrictModelView = this.ModelView.extend({
                 className: 'subtitle',
@@ -92,8 +92,8 @@ $(function() {
         },
     });
     
-    MeiweiApp.Views.RecommendFilter = MeiweiApp.Views.SearchFilter;
-    MeiweiApp.Views.CuisineFilter = MeiweiApp.Views.SearchFilter;
+    var RecommendFilter = SearchFilter;
+    var CuisineFilter = SearchFilter;
     
     MeiweiApp.Pages.RestaurantSearch = new (MeiweiApp.PageView.extend({
     	onClickLeftBtn: function() { MeiweiApp.goTo('Home'); },
@@ -102,6 +102,7 @@ $(function() {
     			this.$('.flipper').removeClass('flip');
     		} else {
     			this.$('.flipper').addClass('flip');
+    			this.resetFilters();
     			MeiweiApp.initGeolocation(function() {
     			    MeiweiApp.Pages.RestaurantSearch.filterRestaurant({
     			        lng: MeiweiApp.coords.longitude,
@@ -126,25 +127,25 @@ $(function() {
     		this.restaurants = new MeiweiApp.Collections.Restaurants();
     		this.cuisines = new MeiweiApp.Collections.Cuisines();
     		this.circles = new MeiweiApp.Collections.Circles();
-    		this.recommends = new MeiweiApp.Collections.Recommends();
+    		this.recommendnames = new MeiweiApp.Collections.RecommendNames();
     		this.views = {
-    			restaurantList: new MeiweiApp.Views.RestaurantList({
+    			restaurantList: new RestaurantList({
     				collection: this.restaurants,
     				el: this.$('.restaurant-list')
     			}),
-    			recommendFilter: new MeiweiApp.Views.RecommendFilter({
-                    collection: this.recommends,
+    			recommendFilter: new RecommendFilter({
+                    collection: this.recommendnames,
                     el: this.$('.filter.recommend .collapsible-inner ul')
                 }),
-    			cuisineFilter: new MeiweiApp.Views.CuisineFilter({
+    			cuisineFilter: new CuisineFilter({
     				collection: this.cuisines,
     				el: this.$('.filter.cuisine .collapsible-inner ul')
     			}),
-    			circleFilter: new MeiweiApp.Views.CircleFilter({
+    			circleFilter: new CircleFilter({
     				collection: this.circles,
     				el: this.$('.filter.circle .collapsible-inner ul')
     			}),
-    			markerInfo: new MeiweiApp.Views.MarkerItemInfo({
+    			markerInfo: new MarkerItemInfo({
     				model: new MeiweiApp.Models.Restaurant(),
     				el: this.$('.map-marker-info')
     			})
@@ -281,7 +282,7 @@ $(function() {
     		this.$('>header input').focus();
     		if (this.checkLazy(24 * 60)) {
         		this.restaurants.fetch({ reset: true, success: this.refreshList });
-        		this.recommends.fetch({ reset: true, success: this.bindRecommendFilters });
+        		this.recommendnames.fetch({ reset: true, success: this.bindRecommendFilters });
         		this.cuisines.fetch({ reset: true, success: this.bindCuisineFilters });
         		this.circles.fetch({ reset: true, success: this.bindCircleFilters });
             }
