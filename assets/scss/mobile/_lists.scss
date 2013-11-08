@@ -31,6 +31,7 @@
 		right: 17px;
 		bottom: 0;
 	}
+	p { height: 20px; }
 }
 
 .order-list { @extend %thumbnail-list; }

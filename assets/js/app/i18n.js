@@ -23,6 +23,10 @@ MeiweiApp.i18n = {
         zh: '订餐',
         en: 'Book'
     },
+    'Price Range': {
+        zh: '人均',
+        en: 'Price'
+    },
     'Reviews': {
         zh: '评论',
         en: 'Reviews'

@@ -102,8 +102,19 @@
 		position: relative;
 		.rating {
 			position: absolute;
-			top: -40px;
+			top: -50px;
 			left: 0;
+		}
+		.price {
+		    position: absolute;
+            top: -22px;
+            left: 5px;
+            font-size: $fontSizeSmall;
+            color: $white;
+            vertical-align: top;
+            .price-tags {
+                font-size: $fontSizeMini;
+            }
 		}
 		.order-button {
 			@include size(35px, 100px);

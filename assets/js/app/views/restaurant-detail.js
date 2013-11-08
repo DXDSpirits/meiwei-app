@@ -21,6 +21,7 @@ $(function() {
     		this.$('.discount').toggleClass('hide', _.isEmpty(resto.discount));
     		this.$('.discount p').html(resto.discount);
     		this.$('.rating').attr('class', 'rating r-' + resto.score);
+            this.$('.price-tags').html(resto.price < 10 ? new Array(resto.price+1).join('￥') : '￥' + resto.price);
     		return this;
     	}
     });
