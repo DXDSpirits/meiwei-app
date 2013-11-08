@@ -118,7 +118,6 @@ $(function() {
                 floorplans: this.restaurant.get('floorplans'),
                 onSelected: function(selectedSeats) {
                     self.selectedSeats = selectedSeats;
-                    console.log(selectedSeats);
                     if (!_.isEmpty(selectedSeats)) {
                         self.$('span.seat-selected').removeClass('hidden');
                     } else {
