@@ -52,10 +52,10 @@
 			background-color: $white;
 			width: 100%;
 			@include translate3d(0, 90px, 0);
-			-webkit-transition: -webkit-transform .6s ease-in-out;
+			-webkit-transition: -webkit-transform .2s ease-in-out;
 			&.expand {
 				@include translate3d(0, 0, 0);
-				-webkit-transition: -webkit-transform .6s ease-in-out;
+				-webkit-transition: -webkit-transform .2s ease-in-out;
 			}
 		}
 	}

@@ -14,7 +14,7 @@ $(function() {
     			setTimeout(function() {
     				self.model.set(resto);
     				self.$el.addClass('expand');
-    			}, 600);
+    			}, 200);
     		} else {
     			this.model.set(resto);
     			this.$el.addClass('expand');
@@ -269,9 +269,9 @@ $(function() {
     			self.markers = [];
     			self.map = new BMap.Map('map_canvas', {enableMapClick: false, maxZoom: 18});
     			self.map.enableContinuousZoom();
-    			self.map.disablePinchToZoom();
+    			self.map.enablePinchToZoom();
     			self.map.centerAndZoom(new BMap.Point(MeiweiApp.coords.longitude, MeiweiApp.coords.latitude), 15);
-    			self.map.addControl(new BMap.NavigationControl({anchor: BMAP_ANCHOR_TOP_RIGHT, type: BMAP_NAVIGATION_CONTROL_ZOOM}));
+    			//self.map.addControl(new BMap.NavigationControl({anchor: BMAP_ANCHOR_TOP_RIGHT, type: BMAP_NAVIGATION_CONTROL_ZOOM}));
     			self.dropMarkers();
     		});
     	},
