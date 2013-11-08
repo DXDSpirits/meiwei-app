@@ -23,3 +23,12 @@ MeiweiApp.Collections.Recommends = MeiweiApp.Collection.extend({
 	url: MeiweiApp.configs.APIHost + '/restaurants/recommend/',
 	model: MeiweiApp.Models.Recommend
 });
+
+MeiweiApp.Models.RecommendName = MeiweiApp.Model.extend({
+    name: 'MeiweiApp.Models.RecommendName',
+    urlRoot: MeiweiApp.configs.APIHost + '/restaurants/recommendname/',
+});
+MeiweiApp.Collections.RecommendNames = MeiweiApp.Collection.extend({
+    url: MeiweiApp.configs.APIHost + '/restaurants/recommendname/',
+    model: MeiweiApp.Models.RecommendName
+});

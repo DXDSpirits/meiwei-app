@@ -35,6 +35,13 @@ $linkColorHover:        $linkColor !default;
     font-style: normal;
 }
 
+@font-face {
+    font-family: 'CaviarDreams';
+    src: url('../font/CaviarDreams.ttf');
+    font-weight: normal;
+    font-style: normal;
+}
+
 $sansFontFamily:        "Helvetica Neue", Helvetica, Arial, "Microsoft Yahei", sans-serif !default;
 $serifFontFamily:       Georgia, "Times New Roman", Times, serif !default;
 $monoFontFamily:        Monaco, Menlo, Consolas, "Courier New", monospace !default;

@@ -35,6 +35,10 @@
 
 .icon-gift					{ @include icon-offset(6, 0); }
 
+.icon-bars                  { @include icon-offset(8, 0); }
+.icon-bars.pressed,
+.pressed .icon-bars         { @include icon-offset(9, 0); }
+
 .icon-confirm				{ @include icon-offset(0, 1); }
 .icon-confirm.pressed,
 .pressed .icon-confirm		{ @include icon-offset(1, 1); }

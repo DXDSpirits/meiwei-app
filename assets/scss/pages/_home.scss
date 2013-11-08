@@ -130,6 +130,38 @@
 	    text-align: center;
 	    color: $brown;
 	}
+	
+	.recommends-filter {
+	    position: absolute;
+	    background-color: rgba(0, 0, 0, 0.7);
+	    top: 0; right: 0; bottom: 0; left: 0;
+	    padding: 10px;
+	    @include clearfix();
+	    @include transition(all .35s ease-in-out);
+	    .filter-item {
+	        font-family: 'CaviarDreams', sans-serif;
+            @include flex-box();
+            text-align: center;
+            padding: 20px;
+            position: relative;
+            float: left;
+            width: 50%;
+            height: 20%;
+            color: $white;
+            font-size: $fontSizeLarge;
+            @include transition(all .35s ease-in-out);
+        }
+	}
+	.recommends-filter.closed {
+        visibility: hidden;
+        opacity: 0;
+        .filter-item:nth-child(2n+1) {
+            @include translate3d(-100%, 0, 0);
+        }
+        .filter-item:nth-child(2n) {
+            @include translate3d(100%, 0, 0);
+        }
+    }
 }
 
 #view-getstarted {
