@@ -38,6 +38,33 @@
 	}
 }
 
+#view-member-contacts {
+    .alphabet {
+        position: absolute;
+        z-index: 1000;
+        top: 60px;
+        right: 4px;
+        width: 28px;
+        height: 364px;
+        -webkit-border-radius:14px;
+        text-align: center;
+        font-size: 11px;
+        color: #6a737d;
+        li {
+            font-size: 11px;
+            line-height: 1;
+            padding-top: 2px;
+            font-weight: bold;
+        }
+        li:first-child {
+            padding-top: 6px;
+        }
+        &.hover, &:active {
+            background: rgba(106, 115, 125, 0.5);
+        }
+    }
+}
+
 #view-member-profile {
 	.member-profile-form {
 	    width: 90%;

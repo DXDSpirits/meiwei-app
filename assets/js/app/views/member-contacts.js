@@ -1,8 +1,16 @@
 $(function() {
-    MeiweiApp.Views.ContactList = MeiweiApp.CollectionView.extend({
+    
+    var ContactList = MeiweiApp.CollectionView.extend({
     	ModelView: MeiweiApp.ModelView.extend({
     		className: 'simple-list-item contact-item',
     		template: MeiweiApp.Templates['contact-list-item'],
+    		render: function() {
+                var attrs = this.model ? this.model.toJSON() : {};
+                this.$el.html(this.template(attrs));
+                MeiweiApp.initLang(this.$el);
+                this.$el.attr('data-index', this.$('[data-field="name"]').html()[0]);
+                return this;
+            }
     	})
     });
     
@@ -14,6 +22,9 @@ $(function() {
     		'fastclick .filter-local': 'getLocalContacts',
     		'tap .contact-item': 'selectContact',
     		'submit >header>form': 'searchContacts',
+    		'touchstart .alphabet': 'alphabetOnTouchStart',
+    		'touchmove .alphabet': 'alphabetOnTouchMove',
+    		'touchend .alphabet': 'alphabetOnTouchEnd'
     	},
     	onClickRightBtn: function() {
     		if (this.options && this.options.callback && this.selectedContact)
@@ -22,6 +33,33 @@ $(function() {
     			                      this.selectedContact.get('sexe'));
     		MeiweiApp.goBack();
     	},
+    	alphabetOnTouchStart: function(ev) {
+            var e = ev.originalEvent;
+            e.preventDefault();
+            this.$('.alphabet').addClass('hover');
+            var theTarget = e.target;
+            if(theTarget.nodeType == 3) theTarget = theTarget.parentNode;
+            theTarget = theTarget.innerText;
+            var pos = this.$('.contact-item[data-index="' + theTarget + '"]')[0];
+            if (pos) this.scroller.scrollToElement(pos);
+            return false;
+    	},
+    	alphabetOnTouchMove: function(ev) {
+            var e = ev.originalEvent;
+            e.preventDefault();
+            var theTarget = document.elementFromPoint(e.targetTouches[0].clientX, e.targetTouches[0].clientY);
+            if(theTarget.nodeType == 3) theTarget = theTarget.parentNode;
+            theTarget = theTarget.innerText;
+            var pos = this.$('.contact-item[data-index="' + theTarget + '"]')[0];
+            if (pos) this.scroller.scrollToElement(pos);
+            return false;
+        },
+        alphabetOnTouchEnd: function(ev) {
+            var e = ev.originalEvent;
+            e.preventDefault();
+            this.$('.alphabet').removeClass('hover');
+            return false;
+        },
     	searchContacts: function(e) {
             if (e.preventDefault) e.preventDefault();
             this.getLocalContacts();
@@ -30,7 +68,7 @@ $(function() {
     		this.listenTo(MeiweiApp.me, 'logout', function() { this.lastRender = null; });
     		this.listenTo(MeiweiApp.me, 'login', function() { this.lastRender = null; });
     		this.views = {
-    			contactList: new MeiweiApp.Views.ContactList({
+    			contactList: new ContactList({
     				collection: new MeiweiApp.Collections.Contacts(),
     				el: this.$('.scroll-inner')
     			})
