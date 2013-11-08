@@ -59,7 +59,8 @@ $(function() {
             }
         },
     	render: function() {
-    		this.ad.fetch({success: this.renderAd, error: this.renderConcierge});
+    	    this.renderConcierge();
+    		this.ad.fetch({success: this.renderAd});
     		return this;
     	}
     });
