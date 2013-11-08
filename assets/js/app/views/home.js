@@ -54,8 +54,6 @@ $(function() {
         renderAd: function() {
             if (this.ad.get('online')) {
                 this.$el.html(this.ad.get('template'));
-            } else {
-                this.renderConcierge();
             }
         },
     	render: function() {
