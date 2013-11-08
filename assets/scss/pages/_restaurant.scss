@@ -69,12 +69,20 @@
 		@include size(200px, 100%);
 		position: relative;
 		overflow: visible;
-		img {
+		img.img-cover {
 			width: 100%;
 			min-height: 250px;
 			position: absolute;
 			z-index: -1;
 			bottom: 0;
+		}
+		.img-stack-icon {
+		    width: 32px;
+		    height: 32px;
+		    position: absolute;
+		    z-index: 1;
+		    top: 15px;
+		    right: 10px; 
 		}
 		&::after {
 			content: "";
