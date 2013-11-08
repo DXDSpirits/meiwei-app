@@ -55,6 +55,10 @@ MeiweiApp.i18n = {
         zh: '桌位选择',
         en: 'Select Seat'
     },
+    'Seat Selected': {
+        zh: '已选',
+        en: 'Seat Selected'
+    },
     'Submit Order': {
         zh: '提交订单',
         en: 'Submit Order'

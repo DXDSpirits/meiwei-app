@@ -1,5 +1,5 @@
 $(function() {
-    MeiweiApp.Views.ProductCartItemList = MeiweiApp.CollectionView.extend({
+    var ProductCartItemList = MeiweiApp.CollectionView.extend({
         ModelView: MeiweiApp.ModelView.extend({
             className: 'product-cart-item',
             template: MeiweiApp.Templates['product-cart-item'],
@@ -11,7 +11,7 @@ $(function() {
         })
     });
     
-    MeiweiApp.Views.RestaurantOrderContactForm = MeiweiApp.View.extend({
+    var RestaurantOrderContactForm = MeiweiApp.View.extend({
         events: { 'tap >header h1': 'selectContact' },
         initView: function(options) {
             _.bindAll(this, 'fillContact', 'switchGender');
@@ -61,7 +61,7 @@ $(function() {
         }
     });
     
-    MeiweiApp.Views.RestaurantOrderForm = MeiweiApp.View.extend({
+    var RestaurantOrderForm = MeiweiApp.View.extend({
         events: {
             'change input[name=orderdate]': 'renderHourList'
         },
@@ -107,17 +107,9 @@ $(function() {
             _.bindAll(this, 'renderOrderForm', 'submitOrder');
             this.restaurant = new MeiweiApp.Models.Restaurant();
             this.views = {
-                orderForm: new MeiweiApp.Views.RestaurantOrderForm({
-                    model: this.restaurant,
-                    el: this.$('.order-info'),
-                }),
-                orderContactForm: new MeiweiApp.Views.RestaurantOrderContactForm({
-                    el: this.$('.contact-info'),
-                }),
-                productCart: new MeiweiApp.Views.ProductCartItemList({
-                    collection: MeiweiApp.ProductCart,
-                    el: this.$('.product-cart')
-                })
+                orderForm: new RestaurantOrderForm({ model: this.restaurant, el: this.$('.order-info') }),
+                orderContactForm: new RestaurantOrderContactForm({ el: this.$('.contact-info') }),
+                productCart: new ProductCartItemList({ collection: MeiweiApp.ProductCart, el: this.$('.product-cart') })
             };
         },
         selectSeat: function() {
@@ -126,6 +118,12 @@ $(function() {
                 floorplans: this.restaurant.get('floorplans'),
                 onSelected: function(selectedSeats) {
                     self.selectedSeats = selectedSeats;
+                    console.log(selectedSeats);
+                    if (!_.isEmpty(selectedSeats)) {
+                        self.$('span.seat-selected').removeClass('hidden');
+                    } else {
+                        self.$('span.seat-selected').addClass('hidden');
+                    }
                 } 
             });
         },

@@ -275,6 +275,10 @@
 			@include icon-offset(3, 4);
 		}
 	}
+	.floorplan-select .seat-selected {
+	    &::before { content: '('; }
+	    &::after { content: ')'; }
+	}
 	.contact-info .switch-gender {
 		@include flexible($flex: 0, $orient: horizontal);
 		width: 70px;
