@@ -6,19 +6,20 @@ $(function() {
     	},
     	saveItem: function(e) {
     		if (e.preventDefault) e.preventDefault();
-    		this.anniversary.set({
-    			date: this.$('input[name=date]').val() || null,
-    			description: this.$('input[name=description]').val() || null
-    		});
-    		var self = this;
-    		this.anniversary.save({}, { 
-    		    success: function() {
-    				MeiweiApp.goTo('MemberAnniversaries');
-    		    },
-    		    error: function(model, xhr, options) {
-    				self.displayError(self.$('.info-text'), xhr.responseText);
-                }
-    		});
+    		var date = this.$('input[name=date]').val() || null;
+    		var description = this.$('input[name=description]').val() || null;
+    		if (date && description) {
+        		this.anniversary.set({ date: date, description: description });
+        		var self = this;
+        		this.anniversary.save({}, { 
+        		    success: function() {
+        				MeiweiApp.goTo('MemberAnniversaries');
+        		    },
+        		    error: function(model, xhr, options) {
+        				self.displayError(self.$('.info-text'), xhr.responseText);
+                    }
+        		});
+        	}
     	},
     	deleteItem: function() {
     		this.anniversary.destroy({
