@@ -22,9 +22,9 @@ $(function() {
     		'fastclick .filter-local': 'getLocalContacts',
     		'tap .contact-item': 'selectContact',
     		'submit >header>form': 'searchContacts',
-    		'touchstart .alphabet': 'alphabetOnTouchStart',
-    		'touchmove .alphabet': 'alphabetOnTouchMove',
-    		'touchend .alphabet': 'alphabetOnTouchEnd'
+    		//'touchstart .alphabet': 'alphabetOnTouchStart',
+    		//'touchmove .alphabet': 'alphabetOnTouchMove',
+    		//'touchend .alphabet': 'alphabetOnTouchEnd'
     	},
     	onClickRightBtn: function() {
     		if (this.options && this.options.callback && this.selectedContact)
