@@ -78,9 +78,9 @@ $(function() {
     	selectContact: function(e) {
     	    var item = e.currentTarget;
     	    this.selectedContact.set({
-    	        name: $(item).find('[data-field="name"]').html(),
-    	        mobile: $(item).find('[data-field="mobile"]').html(),
-    	        sexe: $(item).find('[data-field="sexe"]').html(),
+    	        name: $(item).find('[data-field="name"]').text(),
+    	        mobile: $(item).find('[data-field="mobile"]').text(),
+    	        sexe: $(item).find('[data-field="sexe"]').text(),
     	    });
     	    $(item).find('i').attr('class', 'icon-select');
             $(item).siblings().find('.icon-select').attr('class', 'icon-circle');
