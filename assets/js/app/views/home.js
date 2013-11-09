@@ -2,12 +2,12 @@ $(function() {
     var timeWaitToRefresh = 60 * 1000;
     
     var RecommendsFilter = MeiweiApp.CollectionView.extend({
+        events: { 'fastclick': 'closeFilter' },
+        closeFilter: function() { MeiweiApp.Pages.Home.$('.recommends-filter').addClass('closed'); },
         ModelView: MeiweiApp.ModelView.extend({
             className: 'filter-item',
             template: Mustache.compile('{{name}}'),
-            events: {
-                'fastclick': 'onclick'
-            },
+            events: { 'fastclick': 'onclick' },
             onclick: function() {
                 MeiweiApp.Pages.Home.recommend.clear();
                 MeiweiApp.Pages.Home.recommend.id = this.model.id;
@@ -36,7 +36,7 @@ $(function() {
             }
     	},
     	renderCarousel: function() {
-    	    MeiweiApp.Bootstrap.set('home-products', this.productItems.toJSON());
+    	    MeiweiApp.Bootstrap.set('home-product-items', this.productItems.toJSON());
     		if (this.scroller) this.scroller.destroy();
     		this.$el.html(this.template({
     			items: _.first(this.productItems.toJSON(), 6),
@@ -56,7 +56,7 @@ $(function() {
     		this.scroller.on('scrollEnding', function() { MeiweiApp.Pages.Home.scroller.enable(); });
     	},
     	renderConcierge: function() {
-    	    var products = MeiweiApp.Bootstrap.get('home-products');
+    	    var products = MeiweiApp.Bootstrap.get('home-product-items');
             if (products) {
                 this.productItems.reset(products);
                 this.renderCarousel();
@@ -153,7 +153,7 @@ $(function() {
     		}
     	},
     	renderAll: function() {
-    	    MeiweiApp.Bootstrap.set('home-recommends', this.recommend.items.toJSON());
+    	    MeiweiApp.Bootstrap.set('home-recommend-items', this.recommend.items.toJSON());
     	    this.$('.show-more').removeClass('hidden');
     	    this.initScroller();
     	},
@@ -170,9 +170,11 @@ $(function() {
     	render: function() {
     	    //this.firstVisit();
     	    if (this.checkLazy(30)) {
+    	        this.views.masterHero.render();
+    	        var recommendNames = MeiweiApp.Bootstrap.get('home-recommendnames');
+    	        if (recommendNames) this.recommendNames.reset(recommendNames);
     	        this.recommendNames.fetch({ reset: true });
-        		this.views.masterHero.render();
-        		var recommends = MeiweiApp.Bootstrap.get('home-recommends');
+        		var recommends = MeiweiApp.Bootstrap.get('home-recommend-items');
         		if (recommends) {
         			this.recommend.items.reset(recommends);
         			this.renderAll();
