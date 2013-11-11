@@ -4,6 +4,7 @@ $(function() {
             'tap .carousel-item.getstarted': 'getstarted'
         },
         getstarted: function() {
+            localStorage.setItem('first-time', true);
             MeiweiApp.goTo('Home');
         },
         render: function() {

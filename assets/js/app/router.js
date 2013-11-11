@@ -40,7 +40,6 @@ MeiweiApp.Router = new (Backbone.Router.extend({
 	    if (localStorage.getItem('first-time')) {
 	        MeiweiApp.Pages.Home.go(); MeiweiApp.history.active = MeiweiApp.Pages.Home;
 	    } else {
-	        localStorage.setItem('first-time', true)
 	        MeiweiApp.Pages.GetStarted.go(); MeiweiApp.history.active = MeiweiApp.Pages.GetStarted;
 	    }
 	},
