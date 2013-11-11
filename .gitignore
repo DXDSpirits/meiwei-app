@@ -10,4 +10,5 @@
 /node_modules/
 /.sass-cache/
 index.html
+webapp.html
 *.DS_Store

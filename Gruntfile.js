@@ -63,7 +63,7 @@ module.exports = function(grunt) {
 		},
 		includes: {
 			files: {
-				src: ['mobile/index.html'],
+				src: ['mobile/index.html', 'mobile/webapp.html'],
 				dest: '.',
 				flatten: true,
 				cwd: '.'
