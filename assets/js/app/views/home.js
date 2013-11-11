@@ -168,7 +168,8 @@ $(function() {
         },
     	render: function() {
     	    //this.firstVisit();
-    	    if (this.checkLazy(30)) {
+    	    var listId = this.options.listId;
+    	    if (listId || this.checkLazy(30)) {
     	        this.views.masterHero.render();
     	        var recommendNames = MeiweiApp.Bootstrap.get('home-recommendnames');
     	        if (recommendNames) {
@@ -183,6 +184,10 @@ $(function() {
         		} else {
         		    timeWaitToRefresh = 0;
         		}
+        		if (listId) {
+                    MeiweiApp.Pages.Home.recommend.id = listId;
+                    timeWaitToRefresh = 0;
+                }
         		this.recommend.fetch({ reset: true, success: this.renderAll, delay: timeWaitToRefresh });
                 this.recommendNames.fetch({ reset: true, delay: timeWaitToRefresh });
         	}

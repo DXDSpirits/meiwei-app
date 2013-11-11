@@ -10,7 +10,7 @@ MeiweiApp.Router = new (Backbone.Router.extend({
 	initialize: function(){
 		this.route('', 'index');
 		
-		this.route('home', 'home');
+		this.route(/^home(?:\/l(\d+))?$/, 'home');
 		this.route('getstarted', 'getStarted');
 		
 		this.route(/^restaurant\/(\d+)$/, 'restaurantDetail');
@@ -43,7 +43,7 @@ MeiweiApp.Router = new (Backbone.Router.extend({
 	        MeiweiApp.Pages.GetStarted.go(); MeiweiApp.history.active = MeiweiApp.Pages.GetStarted;
 	    }
 	},
-	home: function() { MeiweiApp.Pages.Home.go(); MeiweiApp.history.active = MeiweiApp.Pages.Home; },
+	home: function(lid) { MeiweiApp.Pages.Home.go({listId: lid}); MeiweiApp.history.active = MeiweiApp.Pages.Home; },
 	getStarted: function() { MeiweiApp.Pages.GetStarted.go(); MeiweiApp.history.active = MeiweiApp.Pages.GetStarted; },
 	
 	restaurantDetail: function(rid) { MeiweiApp.Pages.RestaurantDetail.go({restaurantId: rid}); MeiweiApp.history.active = MeiweiApp.Pages.RestaurantDetail; },
