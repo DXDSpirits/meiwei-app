@@ -60,13 +60,12 @@ $(function() {
             if (products) {
                 this.productItems.reset(products);
                 this.renderCarousel();
+            } else {
+                timeWaitToRefresh = 0;
             }
-            var self = this;
-            setTimeout(function() {
-                self.productItems.fetch({
-                    reset: true, success: self.renderCarousel, data: {recommend: 1}
-                });
-            }, timeWaitToRefresh);
+            this.productItems.fetch({
+                reset: true, success: this.renderCarousel, data: {recommend: 1}, delay: timeWaitToRefresh
+            });
         },
         renderAd: function() {
             if (this.ad.get('online')) {
@@ -172,17 +171,20 @@ $(function() {
     	    if (this.checkLazy(30)) {
     	        this.views.masterHero.render();
     	        var recommendNames = MeiweiApp.Bootstrap.get('home-recommendnames');
-    	        if (recommendNames) this.recommendNames.reset(recommendNames);
-    	        this.recommendNames.fetch({ reset: true });
+    	        if (recommendNames) {
+    	            this.recommendNames.reset(recommendNames);
+    	        } else {
+    	            timeWaitToRefresh = 0;
+    	        }
         		var recommends = MeiweiApp.Bootstrap.get('home-recommend-items');
         		if (recommends) {
         			this.recommend.items.reset(recommends);
         			this.renderAll();
+        		} else {
+        		    timeWaitToRefresh = 0;
         		}
-        		var self = this;
-        		setTimeout(function() {
-        		    self.recommend.fetch({ reset: true, success: self.renderAll });
-        		}, timeWaitToRefresh);
+        		this.recommend.fetch({ reset: true, success: this.renderAll, delay: timeWaitToRefresh });
+                this.recommendNames.fetch({ reset: true, delay: timeWaitToRefresh });
         	}
     	}
     }))({el: $("#view-home")});

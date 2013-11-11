@@ -44,7 +44,14 @@ MeiweiApp.Collection = Backbone.Collection.extend({
 	fetch: function(options) {
 		options = options || {};
 		//MeiweiApp.initCache(this, options);
-		return Backbone.Collection.prototype.fetch.call(this, options);
+		if (options.delay) {
+		    var self = this;
+		    setTimeout(function() {
+		       Backbone.Collection.prototype.fetch.call(self, options); 
+		    }, options.delay);
+		} else {
+		    return Backbone.Collection.prototype.fetch.call(this, options);
+		}
 	},
 });
 
@@ -52,7 +59,14 @@ MeiweiApp.Model = Backbone.Model.extend({
 	fetch: function(options) {
 		options = options || {};
 		//MeiweiApp.initCache(this, options);
-		return Backbone.Model.prototype.fetch.call(this, options);
+		if (options.delay) {
+		    var self = this;
+		    setTimeout(function() {
+		        Backbone.Model.prototype.fetch.call(self, options);
+		    }, options.delay);
+		} else {
+		    return Backbone.Model.prototype.fetch.call(this, options);
+		}
 	},
 	url: function() {
 		if (this.attributes.url) {
