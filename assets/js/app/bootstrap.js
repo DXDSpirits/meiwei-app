@@ -9,6 +9,7 @@ MeiweiApp.Bootstrap = {
         try {
             return JSON.parse(localStorage.getItem('bootstrap-' + key));
         } catch (e) {
+            localStorage.removeItem('bootstrap-' + key);
             return {};
         }
     }

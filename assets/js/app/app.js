@@ -18,9 +18,7 @@ MeiweiApp = new (Backbone.View.extend({
     },
     
     start: function() {
-        if (window.device && window.device.version && parseFloat(window.device.version) === 7.0) {
-            $('html').addClass('iOS7');
-        }
+        MeiweiApp.initDevice();
         MeiweiApp.initVersion();
         MeiweiApp.showSplash();
         MeiweiApp.initAjaxEvents();
@@ -40,6 +38,18 @@ MeiweiApp.showSplash = function() {
     }
 };
 
+MeiweiApp.initDevice = function() {
+    if (window.device) {
+        if (window.device.platform === 'iOS' && parseFloat(window.device.version) === 7.0) {
+            $('html').addClass('iOS7');
+        }
+    } else if(/MicroMessenger/i.test(navigator.userAgent)) {
+        window.device = { platform: 'Weixin' };
+    } else {
+        window.device = { platform: 'WebApp' };
+    }
+};
+
 MeiweiApp.initVersion = function() {
     var pVersion = localStorage.getItem('version-code') || '1.0';
     if (MeiweiApp.Version != pVersion) {
@@ -55,7 +65,7 @@ MeiweiApp.initVersion = function() {
             MeiweiApp.showConfirmDialog(
                 MeiweiApp._('Update Available'), MeiweiApp._('New version is available, go to update?'),
                 function() {
-                    if (window.device && device.platform == 'iOS') {
+                    if (device.platform == 'iOS') {
                         var ref = window.open('https://itunes.apple.com/app/id689668571' ,'_blank', 'location=no');
                     } else {
                         var ref = window.open('http://web.clubmeiwei.com/ad/apppromo' ,'_blank', 'location=no');
@@ -113,10 +123,10 @@ MeiweiApp.initSync = function() {
     };
     MeiweiApp.TokenAuth = {
         get: function() {
-            return authToken;
+            return _.clone(authToken);
         },
         set: function(token) {
-            authToken = token;
+            authToken = _.clone(token);
             localStorage.setItem('auth-token', authToken);
         },
         clear: function() {
