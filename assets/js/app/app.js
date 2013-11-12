@@ -43,11 +43,14 @@ MeiweiApp.initDevice = function() {
         if (window.device.platform === 'iOS' && parseFloat(window.device.version) === 7.0) {
             $('html').addClass('iOS7');
         }
+        $('meta[name=viewport]').attr('content', 'width=device-width, height=device-height, initial-scale=1, maximum-scale=1, user-scalable=0');
     } else if(/MicroMessenger/i.test(navigator.userAgent)) {
         window.device = { platform: 'Weixin' };
         $('title').append(' ' + $('meta[name=description]').attr('content'));
+        $('meta[name=viewport]').attr('content', 'width=device-width, initial-scale=1, maximum-scale=1, user-scalable=0');
     } else {
         window.device = { platform: 'WebApp' };
+        $('meta[name=viewport]').attr('content', 'width=device-width, initial-scale=1, maximum-scale=1, user-scalable=0');
     }
 };
 
