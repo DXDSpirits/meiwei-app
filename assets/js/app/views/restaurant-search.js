@@ -100,8 +100,10 @@ $(function() {
     	onClickRightBtn: function() {
     		if (this.$('.flipper').hasClass('flip')) {
     			this.$('.flipper').removeClass('flip');
+    			MeiweiApp.sendGaEvent('map', 'hide');
     		} else {
     			this.$('.flipper').addClass('flip');
+    			MeiweiApp.sendGaEvent('map', 'show');
     			this.resetFilters();
     			MeiweiApp.initGeolocation(function() {
     			    MeiweiApp.Pages.RestaurantSearch.filterRestaurant({
@@ -167,7 +169,7 @@ $(function() {
     		this.$('>header input').blur();
     	},
     	filterRestaurant: function(filter) {
-    		this.restaurants.fetch({ reset: true, success: this.refreshList, data: filter });
+	        this.restaurants.fetch({ reset: true, success: this.refreshList, data: filter });
     	},
     	toggleRecommendFilters: function() {
             this.$('.collapsible.recommend').toggleClass('expand').siblings().removeClass('expand');
@@ -194,6 +196,7 @@ $(function() {
                     this.resetFilters();
                     this.$('.recommend > p > span').html(recommend.get('name'));
                     this.filterRestaurant({recommend: recommend.id});
+                    MeiweiApp.sendGaEvent('search filter', 'select', 'recommend', recommend.id);
                     this.$('.collapsible.recommend').removeClass('expand');
                 });
             };
@@ -206,6 +209,7 @@ $(function() {
     			    this.resetFilters();
     			    this.$('.cuisine > p > span').html(cuisine.get('name'));
     			    this.filterRestaurant({cuisine: cuisine.id});
+    			    MeiweiApp.sendGaEvent('search filter', 'select', 'cuisine', cuisine.id);
     			    this.$('.collapsible.cuisine').removeClass('expand');
     			});
     		};
@@ -218,12 +222,14 @@ $(function() {
     				this.resetFilters();
     				this.$('.circle > p > span').html(circle.get('name'));
     				this.filterRestaurant({circle: circle.id});
+    				MeiweiApp.sendGaEvent('search filter', 'select', 'circle', circle.id);
     				this.$('.collapsible.circle').removeClass('expand');
     			});
     			this.listenTo(circle, "select-district", function() {
     			    this.resetFilters();
     			    this.$('.circle > p > span').html(circle.get('district').name);
                     this.filterRestaurant({district: circle.get('district').id});
+                    MeiweiApp.sendGaEvent('search filter', 'select', 'district', district.id);
                     this.$('.collapsible.circle').removeClass('expand');
                 });
     		};

@@ -16,12 +16,14 @@ $(function() {
             );
         },
         switchToZh: function() {
+            MeiweiApp.sendGaEvent('language', 'switch', 'zh');
             this.$('.lang-opt.zh').addClass('selected');
             this.$('.lang-opt.en').removeClass('selected');
             MeiweiApp.setLang('zh');
             this.askToRestartApp();
         },
         switchToEn: function() {
+            MeiweiApp.sendGaEvent('language', 'switch', 'en');
             this.$('.lang-opt.en').addClass('selected');
             this.$('.lang-opt.zh').removeClass('selected');
             MeiweiApp.setLang('en');
@@ -42,6 +44,7 @@ $(function() {
                                          'http://www.clubmeiwei.com', 'http://www.clubmeiwei.com',
                                          pic, content, url, 'utf-8');
             var ref = window.open(link ,'_blank', 'location=no');
+            MeiweiApp.sendGaSocial('weibo', 'tweet', 'app promo');
         },
         onClickWeixinBtn: function() {
             if (!MeiweiApp.me.id) MeiweiApp.me.fetch();
@@ -49,6 +52,7 @@ $(function() {
             var content  = '美位网手机应用华丽登场土豪时代，快来体验高品质订餐和贴心的私人管家服务！';
             var pic = 'http://web.clubmeiwei.com/assets/img/apppromo.jpg';
             MeiweiApp.shareToMoments(url, content, pic);
+            MeiweiApp.sendGaSocial('weixin', 'share to moments', 'app promo');
         },
         render: function() {
             this.$('.lang-opt.zh').toggleClass('selected', MeiweiApp.getLang() == 'zh');

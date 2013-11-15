@@ -224,6 +224,7 @@ MeiweiApp.PageView = MeiweiApp.View.extend({
 	                $nextPage.removeClass('view-next');
 	                $nextPage.find('.wrapper input').attr('readonly', false);
 	                $nextPage.find('.wrapper input').blur();
+	                MeiweiApp.sendGaPageView($nextPage.attr('id')); // Google Analytics
 	            }
             };
             $nextPage.removeClass('view-hidden');

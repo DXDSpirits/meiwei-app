@@ -9,6 +9,7 @@ $(function() {
             template: Mustache.compile('{{name}}'),
             events: { 'fastclick': 'onclick' },
             onclick: function() {
+                MeiweiApp.sendGaEvent('homepage list', 'select', 'recommend', this.model.id);
                 MeiweiApp.Pages.Home.recommend.clear();
                 MeiweiApp.Pages.Home.recommend.id = this.model.id;
                 MeiweiApp.Pages.Home.recommend.fetch({ reset: true, success: MeiweiApp.Pages.Home.renderAll });
@@ -113,7 +114,10 @@ $(function() {
     MeiweiApp.Pages.Home = new (MeiweiApp.PageView.extend({
     	onClickLeftBtn: function() { MeiweiApp.goTo('MemberCenter'); },
     	//onClickRightBtn: function() { MeiweiApp.goTo('Attending'); },
-    	onClickRightBtn: function() { this.$('.recommends-filter').toggleClass('closed'); },
+    	onClickRightBtn: function() {
+    	    this.$('.recommends-filter').toggleClass('closed');
+    	    MeiweiApp.sendGaEvent('homepage list', 'select');
+    	},
     	events: {
     		'fastclick .header-btn-left': 'onClickLeftBtn',
     		'fastclick .header-btn-right': 'onClickRightBtn',

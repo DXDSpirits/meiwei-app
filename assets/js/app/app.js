@@ -25,6 +25,7 @@ MeiweiApp = new (Backbone.View.extend({
         MeiweiApp.initLang();
         MeiweiApp.initGeolocation();
         MeiweiApp.initSync();
+        MeiweiApp.initGa();
         Backbone.history.start();
     }
 }))({el: document.body});
@@ -184,6 +185,10 @@ MeiweiApp.initAjaxEvents = function() {
         _.each(xhrPool, function(jqXHR) { jqXHR.abort(); });
         xhrPool = [];
     };
+};
+
+MeiweiApp.initGa = function() {
+    ga('create', 'UA-40624648-3', {'cookieDomain': 'none'});
 };
 
 MeiweiApp.handleError = function(err) {

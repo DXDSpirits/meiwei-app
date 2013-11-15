@@ -167,6 +167,7 @@ $(function() {
                             var content = '我预定了' + newOrder.get('orderdate') + ' ' + newOrder.get('ordertime') + '在' + 
                                           self.restaurant.get('address') + '的' +  self.restaurant.get('fullname') + '。一起来吧！';
                             MeiweiApp.sendWeixinMsg(content);
+                            MeiweiApp.sendGaSocial('weixin', 'message', 'invitation');
                         }
                     );
                 },

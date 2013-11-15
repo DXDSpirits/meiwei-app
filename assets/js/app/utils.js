@@ -36,3 +36,15 @@ MeiweiApp.preloadImage = function(el, src_preload, src) {
     };
     image.src = src;
 };
+
+MeiweiApp.sendGaPageView = function(page) {
+    ga('send', 'pageview', page);
+};
+
+MeiweiApp.sendGaEvent = function(category, action, label, value) {
+    ga('send', 'event', category, action, label, value);
+};
+
+MeiweiApp.sendGaSocial = function(network, action, target) {
+    ga('send', 'social', network, action, target);
+};
