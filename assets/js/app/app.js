@@ -189,11 +189,11 @@ MeiweiApp.initAjaxEvents = function() {
 
 MeiweiApp.initGa = function() {
     var clientId = MeiweiApp.TokenAuth.get() ? MeiweiApp.TokenAuth.get() : window.device.uuid;
-    console.log(clientId);
-    ga('create', 'UA-40624648-3', {
-        'storage': 'none',
-        'clientId': clientId
-    });
+    if (clientId) {
+        ga('create', 'UA-40624648-3', { 'storage': 'none', 'clientId': clientId });
+    } else {
+        ga('create', 'UA-40624648-3', { 'cookieDomain': 'none' });
+    }
 };
 
 MeiweiApp.handleError = function(err) {
