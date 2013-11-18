@@ -288,6 +288,12 @@ $(function() {
     		this.$('>header input').focus();
     		if (this.checkLazy(24 * 60)) {
         		this.restaurants.fetch({ reset: true, success: this.refreshList });
+        		var filters = MeiweiApp.Bootstrap.get('restaurant-search-filters');
+        		if (filters) {
+        			this.recommendnames.reset(filters.recommendnames);
+	        		this.cuisines.reset(filters.cuisines);
+	        		this.circles.reset(filters.circles);
+        		}
         		this.recommendnames.fetch({ reset: true, success: this.bindRecommendFilters });
         		this.cuisines.fetch({ reset: true, success: this.bindCuisineFilters });
         		this.circles.fetch({ reset: true, success: this.bindCircleFilters });
