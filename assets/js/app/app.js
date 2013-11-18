@@ -1,7 +1,7 @@
 
 MeiweiApp = new (Backbone.View.extend({
     
-    Version: '1.4',
+    Version: 1.5,
     
     Models: {},
     Views: {},
@@ -56,7 +56,7 @@ MeiweiApp.initDevice = function() {
 };
 
 MeiweiApp.initVersion = function() {
-    var pVersion = localStorage.getItem('version-code') || '1.0';
+    var pVersion = parseFloat(localStorage.getItem('version-code')) || 1.0;
     if (MeiweiApp.Version != pVersion) {
         var authToken = localStorage.getItem('auth-token');
         localStorage.clear();
@@ -65,8 +65,8 @@ MeiweiApp.initVersion = function() {
     }
     var app = new MeiweiApp.Models.App();
     app.fetch({success: function(model, response, options) {
-        var version = model.get('version');
-        if (version && version != MeiweiApp.Version) {
+        var version = parseFloat(model.get('version'));
+        if (MeiweiApp.isCordova() && version && version > MeiweiApp.Version) {
             MeiweiApp.showConfirmDialog(
                 MeiweiApp._('Update Available'), MeiweiApp._('New version is available, go to update?'),
                 function() {
