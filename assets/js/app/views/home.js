@@ -170,6 +170,7 @@ $(function() {
     	searchKeywords: function(e) {
             if (e.preventDefault) e.preventDefault();
             var keywords = this.$('.search-form input').val();
+            this.$('.search-form input').val('');
             MeiweiApp.goTo('RestaurantSearch', { keywords: keywords });
         },
     	hero: function() {
