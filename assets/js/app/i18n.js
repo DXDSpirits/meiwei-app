@@ -288,11 +288,11 @@ MeiweiApp.i18n = {
         en: 'Order No'
     },
     'Order Date': {
-        zh: '订单日期',
+        zh: '订餐日期',
         en: 'Date'
     },
     'Order Time': {
-        zh: '订单时间',
+        zh: '订餐时间',
         en: 'Time'
     },
     'Peoples': {
@@ -352,7 +352,7 @@ MeiweiApp.i18n = {
         en: 'More Restaurants'
     },
     'No Discount': {
-        zh: '更多餐厅',
+        zh: '无折扣',
         en: 'No Discount'
     },
     'Click for Detail': {
