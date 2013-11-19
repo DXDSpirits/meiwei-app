@@ -135,12 +135,19 @@
 			img { @include square(100%); }
 		}
 		h1 {
+			position: relative;
+			padding-right: 30px;
 			color: $white;
 			margin: 13px 0 8px;
 			font-size: $fontSizeLarge;
 		}
-		p {
+		h1, p {
 			@include text-overflow();
+		}
+		.edit-profile {
+			position: absolute;
+			right: 5px;
+			bottom: 0;
 		}
 	}
 	$listItemHeight: 45px;

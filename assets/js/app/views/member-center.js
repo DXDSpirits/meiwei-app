@@ -50,7 +50,8 @@ $(function() {
     	events: {
     		'fastclick .header-btn-left': 'onClickLeftBtn',
     		'fastclick .header-btn-right': 'onClickRightBtn',
-    		'tap .member-center-nav > li:nth-child(1)': 'gotoMyProfile',
+    		//'tap .member-center-nav > li:nth-child(1)': 'gotoMyProfile',
+    		'tap .edit-profile': 'gotoMyProfile',
     		'tap .member-center-nav > li:nth-child(2)': 'gotoMyOrder',
     		'tap .member-center-nav > li:nth-child(3)': 'gotoMyCredits',
     		'tap .member-center-nav > li:nth-child(4)': 'gotoMyFavorites',
@@ -59,7 +60,7 @@ $(function() {
     		'tap .logout-button': 'logout'
     	},
     	onClickLeftBtn:      function() { MeiweiApp.goTo('Home'); },
-    	onClickRightBtn:      function() { MeiweiApp.goTo('Settings'); },
+    	onClickRightBtn:     function() { MeiweiApp.goTo('Settings'); },
     	gotoMyProfile:       function() { MeiweiApp.goTo('MemberProfile'); },
     	gotoMyOrder:         function() { MeiweiApp.goTo('OrderList'); },
     	gotoMyCredits:       function() { MeiweiApp.goTo('MemberCredits'); },
