@@ -153,9 +153,6 @@ $(function() {
     		this.restaurants.fetch({ reset: true, success: this.refreshList, data: { keywords: keywords } });
     		this.$('>header input').blur();
     	},
-    	filterRestaurant: function(filter) {
-	        this.restaurants.fetch({ reset: true, success: this.refreshList, data: filter });
-    	},
     	toggleFilters: function(e) {
     		var el = e.currentTarget;
     		$(el).closest('.filter').toggleClass('expand').siblings().removeClass('expand');
@@ -185,6 +182,9 @@ $(function() {
             	this.cuisineFilterScroller = new IScroll(this.$('.cuisine .collapsible-inner').selector, { tap: true });
             this.circleFilterScroller ? this.circleFilterScroller.refresh() :
             	this.circleFilterScroller = new IScroll(this.$('.circle .collapsible-inner').selector, { tap: true });
+        },
+        filterRestaurant: function(filter) {
+            this.restaurants.fetch({ reset: true, success: this.refreshList, data: filter });
         },
     	
     	/*********************************************/
@@ -237,8 +237,13 @@ $(function() {
     	
     	render: function() {
     		this.$('>header input').focus();
-    		if (this.checkLazy(24 * 60)) {
-        		this.restaurants.fetch({ reset: true, success: this.refreshList });
+    		var keywords = this.options.keywords;
+    		if (keywords && this.checkLazy(24 * 60)) {
+    		    if (keywords) {
+    		        this.restaurants.fetch({ reset: true, success: this.refreshList, data: { keywords: keywords } });
+    		    } else {
+    		        this.restaurants.fetch({ reset: true, success: this.refreshList });
+    		    }
         		var filters = MeiweiApp.Bootstrap.get('restaurant-search-filters');
         		if (filters) {
         			this.recommendnames.reset(filters.recommendnames);

@@ -1,5 +1,5 @@
 $(function() {
-    var timeWaitToRefresh = 0 * 1000;
+    var timeWaitToRefresh = 60 * 1000;
     
     var RecommendsFilter = MeiweiApp.CollectionView.extend({
         initCollectionView: function() {
@@ -129,6 +129,7 @@ $(function() {
     		'fastclick .header-btn-left': 'onClickLeftBtn',
     		'fastclick .header-btn-right': 'onClickRightBtn',
     		'fastclick .show-more': 'goToSearch',
+    		'submit .search-form form': 'searchKeywords',
     		'fastclick >header h1': 'toggleFilter'
     	},
     	initPage: function() {
@@ -152,6 +153,11 @@ $(function() {
     	goToSearch: function() {
     		MeiweiApp.goTo('RestaurantSearch');
     	},
+    	searchKeywords: function(e) {
+            if (e.preventDefault) e.preventDefault();
+            var keywords = this.$('.search-form input').val();
+            MeiweiApp.goTo('RestaurantSearch', { keywords: keywords });
+        },
     	hero: function() {
     		var wrapperHeight = 250;
     		if (this.scroller.y <= 0) {
@@ -164,11 +170,13 @@ $(function() {
     		if (this.scroller == null) {
     			if (this.$('.iscroll').length > 0) {
     			    this.scroller = new IScroll(this.$('.iscroll').selector, { tap: true });
-    				this.hero();
     				this.scroller.on('scrollEnd', this.hero);
+    				this.scroller.scrollTo(0, -52);
+    				this.hero();
     			}
     		} else {
     			this.scroller.refresh();
+    			this.scroller.scrollTo(0, -52);
     			this.hero();
     		}
     	},

@@ -31,6 +31,26 @@
 		}
 	}
 	
+	.search-form {
+	    width: 100%;
+	    height: 52px;
+	    padding: 13px 5px 5px;
+	    form {
+            @include square(100%);
+            > input[type=search] {
+                @include border-radius(10px);
+                border: 0;
+                background-color: lighten($brownLighter, 3%);
+                width: 100%;
+                height: 34px;
+                padding: 7px 15px;
+                line-height: 20px;
+                text-align: center;
+                @include placeholder($brownLight, 14px, 20px);
+            }
+        }
+    }
+	
 	.recommend-flow {
 		@include flex-box($orient: vertical);
 		width: 100%;
@@ -153,11 +173,9 @@
 	   	}
 	    .filter-item {
 	        //font-family: 'CaviarDreams', sans-serif;
-	        font-family: $serifFontFamily;;
             padding: 15px 20px;
             width: 100%;
             height: 50px;
-            font-size: $fontSizeLarge;
             border-bottom: 1px solid $brownLighter;
             &:first-child {
             	border-top: 1px solid $brownLighter;
