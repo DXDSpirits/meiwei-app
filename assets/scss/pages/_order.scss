@@ -7,6 +7,7 @@
 			margin-top: 10px;
 		}
 	}
+	header > h1 { @include text-overflow(); }
 	.order-detail {
 		width: 100%;
 		padding: 10px 40px;
