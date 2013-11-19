@@ -358,6 +358,10 @@ MeiweiApp.i18n = {
     'Click for Detail': {
         zh: '点击查看详情',
         en: 'Click for Detail'
+    },
+    'Weekly Restaurants': {
+    	zh: '本周餐厅',
+    	en: 'Weekly Restaurants'
     }
 };
 

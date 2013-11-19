@@ -1,13 +1,26 @@
 $(function() {
-    var timeWaitToRefresh = 60 * 1000;
+    var timeWaitToRefresh = 0 * 1000;
     
     var RecommendsFilter = MeiweiApp.CollectionView.extend({
-        events: { 'fastclick': 'closeFilter' },
-        closeFilter: function() { MeiweiApp.Pages.Home.$('.recommends-filter').addClass('closed'); },
+        initCollectionView: function() {
+        	_.bindAll(this, 'initScroller');
+        	this.listenTo(this.collection, 'reset', this.initScroller);
+        },
+        initScroller: function() {
+	        if (this.scroller == null) {
+	            if (MeiweiApp.Pages.Home.$('.recommends-filter').length > 0) {
+	                this.scroller = new IScroll(MeiweiApp.Pages.Home.$('.recommends-filter').selector, {
+	                    tap: true, tagName: /^(INPUT|TEXTAREA|SELECT)$/
+	                });
+	            }
+	        } else {
+	            this.scroller.refresh();
+	        }
+	    },
         ModelView: MeiweiApp.ModelView.extend({
             className: 'filter-item',
             template: Mustache.compile('{{name}}'),
-            events: { 'fastclick': 'onclick' },
+            events: { 'tap': 'onclick' },
             onclick: function() {
                 MeiweiApp.sendGaEvent('homepage list', 'select', 'recommend', this.model.id);
                 MeiweiApp.Pages.Home.recommend.clear();
@@ -112,29 +125,33 @@ $(function() {
     });
     
     MeiweiApp.Pages.Home = new (MeiweiApp.PageView.extend({
-    	onClickLeftBtn: function() { MeiweiApp.goTo('MemberCenter'); },
-    	//onClickRightBtn: function() { MeiweiApp.goTo('Attending'); },
-    	onClickRightBtn: function() {
-    	    this.$('.recommends-filter').toggleClass('closed');
-    	    MeiweiApp.sendGaEvent('homepage list', 'select');
-    	},
     	events: {
     		'fastclick .header-btn-left': 'onClickLeftBtn',
     		'fastclick .header-btn-right': 'onClickRightBtn',
-    		'fastclick >header h1, .show-more': 'goToSearch'
+    		'fastclick .show-more': 'goToSearch',
+    		'fastclick >header h1': 'toggleFilter'
     	},
     	initPage: function() {
     		this.snapStep = 250;
+    		this.defaultRecommendId = 5;
     		_.bindAll(this, 'hero', 'renderAll');
     		this.recommendNames = new MeiweiApp.Collections.RecommendNames();
-    		this.recommend = new MeiweiApp.Models.Recommend({id: 5});
+    		this.recommend = new MeiweiApp.Models.Recommend({id: this.defaultRecommendId});
     		this.views = {
     			masterHero: new MasterHero({ el: this.$('.master-hero .item-wrapper') }),
     			recommendItems: new RecommendItems({ collection: this.recommend.items, el: this.$('.recommend-flow') }),
-    			recommendsFilter: new RecommendsFilter({ collection: this.recommendNames, el: this.$('.recommends-filter') })
+    			recommendsFilter: new RecommendsFilter({ collection: this.recommendNames, el: this.$('.recommends-filter-wrapper') })
     		};
     	},
-    	goToSearch: function() { MeiweiApp.goTo('RestaurantSearch'); },
+    	onClickLeftBtn: function() { MeiweiApp.goTo('MemberCenter'); },
+    	onClickRightBtn: function() { MeiweiApp.goTo('Attending'); },
+    	toggleFilter: function() {
+    	    this.$('.recommends-filter').toggleClass('closed');
+    	    MeiweiApp.sendGaEvent('homepage list', 'select');
+    	},
+    	goToSearch: function() {
+    		MeiweiApp.goTo('RestaurantSearch');
+    	},
     	hero: function() {
     		var wrapperHeight = 250;
     		if (this.scroller.y <= 0) {
@@ -156,8 +173,11 @@ $(function() {
     		}
     	},
     	renderAll: function() {
-    	    MeiweiApp.Bootstrap.set('home-recommend-items', this.recommend.items.toJSON());
+    		if (this.recommend.id == this.defaultRecommendId) {
+    	    	MeiweiApp.Bootstrap.set('home-recommend-items', this.recommend.items.toJSON());
+    	    }
     	    this.$('.show-more').removeClass('hidden');
+    	    this.$('> header > h1 > span').html(this.recommend.get('name'));
     	    this.initScroller();
     	},
     	firstVisit: function() {
