@@ -66,8 +66,22 @@ $(function() {
     		var items = this.$('.carousel-inner > .carousel-item');
         	this.$('.carousel-inner').css('width', items.length * $(items[0]).outerWidth());
     		this.scroller = new IScroll(this.$('.carousel').selector, {tap: true, scrollX: true, scrollY: false});
-    		this.scroller.on('scrollStart', function() { MeiweiApp.Pages.Home.scroller.disable(); });
-    		this.scroller.on('scrollEnding', function() { MeiweiApp.Pages.Home.scroller.enable(); });
+    		this.resolveConflict();
+    	},
+    	resolveConflict: function() {
+    	    var hScroller = this.scroller;
+    	    var vScroller = MeiweiApp.Pages.Home.scroller;
+            hScroller.on('scrollStart', function() {
+                if (Math.abs(this.distY) > Math.abs(this.distX)) {
+                    vScroller.enable();
+                    hScroller.disable();
+                } else {
+                    hScroller.enable();
+                    vScroller.disable();
+                }
+            });
+            hScroller.on('beforeScrollEnd', function() { vScroller.enable(); });
+            vScroller.on('beforeScrollEnd', function() { hScroller.enable(); });
     	},
     	renderConcierge: function() {
     	    var products = MeiweiApp.Bootstrap.get('home-product-items');

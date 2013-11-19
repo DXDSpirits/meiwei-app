@@ -154,7 +154,7 @@ MeiweiApp.PageView = MeiweiApp.View.extend({
         if (!this.scroller) this.initScroller();
         var flip = false;
         page.$('.scroll').append($('<div class="scroll-hint">Pull down to refresh</div>'));
-        page.scroller.on('scrollMoving', function () {
+        page.scroller.on('scrollMove', function () {
             if (page.scroller.y > 50 && !flip) {
                 flip = true;
                 page.$('.scroll-hint').html('Release to refresh');
