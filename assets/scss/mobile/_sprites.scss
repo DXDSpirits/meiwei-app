@@ -55,6 +55,10 @@
 .icon-setting.pressed,
 .pressed .icon-setting		{ @include icon-offset(7, 1); }
 
+.icon-down-large             { @include icon-offset(8, 1); }
+.icon-down-large.pressed,
+.pressed .icon-down-large    { @include icon-offset(9, 1); }
+
 .icon-locate				{ @include icon-offset(0, 2); }
 .icon-locate.pressed,
 .pressed .icon-locate		{ @include icon-offset(1, 2); }
