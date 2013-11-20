@@ -91,6 +91,10 @@ $(function() {
                     }
                 } else {
                     this.scroller.refresh();
+                    if (this.options.orderId) {
+                        var index = this.orders.indexOf(this.orders.findWhere({id: this.options.orderId}));
+                        this.scroller.goToPage(index, 0);
+                    }
                 }
             }
         },
