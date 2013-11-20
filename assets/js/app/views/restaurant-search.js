@@ -236,7 +236,7 @@ $(function() {
     	/*********************************************/
     	
     	render: function() {
-    		this.$('>header input').focus();
+    		//this.$('>header input').focus();
     		var keywords = this.options.keywords;
     		if (keywords || this.checkLazy(24 * 60)) {
     		    if (keywords) {
