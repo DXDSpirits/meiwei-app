@@ -238,7 +238,7 @@ $(function() {
     	render: function() {
     		this.$('>header input').focus();
     		var keywords = this.options.keywords;
-    		if (keywords && this.checkLazy(24 * 60)) {
+    		if (keywords || this.checkLazy(24 * 60)) {
     		    if (keywords) {
     		        this.restaurants.fetch({ reset: true, success: this.refreshList, data: { keywords: keywords } });
     		    } else {
