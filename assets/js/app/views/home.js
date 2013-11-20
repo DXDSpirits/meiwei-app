@@ -1,5 +1,5 @@
 $(function() {
-    var timeWaitToRefresh = 60 * 1000;
+    var timeWaitToRefresh = 0 * 1000;
     
     var RecommendsFilter = MeiweiApp.CollectionView.extend({
         initCollectionView: function() {
