@@ -207,14 +207,14 @@ $(function() {
             var key = 'visited-view-home';
             if (!localStorage.getItem(key)) {
                 this.$el.addClass('first-visit');
-                this.$el.one('click', function() {
+                this.$el.one('touchstart', function() {
                     $(this).removeClass('first-visit');
                     localStorage.setItem(key, true);
                 });
             }
         },
     	render: function() {
-    	    //this.firstVisit();
+    	    this.firstVisit();
     	    var listId = this.options.listId;
     	    if (listId || this.checkLazy(30)) {
     	        this.views.masterHero.render();
