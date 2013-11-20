@@ -238,6 +238,8 @@ function IScroll (el, options) {
 	this.scrollerStyle = this.scroller.style;		// cache style for better performance
 
 	this.options = {
+	    disableMouse: true,
+	    disablePointer: true,
 
 		zoomMin: 1,
 		zoomMax: 4, startZoom: 1,
