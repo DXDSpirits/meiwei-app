@@ -60,7 +60,7 @@ MeiweiApp.Bootstrap.Home = {
 		"id" : 28,
 		"isrecommended" : 1,
 		"order" : 9,
-		"name" : "”万寿无疆“宴"
+		"name" : "\"万寿无疆\"宴"
 	}, {
 		"id" : 25,
 		"isrecommended" : 1,
