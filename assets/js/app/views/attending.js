@@ -84,6 +84,10 @@ $(function() {
                         this.scroller = new IScroll(this.$('.carousel').selector, {
                             scrollX: true, scrollY: false, momentum: false, snap: true, tap: true
                         });
+                        if (this.options.orderId) {
+                        	var index = this.orders.indexOf(this.orders.findWhere({id: this.options.orderId}));
+                        	this.scroller.goToPage(index, 0);
+                        }
                     }
                 } else {
                     this.scroller.refresh();

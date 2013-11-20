@@ -259,6 +259,10 @@ MeiweiApp.i18n = {
         zh: '订单被确认以后您会收到一条短信',
         en: 'An SMS will be sent to you to inform you the order has been confirmed'
     },
+    'Find your order in the top-right corner on homepage. Please show your order to the waiting staff in order to get better service.': {
+        zh: '点击首页右上角可以快速查看订单。为了更好的为您服务，到店后请向店员出示订单。',
+        en: 'Find your order in the top-right corner on homepage. Please show your order to the waiting staff in order to get better service.'
+    },
     'Cancel Order': {
         zh: '取消订单',
         en: 'Cancel Order'

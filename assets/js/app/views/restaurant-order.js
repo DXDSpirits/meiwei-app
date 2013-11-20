@@ -1,4 +1,33 @@
 $(function() {
+	var ConfirmDialog = MeiweiApp.View.extend({
+    	className: 'dialog',
+    	template: MeiweiApp.Templates['order-confirm-dialog'],
+    	events: {
+    		'click .btn-cancel': 'closeDialog',
+    		'click .btn-confirm': 'confirm'
+    	},
+    	closeDialog: function() {
+    		this.remove();
+    		$('#dialog-overlay').addClass('hidden');
+    		this.undelegateEvents();
+    	},
+    	openDialog: function() {
+    		$('body').append(this.el);
+    		$('#dialog-overlay').removeClass('hidden');
+    		this.delegateEvents();
+    	},
+    	confirm: function() {
+    		MeiweiApp.Pages.RestaurantOrder.submitOrder();
+    		this.closeDialog();
+    	},
+    	render: function() {
+    		this.$el.html(this.template());
+    		MeiweiApp.initLang(this.$el);
+    		this.openDialog();
+    		return this;
+    	}
+    });
+	
     var ProductCartItemList = MeiweiApp.CollectionView.extend({
         ModelView: MeiweiApp.ModelView.extend({
             className: 'product-cart-item',
@@ -131,11 +160,9 @@ $(function() {
         },
         askToSubmitOrder: function(e) {
             if (e.preventDefault) e.preventDefault();
-            MeiweiApp.showConfirmDialog(
-                MeiweiApp._('Confirm Order'),
-                MeiweiApp._('An SMS will be sent to you to inform you the order has been confirmed'),
-                this.submitOrder
-            );
+            var dialog = new ConfirmDialog();
+			dialog.remove();
+			dialog.render();
         },
         submitOrder: function() {
             var newOrder = new MeiweiApp.Models.Order();
@@ -160,7 +187,7 @@ $(function() {
             var self = this;
             newOrder.save({}, {
                 success: function(model, xhr, options) {
-                    MeiweiApp.goTo('OrderList');
+                    MeiweiApp.goTo('Attending', {orderId: newOrder.id});
                     MeiweiApp.showConfirmDialog(
                         MeiweiApp._('邀请好友'), MeiweiApp._('是否邀请好友？'),
                         function() {
