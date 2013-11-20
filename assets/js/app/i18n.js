@@ -239,9 +239,13 @@ MeiweiApp.i18n = {
         zh: '输入姓名',
         en: 'Search Contacts'
     },
-    'No Orders! Go and Book!': {
-        zh: '还没有订单，赶紧预订！',
-        en: 'No Orders! Go and Book!'
+    'Book Now': {
+        zh: '赶紧预订',
+        en: 'Book Now'
+    },
+    'Your pending orders will be here': {
+    	zh: '您将要出席的餐厅订单会显示在这里',
+    	en: 'Your pending orders will be here'
     },
     "Password doesn't match.": {
         zh: '两次密码输入不一致，请重新输入。',

@@ -164,8 +164,9 @@ $(function() {
                     MeiweiApp.showConfirmDialog(
                         MeiweiApp._('邀请好友'), MeiweiApp._('是否邀请好友？'),
                         function() {
-                            var content = '我预定了' + newOrder.get('orderdate') + ' ' + newOrder.get('ordertime') + '在' + 
-                                          self.restaurant.get('address') + '的' +  self.restaurant.get('fullname') + '。一起来吧！';
+                            var content = '我预定了' + newOrder.get('orderdate').slice(5,7) + '月' + newOrder.get('orderdate').slice(8,10) + '日' + 
+                            			  newOrder.get('ordertime') + '在' + 
+                            			  self.restaurant.get('address') + '的' +  self.restaurant.get('fullname') + '。一起来吧！';
                             MeiweiApp.sendWeixinMsg(content);
                             MeiweiApp.sendGaSocial('weixin', 'message', 'invitation');
                         }

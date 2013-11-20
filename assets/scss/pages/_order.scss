@@ -162,4 +162,9 @@
 		    @include text-overflow();
 		}
 	}
+	.hint-text {
+		width: 80%;
+		.btn { margin: 20px auto; }
+		p { text-align: center; }
+	}
 }
