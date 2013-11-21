@@ -87,7 +87,7 @@ module.exports = function(grunt) {
 				tasks: ['concat:mwapp', 'uglify:mwapp']
 			},
 			scripts_plugins: {
-				files: ['assets/js/plugin/plugin/*.js'],
+				files: ['assets/js/plugin/*.js'],
 				tasks: ['uglify:plugins']
 			},
 			staticfiles: {
