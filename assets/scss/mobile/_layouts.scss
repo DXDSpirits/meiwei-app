@@ -50,12 +50,12 @@ body {
 }
 
 .view.view-next > .wrapper {
-    @include animation(slideinfromright $pageSwitchDuration ease-in-out);
+    @include animation(slideinfromright $pageSwitchDuration linear);
     -webkit-animation-fill-mode: forwards;
 }
 
 .view.view-prev > .wrapper {
-    @include animation(slideouttoleft $pageSwitchDuration ease-in-out);
+    @include animation(slideouttoleft $pageSwitchDuration linear);
     -webkit-animation-fill-mode: forwards;
 }
 
