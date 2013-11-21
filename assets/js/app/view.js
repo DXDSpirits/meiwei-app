@@ -183,20 +183,24 @@ MeiweiApp.PageView = MeiweiApp.View.extend({
     go: function(options) {
         this.options = options || {};
         this.reset();
-        var render = this.render, rendered = false, pageOpen = function() {
-        	if (!rendered) { rendered = true; render(); }
+        var timeout;
+        var render = this.render, pageOpen = function() {
+            clearTimeout(timeout);
+            render();
         };
+        timeout = setTimeout(pageOpen, 1000);
         this.$el.one('pageOpen', pageOpen);
-        setTimeout(pageOpen, 1000);
         this.showPage();
     },
     refresh: function() {
         this.lastRender = new Date();
-        var render = this.render, rendered = false, pageOpen = function() {
-        	if (!rendered) { rendered = true; render(); }
+        var timeout;
+        var render = this.render, pageOpen = function() {
+            clearTimeout(timeout);
+            render();
         };
+        timeout = setTimeout(pageOpen, 1000);
         this.$el.one('pageOpen', pageOpen);
-        setTimeout(pageOpen, 1000);
         this.showPage();
     },
     reset: function() {},
@@ -204,33 +208,29 @@ MeiweiApp.PageView = MeiweiApp.View.extend({
         window.scrollTo(0, 0);
         if (this.$el && this.$el.hasClass('view-hidden')) {
             var $curPage = $('.view:not(".view-hidden")');
-            var curPageClosed = false, closeCurPage = function() {
-            	if (!curPageClosed) {
-            		curPageClosed = true;
-	            	$curPage.removeClass('view-prev');
-	                //$curPage.find('input').attr('readonly', true);
-	                $curPage.find('input').blur();
-	            }
+            var curPageCloseTimeout;
+            var closeCurPage = function() {
+                clearTimeout(curPageCloseTimeout);
+                $curPage.removeClass('view-prev');
+                $curPage.find('input').blur();
             };
             $curPage.addClass('view-hidden');
             $curPage.addClass('view-prev');
+            curPageCloseTimeout = setTimeout(closeCurPage, 1000);
             $curPage.one('pageClose', closeCurPage);
-            setTimeout(closeCurPage, 1000);
             
             var $nextPage = this.$el;
-            var nextPageOpened = false, openNextPage = function() {
-            	if (!nextPageOpened) {
-            		nextPageOpened = true;
-	                $nextPage.removeClass('view-next');
-	                //$nextPage.find('input').attr('readonly', false);
-	                $nextPage.find('input').blur();
-	                MeiweiApp.sendGaPageView($nextPage.attr('id')); // Google Analytics
-	            }
+            var nextPageOpenTimeout;
+            var openNextPage = function() {
+                clearTimeout(nextPageOpenTimeout);
+                $nextPage.removeClass('view-next');
+                $nextPage.find('input').blur();
+                MeiweiApp.sendGaPageView($nextPage.attr('id')); // Google Analytics
             };
             $nextPage.removeClass('view-hidden');
             $nextPage.addClass('view-next');
+            nextPageOpenTimeout = setTimeout(openNextPage, 1000);
             $nextPage.one('pageOpen', openNextPage);
-            setTimeout(openNextPage, 1000);
             
             this.initScroller();
         }
