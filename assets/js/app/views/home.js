@@ -32,7 +32,7 @@ $(function() {
     });
     
     var MasterHero = MeiweiApp.View.extend({
-    	template: MeiweiApp.Templates['product-carousel'],
+    	template: TPL['product-carousel'],
     	events: { 'tap .carousel-item': 'viewProducts' },
     	initView: function() {
     		this.productItems = new MeiweiApp.Collections.ProductItems();
@@ -110,7 +110,7 @@ $(function() {
     var RecommendItem = MeiweiApp.ModelView.extend({
     	tagName: 'section',
     	className: 'recommend-list-item',
-    	template: MeiweiApp.Templates['recommend-list-item'],
+    	template: TPL['recommend-list-item'],
     	events: {
     		'tap': 'viewRestaurant',
     		'tap .order-button': 'gotoOrder'

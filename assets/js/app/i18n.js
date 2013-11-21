@@ -384,8 +384,8 @@ MeiweiApp.CheckI18n = function() {
     $('[data-i18n], [data-placeholder-i18n]').each(function() {
         checkExist(this);
     });
-    for (var i in MeiweiApp.Templates) {
-        var template = MeiweiApp.Templates[i]();
+    for (var i in TPL) {
+        var template = TPL[i]();
         $(template).find('[data-i18n], [data-i18n-placeholder]').each(function() {
             checkExist(this);
         });

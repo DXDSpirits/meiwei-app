@@ -1,7 +1,7 @@
 $(function() {
     MeiweiApp.Views.AnnversaryList = MeiweiApp.CollectionView.extend({
     	ModelView: MeiweiApp.ModelView.extend({
-    		template: MeiweiApp.Templates['member-anniversary-item'],
+    		template: TPL['member-anniversary-item'],
     		className: 'anniversary-list-item',
     		events: { 'tap': 'modify' },
     		modify: function() {

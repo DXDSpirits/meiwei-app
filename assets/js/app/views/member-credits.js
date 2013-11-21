@@ -1,7 +1,7 @@
 $(function() {
     var CreditList = MeiweiApp.CollectionView.extend({
     	ModelView: MeiweiApp.ModelView.extend({
-    		template: MeiweiApp.Templates['member-credit-item'],
+    		template: TPL['member-credit-item'],
     		className: 'detail-list-item'
     	})
     });

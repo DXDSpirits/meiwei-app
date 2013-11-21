@@ -1,7 +1,7 @@
 $(function() {
     MeiweiApp.Views.FavoriteList = MeiweiApp.CollectionView.extend({
     	ModelView: MeiweiApp.ModelView.extend({
-    		template: MeiweiApp.Templates['favorite-list-item'],
+    		template: TPL['favorite-list-item'],
     		className: 'restaurant-list-item',
     		events: {
     			'tap section': 'viewRestaurant',

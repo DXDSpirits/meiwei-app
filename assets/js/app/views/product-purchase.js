@@ -2,7 +2,7 @@ $(function() {
     MeiweiApp.Views.ProductModelView = MeiweiApp.ModelView.extend({
     	tagName: "section",
     	className: "product-box",
-    	template: MeiweiApp.Templates['product-stack'],
+    	template: TPL['product-stack'],
     	events: { 'tap .stack-item': 'onSelectItem' },
     	render: function() {
     		this.model.items.forEach(function(item) {
@@ -89,7 +89,7 @@ $(function() {
     
     MeiweiApp.Views.ProductItemDetail = MeiweiApp.View.extend({
     	className: 'dialog product-detail',
-    	template: MeiweiApp.Templates['product-item-detail'],
+    	template: TPL['product-item-detail'],
     	events: {
     		'click .btn-cancel': 'closeDialog',
     		'click .btn-confirm': 'confirmPurchase'

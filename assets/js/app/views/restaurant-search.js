@@ -1,6 +1,6 @@
 $(function() {
     var MarkerItemInfo = MeiweiApp.ModelView.extend({
-    	template: MeiweiApp.Templates['restaurant-list-item'],
+    	template: TPL['restaurant-list-item'],
     	events: { 'fastclick': 'viewRestaurant' },
     	viewRestaurant: function() {
     		MeiweiApp.goTo('RestaurantDetail', {
@@ -25,7 +25,7 @@ $(function() {
     var RestaurantListItem = MeiweiApp.ModelView.extend({
     	tagName: 'section',
     	className: 'restaurant-list-item',
-    	template: MeiweiApp.Templates['restaurant-list-item'],
+    	template: TPL['restaurant-list-item'],
     	events: { 'tap': 'viewRestaurant' },
     	viewRestaurant: function() {
     		MeiweiApp.goTo('RestaurantDetail', {

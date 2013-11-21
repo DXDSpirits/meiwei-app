@@ -1,6 +1,6 @@
 $(function() {
     MeiweiApp.Views.OrderDetail = MeiweiApp.ModelView.extend({
-    	template: MeiweiApp.Templates['order-detail'],
+    	template: TPL['order-detail'],
     	events: { 'tap .btn-cancel': 'cancelOrder' },
     	cancelOrder: function() {
     		var model = this.model;

@@ -10,7 +10,6 @@ module.exports = function(grunt) {
                     'assets/js/app/app-local.js',
                     'assets/js/app/utils.js',
                     'assets/js/app/i18n.js',
-                    'assets/js/app/templates.js',
                     'assets/js/app/model.js',
                     'assets/js/app/models/*.js',
                     'assets/js/app/view.js',
@@ -72,7 +71,7 @@ module.exports = function(grunt) {
 		templates: {
 			all: {
 				src: ['assets/template/*.html', 'assets/template/*/*.html'],
-				dest: 'assets/js/app/templates.js'
+				dest: '<%= cfg.path.dest %>/assets/js/templates.js'
 			}
 		},
 		copy: {

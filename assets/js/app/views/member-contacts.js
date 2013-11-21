@@ -3,7 +3,7 @@ $(function() {
     var ContactList = MeiweiApp.CollectionView.extend({
     	ModelView: MeiweiApp.ModelView.extend({
     		className: 'simple-list-item contact-item',
-    		template: MeiweiApp.Templates['contact-list-item'],
+    		template: TPL['contact-list-item'],
     		render: function() {
                 var attrs = this.model ? this.model.toJSON() : {};
                 this.$el.html(this.template(attrs));

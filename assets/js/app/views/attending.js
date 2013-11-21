@@ -6,7 +6,7 @@ $(function() {
                 'tap .btn-share-weixin': 'onClickWeixinBtn',
                 'tap .btn-share-weibo': 'onClickWeiboBtn'
             },
-            template: MeiweiApp.Templates['order-attending'],
+            template: TPL['order-attending'],
             className: 'order-page-item carousel-item',
             goToOrderDetail: function() {
                 MeiweiApp.goTo('OrderDetail', { order: this.model.toJSON() });

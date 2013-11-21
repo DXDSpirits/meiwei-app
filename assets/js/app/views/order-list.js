@@ -1,7 +1,7 @@
 $(function() {
     MeiweiApp.Views.OrderList = MeiweiApp.CollectionView.extend({
     	ModelView: MeiweiApp.ModelView.extend({
-    		template: MeiweiApp.Templates['order-list-item'],
+    		template: TPL['order-list-item'],
     		className: 'order-list-item',
     		events: { 'tap': 'viewOrder' },
     		viewOrder: function() {

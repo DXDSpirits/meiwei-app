@@ -1,7 +1,7 @@
 $(function() {
 	var ConfirmDialog = MeiweiApp.View.extend({
     	className: 'dialog',
-    	template: MeiweiApp.Templates['order-confirm-dialog'],
+    	template: TPL['order-confirm-dialog'],
     	events: {
     		'click .btn-cancel': 'closeDialog',
     		'click .btn-confirm': 'confirm'
@@ -31,7 +31,7 @@ $(function() {
     var ProductCartItemList = MeiweiApp.CollectionView.extend({
         ModelView: MeiweiApp.ModelView.extend({
             className: 'product-cart-item',
-            template: MeiweiApp.Templates['product-cart-item'],
+            template: TPL['product-cart-item'],
             events: { 'tap .delete-button': 'triggerDelete' },
             triggerDelete: function() {
                 MeiweiApp.ProductCart.remove(this.model);
@@ -81,7 +81,7 @@ $(function() {
                 if (switchGender.hasClass('on')) switchOff(); else switchOn();
             }
         },
-        //template: MeiweiApp.Templates['restaurant-order-contact-form'],
+        //template: TPL['restaurant-order-contact-form'],
         render: function(defaultValues) {
             this.defaultValues = defaultValues;
             if (defaultValues.contactname)
