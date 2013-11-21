@@ -21,6 +21,19 @@
     }
 }());
 
+// This script prevents links from opening in Mobile Safari. https://gist.github.com/1042026
+(function(a, b, c) {
+    if ( c in b && b[c]) {
+        var d, e = a.location, f = /^(a|html)$/i;
+        a.addEventListener("click", function(a) {
+            d = a.target;
+            while (!f.test(d.nodeName))
+            d = d.parentNode;
+            "href" in d && (d.href.indexOf("http") || ~d.href.indexOf(e.host)) && (a.preventDefault(), e.href = d.href)
+        }, !1)
+    }
+})(document, window.navigator, "standalone");
+
 // Place any Zepto/helper plugins in here.
 (function(document) {
 	window.MWA = window.MWA || {};
