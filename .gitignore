@@ -3,4 +3,5 @@
 /node_modules/
 /.sass-cache/
 /www/
+config.json
 *.DS_Store
