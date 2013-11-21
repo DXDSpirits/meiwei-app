@@ -159,3 +159,6 @@ body {
 		@include animation(loading-sprite 1s step-start infinite);
 	}
 }
+#apploader.invisible .loading-sprite {
+    @include animation(none);
+}
