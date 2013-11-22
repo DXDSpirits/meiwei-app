@@ -74,7 +74,12 @@ MeiweiApp.CollectionView = MeiweiApp.View.extend({
         var modelView = new this.ModelView({model: item});
         this.$el.append(modelView.render().el);
     },
-    addAll: function() {
+    addAll: function(_collection, options) {
+    	if (options && options.previousModels) {
+	    	_.each(options.previousModels, function(model) {
+	       		model.trigger('hide');
+	    	});
+	    }
         if (this.collection) {
             var $list = [];
             this.collection.forEach(function(item) {
