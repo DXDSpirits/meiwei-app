@@ -65,6 +65,7 @@ $(function() {
     	reset: function() {
     		this.$('.wrapper').addClass('rendering');
     		this.$('> header h1').empty();
+    		this.$('.restaurant-pictures').css('background-image', 'none');
     	},
     	renderReviews: function() {
     	    var self = this;
@@ -85,11 +86,10 @@ $(function() {
     		this.$('> header h1').html(this.restaurant.get('fullname'));
     		var localImage = 'assets/img/bootstrap/restaurant/' + this.restaurant.id + '.jpg';
             MeiweiApp.loadBgImage(this.$('.restaurant-pictures'), this.restaurant.get('frontpic'), {
-    			//src_local: localImage,
+    			src_local: localImage,
     			height: 250
     		});
     		MeiweiApp.loadBgImage(this.$('.scroll'), this.restaurant.get('frontpic'), {
-    			//src_local: localImage,
     			height: 250
     		});
     		this.initScroller();

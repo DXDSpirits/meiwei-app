@@ -19,7 +19,13 @@ $(function() {
     			this.model.set(resto);
     			this.$el.addClass('expand');
     		}
-    	}
+    	},
+        render: function() {
+            MeiweiApp.ModelView.prototype.render.call(this);
+            var attrs = this.model ? this.model.toJSON() : {};
+            MeiweiApp.loadBgImage(this.$('.thumbnail'), attrs.frontpic, { width: 89, height: 89 });
+            return this;
+        }
     });
     
     var RestaurantListItem = MeiweiApp.ModelView.extend({

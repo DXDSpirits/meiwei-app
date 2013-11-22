@@ -207,15 +207,15 @@ $(function() {
         },
         reset: function() {
             this.$('.wrapper').addClass('rendering');
+            this.$('.restaurant-picture').css('background-image', 'none');
         },
         renderOrderForm: function(model, response, options) {
         	var localImage = 'assets/img/bootstrap/restaurant/' + this.restaurant.id + '.jpg';
             MeiweiApp.loadBgImage(this.$('.restaurant-picture'), this.restaurant.get('frontpic'), {
-    			//src_local: localImage,
+    			src_local: localImage,
     			height: 250
     		});
             MeiweiApp.loadBgImage(this.$('.scroll'), this.restaurant.get('frontpic'), {
-    			//src_local: localImage,
     			height: 250
     		});
             this.$('.restaurant-name').html(this.restaurant.get('fullname'));

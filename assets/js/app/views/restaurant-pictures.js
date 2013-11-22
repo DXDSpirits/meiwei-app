@@ -17,6 +17,10 @@ $(function() {
                 })
             };
         },
+        onClickLeftBtn: function() {
+            this.pictures.reset();
+            MeiweiApp.goBack();
+        },
         updateTitle: function() {
             if (this.scroller) {
                 this.$('> header h1').html((this.scroller.currentPage.pageX + 1) + '/' + this.scroller.pages.length);

@@ -110,7 +110,9 @@ MeiweiApp.initGeolocation = function(callback) {
         MeiweiApp.coords.longitude = position.coords.longitude;
         if (callback) callback();
     };
-    var onError = function() { };
+    var onError = function() {
+        if (callback) callback();
+    };
     MeiweiApp.coords = { longitude: 121.491, latitude: 31.233 };
     navigator.geolocation.getCurrentPosition(onSuccess, onError);
 }
