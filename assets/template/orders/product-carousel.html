@@ -7,14 +7,14 @@
 		<div class="carousel-inner">
 			{{ #items }}
 			<div class="carousel-item {{ #selected }}selected{{ /selected }}" data-item="{{ id }}">
+				<div class="img">
+					<!--<img src="{{ picture }}" alt="">-->
+                    <img src="assets/img/bootstrap/product/{{ id }}.jpg" alt="">
+				</div>
 				<div class="tag">
 					<p>{{ name }}</p>
 					{{ #credit }}<p>{{ credit }}积分</p>{{ /credit }}
 					{{ ^credit }}<p>{{ description }}</p>{{ /credit }}
-				</div>
-				<div class="img">
-					<!--<img src="{{ picture }}" alt="">-->
-                    <img src="assets/img/bootstrap/product/{{ id }}.jpg" alt="">
 				</div>
 			</div>
 			{{ /items }}

@@ -18,17 +18,17 @@
 		overflow: hidden;
 		> .tag {
 			display: block;
-			position: absolute;
-			bottom: 5px;
-			width: $carouselWidth - 20px;
+			position: relative;
+			height: 40px;
+			top: -40px;
+			width: 100%;
 			padding: 5px;
 			@include border-bottom-right-radius(10px);
 			@include border-bottom-left-radius(10px);
-			min-height: 2 * ($fontSizeMini + 2px);
 			background-color: $brown;
 			opacity: 0.9;
 			font-size: $fontSizeMini;
-			line-height: $fontSizeMini + 2px;
+			line-height: 15px;
 			color: white;
 			text-align: center;
 		}

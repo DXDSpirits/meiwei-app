@@ -1,5 +1,5 @@
 $(function() {
-    var timeWaitToRefresh = 0 * 1000;
+    var timeWaitToRefresh = 10 * 1000;
     
     var RecommendsFilter = MeiweiApp.CollectionView.extend({
         initCollectionView: function() {
@@ -64,7 +64,7 @@ $(function() {
             });
     		var items = this.$('.carousel-inner > .carousel-item');
         	this.$('.carousel-inner').css('width', items.length * $(items[0]).outerWidth());
-    		this.scroller = new IScroll(this.$('.carousel').selector, { tap: true, scrollX: true, scrollY: false, snap: true });
+    		this.scroller = new IScroll(this.$('.carousel').selector, { tap: true, scrollX: true, scrollY: false });
     	},
     	renderConcierge: function() {
     	    var products = MeiweiApp.Bootstrap.get('home-product-items');
@@ -129,7 +129,6 @@ $(function() {
     		'fastclick >header h1': 'toggleFilter'
     	},
     	initPage: function() {
-    		this.snapStep = 250;
     		this.defaultRecommendId = 5;
     		_.bindAll(this, 'hero', 'renderAll');
     		this.recommendNames = new MeiweiApp.Collections.RecommendNames();
