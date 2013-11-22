@@ -37,6 +37,16 @@ MeiweiApp.preloadImage = function(el, src_preload, src) {
     image.src = src;
 };
 
+MeiweiApp.loadBgImage = function(el, src_local, src) {
+	el.css('background-image', 'url(' + src_local + ')');
+    var image_src = src;
+    var image = new Image();
+    image.onload = function() {
+        el.css('background-image', 'url(' + image_src + ')');
+    };
+    image.src = src;
+};
+
 MeiweiApp.sendGaPageView = function(page) {
     ga('send', 'pageview', page);
 };

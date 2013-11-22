@@ -62,7 +62,6 @@ $(function() {
                 var localImage = 'assets/img/bootstrap/product/'+ id +'.jpg';
                 MeiweiApp.preloadImage($(this).find('.img img'), localImage, items.get(id).get('picture'));
             });
-    		this.$el.prepend('<img src="assets/img/hero.png" />');
     		var items = this.$('.carousel-inner > .carousel-item');
         	this.$('.carousel-inner').css('width', items.length * $(items[0]).outerWidth());
     		this.scroller = new IScroll(this.$('.carousel').selector, {tap: true, scrollX: true, scrollY: false});
@@ -128,8 +127,7 @@ $(function() {
     		this.$el.html(this.template(this.model.toJSON()));
     		var $wrapper = this.$('.item-wrapper');
     		var localImage = 'assets/img/bootstrap/restaurant/' + this.model.get('restaurant').id + '.jpg';
-    		$wrapper.prepend('<img></img>');
-    		MeiweiApp.preloadImage($wrapper.find('>img'), localImage, this.model.get('restaurant').frontpic);
+    		MeiweiApp.loadBgImage($wrapper, localImage, this.model.get('restaurant').frontpic);
     		return this;
     	}
     });

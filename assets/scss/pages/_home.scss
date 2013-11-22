@@ -11,16 +11,6 @@
         background: transparent url('../img/getstarted/view-home.png') no-repeat top right;
         @include background-size(500px, 1000px)
     }
-	
-	/*> header h1 {
-	    @include border-radius(22px);
-	    border: 1px solid $brownDark;
-	    margin: 5px 0;
-	    padding: 0 15px;
-	    font-size: 14px;
-	    line-height: 32px;
-	    text-align: left;
-	}*/
 	header h1 {
 		position: relative;
 		.icon-down-small {
@@ -73,6 +63,10 @@
 			padding: 5px 0;
 			overflow: hidden;
 		}
+		.item-wrapper {
+			background: url('../img/hero.png') no-repeat center bottom;
+			@include background-size(cover);
+		}
 		@include carousel($carouselWidth: $itemHeight - 80px);
 		@include backface-visibility(hidden);
 	}
@@ -85,52 +79,40 @@
 	
 	.item-wrapper {
 		@include flex-box($orient: vertical, $pack: start);
+		border-top: 1px solid $brown;
 		height: $wrapperHeight;
 		width: 100%;
 		overflow: hidden;
 		position: relative;
-		z-index: 0;
 		h1 {
 			@include text-overflow();
 			font-family: $serifFontFamily;
 		}
-		> img {
-			@include border(2px 0 0, solid, $brown);
-			position: absolute;
-			z-index: -1;
-			top: 0;
-			width: 100%;
-			min-height: $wrapperHeight + 1px;
-			@include backface-visibility(hidden);
-		}
-		> article {
-			h1 { font-size: $fontSizeLarge + 2px; line-height: 1.5; margin-bottom: 5px; }
+		background-repeat: no-repeat;
+		background-position: center bottom;
+		@include background-size(cover);
+		article {
+			h1 { font-size: 20px; line-height: 30px; margin-bottom: 5px; }
 			p { font-size: $fontSizeMini; }
 			position: relative;
-			z-index: 2;
 			top: -45px;
 			color: $white;
 			width: 100%;
-			border: 1px solid transparent;
-			padding: 10px 17px 5px;
+			padding: 17px;
 			opacity: 0;
 			visibility: hidden;
 			@include transition(all .35s ease-in-out);
 			position: relative;
 			.order-button {
+				margin: 20px 0 0 auto;
 				@include size(70px, 70px);
-				position: absolute;
-				top: 90px;
-				right: 0px;
-				background: transparent url($bookButtonPath) no-repeat center;
+				background: url($bookButtonPath) no-repeat center;
 				@include background-size(35px 35px);
 			}
 		}
-		> header {
+		header {
 			position: relative;
-			z-index: 0;
 			color: $white;
-			text-shadow: 1px 1px 1px $brownDark;
 			text-align: center;
 			height: 45px;
 			max-width: 200px;
@@ -139,21 +121,17 @@
 			-webkit-border-image: url($tagImagePath) 13 stretch;
 			opacity: 1;
 			visibility: visible;
-			@include transition(opacity .35s ease-in-out);
-		}
-		&.snaping {
-			@include transition(-webkit-transform .35s linear);
+			@include transition(all .35s ease-in-out);
 		}
 	}
 	
-	.recommend-list-item.hero .item-wrapper {
+	.hero .item-wrapper {
 		> article { opacity: 1; visibility: visible; }
 		> header { opacity: 0; visibility: hidden; }
 	}
-	.recommend-list-item .item-wrapper::before {
+	.item-wrapper::before {
 		content: "";
 		position: absolute;
-		z-index: 1;
 		@include size($itemHeight, 100%);
 		background: transparent url($blackShadowPathR) no-repeat top;
 		@include background-size(100% $itemHeight);
