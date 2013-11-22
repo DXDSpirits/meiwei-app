@@ -517,8 +517,6 @@ IScroll.prototype = {
 	},
 
 	_end: function (e) {
-		this._execEvent('beforeScrollEnd');
-		
 		if ( !this.enabled || utils.eventType[e.type] !== this.initiated ) {
 			return;
 		}
