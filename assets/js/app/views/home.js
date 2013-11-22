@@ -1,5 +1,5 @@
 $(function() {
-    var timeWaitToRefresh = 10 * 1000;
+    var timeWaitToRefresh = 0 * 1000;
     
     var RecommendsFilter = MeiweiApp.CollectionView.extend({
         initCollectionView: function() {
@@ -62,6 +62,7 @@ $(function() {
                 var localImage = 'assets/img/bootstrap/product/'+ id +'.jpg';
                 MeiweiApp.preloadImage($(this).find('.img img'), localImage, items.get(id).get('picture'));
             });
+            this.$el.css('background-image', 'url(assets/img/hero.png)');
     		var items = this.$('.carousel-inner > .carousel-item');
         	this.$('.carousel-inner').css('width', items.length * $(items[0]).outerWidth());
     		this.scroller = new IScroll(this.$('.carousel').selector, { tap: true, scrollX: true, scrollY: false });
@@ -109,9 +110,8 @@ $(function() {
     	},
     	render: function() {
     		this.$el.html(this.template(this.model.toJSON()));
-    		var $wrapper = this.$('.item-wrapper');
     		var localImage = 'assets/img/bootstrap/restaurant/' + this.model.get('restaurant').id + '.jpg';
-    		MeiweiApp.loadBgImage($wrapper, localImage, this.model.get('restaurant').frontpic);
+    		MeiweiApp.loadBgImage(this.$el, localImage, this.model.get('restaurant').frontpic);
     		return this;
     	}
     });
@@ -134,7 +134,7 @@ $(function() {
     		this.recommendNames = new MeiweiApp.Collections.RecommendNames();
     		this.recommend = new MeiweiApp.Models.Recommend({id: this.defaultRecommendId});
     		this.views = {
-    			masterHero: new MasterHero({ el: this.$('.master-hero .item-wrapper') }),
+    			masterHero: new MasterHero({ el: this.$('.master-hero') }),
     			recommendItems: new RecommendItems({ collection: this.recommend.items, el: this.$('.recommend-flow') }),
     			recommendsFilter: new RecommendsFilter({ collection: this.recommendNames, el: this.$('.recommends-filter-wrapper') })
     		};

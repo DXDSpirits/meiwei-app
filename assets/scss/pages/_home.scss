@@ -11,7 +11,8 @@
         background: transparent url('../img/getstarted/view-home.png') no-repeat top right;
         @include background-size(500px, 1000px)
     }
-	header h1 {
+	
+	> header h1 {
 		position: relative;
 		.icon-down-small {
 			position: absolute;
@@ -53,65 +54,50 @@
 	}
 	
 	$itemHeight: 250px;
-	$wrapperHeight: 250px; //300px;
 	
 	.master-hero {
 		.viewport {
 			@include size($itemHeight - 80px, 100%);
-			@include center-block();
-			margin-top: 10px;
+			margin: 10px auto 0;
 			padding: 5px 0;
 			overflow: hidden;
-		}
-		.item-wrapper {
-			background: url('../img/hero.png') no-repeat center bottom;
-			@include background-size(cover);
 		}
 		@include carousel($carouselWidth: $itemHeight - 80px);
 		@include backface-visibility(hidden);
 	}
 	
 	.master-hero, .recommend-list-item {
+		@include flex-box($orient: vertical, $pack: start);
 		width: 100%;
 		height: $itemHeight;
-		overflow: visible;
-	}
-	
-	.item-wrapper {
-		@include flex-box($orient: vertical, $pack: start);
-		border-top: 1px solid $brown;
-		height: $wrapperHeight;
-		width: 100%;
 		overflow: hidden;
-		position: relative;
+		border-top: 1px solid $brown;
+		background-repeat: no-repeat;
+		background-position: center bottom;
+		@include background-size(cover);
 		h1 {
 			@include text-overflow();
 			font-family: $serifFontFamily;
 		}
-		background-repeat: no-repeat;
-		background-position: center bottom;
-		@include background-size(cover);
 		article {
 			h1 { font-size: 20px; line-height: 30px; margin-bottom: 5px; }
 			p { font-size: $fontSizeMini; }
-			position: relative;
-			top: -45px;
 			color: $white;
-			width: 100%;
+			@include square(100%);
 			padding: 17px;
+			margin-top: -45px;
 			opacity: 0;
 			visibility: hidden;
 			@include transition(all .35s ease-in-out);
-			position: relative;
 			.order-button {
-				margin: 20px 0 0 auto;
+				margin: 20px -10px 0 auto;
 				@include size(70px, 70px);
 				background: url($bookButtonPath) no-repeat center;
 				@include background-size(35px 35px);
 			}
+			@include gradient-vertical(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0));
 		}
 		header {
-			position: relative;
 			color: $white;
 			text-align: center;
 			height: 45px;
@@ -125,17 +111,9 @@
 		}
 	}
 	
-	.hero .item-wrapper {
-		> article { opacity: 1; visibility: visible; }
-		> header { opacity: 0; visibility: hidden; }
-	}
-	.item-wrapper::before {
-		content: "";
-		position: absolute;
-		@include size($itemHeight, 100%);
-		background: transparent url($blackShadowPathR) no-repeat top;
-		@include background-size(100% $itemHeight);
-		opacity: 0.4;
+	.recommend-list-item.hero {
+		article { opacity: 1; visibility: visible; }
+		header { opacity: 0; visibility: hidden; }
 	}
 	
 	.show-more {
