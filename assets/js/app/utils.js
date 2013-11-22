@@ -39,12 +39,13 @@ MeiweiApp.preloadImage = function(el, src_preload, src) {
 
 MeiweiApp.loadBgImage = function(el, src_local, src) {
 	el.css('background-image', 'url(' + src_local + ')');
-    var image_src = src;
+	var ratio = 2;
+    var image_src = src + '?imageView/2/w/' + parseInt($('body').innerWidth() * ratio);
     var image = new Image();
     image.onload = function() {
         el.css('background-image', 'url(' + image_src + ')');
     };
-    image.src = src;
+    image.src = image_src;
 };
 
 MeiweiApp.sendGaPageView = function(page) {
