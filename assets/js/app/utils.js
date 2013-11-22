@@ -30,7 +30,7 @@ MeiweiApp.shareToMoments = function(url, content, pic) {
 
 MeiweiApp.loadImage = function(img, src, options) {
     options = options || {};
-    if (options.src_local) img.attr('src', options.src_local);
+    if (MeiweiApp.isCordova() && options.src_local) img.attr('src', options.src_local);
     var ratio = window.devicePixelRatio ? window.devicePixelRatio: 2;
     var width = options.width || parseInt($('body').innerWidth());
 	var height = options.height;
@@ -45,7 +45,7 @@ MeiweiApp.loadImage = function(img, src, options) {
 
 MeiweiApp.loadBgImage = function(el, src, options) {
 	options = options || {};
-	if (options.src_local) el.css('background-image', 'url(' + options.src_local + ')');
+	if (MeiweiApp.isCordova() && options.src_local) el.css('background-image', 'url(' + options.src_local + ')');
 	var ratio = window.devicePixelRatio || 2;
 	var width = options.width || parseInt($('body').innerWidth());
 	var height = options.height;
