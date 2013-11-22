@@ -28,18 +28,19 @@ MeiweiApp.shareToMoments = function(url, content, pic) {
     }
 };
 
-MeiweiApp.preloadImage = function(el, src_preload, src) {
-    el.attr('src', src_preload);
+MeiweiApp.loadImage = function(el, src, src_local) {
+    if (src_local) el.attr('src', src_local);
+    var ratio = window.devicePixelRatio ? window.devicePixelRatio: 2;
     var image = new Image();
     image.onload = function() {
         el.replaceWith(image);
     };
-    image.src = src;
+    image.src = src + '?imageView/2/w/' + parseInt($('body').innerWidth() * ratio);
 };
 
-MeiweiApp.loadBgImage = function(el, src_local, src) {
-	el.css('background-image', 'url(' + src_local + ')');
-	var ratio = 2;
+MeiweiApp.loadBgImage = function(el, src, src_local) {
+	if (src_local) el.css('background-image', 'url(' + src_local + ')');
+	var ratio = window.devicePixelRatio ? window.devicePixelRatio: 2;
     var image_src = src + '?imageView/2/w/' + parseInt($('body').innerWidth() * ratio);
     var image = new Image();
     image.onload = function() {
