@@ -209,10 +209,16 @@ $(function() {
             this.$('.wrapper').addClass('rendering');
         },
         renderOrderForm: function(model, response, options) {
-            var img = $('<img></img>').attr('src', this.restaurant.get('frontpic'));
-            this.$('.restaurant-info').html(img);
-            this.$('.bottom-banner').html(img.clone());
-            $('<h1></h1>').html(this.restaurant.get('fullname')).appendTo(this.$('.restaurant-info'));
+        	var localImage = 'assets/img/bootstrap/restaurant/' + this.restaurant.id + '.jpg';
+            MeiweiApp.loadBgImage(this.$('.restaurant-picture'), this.restaurant.get('frontpic'), {
+    			//src_local: localImage,
+    			height: 250
+    		});
+            MeiweiApp.loadBgImage(this.$('.scroll'), this.restaurant.get('frontpic'), {
+    			//src_local: localImage,
+    			height: 250
+    		});
+            this.$('.restaurant-name').html(this.restaurant.get('fullname'));
             
             var defaultValues;
             if (this.options.pendingOrder) {

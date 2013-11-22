@@ -92,7 +92,9 @@ body {
 	overflow-y: auto;
 	overflow-x: hidden;
 	-webkit-overflow-scrolling: touch;
-	
+	background-repeat: no-repeat;
+	background-position: bottom;
+	@include background-size(contain);
 	&.iscroll {
 		overflow: hidden;
 	}

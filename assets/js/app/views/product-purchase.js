@@ -15,8 +15,9 @@ $(function() {
     		var items = this.model.items;
     		this.$('.stack-item').each(function() {
     		    var id = +$(this).attr('data-item');
-    		    var localImage = 'assets/img/bootstrap/product/'+ id +'.jpg';
-    		    MeiweiApp.loadImage($(this).find('.img img'), items.get(id).get('picture'), localImage);
+    		    MeiweiApp.loadBgImage($(this).find('.img'), items.get(id).get('picture'), {
+                	height: 150, width: 150
+                });
     		});
     		MeiweiApp.initLang(this.$el);
     		return this;

@@ -24,9 +24,9 @@ module.exports = function(grunt) {
 		uglify: {
 			mwapp: {
 				options: {
-					sourceMap: '<%= cfg.path.dest %>/assets/js/mw-app.min.map',
-					sourceMappingURL: 'mw-app.min.map',
-					sourceMapPrefix: 2,
+					//sourceMap: '<%= cfg.path.dest %>/assets/js/mw-app.min.map',
+					//sourceMappingURL: 'mw-app.min.map',
+					//sourceMapPrefix: 2,
 					mangle: false,
 					beautify: {
 						width: 80,

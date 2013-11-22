@@ -33,6 +33,17 @@ $(function() {
     		});
     	},
     	renderAll: function() {
+    		var resto = this.order.get('restaurantinfor');
+    		var localImage = 'assets/img/bootstrap/restaurant/' + resto.id + '.jpg';
+            MeiweiApp.loadBgImage(this.$('.restaurant-picture'), resto.frontpic, {
+    			//src_local: localImage,
+    			height: 250
+    		});
+            MeiweiApp.loadBgImage(this.$('.scroll'), resto.frontpic, {
+    			//src_local: localImage,
+    			height: 250
+    		});
+            this.$('.restaurant-name').html(resto.fullname);
     		if (this.order.get('editable')) {
     			this.$('.header-btn-right i').attr('class', 'icon-edit');
     		} else {

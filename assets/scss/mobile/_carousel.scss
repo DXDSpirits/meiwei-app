@@ -34,7 +34,7 @@
 		}
 		> .img {
 			@include border-radius(10px);
-			border: 1px solid $brownLight;
+			border: 1px solid $brown;
 			overflow: hidden;
 			&, & img {
 				height: 100%;

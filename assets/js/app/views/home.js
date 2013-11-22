@@ -59,8 +59,11 @@ $(function() {
     		var items = this.productItems;
             this.$('.carousel-item').each(function() {
                 var id = +$(this).attr('data-item');
-                var localImage = 'assets/img/bootstrap/product/'+ id +'.jpg';
-                MeiweiApp.loadImage($(this).find('.img img'), items.get(id).get('picture'), localImage);
+                MeiweiApp.loadImage($(this).find('.img img'), items.get(id).get('picture'), {
+                	src_local: 'assets/img/bootstrap/product/'+ id +'.jpg',
+                	height: 148,
+                	width: 148
+                });
             });
             this.$el.css('background-image', 'url(assets/img/hero.png)');
     		var items = this.$('.carousel-inner > .carousel-item');
@@ -110,8 +113,10 @@ $(function() {
     	},
     	render: function() {
     		this.$el.html(this.template(this.model.toJSON()));
-    		var localImage = 'assets/img/bootstrap/restaurant/' + this.model.get('restaurant').id + '.jpg';
-    		MeiweiApp.loadBgImage(this.$el, this.model.get('restaurant').frontpic, localImage);
+    		MeiweiApp.loadBgImage(this.$el, this.model.get('restaurant').frontpic, {
+    			src_local: 'assets/img/bootstrap/restaurant/' + this.model.get('restaurant').id + '.jpg',
+    			height: 250
+    		});
     		return this;
     	}
     });

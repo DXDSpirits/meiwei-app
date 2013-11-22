@@ -37,8 +37,10 @@ $(function() {
                 MeiweiApp.shareToMoments(url, content, pic);
             },
             render: function() {
-                this.$el.html(this.template(this.model.toJSON()));
-                MeiweiApp.initLang(this.$el);
+                MeiweiApp.ModelView.prototype.render.call(this);
+	            MeiweiApp.loadBgImage(this.$('.section-header-img'), this.model.get('restaurantinfor').frontpic, {
+	    			height: 150, width: 250
+	    		});
                 if ($('body').height() >= 530) {
                     this.$('.section-qrcode').show();
                     this.$('.section-qrcode').qrcode({

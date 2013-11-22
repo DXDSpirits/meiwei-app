@@ -35,14 +35,20 @@ $(function() {
     });
     
     MeiweiApp.Views.FavoriteRestoCarousel = MeiweiApp.CollectionView.extend({
+    	initView: function() {
+	        if (this.collection) this.listenTo(this.collection, 'reset', this.addAll);
+	    },
         addAll: function() {
-            var path = 'assets/img/default.png';
             if (this.collection.length > 0) {
                 var ran = _.random(0, this.collection.length - 1);
                 var model = this.collection.at(ran);
-                path = model.get('restaurantinfor').frontpic;
+	            MeiweiApp.loadBgImage(this.$el, model.get('restaurantinfor').frontpic, {
+	    			//src_local: 'assets/img/bootstrap/restaurant/' + model.get('restaurantinfor').id + '.jpg',
+	    			height: 250
+	    		});
+            } else {
+            	this.$el.css('background-image', 'url(assets/img/default.png)');
             }
-            this.$el.html($('<img></img>').attr('src', path));
         }
     });
     

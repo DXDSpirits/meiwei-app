@@ -8,11 +8,16 @@
 	padding: 6px 17px 6px 99px;
 	overflow: hidden;
 	position: relative;
-	img {
+	img, .thumbnail {
 		position: absolute;
 		top: 0;
 		left: 0;
 		@include square(89px);
+	}
+	.thumbnail {
+		background-repeat: no-repeat;
+		background-position: center bottom;
+		@include background-size(cover);
 	}
 	h1, h2, h3, p {
 		@include text-overflow();

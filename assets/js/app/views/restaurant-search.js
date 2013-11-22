@@ -49,6 +49,7 @@ $(function() {
     	    var attrs = this.model ? this.model.toJSON() : {};
     	    if (attrs.coordinate) attrs.distance = this.calculateDistance(attrs.coordinate.latitude, attrs.coordinate.longitude);
             this.$el.html(this.template(attrs));
+            MeiweiApp.loadBgImage(this.$('.thumbnail'), attrs.frontpic, { width: 89, height: 89 });
             return this;
     	}
     });

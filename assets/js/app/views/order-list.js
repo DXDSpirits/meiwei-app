@@ -8,6 +8,15 @@ $(function() {
     			MeiweiApp.goTo('OrderDetail', {
     				order: this.model.toJSON()
     			});
+    		},
+    		render: function() {
+    			MeiweiApp.ModelView.prototype.render.call(this);
+    			if (this.model) {
+    				MeiweiApp.loadBgImage(this.$('.thumbnail'), this.model.get('restaurantinfor').frontpic, {
+    					width: 89, height: 89
+    				});
+    			}
+    			return this;
     		}
     	})
     });

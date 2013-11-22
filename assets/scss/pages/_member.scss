@@ -87,27 +87,20 @@
 }
 
 #view-member-center {
-	&.view > .wrapper > .scroll {
-		background: url($backgroundBottomPath) no-repeat bottom;
-		@include background-size(contain);
+	.scroll {
+		background-image: url($backgroundBottomPath);
 	}
 	.favorite-resto-carousel {
-		z-index: 0;
-		height: 200px - 45px;
-		width: 100%;
+		@include size(250px, 100%);
+		margin-top: -70px;
+		background-repeat: no-repeat;
+		background-position: center bottom;
+		@include background-size(cover);
 		position: relative;
-		img {
-		   	position: absolute;
-			bottom: -45px;
-			z-index: 0;
-		   	width: 100%;
-			min-height: 200px;
-		}
 		&::after {
 			content: "";
 			position: absolute;
-			bottom: -45px;
-			z-index: 1;
+			bottom: 0;
 			@include size(200px, 100%);
 			background: transparent url($blackShadowPath) no-repeat top;
 			@include background-size(100% 400px);
@@ -117,12 +110,11 @@
 		z-index: 1;
 		position: relative;
 		font-size: $fontSizeMini;
-		@include size(90px, 100%);
-		margin-bottom: 10px;
+		width: 100%;
+		margin-top: -45px;
 		@include clearfix();
 		& > div {
 			float: left;
-			height: 90px;
 			&:first-child { width: 40%; }
 			&:last-child { width: 60%; }
 		}

@@ -1,5 +1,8 @@
 $(function() {
     MeiweiApp.Views.FavoriteList = MeiweiApp.CollectionView.extend({
+    	initCollectionView: function() {
+    		if (this.collection) this.stopListening(this.collection, 'add');
+    	},
     	ModelView: MeiweiApp.ModelView.extend({
     		template: TPL['favorite-list-item'],
     		className: 'restaurant-list-item',
@@ -19,6 +22,15 @@ $(function() {
     				self.model.destroy();
     				MeiweiApp.Pages.MemberFavorites.initScroller();
     			}, 350);
+    		},
+    		render: function() {
+    			MeiweiApp.ModelView.prototype.render.call(this);
+    			if (this.model) {
+    				MeiweiApp.loadBgImage(this.$('.thumbnail'), this.model.get('restaurantinfor').frontpic, {
+    					width: 89, height: 89
+    				});
+    			}
+    			return this;
     		}
     	})
     });
