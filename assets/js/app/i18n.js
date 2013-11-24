@@ -115,6 +115,14 @@ MeiweiApp.i18n = {
         zh: '退出登录',
         en: 'Logout'
     },
+    'Already Have an Account?': {
+        zh: '已经注册？',
+        en: 'Already Have an Account?'
+    },
+    'Or Create Your Account': {
+        zh: '或者新建一个帐号',
+        en: 'Or Create Your Account'
+    },
     'Login': {
         zh: '登录',
         en: 'Login'

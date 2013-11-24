@@ -15,6 +15,15 @@
 	    width: 70%;
 	    margin-top: 15px;
 	    margin-bottom: 30px;
+	    button {
+	        border-color: transparent;
+	        text-align: left;
+	        font-size: $baseFontSize;
+	    }
+	    button:active, button.pressed {
+            color: $brown;
+            background-color: $white;
+        }
 	}
 	.social-box {
 		@include size(105px, 100%);
