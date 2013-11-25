@@ -1,6 +1,26 @@
 Meiwei Web App / Cordova App
 ==================
 
+The website http://mobile.clubmeiwei.com is optimized for touch event, only available on mobile devices.
+
+
+Technical stuff
+---------------
+
+This web app works best on iOS 5+ Mobile Safari (iOS theme) and other modern browsers (web theme). It uses these wonderful scripts:
+
+- [iScroll.js](https://github.com/cubiq/iscroll)
+- [Backbone.js](https://github.com/jashkenas/backbone)
+
+Also uses the [Meiwei Django Rest API](http://api.clubmeiwei.com/).
+
+Some of the *cutting-edge* web technologies used:
+
+- [localStorage & sessionStorage](http://caniuse.com/namevalue-storage)
+- [CORS](http://caniuse.com/cors)
+- [CSS Animation](http://caniuse.com/css-animation)
+- [CSS Media Queries](http://caniuse.com/css-mediaqueries)
+- [Flexible Box Layout](http://caniuse.com/flexbox) (old spec)
 
 
 Development stuff
@@ -71,7 +91,8 @@ Development stuff
 
 			grunt server
 
+
 License
 -------
 
-Licensed under the [MIT License](http://xd.mit-license.org/).
+Licensed under the MIT License.
