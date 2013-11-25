@@ -1,34 +1,60 @@
-Meiwei Cordova App
+Meiwei Web App / Cordova App
 ==================
+
+
 
 Development stuff
 -----------------
 
 - Prerequisites
 
-		git clone git@bitbucket.org:DXDSpirits/meiwei-app.git
-		cd meiwei-app/
-		npm install
+	- Install nodejs and git
+
+	- Install Grunt's command line interface
+
+			npm install -g grunt-cli
+
+	- Prepare Project
+
+			git clone git@github.com:DXDSpirits/meiwei-app.git
+			cd meiwei-app
+			npm install
 
 - [Grunt](http://gruntjs.com/) tasks
 
-	- Compile templates in `assets/template/*` to generate `assets/js/app/templates.js`
+	- Config distribute path
+
+			echo {"path": {"dest": "www","src": "."}} >> config.json
+
+	- Compile templates in `assets/template/*` to generate `www/assets/js/templates.js`
 
 			grunt templates
 
-	- Concat and minify JavaScript files in `assets/js/app/*` to generate `assets/js/mw-app.js`
+	- Concat JavaScript files in `assets/js/app/*` to generate `assets/js/mw-app.js`
+
+			grunt concat
+
+	- Minify JavaScript files in `assets/js/plugin/*` and `assets/js/mw-app.js` to generate `www/assets/js/plugin/*` and `assets/js/mw-app.js`
 
 			grunt uglify
 
-	- Compile Sass files in `assets/sass/*` to generate `assets/css/mobile.css`
+	- Compile Sass files in `assets/sass/*` to generate `www/assets/css/mobile.css`
 
 			grunt sass
 
-	- Concat html files in `mobile/*` to generate `index.html`
+	- Concat html files in `mobile/*` to generate `www/index.html`
 
 			grunt includes
 
-	- Watch the templates and scripts, run `templates`, `uglify`, `sass` and `includes` tasks when they're changed
+	- Copy images, fonts, vendor scripts and other static files to `www`
+
+			grunt copy
+
+	- Alternative to previous 6 commandes, eg. run templates + concat + uglify + sass + includes + copy at the same time
+
+			grunt dist
+
+	- Monitor files, run tasks when they're changed
 
 			grunt watch
 
@@ -43,7 +69,7 @@ Development stuff
 
 	- Run both `watch` and `connect` tasks at the same time
 
-			grunt server 
+			grunt server
 
 License
 -------
