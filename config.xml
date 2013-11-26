@@ -4,11 +4,12 @@
 	<description>中高端服务平台</description>
 	<author email="dxd.spirits@gmail.com" href="http://www.clubmeiwei.com">Xindong Ding</author>
 	<access origin="*" />
-	<preference name="webviewbounce" value="true" />
+	<preference name="WebViewBounce" value="true" />
+	<preference name="Fullscreen" value="false" />
+	<preference name="Orientation" value="landscape" />
 	<preference name="DisallowOverscroll" value="true" />
+	<preference name="SplashScreen" value="splash" />
 	<preference name="AutoHideSplashScreen" value="false" />
 	<preference name="KeyboardDisplayRequiresUserAction" value="false" />
-	<preference name="SplashScreen" value="splash" />
-	<preference name="fullscreen" value="false" />
 	<content src="index.html" />
 </widget>
