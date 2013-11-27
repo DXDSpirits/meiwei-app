@@ -37,7 +37,8 @@ $(function() {
         fillImages: function() {
         	var $list = [];
         	for (var i=0; i<this.pics.length; i++) {
-        		$list.push($('<div></div>').addClass('carousel-item').css('background-image', 'url(' + this.pics[i] + ')'));
+        		var $img = $('<div></div>').addClass('img').css('background-image', 'url(' + this.pics[i] + ')');
+        		$list.push($('<div></div>').addClass('carousel-item').html($img));
         	}
         	$list[$list.length-1].addClass('getstarted');
         	this.$('.carousel-inner').html($list);

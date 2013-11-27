@@ -16,34 +16,33 @@
 		padding: 5px 10px;
 		position: relative;
 		overflow: hidden;
+	}
+	
+	.tag {
+		display: block;
+		position: relative;
+		height: 40px;
+		top: -40px;
+		width: 100%;
+		padding: 5px;
+		@include border-bottom-right-radius(10px);
+		@include border-bottom-left-radius(10px);
+		background-color: $brown;
+		opacity: 0.9;
+		font-size: $fontSizeMini;
+		line-height: 15px;
+		color: white;
+		text-align: center;
+	}
+	
+	.img {
+		overflow: hidden;
+		@include square(100%);
+		@include border-radius(10px);
+		border: 1px solid $brown;
 		background-repeat: no-repeat;
-		background-position: center top;
-		@include background-size(contain);
-		> .tag {
-			display: block;
-			position: relative;
-			height: 40px;
-			top: -40px;
-			width: 100%;
-			padding: 5px;
-			@include border-bottom-right-radius(10px);
-			@include border-bottom-left-radius(10px);
-			background-color: $brown;
-			opacity: 0.9;
-			font-size: $fontSizeMini;
-			line-height: 15px;
-			color: white;
-			text-align: center;
-		}
-		> .img {
-			@include border-radius(10px);
-			border: 1px solid $brown;
-			overflow: hidden;
-			&, & img {
-				height: 100%;
-				width: 100%;
-			} 
-		}
+		background-position: center bottom;
+		@include background-size(cover);
 	}
 	
 	.indicator {

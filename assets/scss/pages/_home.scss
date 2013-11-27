@@ -171,7 +171,9 @@
     .carousel-item {
         padding: 0;
     }
-    img {
-        width: 240px;
+    .img {
+    	border: 0;
+    	background-position: center top;
+		@include background-size(contain);
     }
 }

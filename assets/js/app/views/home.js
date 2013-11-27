@@ -59,10 +59,8 @@ $(function() {
     		var items = this.productItems;
             this.$('.carousel-item').each(function() {
                 var id = +$(this).attr('data-item');
-                MeiweiApp.loadImage($(this).find('.img img'), items.get(id).get('picture'), {
-                	src_local: 'assets/img/bootstrap/product/'+ id +'.jpg',
-                	height: 148,
-                	width: 148
+                MeiweiApp.loadBgImage($(this).find('.img'), items.get(id).get('picture'), {
+                	height: 150, width: 150
                 });
             });
             this.$el.css('background-image', 'url(assets/img/hero.jpg)');
