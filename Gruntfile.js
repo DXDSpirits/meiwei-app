@@ -23,16 +23,16 @@ module.exports = function(grunt) {
 		},
 		uglify: {
 			mwapp: {
-				options: {
-					//sourceMap: '<%= cfg.path.dest %>/assets/js/mw-app.min.map',
-					//sourceMappingURL: 'mw-app.min.map',
-					//sourceMapPrefix: 2,
+				/*options: {
+					sourceMap: '<%= cfg.path.dest %>/assets/js/mw-app.min.map',
+					sourceMappingURL: 'mw-app.min.map',
+					sourceMapPrefix: 2,
 					mangle: false,
 					beautify: {
 						width: 80,
 						beautify: true
 					}
-				},
+				},*/
 				src: 'assets/js/mw-app.js',
 				dest: '<%= cfg.path.dest %>/assets/js/mw-app.min.js'
 			},
@@ -55,7 +55,8 @@ module.exports = function(grunt) {
 			}
 		},
 		sass: {
-			dist: {
+			mobile: {
+				options: { style: 'compressed' },
 				src: 'assets/scss/mobile.scss',
 				dest: '<%= cfg.path.dest %>/assets/css/mobile.css'
 			}

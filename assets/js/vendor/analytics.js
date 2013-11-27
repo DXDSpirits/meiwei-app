@@ -979,8 +979,7 @@
     };
     Z.execute = function(a) {
         var b = Z.J[G](Z, arguments), b = Z.f.concat(b);
-        for (Z.f = []; 0 < b[y] && !Z.v(b[0]) && !(b.shift(), 0 < Z.f[y]); )
-            ;
+        for (Z.f = []; 0 < b[y] && !Z.v(b[0]) && !(b.shift(), 0 < Z.f[y]); ) {}
         Z.f = Z.f.concat(b)
     };
     Z.J = function(a) {
