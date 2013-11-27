@@ -131,9 +131,7 @@ $(function() {
     		});
     	},
     	render: function() {
-    	    if (this.checkLazy(60)) {
-    	        this.getOnlineContacts();
-    		}
+    	    this.getOnlineContacts();
     	}
     }))({ el: $("#view-member-contacts") });
 });

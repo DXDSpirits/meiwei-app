@@ -107,10 +107,8 @@ $(function() {
             }
     	},
     	render: function() {
-    	    if (this.checkLazy(60)) {
-        		MeiweiApp.me.fetch({ success: this.askToShare });
-        		this.favorites.fetch({ reset: true });
-            }
+    		MeiweiApp.me.fetch({ success: this.askToShare });
+    		this.favorites.fetch({ reset: true });
     	}
     }))({el: $("#view-member-center")});
 });

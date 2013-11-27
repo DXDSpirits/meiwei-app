@@ -177,14 +177,6 @@ MeiweiApp.PageView = MeiweiApp.View.extend({
             }
         });
     },
-    checkLazy: function(timeout) { // timeout in minutes
-        if ((new Date()) - (this.lastRender || 0) > timeout * 60 * 1000) {
-            this.lastRender = new Date();
-            return true;
-        } else {
-            return false;
-        }
-    },
     go: function(options) {
         this.options = options || {};
         this.reset();

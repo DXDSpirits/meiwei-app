@@ -201,28 +201,26 @@ $(function() {
     	render: function() {
     	    this.firstVisit();
     	    var listId = this.options.listId;
-    	    if (listId || this.checkLazy(30)) {
-    	        this.views.masterHero.render();
-    	        var recommendNames = MeiweiApp.Bootstrap.get('home-recommendnames');
-    	        if (recommendNames) {
-    	            this.recommendNames.reset(recommendNames);
-    	        } else {
-    	            timeWaitToRefresh = 0;
-    	        }
-        		var recommends = MeiweiApp.Bootstrap.get('home-recommend-items');
-        		if (recommends) {
-        			this.recommend.items.reset(recommends);
-        			this.renderAll();
-        		} else {
-        		    timeWaitToRefresh = 0;
-        		}
-        		if (listId) {
-                    MeiweiApp.Pages.Home.recommend.id = listId;
-                    timeWaitToRefresh = 0;
-                }
-        		this.recommend.fetch({ reset: true, success: this.renderAll, delay: timeWaitToRefresh });
-                this.recommendNames.fetch({ reset: true, delay: timeWaitToRefresh });
-        	}
+	        this.views.masterHero.render();
+	        var recommendNames = MeiweiApp.Bootstrap.get('home-recommendnames');
+	        if (recommendNames) {
+	            this.recommendNames.reset(recommendNames);
+	        } else {
+	            timeWaitToRefresh = 0;
+	        }
+    		var recommends = MeiweiApp.Bootstrap.get('home-recommend-items');
+    		if (recommends) {
+    			this.recommend.items.reset(recommends);
+    			this.renderAll();
+    		} else {
+    		    timeWaitToRefresh = 0;
+    		}
+    		if (listId) {
+                MeiweiApp.Pages.Home.recommend.id = listId;
+                timeWaitToRefresh = 0;
+            }
+    		this.recommend.fetch({ reset: true, success: this.renderAll, delay: timeWaitToRefresh });
+            this.recommendNames.fetch({ reset: true, delay: timeWaitToRefresh });
     	}
     }))({el: $("#view-home")});
 });

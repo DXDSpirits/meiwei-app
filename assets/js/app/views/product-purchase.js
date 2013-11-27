@@ -68,12 +68,7 @@ $(function() {
     	    }
     	},
     	render: function() {
-    		if (this.checkLazy(24 * 60)) {
-                this.products.fetch({ data: {category: 1}, reset: true, success: this.renderAll });
-            } else {
-                this.views.productList.render();
-                this.renderAll();
-            }
+    		this.products.fetch({ data: {category: 1}, reset: true, success: this.renderAll });
     	}
     }))({el: $("#view-product-purchase")});
     
@@ -163,9 +158,7 @@ $(function() {
     		};
     	},
     	render: function() {
-    	    if (this.checkLazy(24 * 60)) {
-        		this.products.fetch({ data: {category: 2}, reset: true, success: this.initScroller});
-        	}
+        	this.products.fetch({ data: {category: 2}, reset: true, success: this.initScroller});
     	}
     }))({el: $("#view-product-redeem")});
 });
