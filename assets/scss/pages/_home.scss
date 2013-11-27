@@ -161,10 +161,10 @@
     }
     .viewport {
         overflow: hidden;
-        width: 240px;
+        width: 100%;
         height: 430px;
     }
-    @include carousel($carouselWidth: 240px);
+    @include carousel($carouselWidth: 100%);
     .indicator {
         width: 70px;
     }

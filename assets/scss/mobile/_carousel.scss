@@ -16,6 +16,9 @@
 		padding: 5px 10px;
 		position: relative;
 		overflow: hidden;
+		background-repeat: no-repeat;
+		background-position: center top;
+		@include background-size(contain);
 		> .tag {
 			display: block;
 			position: relative;
