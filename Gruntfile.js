@@ -98,7 +98,7 @@ module.exports = function(grunt) {
 				tasks: ['uglify:plugins']
 			},
 			staticfiles: {
-				files: ['assets/img/**/*', 'assets/font/**/*', 'assets/js/vendor/**/*', 'config.xml'],
+				files: ['assets/img/**/*', 'assets/font/**/*', 'assets/js/vendor/**/*', 'config.xml', '.htaccess'],
 				tasks: ['copy']
 			},
 			stylesheets: {
