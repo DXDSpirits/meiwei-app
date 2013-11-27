@@ -78,7 +78,13 @@ module.exports = function(grunt) {
 		copy: {
 			staticfiles: {
 				expand: true,
-    			src: ['assets/img/**/*', 'assets/font/**/*', 'assets/js/vendor/**/*', 'config.xml'],
+    			src: [
+    				'assets/img/**/*',
+    				'assets/font/**/*',
+    				'assets/js/vendor/**/*',
+    				'.htaccess',
+    				'config.xml'
+    			],
     			dest: '<%= cfg.path.dest %>'
 			}
 		},
