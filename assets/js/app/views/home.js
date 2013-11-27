@@ -65,7 +65,7 @@ $(function() {
                 	width: 148
                 });
             });
-            this.$el.css('background-image', 'url(assets/img/hero.png)');
+            this.$el.css('background-image', 'url(assets/img/hero.jpg)');
     		var items = this.$('.carousel-inner > .carousel-item');
         	this.$('.carousel-inner').css('width', items.length * $(items[0]).outerWidth());
     		this.scroller = new IScroll(this.$('.carousel').selector, { tap: true, scrollX: true, scrollY: false });
