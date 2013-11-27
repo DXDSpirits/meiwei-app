@@ -123,8 +123,11 @@ MeiweiApp.initSync = function() {
     Backbone.sync = function(method, model, options) {
         options.timeout = options.timeout || MeiweiApp.configs.ajaxTimeout;
         _.extend((options.headers || (options.headers = {})), { 'Accept-Language': MeiweiApp.getLang() });
-        if (typeof authToken !== "undefined" && authToken !== null) {
+        if (authToken) {
             _.extend(options.headers, { 'Authorization': 'Token ' + authToken });
+        }
+        if (options.nocache) {
+            _.extend(options.headers, { 'Cache-Control': 'no-cache' });
         }
         return originalSync.call(model, method, model, options);
     };
