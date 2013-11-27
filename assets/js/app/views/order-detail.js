@@ -8,7 +8,9 @@ $(function() {
     		    MeiweiApp._('Cancel Order'),
     		    MeiweiApp._('Please confirm the cancellation'),
     		    function() {
-    		        model.cancel({success: function() { MeiweiApp.goTo('OrderList'); }});
+    		        model.cancel({success: function() {
+    		            MeiweiApp.goTo('OrderList', {nocache: true});
+    		        }});
     		    }
     		);
     	}
