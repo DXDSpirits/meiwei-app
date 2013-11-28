@@ -14,7 +14,7 @@ MeiweiApp.Models.Recommend = MeiweiApp.Model.extend({
 	urlRoot: MeiweiApp.configs.APIHost + '/restaurants/recommend/',
 	parse: function(response) {
 		this.initialize();
-		this.items.reset(response.recommenditem_set);
+		this.items.smartSet(response.recommenditem_set);
 		return response;
 	}
 });

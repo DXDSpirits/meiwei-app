@@ -27,6 +27,9 @@ MeiweiApp.Collection = Backbone.Collection.extend({
 			return response;
 		}
 	},
+	smartSet: function(models, options) {
+		this[this.isEmpty() ? 'reset' : 'set'](models, options);
+	},
 	fetchNext: function(options) {
 		var options = options || {};
 		if (this.next) {
@@ -43,6 +46,7 @@ MeiweiApp.Collection = Backbone.Collection.extend({
 	},
 	fetch: function(options) {
 		options = options || {};
+		options.reset = this.isEmpty();
 		//MeiweiApp.initCache(this, options);
 		if (options.delay) {
 		    var self = this;
