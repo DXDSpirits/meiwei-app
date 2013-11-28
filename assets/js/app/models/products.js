@@ -21,7 +21,7 @@ MeiweiApp.Models.Product = MeiweiApp.Model.extend({
 	urlRoot: MeiweiApp.configs.APIHost + '/restaurants/product/',
 	parse: function(response) {
 		this.items = this.items || new MeiweiApp.Collections.ProductItems();
-		this.items.smartSet(response.productitem_set);
+		this.items.reset(response.productitem_set);
 		response.productitem_set = null;
 		return response;
 	}
