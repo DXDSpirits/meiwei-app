@@ -156,9 +156,12 @@ $(function() {
     	hero: function() {
     		var wrapperHeight = 250;
     		if (this.scroller.y <= 0) {
-    		    this.$('.hero').removeClass('hero');
         		var page = parseInt((-this.scroller.y) / wrapperHeight);
-        		this.$('.recommend-list-item').slice(Math.max(page - 1, 0), page + 2).addClass('hero');
+        		var begin = Math.max(page - 1, 0);
+        		var end = page + 2;
+        		this.$('.recommend-list-item').slice(0, begin).removeClass('hero');
+        		this.$('.recommend-list-item').slice(end).removeClass('hero');
+        		this.$('.recommend-list-item').slice(begin, end).addClass('hero');
         	}
     	},
     	initScroller: function() {
@@ -171,7 +174,7 @@ $(function() {
     			}
     		} else {
     			this.scroller.refresh();
-    			this.scroller.scrollTo(0, -52);
+    			if (this.scroller.y > -52) this.scroller.scrollTo(0, -52);
     			this.hero();
     		}
     	},
