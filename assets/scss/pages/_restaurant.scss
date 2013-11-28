@@ -38,29 +38,43 @@
 			}
 		}
 	}
+	.map_canvas, #map_canvas {
+	    @include square(100%);
+	}
 	.map_canvas {
 		margin-top: 50px;
 		padding-bottom: 50px;
-		&, & #map_canvas {
-			@include square(100%);
-		}
-		.map-marker-info {
-			@extend .restaurant-list-item;
-			position: absolute;
-			z-index: 2;
-			bottom: 50px;
-			background-color: $white;
-			width: 100%;
-			@include translate3d(0, 90px, 0);
-			-webkit-transition: -webkit-transform .2s ease-in-out;
-			&.expand {
-				@include translate3d(0, 0, 0);
-				-webkit-transition: -webkit-transform .2s ease-in-out;
-			}
-		}
 	}
+	.locate-btn {
+	    @include square(32px);
+	    @include border-radius(50%);
+	    border: 1px solid $brownLighter;
+	    background-color: $white;
+	    padding: 2px;
+	    position: absolute;
+	    z-index: 1;
+	    top: 20px;
+	    right: 5px;
+	}
+	.map-marker-info {
+        @extend .restaurant-list-item;
+        position: absolute;
+        z-index: 2;
+        bottom: 50px;
+        background-color: $white;
+        width: 100%;
+        @include translate3d(0, 90px, 0);
+        -webkit-transition: -webkit-transform .2s ease-in-out;
+        &.expand {
+            @include translate3d(0, 0, 0);
+            -webkit-transition: -webkit-transform .2s ease-in-out;
+        }
+    }
 	.amap-icon img {
 		@include square(25px);
+	}
+	.amap-logo, .amap-copyright {
+	    display: none;
 	}
 }
 
