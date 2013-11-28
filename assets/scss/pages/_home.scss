@@ -62,6 +62,7 @@
 			padding: 5px 0;
 			overflow: hidden;
 		}
+		background-image: url('../img/hero.jpg');
 		@include carousel($carouselWidth: $itemHeight - 80px);
 		@include backface-visibility(hidden);
 	}
