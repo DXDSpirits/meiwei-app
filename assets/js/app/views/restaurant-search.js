@@ -252,14 +252,14 @@ $(function() {
 		    }
     		var filters = MeiweiApp.Bootstrap.get('restaurant-search-filters');
     		if (filters) {
-    			this.recommendnames.reset(filters.recommendnames);
-        		this.cuisines.reset(filters.cuisines);
-        		this.circles.reset(filters.circles);
+    			this.recommendnames.smartSet(filters.recommendnames);
+        		this.cuisines.smartSet(filters.cuisines);
+        		this.circles.smartSet(filters.circles);
         		this.refreshFilters();
     		}
-    		this.recommendnames.fetch({ reset: true, success: this.refreshFilters });
-    		this.cuisines.fetch({ reset: true, success: this.refreshFilters });
-    		this.circles.fetch({ reset: true, success: this.refreshFilters });
+    		this.recommendnames.fetch({ success: this.refreshFilters });
+    		this.cuisines.fetch({ success: this.refreshFilters });
+    		this.circles.fetch({ success: this.refreshFilters });
     	}
     }))({el: $("#view-restaurant-search")});
 });

@@ -1,10 +1,7 @@
 $(function() {
-    var timeWaitToRefresh = 0 * 1000;
-    
     var RecommendsFilter = MeiweiApp.CollectionView.extend({
         initCollectionView: function() {
-        	_.bindAll(this, 'initScroller');
-        	this.listenTo(this.collection, 'reset', this.initScroller);
+        	this.listenTo(this.collection, 'reset add remove', this.initScroller);
         },
         initScroller: function() {
 	        if (this.scroller == null) {
@@ -25,7 +22,7 @@ $(function() {
                 MeiweiApp.sendGaEvent('homepage list', 'select', 'recommend', this.model.id);
                 MeiweiApp.Pages.Home.recommend.clear();
                 MeiweiApp.Pages.Home.recommend.id = this.model.id;
-                MeiweiApp.Pages.Home.recommend.fetch({ reset: true, success: MeiweiApp.Pages.Home.renderAll });
+                MeiweiApp.Pages.Home.recommend.fetch();
                 MeiweiApp.Pages.Home.$('.recommends-filter').addClass('closed');
             }
         })
@@ -35,9 +32,10 @@ $(function() {
     	template: TPL['product-carousel'],
     	events: { 'tap .carousel-item': 'viewProducts' },
     	initView: function() {
+    		_.bindAll(this, 'renderAd');
     		this.productItems = new MeiweiApp.Collections.ProductItems();
+    		this.listenTo(this.productItems, 'reset add remove', this.renderCarousel);
     		this.ad = new MeiweiApp.Models.Ad();
-    		_.bindAll(this, 'renderCarousel', 'renderAd', 'renderConcierge');
     	},
     	viewProducts: function(e) {
     	    if (this.ad.get('online') && this.ad.get('target') == 'external') {
@@ -63,7 +61,6 @@ $(function() {
                 	height: 150, width: 150
                 });
             });
-            this.$el.css('background-image', 'url(assets/img/hero.jpg)');
     		var items = this.$('.carousel-inner > .carousel-item');
         	this.$('.carousel-inner').css('width', items.length * $(items[0]).outerWidth());
     		this.scroller = new IScroll(this.$('.carousel').selector, { tap: true, scrollX: true, scrollY: false });
@@ -71,14 +68,9 @@ $(function() {
     	renderConcierge: function() {
     	    var products = MeiweiApp.Bootstrap.get('home-product-items');
             if (products) {
-                this.productItems.reset(products);
-                this.renderCarousel();
-            } else {
-                timeWaitToRefresh = 0;
+                this.productItems.smartSet(products);
             }
-            this.productItems.fetch({
-                reset: true, success: this.renderCarousel, data: {recommend: 1}, delay: timeWaitToRefresh
-            });
+            this.productItems.fetch({ data: {recommend: 1} });
         },
         renderAd: function() {
             if (this.ad.get('online')) {
@@ -133,7 +125,7 @@ $(function() {
     	},
     	initPage: function() {
     		this.defaultRecommendId = 5;
-    		_.bindAll(this, 'hero', 'renderAll');
+    		_.bindAll(this, 'hero');
     		this.recommendNames = new MeiweiApp.Collections.RecommendNames();
     		this.recommend = new MeiweiApp.Models.Recommend({id: this.defaultRecommendId});
     		this.views = {
@@ -141,6 +133,10 @@ $(function() {
     			recommendItems: new RecommendItems({ collection: this.recommend.items, el: this.$('.recommend-flow') }),
     			recommendsFilter: new RecommendsFilter({ collection: this.recommendNames, el: this.$('.recommends-filter-wrapper') })
     		};
+    		/* It's important to put listenTo after view initialization.
+    		 * The CollectionView.addAll should be executed before this.renderAll
+    		 */
+    		this.listenTo(this.recommend.items, 'reset add remove', this.renderAll);
     	},
     	onClickLeftBtn: function() { MeiweiApp.goTo('MemberCenter'); },
     	onClickRightBtn: function() { MeiweiApp.goTo('Attending'); },
@@ -204,23 +200,17 @@ $(function() {
 	        this.views.masterHero.render();
 	        var recommendNames = MeiweiApp.Bootstrap.get('home-recommendnames');
 	        if (recommendNames) {
-	            this.recommendNames.reset(recommendNames);
-	        } else {
-	            timeWaitToRefresh = 0;
+	            this.recommendNames.smartSet(recommendNames);
 	        }
     		var recommends = MeiweiApp.Bootstrap.get('home-recommend-items');
     		if (recommends) {
-    			this.recommend.items.reset(recommends);
-    			this.renderAll();
-    		} else {
-    		    timeWaitToRefresh = 0;
+    			this.recommend.items.smartSet(recommends);
     		}
     		if (listId) {
                 MeiweiApp.Pages.Home.recommend.id = listId;
-                timeWaitToRefresh = 0;
             }
-    		this.recommend.fetch({ reset: true, success: this.renderAll, delay: timeWaitToRefresh });
-            this.recommendNames.fetch({ reset: true, delay: timeWaitToRefresh });
+    		this.recommend.fetch();
+            this.recommendNames.fetch();
     	}
     }))({el: $("#view-home")});
 });
