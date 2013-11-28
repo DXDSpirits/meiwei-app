@@ -195,7 +195,7 @@ $(function() {
         },
     	
     	/*********************************************/
-    	dropMarkers: function () {
+    	/*dropMarkers: function () {
     		if (!this.map) {
     		    this.initializeMap();
     		} else {
@@ -239,6 +239,46 @@ $(function() {
     			//self.map.addControl(new BMap.NavigationControl({anchor: BMAP_ANCHOR_TOP_RIGHT, type: BMAP_NAVIGATION_CONTROL_ZOOM}));
     			self.dropMarkers();
     		});
+    	},*/
+    	dropMarkers: function () {
+    		if (!this.map) {
+    		    this.initializeMap();
+    		} else {
+        		this.map.clearMap();
+        		this.restaurants.forEach(function(item) {
+        			var coord = item.get('coordinate');
+        			if (coord) {
+                        var marker = new AMap.Marker({     
+						    map: this.map,
+						    position: new AMap.LngLat(coord.longitude / 100000.0 , coord.latitude / 100000.0),
+						    icon: new AMap.Icon({
+					            size: new AMap.Size(25, 25),
+					            image: "assets/img/mapmarker.png",
+					            imageOffset:new AMap.Pixel(0, 0)
+					        })
+					    });
+					    this.addMessage(marker, item.toJSON());
+                    }
+        		}, this);
+        		this.map.setFitView();
+        	}
+    	},
+    	addMessage: function(marker, resto) {
+    		var markerInfo = this.views.markerInfo;
+    		marker.on('click', function () {
+    			markerInfo.toggle(resto);
+    		});
+    	},
+    	initializeMap: function () {
+		    if (!window.AMap) return;
+			this.markers = [];
+			this.map = new AMap.Map('map_canvas', {
+				center:new AMap.LngLat(MeiweiApp.coords.longitude, MeiweiApp.coords.latitude), 
+				level:15,
+				continuousZoomEnable: true,
+				touchZoom: true
+			});
+			this.dropMarkers();
     	},
     	/*********************************************/
     	

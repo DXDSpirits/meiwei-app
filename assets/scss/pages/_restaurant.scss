@@ -59,6 +59,9 @@
 			}
 		}
 	}
+	.amap-icon img {
+		@include square(25px);
+	}
 }
 
 #view-restaurant-detail {
