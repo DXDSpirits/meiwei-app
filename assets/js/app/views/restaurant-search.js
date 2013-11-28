@@ -76,7 +76,7 @@ $(function() {
 	});
     
     var CircleFilter = MeiweiApp.CollectionView.extend({
-    	ModelView: SearchFilterItem.extend({ filtername: 'recommend' }),
+    	ModelView: SearchFilterItem.extend({ filtername: 'circle' }),
         addAll: function() {
             var DistrictModelView = SearchFilterItem.extend({ className: 'subtitle', filtername: 'district' });
             var CircleModelView = SearchFilterItem.extend({ filtername: 'circle' });
@@ -294,12 +294,12 @@ $(function() {
     		if (filters) {
     			this.recommendnames.smartSet(filters.recommendnames);
         		this.cuisines.smartSet(filters.cuisines);
-        		this.circles.smartSet(filters.circles);
+        		this.circles.reset(filters.circles); //circles needs reset since they are subgrouped 
         		this.refreshFilters();
     		}
     		this.recommendnames.fetch({ success: this.refreshFilters });
     		this.cuisines.fetch({ success: this.refreshFilters });
-    		this.circles.fetch({ success: this.refreshFilters });
+    		this.circles.fetch({ reset: true, success: this.refreshFilters });
     	}
     }))({el: $("#view-restaurant-search")});
 });
