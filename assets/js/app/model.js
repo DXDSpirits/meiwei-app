@@ -46,7 +46,7 @@ MeiweiApp.Collection = Backbone.Collection.extend({
 	},
 	fetch: function(options) {
 		options = options || {};
-		options.reset = this.isEmpty();
+		options.reset = options.reset || this.isEmpty();
 		//MeiweiApp.initCache(this, options);
 		if (options.delay) {
 		    var self = this;
