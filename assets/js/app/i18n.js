@@ -375,9 +375,9 @@ MeiweiApp.i18n = {
         zh: '点击查看详情',
         en: 'Click for Detail'
     },
-    'Weekly Restaurants': {
+    'Weekly Choice': {
     	zh: '本周餐厅',
-    	en: 'Weekly Restaurants'
+    	en: 'Weekly Choice'
     }
 };
 
