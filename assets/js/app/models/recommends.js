@@ -7,16 +7,13 @@ MeiweiApp.Collections.RecommendItems = MeiweiApp.Collection.extend({
 });
 
 MeiweiApp.Models.Recommend = MeiweiApp.Model.extend({
-	name: 'MeiweiApp.Models.Recommend',
 	initialize: function() {
-		if (this.items == null) this.items = new MeiweiApp.Collections.RecommendItems();
+		this.items = new MeiweiApp.Collections.RecommendItems(this.get('recommenditem_set'));
+		this.on('change:recommenditem_set', function() {
+            this.items.reset(this.get('recommenditem_set'));
+        }, this);
 	},
-	urlRoot: MeiweiApp.configs.APIHost + '/restaurants/recommend/',
-	parse: function(response) {
-		this.initialize();
-		this.items.smartSet(response.recommenditem_set);
-		return response;
-	}
+	urlRoot: MeiweiApp.configs.APIHost + '/restaurants/recommend/'
 });
 
 MeiweiApp.Collections.Recommends = MeiweiApp.Collection.extend({
@@ -25,7 +22,6 @@ MeiweiApp.Collections.Recommends = MeiweiApp.Collection.extend({
 });
 
 MeiweiApp.Models.RecommendName = MeiweiApp.Model.extend({
-    name: 'MeiweiApp.Models.RecommendName',
     urlRoot: MeiweiApp.configs.APIHost + '/restaurants/recommendname/',
 });
 MeiweiApp.Collections.RecommendNames = MeiweiApp.Collection.extend({

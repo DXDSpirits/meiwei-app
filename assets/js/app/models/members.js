@@ -58,14 +58,15 @@ MeiweiApp.Collections.Favorites = MeiweiApp.Collection.extend({
 
 MeiweiApp.me = new (MeiweiApp.Models.Member.extend({
 	initialize: function() {
-		if (this.favorites == null) this.favorites = new MeiweiApp.Collections.Favorites();
-		if (this.contacts == null) this.contacts = new MeiweiApp.Collections.Contacts();
-		if (this.profile == null) this.profile = new MeiweiApp.Models.Profile();
+		this.favorites = new MeiweiApp.Collections.Favorites();
+		this.contacts = new MeiweiApp.Collections.Contacts();
+		this.profile = new MeiweiApp.Models.Profile(this.get('profile'));
+		this.on('change:profile', function() {
+            this.profile.set(this.get('profile'));
+        }, this);
 	},
 	parse: function(response) {
-		if (_.isArray(response.results)) response = response.results[0];
-		if (response.profile) this.profile.set(response.profile);
-		return response;
+		return _.isArray(response.results) ? response.results[0] : response;
 	},
 	login: function(auth, options) {
 	    this.clear().set(auth);

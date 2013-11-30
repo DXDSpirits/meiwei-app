@@ -16,15 +16,12 @@ MeiweiApp.Collections.ProductItems = MeiweiApp.Collection.extend({
 
 MeiweiApp.Models.Product = MeiweiApp.Model.extend({
 	initialize: function() {
-		this.items = this.items || new MeiweiApp.Collections.ProductItems();
+		this.items = new MeiweiApp.Collections.ProductItems(this.get('productitem_set'));
+		this.on('change:productitem_set', function() {
+            this.items.reset(this.get('productitem_set'));
+        }, this);
 	},
-	urlRoot: MeiweiApp.configs.APIHost + '/restaurants/product/',
-	parse: function(response) {
-		this.items = this.items || new MeiweiApp.Collections.ProductItems();
-		this.items.reset(response.productitem_set);
-		response.productitem_set = null;
-		return response;
-	}
+	urlRoot: MeiweiApp.configs.APIHost + '/restaurants/product/'
 });
 
 MeiweiApp.Collections.Products = MeiweiApp.Collection.extend({
