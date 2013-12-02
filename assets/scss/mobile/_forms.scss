@@ -94,6 +94,8 @@ form .info-text {
 	//margin: 10px 0;
 	color: #FF0000;
 	font-size: $fontSizeMini;
+	max-height: 2 * $baseLineHeight;
+	overflow: hidden;
 }
 
 form label {
