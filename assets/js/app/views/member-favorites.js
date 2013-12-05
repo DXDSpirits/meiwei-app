@@ -12,7 +12,7 @@ $(function() {
     		},
     		viewRestaurant: function() {
     			MeiweiApp.goTo('RestaurantDetail', {
-    				restaurantId: this.model.get('restaurant')
+    				restaurant: this.model.get('restaurantinfor')
     			});
     		},
     		deleteFav: function(e) {

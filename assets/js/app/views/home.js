@@ -84,9 +84,7 @@ $(function() {
         },
     	render: function() {
     	    this.renderConcierge();
-    	    if (!checkFirstTime()) {
-                this.ad.fetch({success: this.renderAd});
-            }
+            this.ad.fetch({success: this.renderAd, global: false});
     		return this;
     	}
     });
@@ -100,8 +98,7 @@ $(function() {
     		'tap .order-button': 'gotoOrder'
     	},
     	viewRestaurant: function(e) {
-    		var restaurantId = this.model.get('restaurant').id;
-    		MeiweiApp.goTo('RestaurantDetail', { restaurantId: restaurantId });
+    		MeiweiApp.goTo('RestaurantDetail', { restaurant: this.model.get('restaurant') });
     	},
     	gotoOrder: function(e) {
     		if (e.stopPropagation) e.stopPropagation();

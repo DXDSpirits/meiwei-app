@@ -64,21 +64,26 @@ MeiweiApp.initVersion = function() {
         if (authToken) localStorage.setItem('auth-token', authToken);
     }
     var app = new MeiweiApp.Models.App();
-    app.fetch({success: function(model, response, options) {
-        var version = parseFloat(model.get('version'));
-        if (MeiweiApp.isCordova() && version && version > MeiweiApp.Version) {
-            MeiweiApp.showConfirmDialog(
-                MeiweiApp._('Update Available'), MeiweiApp._('New version is available, go to update?'),
-                function() {
-                    if (device.platform == 'iOS') {
-                        var ref = window.open('https://itunes.apple.com/app/id689668571' ,'_blank', 'location=no');
-                    } else {
-                        var ref = window.open('http://web.clubmeiwei.com/ad/apppromo' ,'_blank', 'location=no');
-                    }
+    app.fetch({
+        global: false,
+        success: function(model, response, options) {
+            var version = parseFloat(model.get('version'));
+            var onConfirm = function() {
+                if (device.platform == 'iOS') {
+                    var ref = window.open('https://itunes.apple.com/app/id689668571' ,'_blank', 'location=no');
+                } else {
+                    var ref = window.open('http://web.clubmeiwei.com/ad/apppromo' ,'_blank', 'location=no');
                 }
-            );
+            };
+            if (MeiweiApp.isCordova() && version && version > MeiweiApp.Version) {
+                MeiweiApp.showConfirmDialog(
+                    MeiweiApp._('Update Available'),
+                    MeiweiApp._('New version is available, go to update?'),
+                    onConfirm
+                );
+            }
         }
-    }});
+    });
 };
 
 MeiweiApp.initLang = function() {
