@@ -100,3 +100,9 @@ MeiweiApp.me = new (MeiweiApp.Models.Member.extend({
 		Backbone.sync('update', this, options);
 	}
 }));
+
+MeiweiApp.me.on('login', function() {
+    var orders = new MeiweiApp.Collections.Orders();
+    orders.fetch({ nocache: true, global: false, data: { status: 'pending' } });
+    orders.fetch({ nocache: true, global: false, data: { status: 'fulfilled' } });
+});
