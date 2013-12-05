@@ -27,21 +27,21 @@ body {
 	padding: $navbarHeight 0 0 0;
 	margin: 0;
 	overflow: hidden;
-	& > .wrapper {
-		@include flex-box($orient: vertical);
-		@include size(100%, 100%);
-		background-color: $bodyBackground;
-		position: relative;
-		&.rendering {
-		    opacity: 0;
-		}
-		@include backface-visibility(hidden);
-		@include translate3d(0, 0, 0);
-	}
+	&.view-next, &.view-prev, &.view-hidden {
+        pointer-events: none;
+    }
 }
 
-.view.view-next, .view.view-prev, .view.view-hidden {
-	pointer-events: none;
+.wrapper {
+    @include flex-box($orient: vertical);
+    @include size(100%, 100%);
+    background-color: $bodyBackground;
+    position: relative;
+    &.rendering {
+        opacity: 0;
+    }
+    @include backface-visibility(hidden);
+    @include translate3d(0, 0, 0);
 }
 
 .view.view-hidden > .wrapper {
@@ -72,7 +72,7 @@ body {
     }
 }
 
-.view > .wrapper > .scroll {
+.scroll {
 	@include flexible($orient: vertical);
 	position: relative;
 	width: 100%;
@@ -88,12 +88,6 @@ body {
 	&::-webkit-scrollbar {
 		display: none;
 	}
-	& > .scroll-inner {
-		background-color: $bodyBackground;
-		width: 100%;
-		@include flex-box($orient: vertical, $pack: start);
-		position: relative;
-	}
 	& > .scroll-hint {
 	    position: absolute;
 	    top: 15px;
@@ -105,6 +99,13 @@ body {
 	}
 }
 
+.scroll-inner {
+    background-color: $bodyBackground;
+    width: 100%;
+    @include flex-box($orient: vertical, $pack: start);
+    position: relative;
+}
+
 #apploader {
 	position: absolute;
 	top: 0;
@@ -113,41 +114,40 @@ body {
 	right: 0;
 	z-index: 9999;
     @include transition(opacity 1s ease-in-out);
-}
-
-#apploader .loader {
-	@include flex-box($orient: vertical);
-	position: absolute;
-	top: 50%;
-	left: 50%;
-	width: 140px;
-	margin: -30px -70px;
-	min-height: 60px;
-	padding: 10px;
-	@include border-radius(5px);
-	background-color: rgba(0, 0, 0, 0.8);
-	pointer-events: none;
-	.ajax-error {
-		font-size: $fontSizeMini;
-		text-align: center;
-		color: $white;
-	}
-	.loading-sprite {
-		@include user-select(none);
-		pointer-events: none;
-		height: 20px;
-		width: 20px;
-		margin: 10px 0;
-		font-size: 16px;
-		color: #666;
-		line-height: 20px;
-		color: #666;
-		text-shadow: 0 1px #fff;
-		background: transparent url($activityIndicator) no-repeat center;
-		background-size: 20px auto;
-		@include animation(loading-sprite 1s step-start infinite);
-	}
-}
-#apploader.invisible .loading-sprite {
-    @include animation(none);
+    .loader {
+        @include flex-box($orient: vertical);
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        width: 140px;
+        margin: -30px -70px;
+        min-height: 60px;
+        padding: 10px;
+        @include border-radius(5px);
+        background-color: rgba(0, 0, 0, 0.8);
+        pointer-events: none;
+    }
+    .ajax-error {
+        font-size: $fontSizeMini;
+        text-align: center;
+        color: $white;
+    }
+    .loading-sprite {
+        @include user-select(none);
+        pointer-events: none;
+        height: 20px;
+        width: 20px;
+        margin: 10px 0;
+        font-size: 16px;
+        color: #666;
+        line-height: 20px;
+        color: #666;
+        text-shadow: 0 1px #fff;
+        background: transparent url($activityIndicator) no-repeat center;
+        background-size: 20px auto;
+        @include animation(loading-sprite 1s step-start infinite);
+    }
+    &.invisible .loading-sprite {
+        @include animation(none);
+    }
 }
