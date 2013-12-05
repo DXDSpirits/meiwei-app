@@ -21,7 +21,7 @@ $(function() {
     		'fastclick .filter-online': 'getOnlineContacts',
     		'fastclick .filter-local': 'getLocalContacts',
     		'tap .contact-item': 'selectContact',
-    		'submit >header>form': 'searchContacts',
+    		'submit .search-form': 'searchContacts',
     		//'touchstart .alphabet': 'alphabetOnTouchStart',
     		//'touchmove .alphabet': 'alphabetOnTouchMove',
     		//'touchend .alphabet': 'alphabetOnTouchEnd'
@@ -91,7 +91,7 @@ $(function() {
         	    this.$('.filter-local').addClass('selected');
         		var contactCollection = this.views.contactList.collection;
         		var initScroller = this.initScroller;
-        		var keywords = this.$('>header input').val();
+        		var keywords = this.$('.search-form > input').val();
         		$('#apploader').removeClass('invisible');
         		navigator.contacts.find(
         			["displayName", "phoneNumbers"],

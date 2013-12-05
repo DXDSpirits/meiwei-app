@@ -12,15 +12,12 @@
         @include background-size(500px, 1000px)
     }
 	
-	> header h1 {
-		position: relative;
-		.icon-down-small {
-			position: absolute;
-			bottom: -7px;
-			left: 50%;
-			margin-left: -13px;
-		}
-	}
+	.icon-down-small {
+        position: absolute;
+        bottom: -7px;
+        left: 50%;
+        margin-left: -13px;
+    }
 	
 	.search-form {
 	    width: 100%;
@@ -157,9 +154,6 @@
 
 #view-getstarted {
     padding: 0;
-    > header::before {
-        background: none;
-    }
     .viewport {
         overflow: hidden;
         width: 100%;

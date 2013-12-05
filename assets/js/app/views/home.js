@@ -121,7 +121,7 @@ $(function() {
     		'fastclick .header-btn-right': 'onClickRightBtn',
     		'fastclick .show-more': 'goToSearch',
     		'submit .search-form form': 'searchKeywords',
-    		'fastclick >header h1': 'toggleFilter'
+    		'fastclick .header-title': 'toggleFilter'
     	},
     	initPage: function() {
     		this.defaultRecommendId = 5;
@@ -183,7 +183,7 @@ $(function() {
     	    	MeiweiApp.Bootstrap.set('home-recommend-items', this.recommend.items.toJSON());
     	    }
     	    this.$('.show-more').removeClass('hidden');
-    	    this.$('> header > h1 > span').html(this.recommend.get('name'));
+    	    this.$('.header-title > span').html(this.recommend.get('name'));
     	    this.initScroller();
     	},
     	firstVisit: function() {

@@ -41,7 +41,7 @@ $(function() {
     });
     
     var RestaurantOrderContactForm = MeiweiApp.View.extend({
-        events: { 'tap >header h1': 'selectContact' },
+        events: { 'tap > header > h1': 'selectContact' },
         initView: function(options) {
             _.bindAll(this, 'fillContact', 'switchGender');
             var btn = this.bindFastButton(this.$('.switch-gender'), this.switchGender);

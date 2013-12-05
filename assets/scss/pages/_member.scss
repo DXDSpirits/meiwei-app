@@ -1,5 +1,5 @@
 #view-member-login {
-	.scroll-inner > header {
+	.logo {
 		height: 170px;
 		img {
 			position: relative;
@@ -25,26 +25,26 @@
             background-color: $white;
         }
 	}
-	.social-box {
-		@include size(105px, 100%);
-		& > header {
-			height: 28px;
-			line-height: 30px;
-			color: $brownDark;
-			text-align: center;
-			vertical-align: middle;
-			border-width: 1px 0;
-			border-style: solid;
-			border-color: $brownDark;
-		}
-		.social-icons {
-			padding: 15px 0;
-			text-align: center;
-			img {
-				@include square(45px);
-			}
-		}
-	}
+	// .social-box {
+		// @include size(105px, 100%);
+		// & > header {
+			// height: 28px;
+			// line-height: 30px;
+			// color: $brownDark;
+			// text-align: center;
+			// vertical-align: middle;
+			// border-width: 1px 0;
+			// border-style: solid;
+			// border-color: $brownDark;
+		// }
+		// .social-icons {
+			// padding: 15px 0;
+			// text-align: center;
+			// img {
+				// @include square(45px);
+			// }
+		// }
+	// }
 }
 
 #view-member-contacts {

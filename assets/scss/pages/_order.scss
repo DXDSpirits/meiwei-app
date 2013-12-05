@@ -127,55 +127,51 @@
 	
 	.order-page-item {
 		position: relative;
-		
-		.section-header-img {
-			height: 150px;
-	        width: 100%;
-	        margin: 10px 0;
-	       	overflow: hidden;
-	       	@include border-top-left-radius(5px);
-	       	@include border-top-right-radius(5px);
-	       	background-repeat: no-repeat;
-			background-position: center bottom;
-			@include background-size(cover);
-		}
-		
-		.order-detail {
-			width: 85%;
-			@include center-block();
-			@include flex-box($orient: vertical, $pack: end);
-			.section-qrcode {
-				display: none;
-		        @include square(110px);
-		        padding: 5px;
-		        background-color: $white;
-			}
-			> header {
-				h1 { @include text-overflow(); }
-				line-height: 1.5*$baseLineHeight;
-				height:30px;
-				width: 100%;
-				text-align:center;
-				background: transparent url($gradientShadowPathR) no-repeat top;
-				@include background-size(100% 60px);
-				h1 { @include text-overflow(); }
-			}
-			table {
-				margin-bottom: 10px;
-			}
-			.button-group {
-				width: 100%;
-				button { font-size: $fontSizeMini; }
-			}
-		}
-		.discount-text {
-		    width: 200px;
-		    @include text-overflow();
-		}
 	}
+	.section-header-img {
+        height: 150px;
+        width: 100%;
+        margin: 10px 0;
+        overflow: hidden;
+        @include border-top-left-radius(5px);
+        @include border-top-right-radius(5px);
+        background-repeat: no-repeat;
+        background-position: center bottom;
+        @include background-size(cover);
+    }
+    .order-detail {
+        width: 85%;
+        @include center-block();
+        @include flex-box($orient: vertical, $pack: end);
+        > .section-qrcode {
+            display: none;
+            @include square(110px);
+            padding: 5px;
+            background-color: $white;
+        }
+        > h1 {
+            line-height: 1.5*$baseLineHeight;
+            height:30px;
+            width: 100%;
+            text-align:center;
+            background: transparent url($gradientShadowPathR) no-repeat top;
+            @include background-size(100% 60px);
+            @include text-overflow();
+        }
+        > table {
+            margin-bottom: 10px;
+        }
+        > .button-group {
+            width: 100%;
+            button { font-size: $fontSizeMini; }
+        }
+    }
+    .discount-text {
+        width: 200px;
+        @include text-overflow();
+    }
 	.hint-text {
 		width: 80%;
 		.btn { margin: 20px auto; }
-		p { text-align: center; }
 	}
 }

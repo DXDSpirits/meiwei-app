@@ -41,9 +41,9 @@ $(function() {
             MeiweiApp.loadBgImage(this.$('.scroll'), resto.frontpic, { height: 250 });
             this.$('.restaurant-name').html(resto.fullname);
     		if (this.order.get('editable')) {
-    			this.$('.header-btn-right i').attr('class', 'icon-edit');
+    			this.$('.header-btn-right i').attr('class', 'icon icon-edit');
     		} else {
-    			this.$('.header-btn-right i').attr('class', 'icon-blank');
+    			this.$('.header-btn-right i').attr('class', 'icon icon-blank');
     			this.$('.btn-cancel').remove();
     			this.onClickRightBtn = function() {};
     		}

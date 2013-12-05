@@ -165,10 +165,10 @@ $(function() {
             'fastclick .filter p': 'toggleFilters',
             'tap .filter li': 'selectFilter',
             'touchstart .scroll': 'closeFilters',
-            'submit >header>form': 'searchKeywords',
-            'focus >header input': 'clearFormInput'
+            'submit .search-form': 'searchKeywords',
+            'focus .search-form > input': 'clearFormInput'
         },
-        clearFormInput: function() { this.$('>header input').val(''); },
+        clearFormInput: function() { this.$('.search-form > input').val(''); },
         onClickLeftBtn: function() { MeiweiApp.goTo('Home'); },
         onClickRightBtn: function() {
             var flip = this.$('.flipper').hasClass('flip');
@@ -229,9 +229,9 @@ $(function() {
         },
         searchKeywords: function(e) {
             if (e.preventDefault) e.preventDefault();
-            var keywords = this.$('>header input').val();
+            var keywords = this.$('.search-form > input').val();
             this.restaurants.fetch({ reset: true, data: { keywords: keywords } });
-            this.$('>header input').blur();
+            this.$('.search-form > input').blur();
         },
         searchRestaurants: function(filter) {
             this.restaurants.fetch({ reset: true, data: filter });

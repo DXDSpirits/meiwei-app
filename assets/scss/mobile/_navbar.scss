@@ -1,5 +1,5 @@
 
-.view > header {
+.header-navbar {
 	@include flex-box($orient: horizontal);
 	@include size($navbarHeight, 100%);
 	//padding: 0 $navbarPadding;
@@ -18,12 +18,12 @@
 	@include transition(all $pageSwitchDuration ease-in-out);
 }
 
-.view.view-hidden > header {
+.view.view-hidden > .header-navbar {
 	opacity: 0;
 	visibility: hidden;
 }
 
-.view > header {
+.header-navbar {
     > h1 {
         padding: 0 5px;
         margin: 0;

@@ -29,7 +29,7 @@ $(function() {
     			reset: true,
     			success: function(collection) {
     				var balance = _.reduce(collection.pluck('amount'), function(a,b) { return a + b; } );
-    				self.$('> header > h1 > .balance').html('(' + balance + ')');
+    				self.$('.header-balance').html('(' + balance + ')');
     				self.initScroller();
     			}
     		});

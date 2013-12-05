@@ -23,9 +23,9 @@ $(function() {
         },
         updateTitle: function() {
             if (this.scroller) {
-                this.$('> header h1').html((this.scroller.currentPage.pageX + 1) + '/' + this.scroller.pages.length);
+                this.$('.header-title').html((this.scroller.currentPage.pageX + 1) + '/' + this.scroller.pages.length);
             } else {
-                this.$('> header h1').html('0/0');
+                this.$('.header-title').html('0/0');
             }
         },
         renderPages: function() {
