@@ -245,7 +245,7 @@ $(function() {
             } else {
                 this.restaurants.fetch({ reset: true });
             }
-            var filters = MeiweiApp.Bootstrap.get('restaurant-search-filters');
+            var filters = window.Bootstrap && Bootstrap.get('restaurant-search-filters');
             if (filters) {
                 this.recommendnames.reset(filters.recommendnames);
                 this.cuisines.reset(filters.cuisines);

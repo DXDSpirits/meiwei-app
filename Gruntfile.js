@@ -14,27 +14,20 @@ module.exports = function(grunt) {
                     'assets/js/app/models/*.js',
                     'assets/js/app/view.js',
                     'assets/js/app/router.js',
-                    'assets/js/app/bootstrap.js',
                     'assets/js/app/_close.js',
                     'assets/js/app/views/*.js',
                 ],
-                dest: 'assets/js/mw-app.js'
+                dest: '<%= cfg.path.dest %>/assets/js/mw-app.js'
             }
 		},
 		uglify: {
 			mwapp: {
-				/*options: {
-					sourceMap: '<%= cfg.path.dest %>/assets/js/mw-app.min.map',
-					sourceMappingURL: 'mw-app.min.map',
-					sourceMapPrefix: 2,
-					mangle: false,
-					beautify: {
-						width: 80,
-						beautify: true
-					}
-				},*/
-				src: 'assets/js/mw-app.js',
+				src: '<%= cfg.path.dest %>/assets/js/mw-app.js',
 				dest: '<%= cfg.path.dest %>/assets/js/mw-app.min.js'
+			},
+			bootstrap: {
+			    src: 'assets/js/bootstrap.js',
+                dest: '<%= cfg.path.dest %>/assets/js/bootstrap.js'
 			},
 			plugins: {
 				files: [
@@ -98,6 +91,10 @@ module.exports = function(grunt) {
 				files: ['assets/js/app/*.js', 'assets/js/app/models/*.js', 'assets/js/app/views/*.js'],
 				tasks: ['concat:mwapp', 'uglify:mwapp']
 			},
+			scripts_bootstrap: {
+                files: ['assets/js/bootstrap.js'],
+                tasks: ['uglify:bootstrap']
+            },
 			scripts_plugins: {
 				files: ['assets/js/plugin/*.js'],
 				tasks: ['uglify:plugins']

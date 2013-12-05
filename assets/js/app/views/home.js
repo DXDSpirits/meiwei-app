@@ -51,7 +51,7 @@ $(function() {
             }
     	},
     	renderCarousel: function() {
-    	    MeiweiApp.Bootstrap.set('home-product-items', this.productItems.toJSON());
+    	    window.Bootstrap && Bootstrap.set('home-product-items', this.productItems.toJSON());
     		if (this.scroller) this.scroller.destroy();
     		this.$el.html(this.template({
     			items: _.first(this.productItems.toJSON(), 6),
@@ -69,7 +69,7 @@ $(function() {
     		this.scroller = new IScroll(this.$('.carousel').selector, { tap: true, scrollX: true, scrollY: false });
     	},
     	renderConcierge: function() {
-    	    var products = MeiweiApp.Bootstrap.get('home-product-items');
+    	    var products = window.Bootstrap && Bootstrap.get('home-product-items');
             if (products) {
                 this.productItems.smartSet(products);
             }
@@ -184,7 +184,7 @@ $(function() {
     	},
     	renderAll: function() {
     		if (this.recommend.id == this.defaultRecommendId) {
-    	    	MeiweiApp.Bootstrap.set('home-recommend-items', this.recommend.items.toJSON());
+    	    	window.Bootstrap && Bootstrap.set('home-recommend-items', this.recommend.items.toJSON());
     	    }
     	    this.$('.show-more').removeClass('hidden');
     	    this.$('.header-title > span').html(this.recommend.get('name'));
@@ -205,11 +205,11 @@ $(function() {
     	    this.firstVisit();
     	    var listId = this.options.listId;
 	        this.views.masterHero.render();
-	        var recommendNames = MeiweiApp.Bootstrap.get('home-recommendnames');
+	        var recommendNames = window.Bootstrap && Bootstrap.get('home-recommendnames');
 	        if (recommendNames) {
 	            this.recommendNames.smartSet(recommendNames);
 	        }
-    		var recommends = MeiweiApp.Bootstrap.get('home-recommend-items');
+    		var recommends = window.Bootstrap && Bootstrap.get('home-recommend-items');
     		if (recommends) {
     			this.recommend.items.smartSet(recommends);
     		}
