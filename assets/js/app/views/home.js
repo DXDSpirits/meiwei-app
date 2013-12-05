@@ -93,7 +93,7 @@ $(function() {
     
     var RecommendItem = MeiweiApp.ModelView.extend({
     	tagName: 'section',
-    	className: 'recommend-list-item',
+    	className: 'recommend-list-item img',
     	template: TPL['recommend-list-item'],
     	events: {
     		'tap': 'viewRestaurant',

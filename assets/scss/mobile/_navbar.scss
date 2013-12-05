@@ -37,16 +37,17 @@
     	@include flexible($orient: horizontal);
     	height: 44px;
     	padding: 5px 0;
+    	> input[type=search] {
+            @include border-radius(500px);
+            width: 100%;
+            border: 1px solid $brown;
+            height: 34px;
+            padding: 9px 15px;
+            line-height: 14px;
+            @include placeholder($brownLight, 14px, 16px);
+        }
 	}
-	> input[type=search] {
-		@include border-radius(500px);
-		width: 100%;
-		border: 1px solid $brown;
-		height: 34px;
-		padding: 9px 15px;
-	  	line-height: 14px;
-	  	@include placeholder($brownLight, 14px, 16px);
-	}
+
 }
 
 .header-btn {
@@ -93,31 +94,6 @@
 		color: $white;
 		&:active, &.active, &.selected { background-color: $brownDark; }
 	}
-	
-	> .collapsible {
-		position: relative;
-		& > .collapsible-inner {
-			//@include scrollable(5px);
-			overflow: hidden;
-			position: absolute;
-			z-index: $zindexPopover;
-			top: 50px;
-			height: 200px;
-			visibility: hidden;
-			background-color: $brown;
-			color: $white;
-			max-width: 200%;
-			min-width: 150%;
-		}
-		&:last-child .collapsible-inner {
-            right: 0;
-        }
-		&.expand > .collapsible-inner {
-			visibility: visible;
-		}
-		&:active, &.active, &.selected { background-color: transparent; }
-	}
-	
 	.spliter {
 		width: 0;
 		height: 30px;
@@ -126,4 +102,28 @@
 		background-color: $brown;
 		margin: 12px 0 8px;
 	}
+}
+
+.collapsible {
+    position: relative;
+    > .collapsible-inner {
+        //@include scrollable(5px);
+        overflow: hidden;
+        position: absolute;
+        z-index: $zindexPopover;
+        top: 50px;
+        height: 200px;
+        visibility: hidden;
+        background-color: $brown;
+        color: $white;
+        max-width: 200%;
+        min-width: 150%;
+    }
+    &:last-child > .collapsible-inner {
+        right: 0;
+    }
+    &.expand > .collapsible-inner {
+        visibility: visible;
+    }
+    &:active, &.active, &.selected { background-color: transparent; }
 }

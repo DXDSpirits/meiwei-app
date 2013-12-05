@@ -2,40 +2,38 @@
 .flipper {
 	-webkit-perspective: 1000;
 	perspective: 1000;
-	
 	position: relative;
-	.front, .back {
+	> .front, > .back {
 		@include backface-visibility(hidden);
-		position: absolute;
-		top: 0;
+		@include transition(all .7s ease-in-out);
 	}
-	&.flip .back, &:not(.flip) .front {
-		@include rotateY(0);
-		@include animation(flipinfromleft .6s ease-in-out);
+	> .back {
+	    position: absolute;
+        top: 0;
 	}
-	&.flip .front, &:not(.flip) .back {
-		@include rotateY(180deg);
-		@include animation(flipouttoleft .6s ease-in-out);
+	&.flip > .front {
+		@include rotateY(-180deg);
 		z-index: -1;
-		opacity: 0;
 	}
+	&:not(.flip) > .back {
+        @include rotateY(180deg);
+        z-index: -1;
+    }
 }
 
 #view-restaurant-search {
-	.filter-bar {
-		.recommend li, .cuisine li, .circle li, .sort li {
-		    @include text-overflow();
-			line-height: 30px;
-			padding: 0 17px;
-			//@include border(0 0 1px 0, dotted, $brownLight);
-			//border-bottom: 1px solid darken($brown, 5%);
-			border-top: 1px solid lighten($brown, 5%);
-			&:active, &.pressed { background-color: $brownDark; }
-			&.subtitle {
-			    font-weight: bold;
-			    font-size: $baseFontSize;
-			    background-color: darken($brown, 5%);
-			}
+	.filter-item {
+	    @include text-overflow();
+		line-height: 30px;
+		padding: 0 17px;
+		//@include border(0 0 1px 0, dotted, $brownLight);
+		//border-bottom: 1px solid darken($brown, 5%);
+		border-top: 1px solid lighten($brown, 5%);
+		&:active, &.pressed { background-color: $brownDark; }
+		&.subtitle {
+		    font-weight: bold;
+		    font-size: $baseFontSize;
+		    background-color: darken($brown, 5%);
 		}
 	}
 	.map_canvas, #map_canvas {
@@ -85,17 +83,6 @@
 		overflow: visible;
 		@include size(250px, 100%);
 		margin-top: -50px;
-		background-repeat: no-repeat;
-		background-position: center bottom;
-		@include background-size(cover);
-		.img-stack-icon {
-		    width: 32px;
-		    height: 32px;
-		    position: absolute;
-		    z-index: 1;
-		    top: 65px;
-		    right: 10px;
-		}
 		&::after {
 			content: "";
 			position: absolute;
@@ -105,70 +92,66 @@
 			@include background-size(100% 400px);
 		}
 	}
+	.img-stack-icon {
+        width: 32px;
+        height: 32px;
+        position: absolute;
+        z-index: 1;
+        top: 65px;
+        right: 10px;
+    }
 	.restaurant-profile {
-		z-index: 1;
 		width: 90%;
-		//@include border(0 0 1px, solid, $brownLight);
 		font-size: $fontSizeMini;
 		line-height: $fontSizeMini + 4px;
 		position: relative;
-		.rating {
-			position: absolute;
-			top: -50px;
-			left: 0;
-		}
-		.price {
-		    position: absolute;
-            top: -22px;
-            left: 5px;
-            font-size: $fontSizeSmall;
-            color: $white;
-            vertical-align: top;
-            .price-tags {
-                font-size: $fontSizeMini;
-            }
-		}
-		.order-button {
-			@include size(35px, 100px);
-			position: absolute;
-			top: -45px;
-			right: 0;
-			text-indent: 50px;
-			line-height: 40px;
-			vertical-align: middle;
-			color: $white;
-			font-size: 20px;
-			background: transparent url($bookButtonPath) no-repeat bottom left;
-			@include background-size(35px 35px);
-		}
-		article {
+		> article {
 			padding: $baseLineHeight/2 0;
-			//@include size(3 * $baseLineHeight, 100%);
 			width: 100%;
 			color: $brown;
-			p {
-				@include square(100%);
-				overflow: hidden; 
-				line-height: $baseLineHeight;
-			}
+			overflow: hidden; 
+            line-height: $baseLineHeight;
 			background: transparent url($gradientShadowPath) repeat-x bottom;
 			@include background-size(100% (3*$baseLineHeight));
 		}
-		.information  {
-			color: $brownDark;
-			padding: 5px 0;
-			> div {
-				min-height: 26px;
-				padding: 7px 0 7px 26px;
-				position: relative;
-				i {
-					position: absolute;
-					left: 0;
-					top: 0;
-				}
-			}
-		}
 	}
+	.rating {
+        position: absolute;
+        top: -50px;
+        left: 0;
+    }
+    .price {
+        position: absolute;
+        top: -22px;
+        left: 5px;
+        color: $white;
+    }
+    .order-button {
+        position: absolute;
+        top: -45px;
+        right: 0;
+        @include size(35px, 100px);
+        line-height: 35px;
+        text-indent: 50px;
+        color: $white;
+        font-size: 20px;
+        background: transparent url($bookButtonPath) no-repeat bottom left;
+        @include background-size(35px 35px);
+    }
+    .information  {
+        color: $brownDark;
+        padding: 5px 0;
+        > div {
+            min-height: 26px;
+            padding: 7px 0 7px 26px;
+            position: relative;
+        }
+        .icon {
+            position: absolute;
+            left: 0;
+            top: 0;
+        }
+    }
 	.restaurant-reviews {
 	    font-size: $fontSizeMini;
         width: 90%;
@@ -207,7 +190,7 @@
 	.callus-button {
 		width: 90%;
 		padding: 20px 10%;
-		.btn {
+		> .btn {
 			@include center-block();
 			width: 100%;
 			text-indent: -20px;
@@ -215,7 +198,6 @@
 		background: transparent url($gradientShadowPathR) repeat-x top;
 		@include background-size(100% 60px);
 	}
-
 }
 
 #view-restaurant-order {
@@ -223,9 +205,6 @@
 	.restaurant-picture {
 		@include size(250px, 100%);
 		margin-top: -100px;
-		background-repeat: no-repeat;
-		background-position: center bottom;
-		@include background-size(cover);
 	}
 	.restaurant-name {
         width: 100%;
@@ -247,74 +226,66 @@
 	.order-info, .contact-info, .floorplan-select, .product-select {
 		width: 100%;
 		padding: 0 15%;
-		> header {
-			margin: 0 -21.4285714%;
-			height: 40px;
-			text-align: center;
-			font-size: $fontSizeSmall;
-			position: relative;
-			h1 {
-	        	font-size: $baseFontSize;
-	        	line-height: 40px;
-	        	text-align: center;
-	        }
-		}
 		background: transparent url($gradientShadowPathR) no-repeat top;
 		@include background-size(100% (3*$baseLineHeight));
 	}
-	.contact-info, .floorplan-select, .product-select {
-		header h1.pressed, header h1:active {
-			background: $brownLighter;
-		}
-		header h1::after {
+	.section-title {
+        margin: 0 -21.4285714%;
+        height: 40px;
+        text-align: center;
+        font-size: $fontSizeSmall;
+        position: relative;
+        > h1 {
+            font-size: $baseFontSize;
+            line-height: 40px;
+            text-align: center;
+        }
+        &.menu > h1.pressed, &.menu > h1:active {
+            background: $brownLighter;
+        }
+        &.menu > h1::after {
             content: "";
-			position: absolute;
-			top: (40px - 26px) / 2;
-			right: 15%;
-			@include icon-display();
-			@include icon-offset(3, 4);
-		}
-	}
-	.floorplan-select .seat-selected {
+            position: absolute;
+            top: (40px - 26px) / 2;
+            right: 15%;
+            @include icon-display();
+            @include icon-offset(3, 4);
+        }
+    }
+	.seat-selected {
 	    &::before { content: '('; }
 	    &::after { content: ')'; }
 	}
-	.contact-info .switch-gender {
+	.switch-gender {
 		@include flexible($flex: 0, $orient: horizontal);
 		width: 70px;
 	}
 	.product-select {
 		background: transparent url($gradientShadowPathR) no-repeat top;
 		@include background-size(100% (3*$baseLineHeight));
-		.product-cart {
-			width: 100%;
-			@include clearfix();
-			.product-cart-item {
-				//width: 30%;
-				//height: 100px;
-				@include square(65px);
-				float: left;
-				border: 1px solid $brown;
-				margin: 1.666667%;
-				img { @include square(100%); @include center-block(); }
-				position: relative;
-				.delete-button {
-					position: absolute;
-					bottom: 0; right: 0;
-					opacity: 0.7;
-					padding: 3px;
-					background-color: $brown;
-					color: $white;
-				}
-			}
-		}
 	}
+    .product-cart-item {
+        @include square(65px);
+        float: left;
+        border: 1px solid $brown;
+        margin: 1.666667%;
+        position: relative;
+        > img { @include square(100%); @include center-block(); }
+        > .delete-button {
+            position: absolute;
+            bottom: 0; right: 0;
+            opacity: 0.7;
+            padding: 3px;
+            background-color: $brown;
+            color: $white;
+        }
+    }
 	.order-submit-button {
 		background: transparent url($gradientShadowPathR) no-repeat top;
 		@include background-size(100% (3*$baseLineHeight));
 		padding: 15px 15%;
 		width: 100%;
-		.btn { width: 100%; }
+		> .btn { width: 100%; }
 	}
 }
 
@@ -328,26 +299,26 @@
 		@include flexible($orient: vertical);
 		width: 100%;
 		overflow: hidden;
-		.svg-canvas-inner {
-			@include size(400px, 100%);
-		}
 	}
+	.svg-canvas-inner {
+        @include size(400px, 100%);
+    }
 	.floorplan-nav {
 		width: 100%;
 		text-align: center;
 		margin: 10px 0;
-		.floorplan-nav-item {
-			display: inline-block;
-			padding: 5px 10px;
-			margin: 5px;
-			border: 1px solid $brown;
-			@include border-radius(5px);
-			&.selected {
-				background-color: $brown;
-				color: $white;
-			} 
-		}
 	}
+	.floorplan-nav-item {
+        display: inline-block;
+        padding: 5px 10px;
+        margin: 5px;
+        border: 1px solid $brown;
+        @include border-radius(5px);
+        &.selected {
+            background-color: $brown;
+            color: $white;
+        } 
+    }
 }
 
 #view-restaurant-pictures {

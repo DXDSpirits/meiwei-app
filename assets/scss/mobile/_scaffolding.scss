@@ -142,3 +142,10 @@ img {
 .img-circle {
 	@include border-radius(500px); // crank the border-radius so it works with most reasonably sized images
 }
+
+// As an alternative to img tag, using background-image
+.img, .thumbnail {
+    background-repeat: no-repeat;
+    background-position: center bottom;
+    @include background-size(cover);
+}

@@ -262,21 +262,6 @@
 	        transform: translate3d($x, $y, $z);
 }
 
-// Animations
-@mixin keyframes($name) {
-	@-webkit-keyframes #{$name} { @content; }
-	   @-moz-keyframes #{$name} { @content; }
-	     @-o-keyframes #{$name} { @content; }
-	        @keyframes #{$name} { @content; }
-}
-
-@mixin keyframes-transform($name, $from, $to) {
-	@-webkit-keyframes #{$name} { from { -webkit-transform: $from; } to { -webkit-transform: $to; } }
-	   @-moz-keyframes #{$name} { from {    -moz-transform: $from; } to {    -moz-transform: $to; } }
-	     @-o-keyframes #{$name} { from {      -o-transform: $from; } to {      -o-transform: $to; } }
-	        @keyframes #{$name} { from {         transform: $from; } to {         transform: $to; } }
-}
-
 @mixin animation($animation...) {
 	-webkit-animation: $animation;
 	   -moz-animation: $animation;

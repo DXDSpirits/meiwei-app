@@ -50,11 +50,13 @@ body {
 }
 
 .view.view-next > .wrapper {
+    visibility: visible;
     @include animation(slideinfromright $pageSwitchDuration linear);
     -webkit-animation-fill-mode: forwards;
 }
 
 .view.view-prev > .wrapper {
+    visibility: visible;
     @include animation(slideouttoleft $pageSwitchDuration linear);
     -webkit-animation-fill-mode: forwards;
 }

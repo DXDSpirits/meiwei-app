@@ -58,8 +58,12 @@ module.exports = function(grunt) {
 			mobile: {
 				options: { style: 'compressed' },
 				src: 'assets/scss/mobile.scss',
-				dest: '<%= cfg.path.dest %>/assets/css/mobile.css'
-			}
+				dest: '<%= cfg.path.dest %>/assets/css/mobile.min.css'
+			},
+			development: {
+                src: 'assets/scss/mobile.scss',
+                dest: '<%= cfg.path.dest %>/assets/css/mobile.css'
+            }
 		},
 		includes: {
 			files: {

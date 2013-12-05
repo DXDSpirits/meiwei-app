@@ -14,11 +14,6 @@
 		left: 0;
 		@include square(89px);
 	}
-	.thumbnail {
-		background-repeat: no-repeat;
-		background-position: center bottom;
-		@include background-size(cover);
-	}
 	h1, h2, h3, p {
 		@include text-overflow();
 	}

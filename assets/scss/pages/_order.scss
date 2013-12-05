@@ -10,9 +10,6 @@
 	.restaurant-picture {
 		@include size(250px, 100%);
 		margin-top: -100px;
-		background-repeat: no-repeat;
-		background-position: center bottom;
-		@include background-size(cover);
 	}
 	.restaurant-name {
         width: 100%;
@@ -84,9 +81,7 @@
             overflow: hidden;
             position: relative;
             .ar { padding-bottom: 100%; }
-            background-repeat: no-repeat;
 			background-position: center center;
-			@include background-size(cover);
         }
         .tag {
             margin-top: 5px;
@@ -136,9 +131,6 @@
         overflow: hidden;
         @include border-top-left-radius(5px);
         @include border-top-right-radius(5px);
-        background-repeat: no-repeat;
-        background-position: center bottom;
-        @include background-size(cover);
     }
     .order-detail {
         width: 85%;

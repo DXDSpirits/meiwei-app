@@ -122,6 +122,7 @@ $(function() {
     var SearchFilterItem = MeiweiApp.ModelView.extend({
         filtername: 'circle',
         tagName: 'li',
+        className: 'filter-item',
         render: function() {
             this.$el.html(this.model.get('name'));
             this.$el.attr({ 'data-filter': this.filtername, 'data-id': this.model.id });
@@ -130,7 +131,7 @@ $(function() {
     });
     
     var CircleFilter = MeiweiApp.CollectionView.extend({
-        DistrictModelView: SearchFilterItem.extend({ className: 'subtitle', filtername: 'district' }),
+        DistrictModelView: SearchFilterItem.extend({ className: 'filter-item subtitle', filtername: 'district' }),
         CircleModelView: SearchFilterItem.extend({ filtername: 'circle' }),
         removeOne: function(item) {},
         addOne: function(item) {},

@@ -102,9 +102,6 @@
 	.favorite-resto-carousel {
 		@include size(250px, 100%);
 		margin-top: -70px;
-		background-repeat: no-repeat;
-		background-position: center bottom;
-		@include background-size(cover);
 		position: relative;
 		&::after {
 			content: "";
@@ -155,7 +152,7 @@
 	$listItemWidth: 100%; //93.75%;
 	$buttonWidth: 70%; //62.5%;
 	$listPadding: ($listItemWidth - $buttonWidth) / 2;
-	ul.member-center-nav {
+	.member-center-nav {
 		width: $listItemWidth;
 		li {
 			width: 100%;
@@ -214,10 +211,8 @@
         color: $white;
         span { vertical-align: middle; }
     }
-    .detail-list-item {
-        .positive { color: #27AE60; }
-        .negative { color: #E74C3C; }
-    }
+    .positive { color: #27AE60; }
+    .negative { color: #E74C3C; }
 }
 
 #view-member-anniversaries {
@@ -225,25 +220,25 @@
 		@include clearfix();
 		@include border(0 0 1px 0, solid, $brownLighter);
 		@include size(50px, 100%);
-		.date-icon, .date-desc {
-			float: left;
-			height: 100%;
-		}
-		.date-icon {
-			padding: 12px;
-			width: 80px;
-			span {
-				display: inline-block;
-				width: 30px;
-				text-align: right;
-				font-weight: bold;
-				vertical-align: middle;
-			}
-		}
-		.date-desc {
-			padding: 15px;
-		}
 	}
+	.date-icon, .date-desc {
+        float: left;
+        height: 100%;
+    }
+    .date-icon {
+        padding: 12px;
+        width: 80px;
+        > span {
+            display: inline-block;
+            width: 30px;
+            text-align: right;
+            font-weight: bold;
+            vertical-align: middle;
+        }
+    }
+    .date-desc {
+        padding: 15px;
+    }
 	.month {
 		background-color: $brownLight;
 		width: 100%;
@@ -263,24 +258,24 @@
 	    padding: 20px 0;
 	    @include clearfix();
 	    text-align: center;
-	    .span1, .span2, .span3 {
-	        //float: left;
-	        display: inline-block;
-	        margin: 0 3px;
-	        line-height: 35px;
-	    }
-	    .span3 {
-	        font-size: 20px;
-	        color: $brown;
-	    }
-	    .span2 {
-	        font-size: 17px;
-	    }
-	    .span1 {
-	        font-size: 14px;
-	        font-weight: bold;
-	    }
 	}
+	.span1, .span2, .span3 {
+        //float: left;
+        display: inline-block;
+        margin: 0 3px;
+        line-height: 35px;
+    }
+    .span3 {
+        font-size: 20px;
+        color: $brown;
+    }
+    .span2 {
+        font-size: 17px;
+    }
+    .span1 {
+        font-size: 14px;
+        font-weight: bold;
+    }
 }
 
 #view-settings {
