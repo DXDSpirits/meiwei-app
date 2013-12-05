@@ -1,4 +1,7 @@
 $(function() {
+    function checkFirstTime() {
+        return !localStorage.getItem('visited-view-home');
+    }
     var RecommendsFilter = MeiweiApp.CollectionView.extend({
         initCollectionView: function() {
         	this.listenTo(this.collection, 'reset add remove', this.initScroller);
@@ -70,7 +73,9 @@ $(function() {
             if (products) {
                 this.productItems.smartSet(products);
             }
-            this.productItems.fetch({ data: {recommend: 1} });
+            if (!checkFirstTime()) { 
+                this.productItems.fetch({ data: {recommend: 1} });
+            }
         },
         renderAd: function() {
             if (this.ad.get('online')) {
@@ -79,7 +84,9 @@ $(function() {
         },
     	render: function() {
     	    this.renderConcierge();
-    		this.ad.fetch({success: this.renderAd});
+    	    if (!checkFirstTime()) {
+                this.ad.fetch({success: this.renderAd});
+            }
     		return this;
     	}
     });
@@ -212,8 +219,10 @@ $(function() {
     		if (listId) {
                 MeiweiApp.Pages.Home.recommend.id = listId;
             }
-    		this.recommend.fetch();
-            this.recommendNames.fetch();
+            if (!checkFirstTime()) {
+                this.recommend.fetch();
+                this.recommendNames.fetch();
+            }
     	}
     }))({el: $("#view-home")});
 });
