@@ -239,9 +239,9 @@ $(function() {
             this.views.productCart.render();
             
             if (_.isEmpty(this.restaurant.get('floorplans'))) {
-                this.$('.floorplan-select').addClass('hide');
+                this.$('.floorplan-select').addClass('hidden');
             } else {
-                this.$('.floorplan-select').removeClass('hide');
+                this.$('.floorplan-select').removeClass('hidden');
             }
             this.initScroller();
             //this.$('input[name=orderdate]').focus();

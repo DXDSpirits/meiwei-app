@@ -106,13 +106,13 @@ $(function() {
     			success: function(model, response, options) {
     				self.$('.btn-confirm').remove();
     				self.$('.content .info-text .balance').html(model.balance);
-    				self.$('.content .info-text').show();
+    				self.$('.content .info-text').removeClass('hidden');
     			},
     			error: function(model, response, options) {
     				var error = JSON.parse(model.responseText);
     				self.$('.btn-confirm').remove();
     				self.$('.content .info-text').html(error.detail);
-    				self.$('.content .info-text').show();
+    				self.$('.content .info-text').removeClass('hidden');
     			}
     		});
     	},

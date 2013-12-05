@@ -12,13 +12,13 @@ $(function() {
     	render: function() {
     		var resto = this.model.toJSON();
     		this.$('article p').html(resto.description);
-    		this.$('.address').toggleClass('hide', _.isEmpty(resto.address));
+    		this.$('.address').toggleClass('hidden', _.isEmpty(resto.address));
     		this.$('.address p').html(resto.address);
-    		this.$('.workinghour').toggleClass('hide', _.isEmpty(resto.workinghour));
+    		this.$('.workinghour').toggleClass('hidden', _.isEmpty(resto.workinghour));
     		this.$('.workinghour p').html(resto.workinghour);
-    		this.$('.parking').toggleClass('hide', _.isEmpty(resto.parking));
+    		this.$('.parking').toggleClass('hidden', _.isEmpty(resto.parking));
     		this.$('.parking p').html(resto.parking);
-    		this.$('.discount').toggleClass('hide', _.isEmpty(resto.discount));
+    		this.$('.discount').toggleClass('hidden', _.isEmpty(resto.discount));
     		this.$('.discount p').html(resto.discount);
     		this.$('.rating').attr('class', 'rating r-' + resto.score);
             this.$('.price-tags').html(resto.price < 10 ? new Array(resto.price+1).join('￥') : '￥' + resto.price);
