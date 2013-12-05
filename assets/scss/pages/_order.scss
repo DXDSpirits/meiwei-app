@@ -108,6 +108,7 @@
 
 #view-product-purchase .stack-item.selected::after {
 	content: "";
+	@include icon-display();
 	@include icon-offset(5, 5);
 	position: absolute;
 	top: 0;

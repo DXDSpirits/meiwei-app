@@ -14,8 +14,11 @@
 	}
 }
 
+.icon {
+    @include icon-display();
+}
+
 @mixin icon-offset($x, $y) {
-	@include icon-display();
 	background-position: $x * (-26px)  $y * (-26px);
 }
 
@@ -67,6 +70,7 @@
 .icon-favorite				{ @include icon-offset(2, 2); }
 .icon-favorite.pressed,
 .pressed .icon-favorite		{ @include icon-offset(3, 2); }
+.icon-favorite.succeed      { @include icon-offset(7, 6); @include animation(jump .35s ease-in-out); }
 
 .icon-map-marker			{ @include icon-offset(4, 2); }
 .icon-map-marker.pressed,
@@ -116,7 +120,10 @@
 @mixin icon-star-small-half		{ @include icon-offset(5, 6); width: 20px; }
 
 @mixin rating($r) {
-	* { @include icon-star-large-full(); }
+	> * {
+	    @include icon-display();
+	    @include icon-star-large-full();
+	}
 	> :nth-child(n + #{$r+1}) {
 		@include icon-star-large-zero();
 	}
@@ -129,10 +136,4 @@
 	&.r-3 { @include rating(3); }
 	&.r-4 { @include rating(4); }
 	&.r-5 { @include rating(5); }
-}
-
-// Favorite
-.icon-favorite.succeed {
-	@include icon-offset(7, 6);
-	@include animation(jump .35s ease-in-out);
 }

@@ -271,6 +271,7 @@
 			position: absolute;
 			top: (40px - 26px) / 2;
 			right: 15%;
+			@include icon-display();
 			@include icon-offset(3, 4);
 		}
 	}

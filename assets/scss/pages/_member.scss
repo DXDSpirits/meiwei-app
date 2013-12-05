@@ -176,6 +176,7 @@
 			top: ($listItemHeight - 26px) / 2;
 			right: $listPadding;
 			font-weight: bold;
+			@include icon-display();
 			@include icon-offset(3, 4);
 		}
 	}

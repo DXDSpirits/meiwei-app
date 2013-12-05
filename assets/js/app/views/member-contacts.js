@@ -82,8 +82,8 @@ $(function() {
     	        mobile: $(item).find('[data-field="mobile"]').text(),
     	        sexe: $(item).find('[data-field="sexe"]').text(),
     	    });
-    	    $(item).find('i').attr('class', 'icon-select');
-            $(item).siblings().find('.icon-select').attr('class', 'icon-circle');
+    	    $(item).find('i').attr('class', 'icon icon-select');
+            $(item).siblings().find('.icon-select').attr('class', 'icon icon-circle');
     	},
     	getLocalContacts: function() {
     	    if (navigator.contacts && _.isFunction(navigator.contacts.find)) {
