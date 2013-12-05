@@ -128,14 +128,15 @@
     }
     .order-button {
         position: absolute;
-        top: -45px;
+        top: -65px;
         right: 0;
-        @include size(35px, 100px);
+        @include size(75px, 100px);
+        padding: 20px 0;
         line-height: 35px;
         text-indent: 50px;
         color: $white;
         font-size: 20px;
-        background: transparent url($bookButtonPath) no-repeat bottom left;
+        background: transparent url($bookButtonPath) no-repeat center left;
         @include background-size(35px 35px);
     }
     .information  {
