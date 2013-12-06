@@ -47,3 +47,59 @@
 		$(window).bind('touchmove', function(ev) { ev.preventDefault(); });
 	};
 })(document);
+
+! function($) {
+    "use strict";
+    $.fn['switchControl'] = function(method) {
+        var methods = {
+            init : function() {
+                return this.each(function() {
+                    "off: 0; on : 1"
+                    var $element = $(this), 
+                        onLabel = $(this).find('.label-on').text() || 'ON',
+                        offLabel = $(this).find('.label-off').text() || 'OFF';
+                    var switchGender = function(gender) {
+                        window.scrollTo(0, 0); // ios hack ...
+                        var switchOff = function() {
+                            $element.removeClass('on').addClass('off');
+                            $element.find('input').val(0);
+                            $element.find('.label-text').html(offLabel);
+                        };
+                        var switchOn = function() {
+                            $element.removeClass('off').addClass('on');
+                            $element.find('input').val(1);
+                            $element.find('.label-text').html(onLabel);
+                        }
+                        if (gender == 0) {
+                            switchOff();
+                        } else if (gender == 1) {
+                            switchOn();
+                        } else {
+                            if ($element.hasClass('on')) switchOff(); else switchOn();
+                        }
+                    };
+                    switchGender(0);
+                    var btn = new MBP.fastButton($element[0], switchGender);
+                    btn.onTouchMove = function(event) {
+                        if (Math.abs(event.touches[0].clientY - this.startY) > 10) btn.reset(event);
+                        if ($element.hasClass('on') && event.touches[0].clientX - btn.startX > 10) btn.reset(event);
+                        if ($element.hasClass('off') && event.touches[0].clientX - btn.startX < -10) btn.reset(event);
+                    };
+                    $element.on('change', function(e, status) {
+                        switchGender(status);
+                    });
+                });
+            },
+            toggle: function() {
+                $(this).trigger('change', arguments[0]);
+            },
+            destroy : function() {  }
+        };
+        if (methods[method])
+            return methods[method].apply(this, Array.prototype.slice.call(arguments, 1));
+        else if ( typeof method === 'object' || !method)
+            return methods.init.apply(this, arguments);
+        else
+            $.error('Method ' + method + ' does not exist!');
+    };
+}(jQuery);

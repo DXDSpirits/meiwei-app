@@ -4,35 +4,8 @@ $(function() {
             'tap button': 'updateProfile'
         },
         initView: function() {
-            _.bindAll(this, 'switchGender', 'render');
-            var btn = this.bindFastButton(this.$('.switch-gender'), this.switchGender);
-            var switchGender = this.$('.switch-gender');
-            btn.onTouchMove = function(event) {
-                if (Math.abs(event.touches[0].clientY - this.startY) > 10) btn.reset(event);
-                if (switchGender.hasClass('on') && event.touches[0].clientX - btn.startX > 10) btn.reset(event);
-                if (switchGender.hasClass('off') && event.touches[0].clientX - btn.startX < -10) btn.reset(event);
-            };
-        },
-        switchGender: function(gender) {
-            window.scrollTo(0, 0);
-            var switchGender = this.$('.switch-gender');
-            var switchOff = function() {
-                switchGender.removeClass('on').addClass('off');
-                switchGender.find('input').val(0);
-                switchGender.find('label').html(MeiweiApp._('Mr.'));
-            };
-            var switchOn = function() {
-                switchGender.removeClass('off').addClass('on');
-                switchGender.find('input').val(1);
-                switchGender.find('label').html(MeiweiApp._('Ms.'));
-            }
-            if (gender == 0) {
-                switchOff();
-            } else if (gender == 1) {
-                switchOn();
-            } else {
-                if (switchGender.hasClass('on')) switchOff(); else switchOn();
-            }
+            _.bindAll(this, 'render');
+            this.$('.switch-gender').switchControl();
         },
         updateProfile: function(e) {
             if (e.preventDefault) e.preventDefault();
@@ -59,8 +32,7 @@ $(function() {
             this.$('input[name=birthday]').val(profile.birthday);
             this.$('input[name=sexe]').val(profile.sexe);
             this.$('.info-text').html('');
-            
-            this.switchGender(profile.sexe);
+            this.$('.switch-gender').switchControl('toggle', profile.sexe);
         }
     });
     

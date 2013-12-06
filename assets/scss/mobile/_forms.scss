@@ -105,46 +105,57 @@ form label {
 }
 
 //radio-button
-.control-group.switch {
+.switch {
 	@include flex-box($orient: horizontal);
 	font-size: $fontSizeMini;
 	padding: 0;
-	$switchInnerHeight: 30px;
-	.switch-inner {
+	> .switch-inner {
+	    $switchInnerHeight: 30px;
 		@include size($switchInnerHeight, $switchInnerHeight * 2 + 10px);
 		@include border-radius(999px);
 		position: relative;
 		border: 1px solid $brownLight;
-	}
-	.switch-button {
-		@include square($switchInnerHeight - 2px);
-		@include border-radius(999px);
-		background-color: $white;
-		box-shadow: 0 0 1px $brownDark;
-		@include translate3d(0, 0, 0);
-		-webkit-transition: -webkit-transform .2s linear;
-	}
-	label {
-		position: absolute;
-		top: 0;
-		left: 0;
-		padding: 0 10px;
-		line-height: $switchInnerHeight - 2px;
-		@include square(100%);
-		text-align: right;
+		> .label-on, > .label-off {
+		    display: none;
+		}
+		> .label-text {
+            position: absolute;
+            top: 0;
+            left: 0;
+            padding: 0 10px;
+            line-height: $switchInnerHeight - 2px;
+            @include square(100%);
+            text-align: right;
+        }
+        > .switch-button {
+            @include square($switchInnerHeight - 2px);
+            @include border-radius(999px);
+            background-color: $white;
+            box-shadow: 0 0 1px $brownDark;
+            -webkit-transition: -webkit-transform .2s linear;
+        }
 	}
 }
 
-.control-group.switch.on {
-	.switch-inner {
+.switch.off {
+    > .switch-inner {
+        > .switch-button {
+            @include translate3d(0, 0, 0);
+        }
+        > .label-text {
+            text-align: right;
+        }
+    }
+}
+.switch.on {
+	> .switch-inner {
 		background-color: $brownLight;
-	}
-	&.on .switch-button {
-		@include translate3d(40px, 0, 0);
-		-webkit-transition: -webkit-transform .2s linear;
-	}
-	&.on label {
-		text-align: left;
-		color: $white;
+		> .switch-button {
+            @include translate3d(40px, 0, 0);
+        }
+        > .label-text {
+            text-align: left;
+            color: $white;
+        }
 	}
 }

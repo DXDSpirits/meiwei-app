@@ -43,14 +43,8 @@ $(function() {
     var RestaurantOrderContactForm = MeiweiApp.View.extend({
         events: { 'tap > header': 'selectContact' },
         initView: function(options) {
-            _.bindAll(this, 'fillContact', 'switchGender');
-            var btn = this.bindFastButton(this.$('.switch-gender'), this.switchGender);
-            var switchGender = this.$('.switch-gender');
-            btn.onTouchMove = function(event) {
-                if (Math.abs(event.touches[0].clientY - this.startY) > 10) btn.reset(event);
-                if (switchGender.hasClass('on') && event.touches[0].clientX - btn.startX > 10) btn.reset(event);
-                if (switchGender.hasClass('off') && event.touches[0].clientX - btn.startX < -10) btn.reset(event);
-            };
+            _.bindAll(this, 'fillContact');
+            this.$('.switch-gender').switchControl();
         },
         selectContact: function() {
             MeiweiApp.goTo('MemberContacts', { multiple: false, callback: this.fillContact });
@@ -58,28 +52,7 @@ $(function() {
         fillContact: function(contactname, contactphone, contactgender) {
             this.$('input[name=contactname]').val(contactname);
             this.$('input[name=contactphone]').val(contactphone);
-            this.switchGender(contactgender);
-        },
-        switchGender: function(gender) {
-            window.scrollTo(0, 0);
-            var switchGender = this.$('.switch-gender');
-            var switchOff = function() {
-                switchGender.removeClass('on').addClass('off');
-                switchGender.find('input').val(0);
-                switchGender.find('label').html(MeiweiApp._('Mr.'));
-            };
-            var switchOn = function() {
-                switchGender.removeClass('off').addClass('on');
-                switchGender.find('input').val(1);
-                switchGender.find('label').html(MeiweiApp._('Ms.'));
-            }
-            if (gender == 0) {
-                switchOff();
-            } else if (gender == 1) {
-                switchOn();
-            } else {
-                if (switchGender.hasClass('on')) switchOff(); else switchOn();
-            }
+            this.$('.switch-gender').switchControl('toggle', contactgender);
         },
         //template: TPL['restaurant-order-contact-form'],
         render: function(defaultValues) {
