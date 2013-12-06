@@ -32,6 +32,8 @@ MeiweiApp.Router = new (Backbone.Router.extend({
 		this.route('product/purchase', 'productPurchase');
 		this.route('product/redeem', 'productRedeem');
 		
+		this.route('requestdriver', 'requestDriver');
+		
 		this.route('attending', 'attending');
 		this.route('settings', 'settings');
 	},
@@ -64,6 +66,8 @@ MeiweiApp.Router = new (Backbone.Router.extend({
     
     productPurchase: function() { MeiweiApp.Pages.ProductPurchase.go(); MeiweiApp.history.active = MeiweiApp.Pages.ProductPurchase; },
     productRedeem: function() { MeiweiApp.Pages.ProductRedeem.go(); MeiweiApp.history.active = MeiweiApp.Pages.ProductRedeem; },
+    
+    requestDriver: function() { MeiweiApp.Pages.RequestDriver.go(); MeiweiApp.history.active = MeiweiApp.Pages.RequestDriver; },
     
     attending: function() { MeiweiApp.Pages.Attending.go(); MeiweiApp.history.active = MeiweiApp.Pages.Attending; },
     settings: function() { MeiweiApp.Pages.Settings.go(); MeiweiApp.history.active = MeiweiApp.Pages.Settings; }

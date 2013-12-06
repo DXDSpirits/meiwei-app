@@ -34,8 +34,7 @@ $(function() {
         },
         show: function() {
             if (!this.map) {
-                window.initializeMap = this.initializeMap;
-                $.getScript("http://webapi.amap.com/maps?v=1.2&key=88079b446671c954e1de335141228c28&callback=initializeMap");
+                this.initializeMap();
             } else {
                 this.dropMarkers();
             }
@@ -44,7 +43,11 @@ $(function() {
             MeiweiApp.sendGaEvent('map', 'show');
         },
         initializeMap: function () {
-            if (!window.AMap) return;
+            if (!window.AMap) {
+                window.initializeMap = this.initializeMap;
+                $.getScript("http://webapi.amap.com/maps?v=1.2&key=88079b446671c954e1de335141228c28&callback=initializeMap");
+                return;
+            }
             this.markers = [];
             var mapObj = this.map = new AMap.Map('map_canvas', {
                 center: new AMap.LngLat(MeiweiApp.coords.longitude, MeiweiApp.coords.latitude),

@@ -1,0 +1,40 @@
+<div class="view view-hidden" id="view-request-driver">
+	<header class="header-navbar">
+		<div class="header-btn header-btn-left">
+			<i class="icon icon-back"></i>
+		</div>
+		<h1 data-i18n="CheckinAndShare"></h1>
+		<div class="header-btn header-btn-right">
+			<i class="icon icon-blank"></i>
+		</div>
+	</header>
+	<section class="wrapper">
+		<div class="scroll iscroll">
+			<div class="scroll-inner">
+			    <div class="map">
+                    <div id="driver_map_canvas"></div>
+                </div>
+				<div class="order-form">
+				    <form>
+                        <p class="info-text"></p>
+                        <fieldset>
+                            <div class="inline-group">
+                                <i class="icon icon-map-marker-small"></i>
+                                <input type="text" name="address" />
+                            </div>
+                            <div class="inline-group">
+                                <i class="icon icon-calendar"></i>
+                                <input type="date" name="orderdate" />
+                            </div>
+                            <div class="inline-group">
+                                <i class="icon icon-clock"></i>
+                                <input type="time" name="ordertime" />
+                            </div>
+                        </fieldset>
+                    </form>
+                    <button class="submit-button btn-inverse btn-block-level" data-i18n="Submit Order"></button>
+				</div>
+			</div>
+		</div>
+	</section>
+</div>
