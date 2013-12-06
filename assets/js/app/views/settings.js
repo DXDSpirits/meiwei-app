@@ -5,9 +5,13 @@ $(function() {
             'tap .lang-opt.zh': 'switchToZh',
             'tap .lang-opt.en': 'switchToEn',
             'tap .btn-share-weixin': 'onClickWeixinBtn',
-            'tap .btn-share-weibo': 'onClickWeiboBtn'
+            'tap .btn-share-weibo': 'onClickWeiboBtn',
+            'tap .settings-request-driver': 'goToRequestDriver'
         },
         initPage: function() { },
+        goToRequestDriver: function() {
+            MeiweiApp.goTo('RequestDriver');
+        },
         askToRestartApp: function() {
             MeiweiApp.showConfirmDialog(
                 MeiweiApp._('Restart Application'),
@@ -55,6 +59,7 @@ $(function() {
             MeiweiApp.sendGaSocial('weixin', 'share to moments', 'app promo');
         },
         render: function() {
+            this.$('.version-no').html(MeiweiApp.Version);
             this.$('.lang-opt.zh').toggleClass('selected', MeiweiApp.getLang() == 'zh');
             this.$('.lang-opt.en').toggleClass('selected', MeiweiApp.getLang() == 'en');
         }

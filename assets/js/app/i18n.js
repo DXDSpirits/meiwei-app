@@ -351,6 +351,10 @@ MeiweiApp.i18n = {
         zh: '更新提示',
         en: 'Update Available'
     },
+    'Version': {
+        zh: '版本',
+        en: 'Version'
+    },
     'New version is available, go to update?': {
         zh: '好消息！美位手机应用更新啦，前往下载？',
         en: 'New version is available, go to update?'
