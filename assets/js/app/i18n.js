@@ -382,6 +382,10 @@ MeiweiApp.i18n = {
     'Weekly Choice': {
     	zh: '本周餐厅',
     	en: 'Weekly Choice'
+    },
+    'Designated Driving': {
+        zh: '代驾服务',
+        en: 'Designated Driving'
     }
 };
 

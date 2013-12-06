@@ -1,8 +1,42 @@
 $(function() {
+    var ConfirmDialog = MeiweiApp.View.extend({
+        className: 'dialog',
+        template: TPL['orderdrive-confirm-dialog'],
+        events: {
+            'click .btn-cancel': 'closeDialog',
+            'click .btn-confirm': 'confirm'
+        },
+        closeDialog: function() {
+            this.remove();
+            $('#dialog-overlay').addClass('hidden');
+            this.undelegateEvents();
+        },
+        openDialog: function() {
+            $('body').append(this.el);
+            $('#dialog-overlay').removeClass('hidden');
+            this.delegateEvents();
+        },
+        confirm: function() {
+            MeiweiApp.Pages.RequestDriver.submitOrder();
+            this.closeDialog();
+        },
+        render: function() {
+            this.$el.html(this.template());
+            MeiweiApp.initLang(this.$el);
+            this.openDialog();
+            return this;
+        }
+    });
+    
     MeiweiApp.Pages.RequestDriver = new (MeiweiApp.PageView.extend({
+        events: {
+            'fastclick .header-btn-left': 'onClickLeftBtn',
+            'tap .order-submit-button': 'askToSubmitOrder'
+        },
         initPage: function() {
             _.bindAll(this, 'initializeMap', 'updateAddress');
             this.views = {  };
+            this.$('.switch-gender').switchControl();
         },
         hideMap: function() {
             if (this.map) this.map.clearMap();
@@ -32,6 +66,8 @@ $(function() {
                     radius: 100,
                     extensions: "base"
                 });
+                AMap.event.addListener(mapObj.geoCoder, "complete", updateAddress);
+                mapObj.geoCoder.getAddress(new AMap.LngLat(MeiweiApp.coords.longitude, MeiweiApp.coords.latitude));
                 AMap.event.addListener(mapObj, 'click', function(e) {
                     mapObj.geoCoder.getAddress(e.lnglat);
                     mapObj.clearMap();
@@ -41,13 +77,41 @@ $(function() {
                     MeiweiApp.coords.longitude = e.lnglat.getLng();
                     MeiweiApp.coords.latitude = e.lnglat.getLat();
                 });
-                AMap.event.addListener(mapObj.geoCoder, "complete", updateAddress);
             });
         },
         updateAddress: function(data) {
             this.$('input[name=address]').val(data.regeocode.formattedAddress);
         },
+        askToSubmitOrder: function(e) {
+            if (e.preventDefault) e.preventDefault();
+            var dialog = new ConfirmDialog();
+            dialog.remove();
+            dialog.render();
+        },
+        submitOrder: function() {
+            var newOrder = new MeiweiApp.Models.OrderDrive();
+            newOrder.set({
+                member: MeiweiApp.me.id,
+                address: this.$('input[name=address]').val() || null,
+                latitude: MeiweiApp.coords.longitude,
+                longitude: MeiweiApp.coords.latitude,
+                order_time: this.$('input[name=order_time]').val() || null,
+                name: this.$('input[name=name]').val() || null,
+                gender: +this.$('input[name=gender]').val() || 0,
+                mobile: this.$('input[name=mobile]').val() || null,
+                comment: this.$('input[name=comment]').val() || null,
+            });
+            this.$('.info-text').html('');
+            var self = this;
+            newOrder.save({}, {
+                success: function() { MeiweiApp.goTo('Home'); },
+                error: function(model, xhr, options) {
+                    self.displayError(self.$('.info-text'), xhr.responseText);
+                }
+            });
+        },
         render: function() {
+            this.$('input[name=ordertime]')
             this.showMap();
         }
     }))({el: $("#view-request-driver")});
