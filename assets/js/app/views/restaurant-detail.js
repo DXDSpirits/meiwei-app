@@ -68,7 +68,7 @@ $(function() {
     		this.$('.restaurant-pictures').css('background-image', 'none');
     	},
     	renderReviews: function() {
-    	    if (!this.restaurant.get('reviews')) return;
+    	    if (!this.restaurant.get('reviews_control')) return;
     	    var self = this;
             this.reviews.fetch({ reset: true, url: this.restaurant.get('reviews'), success: function(collection) {
                 if (collection.length > 0) {
