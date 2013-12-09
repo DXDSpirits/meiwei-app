@@ -44,7 +44,7 @@ $(function() {
                 if ($('body').height() >= 530) {
                     this.$('.section-qrcode').show();
                     this.$('.section-qrcode').qrcode({
-                        render: "canvas", text: this.model.get('orderno'), height: 100, width: 100
+                        render: "canvas", text: this.model.get('order_no'), height: 100, width: 100
                     });
                     this.$('.order-detail').css({ 'position': 'relative', 'top': '-50px' });
                 }
