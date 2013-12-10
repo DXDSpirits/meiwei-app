@@ -81,6 +81,7 @@ MeiweiApp.goTo = function(pageName, options) {
 	var next = MeiweiApp.Pages[pageName];
 	(options || (options = {})).caller = options.caller || MeiweiApp.history.active;
 	if (next != MeiweiApp.history.active) {
+	    MeiweiApp.abortAllAjax();
 		MeiweiApp.history.stack.push(MeiweiApp.history.active);
 		MeiweiApp.history.active = next;
 		MeiweiApp.history.active.go(options);
@@ -93,6 +94,7 @@ MeiweiApp.refreshActivePage = function() {
 };
 
 MeiweiApp.goBack = function() {
+    MeiweiApp.abortAllAjax();
 	if (MeiweiApp.history.stack.length > 0) {
 		var prev = MeiweiApp.history.stack.pop();
 		MeiweiApp.history.active = prev;

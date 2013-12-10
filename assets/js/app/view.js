@@ -186,7 +186,6 @@ MeiweiApp.PageView = MeiweiApp.View.extend({
         });
     },
     go: function(options) {
-        MeiweiApp.abortAllAjax();
         this.options = options || {};
         this.reset();
         var timeout;
@@ -199,7 +198,6 @@ MeiweiApp.PageView = MeiweiApp.View.extend({
         this.showPage();
     },
     refresh: function() {
-        MeiweiApp.abortAllAjax();
         this.lastRender = new Date();
         var timeout;
         var render = this.render, pageOpen = function() {
