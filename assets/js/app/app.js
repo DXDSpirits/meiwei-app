@@ -214,10 +214,10 @@ MeiweiApp.handleError = function(err) {
     } catch (e) {}
 };
 
-window.onerror = function(message, filaName, lineNumber) {
+window.onerror = function(message, file, line, column, errorObj) {
     try {
         MeiweiApp.abortAllAjax();
-        var detail = [filaName, lineNumber].join(':');
+        var detail = errorObj && errorObj.stack ? errorObj.stack : [file, line, column].join(':')
         var error = new MeiweiApp.Models.ClientError();
         error.save({message: message, detail: detail}, {global: false});
         console.error(message, detail);
