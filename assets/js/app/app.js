@@ -184,6 +184,11 @@ MeiweiApp.initAjaxEvents = function() {
     });
     $.ajaxSetup({
         beforeSend: function(jqXHR) {
+            if (xhrPool.length >= 7) {
+                xhrPool[0].abort();
+                xhrPool.splice(0, 1);
+                MeiweiApp.handleError({message: 'xhrPool too large'});
+            }
             xhrPool.push(jqXHR);
         },
         complete: function(jqXHR) {
@@ -193,7 +198,7 @@ MeiweiApp.initAjaxEvents = function() {
     });
     MeiweiApp.abortAllAjax = function() {
         _.each(xhrPool, function(jqXHR) { jqXHR.abort(); });
-        xhrPool = [];
+        xhrPool.length = 0;
     };
 };
 
