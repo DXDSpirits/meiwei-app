@@ -78,7 +78,6 @@ $(function() {
             'tap .register-switch': 'goToRegister',
             'tap .login-switch': 'goToLogin'
         },
-    	onClickLeftBtn: function() { MeiweiApp.goTo('Home'); },
     	initPage: function() {
     		this.views = {
     			loginForm: new MeiweiApp.Views.MemberLoginForm({ el: this.$('.login-box') }),

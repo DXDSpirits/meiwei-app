@@ -173,7 +173,6 @@ $(function() {
             'focus .search-form > input': 'clearFormInput'
         },
         clearFormInput: function() { this.$('.search-form > input').val(''); },
-        onClickLeftBtn: function() { MeiweiApp.goTo('Home'); },
         onClickRightBtn: function() {
             var flip = this.$('.flipper').hasClass('flip');
             this.$('.flipper').toggleClass('flip', !flip);

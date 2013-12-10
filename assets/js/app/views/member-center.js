@@ -65,7 +65,6 @@ $(function() {
     		'tap .member-center-nav > li:nth-child(6)': 'gotoMyAnniversaries',
     		'tap .logout-button': 'logout'
     	},
-    	onClickLeftBtn:      function() { MeiweiApp.goTo('Home'); },
     	onClickRightBtn:     function() { MeiweiApp.goTo('Settings'); },
     	gotoMyProfile:       function() { MeiweiApp.goTo('MemberProfile'); },
     	gotoMyOrder:         function() { MeiweiApp.goTo('OrderList'); },

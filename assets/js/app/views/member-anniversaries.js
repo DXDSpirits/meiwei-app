@@ -26,7 +26,6 @@ $(function() {
     });
     
     MeiweiApp.Pages.MemberAnniversaries = new (MeiweiApp.PageView.extend({
-    	onClickLeftBtn: function() { MeiweiApp.goTo('MemberCenter'); },
     	onClickRightBtn: function() {
     		MeiweiApp.goTo('MemberAnniversariyDetail');
     	},

@@ -50,7 +50,6 @@ $(function() {
     			})
     		};
     	},
-    	onClickLeftBtn: function() { MeiweiApp.goBack(); },
     	onClickRightBtn: function() {
     		if (this.options.caller == MeiweiApp.Pages.RestaurantOrder) {
     			MeiweiApp.goBack();
