@@ -52,7 +52,7 @@ var utils = (function () {
 			speed = Math.abs(distance) / time,
 			destination,
 			duration,
-			deceleration = 0.006; //0.0006;
+			deceleration = 0.001; //0.0006;
 
 		destination = current + ( speed * speed ) / ( 2 * deceleration ) * ( distance < 0 ? -1 : 1 );
 		duration = speed / deceleration;
