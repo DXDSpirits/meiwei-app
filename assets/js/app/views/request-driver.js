@@ -1,7 +1,7 @@
 $(function() {
     var ConfirmDialog = MeiweiApp.View.extend({
         className: 'dialog',
-        template: TPL['orderdrive-confirm-dialog'],
+        template: TPL['orderdriver-confirm-dialog'],
         events: {
             'click .btn-cancel': 'closeDialog',
             'click .btn-confirm': 'confirm'
@@ -89,7 +89,7 @@ $(function() {
             dialog.render();
         },
         submitOrder: function() {
-            var newOrder = new MeiweiApp.Models.OrderDrive();
+            var newOrder = new MeiweiApp.Models.OrderDriver();
             newOrder.set({
                 member: MeiweiApp.me.id,
                 address: this.$('input[name=address]').val() || null,

@@ -19,6 +19,6 @@ MeiweiApp.Collections.Orders = MeiweiApp.Collection.extend({
 	model: MeiweiApp.Models.Order
 });
 
-MeiweiApp.Models.OrderDrive = MeiweiApp.Model.extend({
-    urlRoot: MeiweiApp.configs.APIHost + '/orders/orderdrive/'
+MeiweiApp.Models.OrderDriver = MeiweiApp.Model.extend({
+    urlRoot: MeiweiApp.configs.APIHost + '/orders/orderdriver/'
 });
