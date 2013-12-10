@@ -163,28 +163,6 @@ MeiweiApp.PageView = MeiweiApp.View.extend({
         page.$el.on('tap', '.page-next', page.fetchNext);
         page.listenTo(collection, 'reset', page.resetNavigator);
     },
-    initPullToReresh: function(page) {
-        if (!this.scroller) this.initScroller();
-        var flip = false;
-        page.$('.scroll').append($('<div class="scroll-hint">Pull down to refresh</div>'));
-        page.scroller.on('scrollMove', function () {
-            if (page.scroller.y > 50 && !flip) {
-                flip = true;
-                page.$('.scroll-hint').html('Release to refresh');
-            } else if (page.scroller.y < 50 && flip) {
-                flip = false;
-                page.$('.scroll-hint').html('Pull down to refresh');
-            }
-        });
-        page.scroller.on('scrollEnd', function () {
-            if (flip) {
-                flip = false;
-                page.refresh();
-                page.$('.scroll-hint').html('Pull down to refresh');
-                $('#apploader').removeClass('invisible');
-            }
-        });
-    },
     go: function(options) {
         this.options = options || {};
         this.reset();

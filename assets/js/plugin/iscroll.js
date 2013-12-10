@@ -1,4 +1,4 @@
-/*! iScroll v5.0.6 ~ (c) 2008-2013 Matteo Spinelli ~ http://cubiq.org/license */
+/*! iScroll v5.0.8 ~ (c) 2008-2013 Matteo Spinelli ~ http://cubiq.org/license */
 var IScroll = (function (window, document, Math) {
 var rAF = window.requestAnimationFrame	||
 	window.webkitRequestAnimationFrame	||
@@ -83,7 +83,8 @@ var utils = (function () {
 		hasTransition: _prefixStyle('transition') in _elementStyle
 	});
 
-	me.isAndroidBrowser = /Android/.test(window.navigator.appVersion) && /Version\/\d/.test(window.navigator.appVersion);
+	// This should find all Android browsers lower than build 535.19 (both stock browser and webview)
+	me.isBadAndroid = /Android/.test(window.navigator.appVersion) && !(/Chrome\/\d/.test(window.navigator.appVersion));
 
 	me.extend(me.style = {}, {
 		transform: _transform,
@@ -322,7 +323,7 @@ function IScroll (el, options) {
 }
 
 IScroll.prototype = {
-	version: '5.0.6',
+	version: '5.0.8',
 
 	_init: function () {
 		this._initEvents();
@@ -358,12 +359,13 @@ IScroll.prototype = {
 	},
 
 	_transitionEnd: function (e) {
-		if ( e.target != this.scroller ) {
+		if ( e.target != this.scroller || !this.isInTransition ) {
 			return;
 		}
 
-		this._transitionTime(0);
+		this._transitionTime();
 		if ( !this.resetPosition(this.options.bounceTime) ) {
+			this.isInTransition = false;
 			this._execEvent('scrollEnd');
 		}
 	},
@@ -380,8 +382,8 @@ IScroll.prototype = {
 			return;
 		}
 
-		if ( this.options.preventDefault && !utils.isAndroidBrowser && !utils.preventDefaultException(e.target, this.options.preventDefaultException) ) {
-			e.preventDefault();		// This seems to break default Android browser
+		if ( this.options.preventDefault && !utils.isBadAndroid && !utils.preventDefaultException(e.target, this.options.preventDefaultException) ) {
+			e.preventDefault();
 		}
 
 		var point = e.touches ? e.touches[0] : e,
@@ -397,15 +399,16 @@ IScroll.prototype = {
 
 		this._transitionTime();
 
-		this.isAnimating = false;
 		this.startTime = utils.getTime();
 
 		if ( this.options.useTransition && this.isInTransition ) {
+			this.isInTransition = false;
 			pos = this.getComputedPosition();
-
 			this._translate(Math.round(pos.x), Math.round(pos.y));
 			this._execEvent('scrollEnd');
-			this.isInTransition = false;
+		} else if ( !this.options.useTransition && this.isAnimating ) {
+			this.isAnimating = false;
+			this._execEvent('scrollEnd');
 		}
 
 		this.startX    = this.x;
@@ -513,7 +516,6 @@ IScroll.prototype = {
 
 /* REPLACE END: _move */
 
-		this._execEvent('scrollMove');
 	},
 
 	_end: function (e) {
@@ -729,6 +731,8 @@ IScroll.prototype = {
 	scrollTo: function (x, y, time, easing) {
 		easing = easing || utils.ease.circular;
 
+		this.isInTransition = this.options.useTransition && time > 0;
+
 		if ( !time || (this.options.useTransition && easing.style) ) {
 			this._transitionTimingFunction(easing.style);
 			this._transitionTime(time);
@@ -771,7 +775,12 @@ IScroll.prototype = {
 
 	_transitionTime: function (time) {
 		time = time || 0;
+
 		this.scrollerStyle[utils.style.transitionDuration] = time + 'ms';
+
+		if ( !time && utils.isBadAndroid ) {
+			this.scrollerStyle[utils.style.transitionDuration] = '0.001s';
+		}
 
 
 		if ( this.indicators ) {
@@ -874,8 +883,8 @@ IScroll.prototype = {
 			x = +(matrix[12] || matrix[4]);
 			y = +(matrix[13] || matrix[5]);
 		} else {
-			x = +matrix.left.replace(/[^-\d]/g, '');
-			y = +matrix.top.replace(/[^-\d]/g, '');
+			x = +matrix.left.replace(/[^-\d.]/g, '');
+			y = +matrix.top.replace(/[^-\d.]/g, '');
 		}
 
 		return { x: x, y: y };
@@ -1103,7 +1112,9 @@ IScroll.prototype = {
 			that._execEvent('zoomEnd');
 		}, 400);
 
-		if ('wheelDeltaX' in e) {
+		if ( 'deltaX' in e ) {
+			wheelDeltaY = -e.deltaY / Math.abs(e.deltaY);
+		} else if ('wheelDeltaX' in e) {
 			wheelDeltaY = e.wheelDeltaY / Math.abs(e.wheelDeltaY);
 		} else if('wheelDelta' in e) {
 			wheelDeltaY = e.wheelDelta / Math.abs(e.wheelDelta);
@@ -1119,10 +1130,12 @@ IScroll.prototype = {
 	},
 
 	_initWheel: function () {
+		utils.addEvent(this.wrapper, 'wheel', this);
 		utils.addEvent(this.wrapper, 'mousewheel', this);
 		utils.addEvent(this.wrapper, 'DOMMouseScroll', this);
 
 		this.on('destroy', function () {
+			utils.removeEvent(this.wrapper, 'wheel', this);
 			utils.removeEvent(this.wrapper, 'mousewheel', this);
 			utils.removeEvent(this.wrapper, 'DOMMouseScroll', this);
 		});
@@ -1134,6 +1147,7 @@ IScroll.prototype = {
 		}
 
 		e.preventDefault();
+		e.stopPropagation();
 
 		var wheelDeltaX, wheelDeltaY,
 			newX, newY,
@@ -1145,19 +1159,22 @@ IScroll.prototype = {
 			that._execEvent('scrollEnd');
 		}, 400);
 
-		if ( 'wheelDeltaX' in e ) {
-			wheelDeltaX = e.wheelDeltaX / 120;
-			wheelDeltaY = e.wheelDeltaY / 120;
+		if ( 'deltaX' in e ) {
+			wheelDeltaX = -e.deltaX;
+			wheelDeltaY = -e.deltaY;
+		} else if ( 'wheelDeltaX' in e ) {
+			wheelDeltaX = e.wheelDeltaX / 120 * this.options.mouseWheelSpeed;
+			wheelDeltaY = e.wheelDeltaY / 120 * this.options.mouseWheelSpeed;
 		} else if ( 'wheelDelta' in e ) {
-			wheelDeltaX = wheelDeltaY = e.wheelDelta / 120;
+			wheelDeltaX = wheelDeltaY = e.wheelDelta / 120 * this.options.mouseWheelSpeed;
 		} else if ( 'detail' in e ) {
-			wheelDeltaX = wheelDeltaY = -e.detail / 3;
+			wheelDeltaX = wheelDeltaY = -e.detail / 3 * this.options.mouseWheelSpeed;
 		} else {
 			return;
 		}
 
-		wheelDeltaX *= this.options.mouseWheelSpeed;
-		wheelDeltaY *= this.options.mouseWheelSpeed;
+		wheelDeltaX *= this.options.invertWheelDirection;
+		wheelDeltaY *= this.options.invertWheelDirection;
 
 		if ( !this.hasVerticalScroll ) {
 			wheelDeltaX = wheelDeltaY;
@@ -1185,8 +1202,8 @@ IScroll.prototype = {
 			return;
 		}
 
-		newX = this.x + Math.round(this.hasHorizontalScroll ? wheelDeltaX * this.options.invertWheelDirection : 0);
-		newY = this.y + Math.round(this.hasVerticalScroll ? wheelDeltaY * this.options.invertWheelDirection : 0);
+		newX = this.x + Math.round(this.hasHorizontalScroll ? wheelDeltaX : 0);
+		newY = this.y + Math.round(this.hasVerticalScroll ? wheelDeltaY : 0);
 
 		if ( newX > 0 ) {
 			newX = 0;
@@ -1654,6 +1671,7 @@ IScroll.prototype = {
 			case 'MSTransitionEnd':
 				this._transitionEnd(e);
 				break;
+			case 'wheel':
 			case 'DOMMouseScroll':
 			case 'mousewheel':
 				if ( this.options.wheelAction == 'zoom' ) {
@@ -1794,7 +1812,7 @@ Indicator.prototype = {
 		e.preventDefault();
 		e.stopPropagation();
 
-		this.transitionTime(0);
+		this.transitionTime();
 
 		this.initiated = true;
 		this.moved = false;
@@ -1839,6 +1857,8 @@ Indicator.prototype = {
 
 		this._pos(newX, newY);
 
+// INSERT POINT: indicator._move
+
 		e.preventDefault();
 		e.stopPropagation();
 	},
@@ -1882,6 +1902,10 @@ Indicator.prototype = {
 	transitionTime: function (time) {
 		time = time || 0;
 		this.indicatorStyle[utils.style.transitionDuration] = time + 'ms';
+
+		if ( !time && utils.isBadAndroid ) {
+			this.indicatorStyle[utils.style.transitionDuration] = '0.001s';
+		}
 	},
 
 	transitionTimingFunction: function (easing) {
@@ -1889,7 +1913,7 @@ Indicator.prototype = {
 	},
 
 	refresh: function () {
-		this.transitionTime(0);
+		this.transitionTime();
 
 		if ( this.options.listenX && !this.options.listenY ) {
 			this.indicatorStyle.display = this.scroller.hasHorizontalScroll ? 'block' : 'none';
