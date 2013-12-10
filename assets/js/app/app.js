@@ -187,7 +187,6 @@ MeiweiApp.initAjaxEvents = function() {
             if (xhrPool.length >= 7) {
                 xhrPool[0].abort();
                 xhrPool.splice(0, 1);
-                MeiweiApp.handleError({message: 'xhrPool too large'});
             }
             xhrPool.push(jqXHR);
         },
