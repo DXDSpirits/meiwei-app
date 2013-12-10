@@ -42,7 +42,7 @@ $(function() {
             if (this.map) this.map.clearMap();
         },
         showMap: function() {
-            this.initializeMap();
+            if (!this.map) this.initializeMap();
         },
         initializeMap: function () {
             if (!window.AMap) {
