@@ -100,7 +100,15 @@ MeiweiApp.PageView = MeiweiApp.View.extend({
         'fastclick .header-btn-left': 'onClickLeftBtn',
         'fastclick .header-btn-right': 'onClickRightBtn'
     },
+    disablePage: function() {
+        this.undelegateEvents();
+        this.go = this.refresh = this.showPage = function() {};
+    },
     initView: function() {
+        if (!this.el) {
+            this.disablePage();
+            return;
+        }
         this.views = {};
         _.bindAll(this, 'showPage', 'go', 'refresh', 'render', 'reset', 
                         'onClickLeftBtn', 'onClickRightBtn', 'initScroller');
