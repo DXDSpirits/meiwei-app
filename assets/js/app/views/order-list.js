@@ -3,7 +3,7 @@ $(function() {
     	ModelView: MeiweiApp.ModelView.extend({
     		template: TPL['order-list-item'],
     		className: 'order-list-item',
-    		events: { 'tap': 'viewOrder' },
+    		events: { 'fastclick': 'viewOrder' },
     		viewOrder: function() {
     			MeiweiApp.goTo('OrderDetail', {
     				order: this.model.toJSON()

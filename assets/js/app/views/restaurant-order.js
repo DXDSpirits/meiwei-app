@@ -32,7 +32,7 @@ $(function() {
         ModelView: MeiweiApp.ModelView.extend({
             className: 'product-cart-item',
             template: TPL['product-cart-item'],
-            events: { 'tap .delete-button': 'triggerDelete' },
+            events: { 'fastclick .delete-button': 'triggerDelete' },
             triggerDelete: function() {
                 MeiweiApp.ProductCart.remove(this.model);
                 MeiweiApp.Pages.RestaurantOrder.scroller.refresh();
@@ -41,7 +41,7 @@ $(function() {
     });
     
     var RestaurantOrderContactForm = MeiweiApp.View.extend({
-        events: { 'tap > header': 'selectContact' },
+        events: { 'fastclick > header': 'selectContact' },
         initView: function(options) {
             _.bindAll(this, 'fillContact');
             this.$('.switch-gender').switchControl();
@@ -101,9 +101,9 @@ $(function() {
         events: {
             'fastclick .header-btn-left': 'onClickLeftBtn',
             'fastclick .header-btn-right': 'onClickRightBtn',
-            'tap .floorplan-select > header': 'selectSeat',
-            'tap .product-select > header': 'selectProduct',
-            'tap .order-submit-button': 'askToSubmitOrder',
+            'fastclick .floorplan-select > header': 'selectSeat',
+            'fastclick .product-select > header': 'selectProduct',
+            'fastclick .order-submit-button': 'askToSubmitOrder',
         },
         initPage: function() {
             _.bindAll(this, 'renderOrderForm', 'submitOrder');

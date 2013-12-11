@@ -1,7 +1,7 @@
 $(function() {
     MeiweiApp.Views.OrderDetail = MeiweiApp.ModelView.extend({
     	template: TPL['order-detail'],
-    	events: { 'tap .btn-cancel': 'cancelOrder' },
+    	events: { 'fastclick .btn-cancel': 'cancelOrder' },
     	cancelOrder: function() {
     		var model = this.model;
     		MeiweiApp.showConfirmDialog(

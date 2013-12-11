@@ -1,8 +1,8 @@
 $(function() {
     MeiweiApp.Views.MemberAnniversaryForm = MeiweiApp.View.extend({
     	events: {
-    		'tap .save-button': 'saveItem',
-    		'tap .delete-button': 'deleteItem',
+    		'fastclick .save-button': 'saveItem',
+    		'fastclick .delete-button': 'deleteItem',
     	},
     	saveItem: function(e) {
     		if (e.preventDefault) e.preventDefault();
@@ -44,7 +44,7 @@ $(function() {
     MeiweiApp.Pages.MemberAnniversariyDetail = new (MeiweiApp.PageView.extend({
         events: {
             'fastclick .header-btn-left': 'onClickLeftBtn',
-            'tap .inspritions > span': 'fillInsprition'
+            'fastclick .inspritions > span': 'fillInsprition'
         },
     	initPage: function() {
     		this.views = {

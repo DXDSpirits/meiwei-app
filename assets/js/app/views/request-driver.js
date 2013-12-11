@@ -31,7 +31,7 @@ $(function() {
     MeiweiApp.Pages.RequestDriver = new (MeiweiApp.PageView.extend({
         events: {
             'fastclick .header-btn-left': 'onClickLeftBtn',
-            'tap .order-submit-button': 'askToSubmitOrder'
+            'fastclick .order-submit-button': 'askToSubmitOrder'
         },
         initPage: function() {
             _.bindAll(this, 'initializeMap', 'updateAddress');

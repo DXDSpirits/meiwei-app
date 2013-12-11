@@ -3,7 +3,7 @@ $(function() {
     	tagName: "section",
     	className: "product-box",
     	template: TPL['product-stack'],
-    	events: { 'tap .stack-item': 'onSelectItem' },
+    	events: { 'fastclick .stack-item': 'onSelectItem' },
     	render: function() {
     		this.model.items.forEach(function(item) {
     			item.set({selected: (MeiweiApp.ProductCart.get(item.id) != null)});

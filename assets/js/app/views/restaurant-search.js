@@ -108,7 +108,7 @@ $(function() {
             tagName: 'section',
             className: 'restaurant-list-item',
             template: TPL['restaurant-list-item'],
-            events: { 'tap': 'viewRestaurant' },
+            events: { 'fastclick': 'viewRestaurant' },
             viewRestaurant: function() {
                 MeiweiApp.goTo('RestaurantDetail', { restaurant: this.model.toJSON() });
             },
@@ -167,7 +167,7 @@ $(function() {
             'fastclick .header-btn-left': 'onClickLeftBtn',
             'fastclick .header-btn-right': 'onClickRightBtn',
             'fastclick .filter p': 'toggleFilters',
-            'tap .filter li': 'selectFilter',
+            'fastclick .filter li': 'selectFilter',
             'touchstart .scroll': 'closeFilters',
             'submit .search-form': 'searchKeywords',
             'focus .search-form > input': 'clearFormInput'

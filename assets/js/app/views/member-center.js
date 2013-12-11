@@ -1,6 +1,6 @@
 $(function() {
     var MemberProfileBox = MeiweiApp.ModelView.extend({
-    	events: { 'tap .avatar': 'changeAvatar' },
+    	events: { 'fastclick .avatar': 'changeAvatar' },
     	changeAvatar: function() {
     		function onSuccess(imageData) {
     			localStorage.setItem('avatar', imageData);
@@ -56,14 +56,14 @@ $(function() {
     	events: {
     		'fastclick .header-btn-left': 'onClickLeftBtn',
     		'fastclick .header-btn-right': 'onClickRightBtn',
-    		//'tap .member-center-nav > li:nth-child(1)': 'gotoMyProfile',
-    		'tap .edit-profile': 'gotoMyProfile',
-    		'tap .member-center-nav > li:nth-child(2)': 'gotoMyOrder',
-    		'tap .member-center-nav > li:nth-child(3)': 'gotoMyCredits',
-    		'tap .member-center-nav > li:nth-child(4)': 'gotoMyFavorites',
-    		'tap .member-center-nav > li:nth-child(5)': 'gotoViewProducts',
-    		'tap .member-center-nav > li:nth-child(6)': 'gotoMyAnniversaries',
-    		'tap .logout-button': 'logout'
+    		//'fastclick .member-center-nav > li:nth-child(1)': 'gotoMyProfile',
+    		'fastclick .edit-profile': 'gotoMyProfile',
+    		'fastclick .member-center-nav > li:nth-child(2)': 'gotoMyOrder',
+    		'fastclick .member-center-nav > li:nth-child(3)': 'gotoMyCredits',
+    		'fastclick .member-center-nav > li:nth-child(4)': 'gotoMyFavorites',
+    		'fastclick .member-center-nav > li:nth-child(5)': 'gotoViewProducts',
+    		'fastclick .member-center-nav > li:nth-child(6)': 'gotoMyAnniversaries',
+    		'fastclick .logout-button': 'logout'
     	},
     	onClickRightBtn:     function() { MeiweiApp.goTo('Settings'); },
     	gotoMyProfile:       function() { MeiweiApp.goTo('MemberProfile'); },

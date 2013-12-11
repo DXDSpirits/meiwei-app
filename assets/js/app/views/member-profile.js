@@ -1,7 +1,7 @@
 $(function() {
     MeiweiApp.Views.MemberProfileForm = MeiweiApp.View.extend({
         events: {
-            'tap button': 'updateProfile'
+            'fastclick button': 'updateProfile'
         },
         initView: function() {
             _.bindAll(this, 'render');
@@ -38,7 +38,7 @@ $(function() {
     
     MeiweiApp.Views.MemberPasswordForm = MeiweiApp.View.extend({
         events: {
-            'tap button': 'updatePassword'
+            'fastclick button': 'updatePassword'
         },
         updatePassword: function(e) {
             if (e.preventDefault) e.preventDefault();

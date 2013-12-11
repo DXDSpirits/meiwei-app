@@ -7,8 +7,8 @@ $(function() {
     		template: TPL['favorite-list-item'],
     		className: 'restaurant-list-item',
     		events: {
-    			'tap section': 'viewRestaurant',
-    			'tap .delete-button': 'deleteFav'
+    			'fastclick section': 'viewRestaurant',
+    			'fastclick .delete-button': 'deleteFav'
     		},
     		viewRestaurant: function() {
     			MeiweiApp.goTo('RestaurantDetail', {

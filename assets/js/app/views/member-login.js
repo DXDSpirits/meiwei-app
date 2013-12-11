@@ -1,7 +1,7 @@
 $(function() {
     MeiweiApp.Views.MemberLoginForm = MeiweiApp.View.extend({
     	events: {
-    		'tap .login-button': 'login',
+    		'fastclick .login-button': 'login',
     	},
     	initView: function() {
     		_.bindAll(this, 'login', 'onLoginSuccess', 'onLoginFail');
@@ -31,7 +31,7 @@ $(function() {
     
     MeiweiApp.Views.MemberRegisterForm = MeiweiApp.View.extend({
         events: {
-            'tap .register-button': 'register'
+            'fastclick .register-button': 'register'
         },
         initView: function() {
             _.bindAll(this, 'register', 'onLoginSuccess', 'onLoginFail', 'onRegisterFail');
@@ -75,8 +75,8 @@ $(function() {
     MeiweiApp.Pages.MemberLogin = new (MeiweiApp.PageView.extend({
         events: {
             'fastclick .header-btn-left': 'onClickLeftBtn',
-            'tap .register-switch': 'goToRegister',
-            'tap .login-switch': 'goToLogin'
+            'fastclick .register-switch': 'goToRegister',
+            'fastclick .login-switch': 'goToLogin'
         },
     	initPage: function() {
     		this.views = {

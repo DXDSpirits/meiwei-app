@@ -20,7 +20,7 @@ $(function() {
         ModelView: MeiweiApp.ModelView.extend({
             className: 'filter-item',
             template: Mustache.compile('{{name}}'),
-            events: { 'tap': 'onclick' },
+            events: { 'fastclick': 'onclick' },
             onclick: function() {
                 MeiweiApp.sendGaEvent('homepage list', 'select', 'recommend', this.model.id);
                 MeiweiApp.Pages.Home.recommend.clear();
@@ -94,8 +94,8 @@ $(function() {
     	className: 'recommend-list-item img',
     	template: TPL['recommend-list-item'],
     	events: {
-    		'tap': 'viewRestaurant',
-    		'tap .order-button': 'gotoOrder'
+    		'fastclick': 'viewRestaurant',
+    		'fastclick .order-button': 'gotoOrder'
     	},
     	viewRestaurant: function(e) {
     		MeiweiApp.goTo('RestaurantDetail', { restaurant: this.model.get('restaurant') });

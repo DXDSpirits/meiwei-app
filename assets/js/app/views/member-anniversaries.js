@@ -3,7 +3,7 @@ $(function() {
     	ModelView: MeiweiApp.ModelView.extend({
     		template: TPL['member-anniversary-item'],
     		className: 'anniversary-list-item',
-    		events: { 'tap': 'modify' },
+    		events: { 'fastclick': 'modify' },
     		modify: function() {
     			MeiweiApp.goTo('MemberAnniversariyDetail', {
     				anniversary: this.model
