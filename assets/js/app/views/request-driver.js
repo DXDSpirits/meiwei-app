@@ -10,6 +10,7 @@ $(function() {
             this.remove();
             $('#dialog-overlay').addClass('hidden');
             this.undelegateEvents();
+            MeiweiApp.goTo('Home');
         },
         openDialog: function() {
             $('body').append(this.el);
@@ -17,7 +18,6 @@ $(function() {
             this.delegateEvents();
         },
         confirm: function() {
-            MeiweiApp.Pages.RequestDriver.submitOrder();
             this.closeDialog();
         },
         render: function() {
@@ -30,7 +30,7 @@ $(function() {
     MeiweiApp.Pages.RequestDriver = new (MeiweiApp.PageView.extend({
         events: {
             'fastclick .header-btn-left': 'onClickLeftBtn',
-            'fastclick .order-submit-button': 'askToSubmitOrder'
+            'fastclick .order-submit-button': 'submitOrder'
         },
         initPage: function() {
             _.bindAll(this, 'initializeMap', 'updateAddress');
@@ -60,7 +60,7 @@ $(function() {
                 mapObj.toolBar.doLocation();
             });
             var updateAddress = this.updateAddress;
-            mapObj.plugin(["AMap.Geocoder"], function() {          
+            mapObj.plugin(["AMap.Geocoder"], function() {
                 mapObj.geoCoder = new AMap.Geocoder({
                     radius: 100,
                     extensions: "base"
@@ -81,16 +81,10 @@ $(function() {
         updateAddress: function(data) {
             this.$('input[name=address]').val(data.regeocode.formattedAddress);
         },
-        askToSubmitOrder: function(e) {
+        submitOrder: function(e) {
             if (e.preventDefault) e.preventDefault();
-            var dialog = new ConfirmDialog();
-            dialog.remove();
-            dialog.render();
-        },
-        submitOrder: function() {
             var newOrder = new MeiweiApp.Models.OrderDriver();
             newOrder.set({
-                member: MeiweiApp.me.id,
                 address: this.$('input[name=address]').val() || null,
                 latitude: MeiweiApp.coords.longitude,
                 longitude: MeiweiApp.coords.latitude,
@@ -103,13 +97,18 @@ $(function() {
             this.$('.info-text').html('');
             var self = this;
             newOrder.save({}, {
-                success: function() { MeiweiApp.goTo('Home'); },
+                success: function() {
+                    var dialog = new ConfirmDialog();
+                    dialog.remove();
+                    dialog.render();
+                },
                 error: function(model, xhr, options) {
                     self.displayError(self.$('.info-text'), xhr.responseText);
                 }
             });
         },
         render: function() {
+            this.$('.info-text').html('');
             this.$('input[name=ordertime]')
             this.showMap();
         }

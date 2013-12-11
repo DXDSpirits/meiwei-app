@@ -386,6 +386,18 @@ MeiweiApp.i18n = {
     'Designated Driving': {
         zh: '代驾服务',
         en: 'Designated Driving'
+    },
+    'Thanks to 4001002003.com': {
+        zh: '感谢安师傅提供代驾服务',
+        en: 'The service is provided by our partner www.4001002003.com'
+    },
+    'Our driver will contact you as soon as possible': {
+        zh: '我们会尽快安排司机和您联系',
+        en: 'Our driver will contact you as soon as possible'
+    },
+    'Book Another': {
+        zh: '继续下单',
+        en: 'Book Another'
     }
 };
 
