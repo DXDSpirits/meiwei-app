@@ -40,6 +40,7 @@
         </div>
         <div id="dialog-overlay" class="hidden"></div>
         
+        include "view-member-login.html"
         include "view-request-driver.html"
         
         <!-- Page content End -->
@@ -56,7 +57,13 @@
         
         <script src="assets/js/templates.js"></script>
         <script src="assets/js/mw-app.min.js"></script>
-        <script>$(function() {MeiweiApp.Pages.RequestDriver.go();MeiweiApp.history.active = MeiweiApp.Pages.RequestDriver;});</script>
+        <script src="cordova.js"></script>
+        <script>
+            $(function() {
+                MeiweiApp.Pages.RequestDriver.go();
+                MeiweiApp.history.active = MeiweiApp.Pages.RequestDriver;
+            });
+        </script>
         <script>
             (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
             (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
