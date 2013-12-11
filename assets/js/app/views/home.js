@@ -166,6 +166,7 @@ $(function() {
     	    }
     	    this.$('.show-more').removeClass('hidden');
     	    this.$('.header-title > span').html(this.recommend.get('name'));
+    	    this.scroller.scrollTo(52, 0);
     	},
     	firstVisit: function() {
             var key = 'visited-view-home';
