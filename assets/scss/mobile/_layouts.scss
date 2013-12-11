@@ -62,7 +62,7 @@ body {
 }
 
 
-@mixin bottom-banner-shadow {
+/*@mixin bottom-banner-shadow {
     .scroll-inner::after {
         content: "";
         position: absolute;
@@ -72,7 +72,7 @@ body {
         background: transparent url($blackShadowPathR) no-repeat bottom;
         @include background-size(100% 300px);
     }
-}
+}*/
 
 .scroll {
 	@include flexible($orient: vertical);
