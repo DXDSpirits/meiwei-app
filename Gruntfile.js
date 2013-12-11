@@ -81,7 +81,8 @@ module.exports = function(grunt) {
     				'assets/font/**/*',
     				'assets/js/vendor/**/*',
     				'.htaccess',
-    				'config.xml'
+    				'config.xml',
+    				'cordova.js'
     			],
     			dest: '<%= cfg.path.dest %>'
 			}
@@ -100,7 +101,8 @@ module.exports = function(grunt) {
 				tasks: ['uglify:plugins']
 			},
 			staticfiles: {
-				files: ['assets/css/**/*', 'assets/img/**/*', 'assets/font/**/*', 'assets/js/vendor/**/*', 'config.xml', '.htaccess'],
+				files: ['assets/css/**/*', 'assets/img/**/*', 'assets/font/**/*', 'assets/js/vendor/**/*', 
+				        'config.xml', '.htaccess', 'cordova.js'],
 				tasks: ['copy']
 			},
 			stylesheets: {
