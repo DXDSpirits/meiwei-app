@@ -1,6 +1,9 @@
 $(function() {
     var MemberProfileBox = MeiweiApp.View.extend({
     	events: { 'fastclick .avatar': 'changeAvatar' },
+    	initView: function() {
+            this.listenTo(MeiweiApp.me.profile, 'change', this.updateProfile);
+        },
     	changeAvatar: function() {
     		function onSuccess(imageData) {
     			localStorage.setItem('avatar', imageData);
@@ -29,7 +32,6 @@ $(function() {
             } else {
                 this.$('.avatar img')[0].src = "assets/img/default-avatar@2x.png";
             }
-    		this.updateProfile();
     		return this;
         }
     });
@@ -104,6 +106,7 @@ $(function() {
             }
     	},
     	render: function() {
+    	    this.views.profileBox.render();
     		MeiweiApp.me.fetch({ success: this.askToShare });
     		MeiweiApp.me.favorites.fetch({ reset: true });
     	}
