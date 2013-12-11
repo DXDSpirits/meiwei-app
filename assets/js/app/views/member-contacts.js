@@ -5,9 +5,7 @@ $(function() {
     		className: 'simple-list-item contact-item',
     		template: TPL['contact-list-item'],
     		render: function() {
-                var attrs = this.model ? this.model.toJSON() : {};
-                this.$el.html(this.template(attrs));
-                MeiweiApp.initLang(this.$el);
+                MeiweiApp.ModelView.prototype.render.call(this);
                 this.$el.attr('data-index', this.$('[data-field="name"]').html()[0]);
                 return this;
             }

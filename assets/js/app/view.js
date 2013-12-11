@@ -1,8 +1,15 @@
 
 MeiweiApp.View = Backbone.View.extend({
     initialize: function() {
+        this.fastButtons = [];
         this.delegateFastButtons();
         if (this.initView) this.initView();
+    },
+    remove: function() {
+        this.$el.remove();
+        this.stopListening();
+        this.removeFastButtons();
+        return this;
     },
     displayError: function($el, text) {
         try {
@@ -13,17 +20,8 @@ MeiweiApp.View = Backbone.View.extend({
         }
     },
     bindFastButton: function(el, handler) {
-        this.fastButtons = this.fastButtons || [];
-        if (_.isArray(el)) {
-            for (var i=0; i<el.length; i++) {
-                console.log(el[i]);
-                var btn = new MBP.fastButton(el[i], handler);
-                this.fastButtons.push(btn);
-            }
-        } else {
-            var btn = new MBP.fastButton(el, handler);
-            this.fastButtons.push(btn);
-        }
+        var btn = new MBP.fastButton(el, handler);
+        this.fastButtons.push(btn);
     },
     delegateFastButtons: function() {
         var EVENT_NAME = 'fastclick';
@@ -39,11 +37,27 @@ MeiweiApp.View = Backbone.View.extend({
             return selector === "" ? [that.el] : that.$(selector).toArray();
         }
         function registerTrigger(element) {
-            new MBP.fastButton(element, function() {
+            //new MBP.fastButton(element, function() {
+            that.bindFastButton(element, function() {
                 $(element).trigger(EVENT_NAME);
             });
         }
         _.chain(events).keys().filter(byEventName).map(toJustSelectors).map(toMatchingElements).flatten().each(registerTrigger);
+    },
+    removeFastButtons: function() {
+        var btns = this.fastButtons;
+        for (var i=0; i<btns.length; i++) {
+            btns[i].destroy();
+        }
+        this.fastButtons.length = 0;
+    },
+    template: Mustache.compile(""),
+    renderTemplate: function(attrs) {
+        this.removeFastButtons();
+        this.$el.html(this.template(attrs || {}));
+        this.delegateFastButtons();
+        MeiweiApp.initLang(this.$el);
+        return this;
     }
 });
 
@@ -55,12 +69,9 @@ MeiweiApp.ModelView = MeiweiApp.View.extend({
         }
         if (this.initModelView) this.initModelView();
     },
-    template: Mustache.compile(""),
     render: function() {
         var attrs = this.model ? this.model.toJSON() : {};
-        this.$el.html(this.template(attrs));
-        MeiweiApp.initLang(this.$el);
-        return this;
+        return this.renderTemplate(attrs);
     }
 });
 

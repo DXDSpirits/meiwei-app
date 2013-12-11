@@ -3,8 +3,8 @@ $(function() {
         className: 'dialog',
         template: TPL['orderdriver-confirm-dialog'],
         events: {
-            'click .btn-cancel': 'closeDialog',
-            'click .btn-confirm': 'confirm'
+            'fastclick .btn-cancel': 'closeDialog',
+            'fastclick .btn-confirm': 'confirm'
         },
         closeDialog: function() {
             this.remove();
@@ -21,8 +21,7 @@ $(function() {
             this.closeDialog();
         },
         render: function() {
-            this.$el.html(this.template());
-            MeiweiApp.initLang(this.$el);
+            this.renderTemplate();
             this.openDialog();
             return this;
         }

@@ -3,15 +3,15 @@ $(function() {
     	tagName: "section",
     	className: "product-box",
     	template: TPL['product-stack'],
-    	events: { 'click .stack-item': 'onSelectItem' },
+    	events: { 'fastclick .stack-item': 'onSelectItem' },
     	render: function() {
     		this.model.items.forEach(function(item) {
     			item.set({selected: (MeiweiApp.ProductCart.get(item.id) != null)});
     		}, this);
-    		this.$el.html(this.template({
-    			product: this.model.toJSON(),
-    			items: this.model.items.toJSON()
-    		}));
+    		this.renderTemplate({
+                product: this.model.toJSON(),
+                items: this.model.items.toJSON()
+            });
     		var items = this.model.items;
     		this.$('.stack-item').each(function() {
     		    var id = +$(this).attr('data-item');
@@ -86,8 +86,8 @@ $(function() {
     	className: 'dialog product-detail',
     	template: TPL['product-item-detail'],
     	events: {
-    		'click .btn-cancel': 'closeDialog',
-    		'click .btn-confirm': 'confirmPurchase'
+    		'fastclick .btn-cancel': 'closeDialog',
+    		'fastclick .btn-confirm': 'confirmPurchase'
     	},
     	closeDialog: function() {
     		this.remove();
@@ -116,8 +116,7 @@ $(function() {
     		});
     	},
     	render: function() {
-    		this.$el.html(this.template(this.model.toJSON()));
-    		MeiweiApp.initLang(this.$el);
+    		this.renderTemplate(this.model.toJSON());
     		this.openDialog();
     		return this;
     	}
@@ -126,11 +125,10 @@ $(function() {
     MeiweiApp.Views.ProductRedeemList = MeiweiApp.Views.ProductPurchaseList.extend({
     	ModelView: MeiweiApp.Views.ProductModelView.extend({
     		render: function() {
-    			this.$el.html(this.template({
-    				product: this.model.toJSON(),
-    				items: this.model.items.toJSON()
-    			}));
-    			MeiweiApp.initLang(this.$el);
+    			this.renderTemplate({
+                    product: this.model.toJSON(),
+                    items: this.model.items.toJSON()
+                });
     			return this;
     		},
     		onSelectItem: function(e) {

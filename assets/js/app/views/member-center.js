@@ -1,5 +1,5 @@
 $(function() {
-    var MemberProfileBox = MeiweiApp.ModelView.extend({
+    var MemberProfileBox = MeiweiApp.View.extend({
     	events: { 'fastclick .avatar': 'changeAvatar' },
     	changeAvatar: function() {
     		function onSuccess(imageData) {
@@ -34,14 +34,15 @@ $(function() {
         }
     });
     
-    MeiweiApp.Views.FavoriteRestoCarousel = MeiweiApp.CollectionView.extend({
+    MeiweiApp.Views.FavoriteRestoCarousel = MeiweiApp.View.extend({
     	initView: function() {
-	        if (this.collection) this.listenTo(this.collection, 'reset', this.addAll);
+	        this.listenTo(MeiweiApp.me.favorites, 'reset', this.pickImage);
 	    },
-        addAll: function() {
-            if (this.collection.length > 0) {
-                var ran = _.random(0, this.collection.length - 1);
-                var model = this.collection.at(ran);
+        pickImage: function() {
+            var favorites = MeiweiApp.me.favorites;
+            if (favorites.length > 0) {
+                var ran = _.random(0, favorites.length - 1);
+                var model = favorites.at(ran);
 	            MeiweiApp.loadBgImage(this.$el, model.get('restaurantinfor').frontpic, {
 	    			src_local: 'assets/img/bootstrap/restaurant/' + model.get('restaurantinfor').id + '.jpg',
 	    			height: 250
@@ -79,14 +80,11 @@ $(function() {
     	initPage: function() {
     		this.listenTo(MeiweiApp.me, 'logout', function() { this.lastRender = null; });
     		this.listenTo(MeiweiApp.me, 'login', function() { this.lastRender = null; });
-    		this.favorites = MeiweiApp.me.favorites;
     		this.views = {
     			profileBox: new MemberProfileBox({
-    				model: MeiweiApp.me.profile,
     				el: this.$('.member-profile-box')
     			}),
     			favoriteCarousel: new MeiweiApp.Views.FavoriteRestoCarousel({
-    				collection: this.favorites,
     				el: this.$('.favorite-resto-carousel')
     			})
     		};
@@ -107,7 +105,7 @@ $(function() {
     	},
     	render: function() {
     		MeiweiApp.me.fetch({ success: this.askToShare });
-    		this.favorites.fetch({ reset: true });
+    		MeiweiApp.me.favorites.fetch({ reset: true });
     	}
     }))({el: $("#view-member-center")});
 });

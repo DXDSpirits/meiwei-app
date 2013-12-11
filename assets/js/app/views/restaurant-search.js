@@ -115,7 +115,7 @@ $(function() {
             render: function() {
                 var attrs = this.model ? this.model.toJSON() : {};
                 if (attrs.coordinate) attrs.distance = MeiweiApp.calculateDistance(attrs.coordinate.latitude, attrs.coordinate.longitude);
-                this.$el.html(this.template(attrs));
+                this.renderTemplate(attrs);
                 MeiweiApp.loadBgImage(this.$('.thumbnail'), attrs.frontpic, { width: 89, height: 89 });
                 return this;
             }
@@ -126,8 +126,9 @@ $(function() {
         filtername: 'circle',
         tagName: 'li',
         className: 'filter-item',
+        template: Mustache.compile("{{name}}"),
         render: function() {
-            this.$el.html(this.model.get('name'));
+            MeiweiApp.ModelView.prototype.render.call(this);
             this.$el.attr({ 'data-filter': this.filtername, 'data-id': this.model.id });
             return this;
         }
