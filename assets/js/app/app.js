@@ -198,6 +198,10 @@ MeiweiApp.initAjaxEvents = function() {
     MeiweiApp.abortAllAjax = function() {
         _.each(xhrPool, function(jqXHR) { jqXHR.abort(); });
         xhrPool.length = 0;
+        setTimeout(function() {
+            $('#apploader').addClass('invisible');
+            timeout = 0;
+        }, timeout);
     };
 };
 
