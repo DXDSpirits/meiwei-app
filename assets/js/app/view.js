@@ -145,6 +145,7 @@ MeiweiApp.PageView = MeiweiApp.View.extend({
     onClickRightBtn: function() {},
     initScroller: function() {
         if (this.scroller == null) {
+            var $scroll = this.$('.scroll');
             this.scroller = {
                 scrollTo: function(x, y, duration) {
                     $scroll.animate({
@@ -153,11 +154,10 @@ MeiweiApp.PageView = MeiweiApp.View.extend({
                     }, duration || 350);
                 },
                 scrollToElement: function(el, duration) {
-                    var base_offset = $scroll.offset();
-                    var offset = $(el).offset();
+                    var offset = $(el).position();
                     $scroll.animate({
-                        scrollTop:  offset.top - base_offset.top,
-                        scrollLeft: offset.left - base_offset.left
+                        scrollTop: offset.top,
+                        scrollLeft: offset.left
                     }, duration || 700);
                 },
                 refresh: function() {},
