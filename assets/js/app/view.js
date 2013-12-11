@@ -145,33 +145,24 @@ MeiweiApp.PageView = MeiweiApp.View.extend({
     onClickRightBtn: function() {},
     initScroller: function() {
         if (this.scroller == null) {
-            if (this.$('.iscroll').length > 0) {
-                this.scroller = new IScroll(this.$('.iscroll').selector, {
-                    tap: true, tagName: /^(INPUT|TEXTAREA|SELECT)$/
-                });
-            } else if (this.$('.scroll').length > 0) {
-                var $scroll = this.$('.scroll');
-                this.scroller = {
-                    scrollTo: function(x, y, duration) {
-                        $scroll.animate({
-                            scrollTop:  x || 0,
-                            scrollLeft: y || 0
-                        }, duration || 350);
-                    },
-                    scrollToElement: function(el, duration) {
-                        var base_offset = $scroll.offset();
-                        var offset = $(el).offset();
-                        $scroll.animate({
-                            scrollTop:  offset.top - base_offset.top,
-                            scrollLeft: offset.left - base_offset.left
-                        }, duration || 700);
-                    },
-                    refresh: function() {},
-                    destroy: function() {}
-                }
+            this.scroller = {
+                scrollTo: function(x, y, duration) {
+                    $scroll.animate({
+                        scrollTop:  x || 0,
+                        scrollLeft: y || 0
+                    }, duration || 350);
+                },
+                scrollToElement: function(el, duration) {
+                    var base_offset = $scroll.offset();
+                    var offset = $(el).offset();
+                    $scroll.animate({
+                        scrollTop:  offset.top - base_offset.top,
+                        scrollLeft: offset.left - base_offset.left
+                    }, duration || 700);
+                },
+                refresh: function() {},
+                destroy: function() {}
             }
-        } else {
-            this.scroller.refresh();
         }
     },
     initPageNav: function(page, collection) {
@@ -196,8 +187,6 @@ MeiweiApp.PageView = MeiweiApp.View.extend({
             page.$('.page-next').toggleClass('hidden', (collection.next == null));
             page.$('.page-prev').toggleClass('hidden', (collection.previous == null));
         };
-        //page.$el.on('tap', '.page-prev', page.fetchPrev);
-        //page.$el.on('tap', '.page-next', page.fetchNext);
         this.bindFastButton(page.$('.page-prev'), page.fetchPrev);
         this.bindFastButton(page.$('.page-next'), page.fetchNext);
         page.listenTo(collection, 'reset', page.resetNavigator);

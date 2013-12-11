@@ -2,9 +2,9 @@ $(function() {
     MeiweiApp.Views.OrderPages = MeiweiApp.CollectionView.extend({
         ModelView: MeiweiApp.ModelView.extend({
             events: {
-                'tap': 'goToOrderDetail',
-                'tap .btn-share-weixin': 'onClickWeixinBtn',
-                'tap .btn-share-weibo': 'onClickWeiboBtn'
+                'fastclick': 'goToOrderDetail',
+                'fastclick .btn-share-weixin': 'onClickWeixinBtn',
+                'fastclick .btn-share-weibo': 'onClickWeiboBtn'
             },
             template: TPL['order-attending'],
             className: 'order-page-item carousel-item',

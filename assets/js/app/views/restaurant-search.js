@@ -195,9 +195,6 @@ $(function() {
                 map: new Map({ collection: this.restaurants, el: this.$('.map_canvas')})
             };
             this.listenTo(this.restaurants, 'reset', this.refreshList);
-            this.listenTo(this.cuisines, 'reset', function() { this.refreshFilter('cuisine') });
-            this.listenTo(this.circles, 'reset', function() { this.refreshFilter('circle') });
-            this.listenTo(this.recommendnames, 'reset', function() { this.refreshFilter('recommend') });
             this.initPageNav(this, this.restaurants);
         },
         refreshList: function(collection, xhr, options) {
@@ -225,12 +222,6 @@ $(function() {
             this.$('.recommend > p > span').html(MeiweiApp._('Recommends'));
             this.$('.cuisine > p > span').html(MeiweiApp._('Cuisines'));
             this.$('.circle > p > span').html(MeiweiApp._('Circles'));
-        },
-        refreshFilter: function(name) {
-            /*this.filterScroller = this.filterScroller || {};
-            this.filterScroller[name] ? this.filterScroller[name].refresh() :
-                this.filterScroller[name] = new IScroll(this.$('.' + name + ' .collapsible-inner').selector, { tap: true });
-            */
         },
         searchKeywords: function(e) {
             if (e.preventDefault) e.preventDefault();
