@@ -131,6 +131,25 @@ MeiweiApp.PageView = MeiweiApp.View.extend({
                 this.scroller = new IScroll(this.$('.iscroll').selector, {
                     tap: true, tagName: /^(INPUT|TEXTAREA|SELECT)$/
                 });
+            } else if (this.$('.scroll').length > 0) {
+                var $scroll = this.$('.scroll');
+                this.scroller = {
+                    scrollTo: function(x, y, duration) {
+                        $scroll.animate({
+                            scrollTop:  x || 0,
+                            scrollLeft: y || 0
+                        }, duration || 350);
+                    },
+                    scrollToElement: function(el, duration) {
+                        var offset = $(el).offset;
+                        $scroll.animate({
+                            scrollTop:  offset.top,
+                            scrollLeft: offset.left
+                        }, duration || 350);
+                    },
+                    refresh: function() {},
+                    destroy: function() {}
+                }
             }
         } else {
             this.scroller.refresh();
