@@ -97,6 +97,7 @@
 
     MBP.fastButton = function(element, handler, pressedClass) {
         this.handler = handler;
+        this.element = element;
         // styling of .pressed is defined in the project's CSS files
         this.pressedClass = typeof pressedClass === 'undefined' ? 'pressed' : pressedClass;
 
@@ -106,6 +107,17 @@
             }
         } else {
             this.addClickEvent(element);
+        }
+    };
+    
+    MBP.fastButton.prototype.destroy = function() {
+        var element = this.element;
+        if (element.length && element.length > 1) {
+            for (var singleElIdx in element) {
+                this.removeClickEvent(element[singleElIdx]);
+            }
+        } else {
+            this.removeClickEvent(element);
         }
     };
 
@@ -165,6 +177,11 @@
     MBP.fastButton.prototype.addClickEvent = function(element) {
         addEvt(element, 'touchstart', this, false);
         addEvt(element, 'click', this, false);
+    };
+    
+    MBP.fastButton.prototype.removeClickEvent = function(element) {
+        rmEvt(element, 'touchstart', this, false);
+        rmEvt(element, 'click', this, false);
     };
 
     MBP.preventGhostClick = function(x, y) {
