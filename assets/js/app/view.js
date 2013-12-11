@@ -14,9 +14,16 @@ MeiweiApp.View = Backbone.View.extend({
     },
     bindFastButton: function(el, handler) {
         this.fastButtons = this.fastButtons || [];
-        var btn = new MBP.fastButton(el.length && el.length >= 1 ? el[0] : el, handler);
-        this.fastButtons.push(btn);
-        return btn;
+        if (_.isArray(el)) {
+            for (var i=0; i<el.length; i++) {
+                console.log(el[i]);
+                var btn = new MBP.fastButton(el[i], handler);
+                this.fastButtons.push(btn);
+            }
+        } else {
+            var btn = new MBP.fastButton(el, handler);
+            this.fastButtons.push(btn);
+        }
     },
     delegateFastButtons: function() {
         var EVENT_NAME = 'fastclick';

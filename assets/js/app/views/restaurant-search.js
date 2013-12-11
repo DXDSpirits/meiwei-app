@@ -167,7 +167,7 @@ $(function() {
             'fastclick .header-btn-left': 'onClickLeftBtn',
             'fastclick .header-btn-right': 'onClickRightBtn',
             'fastclick .filter p': 'toggleFilters',
-            'fastclick .filter li': 'selectFilter',
+            'click .filter li': 'selectFilter',
             'touchstart .scroll': 'closeFilters',
             'submit .search-form': 'searchKeywords',
             'focus .search-form > input': 'clearFormInput'

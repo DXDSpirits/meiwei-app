@@ -20,7 +20,7 @@ $(function() {
     		'fastclick .header-btn-right': 'onClickRightBtn',
     		'fastclick .filter-online': 'getOnlineContacts',
     		'fastclick .filter-local': 'getLocalContacts',
-    		'fastclick .contact-item': 'selectContact',
+    		'click .contact-item': 'selectContact',
     		'submit .search-form': 'searchContacts',
     		//'touchstart .alphabet': 'alphabetOnTouchStart',
     		//'touchmove .alphabet': 'alphabetOnTouchMove',

@@ -32,7 +32,7 @@ $(function() {
         ModelView: MeiweiApp.ModelView.extend({
             className: 'product-cart-item',
             template: TPL['product-cart-item'],
-            events: { 'fastclick .delete-button': 'triggerDelete' },
+            events: { 'click .delete-button': 'triggerDelete' },
             triggerDelete: function() {
                 MeiweiApp.ProductCart.remove(this.model);
                 MeiweiApp.Pages.RestaurantOrder.scroller.refresh();
