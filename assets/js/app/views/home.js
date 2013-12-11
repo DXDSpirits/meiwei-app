@@ -4,9 +4,9 @@ $(function() {
     }
     var RecommendsFilter = MeiweiApp.CollectionView.extend({
         initCollectionView: function() {
-        	this.listenTo(this.collection, 'reset add remove', this.initScroller);
+        	//this.listenTo(this.collection, 'reset add remove', this.initScroller);
         },
-        initScroller: function() {
+        /*initScroller: function() {
 	        if (this.scroller == null) {
 	            if (MeiweiApp.Pages.Home.$('.recommends-filter').length > 0) {
 	                this.scroller = new IScroll(MeiweiApp.Pages.Home.$('.recommends-filter').selector, {
@@ -16,7 +16,7 @@ $(function() {
 	        } else {
 	            this.scroller.refresh();
 	        }
-	    },
+	    },*/
         ModelView: MeiweiApp.ModelView.extend({
             className: 'filter-item',
             template: Mustache.compile('{{name}}'),

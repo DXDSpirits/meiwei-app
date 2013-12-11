@@ -124,7 +124,8 @@
 	    top: 0; right: 0; left: 0;
 	    height: 90%;
 	    @include transition(all .35s ease-in-out);
-	    overflow: hidden;
+	    //overflow: hidden;
+	    @include scrollable();
 	    &.closed {
             visibility: hidden;
             opacity: 0;

@@ -226,9 +226,10 @@ $(function() {
             this.$('.circle > p > span').html(MeiweiApp._('Circles'));
         },
         refreshFilter: function(name) {
-            this.filterScroller = this.filterScroller || {};
+            /*this.filterScroller = this.filterScroller || {};
             this.filterScroller[name] ? this.filterScroller[name].refresh() :
                 this.filterScroller[name] = new IScroll(this.$('.' + name + ' .collapsible-inner').selector, { tap: true });
+            */
         },
         searchKeywords: function(e) {
             if (e.preventDefault) e.preventDefault();
