@@ -10,7 +10,7 @@ $(function() {
     		];
     	},
         events: {
-            'tap .carousel-item.getstarted': 'getstarted'
+            'click .getstarted': 'getstarted'
         },
         getstarted: function() {
             localStorage.setItem('first-time', true);
@@ -18,21 +18,6 @@ $(function() {
             this.scroller.destroy();
             this.undelegateEvents();
             this.$('.carousel-inner').empty();
-        },
-        initScroller: function() {
-        	if (this.scroller == null) {
-                if (this.$('.carousel').length > 0) {
-                    this.scroller = new IScroll(this.$('.carousel').selector, {
-                        scrollX: true, scrollY: false, momentum: false, snap: true, tap: true,
-                        indicators: {
-                            el: this.$('.indicator')[0],
-                            resize: false
-                        }
-                    });
-                }
-            } else {
-                this.scroller.refresh();
-            }
         },
         fillImages: function() {
         	var $list = [];
@@ -54,7 +39,6 @@ $(function() {
         render: function() {
         	this.fillImages();
         	this.adjustWidth();
-            this.initScroller();
         }
     }))({el: $("#view-getstarted")});
 });

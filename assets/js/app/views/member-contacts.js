@@ -88,7 +88,6 @@ $(function() {
         	    this.$('.filter-online').removeClass('selected');
         	    this.$('.filter-local').addClass('selected');
         		var contactCollection = this.views.contactList.collection;
-        		var initScroller = this.initScroller;
         		var keywords = this.$('.search-form > input').val();
         		$('#apploader').removeClass('invisible');
         		navigator.contacts.find(
@@ -113,7 +112,6 @@ $(function() {
         				    }
         				}
         				contactCollection.reset(localCollection.models);
-        				initScroller();
         			},
         			function(e) { $('#apploader').addClass('invisible'); },
         			{ filter: "", multiple: true }
@@ -123,10 +121,7 @@ $(function() {
     	getOnlineContacts: function() {
     	    this.$('.filter-online').addClass('selected');
     	    this.$('.filter-local').removeClass('selected');
-    		this.views.contactList.collection.fetch({
-    			reset: true,
-    			success: this.initScroller
-    		});
+    		this.views.contactList.collection.fetch({ reset: true });
     	},
     	render: function() {
     	    this.getOnlineContacts();

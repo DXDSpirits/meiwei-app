@@ -39,7 +39,7 @@ $(function() {
     		};
     	},
     	render: function() {
-    		this.anniversaries.fetch({ reset: true, success: this.initScroller });
+    		this.anniversaries.fetch({ reset: true });
     	}
     }))({el: $("#view-member-anniversaries")});
 });

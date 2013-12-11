@@ -3,20 +3,6 @@ $(function() {
         return !localStorage.getItem('visited-view-home');
     }
     var RecommendsFilter = MeiweiApp.CollectionView.extend({
-        initCollectionView: function() {
-        	//this.listenTo(this.collection, 'reset add remove', this.initScroller);
-        },
-        /*initScroller: function() {
-	        if (this.scroller == null) {
-	            if (MeiweiApp.Pages.Home.$('.recommends-filter').length > 0) {
-	                this.scroller = new IScroll(MeiweiApp.Pages.Home.$('.recommends-filter').selector, {
-	                    tap: true, tagName: /^(INPUT|TEXTAREA|SELECT)$/
-	                });
-	            }
-	        } else {
-	            this.scroller.refresh();
-	        }
-	    },*/
         ModelView: MeiweiApp.ModelView.extend({
             className: 'filter-item',
             template: Mustache.compile('{{name}}'),
@@ -33,7 +19,7 @@ $(function() {
     
     var MasterHero = MeiweiApp.View.extend({
     	template: TPL['product-carousel'],
-    	events: { 'tap .carousel-item': 'viewProducts' },
+    	events: { 'fastclick .carousel-item': 'viewProducts' },
     	initView: function() {
     		_.bindAll(this, 'renderAd');
     		this.productItems = new MeiweiApp.Collections.ProductItems();
@@ -52,11 +38,10 @@ $(function() {
     	},
     	renderCarousel: function() {
     	    window.Bootstrap && Bootstrap.set('home-product-items', this.productItems.toJSON());
-    		if (this.scroller) this.scroller.destroy();
-    		this.$el.html(this.template({
-    			items: _.first(this.productItems.toJSON(), 6),
-    			product: {name: MeiweiApp._('Meiwei Concierge')}
-    		}));
+    		this.renderTemplate({
+                items: _.first(this.productItems.toJSON(), 6),
+                product: {name: MeiweiApp._('Meiwei Concierge')}
+            });
     		var items = this.productItems;
             this.$('.carousel-item').each(function() {
                 var id = +$(this).attr('data-item');
@@ -64,9 +49,14 @@ $(function() {
                 	height: 150, width: 150
                 });
             });
-    		var items = this.$('.carousel-inner > .carousel-item');
-        	this.$('.carousel-inner').css('width', items.length * $(items[0]).outerWidth());
-    		this.scroller = new IScroll(this.$('.carousel').selector, { tap: true, scrollX: true, scrollY: false });
+    		var items = this.$('.carousel-item'), itemWidth = $(items[0]).outerWidth(),
+                wrapperWidth = this.$('.carousel').innerWidth(),
+                margin = (wrapperWidth - itemWidth) / 2;
+            this.$('.carousel-inner').css({
+                'width': items.length * itemWidth + 2 * margin,
+                'padding-left': margin,
+                'padding-right': margin
+            });
     	},
     	renderConcierge: function() {
     	    var products = window.Bootstrap && Bootstrap.get('home-product-items');
@@ -125,11 +115,11 @@ $(function() {
     		'fastclick .header-btn-right': 'onClickRightBtn',
     		'fastclick .show-more': 'goToSearch',
     		'submit .search-form form': 'searchKeywords',
-    		'fastclick .header-title': 'toggleFilter'
+    		'fastclick .header-title': 'toggleFilter',
+    		'touchend .scroll': 'hero'
     	},
     	initPage: function() {
     		this.defaultRecommendId = 5;
-    		_.bindAll(this, 'hero');
     		this.recommendNames = new MeiweiApp.Collections.RecommendNames();
     		this.recommend = new MeiweiApp.Models.Recommend({id: this.defaultRecommendId});
     		this.views = {
@@ -159,28 +149,16 @@ $(function() {
         },
     	hero: function() {
     		var wrapperHeight = 250;
-    		if (this.scroller.y <= 0) {
-        		var page = parseInt((-this.scroller.y) / wrapperHeight);
+    		var y = this.$('.scroll').scrollTop();
+    		if (y >= 0) {
+        		var page = parseInt(y / wrapperHeight);
         		var begin = Math.max(page - 1, 0);
         		var end = page + 2;
-        		this.$('.recommend-list-item').slice(0, begin).removeClass('hero');
-        		this.$('.recommend-list-item').slice(end).removeClass('hero');
-        		this.$('.recommend-list-item').slice(begin, end).addClass('hero');
+        		var items = this.$('.recommend-list-item');
+        		items.slice(0, begin).removeClass('hero');
+        		items.slice(end).removeClass('hero');
+        		items.slice(begin, end).addClass('hero');
         	}
-    	},
-    	initScroller: function() {
-    		if (this.scroller == null) {
-    			if (this.$('.iscroll').length > 0) {
-    			    this.scroller = new IScroll(this.$('.iscroll').selector, { tap: true });
-    				this.scroller.on('scrollEnd', this.hero);
-    				this.scroller.scrollTo(0, -52);
-    				this.hero();
-    			}
-    		} else {
-    			this.scroller.refresh();
-    			if (this.scroller.y > -52) this.scroller.scrollTo(0, -52);
-    			this.hero();
-    		}
     	},
     	renderAll: function() {
     		if (this.recommend.id == this.defaultRecommendId) {
@@ -188,7 +166,6 @@ $(function() {
     	    }
     	    this.$('.show-more').removeClass('hidden');
     	    this.$('.header-title > span').html(this.recommend.get('name'));
-    	    this.initScroller();
     	},
     	firstVisit: function() {
             var key = 'visited-view-home';

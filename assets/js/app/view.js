@@ -20,7 +20,7 @@ MeiweiApp.View = Backbone.View.extend({
         }
     },
     bindFastButton: function(el, handler) {
-        var btn = new MBP.fastButton(el, handler);
+        var btn = new MBP.fastButton(el.length && el.length == 1 ? el[0] : el, handler);
         this.fastButtons.push(btn);
     },
     delegateFastButtons: function() {
@@ -159,11 +159,12 @@ MeiweiApp.PageView = MeiweiApp.View.extend({
                         }, duration || 350);
                     },
                     scrollToElement: function(el, duration) {
-                        var offset = $(el).offset;
+                        var base_offset = $scroll.offset();
+                        var offset = $(el).offset();
                         $scroll.animate({
-                            scrollTop:  offset.top,
-                            scrollLeft: offset.left
-                        }, duration || 350);
+                            scrollTop:  offset.top - base_offset.top,
+                            scrollLeft: offset.left - base_offset.left
+                        }, duration || 700);
                     },
                     refresh: function() {},
                     destroy: function() {}
@@ -194,7 +195,6 @@ MeiweiApp.PageView = MeiweiApp.View.extend({
             page.$('.page-nav').toggleClass('hidden', (collection.next == null && collection.previous == null));
             page.$('.page-next').toggleClass('hidden', (collection.next == null));
             page.$('.page-prev').toggleClass('hidden', (collection.previous == null));
-            if (page.scroller) page.initScroller();
         };
         //page.$el.on('tap', '.page-prev', page.fetchPrev);
         //page.$el.on('tap', '.page-next', page.fetchNext);

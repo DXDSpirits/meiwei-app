@@ -20,7 +20,6 @@ $(function() {
     			var self = this;
     			setTimeout(function() {
     				self.model.destroy();
-    				MeiweiApp.Pages.MemberFavorites.initScroller();
     			}, 350);
     		},
     		render: function() {

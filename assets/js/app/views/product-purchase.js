@@ -58,10 +58,9 @@ $(function() {
     		}
     	},
     	renderAll: function() {
-    	    this.initScroller();
     	    if (this.options.itemId) {
     	        var item = this.$('.stack-item[data-item=' + this.options.itemId + ']');
-    	        this.scroller.scrollToElement(item.closest('.product-box')[0]);
+    	        this.scroller.scrollToElement(item.closest('.product-box')[0], 1000);
     	    } else {
     	        this.scroller.scrollTo(0, 0);
     	    }
@@ -155,7 +154,7 @@ $(function() {
     		};
     	},
     	render: function() {
-        	this.products.fetch({ data: {category: 2}, reset: true, success: this.initScroller});
+        	this.products.fetch({ data: {category: 2}, reset: true });
     	}
     }))({el: $("#view-product-redeem")});
 });

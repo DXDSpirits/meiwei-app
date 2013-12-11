@@ -79,24 +79,17 @@ $(function() {
             } else {
                 this.$('.viewport').removeClass('hidden');
                 this.$('.hint-text').addClass('hidden');
-                var items = this.$('.carousel > .carousel-inner > .carousel-item');
-                this.$('.carousel > .carousel-inner').css('width', items.length * $(items[0]).outerWidth());
-                if (this.scroller == null) {
-                    if (this.$('.carousel').length > 0) {
-                        this.scroller = new IScroll(this.$('.carousel').selector, {
-                            scrollX: true, scrollY: false, momentum: false, snap: true, tap: true
-                        });
-                        if (this.options.orderId) {
-                        	var index = this.orders.indexOf(this.orders.findWhere({id: this.options.orderId}));
-                        	this.scroller.goToPage(index, 0);
-                        }
-                    }
-                } else {
-                    this.scroller.refresh();
-                    if (this.options.orderId) {
-                        var index = this.orders.indexOf(this.orders.findWhere({id: this.options.orderId}));
-                        this.scroller.goToPage(index, 0);
-                    }
+                var items = this.$('.carousel-item'), itemWidth = $(items[0]).outerWidth(),
+                    wrapperWidth = this.$('.carousel').innerWidth(),
+                    margin = (wrapperWidth - itemWidth) / 2;
+                this.$('.carousel-inner').css({
+                    'width': items.length * itemWidth + 2 * margin,
+                    'padding-left': margin,
+                    'padding-right': margin
+                });
+                if (this.options.orderId) {
+                    var index = this.orders.indexOf(this.orders.findWhere({id: this.options.orderId}));
+                    this.$('.carousel').animate({ scrollLeft: index * 250 }, 500);
                 }
             }
         },

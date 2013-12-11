@@ -215,7 +215,6 @@ $(function() {
             } else {
                 this.$('.floorplan-select').removeClass('hidden');
             }
-            this.initScroller();
             //this.$('input[name=orderdate]').focus();
             this.$('.wrapper').removeClass('rendering');
         },

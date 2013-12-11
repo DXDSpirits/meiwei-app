@@ -76,7 +76,6 @@ $(function() {
                 } else {
                     self.$('.restaurant-reviews').addClass('hidden');
                 }
-                self.initScroller();
             }});
     	},
     	renderAll: function() {
@@ -93,7 +92,6 @@ $(function() {
     		MeiweiApp.loadBgImage(this.$('.scroll'), this.restaurant.get('frontpic'), {
     			height: 250
     		});
-    		this.initScroller();
     		this.$('.wrapper').removeClass('rendering');
     		this.renderReviews();
     	},

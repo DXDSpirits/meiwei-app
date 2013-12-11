@@ -113,9 +113,7 @@
 #view-attending {
 	.viewport {
 		overflow: hidden;
-		//max-height: 500px;
-		@include size(100%, 300px);
-		@include center-block();
+		@include square(100%);
 		@include background-size(100% auto, 100% auto);
 	}
 	

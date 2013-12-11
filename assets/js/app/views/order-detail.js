@@ -47,7 +47,6 @@ $(function() {
     			this.$('.btn-cancel').remove();
     			this.onClickRightBtn = function() {};
     		}
-    		this.initScroller();
     	},
     	render: function() {
     		if (this.options.order) {
