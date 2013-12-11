@@ -18,36 +18,28 @@ $(function() {
     });
     
     var MasterHero = MeiweiApp.View.extend({
-    	template: TPL['product-carousel'],
+    	template: TPL['hero-carousel'],
     	events: { 'fastclick .carousel-item': 'viewProducts' },
     	initView: function() {
-    		_.bindAll(this, 'renderAd');
-    		this.productItems = new MeiweiApp.Collections.ProductItems();
-    		this.listenTo(this.productItems, 'reset add remove', this.renderCarousel);
-    		this.ad = new MeiweiApp.Models.Ad();
+    		this.heros = new MeiweiApp.Collections.Heros();
+    		this.listenTo(this.heros, 'reset add remove', this.renderCarousel);
     	},
     	viewProducts: function(e) {
-    	    if (this.ad.get('online') && this.ad.get('target') == 'external') {
-                window.open(this.ad.get('uri'), '_blank', 'location=no');
-            } else if (this.ad.get('online') && this.ad.get('target') == 'internal') {
-                MeiweiApp.goTo(this.ad.get('uri'));
-            } else {
-                var el = e.currentTarget;
-                MeiweiApp.goTo('ProductPurchase', {itemId: +$(el).attr('data-item')});
+            var el = e.currentTarget;
+            var target = $(el).attr('data-target');
+            var uri = $(el).attr('data-item');
+            if (target == 'product') {
+                MeiweiApp.goTo('ProductPurchase', {itemId: +uri});
+            } else if (target == 'internal') {
+                MeiweiApp.goTo(uri);
+            } else if (target == 'external') {
+                window.open(uri, '_blank', 'location=no');
             }
     	},
     	renderCarousel: function() {
-    	    window.Bootstrap && Bootstrap.set('home-product-items', this.productItems.toJSON());
+    	    window.Bootstrap && Bootstrap.set('home-heros', this.heros.toJSON());
     		this.renderTemplate({
-                items: _.first(this.productItems.toJSON(), 6),
-                product: {name: MeiweiApp._('Meiwei Concierge')}
-            });
-    		var items = this.productItems;
-            this.$('.carousel-item').each(function() {
-                var id = +$(this).attr('data-item');
-                MeiweiApp.loadBgImage($(this).find('.img'), items.get(id).get('picture'), {
-                	height: 150, width: 150
-                });
+                items: this.heros.toJSON()
             });
     		var items = this.$('.carousel-item'), itemWidth = $(items[0]).outerWidth(),
                 wrapperWidth = this.$('.carousel').innerWidth(),
@@ -58,23 +50,14 @@ $(function() {
                 'padding-right': margin
             });
     	},
-    	renderConcierge: function() {
-    	    var products = window.Bootstrap && Bootstrap.get('home-product-items');
-            if (products) {
-                this.productItems.smartSet(products);
+    	render: function() {
+    	    var heros = window.Bootstrap && Bootstrap.get('home-heros');
+            if (heros) {
+                this.heros.smartSet(heros);
             }
             if (!checkFirstTime()) { 
-                this.productItems.fetch({ data: {recommend: 1} });
+                this.heros.fetch();
             }
-        },
-        renderAd: function() {
-            if (this.ad.get('online')) {
-                this.$el.html(this.ad.get('template'));
-            }
-        },
-    	render: function() {
-    	    this.renderConcierge();
-            this.ad.fetch({success: this.renderAd, global: false});
     		return this;
     	}
     });
