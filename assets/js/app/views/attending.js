@@ -95,12 +95,10 @@ $(function() {
         },
         render: function() {
             this.orders.fetch({
-                nocache: this.options.nocache === true,
                 reset: true,
                 data: { status: 'pending' },
                 success: this.renderPages
             });
-            this.options.nocache === false;
         }
     }))({el: $("#view-attending")});
 });

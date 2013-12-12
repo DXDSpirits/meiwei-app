@@ -159,10 +159,7 @@ $(function() {
             var self = this;
             newOrder.save({}, {
                 success: function(model, xhr, options) {
-                    MeiweiApp.goTo('Attending', {
-                        orderId: newOrder.id,
-                        nocache: true
-                    });
+                    MeiweiApp.goTo('Attending', { orderId: newOrder.id });
                     MeiweiApp.showConfirmDialog(
                         MeiweiApp._('邀请好友'), MeiweiApp._('是否邀请好友？'),
                         function() {

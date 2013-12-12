@@ -42,21 +42,17 @@ $(function() {
     		this.$('.filter-fulfilled').removeClass('selected');
     		this.$('.filter-pending').addClass('selected');
     		this.orders.fetch({
-    		    nocache: this.options.nocache === true,
     		    reset: true,
     		    data: { status: 'pending' }
     		});
-    		this.options.nocache = false;
     	},
     	getFulfilledOrders: function() {
     		this.$('.filter-fulfilled').addClass('selected');
     		this.$('.filter-pending').removeClass('selected');
     		this.orders.fetch({
-    		    nocache: this.options.nocache === true,
     		    reset: true,
     		    data: { status: 'fulfilled' }
     		});
-    		this.options.nocache = false;
     	},
     	render: function() {
     		this.getPendingOrders();
