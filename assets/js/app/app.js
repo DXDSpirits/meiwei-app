@@ -27,6 +27,7 @@ MeiweiApp = new (Backbone.View.extend({
         MeiweiApp.initSync();
         MeiweiApp.initGa();
         Backbone.history.start();
+        MeiweiApp.fixViewport();
     }
 }))({el: document.body});
 
@@ -52,6 +53,13 @@ MeiweiApp.initDevice = function() {
     } else {
         window.device = { platform: 'WebApp' };
         $('meta[name=viewport]').attr('content', 'width=device-width, initial-scale=1, maximum-scale=1, user-scalable=0');
+    }
+};
+
+MeiweiApp.fixViewport = function() {
+    if (window.device.platform == 'Weixin') {
+        $('meta[name=viewport]').attr('content', 
+            'width=device-width, initial-scale=1, maximum-scale=1, user-scalable=0, height=' + $('body').innerHeight());
     }
 };
 
