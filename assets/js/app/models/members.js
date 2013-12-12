@@ -102,6 +102,7 @@ MeiweiApp.me = new (MeiweiApp.Models.Member.extend({
 		this.set({password: password});
 		options = options || {};
 		options.url = this.url() + 'change_password/';
-		Backbone.sync('update', this, options);
+		this.save({}, options);
+		//Backbone.sync('update', this, options);
 	}
 }));
