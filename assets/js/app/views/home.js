@@ -132,7 +132,7 @@ $(function() {
         },
     	hero: function() {
     		var wrapperHeight = 250;
-    		var y = this.$('.scroll').scrollTop();
+    		var y = $(window).scrollTop();
     		if (y >= 0) {
         		var page = parseInt(y / wrapperHeight);
         		var begin = Math.max(page - 1, 0);
