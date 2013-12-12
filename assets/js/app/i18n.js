@@ -389,11 +389,15 @@ MeiweiApp.i18n = {
     },
     'Thanks to 4001002003.com': {
         zh: '感谢安师傅提供代驾服务',
-        en: 'The service is provided by our partner www.4001002003.com'
+        en: 'Service provided 4001002003.com'
     },
-    'Our driver will contact you as soon as possible, please call 021-60515617 if you have any questions': {
-        zh: '我们会尽快安排司机和您联系，如有疑问请拨打服务热线 021-60515617',
-        en: 'Our driver will contact you as soon as possible, please call 021-60515617 if you have any questions'
+    'Save 10RMB on every order from clubmeiwei.com': {
+        zh: '通过美位预订尊享10元优惠',
+        en: 'Save 10RMB on every order from clubmeiwei.com'
+    },
+    'Our driver will contact you as soon as possible, if you have any questions please call': {
+        zh: '我们会尽快安排司机和您联系，如有疑问请拨打服务热线',
+        en: 'Our driver will contact you as soon as possible, if you have any questions please call'
     },
     'Book More': {
         zh: '再下一单',
