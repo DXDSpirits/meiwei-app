@@ -1,9 +1,16 @@
+#navbar-overlay {
+    @include size($navbarHeight, 100%);
+    position: fixed;
+    top: 0;
+    z-index: $zindexFixedNavbar - 1;
+    background-color: $bodyBackground;
+}
 
 .header-navbar {
 	@include flex-box($orient: horizontal);
 	@include size($navbarHeight, 100%);
 	//padding: 0 $navbarPadding;
-	position: absolute;
+	position: fixed;
 	top: 0;
 	z-index: $zindexFixedNavbar;
 	&::before {
