@@ -63,6 +63,7 @@ $(function() {
     		'fastclick .member-center-nav > li': 'onClickNav',
     		'fastclick .logout-button': 'logout'
     	},
+    	onClickLeftBtn: function() { MeiweiApp.goTo('Home'); },
     	onClickRightBtn: function() { MeiweiApp.goTo('Settings'); },
     	gotoMyProfile: function() { MeiweiApp.goTo('MemberProfile'); },
     	onClickNav: function(e) {

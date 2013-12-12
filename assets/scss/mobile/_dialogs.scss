@@ -27,10 +27,10 @@
 		color: $white;
 		text-align: center;
 	}
-	.button-group {
+	> .button-group {
         padding: 5px;
     }
-	.content {
+	> .content {
 		min-height: 120px;
 		padding: 5px;
 		img {
@@ -44,4 +44,10 @@
 			text-align: center;
 		}
 	}
+}
+
+.dialog.confirm-dialog > .content {
+    min-height: 0;
+    padding: 20px 10px;
+    p { font-size: $baseFontSize; }
 }

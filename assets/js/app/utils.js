@@ -3,12 +3,44 @@ MeiweiApp.isCordova = function() {
 };
 
 MeiweiApp.showConfirmDialog = function(title, content, onConfirm) {
-	if (navigator.notification && _.isFunction(navigator.notification.confirm)) {
-		var callback = function(button) { if (button == 2 && onConfirm) onConfirm(); };
-		navigator.notification.confirm(content, callback, title, [MeiweiApp._('Cancel'), MeiweiApp._('Confirm')]);
-	} else {
-		if (confirm(title) == true) onConfirm();
-	}
+    var dialog = new (MeiweiApp.View.extend({
+        className: 'dialog confirm-dialog',
+        template: TPL['confirm-dialog'],
+        events: {
+            'fastclick .btn-cancel': 'closeDialog',
+            'fastclick .btn-confirm': 'confirm'
+        },
+        closeDialog: function() {
+            this.remove();
+            $('#dialog-overlay').addClass('hidden');
+            this.undelegateEvents();
+        },
+        openDialog: function() {
+            $('body').append(this.el);
+            $('#dialog-overlay').removeClass('hidden');
+            this.delegateEvents();
+        },
+        confirm: function() {
+            this.closeDialog();
+            onConfirm();
+        },
+        render: function() {
+            this.renderTemplate({title: title, content: content});
+            this.openDialog();
+            return this;
+        }
+    }))();
+    dialog.remove();
+    dialog.render();
+};
+
+MeiweiApp.showNativConfirmDialog = function(title, content, onConfirm) {
+    if (navigator.notification && _.isFunction(navigator.notification.confirm)) {
+        var callback = function(button) { if (button == 2 && onConfirm) onConfirm(); };
+        navigator.notification.confirm(content, callback, title, [MeiweiApp._('Cancel'), MeiweiApp._('Confirm')]);
+    } else {
+        if (confirm(content) == true) onConfirm();
+    }
 };
 
 MeiweiApp.sendWeixinMsg = function(content) {
