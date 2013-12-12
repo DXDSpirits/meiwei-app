@@ -24,10 +24,10 @@ $(function() {
     MeiweiApp.Pages.OrderList = new (MeiweiApp.PageView.extend({
     	events: {
     		'fastclick .header-btn-left': 'onClickLeftBtn',
-    		'fastclick .header-btn-right': 'onClickRightBtn',
     		'fastclick .filter-pending': 'getPendingOrders',
     		'fastclick .filter-fulfilled': 'getFulfilledOrders'
     	},
+    	onClickLeftBtn: function() { MeiweiApp.goTo('MemberCenter'); },
     	initPage: function() {
     		this.orders = new MeiweiApp.Collections.Orders();
     		this.views = {

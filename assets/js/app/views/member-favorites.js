@@ -35,6 +35,7 @@ $(function() {
     });
     
     MeiweiApp.Pages.MemberFavorites = new (MeiweiApp.PageView.extend({
+        onClickLeftBtn: function() { MeiweiApp.goTo('MemberCenter'); },
     	initPage: function() {
     		this.favorites = MeiweiApp.me.favorites;
     		this.views = {

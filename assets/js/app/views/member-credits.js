@@ -9,9 +9,9 @@ $(function() {
     MeiweiApp.Pages.MemberCredits = new (MeiweiApp.PageView.extend({
         events: {
             'fastclick .header-btn-left': 'onClickLeftBtn',
-            'fastclick .header-btn-right': 'onClickRightBtn',
             'fastclick .redeem-btn': 'goToProductRedeem'
         },
+        onClickLeftBtn: function() { MeiweiApp.goTo('MemberCenter'); },
     	goToProductRedeem: function() { MeiweiApp.goTo('ProductRedeem'); },
     	initPage: function() {
     		this.credits = new MeiweiApp.Collections.Credits();
