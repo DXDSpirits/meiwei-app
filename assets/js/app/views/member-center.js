@@ -75,11 +75,11 @@ $(function() {
     		MeiweiApp.goTo('Home');
     	},
     	initPage: function() {
+    		_.bindAll(this, 'askToShare');
     		this.views = {
     			profileBox: new MemberProfileBox({ el: this.$('.member-profile-box') }),
     			favoriteCarousel: new FavoriteRestoCarousel({ el: this.$('.favorite-resto-carousel') })
     		};
-    		_.bindAll(this, 'askToShare');
     	},
     	askToShare: function() {
 	        var key = 'visited-view-member-center';
@@ -97,6 +97,9 @@ $(function() {
     	render: function() {
     	    if (!this.rendered) {
     	        this.rendered = true;
+    	        MeiweiApp.me.once('logout', function() {
+                    this.rendered = false;
+                }, this);
     	        MeiweiApp.me.fetch({ success: this.askToShare });
     	        MeiweiApp.me.favorites.fetch({ reset: true });
     	    }
