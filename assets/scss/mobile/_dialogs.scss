@@ -21,12 +21,11 @@
 	background-color: $white;
 	> header {
 		width: auto;
-		height: 40px;
+		min-height: 40px;
 		padding: 10px;
 		background-color: $brown;
 		color: $white;
 		text-align: center;
-		h1 { @include text-overflow(); }
 	}
 	.button-group {
         padding: 5px;
@@ -36,7 +35,8 @@
 		padding: 5px;
 		img {
 		    @include square(150px);
-		    @include center-block();
+		    margin: 10px auto;
+		    display: block;
 		}
 		p {
 			margin: 5px 0 0;
