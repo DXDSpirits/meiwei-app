@@ -64,6 +64,11 @@ MeiweiApp.me = new (MeiweiApp.Models.Member.extend({
 		this.on('change:profile', function() {
             this.profile.set(this.get('profile'));
         }, this);
+        this.on('login', function() {
+            this.fetch();
+            this.favorites.fetch();
+            this.contacts.fetch();
+        });
 	},
 	parse: function(response) {
 		return _.isArray(response.results) ? response.results[0] : response;
