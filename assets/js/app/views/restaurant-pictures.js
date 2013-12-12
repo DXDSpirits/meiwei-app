@@ -7,7 +7,10 @@ $(function() {
     });
     
     MeiweiApp.Pages.RestaurantPictures = new (MeiweiApp.PageView.extend({
-        events: { 'touchend .carousel': 'updateTitle' },
+        events: {
+            'fastclick .header-btn-left': 'onClickLeftBtn',
+            'touchend .carousel': 'updateTitle'
+        },
         initPage: function() {
             _.bindAll(this, 'renderPages');
             this.pictures = new MeiweiApp.Collections.Pictures();
