@@ -3,6 +3,7 @@ $(function() {
     	events: { 'fastclick .avatar': 'changeAvatar' },
     	initView: function() {
             this.listenTo(MeiweiApp.me.profile, 'change', this.updateProfile);
+            this.renderAvatar();
         },
     	changeAvatar: function() {
     		function onSuccess(imageData) {
@@ -25,18 +26,17 @@ $(function() {
             this.$('[data-field=mobile]').html(profile.mobile);
             this.$('[data-field=email]').html(profile.email);
     	},
-    	render: function() {
+    	renderAvatar: function() {
     	    var imageData = localStorage.getItem('avatar');
             if (imageData) {
                 this.$('.avatar img')[0].src = "data:image/jpeg;base64," + imageData;
             } else {
                 this.$('.avatar img')[0].src = "assets/img/default-avatar@2x.png";
             }
-    		return this;
         }
     });
     
-    MeiweiApp.Views.FavoriteRestoCarousel = MeiweiApp.View.extend({
+    var FavoriteRestoCarousel = MeiweiApp.View.extend({
     	initView: function() {
 	        this.listenTo(MeiweiApp.me.favorites, 'reset', this.pickImage);
 	    },
@@ -59,34 +59,24 @@ $(function() {
     	events: {
     		'fastclick .header-btn-left': 'onClickLeftBtn',
     		'fastclick .header-btn-right': 'onClickRightBtn',
-    		//'fastclick .member-center-nav > li:nth-child(1)': 'gotoMyProfile',
     		'fastclick .edit-profile': 'gotoMyProfile',
-    		'fastclick .member-center-nav > li:nth-child(2)': 'gotoMyOrder',
-    		'fastclick .member-center-nav > li:nth-child(3)': 'gotoMyCredits',
-    		'fastclick .member-center-nav > li:nth-child(4)': 'gotoMyFavorites',
-    		'fastclick .member-center-nav > li:nth-child(5)': 'gotoViewProducts',
-    		'fastclick .member-center-nav > li:nth-child(6)': 'gotoMyAnniversaries',
+    		'fastclick .member-center-nav > li': 'onClickNav',
     		'fastclick .logout-button': 'logout'
     	},
-    	onClickRightBtn:     function() { MeiweiApp.goTo('Settings'); },
-    	gotoMyProfile:       function() { MeiweiApp.goTo('MemberProfile'); },
-    	gotoMyOrder:         function() { MeiweiApp.goTo('OrderList'); },
-    	gotoMyCredits:       function() { MeiweiApp.goTo('MemberCredits'); },
-    	gotoMyFavorites:     function() { MeiweiApp.goTo('MemberFavorites'); },
-    	gotoViewProducts:    function() { MeiweiApp.goTo('ProductPurchase'); },
-    	gotoMyAnniversaries: function() { MeiweiApp.goTo('MemberAnniversaries'); },
+    	onClickRightBtn: function() { MeiweiApp.goTo('Settings'); },
+    	gotoMyProfile: function() { MeiweiApp.goTo('MemberProfile'); },
+    	onClickNav: function(e) {
+    	    var el = e.currentTarget;
+    	    MeiweiApp.goTo($(e.currentTarget).attr('data-nav'));
+    	},
     	logout: function() {
     		MeiweiApp.me.logout();
     		MeiweiApp.goTo('Home');
     	},
     	initPage: function() {
     		this.views = {
-    			profileBox: new MemberProfileBox({
-    				el: this.$('.member-profile-box')
-    			}),
-    			favoriteCarousel: new MeiweiApp.Views.FavoriteRestoCarousel({
-    				el: this.$('.favorite-resto-carousel')
-    			})
+    			profileBox: new MemberProfileBox({ el: this.$('.member-profile-box') }),
+    			favoriteCarousel: new FavoriteRestoCarousel({ el: this.$('.favorite-resto-carousel') })
     		};
     		_.bindAll(this, 'askToShare');
     	},
@@ -104,9 +94,11 @@ $(function() {
             }
     	},
     	render: function() {
-    	    this.views.profileBox.render();
-    		MeiweiApp.me.fetch({ success: this.askToShare });
-    		MeiweiApp.me.favorites.fetch({ reset: true });
+    	    if (!this.rendered) {
+    	        this.rendered = true;
+    	        MeiweiApp.me.fetch({ success: this.askToShare });
+    	        MeiweiApp.me.favorites.fetch({ reset: true });
+    	    }
     	}
     }))({el: $("#view-member-center")});
 });
