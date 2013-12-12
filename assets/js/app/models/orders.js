@@ -10,8 +10,7 @@ MeiweiApp.Models.Order = MeiweiApp.Model.extend({
 		options = options || {};
 		var url = this.url() + 'cancel/';
 		options.url = url;
-		this.save({}, options);
-        //Backbone.sync('update', this, options);
+        Backbone.sync('update', this, options);
 	}
 });
 

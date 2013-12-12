@@ -18,7 +18,9 @@ $(function() {
             });
             var self = this;
             MeiweiApp.me.profile.save({}, {
-                success: MeiweiApp.goBack,
+                success: function() {
+                    MeiweiApp.goBack();
+                },
                 error: function(model, xhr, options) {
                     self.displayError(self.$('.info-text'), xhr.responseText);
                 }
@@ -49,9 +51,11 @@ $(function() {
             } else {
                 var self = this;
                 MeiweiApp.me.changePassword(password, { 
-                    success: MeiweiApp.goBack,
-                    error: function(model, xhr, options) {
-                        self.displayError(self.$('.info-text'), xhr.responseText);
+                    success: function() {
+                        MeiweiApp.goBack();
+                    },
+                    error: function(jqXHR, textStatus, errorThrown) {
+                        self.displayError(self.$('.info-text'), jqXHR.responseText);
                     }
                 });
             }

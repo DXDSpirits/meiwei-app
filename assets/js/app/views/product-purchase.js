@@ -101,15 +101,20 @@ $(function() {
     	confirmPurchase: function() {
     		var self = this;
     		this.model.purchase({
-    			success: function(model, response, options) {
+    		    /* IMPORTANT !!!
+    		     * Backbone.sync ($.ajax)
+    		     * passes response data (json), status text and jqXHR object to success 
+    		     * and jqXHR object, status text and http error
+    		     */
+    			success: function(data, textStatus, jqXHR) {
     				self.$('.btn-confirm').remove();
-    				self.$('.content .info-text .balance').html(response.balance);
+    				self.$('.content .info-text .balance').html(data.balance);
     				self.$('.content .info-text').removeClass('hidden');
     			},
-    			error: function(model, xhr, options) {
+    			error: function(jqXHR, textStatus, errorThrown) {
     				self.$('.btn-confirm').remove();
     				self.$('.content .info-text').removeClass('hidden');
-    				self.displayError(self.$('.content .info-text'), xhr.responseText);
+    				self.displayError(self.$('.content .info-text'), jqXHR.responseText);
     			}
     		});
     	},

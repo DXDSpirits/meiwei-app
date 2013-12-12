@@ -5,8 +5,7 @@ MeiweiApp.Models.ProductItem = MeiweiApp.Model.extend({
 		options = options || {};
 		var url = this.url() + 'purchase/';
 		options.url = url;
-		this.save({}, options);
-        //Backbone.sync('update', this, options);
+        Backbone.sync('update', this, options);
 	}
 });
 
