@@ -63,8 +63,6 @@ $(function() {
             this.getLocalContacts();
         },
     	initPage: function() {
-    		this.listenTo(MeiweiApp.me, 'logout', function() { this.lastRender = null; });
-    		this.listenTo(MeiweiApp.me, 'login', function() { this.lastRender = null; });
     		this.views = {
     			contactList: new ContactList({
     				collection: new MeiweiApp.Collections.Contacts(),

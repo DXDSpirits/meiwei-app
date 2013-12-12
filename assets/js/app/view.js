@@ -204,7 +204,6 @@ MeiweiApp.PageView = MeiweiApp.View.extend({
         this.showPage();
     },
     refresh: function() {
-        this.lastRender = new Date();
         var timeout;
         var render = this.render, pageOpen = function() {
             clearTimeout(timeout);

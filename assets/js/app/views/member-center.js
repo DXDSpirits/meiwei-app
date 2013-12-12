@@ -80,8 +80,6 @@ $(function() {
     		MeiweiApp.goTo('Home');
     	},
     	initPage: function() {
-    		this.listenTo(MeiweiApp.me, 'logout', function() { this.lastRender = null; });
-    		this.listenTo(MeiweiApp.me, 'login', function() { this.lastRender = null; });
     		this.views = {
     			profileBox: new MemberProfileBox({
     				el: this.$('.member-profile-box')
