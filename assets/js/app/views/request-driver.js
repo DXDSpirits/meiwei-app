@@ -30,7 +30,8 @@ $(function() {
     MeiweiApp.Pages.RequestDriver = new (MeiweiApp.PageView.extend({
         events: {
             'fastclick .header-btn-left': 'onClickLeftBtn',
-            'fastclick .order-submit-button': 'submitOrder'
+            'fastclick .order-submit-button': 'submitOrder',
+            'fastclick .asap': 'switchTime'
         },
         initPage: function() {
             _.bindAll(this, 'initializeMap', 'updateAddress');
@@ -42,6 +43,17 @@ $(function() {
         },
         showMap: function() {
             if (!this.map) this.initializeMap();
+        },
+        switchTime: function() {
+            var asap = this.$('.asap');
+            var timeInput = this.$('input[name=request_time]');
+            if (asap.hasClass('checked')) {
+                asap.removeClass('checked');
+                timeInput.removeAttr('disabled');
+            } else {
+                asap.addClass('checked');
+                timeInput.attr('disabled', 'disabled');
+            }
         },
         initializeMap: function () {
             if (!window.AMap) {
@@ -93,6 +105,7 @@ $(function() {
                 gender: +this.$('input[name=gender]').val() || 0,
                 mobile: this.$('input[name=mobile]').val() || null,
                 comment: this.$('input[name=comment]').val() || null,
+                request_time: this.$('.asap').hasClass('checked') ? null : this.$('input[name=request_time]').val()
             });
             this.$('.info-text').html('');
             var self = this;

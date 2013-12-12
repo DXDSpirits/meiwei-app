@@ -402,6 +402,10 @@ MeiweiApp.i18n = {
     'Your order has been received': {
         zh: '预订成功',
         en: 'Your order has been received'
+    },
+    'ASAP': {
+        zh: '尽快到达',
+        en: 'ASAP'
     }
 };
 

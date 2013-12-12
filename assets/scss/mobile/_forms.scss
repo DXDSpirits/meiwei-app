@@ -79,6 +79,10 @@ input[type="color"],
 		@include flexible($orient: horizontal);
 		@include inline-field-set();
 	}
+	
+	&[disabled] {
+	    color: $brownLighter;
+	}
 }
 
 // Textarea
