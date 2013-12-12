@@ -103,14 +103,13 @@ $(function() {
     		this.model.purchase({
     			success: function(model, response, options) {
     				self.$('.btn-confirm').remove();
-    				self.$('.content .info-text .balance').html(model.balance);
+    				self.$('.content .info-text .balance').html(response.balance);
     				self.$('.content .info-text').removeClass('hidden');
     			},
-    			error: function(model, response, options) {
-    				var error = JSON.parse(model.responseText);
+    			error: function(model, xhr, options) {
     				self.$('.btn-confirm').remove();
-    				self.$('.content .info-text').html(error.detail);
     				self.$('.content .info-text').removeClass('hidden');
+    				self.displayError(self.$('.content .info-text'), xhr.responseText);
     			}
     		});
     	},

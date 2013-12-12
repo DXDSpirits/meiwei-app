@@ -16,7 +16,7 @@ MeiweiApp.View = Backbone.View.extend({
             var error = JSON.parse(text);
             for (var k in error) { $el.html(error[k]);  break; };
         } catch (e) {
-            $el.text(text);
+            $el.text(text || 'Error');
         }
     },
     bindFastButton: function(el, handler) {
