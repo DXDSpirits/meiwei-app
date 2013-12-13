@@ -20,12 +20,10 @@ body {
         pointer-events: none;
     }
     &.view-hidden {
-        max-height: 0;
-        visibility: hidden;
+        display: none;
     }
     &.view-next, &.view-prev {
-        max-height: none;
-        visibility: visible;
+        display: block;
     }
 }
 

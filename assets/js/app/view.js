@@ -194,7 +194,6 @@ MeiweiApp.PageView = MeiweiApp.View.extend({
     },
     reset: function() {},
     showPage: function() {
-        window.scrollTo(0, 0);
         if (this.$el && this.$el.hasClass('view-hidden')) {
             var $curPage = $('.view:not(".view-hidden")');
             var curPageCloseTimeout;
@@ -215,6 +214,7 @@ MeiweiApp.PageView = MeiweiApp.View.extend({
                 $nextPage.removeClass('view-next');
                 $nextPage.find('input').blur();
                 MeiweiApp.sendGaPageView($nextPage.attr('id')); // Google Analytics
+                window.scrollTo(0, 0);
             };
             $nextPage.removeClass('view-hidden');
             $nextPage.addClass('view-next');
