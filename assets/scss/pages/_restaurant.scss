@@ -323,7 +323,10 @@
 }
 
 #view-restaurant-pictures {
-    .wrapper { background-color: rgba(0, 0, 0, 0.9); }
+    .wrapper {
+        background-color: rgba(0, 0, 0, 0.9);
+        -webkit-box-pack: center;
+    }
     .picture-item {
         @include flex-box();
     }
