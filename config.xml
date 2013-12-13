@@ -7,7 +7,7 @@
     <preference name="WebViewBounce" value="true" />
     <preference name="Fullscreen" value="false" />
     <preference name="Orientation" value="landscape" />
-    <preference name="DisallowOverscroll" value="false" />
+    <preference name="DisallowOverscroll" value="true" />
     <preference name="BackgroundColor" value="0xffffffff" />
     <preference name="SplashScreen" value="splash" />
     <preference name="AutoHideSplashScreen" value="false" />
