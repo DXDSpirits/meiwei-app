@@ -125,8 +125,6 @@
 	    left: 0;
 	    width: 100%;
 	    height: 400px;
-	    padding-top: 15px;
-	    background-color: $white;
 	    @include transition(all .35s ease-in-out);
 	    @include scrollable();
 	    &.closed {
@@ -136,6 +134,7 @@
         }
 	}
     .filter-item {
+        background-color: $bodyBackground;
         padding: 15px 20px;
         width: 100%;
         height: 50px;
