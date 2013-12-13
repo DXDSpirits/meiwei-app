@@ -155,7 +155,7 @@ $(function() {
             var key = 'visited-view-home';
             if (!localStorage.getItem(key)) {
                 this.$el.addClass('first-visit');
-                this.$el.one('touchstart', function(e) {
+                this.$el.one('touchstart click', function(e) {
                 	if (e.preventDefault) e.preventDefault();
                     $(this).removeClass('first-visit');
                     localStorage.setItem(key, true);
