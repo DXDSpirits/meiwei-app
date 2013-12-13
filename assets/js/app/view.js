@@ -143,21 +143,23 @@ MeiweiApp.PageView = MeiweiApp.View.extend({
     onClickLeftBtn: function() { MeiweiApp.goBack(); },
     onClickRightBtn: function() {},
     initPageNav: function(page, collection) {
+        /*
+         * Prevent Ghost click
+         * It cant be catched propertly by MPB because of the scrollTop animation
+         * right after a touchend
+         */
+        var nextGhost = false, prevGhost = false, timeout = 1000;
         page.fetchNext = function() {
+            if (nextGhost) return;
+            nextGhost = true, setTimeout(function() { nextGhost = false }, timeout);
             $('body').animate({scrollTop: 0}, 100);
-            setTimeout(function() {
-                collection.fetchNext({success: function(collection, xhr, options) {
-                    page.resetNavigator(collection, xhr, options);
-                }});
-            }, 100);
+            setTimeout(function() { collection.fetchNext(); }, 100);
         };
         page.fetchPrev = function() {
+            if (prevGhost) return;
+            prevGhost = true, setTimeout(function() { prevGhost = false }, timeout);
             $('body').animate({scrollTop: 0}, 100);
-            setTimeout(function() {
-                collection.fetchPrev({success: function(collection, xhr, options) {
-                    page.resetNavigator(collection, xhr, options);
-                }});
-            }, 100);
+            setTimeout(function() { collection.fetchPrev(); }, 100);
         };
         page.resetNavigator = function() {
             page.$('.page-nav').toggleClass('hidden', (collection.next == null && collection.previous == null));

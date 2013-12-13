@@ -34,6 +34,7 @@ MeiweiApp.Collection = Backbone.Collection.extend({
 		var options = options || {};
 		if (this.next) {
 			options.url = this.next;
+			options.reset = true;
 			this.fetch(options);
 		}
 	},
@@ -41,6 +42,7 @@ MeiweiApp.Collection = Backbone.Collection.extend({
 		var options = options || {};
 		if (this.previous) {
 			options.url = this.previous;
+			options.reset = true;
 			this.fetch(options);
 		}
 	},
