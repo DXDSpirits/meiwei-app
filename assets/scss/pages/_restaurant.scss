@@ -4,6 +4,7 @@
 	perspective: 1000;
 	position: relative;
 	> .front, > .back {
+	    background: $bodyBackground;
 		@include backface-visibility(hidden);
 		@include transition(all .7s ease-in-out);
 	}

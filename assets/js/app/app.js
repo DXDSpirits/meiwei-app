@@ -57,10 +57,7 @@ MeiweiApp.initDevice = function() {
 };
 
 MeiweiApp.fixViewport = function() {
-    if (window.device.platform == 'Weixin') {
-        $('meta[name=viewport]').attr('content', 
-            'width=device-width, initial-scale=1, maximum-scale=1, user-scalable=0, height=' + $('body').innerHeight());
-    }
+    $('body>.view>.wrapper').css('min-height', $(window).height() - MeiweiApp.wrapperOffset);
 };
 
 MeiweiApp.initVersion = function() {
