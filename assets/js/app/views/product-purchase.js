@@ -66,7 +66,7 @@ $(function() {
     	    }
     	},
     	render: function() {
-    		this.products.fetch({ data: {category: 1}, reset: true, success: this.renderAll });
+    		this.products.fetch({ data: {category: 1}, success: this.renderAll });
     	}
     }))({el: $("#view-product-purchase")});
     
@@ -158,7 +158,7 @@ $(function() {
     		};
     	},
     	render: function() {
-        	this.products.fetch({ data: {category: 2}, reset: true });
+        	this.products.fetch({ data: {category: 2} });
     	}
     }))({el: $("#view-product-redeem")});
 });
