@@ -51,13 +51,13 @@ $(function() {
             });
     	},
     	render: function() {
-    	    var heros = window.Bootstrap && Bootstrap.get('home-heros');
-            if (heros) {
-                this.heros.smartSet(heros);
-            }
-            if (!checkFirstTime()) { 
-                this.heros.fetch();
-            }
+    	    if (!this.bootstrapped) {
+    	        this.bootstrapped = true;
+    	        var heros = window.Bootstrap && Bootstrap.get('home-heros');
+                if (heros) this.heros.reset(heros);
+    	    } else {
+    	        this.heros.fetch();
+    	    }
     		return this;
     	}
     });
@@ -163,21 +163,17 @@ $(function() {
             }
         },
     	render: function() {
-    	    this.firstVisit();
-    	    var listId = this.options.listId;
 	        this.views.masterHero.render();
-	        var recommendNames = window.Bootstrap && Bootstrap.get('home-recommendnames');
-	        if (recommendNames) {
-	            this.recommendNames.smartSet(recommendNames);
-	        }
-    		var recommends = window.Bootstrap && Bootstrap.get('home-recommend-items');
-    		if (recommends) {
-    			this.recommend.items.smartSet(recommends);
-    		}
-    		if (listId) {
-                MeiweiApp.Pages.Home.recommend.id = listId;
-            }
-            if (!checkFirstTime()) {
+	        var listId = this.options.listId;
+	        if (!this.bootstrapped && !listId) {
+                this.bootstrapped = true;
+                this.firstVisit();
+                var recommendNames = window.Bootstrap && Bootstrap.get('home-recommendnames');
+                if (recommendNames) this.recommendNames.reset(recommendNames);
+                var recommends = window.Bootstrap && Bootstrap.get('home-recommend-items');
+                if (recommends) this.recommend.items.reset(recommends);
+            } else {
+                if (listId) MeiweiApp.Pages.Home.recommend.id = listId;
                 this.recommend.fetch();
                 this.recommendNames.fetch();
             }
