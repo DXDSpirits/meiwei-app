@@ -108,7 +108,7 @@ $(function() {
     		this.views = {
     			masterHero: new MasterHero({ el: this.$('.master-hero') }),
     			recommendItems: new RecommendItems({ collection: this.recommend.items, el: this.$('.recommend-flow') }),
-    			recommendsFilter: new RecommendsFilter({ collection: this.recommendNames, el: this.$('.recommends-filter-wrapper') })
+    			recommendsFilter: new RecommendsFilter({ collection: this.recommendNames, el: this.$('.recommends-filter') })
     		};
     		/* It's important to put listenTo after view initialization.
     		 * The CollectionView.addAll should be executed before this.renderAll

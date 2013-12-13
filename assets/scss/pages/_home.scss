@@ -120,11 +120,14 @@
 	
     .recommends-filter {
 	    position: absolute;
+	    z-index: -2;
+	    top: $navbarHeight;
+	    left: 0;
+	    width: 100%;
+	    height: 400px;
+	    padding-top: 15px;
 	    background-color: $white;
-	    top: 0; right: 0; left: 0;
-	    height: 90%;
 	    @include transition(all .35s ease-in-out);
-	    //overflow: hidden;
 	    @include scrollable();
 	    &.closed {
             visibility: hidden;
@@ -132,10 +135,6 @@
             @include translate3d(0, -100%, 0);
         }
 	}
-    .recommends-filter-wrapper {
-        width: 100%;
-        padding-top: 10px;
-    }
     .filter-item {
         padding: 15px 20px;
         width: 100%;
