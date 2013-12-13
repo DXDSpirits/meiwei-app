@@ -147,7 +147,7 @@ $(function() {
     });
     
     MeiweiApp.Pages.ProductRedeem = new (MeiweiApp.Pages.ProductPurchase.constructor.extend({
-    	onClickRightBtn: function() { MeiweiApp.goBack(); },
+        onClickRightBtn: function() {},
     	initPage: function() {
     		this.products = new MeiweiApp.Collections.Products();
     		this.views = {
