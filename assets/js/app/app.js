@@ -41,18 +41,18 @@ MeiweiApp.showSplash = function() {
 };
 
 MeiweiApp.initDevice = function() {
+    MeiweiApp.wrapperOffset = 44;
     if (window.device) {
         if (window.device.platform === 'iOS' && parseFloat(window.device.version) === 7.0) {
             $('html').addClass('iOS7');
+            MeiweiApp.wrapperOffset += 20;
+            $('.view,.header-navbar').css('top', '20px');
         }
-        $('meta[name=viewport]').attr('content', 'width=device-width, height=device-height, initial-scale=1, maximum-scale=1, user-scalable=0');
     } else if(/MicroMessenger/i.test(navigator.userAgent)) {
         window.device = { platform: 'Weixin' };
         $('title').append(' ' + $('meta[name=description]').attr('content'));
-        $('meta[name=viewport]').attr('content', 'width=device-width, initial-scale=1, maximum-scale=1, user-scalable=0');
     } else {
         window.device = { platform: 'WebApp' };
-        $('meta[name=viewport]').attr('content', 'width=device-width, initial-scale=1, maximum-scale=1, user-scalable=0');
     }
 };
 
@@ -71,6 +71,7 @@ MeiweiApp.initVersion = function() {
         localStorage.setItem('version-code', MeiweiApp.Version);
         if (authToken) localStorage.setItem('auth-token', authToken);
     }
+    if (!MeiweiApp.isCordova()) return;
     var app = new MeiweiApp.Models.App();
     app.fetch({
         global: false,
@@ -83,7 +84,7 @@ MeiweiApp.initVersion = function() {
                     var ref = window.open('http://web.clubmeiwei.com/ad/apppromo' ,'_blank', 'location=no');
                 }
             };
-            if (MeiweiApp.isCordova() && version && version > MeiweiApp.Version) {
+            if (version && version > MeiweiApp.Version) {
                 MeiweiApp.showConfirmDialog(
                     MeiweiApp._('Update Available'),
                     MeiweiApp._('New version is available, go to update?'),
