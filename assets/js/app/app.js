@@ -58,6 +58,7 @@ MeiweiApp.initDevice = function() {
 
 MeiweiApp.fixViewport = function() {
     $('body>.view>.wrapper').css('min-height', $(window).height() - MeiweiApp.wrapperOffset);
+    $('#map_canvas').css('height', $(window).height() - MeiweiApp.wrapperOffset - 44);
 };
 
 MeiweiApp.initVersion = function() {

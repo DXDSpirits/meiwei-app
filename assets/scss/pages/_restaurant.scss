@@ -23,7 +23,7 @@
 }
 
 #view-restaurant-search {
-    .front, .back {
+    .flipper {
         width: 100%;
     }
 	.filter-item {
@@ -41,11 +41,7 @@
 		}
 	}
 	.map_canvas, #map_canvas {
-	    @include square(100%);
-	}
-	.map_canvas {
-		margin-top: 50px;
-		padding-bottom: 50px;
+	    width: 100%;
 	}
 	.locate-btn {
 	    @include square(32px);
@@ -62,14 +58,16 @@
         @extend .restaurant-list-item;
         position: absolute;
         z-index: 2;
-        bottom: 50px;
+        bottom: 0;
         background-color: $white;
         width: 100%;
+        opacity: 0;
         @include translate3d(0, 90px, 0);
-        -webkit-transition: -webkit-transform .2s ease-in-out;
+        -webkit-transition: all .2s ease-in-out;
         &.expand {
+            opacity: 1;
             @include translate3d(0, 0, 0);
-            -webkit-transition: -webkit-transform .2s ease-in-out;
+            -webkit-transition: all .2s ease-in-out;
         }
     }
 	.amap-icon img {
