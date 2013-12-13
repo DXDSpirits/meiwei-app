@@ -168,8 +168,8 @@ $(function() {
             'fastclick .header-btn-left': 'onClickLeftBtn',
             'fastclick .header-btn-right': 'onClickRightBtn',
             'fastclick .filter p': 'toggleFilters',
-            'click .filter li': 'selectFilter',
-            'touchstart .wrapper': 'closeFilters',
+            'tap .filter li': 'selectFilter',
+            'touchmove .wrapper': 'closeFilters',
             'submit .search-form': 'searchKeywords',
             'focus .search-form > input': 'clearFormInput'
         },
@@ -184,6 +184,7 @@ $(function() {
         },
         initPage: function() {
             this.restaurants = new MeiweiApp.Collections.Restaurants();
+            this.filters = new MeiweiApp.Models.Filters();
             this.cuisines = new MeiweiApp.Collections.Cuisines();
             this.circles = new MeiweiApp.Collections.Circles();
             this.recommendnames = new MeiweiApp.Collections.RecommendNames();
@@ -194,13 +195,8 @@ $(function() {
                 circleFilter: new CircleFilter({ collection: this.circles, el: this.$('.filter.circle ul') }),
                 map: new Map({ collection: this.restaurants, el: this.$('.map_canvas')})
             };
-            this.listenTo(this.restaurants, 'reset', this.refreshList);
+            this.listenTo(this.filters, 'change', this.refreshFilters);
             this.initPageNav(this, this.restaurants);
-        },
-        refreshList: function(collection, xhr, options) {
-            if (this.restaurants.length == 0) {
-                this.$('.restaurant-list').prepend('<p style="padding: 15px;">没有找到合适的餐厅，请尝试搜索其他关键字，或者选择菜系和商圈</p>');
-            }
         },
         toggleFilters: function(e) {
             var el = e.currentTarget;
@@ -223,11 +219,23 @@ $(function() {
             this.$('.cuisine > p > span').html(MeiweiApp._('Cuisines'));
             this.$('.circle > p > span').html(MeiweiApp._('Circles'));
         },
+        refreshFilters: function() {
+            window.Bootstrap && Bootstrap.set('restaurant-search-filters', this.filters.toJSON());
+            var scrollers = this.scrollers = this.scrollers || {};
+            var self = this;
+            var reset = function(className, filterName) {
+                self[filterName].reset(self.filters.get(filterName));
+                scrollers[className] ? scrollers[className].refresh() : scrollers[className] 
+                    = new IScroll(self.$('.' + className + ' .collapsible-inner').selector, { tap: true, bounce: false });
+            };
+            reset('cuisine', 'cuisines'), reset('circle', 'circles'), reset('recommend', 'recommendnames');
+        },
         searchKeywords: function(e) {
             if (e.preventDefault) e.preventDefault();
             var keywords = this.$('.search-form > input').val();
             this.restaurants.fetch({ reset: true, data: { keywords: keywords } });
             this.$('.search-form > input').blur();
+            this.resetFilters();
         },
         searchRestaurants: function(filter) {
             this.restaurants.fetch({ reset: true, data: filter });
@@ -235,20 +243,14 @@ $(function() {
         render: function() {
             MeiweiApp.initGeolocation();
             var keywords = this.options.keywords;
-            if (keywords) {
-                this.restaurants.fetch({ reset: true, data: { keywords: keywords } });
+            keywords ? this.searchRestaurants({ keywords: keywords }) : this.restaurants.fetch();
+            if (!this.bootstrapped) {
+                this.bootstrapped = true;
+                var filters = window.Bootstrap && Bootstrap.get('restaurant-search-filters');
+                if (filters) this.filters.set(filters);
             } else {
-                this.restaurants.fetch({ reset: true });
+                this.filters.fetch();
             }
-            var filters = window.Bootstrap && Bootstrap.get('restaurant-search-filters');
-            if (filters) {
-                this.recommendnames.reset(filters.recommendnames);
-                this.cuisines.reset(filters.cuisines);
-                this.circles.reset(filters.circles); //filters needs reset since they are sorted
-            }
-            this.recommendnames.fetch({ reset: true });
-            this.cuisines.fetch({ reset: true });
-            this.circles.fetch({ reset: true });
         }
     }))({el: $("#view-restaurant-search")});
 });

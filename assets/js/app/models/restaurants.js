@@ -1,3 +1,6 @@
+MeiweiApp.Models.Filters = MeiweiApp.Model.extend({
+    urlRoot: MeiweiApp.configs.APIHost + '/restaurants/filters/'
+});
 
 MeiweiApp.Models.Cuisine = MeiweiApp.Model.extend({
 	urlRoot: MeiweiApp.configs.APIHost + '/restaurants/cuisine/'

@@ -27,22 +27,21 @@
 }
 
 #view-restaurant-search {
-    .flipper {
-        width: 100%;
-    }
+    .flipper { width: 100%; }
+    .filter:active, .filter.active { background-color: $brown; }
 	.filter-item {
 	    @include text-overflow();
 		line-height: 30px;
 		padding: 0 17px;
-		//@include border(0 0 1px 0, dotted, $brownLight);
-		//border-bottom: 1px solid darken($brown, 5%);
 		border-top: 1px solid lighten($brown, 5%);
+		background-color: $brown;
 		&:active, &.pressed { background-color: $brownDark; }
 		&.subtitle {
 		    font-weight: bold;
 		    font-size: $baseFontSize;
 		    background-color: darken($brown, 5%);
 		}
+		&:active.subtitle, &.pressed.subtitle { background-color: darken($brown, 10%); }
 	}
 	.map_canvas, #map_canvas {
 	    width: 100%;

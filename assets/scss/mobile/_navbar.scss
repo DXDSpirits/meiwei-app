@@ -110,14 +110,12 @@
 .collapsible {
     position: relative;
     > .collapsible-inner {
-        @include scrollable();
-        //overflow: hidden;
+        overflow: hidden;
         position: absolute;
         z-index: $zindexPopover;
         top: $filterBarHeight;
         height: 200px;
         visibility: hidden;
-        background-color: $brown;
         color: $white;
         max-width: 200%;
         min-width: 150%;
@@ -128,5 +126,4 @@
     &.expand > .collapsible-inner {
         visibility: visible;
     }
-    &:active, &.active, &.selected { background-color: transparent; }
 }
