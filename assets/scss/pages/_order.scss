@@ -111,14 +111,15 @@
 }
 
 #view-attending {
+    .wrapper {
+        -webkit-box-pack: center;
+    }
 	.viewport {
 		overflow: hidden;
 		@include square(100%);
 		@include background-size(100% auto, 100% auto);
 	}
-	
 	@include carousel($carouselWidth: 250px);
-	
 	.order-page-item {
 		position: relative;
 	}
