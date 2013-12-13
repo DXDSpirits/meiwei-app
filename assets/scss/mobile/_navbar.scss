@@ -76,15 +76,17 @@
 	}
 }
 
-
 .filter-bar {
+    position: absolute;
+    left: 0;
+    top: $navbarHeight;
 	@include flex-box($orient: horizontal);
-	@include size(50px, 100%);
+	@include size($navbarHeight, 100%);
 	background-color: $brown;
 	> .filter {
 		@include flexible($orient: horizontal);
-		height: 50px;
-		line-height: 50px;
+		height: $navbarHeight;
+		line-height: $navbarHeight;
 		text-align: center;
 		font-size: $fontSizeSmall;
 		color: $white;
@@ -100,6 +102,10 @@
 	}
 }
 
+.padding-filter-bar {
+    padding-top: $navbarHeight;
+}
+
 .collapsible {
     position: relative;
     > .collapsible-inner {
@@ -107,7 +113,7 @@
         //overflow: hidden;
         position: absolute;
         z-index: $zindexPopover;
-        top: 50px;
+        top: $navbarHeight;
         height: 200px;
         visibility: hidden;
         background-color: $brown;
