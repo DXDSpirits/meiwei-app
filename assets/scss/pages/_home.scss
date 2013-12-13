@@ -150,7 +150,9 @@
 }
 
 #view-getstarted {
-    padding: 0;
+    .wrapper {
+        -webkit-box-pack: center;
+    }
     .viewport {
         overflow: hidden;
         width: 100%;

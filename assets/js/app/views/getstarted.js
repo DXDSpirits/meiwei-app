@@ -28,12 +28,19 @@ $(function() {
         	this.$('.carousel-inner').html($list);
         },
         adjustWidth: function() {
-        	var bodyWidth = $('body').innerWidth();
-            var items = this.$('.carousel > .carousel-inner > .carousel-item');
+        	var bodyWidth = $('.view').innerWidth();
+            var items = this.$('.carousel-item'), itemWidth = $(items[0]).outerWidth(),
+                wrapperWidth = this.$('.carousel').innerWidth(),
+                margin = (wrapperWidth - itemWidth) / 2;
             for (var i=0; i<items.length; i++) {
-            	$(items[i]).css('width', bodyWidth);
+                $(items[i]).css('width', bodyWidth);
             }
-            this.$('.carousel > .carousel-inner').css('width', items.length * $(items[0]).outerWidth());
+            this.$('.carousel-inner').css({
+                'width': items.length * itemWidth + 2 * margin,
+                'padding-left': margin,
+                'padding-right': margin
+            });
+            
         },
         render: function() {
         	this.fillImages();
