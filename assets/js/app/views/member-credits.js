@@ -18,7 +18,7 @@ $(function() {
     		this.views = {
     			creditList: new CreditList({
     				collection: this.credits,
-    				el: this.$('.credit-list')
+    				el: this.$('.simple-list')
     			})
     		};
     	},
