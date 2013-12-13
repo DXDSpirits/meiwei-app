@@ -60,9 +60,10 @@ $(function() {
     	renderAll: function() {
     	    if (this.options.itemId) {
     	        var item = this.$('.stack-item[data-item=' + this.options.itemId + ']');
-    	        this.scroller.scrollToElement(item.closest('.product-box')[0], 1000);
+                var offset = item.closest('.product-box').position();
+                $('body').animate({scrollTop: offset.top}, 700);
     	    } else {
-    	        this.scroller.scrollTo(0, 0);
+    	        $('body').animate({scrollTop: 0}, 700);
     	    }
     	},
     	render: function() {

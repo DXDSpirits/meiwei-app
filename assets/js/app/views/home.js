@@ -149,7 +149,7 @@ $(function() {
     	    }
     	    this.$('.show-more').removeClass('hidden');
     	    this.$('.header-title > span').html(this.recommend.get('name'));
-    	    this.scroller.scrollTo(52, 0);
+    	    window.scrollTo(0, 52);
     	},
     	firstVisit: function() {
             var key = 'visited-view-home';

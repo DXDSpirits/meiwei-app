@@ -34,7 +34,6 @@ $(function() {
             events: { 'click .delete-button': 'triggerDelete' },
             triggerDelete: function() {
                 MeiweiApp.ProductCart.remove(this.model);
-                MeiweiApp.Pages.RestaurantOrder.scroller.refresh();
             }
         })
     });
@@ -172,7 +171,7 @@ $(function() {
                     );
                 },
                 error: function(model, xhr, options) {
-                    $(window).scrollTop(0);
+                    window.scrollTo(0, 0);
                     self.displayError(self.$('.info-text'), xhr.responseText);
                 }
             });

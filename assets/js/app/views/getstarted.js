@@ -15,7 +15,6 @@ $(function() {
         getstarted: function() {
             localStorage.setItem('first-time', true);
             MeiweiApp.goTo('Home');
-            this.scroller.destroy();
             this.undelegateEvents();
             this.$('.carousel-inner').empty();
         },

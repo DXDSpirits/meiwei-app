@@ -90,7 +90,6 @@ $(function() {
     	    this.$('.register-switch').addClass('hidden');
             this.$('.login-switch').removeClass('hidden');
             this.$('.header-title').html(MeiweiApp._('Register'));
-            this.scroller.refresh();
     	},
     	goToLogin: function() {
     	    this.views.registerForm.$el.addClass('hidden');
@@ -98,7 +97,6 @@ $(function() {
             this.$('.login-switch').addClass('hidden');
             this.$('.register-switch').removeClass('hidden');
             this.$('.header-title').html(MeiweiApp._('Login'));
-            this.scroller.refresh();
     	},
     	render: function() {
     		MeiweiApp.me.logout();

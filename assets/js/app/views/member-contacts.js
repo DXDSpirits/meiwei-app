@@ -39,7 +39,7 @@ $(function() {
             if(theTarget.nodeType == 3) theTarget = theTarget.parentNode;
             theTarget = theTarget.innerText;
             var pos = this.$('.contact-item[data-index="' + theTarget + '"]')[0];
-            if (pos) this.scroller.scrollToElement(pos);
+            //if (pos) this.scroller.scrollToElement(pos);
             return false;
     	},
     	alphabetOnTouchMove: function(ev) {
@@ -49,7 +49,7 @@ $(function() {
             if(theTarget.nodeType == 3) theTarget = theTarget.parentNode;
             theTarget = theTarget.innerText;
             var pos = this.$('.contact-item[data-index="' + theTarget + '"]')[0];
-            if (pos) this.scroller.scrollToElement(pos);
+            //if (pos) this.scroller.scrollToElement(pos);
             return false;
         },
         alphabetOnTouchEnd: function(ev) {

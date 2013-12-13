@@ -129,7 +129,7 @@ MeiweiApp.PageView = MeiweiApp.View.extend({
         }
         this.views = {};
         _.bindAll(this, 'showPage', 'go', 'refresh', 'render', 'reset', 
-                        'onClickLeftBtn', 'onClickRightBtn', 'initScroller');
+                        'onClickLeftBtn', 'onClickRightBtn');
         this.$('.wrapper').css('min-height', $(window).height() - MeiweiApp.wrapperOffset);
         var $el = this.$el;
         this.$('.wrapper').on('webkitAnimationEnd', function(e) {
@@ -143,31 +143,9 @@ MeiweiApp.PageView = MeiweiApp.View.extend({
     },
     onClickLeftBtn: function() { MeiweiApp.goBack(); },
     onClickRightBtn: function() {},
-    initScroller: function() {
-        if (this.scroller == null) {
-            var $scroll = $('body');
-            this.scroller = {
-                scrollTo: function(y, x, duration) {
-                    $scroll.animate({
-                        scrollTop:  y || 0,
-                        scrollLeft: x || 0
-                    }, duration || 350);
-                },
-                scrollToElement: function(el, duration) {
-                    var offset = $(el).position();
-                    $scroll.animate({
-                        scrollTop: offset.top,
-                        scrollLeft: offset.left
-                    }, duration || 700);
-                },
-                refresh: function() {},
-                destroy: function() {}
-            }
-        }
-    },
     initPageNav: function(page, collection) {
         page.fetchNext = function() {
-            if (page.scroller) page.scroller.scrollTo(0, 0, 100);
+            $('body').animate({scrollTop: 0}, 100);
             setTimeout(function() {
                 collection.fetchNext({success: function(collection, xhr, options) {
                     page.resetNavigator(collection, xhr, options);
@@ -175,7 +153,7 @@ MeiweiApp.PageView = MeiweiApp.View.extend({
             }, 100);
         };
         page.fetchPrev = function() {
-            if (page.scroller) page.scroller.scrollTo(0, 0, 100);
+            $('body').animate({scrollTop: 0}, 100);
             setTimeout(function() {
                 collection.fetchPrev({success: function(collection, xhr, options) {
                     page.resetNavigator(collection, xhr, options);
@@ -241,8 +219,6 @@ MeiweiApp.PageView = MeiweiApp.View.extend({
             $nextPage.addClass('view-next');
             nextPageOpenTimeout = setTimeout(openNextPage, 1000);
             $nextPage.one('pageOpen', openNextPage);
-            
-            this.initScroller();
         }
     }
 });
