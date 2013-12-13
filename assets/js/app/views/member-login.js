@@ -14,7 +14,6 @@ $(function() {
     		this.displayError(this.$('.info-text'), xhr.responseText);
     	},
     	login: function() {
-    		window.scrollTo(0, 0);
     		var username = this.$('input[name=username]').val();
     		var password = this.$('input[name=password]').val();
     		if (username.length > 0 && password.length > 0) {
@@ -47,7 +46,6 @@ $(function() {
             this.displayError(this.$('.info-text'), xhr.responseText);
         },
         register: function() {
-            window.scrollTo(0, 0);
             var username = this.$('input[name=username]').val() || null;
             var password = this.$('input[name=password]').val() || null;
             var passwordConfirm = this.$('input[name=password-confirm]').val() || null;

@@ -59,7 +59,6 @@
                         onLabel = $(this).find('.label-on').text() || 'ON',
                         offLabel = $(this).find('.label-off').text() || 'OFF';
                     var switchGender = function(gender) {
-                        window.scrollTo(0, 0); // ios hack ...
                         var switchOff = function() {
                             $element.removeClass('on').addClass('off');
                             $element.find('input').val(0);
