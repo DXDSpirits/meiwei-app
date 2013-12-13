@@ -22,6 +22,9 @@
 }
 
 #view-restaurant-search {
+    .front, .back {
+        width: 100%;
+    }
 	.filter-item {
 	    @include text-overflow();
 		line-height: 30px;
