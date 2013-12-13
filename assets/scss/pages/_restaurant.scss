@@ -13,10 +13,14 @@
         top: 0;
 	}
 	&.flip > .front {
+	    opacity: 0;
+	    visibility: hidden;
 		@include rotateY(-180deg);
 		z-index: -1;
 	}
 	&:not(.flip) > .back {
+	    opacity: 0;
+        visibility: hidden;
         @include rotateY(180deg);
         z-index: -1;
     }
