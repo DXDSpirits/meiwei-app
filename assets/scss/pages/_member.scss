@@ -96,9 +96,6 @@
 }
 
 #view-member-center {
-	.scroll {
-		background-image: url($backgroundBottomPath);
-	}
 	.favorite-resto-carousel {
 		@include size(250px, 100%);
 		margin-top: -70px;
@@ -279,7 +276,7 @@
 }
 
 #view-settings {
-    .scroll-inner > section {
+    .wrapper > section {
         margin-top: 20px;
         width: 100%;
     }

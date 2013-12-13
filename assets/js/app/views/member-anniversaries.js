@@ -33,7 +33,7 @@ $(function() {
     		this.views = {
     			anniversaryList: new MeiweiApp.Views.AnnversaryList({
     				collection: this.anniversaries,
-    				el: this.$('.scroll-inner')
+    				el: this.$('.wrapper')
     			})
     		};
     	},

@@ -9,76 +9,72 @@
 		</div>
 	</header>
 	<section class="wrapper">
-		<div class="scroll">
-			<div class="scroll-inner">
-				<div class="restaurant-picture img"></div>
-				<p class="restaurant-name"></p>
-				<section class="order-info">
-					<header class="section-title"><h1 data-i18n="Reservation Detail">预订信息</h1></header>
-					<form>
-						<p class="info-text"></p>
-						<fieldset>
-							<div class="inline-group">
-								<i class="icon icon-calendar"></i>
-								<input type="date" name="orderdate" />
-							</div>
-							<div class="inline-group">
-								<i class="icon icon-clock"></i>
-								<select name="ordertime">
-									<option>11:00</option><option>11:30</option><option>12:00</option><option>12:30</option>
-									<option>13:00</option><option>13:30</option><option>14:00</option><option>14:30</option>
-									<option>15:00</option><option>15:30</option><option>16:00</option><option>16:30</option>
-									<option>17:00</option><option>17:30</option><option>18:00</option><option>18:30</option>
-									<option>19:00</option><option>19:30</option><option>20:00</option><option>20:30</option>
-								</select>
-								<i class="icon icon-group"></i>
-								<input type="text" name="personnum" pattern="[0-9]*" />
-							</div>
-							<div class="order-detail inline-group">
-								<i class="icon icon-pencil"></i>
-								<input type="text" name="other" data-placeholder-i18n="Remarks" placeholder="备注" />
-							</div>
-						</fieldset>
-					</form>
-				</section>
-				<section class="contact-info">
-					<header class="section-title menu"><h1 data-i18n="Select Contact">选择预订人</h1></header>
-					<form>
-						<fieldset>
-							<div class="inline-group">
-								<i class="icon icon-member-small"></i>
-								<input type="text" name="contactname" data-placeholder-i18n="Contact" placeholder="联系人"/>
-								<div class="control-group switch switch-gender">
-                                    <div class="switch-inner">
-                                        <input type="hidden" name="contactgender" value="0"/>
-                                        <label class="label-text"></label>
-                                        <label class="label-off" data-i18n="Mr.">先生</label>
-                                        <label class="label-on" data-i18n="Ms.">女士</label>
-                                        <div class="switch-button"></div>
-                                    </div>
-                                </div>
-							</div>
-							<div class="inline-group">
-								<i class="icon icon-phone"></i>
-								<input type="tel" name="contactphone" data-placeholder-i18n="Mobile" placeholder="手机号" />
-							</div>
-						</fieldset>
-					</form>
-				</section>
-				<section class="floorplan-select">
-					<header class="section-title menu"><h1>
-					    <span data-i18n="Select Seat">桌位选择</span>
-					    <span data-i18n="Seat Selected" class="seat-selected hidden"></span>
-					</h1></header>
-				</section>
-				<section class="product-select">
-					<header class="section-title menu"><h1 data-i18n="Concierge Services">私人管家服务</h1></header>
-					<div class="product-cart clearfix"></div>
-				</section>
-				<section class="order-submit-button">
-					<button class="btn btn-inverse" data-i18n="Submit Order">提交订单</button>
-				</section>
-			</div>
-		</div>
+		<div class="restaurant-picture img"></div>
+		<p class="restaurant-name"></p>
+		<section class="order-info">
+			<header class="section-title"><h1 data-i18n="Reservation Detail">预订信息</h1></header>
+			<form>
+				<p class="info-text"></p>
+				<fieldset>
+					<div class="inline-group">
+						<i class="icon icon-calendar"></i>
+						<input type="date" name="orderdate" />
+					</div>
+					<div class="inline-group">
+						<i class="icon icon-clock"></i>
+						<select name="ordertime">
+							<option>11:00</option><option>11:30</option><option>12:00</option><option>12:30</option>
+							<option>13:00</option><option>13:30</option><option>14:00</option><option>14:30</option>
+							<option>15:00</option><option>15:30</option><option>16:00</option><option>16:30</option>
+							<option>17:00</option><option>17:30</option><option>18:00</option><option>18:30</option>
+							<option>19:00</option><option>19:30</option><option>20:00</option><option>20:30</option>
+						</select>
+						<i class="icon icon-group"></i>
+						<input type="text" name="personnum" pattern="[0-9]*" />
+					</div>
+					<div class="order-detail inline-group">
+						<i class="icon icon-pencil"></i>
+						<input type="text" name="other" data-placeholder-i18n="Remarks" placeholder="备注" />
+					</div>
+				</fieldset>
+			</form>
+		</section>
+		<section class="contact-info">
+			<header class="section-title menu"><h1 data-i18n="Select Contact">选择预订人</h1></header>
+			<form>
+				<fieldset>
+					<div class="inline-group">
+						<i class="icon icon-member-small"></i>
+						<input type="text" name="contactname" data-placeholder-i18n="Contact" placeholder="联系人"/>
+						<div class="control-group switch switch-gender">
+                            <div class="switch-inner">
+                                <input type="hidden" name="contactgender" value="0"/>
+                                <label class="label-text"></label>
+                                <label class="label-off" data-i18n="Mr.">先生</label>
+                                <label class="label-on" data-i18n="Ms.">女士</label>
+                                <div class="switch-button"></div>
+                            </div>
+                        </div>
+					</div>
+					<div class="inline-group">
+						<i class="icon icon-phone"></i>
+						<input type="tel" name="contactphone" data-placeholder-i18n="Mobile" placeholder="手机号" />
+					</div>
+				</fieldset>
+			</form>
+		</section>
+		<section class="floorplan-select">
+			<header class="section-title menu"><h1>
+			    <span data-i18n="Select Seat">桌位选择</span>
+			    <span data-i18n="Seat Selected" class="seat-selected hidden"></span>
+			</h1></header>
+		</section>
+		<section class="product-select">
+			<header class="section-title menu"><h1 data-i18n="Concierge Services">私人管家服务</h1></header>
+			<div class="product-cart clearfix"></div>
+		</section>
+		<section class="order-submit-button">
+			<button class="btn btn-inverse" data-i18n="Submit Order">提交订单</button>
+		</section>
 	</section>
 </div>

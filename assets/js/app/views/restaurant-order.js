@@ -172,7 +172,7 @@ $(function() {
                     );
                 },
                 error: function(model, xhr, options) {
-                    self.$('.scroll').scrollTop(0);
+                    $(window).scrollTop(0);
                     self.displayError(self.$('.info-text'), xhr.responseText);
                 }
             });
@@ -187,9 +187,7 @@ $(function() {
     			src_local: localImage,
     			height: 250
     		});
-            MeiweiApp.loadBgImage(this.$('.scroll'), this.restaurant.get('frontpic'), {
-    			height: 250
-    		});
+            //MeiweiApp.loadBgImage($('body'), this.restaurant.get('frontpic'), { height: 250 });
             this.$('.restaurant-name').html(this.restaurant.get('fullname'));
             
             var defaultValues;

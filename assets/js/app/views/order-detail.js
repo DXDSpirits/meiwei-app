@@ -23,7 +23,7 @@ $(function() {
     		this.views = {
     			orderDetail: new MeiweiApp.Views.OrderDetail({
     				model: this.order,
-    				el: this.$('.scroll .scroll-inner')
+    				el: this.$('.wrapper')
     			})
     		};
     	},
@@ -38,7 +38,7 @@ $(function() {
     		var resto = this.order.get('restaurantinfor');
     		var localImage = 'assets/img/bootstrap/restaurant/' + resto.id + '.jpg';
             MeiweiApp.loadBgImage(this.$('.restaurant-picture'), resto.frontpic, { height: 250 });
-            MeiweiApp.loadBgImage(this.$('.scroll'), resto.frontpic, { height: 250 });
+            //MeiweiApp.loadBgImage($('body'), resto.frontpic, { height: 250 });
             this.$('.restaurant-name').html(resto.fullname);
     		if (this.order.get('editable')) {
     			this.$('.header-btn-right i').attr('class', 'icon icon-edit');

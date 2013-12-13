@@ -35,11 +35,12 @@ body {
     position: relative;
     width: 100%;
     background-color: $bodyBackground;
+    @include flex-box($orient: vertical, $pack: start);
+    @include backface-visibility(hidden);
+    @include translate3d(0, 0, 0);
     &.rendering {
         opacity: 0;
     }
-    @include backface-visibility(hidden);
-    @include translate3d(0, 0, 0);
 }
 
 .view.view-next > .wrapper {
@@ -50,18 +51,6 @@ body {
 .view.view-prev > .wrapper {
     @include animation(slideouttoleft $pageSwitchDuration linear);
     -webkit-animation-fill-mode: forwards;
-}
-
-.scroll {
-	position: relative;
-	width: 100%;
-	background: $bodyBackground !important;
-}
-
-.scroll-inner {
-    position: relative;
-    width: 100%;
-    @include flex-box($orient: vertical, $pack: start);
 }
 
 #apploader {

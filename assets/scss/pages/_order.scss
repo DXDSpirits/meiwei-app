@@ -47,7 +47,7 @@
 }
 
 #view-product-purchase, #view-product-redeem {
-	.scroll-inner {
+    .wrapper {
 		padding: 15px 0;
 	}
 	.product-box {
@@ -94,7 +94,7 @@
             text-indent: -5px;
             font-size: $fontSizeMini;
         }
-        position: absolute;
+        position: fixed;
         bottom: 10px;
         left: 10px;
         opacity: 0.7;

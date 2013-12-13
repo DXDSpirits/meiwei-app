@@ -66,7 +66,7 @@ $(function() {
     		this.views = {
     			contactList: new ContactList({
     				collection: new MeiweiApp.Collections.Contacts(),
-    				el: this.$('.scroll-inner')
+    				el: this.$('.contact-list')
     			})
     		};
     		this.selectedContact = new MeiweiApp.Models.Contact();

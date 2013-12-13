@@ -169,7 +169,7 @@ $(function() {
             'fastclick .header-btn-right': 'onClickRightBtn',
             'fastclick .filter p': 'toggleFilters',
             'click .filter li': 'selectFilter',
-            'touchstart .scroll': 'closeFilters',
+            'touchstart .wrapper': 'closeFilters',
             'submit .search-form': 'searchKeywords',
             'focus .search-form > input': 'clearFormInput'
         },

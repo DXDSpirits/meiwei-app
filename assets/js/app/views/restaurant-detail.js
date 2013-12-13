@@ -89,9 +89,7 @@ $(function() {
     			src_local: localImage,
     			height: 250
     		});
-    		MeiweiApp.loadBgImage(this.$('.scroll'), this.restaurant.get('frontpic'), {
-    			height: 250
-    		});
+    		//MeiweiApp.loadBgImage($('body'), this.restaurant.get('frontpic'), { height: 250 });
     		this.$('.wrapper').removeClass('rendering');
     		this.renderReviews();
     	},

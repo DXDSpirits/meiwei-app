@@ -9,50 +9,46 @@
 		</div>
 	</header>
 	<section class="wrapper">
-		<div class="scroll">
-			<div class="scroll-inner">
-			    <div class="map">
-                    <div id="driver_map_canvas"></div>
-                </div>
-				<div class="order-form">
-				    <form>
-                        <p class="info-text"></p>
-                        <fieldset>
-                            <div class="inline-group">
-                                <i class="icon icon-map-marker-small"></i>
-                                <input type="text" name="address" />
+	    <div class="map">
+            <div id="driver_map_canvas"></div>
+        </div>
+		<div class="order-form">
+		    <form>
+                <p class="info-text"></p>
+                <fieldset>
+                    <div class="inline-group">
+                        <i class="icon icon-map-marker-small"></i>
+                        <input type="text" name="address" />
+                    </div>
+                    <div class="inline-group">
+                        <i class="icon icon-clock"></i>
+                        <input type="time" name="request_time" value="21:00"/>
+                        <small class="asap" data-i18n="ASAP">尽快到达</small>
+                    </div>
+                    <div class="inline-group">
+                        <i class="icon icon-member-small"></i>
+                        <input type="text" name="name" data-placeholder-i18n="Contact" placeholder="联系人"/>
+                        <div class="control-group switch switch-gender">
+                            <div class="switch-inner">
+                                <input type="hidden" name="gender" value="0"/>
+                                <label class="label-text"></label>
+                                <label class="label-off" data-i18n="Mr.">先生</label>
+                                <label class="label-on" data-i18n="Ms.">女士</label>
+                                <div class="switch-button"></div>
                             </div>
-                            <div class="inline-group">
-                                <i class="icon icon-clock"></i>
-                                <input type="time" name="request_time" value="21:00"/>
-                                <small class="asap" data-i18n="ASAP">尽快到达</small>
-                            </div>
-                            <div class="inline-group">
-                                <i class="icon icon-member-small"></i>
-                                <input type="text" name="name" data-placeholder-i18n="Contact" placeholder="联系人"/>
-                                <div class="control-group switch switch-gender">
-                                    <div class="switch-inner">
-                                        <input type="hidden" name="gender" value="0"/>
-                                        <label class="label-text"></label>
-                                        <label class="label-off" data-i18n="Mr.">先生</label>
-                                        <label class="label-on" data-i18n="Ms.">女士</label>
-                                        <div class="switch-button"></div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="inline-group">
-                                <i class="icon icon-phone"></i>
-                                <input type="tel" name="mobile" data-placeholder-i18n="Mobile" placeholder="手机号" />
-                            </div>
-                            <div class="inline-group">
-                                <i class="icon icon-pencil"></i>
-                                <input type="text" name="comment" data-placeholder-i18n="Remarks" placeholder="备注" />
-                            </div>
-                        </fieldset>
-                    </form>
-                    <button class="order-submit-button btn-inverse btn-block-level" data-i18n="Submit Order"></button>
-				</div>
-			</div>
+                        </div>
+                    </div>
+                    <div class="inline-group">
+                        <i class="icon icon-phone"></i>
+                        <input type="tel" name="mobile" data-placeholder-i18n="Mobile" placeholder="手机号" />
+                    </div>
+                    <div class="inline-group">
+                        <i class="icon icon-pencil"></i>
+                        <input type="text" name="comment" data-placeholder-i18n="Remarks" placeholder="备注" />
+                    </div>
+                </fieldset>
+            </form>
+            <button class="order-submit-button btn-inverse btn-block-level" data-i18n="Submit Order"></button>
 		</div>
 	</section>
 </div>

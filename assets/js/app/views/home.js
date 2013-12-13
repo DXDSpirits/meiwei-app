@@ -99,7 +99,7 @@ $(function() {
     		'fastclick .show-more': 'goToSearch',
     		'submit .search-form form': 'searchKeywords',
     		'fastclick .header-title': 'toggleFilter',
-    		'touchend .scroll': 'hero'
+    		'touchend .wrapper': 'hero'
     	},
     	initPage: function() {
     		this.defaultRecommendId = 5;

@@ -46,7 +46,7 @@ $(function() {
     		this.views = {
     			productList: new MeiweiApp.Views.ProductPurchaseList({
     				collection: this.products,
-    				el: this.$('.scroll-inner')
+    				el: this.$('.wrapper')
     			})
     		};
     	},
@@ -152,7 +152,7 @@ $(function() {
     		this.views = {
     			productList: new MeiweiApp.Views.ProductRedeemList({
     				collection: this.products,
-    				el: this.$('.scroll-inner')
+    				el: this.$('.wrapper')
     			}),
     			detailDialog: new MeiweiApp.Views.ProductItemDetail()
     		};

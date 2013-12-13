@@ -130,7 +130,6 @@ MeiweiApp.PageView = MeiweiApp.View.extend({
         this.views = {};
         _.bindAll(this, 'showPage', 'go', 'refresh', 'render', 'reset', 
                         'onClickLeftBtn', 'onClickRightBtn', 'initScroller');
-        this.$('.scroll-inner').css('min-height', (this.$('.scroll').height() + 1) + 'px');
         var $el = this.$el;
         this.$('.wrapper').on('webkitAnimationEnd', function(e) {
             if (e.originalEvent.animationName == "slideouttoleft") {
