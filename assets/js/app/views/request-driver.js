@@ -3,19 +3,22 @@ $(function() {
         className: 'dialog',
         template: TPL['orderdriver-confirm-dialog'],
         events: {
-            'fastclick .btn-cancel': 'closeDialog',
+            'fastclick .btn-cancel': 'cancel',
             'fastclick .btn-confirm': 'confirm'
         },
         closeDialog: function() {
             this.remove();
             $('#dialog-overlay').addClass('hidden');
             this.undelegateEvents();
-            MeiweiApp.goTo('Home');
         },
         openDialog: function() {
             $('body').append(this.el);
             $('#dialog-overlay').removeClass('hidden');
             this.delegateEvents();
+        },
+        cancel: function() {
+            this.closeDialog();
+            MeiweiApp.goTo('Home');
         },
         confirm: function() {
             this.closeDialog();
