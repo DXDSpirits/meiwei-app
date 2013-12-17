@@ -41,13 +41,8 @@ MeiweiApp.showSplash = function() {
 };
 
 MeiweiApp.initDevice = function() {
-    MeiweiApp.wrapperOffset = 44;
     if (window.device) {
-        if (window.device.platform === 'iOS' && parseFloat(window.device.version) === 7.0) {
-            $('html').addClass('iOS7');
-            MeiweiApp.wrapperOffset += 20;
-            $('.view,.header-navbar').css('top', '20px');
-        }
+        // Just Fine
     } else if(/MicroMessenger/i.test(navigator.userAgent)) {
         window.device = { platform: 'Weixin' };
         $('title').append(' ' + $('meta[name=description]').attr('content'));
@@ -57,8 +52,9 @@ MeiweiApp.initDevice = function() {
 };
 
 MeiweiApp.fixViewport = function() {
-    $('body>.view>.wrapper').css('min-height', $(window).height() - MeiweiApp.wrapperOffset);
-    $('#map_canvas').css('height', $(window).height() - MeiweiApp.wrapperOffset - 50);
+    var wrapperOffset = 44;
+    $('body>.view>.wrapper').css('min-height', $(window).height() - wrapperOffset);
+    $('#map_canvas').css('height', $(window).height() - wrapperOffset - 50);
 };
 
 MeiweiApp.initVersion = function() {
