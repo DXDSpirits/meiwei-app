@@ -90,6 +90,7 @@
 		line-height: $filterBarHeight;
 		text-align: center;
 		font-size: $fontSizeSmall;
+		background-color: $brown;
 		color: $white;
 		&:active, &.active, &.selected { background-color: $brownDark; }
 	}
@@ -112,18 +113,19 @@
     > .collapsible-inner {
         overflow: hidden;
         position: absolute;
-        z-index: $zindexPopover;
+        z-index: -1;
         top: $filterBarHeight;
         height: 200px;
-        visibility: hidden;
         color: $white;
         max-width: 200%;
-        min-width: 150%;
+        min-width: 100%;
+        @include translate3d(0, -150%, 0);
+        @include transition(all .35s ease-in-out);
     }
     &:last-child > .collapsible-inner {
         right: 0;
     }
     &.expand > .collapsible-inner {
-        visibility: visible;
+        @include translate3d(0, 0, 0);
     }
 }

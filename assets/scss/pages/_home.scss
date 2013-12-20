@@ -125,11 +125,9 @@
 	    left: 0;
 	    width: 100%;
 	    height: 400px;
+	    overflow: hidden;
 	    @include transition(all .35s ease-in-out);
-	    @include scrollable();
 	    &.closed {
-            visibility: hidden;
-            opacity: 0;
             @include translate3d(0, -100%, 0);
         }
 	}
