@@ -33,7 +33,7 @@ $(function() {
     	events: { 'fastclick .carousel-item': 'viewProducts' },
     	initView: function() {
     		this.heros = new MeiweiApp.Collections.Heros();
-    		this.listenTo(this.heros, 'reset add remove', this.renderCarousel);
+    		this.listenTo(this.heros, 'reset add remove change', this.renderCarousel);
     	},
     	viewProducts: function(e) {
             var el = e.currentTarget;
