@@ -41,7 +41,7 @@ $(function() {
 	            MeiweiApp.loadBgImage(this.$('.section-header-img'), this.model.get('restaurantinfor').frontpic, {
 	    			height: 150, width: 250
 	    		});
-                if ($('body').height() >= 530) {
+                if ($(window).height() >= 530) {
                     this.$('.section-qrcode').show();
                     this.$('.section-qrcode').qrcode({
                         render: "canvas", text: this.model.get('order_no'), height: 100, width: 100
