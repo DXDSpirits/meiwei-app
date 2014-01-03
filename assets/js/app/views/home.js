@@ -47,7 +47,7 @@ $(function() {
             }
         }),
         initCollectionView: function() {
-            this.listenTo(this.collection, 'reset add remove', this.renderCarousel);
+            this.listenTo(this.collection, 'reset change add remove', this.renderCarousel);
         },
         renderCarousel: function() {
             window.Bootstrap && Bootstrap.set('home-heros', this.collection.toJSON());
@@ -117,7 +117,7 @@ $(function() {
     		/* It's important to put listenTo after view initialization.
     		 * The CollectionView.addAll should be executed before this.renderAll
     		 */
-    		this.listenTo(this.recommend.items, 'reset add remove', this.renderAll);
+    		this.listenTo(this.recommend.items, 'reset change add remove', this.renderAll);
     	},
     	onClickLeftBtn: function() { MeiweiApp.goTo('MemberCenter'); },
     	onClickRightBtn: function() { MeiweiApp.goTo('Attending'); },
