@@ -65,9 +65,17 @@ MeiweiApp.ModelView = MeiweiApp.View.extend({
     initView: function() {
         if (this.model) {
             this.listenTo(this.model, 'change', this.render);
-            this.listenTo(this.model, 'hide', this.remove);
+            this.listenTo(this.model, 'hide', this.hide);
         }
         if (this.initModelView) this.initModelView();
+    },
+    hide: function() {
+        var self = this;
+        this.$el.animate({
+            opacity: 0
+        }, 1000, function() {
+            self.remove();
+        });
     },
     render: function() {
         var attrs = this.model ? this.model.toJSON() : {};

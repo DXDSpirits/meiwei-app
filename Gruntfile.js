@@ -145,7 +145,7 @@ module.exports = function(grunt) {
 		},
 		concurrent: {
 		    dist: {
-                tasks: ['sass', 'includes', 'templates', 'concat', 'uglify', 'copy'],
+                tasks: ['concat', 'sass', 'includes', 'templates', 'uglify', 'copy'],
                 options: { logConcurrentOutput: true }
             },
 			server: {
