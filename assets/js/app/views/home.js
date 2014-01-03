@@ -54,7 +54,6 @@ $(function() {
             var items = this.$('.carousel-item'), itemWidth = $(items[0]).outerWidth(),
                 wrapperWidth = this.$el.closest('.carousel').innerWidth(),
                 margin = (wrapperWidth - itemWidth) / 2;
-            console.log(wrapperWidth, itemWidth, margin);
             this.$el.css({
                 'width': items.length * itemWidth + 2 * margin,
                 'padding-left': margin,
