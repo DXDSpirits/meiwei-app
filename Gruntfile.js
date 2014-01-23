@@ -41,6 +41,9 @@ module.exports = function(grunt) {
 						src: ['assets/js/plugin/qrcode.js', 'assets/js/plugin/jquery.qrcode.js'],
 						dest: '<%= cfg.path.dest %>/assets/js/plugin/qrcode.min.js'
 					},{
+                        src: ['assets/js/plugin/hammer.js', 'assets/js/plugin/jquery.hammer.js'],
+                        dest: '<%= cfg.path.dest %>/assets/js/plugin/hammer.min.js'
+                    },{
 						src: 'assets/js/plugin/iscroll.js',
 						dest: '<%= cfg.path.dest %>/assets/js/plugin/iscroll.min.js'
 					}
