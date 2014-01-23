@@ -72,8 +72,7 @@ $(function() {
             this.hours = new MeiweiApp.Models.Hour();
         },
         renderHourList: function() {
-            var ymd = this.$('input[name=orderdate]').val().split('-');
-            var day = (ymd.length == 3 ? (new Date(ymd[0], ymd[1] - 1, ymd[2])).getDay().toString() : '0');
+            var day = moment(this.$('input[name=orderdate]').val()).day();
             var $select = this.$('select[name=ordertime]');
             $select.empty();
             var hour = this.hours.get(day);
@@ -162,9 +161,10 @@ $(function() {
                     MeiweiApp.showConfirmDialog(
                         MeiweiApp._('邀请好友'), MeiweiApp._('是否邀请好友？'),
                         function() {
-                            var content = '我预定了' + newOrder.get('orderdate').slice(5,7) + '月' + newOrder.get('orderdate').slice(8,10) + '日' + 
-                            			  newOrder.get('ordertime') + '在' + 
-                            			  self.restaurant.get('address') + '的' +  self.restaurant.get('fullname') + '。一起来吧！';
+                            var content = '我预定了' + 
+                                moment(newOrder.get('orderdate') + ' ' + newOrder.get('ordertime')).format('LLLL') + 
+                                '在' + self.restaurant.get('address') +
+                                '的' + self.restaurant.get('fullname') + '。一起来吧！';
                             MeiweiApp.sendWeixinMsg(content);
                             MeiweiApp.sendGaSocial('weixin', 'message', 'invitation');
                         }
@@ -194,7 +194,7 @@ $(function() {
                 defaultValues = this.options.pendingOrder.toJSON();
             } else {
                 defaultValues = {
-                    orderdate: (new Date()).toJSON().slice(0, 10),
+                    orderdate: moment().add('days', 1).format('YYYY-MM-DD'),
                     ordertime: '19:00',
                     personnum: 2
                 };

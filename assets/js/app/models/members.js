@@ -19,8 +19,7 @@ MeiweiApp.Collections.Contacts = MeiweiApp.Collection.extend({
 MeiweiApp.Models.Credit = MeiweiApp.Model.extend({
 	urlRoot: MeiweiApp.configs.APIHost + '/members/credit/',
 	parse: function(response) {
-		var time = (new Date(response.time_created)).toISOString();
-		response.time_created = time.slice(0, 10) + ' ' + time.slice(11, 16);
+		response.time_created = moment(response.time_created).format('LL');
 		response.positive = (response.amount > 0);
 		response.negative = (response.amount < 0);
 		return response;
@@ -35,9 +34,9 @@ MeiweiApp.Collections.Credits = MeiweiApp.Collection.extend({
 MeiweiApp.Models.Anniversary = MeiweiApp.Model.extend({
 	urlRoot: MeiweiApp.configs.APIHost + '/members/anniversary/',
 	parse: function(response) {
-		var date = (new Date(response.date)).toISOString();
-		response.month = date.slice(5, 7);
-		response.day = date.slice(8, 10);
+		var date = moment(response.date);
+		response.month = date.format('MMM');
+		response.day = date.date();
 		return response;
 	}
 });

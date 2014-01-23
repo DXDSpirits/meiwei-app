@@ -17,7 +17,7 @@ $(function() {
     			var item = this.collection.at(i);
     			var modelView = new this.ModelView({model: item});
     			if (lastItem == null || item.get('month') != lastItem.get('month')) {
-    				$list.push($('<p class="month"></p>').html(item.get('month') + ' 月'));
+    				$list.push($('<p class="month"></p>').html(item.get('month')));
     			}
     			$list.push(modelView.render().el);
     		}
