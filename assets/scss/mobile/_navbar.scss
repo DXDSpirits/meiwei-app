@@ -1,18 +1,13 @@
-#navbar-overlay {
-    @include size($navbarHeight, 100%);
-    position: fixed;
-    top: 0;
-    z-index: $zindexFixedNavbar - 1;
-    background-color: $bodyBackground;
-}
 
 .header-navbar {
 	@include flex-box($orient: horizontal);
 	@include size($navbarHeight, 100%);
 	//padding: 0 $navbarPadding;
-	position: fixed;
-	top: 0;
-	z-index: $zindexFixedNavbar;
+	//position: fixed;
+	//top: 0;
+	//z-index: $zindexFixedNavbar;
+	position: relative;
+	z-index: 1;
 	&::before {
 		content: " ";
 		background: transparent url($bannerImagePath) repeat-x;
@@ -58,8 +53,8 @@
 }
 
 .header-btn {
-	height: 70px;
-	padding-bottom: 70px - $navbarHeight;
+	height: 60px;
+	padding-bottom: 60px - $navbarHeight;
     width: -webkit-max-content;
     min-width: 53px;
 	@include flex-box($orient: horizontal);

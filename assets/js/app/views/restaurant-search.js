@@ -175,7 +175,7 @@ $(function() {
         },
         clearFormInput: function() { this.$('.search-form > input').val(''); },
         onClickRightBtn: function() {
-            window.scrollTo(0, 0);
+            this.$('.wrapper').scrollTop(0);
             var flip = this.$('.flipper').hasClass('flip');
             this.$('.flipper').toggleClass('flip', !flip);
             this.$('.header-btn-right .icon-bars').toggleClass('hidden', flip);

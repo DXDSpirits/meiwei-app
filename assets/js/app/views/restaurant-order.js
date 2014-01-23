@@ -171,7 +171,7 @@ $(function() {
                     );
                 },
                 error: function(model, xhr, options) {
-                    window.scrollTo(0, 0);
+                    self.$('.wrapper').scrollTop(0);
                     self.displayError(self.$('.info-text'), xhr.responseText);
                 }
             });

@@ -151,10 +151,9 @@ MeiweiApp.PageView = MeiweiApp.View.extend({
     onClickLeftBtn: function() { MeiweiApp.goBack(); },
     onClickRightBtn: function() {},
     initPageNav: function(page, collection) {
-        var viewportHeight = $(window).height() + 50;
         var fetching = false;
         page.fetchMore = function() {
-            if (fetching || collection.next) return;
+            if (fetching || !collection.next) return;
             fetching = true;
             collection.fetchNext({
                 remove: false, reset: false,
@@ -162,9 +161,10 @@ MeiweiApp.PageView = MeiweiApp.View.extend({
                 error: function() { fetching = false }
             });
         };
-        $(window).scroll(function() {
+        var viewportHeight = $(window).height() + 50;
+        page.$('.wrapper').scroll(function() {
             if (page.$el.hasClass('view-hidden')) return;
-            if (page.$el.height() - $(window).scrollTop() < viewportHeight) {
+            if (page.$('.page-nav').offset().top < viewportHeight) {
                 page.fetchMore();
             }
         });
@@ -213,7 +213,6 @@ MeiweiApp.PageView = MeiweiApp.View.extend({
                 $nextPage.removeClass('view-next');
                 $nextPage.find('input').blur();
                 MeiweiApp.sendGaPageView($nextPage.attr('id')); // Google Analytics
-                window.scrollTo(0, 0);
             };
             $nextPage.removeClass('view-hidden');
             $nextPage.addClass('view-next');

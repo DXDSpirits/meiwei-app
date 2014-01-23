@@ -199,8 +199,9 @@
 }
 
 #view-member-credits {
+    &.view-hidden .redeem-btn { display: none; }
     .redeem-btn {
-        position: fixed;
+        position: absolute;
         bottom: 0;
         left: 0;
         width: 100%;
