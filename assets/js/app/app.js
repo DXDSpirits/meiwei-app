@@ -1,5 +1,5 @@
 
-MeiweiApp = new (Backbone.View.extend({
+window.MeiweiApp = new (Backbone.View.extend({
     
     Version: 2.0,
     
@@ -11,14 +11,13 @@ MeiweiApp = new (Backbone.View.extend({
     Pages: {},
     
     configs: {
-        APIHost: "http://api.clubmeiwei.com",
-        StaticHost: "http://api.clubmeiwei.com",
-        MediaHost: "http://api.clubmeiwei.com",
+        APIHost: localStorage.getItem('api-host') || "http://api.clubmeiwei.com",
         ajaxTimeout: 10000
     },
     
     start: function() {
         MeiweiApp.initDevice();
+        MeiweiApp.initAPI();
         MeiweiApp.initVersion();
         MeiweiApp.showSplash();
         MeiweiApp.initAjaxEvents();
@@ -56,6 +55,27 @@ MeiweiApp.fixViewport = function() {
     $('body>.view>.wrapper').css('min-height', $(window).height() - wrapperOffset);
     $('#map_canvas').css('height', $(window).height() - wrapperOffset - 50);
 };
+
+MeiweiApp.initAPI = function() {
+    var PrimaryAPI = "http://api.clubmeiwei.com";
+    var SecondaryAPI = "http://api.meiwei.oatpie.com";
+    (new MeiweiApp.Model()).fetch({
+        global: false,
+        url: PrimaryAPI + '/clients/app/',
+        success: function() {
+            localStorage.removeItem('api-host');
+            if (MeiweiApp.configs.APIHost == SecondaryAPI) {
+                window.location.reload();
+            }
+        },
+        error: function() {
+            if (MeiweiApp.configs.APIHost == PrimaryAPI) {
+                localStorage.setItem('api-host', SecondaryAPI);
+                window.location.reload();
+            }
+        },
+    });
+}
 
 MeiweiApp.initVersion = function() {
     var pVersion = parseFloat(localStorage.getItem('version-code')) || 1.0;
@@ -136,6 +156,10 @@ MeiweiApp.initSync = function() {
         }
         if (options.nocache) {
             _.extend(options.headers, { 'Cache-Control': 'no-cache' });
+        }
+        if (options.url) {
+            options.url = options.url.replace(/^(?:http|https)\:\/{2}[a-zA-Z0-9\-_\.]+(?:\:[0-9]{1,4})?(.*)/,
+                MeiweiApp.configs.APIHost + '$1');
         }
         return originalSync.call(model, method, model, options);
     };
