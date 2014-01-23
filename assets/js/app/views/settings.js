@@ -5,13 +5,9 @@ $(function() {
             'fastclick .lang-opt.zh': 'switchToZh',
             'fastclick .lang-opt.en': 'switchToEn',
             'fastclick .btn-share-weixin': 'onClickWeixinBtn',
-            'fastclick .btn-share-weibo': 'onClickWeiboBtn',
-            'fastclick .settings-request-driver': 'goToRequestDriver'
+            'fastclick .btn-share-weibo': 'onClickWeiboBtn'
         },
         initPage: function() { },
-        goToRequestDriver: function() {
-            MeiweiApp.goTo('RequestDriver');
-        },
         askToRestartApp: function() {
             MeiweiApp.showConfirmDialog(
                 MeiweiApp._('Restart Application'),
