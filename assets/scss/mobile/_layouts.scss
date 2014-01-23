@@ -61,12 +61,12 @@ body {
         width: 140px;
         margin: 0 auto;
         min-height: 60px;
-        padding: 10px;
-        @include border-radius(5px);
-        background-color: rgba(0, 0, 0, 0.8);
         pointer-events: none;
     }
     .ajax-error {
+        padding: 10px;
+        @include border-radius(5px);
+        background-color: rgba(0, 0, 0, 0.6);
         font-size: $fontSizeMini;
         text-align: center;
         color: $white;
@@ -74,17 +74,17 @@ body {
     .loading-sprite {
         @include user-select(none);
         pointer-events: none;
-        height: 20px;
-        width: 20px;
+        height: 50px;
+        width: 50px;
         margin: 10px 0;
         font-size: 16px;
         color: #666;
-        line-height: 20px;
+        line-height: 50px;
         color: #666;
         text-shadow: 0 1px #fff;
         background: transparent url($activityIndicator) no-repeat center;
-        background-size: 20px auto;
-        @include animation(loading-sprite 1s step-start infinite);
+        background-size: auto 50px;
+        @include animation(loading-sprite 2s step-start infinite);
     }
     &.invisible .loading-sprite {
         @include animation(none);
