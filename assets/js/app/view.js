@@ -182,11 +182,12 @@ MeiweiApp.PageView = MeiweiApp.View.extend({
         var viewportHeight = $(window).height() + 50;
         var fetching = false;
         page.fetchMore = function() {
-            if (fetching) return;
+            if (fetching || collection.next) return;
             fetching = true;
             collection.fetchNext({
-                remove: false,
-                success: function() { fetching = false }
+                remove: false, reset: false,
+                success: function() { fetching = false },
+                error: function() { fetching = false }
             });
         };
         $(window).scroll(function() {
