@@ -21,7 +21,7 @@ $(function() {
     		},
     		render: function() {
     			MeiweiApp.ModelView.prototype.render.call(this);
-    			if (this.model) {
+    			if (this.model && this.model.get('restaurantinfor')) {
     				MeiweiApp.loadBgImage(this.$('.thumbnail'), this.model.get('restaurantinfor').frontpic, {
     					width: 89, height: 89
     				});
