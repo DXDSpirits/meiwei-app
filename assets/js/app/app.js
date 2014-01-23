@@ -53,6 +53,11 @@ MeiweiApp.initDevice = function() {
 MeiweiApp.fixViewport = function() {
     var wrapperOffset = 44;
     $('body>.view>.wrapper').css('height', $(window).height() - wrapperOffset);
+    if (window.device) {
+        $('meta[name=viewport]').attr('content', 'width=device-width, height=device-height, initial-scale=1, maximum-scale=1, user-scalable=0');
+    } else {
+        $('meta[name=viewport]').attr('content', 'width=device-width, initial-scale=1, maximum-scale=1, user-scalable=0');
+    }
 };
 
 MeiweiApp.initAPI = function() {
