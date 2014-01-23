@@ -2,6 +2,14 @@
     .map {
         width: 100%;
         height: 280px;
+        position: relative;
+        > h2 {
+            position: absolute;
+            bottom: 0;
+            right: 0;
+            padding: 2px 5px;
+            background: rgba(255, 255, 255, .1);
+        }
     }
     .asap {
         padding: 5px;
@@ -23,5 +31,23 @@
     }
     .switch-gender {
         @include flexible($flex: 2, $orient: horizontal);
+    }
+    .contact-menu {
+        width: 100%;
+        font-size: $baseFontSize;
+        line-height: 40px;
+        text-align: center;
+        position: relative;
+        &.pressed, &:active {
+            background: $brownLighter;
+        }
+        &::after {
+            content: "";
+            position: absolute;
+            top: (40px - 26px) / 2;
+            right: 10px;
+            @include icon-display();
+            @include icon-offset(3, 4);
+        }
     }
 }

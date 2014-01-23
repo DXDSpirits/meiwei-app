@@ -34,10 +34,11 @@ $(function() {
         events: {
             'fastclick .header-btn-left': 'onClickLeftBtn',
             'fastclick .order-submit-button': 'submitOrder',
-            'fastclick .asap': 'switchTime'
+            'fastclick .asap': 'switchTime',
+            'fastclick .contact-menu': 'selectContact'
         },
         initPage: function() {
-            _.bindAll(this, 'initializeMap', 'updateAddress');
+            _.bindAll(this, 'initializeMap', 'updateAddress', 'fillContact');
             this.views = {  };
             this.$('.switch-gender').switchControl();
         },
@@ -122,6 +123,14 @@ $(function() {
                     self.displayError(self.$('.info-text'), xhr.responseText);
                 }
             });
+        },
+        selectContact: function() {
+            MeiweiApp.goTo('MemberContacts', { multiple: false, callback: this.fillContact });
+        },
+        fillContact: function(contactname, contactphone, contactgender) {
+            this.$('input[name=name]').val(contactname);
+            this.$('input[name=mobile]').val(contactphone);
+            this.$('.switch-gender').switchControl('toggle', contactgender);
         },
         render: function() {
             this.$('.info-text').html('');
