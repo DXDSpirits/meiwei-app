@@ -21,7 +21,7 @@ window.MeiweiApp = new (Backbone.View.extend({
         MeiweiApp.initVersion();
         MeiweiApp.showSplash();
         MeiweiApp.initAjaxEvents();
-        MeiweiApp.initLang();
+        MeiweiApp.initLanguage();
         MeiweiApp.initGeolocation();
         MeiweiApp.initSync();
         MeiweiApp.initGa();
@@ -113,7 +113,7 @@ MeiweiApp.initVersion = function() {
     });
 };
 
-MeiweiApp.initLang = function() {
+MeiweiApp.initLanguage = function() {
     var langCode = localStorage.getItem('lang-code') || 'zh';
     MeiweiApp._ = function(msgId) {
         var msg = MeiweiApp.i18n[msgId];
@@ -127,6 +127,7 @@ MeiweiApp.initLang = function() {
         $(context).find('[data-placeholder-i18n]').each(function() {
             $(this).attr('placeholder', MeiweiApp._($(this).attr('data-placeholder-i18n')));
         });
+        moment.lang(langCode == 'en' ? 'en' : 'zh-cn');
     };
     MeiweiApp.setLang = function(lang) {
         localStorage.setItem('lang-code', (langCode = lang));
