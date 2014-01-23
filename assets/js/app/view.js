@@ -213,6 +213,7 @@ MeiweiApp.PageView = MeiweiApp.View.extend({
                 $nextPage.removeClass('view-next');
                 $nextPage.find('input').blur();
                 MeiweiApp.sendGaPageView($nextPage.attr('id')); // Google Analytics
+                window.scrollTo(0, 0);
             };
             $nextPage.removeClass('view-hidden');
             $nextPage.addClass('view-next');
