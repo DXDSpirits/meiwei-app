@@ -94,7 +94,7 @@ body {
         text-shadow: 0 1px #fff;
         background: transparent url($activityIndicator) no-repeat center;
         background-size: auto 50px;
-        @include animation(loading-sprite 2s step-start infinite);
+        @include animation(loading-sprite 1s step-start infinite);
     }
     &.invisible .loading-sprite {
         @include animation(none);

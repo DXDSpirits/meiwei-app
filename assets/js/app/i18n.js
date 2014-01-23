@@ -19,6 +19,10 @@ MeiweiApp.i18n = {
         zh: '上一页',
         en: 'Previous Page'
     },
+    'Loading...': {
+        zh: '正在加载...',
+        en: 'Loading...'
+    },
     'Reserve': {
         zh: '订餐',
         en: 'Book'

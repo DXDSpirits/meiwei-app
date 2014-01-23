@@ -152,13 +152,15 @@ MeiweiApp.PageView = MeiweiApp.View.extend({
     onClickRightBtn: function() {},
     initPageNav: function(page, collection) {
         var fetching = false;
+        page.resetNavigator = function() {
+            fetching = false
+            page.$('.page-nav').toggleClass('hidden', collection.next == null);
+        };
         page.fetchMore = function() {
             if (fetching || !collection.next) return;
             fetching = true;
             collection.fetchNext({
-                remove: false, reset: false,
-                success: function() { fetching = false },
-                error: function() { fetching = false }
+                remove: false, success: page.resetNavigator, error: page.resetNavigator
             });
         };
         var viewportHeight = $(window).height() + 50;
@@ -168,6 +170,7 @@ MeiweiApp.PageView = MeiweiApp.View.extend({
                 page.fetchMore();
             }
         });
+        page.listenTo(collection, 'reset', page.resetNavigator);
     },
     go: function(options) {
         this.options = options || {};
