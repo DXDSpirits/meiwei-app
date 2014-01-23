@@ -179,7 +179,7 @@ MeiweiApp.initSync = function() {
 };
 
 MeiweiApp.initAjaxEvents = function() {
-    var timeout = 0;
+    var timeout = 1000;
     var xhrPool = [];
     $(document).ajaxStart(function() {
         $('#apploader').removeClass('invisible');
@@ -187,7 +187,7 @@ MeiweiApp.initAjaxEvents = function() {
     $(document).ajaxStop(function() {
         setTimeout(function() {
             $('#apploader').addClass('invisible');
-            timeout = 0;
+            timeout = 1000;
         }, timeout);
     });
     $(document).ajaxError(function(event, jqxhr, settings, exception) {
@@ -198,7 +198,7 @@ MeiweiApp.initAjaxEvents = function() {
                 $('#apploader .ajax-error').html(response.detail).removeClass('hidden');
                 setTimeout(function() {
                     $('#apploader .ajax-error').html(text).addClass('hidden');
-                }, (timeout = 1000)/* + 500*/);
+                }, (timeout = 2000)/* + 500*/);
             }
             MeiweiApp.TokenAuth.clear();
             MeiweiApp.Pages.MemberLogin.go({ ref: MeiweiApp.history.active });
@@ -206,7 +206,7 @@ MeiweiApp.initAjaxEvents = function() {
             $('#apploader .ajax-error').removeClass('hidden');
             setTimeout(function() {
                 $('#apploader .ajax-error').addClass('hidden');
-            }, (timeout = 1500)/* + 500*/);
+            }, (timeout = 2500)/* + 500*/);
         }
     });
     $.ajaxSetup({

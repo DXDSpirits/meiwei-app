@@ -150,7 +150,7 @@ MeiweiApp.PageView = MeiweiApp.View.extend({
     },
     onClickLeftBtn: function() { MeiweiApp.goBack(); },
     onClickRightBtn: function() {},
-    initPageNav: function(page, collection) {
+    initPageNavNextPrevious: function(page, collection) {
         /*
          * Prevent Ghost click
          * It cant be catched propertly by MPB because of the scrollTop animation
@@ -177,6 +177,24 @@ MeiweiApp.PageView = MeiweiApp.View.extend({
         this.bindFastButton(page.$('.page-prev'), page.fetchPrev);
         this.bindFastButton(page.$('.page-next'), page.fetchNext);
         page.listenTo(collection, 'reset', page.resetNavigator);
+    },
+    initPageNav: function(page, collection) {
+        var viewportHeight = $(window).height() + 50;
+        var fetching = false;
+        page.fetchMore = function() {
+            if (fetching) return;
+            fetching = true;
+            collection.fetchNext({
+                remove: false,
+                success: function() { fetching = false }
+            });
+        };
+        $(window).scroll(function() {
+            if (page.$el.hasClass('view-hidden')) return;
+            if (page.$el.height() - $(window).scrollTop() < viewportHeight) {
+                page.fetchMore();
+            }
+        });
     },
     go: function(options) {
         this.options = options || {};

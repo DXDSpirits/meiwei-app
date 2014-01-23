@@ -1,8 +1,5 @@
 $(function() {
     MeiweiApp.Views.FavoriteList = MeiweiApp.CollectionView.extend({
-    	initCollectionView: function() {
-    		if (this.collection) this.stopListening(this.collection, 'add');
-    	},
     	ModelView: MeiweiApp.ModelView.extend({
     		template: TPL['favorite-list-item'],
     		className: 'restaurant-list-item',
