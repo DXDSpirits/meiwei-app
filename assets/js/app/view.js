@@ -153,7 +153,8 @@ MeiweiApp.PageView = MeiweiApp.View.extend({
     initPageNav: function(page, collection) {
         var fetching = false;
         page.resetNavigator = function() {
-            fetching = false
+            fetching = false;
+            page.$('.null-list-help').toggleClass('hidden', collection.length > 0);
             page.$('.page-nav').toggleClass('hidden', collection.next == null);
         };
         page.fetchMore = function() {

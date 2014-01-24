@@ -414,6 +414,10 @@ MeiweiApp.i18n = {
     'ASAP': {
         zh: '尽快到达',
         en: 'ASAP'
+    },
+    "We couldn't find what you're looking for. Please try a different search.": {
+        zh: "美位无法找到您搜索的餐厅，请尝试其他搜索。",
+        en: "We couldn't find what you're looking for.<br>Please try a different search."
     }
 };
 

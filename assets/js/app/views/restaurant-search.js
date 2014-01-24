@@ -6,7 +6,11 @@ $(function() {
             MeiweiApp.goTo('RestaurantDetail', { restaurant: this.model.toJSON() });
         },
         toggle: function(resto) {
-            this.model.set(resto);
+            var self = this;
+            this.$el.animate({opacity: 0}, 100, function() {
+                self.model.set(resto);
+                self.$el.animate({opacity: 1}, 500);
+            })
         },
         render: function() {
             MeiweiApp.ModelView.prototype.render.call(this);
@@ -53,9 +57,6 @@ $(function() {
                 center: new AMap.LngLat(MeiweiApp.coords.longitude, MeiweiApp.coords.latitude),
                 continuousZoomEnable: true, level: 15, zooms: [3, 17], touchZoom: true
             });
-            AMap.event.addListener(this.map, 'click', function(e) {
-                this.views.markerInfo.$el.removeClass('expand');
-            }, this);
             mapObj.plugin(["AMap.ToolBar"], function() {
                 mapObj.toolBar = new AMap.ToolBar();
                 mapObj.addControl(mapObj.toolBar);
@@ -234,7 +235,7 @@ $(function() {
         searchKeywords: function(e) {
             if (e.preventDefault) e.preventDefault();
             var keywords = this.$('.search-form > input').val();
-            this.restaurants.fetch({ reset: true, data: { keywords: keywords } });
+            this.searchRestaurants({ keywords: keywords });
             this.$('.search-form > input').blur();
             this.resetFilters();
         },
