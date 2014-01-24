@@ -98,6 +98,7 @@ MeiweiApp.me = new (MeiweiApp.Models.Member.extend({
 		});
 	},
 	changePassword: function(password, options) {
+	    if (!password) return;
 		this.set({password: password});
 		options = options || {};
 		options.url = this.url() + 'change_password/';
