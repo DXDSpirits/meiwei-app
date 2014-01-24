@@ -75,12 +75,9 @@ $(function() {
                 mapObj.toolBar.hide();
                 mapObj.toolBar.doLocation();
             });
-            var updateAddress = this.updateAddress;
+            var updateAddress = this.updateAddress, $addressInput = this.$('input[name=address]');
             mapObj.plugin(["AMap.Geocoder"], function() {
-                mapObj.geoCoder = new AMap.Geocoder({
-                    radius: 100,
-                    extensions: "base"
-                });
+                mapObj.geoCoder = new AMap.Geocoder({ radius: 100, extensions: "base" });
                 AMap.event.addListener(mapObj.geoCoder, "complete", updateAddress);
                 mapObj.geoCoder.getAddress(new AMap.LngLat(MeiweiApp.coords.longitude, MeiweiApp.coords.latitude));
                 AMap.event.addListener(mapObj, 'click', function(e) {
@@ -89,22 +86,28 @@ $(function() {
                     new AMap.Marker({ map: mapObj, position: e.lnglat,
                         icon: new AMap.Icon({ size: new AMap.Size(25, 25), image: "assets/img/mapmarker.png" })
                     });
-                    MeiweiApp.coords.longitude = e.lnglat.getLng();
-                    MeiweiApp.coords.latitude = e.lnglat.getLat();
+                });
+                $addressInput.on('change', function() {
+                    mapObj.geoCoder.getLocation($(this).val());
                 });
             });
         },
         updateAddress: function(data) {
-            this.$('input[name=address]').val(data.regeocode.formattedAddress);
+            if (data.regeocode) {
+                this.$('input[name=address]').val(data.regeocode.formattedAddress);
+            } else if (data.geocodes && data.geocodes.length) {
+                var location = data.geocodes[0].location;
+                this.$('input[name=longitude]').val(location.getLng());
+                this.$('input[name=latitude]').val(location.getLat());
+            }
         },
         submitOrder: function(e) {
             if (e.preventDefault) e.preventDefault();
             var newOrder = new MeiweiApp.Models.OrderDriver();
             newOrder.set({
                 address: this.$('input[name=address]').val() || null,
-                latitude: MeiweiApp.coords.longitude,
-                longitude: MeiweiApp.coords.latitude,
-                order_time: this.$('input[name=order_time]').val() || null,
+                latitude: +this.$('input[name=latitude]').val() || MeiweiApp.coords.longitude,
+                longitude: +this.$('input[name=longitude]').val() || MeiweiApp.coords.latitude,
                 name: this.$('input[name=name]').val() || null,
                 gender: +this.$('input[name=gender]').val() || 0,
                 mobile: this.$('input[name=mobile]').val() || null,
