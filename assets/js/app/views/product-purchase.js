@@ -60,10 +60,11 @@ $(function() {
     	renderAll: function() {
     	    if (this.options.itemId) {
     	        var item = this.$('.stack-item[data-item=' + this.options.itemId + ']');
-                var offset = item.closest('.product-box').position();
-                $('body').animate({scrollTop: offset.top}, 700);
+                var offsetItem = item.closest('.product-box').position().top;
+                var offsetWrapper = this.$('.wrapper').scrollTop();
+                this.$('.wrapper').animate({scrollTop: offsetItem + offsetWrapper}, 700);
     	    } else {
-    	        $('body').animate({scrollTop: 0}, 700);
+    	        this.$('.wrapper').animate({scrollTop: 0}, 700);
     	    }
     	},
     	render: function() {
