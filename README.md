@@ -44,7 +44,7 @@ Development stuff
 
 	- Config distribute path
 
-			echo {"path": {"dest": "www","src": "."}} >> config.json
+			echo '{"path": {"dest": "www", "src": "."}}' >> config.json
 
 	- Compile templates in `assets/template/*` to generate `www/assets/js/templates.js`
 
