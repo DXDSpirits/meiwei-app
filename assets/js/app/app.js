@@ -1,7 +1,7 @@
 
 window.MeiweiApp = new (Backbone.View.extend({
     
-    Version: 2.1,
+    Version: 2.2,
     
     Models: {},
     Views: {},
@@ -52,9 +52,12 @@ MeiweiApp.initDevice = function() {
 
 MeiweiApp.fixViewport = function() {
     var wrapperOffset = 44;
+    if (window.device.platform === 'iOS' && parseFloat(window.device.version) === 7.0) {
+        wrapperOffset += 20;
+    }
     var fixWrapperHeight = function() {
         $('body>.view>.wrapper').css('height', $(window).height() - wrapperOffset);
-    }
+    };
     fixWrapperHeight();
     $(window).resize(fixWrapperHeight);
     if (window.device) {
@@ -83,7 +86,7 @@ MeiweiApp.initAPI = function() {
             }
         },
     });
-}
+};
 
 MeiweiApp.initVersion = function() {
     var pVersion = parseFloat(localStorage.getItem('version-code')) || 1.0;
@@ -152,7 +155,7 @@ MeiweiApp.initGeolocation = function(callback) {
     };
     MeiweiApp.coords = { longitude: 121.491, latitude: 31.233 };
     navigator.geolocation.getCurrentPosition(onSuccess, onError);
-}
+};
 
 MeiweiApp.initSync = function() {
     var authToken = localStorage.getItem('auth-token');
@@ -261,7 +264,7 @@ MeiweiApp.handleError = function(err) {
 window.onerror = function(message, file, line, column, errorObj) {
     try {
         MeiweiApp.abortAllAjax();
-        var detail = errorObj && errorObj.stack ? errorObj.stack : [file, line, column].join(':')
+        var detail = errorObj && errorObj.stack ? errorObj.stack : [file, line, column].join(':');
         var error = new MeiweiApp.Models.ClientError();
         error.save({message: message, detail: detail}, {global: false});
         console.error(message, detail);
