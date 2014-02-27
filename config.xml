@@ -5,6 +5,12 @@
     <description>中高端服务平台</description>
     <author email="dxd.spirits@gmail.com" href="http://blog.ukisama.com">Xindong Ding</author>
     <access origin="*" />
+    <feature name="Weixin">
+        <param name="android-package" value="com.meiwei.app.plugin.WeixinPlugin" />
+    </feature>
+    <feature name="Weixin">
+        <param name="ios-package" value="Weixin" />
+    </feature>
     <preference name="WebViewBounce" value="true" />
     <preference name="Fullscreen" value="false" />
     <preference name="Orientation" value="landscape" />
