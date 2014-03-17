@@ -1,71 +1,76 @@
 $(function() {
-    ProductModelView = MeiweiApp.ModelView.extend({
+    var ProductFilter = MeiweiApp.CollectionView.extend({
+        initCollectionView: function() {
+            this.listenTo(this.collection, 'reset add remove', this.initScroller);
+        },
+        initScroller: function() {
+            if (this.scroller == null) {
+                var $filter = MeiweiApp.Pages.ProductList.$('.product-filter');
+                if ($filter.length > 0)
+                    this.scroller = new IScroll($filter.selector, { tap: true, bounce: false });
+            } else {
+                this.scroller.refresh();
+            }
+        },
+        ModelView: MeiweiApp.ModelView.extend({
+            className: 'filter-item',
+            template: Mustache.compile('{{name}}'),
+            events: { 'tap': 'onclick' },
+            onclick: function() {
+                MeiweiApp.sendGaEvent('product list', 'select', 'product', this.model.id);
+                var page = MeiweiApp.Pages.ProductList;
+                var collection = page.views.productList.collection;
+                collection.reset(this.model.items.toJSON());
+                page.$('.product-filter').addClass('closed');
+                page.$('.header-title > span').html(this.model.get('name'));
+            }
+        })
+    });
+    
+    var ProductItemView = MeiweiApp.ModelView.extend({
     	tagName: "section",
-    	className: "product-box",
-    	template: TPL['product-stack'],
-    	events: { 'fastclick .stack-item': 'onSelectItem' },
+    	className: "product-list-item",
+    	template: TPL['product-list-item'],
+    	events: { 'fastclick': 'onSelectItem' },
     	render: function() {
-    		this.model.items.forEach(function(item) {
-    			item.set({selected: (MeiweiApp.ProductCart.get(item.id) != null)});
-    		}, this);
-    		this.renderTemplate({
-                product: this.model.toJSON(),
-                items: this.model.items.toJSON()
-            });
-    		var items = this.model.items;
-    		this.$('.stack-item').each(function() {
-    		    var id = +$(this).attr('data-item');
-    		    MeiweiApp.loadBgImage($(this).find('.img'), items.get(id).get('picture'), {
-                	height: 150, width: 150
-                });
-    		});
-    		MeiweiApp.initLang(this.$el);
-    		return this;
+    		var attrs = this.model ? this.model.toJSON() : {};
+            this.renderTemplate(attrs);
+            MeiweiApp.loadBgImage(this.$('.thumbnail'), attrs.picture, { width: 89, height: 89 });
+            return this;
     	},
     	onSelectItem: function(e) {
-    		var $el = $(e.currentTarget);
-    		var item = this.model.items.get($el.attr('data-item'));
-    		if ($el.hasClass('selected')) {
-    			$el.removeClass('selected');
-    			MeiweiApp.ProductCart.remove(item);
-    		} else {
-    			$el.addClass('selected');
-    			MeiweiApp.ProductCart.add(item);
-    		}
+    		
     	}
     });
     
-    ProductPurchaseList = MeiweiApp.CollectionView.extend({
-    	ModelView: ProductModelView
+    var ProductListView = MeiweiApp.CollectionView.extend({
+    	ModelView: ProductItemView
     });
     
     MeiweiApp.Pages.ProductList = new (MeiweiApp.PageView.extend({
+        events: {
+            'fastclick .header-title': 'toggleFilter'
+        },
     	initPage: function() {
     	    _.bindAll(this, 'renderAll');
     		this.products = new MeiweiApp.Collections.Products();
     		this.views = {
-    			productList: new ProductPurchaseList({
-    				collection: this.products,
-    				el: this.$('.wrapper')
+    			productList: new ProductListView({
+    				collection: new MeiweiApp.Collections.ProductItems(),
+    				el: this.$('.product-list')
+    			}),
+    			productFilter: new ProductFilter({
+    			    collection: this.products,
+    			    el: this.$('.product-filter-wrapper')
     			})
     		};
     	},
-    	onClickRightBtn: function() {
-    		if (this.options.caller == MeiweiApp.Pages.RestaurantOrder) {
-    			MeiweiApp.goBack();
-    		} else {
-    			MeiweiApp.goTo('RestaurantOrder', { restaurantId: 1 });
-    		}
-    	},
+        toggleFilter: function() {
+            this.$('.product-filter').toggleClass('closed');
+            MeiweiApp.sendGaEvent('product list', 'select');
+        },
     	renderAll: function() {
-    	    if (this.options.itemId) {
-    	        var item = this.$('.stack-item[data-item=' + this.options.itemId + ']');
-                var offsetItem = item.closest('.product-box').position().top;
-                var offsetWrapper = this.$('.wrapper').scrollTop();
-                this.$('.wrapper').animate({scrollTop: offsetItem + offsetWrapper}, 700);
-    	    } else {
-    	        this.$('.wrapper').animate({scrollTop: 0}, 700);
-    	    }
+    	    this.views.productList.collection.reset(this.products.at(0).items.toJSON());
     	},
     	render: function() {
     		this.products.fetch({ data: {category: 1}, success: this.renderAll });

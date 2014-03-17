@@ -34,6 +34,17 @@
 	p { height: 20px; }
 }
 
+.product-list { @extend %thumbnail-list; }
+.product-list-item {
+    @extend %thumbnail-list-item;
+    .two-line, .three-line {
+        overflow: hidden;
+        white-space: normal;
+    }
+    .two-line { height: 40px; }
+    .three-line { height: 60px; }
+}
+
 .order-list { @extend %thumbnail-list; }
 .order-list-item {
 	@extend %thumbnail-list-item;

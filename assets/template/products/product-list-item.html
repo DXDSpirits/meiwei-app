@@ -1,0 +1,9 @@
+<div class="thumbnail"></div>
+<h3>{{ name }}</h3>
+{{#price}}
+<h3>￥{{ price }}</h3>
+<p class="two-line">{{ description }}</p>
+{{/price}}
+{{^price}}
+<p class="three-line">{{ description }}</p>
+{{/price}}
