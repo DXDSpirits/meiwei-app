@@ -11,13 +11,12 @@ window.MeiweiApp = new (Backbone.View.extend({
     Pages: {},
     
     configs: {
-        APIHost: localStorage.getItem('api-host') || "http://api.clubmeiwei.com",
+        APIHost: "http://api.clubmeiwei.com",
         ajaxTimeout: 10000
     },
     
     start: function() {
         MeiweiApp.initDevice();
-        MeiweiApp.initAPI();
         MeiweiApp.initVersion();
         MeiweiApp.showSplash();
         MeiweiApp.initAjaxEvents();
@@ -65,27 +64,6 @@ MeiweiApp.fixViewport = function() {
     } else {
         $('meta[name=viewport]').attr('content', 'width=device-width, initial-scale=1, maximum-scale=1, user-scalable=0');
     }
-};
-
-MeiweiApp.initAPI = function() {
-    var PrimaryAPI = "http://api.clubmeiwei.com";
-    var SecondaryAPI = "http://api.meiwei.oatpie.com";
-    (new MeiweiApp.Model()).fetch({
-        global: false,
-        url: PrimaryAPI + '/clients/app/',
-        success: function() {
-            localStorage.removeItem('api-host');
-            if (MeiweiApp.configs.APIHost == SecondaryAPI) {
-                window.location.reload();
-            }
-        },
-        error: function() {
-            if (MeiweiApp.configs.APIHost == PrimaryAPI) {
-                localStorage.setItem('api-host', SecondaryAPI);
-                window.location.reload();
-            }
-        },
-    });
 };
 
 MeiweiApp.initVersion = function() {
