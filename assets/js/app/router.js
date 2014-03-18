@@ -9,6 +9,7 @@ MeiweiApp.history = {
 MeiweiApp.Router = new (Backbone.Router.extend({
 	initialize: function(){
 		this.route('', 'index');
+		this.route('regAuth/:token/*path', 'registerAuthToken');
 		
 		this.route(/^home(?:\/l(\d+))?$/, 'home');
 		this.route('getstarted', 'getStarted');
@@ -46,6 +47,12 @@ MeiweiApp.Router = new (Backbone.Router.extend({
 	        MeiweiApp.Pages.GetStarted.go(); MeiweiApp.history.active = MeiweiApp.Pages.GetStarted;
 	    }
 	},
+	
+	registerAuthToken: function(token, path) {
+	    MeiweiApp.TokenAuth.set(token);
+	    this.navigate(path);
+	},
+	
 	home: function(lid) { MeiweiApp.Pages.Home.go({listId: lid}); MeiweiApp.history.active = MeiweiApp.Pages.Home; },
 	getStarted: function() { MeiweiApp.Pages.GetStarted.go(); MeiweiApp.history.active = MeiweiApp.Pages.GetStarted; },
 	
