@@ -97,3 +97,67 @@
         background-color: $brownLighter;
     }
 }
+
+#view-product-order {
+    .product-picture {
+        @include size(250px, 100%);
+    }
+    .product-info {
+        width: 100%;
+        padding: 10px 17px;
+        font-size: $fontSizeSmall;
+        h1 {
+            font-size: $baseFontSize;
+            text-align: center;
+            @include text-overflow();
+        }
+    }
+    fieldset {
+        margin: 0;
+        border-width: 1px 0 0 0;
+        @include border-radius(0);
+    }
+    .inline-group {
+        border-right: none;
+    }
+    .order-info, .contact-info {
+        width: 100%;
+        padding: 0 15%;
+        background: transparent url($gradientShadowPathR) no-repeat top;
+        @include background-size(100% (3*$baseLineHeight));
+    }
+    .section-title {
+        margin: 0 -21.4285714%;
+        height: 40px;
+        text-align: center;
+        font-size: $fontSizeSmall;
+        position: relative;
+        > h1 {
+            font-size: $baseFontSize;
+            line-height: 40px;
+            text-align: center;
+        }
+        &.menu > h1.pressed, &.menu > h1:active {
+            background: $brownLighter;
+        }
+        &.menu > h1::after {
+            content: "";
+            position: absolute;
+            top: (40px - 26px) / 2;
+            right: 15%;
+            @include icon-display();
+            @include icon-offset(3, 4);
+        }
+    }
+    .switch-gender {
+        @include flexible($flex: 0, $orient: horizontal);
+        width: 70px;
+    }
+    .order-submit-button {
+        background: transparent url($gradientShadowPathR) no-repeat top;
+        @include background-size(100% (3*$baseLineHeight));
+        padding: 15px 15%;
+        width: 100%;
+        > .btn { width: 100%; }
+    }
+}

@@ -39,7 +39,7 @@ $(function() {
             return this;
     	},
     	onSelectItem: function(e) {
-    		
+    		MeiweiApp.goTo('ProductOrder', {productItem: this.model.toJSON()})
     	}
     });
     
