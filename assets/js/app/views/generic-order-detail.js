@@ -1,6 +1,6 @@
 $(function() {
     var OrderDetail = MeiweiApp.ModelView.extend({
-    	template: TPL['order-detail'],
+    	template: TPL['generic-order-detail'],
     	events: { 'fastclick .btn-cancel': 'cancelOrder' },
     	cancelOrder: function() {
     		var model = this.model;
@@ -19,7 +19,7 @@ $(function() {
     MeiweiApp.Pages.GenericOrderDetail = new (MeiweiApp.PageView.extend({
     	initPage: function() {
     		_.bindAll(this, 'renderAll');
-    		this.order = new MeiweiApp.Models.Order();
+    		this.order = new MeiweiApp.Models.GenericOrder();
     		this.views = {
     			orderDetail: new OrderDetail({
     				model: this.order,
@@ -27,23 +27,12 @@ $(function() {
     			})
     		};
     	},
-    	onClickRightBtn: function() {
-    		MeiweiApp.ProductCart.reset(this.order.get('product_items'));
-    		MeiweiApp.goTo('RestaurantOrder', {
-    			restaurantId: this.order.get('restaurant'),
-    			pendingOrder: this.order
-    		});
-    	},
     	renderAll: function() {
     		var detail = this.order.get('detail');
             MeiweiApp.loadBgImage(this.$('.item-picture'), detail.picture, { height: 250 });
             this.$('.item-name').html(detail.name);
-    		if (this.order.get('editable')) {
-    			this.$('.header-btn-right i').attr('class', 'icon icon-edit');
-    		} else {
-    			this.$('.header-btn-right i').attr('class', 'icon icon-blank');
+    		if (!this.order.get('editable')) {
     			this.$('.btn-cancel').remove();
-    			this.onClickRightBtn = function() {};
     		}
     	},
     	render: function() {
