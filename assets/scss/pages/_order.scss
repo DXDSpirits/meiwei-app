@@ -1,4 +1,4 @@
-#view-order-detail {
+#view-order-detail, #view-generic-order-detail {
 	.wrapper header {
 		@include size(170px, 100%);
 		img { @include size(140px, 100%); }

@@ -19,6 +19,27 @@ MeiweiApp.Collections.Orders = MeiweiApp.Collection.extend({
 	model: MeiweiApp.Models.Order
 });
 
+MeiweiApp.Models.GenericOrder = MeiweiApp.Model.extend({
+    urlRoot: MeiweiApp.configs.APIHost + '/orders/genericorder/',
+    parse: function(response) {
+        if (response.attributes && response.attributes.datetime)
+            response.attributes.formatted_datetime = moment(response.attributes.datetime).format('LL')
+        response.editable = (response.status < 20);
+        return response;
+    },
+    cancel: function(options) {
+        options = options || {};
+        var url = this.url() + 'cancel/';
+        options.url = url;
+        Backbone.sync('update', this, options);
+    }
+});
+
+MeiweiApp.Collections.GenericOrders = MeiweiApp.Collection.extend({
+    url: MeiweiApp.configs.APIHost + '/orders/genericorder/',
+    model: MeiweiApp.Models.GenericOrder
+});
+
 MeiweiApp.Models.OrderDriver = MeiweiApp.Model.extend({
     urlRoot: MeiweiApp.configs.APIHost + '/orders/orderdriver/'
 });

@@ -29,6 +29,8 @@ MeiweiApp.Router = new (Backbone.Router.extend({
 		
 		this.route('order', 'orderList');
 		this.route(/^order\/(\d+)$/, 'orderDetail');
+		this.route('genericorder', 'genericOrderList');
+        this.route(/^genericorder\/(\d+)$/, 'genericOrderDetail');
 		
 		this.route('product', 'productList');
 		this.route(/^product\/(\d+)\/order$/, 'productOrder');
@@ -72,6 +74,8 @@ MeiweiApp.Router = new (Backbone.Router.extend({
     
     orderList: function() { MeiweiApp.Pages.OrderList.go(); MeiweiApp.history.active = MeiweiApp.Pages.OrderList; },
     orderDetail: function(oid) { MeiweiApp.Pages.OrderDetail.go({orderId: oid}); MeiweiApp.history.active = MeiweiApp.Pages.OrderDetail; },
+    genericOrderList: function() { MeiweiApp.Pages.GenericOrderList.go(); MeiweiApp.history.active = MeiweiApp.Pages.GenericOrderList; },
+    genericOrderDetail: function(oid) { MeiweiApp.Pages.GenericOrderDetail.go({orderId: oid}); MeiweiApp.history.active = MeiweiApp.Pages.GenericOrderDetail; },
     
     productList: function() { MeiweiApp.Pages.ProductList.go(); MeiweiApp.history.active = MeiweiApp.Pages.ProductList; },
     productOrder: function(pid) { MeiweiApp.Pages.ProductOrder.go({productItemId: pid}); MeiweiApp.history.active = MeiweiApp.Pages.ProductOrder; },

@@ -312,11 +312,11 @@ MeiweiApp.i18n = {
         en: 'Order No'
     },
     'Order Date': {
-        zh: '订餐日期',
+        zh: '订单日期',
         en: 'Date'
     },
     'Order Time': {
-        zh: '订餐时间',
+        zh: '订单时间',
         en: 'Time'
     },
     'Peoples': {
