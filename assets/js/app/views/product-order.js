@@ -75,6 +75,7 @@ $(function() {
                 name: this.$('input[name=name]').val() || null,
                 gender: this.$('input[name=gender]').val() || null,
                 mobile: this.$('input[name=mobile]').val() || null,
+                address: this.$('input[name=address]').val() || null,
                 comment: this.$('input[name=comment]').val() || null
             });
             this.$('.info-text').html('');

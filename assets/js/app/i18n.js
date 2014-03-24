@@ -75,6 +75,10 @@ MeiweiApp.i18n = {
         zh: '备注',
         en: 'Remarks'
     },
+    'Address': {
+        zh: '地址',
+        en: 'Address'
+    },
     'Member Center': {
         zh: '用户中心',
         en: 'Member Center'
