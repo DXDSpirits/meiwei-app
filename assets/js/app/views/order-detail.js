@@ -1,5 +1,5 @@
 $(function() {
-    MeiweiApp.Views.OrderDetail = MeiweiApp.ModelView.extend({
+    var OrderDetail = MeiweiApp.ModelView.extend({
     	template: TPL['order-detail'],
     	events: { 'fastclick .btn-cancel': 'cancelOrder' },
     	cancelOrder: function() {
@@ -21,7 +21,7 @@ $(function() {
     		_.bindAll(this, 'renderAll');
     		this.order = new MeiweiApp.Models.Order();
     		this.views = {
-    			orderDetail: new MeiweiApp.Views.OrderDetail({
+    			orderDetail: new OrderDetail({
     				model: this.order,
     				el: this.$('.wrapper')
     			})
@@ -37,9 +37,9 @@ $(function() {
     	renderAll: function() {
     		var resto = this.order.get('restaurantinfor');
     		var localImage = 'assets/img/bootstrap/restaurant/' + resto.id + '.jpg';
-            MeiweiApp.loadBgImage(this.$('.restaurant-picture'), resto.frontpic, { height: 250 });
+            MeiweiApp.loadBgImage(this.$('.item-picture'), resto.frontpic, { height: 250 });
             //MeiweiApp.loadBgImage($('body'), resto.frontpic, { height: 250 });
-            this.$('.restaurant-name').html(resto.fullname);
+            this.$('.item-name').html(resto.fullname);
     		if (this.order.get('editable')) {
     			this.$('.header-btn-right i').attr('class', 'icon icon-edit');
     		} else {

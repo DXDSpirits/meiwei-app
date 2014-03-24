@@ -1,5 +1,5 @@
 $(function() {
-    MeiweiApp.Views.OrderList = MeiweiApp.CollectionView.extend({
+    var OrderList = MeiweiApp.CollectionView.extend({
     	ModelView: MeiweiApp.ModelView.extend({
     		template: TPL['order-list-item'],
     		className: 'order-list-item',
@@ -31,7 +31,7 @@ $(function() {
     	initPage: function() {
     		this.orders = new MeiweiApp.Collections.Orders();
     		this.views = {
-    			orderList: new MeiweiApp.Views.OrderList({
+    			orderList: new OrderList({
     				collection: this.orders,
     				el: this.$('.order-list')
     			})

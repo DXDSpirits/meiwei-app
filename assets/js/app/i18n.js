@@ -88,7 +88,7 @@ MeiweiApp.i18n = {
         en: 'Profile'
     },
     'Reservations': {
-        zh: '订单',
+        zh: '订餐',
         en: 'Reservations'
     },
     'Credits': {
@@ -302,6 +302,10 @@ MeiweiApp.i18n = {
     'No': {
         zh: '否',
         en: 'No'
+    },
+    'Orders': {
+        zh: '订单',
+        en: 'Orders'
     },
     'Order No': {
         zh: '订单号',

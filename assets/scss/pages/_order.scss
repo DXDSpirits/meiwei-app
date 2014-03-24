@@ -7,11 +7,11 @@
 			margin-top: 10px;
 		}
 	}
-	.restaurant-picture {
+	.item-picture {
 		@include size(250px, 100%);
 		margin-top: -100px;
 	}
-	.restaurant-name {
+	.item-name {
         width: 100%;
         padding: 10px 17px;
         text-align: center;
