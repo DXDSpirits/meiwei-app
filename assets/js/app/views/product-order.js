@@ -3,34 +3,6 @@ $(function() {
         urlRoot: MeiweiApp.configs.APIHost + '/orders/orderproduct/'
     });
     
-	var ConfirmDialog = MeiweiApp.View.extend({
-    	className: 'dialog',
-    	template: TPL['order-confirm-dialog'],
-    	events: {
-    		'fastclick .btn-cancel': 'closeDialog',
-    		'fastclick .btn-confirm': 'confirm'
-    	},
-    	closeDialog: function() {
-    		this.remove();
-    		$('#dialog-overlay').addClass('hidden');
-    		this.undelegateEvents();
-    	},
-    	openDialog: function() {
-    		$('body').append(this.el);
-    		$('#dialog-overlay').removeClass('hidden');
-    		this.delegateEvents();
-    	},
-    	confirm: function() {
-    		MeiweiApp.Pages.ProductOrder.submitOrder();
-    		this.closeDialog();
-    	},
-    	render: function() {
-    		this.renderTemplate();
-    		this.openDialog();
-    		return this;
-    	}
-    });
-    
     var OrderContactForm = MeiweiApp.View.extend({
         events: { 'fastclick > header': 'selectContact' },
         initView: function(options) {
@@ -62,9 +34,11 @@ $(function() {
         },
         askToSubmitOrder: function(e) {
             if (e.preventDefault) e.preventDefault();
-            var dialog = new ConfirmDialog();
-			dialog.remove();
-			dialog.render();
+			MeiweiApp.showConfirmDialog(
+                MeiweiApp._('Confirm Order'),
+                MeiweiApp._('An SMS will be sent to you to inform you the order has been confirmed'),
+                this.submitOrder
+            );
         },
         submitOrder: function() {
             var newOrder = new ProductOrderCreation();
@@ -82,7 +56,7 @@ $(function() {
             var self = this;
             newOrder.save({}, {
                 success: function(model, xhr, options) {
-                    MeiweiApp.goTo('Attending', { orderId: newOrder.id });
+                    MeiweiApp.goTo('GenericOrderList');
                 },
                 error: function(model, xhr, options) {
                     self.$('.wrapper').scrollTop(0);
