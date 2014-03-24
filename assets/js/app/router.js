@@ -53,7 +53,7 @@ MeiweiApp.Router = new (Backbone.Router.extend({
 	
 	registerAuthToken: function(token, path) {
 	    MeiweiApp.TokenAuth.set(token);
-	    this.navigate(path);
+	    this.navigate(path, {trigger: true});
 	},
 	
 	home: function(lid) { MeiweiApp.Pages.Home.go({listId: lid}); MeiweiApp.history.active = MeiweiApp.Pages.Home; },
