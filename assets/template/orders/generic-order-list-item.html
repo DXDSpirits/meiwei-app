@@ -1,7 +1,7 @@
 <div class="thumbnail"></div>
 <div class="order-list-detail">
 <h3>{{ detail.name }}</h3>
-<h3>￥{{ detail.price }}</h3>
+{{#payment}}<h3>￥{{ payment.amount }}</h3>{{/payment}}
 <p>{{ attributes.formatted_datetime }}</p>
 <p><span data-i18n="Order No">订单编号</span>: {{ order_no }}</p>
 </div>

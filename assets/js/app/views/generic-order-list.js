@@ -12,9 +12,12 @@ $(function() {
     		render: function() {
     			MeiweiApp.ModelView.prototype.render.call(this);
     			if (this.model) {
-    				MeiweiApp.loadBgImage(this.$('.thumbnail'), this.model.get('detail').picture, {
-    					width: 89, height: 89
-    				});
+    			    var detail = this.model.get('detail')
+    			    if (detail) {
+    			        MeiweiApp.loadBgImage(this.$('.thumbnail'), detail.picture, {
+                            width: 89, height: 89
+                        });
+    			    }
     			}
     			return this;
     		}
