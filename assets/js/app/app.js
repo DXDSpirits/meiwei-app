@@ -51,7 +51,7 @@ MeiweiApp.initDevice = function() {
 
 MeiweiApp.fixViewport = function() {
     var wrapperOffset = 44;
-    if (window.device.platform === 'iOS' && parseFloat(window.device.version) === 7.0) {
+    if (window.device.platform === 'iOS' && parseFloat(window.device.version) >= 7.0) {
         wrapperOffset += 20;
     }
     var fixWrapperHeight = function() {
