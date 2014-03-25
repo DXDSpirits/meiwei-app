@@ -49,6 +49,7 @@ $(function() {
     
     MeiweiApp.Pages.ProductList = new (MeiweiApp.PageView.extend({
         events: {
+            'fastclick .header-btn-left': 'onClickLeftBtn',
             'fastclick .header-title': 'toggleFilter'
         },
     	initPage: function() {
