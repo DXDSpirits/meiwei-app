@@ -37,10 +37,11 @@ $(function() {
                 var el = e.currentTarget;
                 var target = this.model.get('target');
                 var uri = this.model.get('uri');
+                var options = this.model.get('options');
                 if (target == 'product') {
-                    MeiweiApp.goTo('ProductPurchase', {itemId: +uri});
+                    MeiweiApp.goTo('ProductOrder', {productItemId: +uri});
                 } else if (target == 'internal') {
-                    MeiweiApp.goTo(uri);
+                    MeiweiApp.goTo(uri, options);
                 } else if (target == 'external') {
                     window.open(uri, '_blank', 'location=no');
                 }
@@ -55,10 +56,13 @@ $(function() {
                 wrapperWidth = this.$el.closest('.carousel').innerWidth(),
                 margin = (wrapperWidth - itemWidth) / 2;
             this.$el.css({
-                'width': items.length * itemWidth + 2 * margin,
+                'width': this.collection.length * itemWidth + 2 * margin,
                 'padding-left': margin,
                 'padding-right': margin
             });
+            /* Since it tooks 350ms to remove an item (CSS3 Transition)
+             * this.collection.length is used instead of items.length
+             */
         },
         addAll: function() {
             MeiweiApp.CollectionView.prototype.addAll.call(this);

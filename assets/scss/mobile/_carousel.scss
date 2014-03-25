@@ -35,6 +35,9 @@
 		line-height: 15px;
 		color: $white;
 		text-align: center;
+		p {
+		    @include text-overflow();
+		}
 	}
 	
 	.img {
