@@ -11,6 +11,9 @@
     <feature name="Weixin">
         <param name="ios-package" value="Weixin" />
     </feature>
+    <feature name="Alipay">
+        <param name="ios-package" value="Alipay" />
+    </feature>
     <preference name="WebViewBounce" value="true" />
     <preference name="Fullscreen" value="false" />
     <preference name="Orientation" value="landscape" />

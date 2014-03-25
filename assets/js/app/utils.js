@@ -60,6 +60,15 @@ MeiweiApp.shareToMoments = function(url, content, pic) {
     }
 };
 
+MeiweiApp.payByAlipay = function(orderString) {
+    var command = [orderString];
+    var success = function() {};
+    var fail = function() {};
+    if (window.Cordova) {
+        Cordova.exec(success, fail, "Alipay", "payOrder", command);
+    }
+};
+
 MeiweiApp.loadImage = function(img, src, options) {
     options = options || {};
     if (MeiweiApp.isCordova() && options.src_local) img.attr('src', options.src_local);
