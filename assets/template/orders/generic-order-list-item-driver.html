@@ -1,0 +1,12 @@
+<div class="thumbnail" style="background-image: url(assets/img/daijia.jpg)"></div>
+<div class="order-list-detail">
+<p><span data-i18n="Order No">订单编号</span>: {{ order_no }}</p>
+<h3>美位代驾</h3>
+<p>{{ attributes.address }}</p>
+{{#gender}}
+<p>{{ name }}女士 {{ mobile }}</p>
+{{/gender}}
+{{^gender}}
+<p>{{ name }}先生{{ mobile }}</p>
+{{/gender}}
+</div>

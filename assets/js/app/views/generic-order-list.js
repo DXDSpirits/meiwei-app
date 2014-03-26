@@ -1,7 +1,11 @@
 $(function() {
     var OrderListView = MeiweiApp.CollectionView.extend({
     	ModelView: MeiweiApp.ModelView.extend({
-    		template: TPL['generic-order-list-item'],
+    	    template: TPL['generic-order-list-item'],
+    		templates: {
+    		    30: TPL['generic-order-list-item-driver'],
+    		    40: TPL['generic-order-list-item-vvip']
+    		},
     		className: 'order-list-item',
     		events: { 'fastclick': 'viewOrder' },
     		viewOrder: function() {
@@ -10,10 +14,11 @@ $(function() {
     			});
     		},
     		render: function() {
-    			MeiweiApp.ModelView.prototype.render.call(this);
     			if (this.model) {
+    			    this.template = this.templates[this.model.get('order_type')] || this.template;
+    			    MeiweiApp.ModelView.prototype.render.call(this);
     			    var detail = this.model.get('detail')
-    			    if (detail) {
+    			    if (detail && detail.picture) {
     			        MeiweiApp.loadBgImage(this.$('.thumbnail'), detail.picture, {
                             width: 89, height: 89
                         });

@@ -45,6 +45,18 @@
     }
 }
 
+#view-generic-order-list {
+    .payment_status {
+        font-size: 90%;
+        display: inline-block;
+        margin: 0 10px;
+        color: #555;
+        &.paid {
+            color: #27AE60;
+        }
+    }
+}
+
 #view-attending {
     .wrapper {
         -webkit-box-pack: center;
