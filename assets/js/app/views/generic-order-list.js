@@ -1,7 +1,7 @@
 $(function() {
     var OrderListView = MeiweiApp.CollectionView.extend({
     	ModelView: MeiweiApp.ModelView.extend({
-    	    template: TPL['generic-order-list-item'],
+    	    default_template: TPL['generic-order-list-item'],
     		templates: {
     		    30: TPL['generic-order-list-item-driver'],
     		    40: TPL['generic-order-list-item-vvip']
@@ -15,7 +15,7 @@ $(function() {
     		},
     		render: function() {
     			if (this.model) {
-    			    this.template = this.templates[this.model.get('order_type')] || this.template;
+    			    this.template = this.templates[this.model.get('order_type')] || this.default_template;
     			    MeiweiApp.ModelView.prototype.render.call(this);
     			    var detail = this.model.get('detail')
     			    if (detail && detail.picture) {

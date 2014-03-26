@@ -13,6 +13,7 @@
             {{^gender}}<td>{{ name }}先生</td>{{/gender}}
         </tr>
         <tr><th data-i18n="Mobile">手机</th><td>{{ mobile }}</td></tr>
+        {{#payment}}
         <tr>
             <th data-i18n="价格">价格</th>
             <td>
@@ -25,6 +26,7 @@
                 {{/payment.is_payable}}
             </td>
         </tr>
+        {{/payment}}
         {{#comment}}<tr><th data-i18n="Remarks">备注</th><td>{{ comment }}</td></tr>{{/comment}}
     </table>
 </section>

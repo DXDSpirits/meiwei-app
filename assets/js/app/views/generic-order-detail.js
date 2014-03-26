@@ -5,7 +5,7 @@ $(function() {
     });
     
     var OrderDetail = MeiweiApp.ModelView.extend({
-    	template: TPL['generic-order-detail'],
+    	default_template: TPL['generic-order-detail'],
     	templates: {
             30: TPL['generic-order-detail-driver'],
             40: TPL['generic-order-detail-vvip']
@@ -36,7 +36,7 @@ $(function() {
     	},
         render: function() {
             if (this.model) {
-                this.template = this.templates[this.model.get('order_type')] || this.template;
+                this.template = this.templates[this.model.get('order_type')] || this.default_template;
                 MeiweiApp.ModelView.prototype.render.call(this);
                 var detail = this.model.get('detail')
                 if (detail && detail.picture) {
