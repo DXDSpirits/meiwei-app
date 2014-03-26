@@ -1,0 +1,17 @@
+
+<div class="item-picture img" style="background-image: url(assets/img/daijia.jpg)"></div>
+<p class="item-name">美位代驾</p>
+
+<section class="order-detail">
+    <table>
+        <tr><th data-i18n="Order No">订单号</th><td>{{ order_no }}</td></tr>
+        <tr><th data-i18n="Address">地址</th><td>{{ attributes.address }}</td></tr>
+        <tr>
+            <th data-i18n="Contact">联系人</th>
+            {{#gender}}<td>{{ name }}女士</td>{{/gender}}
+            {{^gender}}<td>{{ name }}先生</td>{{/gender}}
+        </tr>
+        <tr><th data-i18n="Mobile">手机</th><td>{{ mobile }}</td></tr>
+        {{#comment}}<tr><th data-i18n="Remarks">备注</th><td>{{ comment }}</td></tr>{{/comment}}
+    </table>
+</section>

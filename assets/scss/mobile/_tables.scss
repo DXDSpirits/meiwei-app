@@ -6,7 +6,7 @@ table {
 }
 
 th, td {
-	padding: 1px;
+	padding: 2px 5px;
 	font-size: $fontSizeSmall;
 	line-height: $baseLineHeight;
 	text-align: left;
@@ -19,5 +19,5 @@ th {
 	font-weight: normal;
 	font-size: $fontSizeSmall;
 	color: $brownLight;
-	padding-top: 6px;
+	@include text-overflow();
 }

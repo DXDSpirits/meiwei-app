@@ -39,18 +39,18 @@
 			}
 		}
 	}
-    .btn-cancel {
+    .btn-cancel, .btn-payable {
     	width: 70%;
-    	margin: 10px 0;
+    	margin: 10px 0 20px;
     }
 }
 
-#view-generic-order-list {
+#view-generic-order-list, #view-generic-order-detail {
     .payment_status {
         font-size: 90%;
         display: inline-block;
         margin: 0 10px;
-        color: #555;
+        color: $brownLight;
         &.paid {
             color: #27AE60;
         }

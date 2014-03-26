@@ -1,12 +1,15 @@
 
 <div class="item-picture img"></div>
-<p class="item-name">{{ detail.name }}</p>
+<p class="item-name">VVIP国内出入港服务</p>
 
 <section class="order-detail">
     <table>
         <tr><th data-i18n="Order No">订单号</th><td>{{ order_no }}</td></tr>
-        <tr><th data-i18n="Order Date">订单日期</th><td>{{ attributes.formatted_datetime }}</td></tr>
-        <tr><th data-i18n="Address">地址</th><td>{{ attributes.address }}</td></tr>
+        <tr><th data-i18n="Date">日期</th><td>{{ attributes.formatted_datetime }}</td></tr>
+        <tr><th data-i18n="机场">机场</th><td>{{ attributes.airport }}</td></tr>
+        <tr><th data-i18n="航班">航班</th><td>{{ attributes.flight_no }}</td></tr>
+        <tr><th data-i18n="贵宾">贵宾</th><td>{{ attributes.guest }}</td></tr>
+        <tr><th data-i18n="陪同人数">陪同人数</th><td>{{ attributes.accompany }}</td></tr>
         <tr>
             <th data-i18n="Contact">联系人</th>
             {{#gender}}<td>{{ name }}女士</td>{{/gender}}
@@ -29,7 +32,6 @@
     </table>
 </section>
 
-<!--<button class="btn-inverse btn-cancel" data-i18n="Cancel Order">取消订单</button>-->
 {{#payment.is_payable}}
 <button class="btn-inverse btn-payable" data-i18n="支付">支付</button>
 {{/payment.is_payable}}
