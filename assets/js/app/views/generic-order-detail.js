@@ -1,11 +1,19 @@
 $(function() {
+    var AlipayPayment = MeiweiApp.Model.extend({
+        urlRoot: MeiweiApp.configs.APIHost + '/alipay/payable/',
+        idAttribute: 'payment_no'
+    });
+    
     var OrderDetail = MeiweiApp.ModelView.extend({
     	template: TPL['generic-order-detail'],
     	templates: {
             30: TPL['generic-order-detail-driver'],
             40: TPL['generic-order-detail-vvip']
         },
-    	events: { 'fastclick .btn-cancel': 'cancelOrder' },
+    	events: {
+    	    'fastclick .btn-cancel': 'cancelOrder',
+    	    'fastclick .btn-payable': 'payOrder'
+    	},
     	cancelOrder: function() {
     		var model = this.model;
     		MeiweiApp.showConfirmDialog(
@@ -17,6 +25,14 @@ $(function() {
     		        }});
     		    }
     		);
+    	},
+    	payOrder: function() {
+    	    var alipayPayment = new AlipayPayment({
+    	        payment_no: this.model.get('payment').payment_no
+    	    });
+    	    alipayPayment.fetch({success: function(model) {
+    	        MeiweiApp.payByAlipay(model.get('orderString'));
+    	    }});
     	},
         render: function() {
             if (this.model) {
@@ -40,10 +56,7 @@ $(function() {
     	initPage: function() {
     		this.order = new MeiweiApp.Models.GenericOrder();
     		this.views = {
-    			orderDetail: new OrderDetail({
-    				model: this.order,
-    				el: this.$('.wrapper')
-    			})
+    			orderDetail: new OrderDetail({ model: this.order, el: this.$('.wrapper') })
     		};
     	},
     	render: function() {
