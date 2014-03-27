@@ -84,34 +84,37 @@
 }
 
 #view-restaurant-detail {
-    //@include bottom-banner-shadow();
-	.restaurant-pictures {
-		position: relative;
-		overflow: visible;
-		@include size(250px, 100%);
-		margin-top: -50px;
-		&::after {
-			content: "";
-			position: absolute;
-			bottom: 0;
-			@include size(200px, 100%);
-			background: transparent url($blackShadowPath) no-repeat top;
-			@include background-size(100% 400px);
-		}
-	}
+    .wrapper {
+        background-repeat: no-repeat;
+        background-position: center top;
+        @include background-size(contain);
+        padding-top: 50%;
+    }
 	.img-stack-icon {
         width: 32px;
         height: 32px;
         position: absolute;
         z-index: 1;
-        top: 65px;
-        right: 10px;
+        top: 15px;
+        right: 15px;
     }
 	.restaurant-profile {
-		width: 90%;
+		width: 100%;
+		padding-left: 15px;
+		padding-right: 15px;
+		background-color: $bodyBackground;
 		font-size: $fontSizeMini;
 		line-height: $fontSizeMini + 4px;
 		position: relative;
+        &::before {
+            content: "";
+            position: absolute;
+            top: -200px;
+            left: 0;
+            @include size(200px, 100%);
+            background: transparent url($blackShadowPath) no-repeat top;
+            @include background-size(100% 400px);
+        }
 		> article {
 			padding: $baseLineHeight/2 0;
 			width: 100%;
@@ -125,18 +128,18 @@
 	.rating {
         position: absolute;
         top: -50px;
-        left: 0;
+        left: 15px;
     }
     .price {
         position: absolute;
         top: -22px;
-        left: 5px;
+        left: 20px;
         color: $white;
     }
     .order-button {
         position: absolute;
         top: -65px;
-        right: 0;
+        right: 15px;
         @include size(75px, 100px);
         padding: 20px 0;
         line-height: 35px;
@@ -162,8 +165,10 @@
     }
 	.restaurant-reviews {
 	    font-size: $fontSizeMini;
-        width: 90%;
-        background: transparent url($gradientShadowPathR) no-repeat top;
+        width: 100%;
+        padding-left: 15px;
+        padding-right: 15px;
+        background: $bodyBackground url($gradientShadowPathR) no-repeat top;
         @include background-size(100% (3*$baseLineHeight));
         > header {
             height: 36px;
@@ -196,29 +201,31 @@
         }
     }
 	.callus-button {
-		width: 90%;
-		padding: 20px 10%;
-		> .btn {
-			@include center-block();
-			width: 100%;
-			text-indent: -20px;
-		}
-		background: transparent url($gradientShadowPathR) repeat-x top;
+		width: 100%;
+		padding: 20px 15px;
+		background: $bodyBackground url($gradientShadowPathR) repeat-x top;
 		@include background-size(100% 60px);
+        > .btn {
+            @include center-block();
+            width: 100%;
+            text-indent: -20px;
+        }
 	}
 }
 
 #view-restaurant-order {
-    //@include bottom-banner-shadow();
-	.restaurant-picture {
-		@include size(250px, 100%);
-		margin-top: -100px;
-	}
+    .wrapper {
+        background-repeat: no-repeat;
+        background-position: center top;
+        @include background-size(contain);
+        padding-top: 50%;
+    }
 	.restaurant-name {
         width: 100%;
         padding: 10px 17px;
         text-align: center;
         @include text-overflow();
+        background-color: $bodyBackground;
 	}
 	fieldset {
 		margin: 0;
@@ -234,7 +241,7 @@
 	.order-info, .contact-info, .floorplan-select, .product-select {
 		width: 100%;
 		padding: 0 15%;
-		background: transparent url($gradientShadowPathR) no-repeat top;
+		background: $bodyBackground url($gradientShadowPathR) no-repeat top;
 		@include background-size(100% (3*$baseLineHeight));
 	}
 	.section-title {
@@ -289,7 +296,7 @@
         }
     }
 	.order-submit-button {
-		background: transparent url($gradientShadowPathR) no-repeat top;
+		background: $bodyBackground url($gradientShadowPathR) no-repeat top;
 		@include background-size(100% (3*$baseLineHeight));
 		padding: 15px 15%;
 		width: 100%;

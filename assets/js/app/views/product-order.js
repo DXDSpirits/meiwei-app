@@ -66,10 +66,10 @@ $(function() {
         },
         reset: function() {
             this.$('.wrapper').addClass('rendering');
-            this.$('.product-picture').css('background-image', 'none');
+            this.$('.wrapper').css('background-image', 'none');
         },
         renderOrderForm: function(model, response, options) {
-            MeiweiApp.loadBgImage(this.$('.product-picture'), this.productItem.get('picture'), {
+            MeiweiApp.loadBgImage(this.$('.wrapper'), this.productItem.get('picture'), {
     			height: 250
     		});
     		var infoTemplate = Mustache.compile(

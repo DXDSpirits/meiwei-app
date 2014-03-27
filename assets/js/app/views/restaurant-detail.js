@@ -37,7 +37,7 @@ $(function() {
         events: {
             'click .header-btn-left': 'onClickLeftBtn',
             'click .header-btn-right': 'onClickRightBtn',
-            'click .restaurant-pictures': 'viewPictures'
+            'click .img-stack-icon': 'viewPictures'
         },
     	initPage: function() {
     		this.restaurant = new MeiweiApp.Models.Restaurant();
@@ -63,9 +63,9 @@ $(function() {
     		});
     	},
     	reset: function() {
-    		this.$('.wrapper').addClass('rendering');
     		this.$('.header-title').empty();
-    		this.$('.restaurant-pictures').css('background-image', 'none');
+    		this.$('.wrapper').addClass('rendering');
+    		this.$('.wrapper').css('background-image', 'none');
     	},
     	renderReviews: function() {
     	    if (!this.restaurant.get('reviews_control')) return;
@@ -85,7 +85,7 @@ $(function() {
     		this.$('.icon-favorite').toggleClass('succeed', (succeed != null));
     		this.$('.header-title').html(this.restaurant.get('fullname'));
     		var localImage = 'assets/img/bootstrap/restaurant/' + this.restaurant.id + '.jpg';
-            MeiweiApp.loadBgImage(this.$('.restaurant-pictures'), this.restaurant.get('frontpic'), {
+            MeiweiApp.loadBgImage(this.$('.wrapper'), this.restaurant.get('frontpic'), {
     			src_local: localImage,
     			height: 250
     		});

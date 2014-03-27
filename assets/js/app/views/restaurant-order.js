@@ -178,11 +178,11 @@ $(function() {
         },
         reset: function() {
             this.$('.wrapper').addClass('rendering');
-            this.$('.restaurant-picture').css('background-image', 'none');
+            this.$('.wrapper').css('background-image', 'none');
         },
         renderOrderForm: function(model, response, options) {
         	var localImage = 'assets/img/bootstrap/restaurant/' + this.restaurant.id + '.jpg';
-            MeiweiApp.loadBgImage(this.$('.restaurant-picture'), this.restaurant.get('frontpic'), {
+            MeiweiApp.loadBgImage(this.$('.wrapper'), this.restaurant.get('frontpic'), {
     			src_local: localImage,
     			height: 250
     		});

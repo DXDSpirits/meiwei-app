@@ -101,12 +101,16 @@
 }
 
 #view-product-order {
-    .product-picture {
-        @include size(250px, 100%);
+    .wrapper {
+        background-repeat: no-repeat;
+        background-position: center top;
+        @include background-size(contain);
+        padding-top: 80%;
     }
     .product-info {
         width: 100%;
         padding: 10px 17px;
+        background-color: $bodyBackground;
         font-size: $fontSizeSmall;
         h1 {
             font-size: $baseFontSize;
@@ -125,7 +129,7 @@
     .order-info, .contact-info {
         width: 100%;
         padding: 0 15%;
-        background: transparent url($gradientShadowPathR) no-repeat top;
+        background: $bodyBackground url($gradientShadowPathR) no-repeat top;
         @include background-size(100% (3*$baseLineHeight));
     }
     .section-title {
@@ -156,7 +160,7 @@
         width: 70px;
     }
     .order-submit-button {
-        background: transparent url($gradientShadowPathR) no-repeat top;
+        background: $bodyBackground url($gradientShadowPathR) no-repeat top;
         @include background-size(100% (3*$baseLineHeight));
         padding: 15px 15%;
         width: 100%;
