@@ -26,6 +26,7 @@ $(function() {
     				el: this.$('.wrapper')
     			})
     		};
+    		this.listenTo(this.order, 'change', this.renderAll);
     	},
     	onClickRightBtn: function() {
     		MeiweiApp.ProductCart.reset(this.order.get('product_items'));
@@ -34,11 +35,13 @@ $(function() {
     			pendingOrder: this.order
     		});
     	},
+        reset: function() {
+            this.$('.wrapper').css('background-image', 'none');
+        },
     	renderAll: function() {
     		var resto = this.order.get('restaurantinfor');
     		var localImage = 'assets/img/bootstrap/restaurant/' + resto.id + '.jpg';
-            MeiweiApp.loadBgImage(this.$('.item-picture'), resto.frontpic, { height: 250 });
-            //MeiweiApp.loadBgImage($('body'), resto.frontpic, { height: 250 });
+            MeiweiApp.loadBgImage(this.$('.wrapper'), resto.frontpic, { height: 250 });
             this.$('.item-name').html(resto.fullname);
     		if (this.order.get('editable')) {
     			this.$('.header-btn-right i').attr('class', 'icon icon-edit');
@@ -51,10 +54,9 @@ $(function() {
     	render: function() {
     		if (this.options.order) {
     			this.order.set(this.options.order);
-    			this.renderAll();
     		} else if (this.options.orderId) {
     			this.order.set({id: this.options.orderId});
-    			this.order.fetch({ success: this.renderAll });
+    			this.order.fetch();
     		}
     	}
     }))({el: $("#view-order-detail")});

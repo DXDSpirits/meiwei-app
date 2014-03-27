@@ -38,12 +38,6 @@ $(function() {
             if (this.model) {
                 this.template = this.templates[this.model.get('order_type')] || this.default_template;
                 MeiweiApp.ModelView.prototype.render.call(this);
-                var detail = this.model.get('detail')
-                if (detail && detail.picture) {
-                    MeiweiApp.loadBgImage(this.$('.item-picture'), detail.picture, {
-                        height: 250
-                    });
-                }
                 if (!this.model.get('editable')) {
                     this.$('.btn-cancel').remove();
                 }
@@ -58,7 +52,17 @@ $(function() {
     		this.views = {
     			orderDetail: new OrderDetail({ model: this.order, el: this.$('.wrapper') })
     		};
+    		this.listenTo(this.order, 'change', this.renderWrapperBg);
     	},
+        reset: function() {
+            this.$('.wrapper').css('background-image', 'none');
+        },
+        renderWrapperBg: function() {
+            var detail = this.order.get('detail')
+            if (detail && detail.picture) {
+                MeiweiApp.loadBgImage(this.$('.wrapper'), detail.picture, { height: 250 });
+            }
+        },
     	render: function() {
     		if (this.options.order) {
     			this.order.set(this.options.order);

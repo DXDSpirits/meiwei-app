@@ -1,26 +1,22 @@
 #view-order-detail, #view-generic-order-detail {
-	.wrapper header {
-		@include size(170px, 100%);
-		img { @include size(140px, 100%); }
-		h1 {
-			text-align: center;
-			margin-top: 10px;
-		}
-	}
-	.item-picture {
-		@include size(250px, 100%);
-	}
+    .wrapper {
+        background-repeat: no-repeat;
+        background-position: center top;
+        @include background-size(contain);
+        padding-top: 50%;
+    }
 	.item-name {
         width: 100%;
         padding: 10px 17px;
         text-align: center;
         @include text-overflow();
+        background-color: $bodyBackground;
 	}
 	.order-detail {
 		width: 100%;
 		padding: 10px 40px;
-		margin-bottom: 10px;
 		background: url($gradientShadowPathR) repeat-x top, url($gradientShadowPath) repeat-x bottom;
+		background-color: $bodyBackground;
 		@include background-size(100% 60px, 100% 60px);
 	}
 	.order-product {
@@ -39,10 +35,11 @@
 			}
 		}
 	}
-    .btn-cancel, .btn-payable {
-    	width: 70%;
-    	margin: 10px 0 20px;
-    }
+	.order-buttons {
+	    width: 100%;
+	    background-color: $bodyBackground;
+	    padding: 20px 40px;
+	}
 }
 
 #view-generic-order-list, #view-generic-order-detail {
