@@ -26,7 +26,6 @@ $(function() {
     				el: this.$('.wrapper')
     			})
     		};
-    		this.listenTo(this.order, 'change', this.renderAll);
     	},
     	onClickRightBtn: function() {
     		MeiweiApp.ProductCart.reset(this.order.get('product_items'));
@@ -54,9 +53,10 @@ $(function() {
     	render: function() {
     		if (this.options.order) {
     			this.order.set(this.options.order);
+    			this.renderAll();
     		} else if (this.options.orderId) {
     			this.order.set({id: this.options.orderId});
-    			this.order.fetch();
+    			this.order.fetch({success: this.renderAll});
     		}
     	}
     }))({el: $("#view-order-detail")});

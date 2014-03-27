@@ -48,16 +48,16 @@ $(function() {
     
     MeiweiApp.Pages.GenericOrderDetail = new (MeiweiApp.PageView.extend({
     	initPage: function() {
+    	    _.bindAll(this, 'renderAll');
     		this.order = new MeiweiApp.Models.GenericOrder();
     		this.views = {
     			orderDetail: new OrderDetail({ model: this.order, el: this.$('.wrapper') })
     		};
-    		this.listenTo(this.order, 'change', this.renderWrapperBg);
     	},
         reset: function() {
             this.$('.wrapper').css('background-image', 'none');
         },
-        renderWrapperBg: function() {
+        renderAll: function() {
             var detail = this.order.get('detail')
             if (detail && detail.picture) {
                 MeiweiApp.loadBgImage(this.$('.wrapper'), detail.picture, { height: 250 });
@@ -66,9 +66,10 @@ $(function() {
     	render: function() {
     		if (this.options.order) {
     			this.order.set(this.options.order);
+    			this.renderAll();
     		} else if (this.options.orderId) {
     			this.order.set({id: this.options.orderId});
-    			this.order.fetch();
+    			this.order.fetch({success: this.renderAll});
     		}
     	}
     }))({el: $("#view-generic-order-detail")});
