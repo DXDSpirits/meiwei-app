@@ -101,6 +101,10 @@ MeiweiApp.initVersion = function() {
 
 MeiweiApp.initLanguage = function() {
     var langCode = localStorage.getItem('lang-code') || 'zh';
+    /*
+     * i18n is disabled for the moment
+     */
+    langCode = 'zh';
     MeiweiApp._ = function(msgId) {
         var msg = MeiweiApp.i18n[msgId];
         return msg ? msg[langCode] : msgId;
