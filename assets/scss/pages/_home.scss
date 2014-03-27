@@ -47,7 +47,6 @@
     }
 	
 	.recommend-flow {
-		@include flex-box($orient: vertical);
 		width: 100%;
 	}
 	
@@ -66,7 +65,6 @@
 	}
 	
 	.master-hero, .recommend-list-item {
-		@include flex-box($orient: vertical, $pack: start);
 		width: 100%;
 		height: $itemHeight;
 		overflow: hidden;
@@ -97,9 +95,9 @@
 			color: $white;
 			text-align: center;
 			height: 45px;
-			max-width: 200px;
-			min-width: 100px;
-			border: 13px solid transparent;
+			width: 60%;
+			margin: 0 auto;
+			border: 10px solid transparent;
 			-webkit-border-image: url($tagImagePath) 13 stretch;
 			opacity: 1;
 			visibility: visible;
