@@ -61,6 +61,8 @@ $(function() {
             var detail = this.order.get('detail')
             if (detail && detail.picture) {
                 MeiweiApp.loadBgImage(this.$('.wrapper'), detail.picture, { height: 250 });
+            } else {
+                MeiweiApp.loadBgImage(this.$('.wrapper'), 'assets/img/default-order-avatar.png', { height: 250 });
             }
         },
     	render: function() {
