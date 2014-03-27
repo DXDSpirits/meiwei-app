@@ -88,7 +88,7 @@
         background-repeat: no-repeat;
         background-position: center top;
         @include background-size(contain);
-        padding-top: 50%;
+        padding-top: 200px;
     }
 	.img-stack-icon {
         width: 32px;
@@ -113,7 +113,7 @@
             left: 0;
             @include size(200px, 100%);
             background: transparent url($blackShadowPath) no-repeat top;
-            @include background-size(100% 400px);
+            @include background-size(100% 100%);
         }
 		> article {
 			padding: $baseLineHeight/2 0;
