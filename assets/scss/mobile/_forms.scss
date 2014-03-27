@@ -110,9 +110,8 @@ form label {
 
 //radio-button
 .switch {
-	@include flex-box($orient: horizontal);
 	font-size: $fontSizeMini;
-	padding: 0;
+	padding: 7px 0;
 	> .switch-inner {
 	    $switchInnerHeight: 30px;
 		@include size($switchInnerHeight, $switchInnerHeight * 2 + 10px);
