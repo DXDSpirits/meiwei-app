@@ -3,21 +3,10 @@ $(function() {
         return !localStorage.getItem('visited-view-home');
     }
     var RecommendsFilter = MeiweiApp.CollectionView.extend({
-        initCollectionView: function() {
-        	this.listenTo(this.collection, 'reset add remove', this.initScroller);
-        },
-        initScroller: function() {
-	        if (this.scroller == null) {
-	            var $filter = MeiweiApp.Pages.Home.$('.recommends-filter');
-	            if ($filter.length > 0) this.scroller = new IScroll($filter.selector, { tap: true, bounce: false });
-	        } else {
-	            this.scroller.refresh();
-	        }
-	    },
         ModelView: MeiweiApp.ModelView.extend({
             className: 'filter-item',
             template: Mustache.compile('{{name}}'),
-            events: { 'tap': 'onclick' },
+            events: { 'click': 'onclick' },
             onclick: function() {
                 MeiweiApp.sendGaEvent('homepage list', 'select', 'recommend', this.model.id);
                 MeiweiApp.Pages.Home.recommend.clear();

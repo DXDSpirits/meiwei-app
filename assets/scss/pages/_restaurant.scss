@@ -33,7 +33,11 @@
 
 #view-restaurant-search {
     .flipper { width: 100%; }
-    .filter:active, .filter.active { background-color: $brown; }
+    .filter:active, .filter.active, { background-color: $brown; }
+     .filter.collapsible .collapsible-inner {
+         @include scrollable();
+         background-color: $brown;
+     }
 	.filter-item {
 	    @include text-overflow();
 		line-height: 30px;

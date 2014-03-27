@@ -169,7 +169,7 @@ $(function() {
             'click .header-btn-left': 'onClickLeftBtn',
             'click .header-btn-right': 'onClickRightBtn',
             'click .filter p': 'toggleFilters',
-            'tap .filter li': 'selectFilter',
+            'click .filter li': 'selectFilter',
             'touchmove .wrapper': 'closeFilters',
             'submit .search-form': 'searchKeywords',
             'focus .search-form > input': 'clearFormInput'
@@ -223,12 +223,9 @@ $(function() {
         },
         refreshFilters: function() {
             window.Bootstrap && Bootstrap.set('restaurant-search-filters', this.filters.toJSON());
-            var scrollers = this.scrollers = this.scrollers || {};
             var self = this;
             var reset = function(className, filterName) {
                 self[filterName].reset(self.filters.get(filterName));
-                scrollers[className] ? scrollers[className].refresh() : scrollers[className] 
-                    = new IScroll(self.$('.' + className + ' .collapsible-inner').selector, { tap: true, bounce: false });
             };
             reset('cuisine', 'cuisines'), reset('circle', 'circles'), reset('recommend', 'recommendnames');
         },

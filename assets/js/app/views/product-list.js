@@ -1,21 +1,9 @@
 $(function() {
     var ProductFilter = MeiweiApp.CollectionView.extend({
-        initCollectionView: function() {
-            this.listenTo(this.collection, 'reset add remove', this.initScroller);
-        },
-        initScroller: function() {
-            if (this.scroller == null) {
-                var $filter = MeiweiApp.Pages.ProductList.$('.product-filter');
-                if ($filter.length > 0)
-                    this.scroller = new IScroll($filter.selector, { tap: true, bounce: false });
-            } else {
-                this.scroller.refresh();
-            }
-        },
         ModelView: MeiweiApp.ModelView.extend({
             className: 'filter-item',
             template: Mustache.compile('{{name}}'),
-            events: { 'tap': 'onclick' },
+            events: { 'click': 'onclick' },
             onclick: function() {
                 MeiweiApp.sendGaEvent('product list', 'select', 'product', this.model.id);
                 var page = MeiweiApp.Pages.ProductList;

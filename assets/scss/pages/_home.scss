@@ -130,6 +130,8 @@
 	    &.closed {
             @include translate3d(0, -100%, 0);
         }
+        background: $white;
+        @include scrollable();
 	}
     .filter-item {
         background-color: $bodyBackground;
