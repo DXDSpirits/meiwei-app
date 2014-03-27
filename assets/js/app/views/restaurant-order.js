@@ -3,8 +3,8 @@ $(function() {
     	className: 'dialog',
     	template: TPL['order-confirm-dialog'],
     	events: {
-    		'fastclick .btn-cancel': 'closeDialog',
-    		'fastclick .btn-confirm': 'confirm'
+    		'click .btn-cancel': 'closeDialog',
+    		'click .btn-confirm': 'confirm'
     	},
     	closeDialog: function() {
     		this.remove();
@@ -39,7 +39,7 @@ $(function() {
     });
     
     var RestaurantOrderContactForm = MeiweiApp.View.extend({
-        events: { 'fastclick > header': 'selectContact' },
+        events: { 'click > header': 'selectContact' },
         initView: function(options) {
             _.bindAll(this, 'fillContact');
             this.$('.switch-gender').switchControl();
@@ -96,11 +96,11 @@ $(function() {
     
     MeiweiApp.Pages.RestaurantOrder = new (MeiweiApp.PageView.extend({
         events: {
-            'fastclick .header-btn-left': 'onClickLeftBtn',
-            'fastclick .header-btn-right': 'onClickRightBtn',
-            'fastclick .floorplan-select > header': 'selectSeat',
-            'fastclick .product-select > header': 'selectProduct',
-            'fastclick .order-submit-button': 'askToSubmitOrder',
+            'click .header-btn-left': 'onClickLeftBtn',
+            'click .header-btn-right': 'onClickRightBtn',
+            'click .floorplan-select > header': 'selectSeat',
+            'click .product-select > header': 'selectProduct',
+            'click .order-submit-button': 'askToSubmitOrder',
         },
         initPage: function() {
             _.bindAll(this, 'renderOrderForm', 'submitOrder');

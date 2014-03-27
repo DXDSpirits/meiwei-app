@@ -3,7 +3,7 @@ $(function() {
     	tagName: "section",
     	className: "product-box",
     	template: TPL['product-stack'],
-    	events: { 'fastclick .stack-item': 'onSelectItem' },
+    	events: { 'click .stack-item': 'onSelectItem' },
     	render: function() {
     		this.model.items.forEach(function(item) {
     			item.set({selected: (MeiweiApp.ProductCart.get(item.id) != null)});
@@ -87,8 +87,8 @@ $(function() {
     	className: 'dialog product-detail',
     	template: TPL['product-item-detail'],
     	events: {
-    		'fastclick .btn-cancel': 'closeDialog',
-    		'fastclick .btn-confirm': 'confirmPurchase'
+    		'click .btn-cancel': 'closeDialog',
+    		'click .btn-confirm': 'confirmPurchase'
     	},
     	closeDialog: function() {
     		this.remove();

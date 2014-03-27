@@ -1,11 +1,11 @@
 $(function() {
     MeiweiApp.Pages.Settings = new (MeiweiApp.PageView.extend({
         events: {
-            'fastclick .header-btn-left': 'onClickLeftBtn',
-            'fastclick .lang-opt.zh': 'switchToZh',
-            'fastclick .lang-opt.en': 'switchToEn',
-            'fastclick .btn-share-weixin': 'onClickWeixinBtn',
-            'fastclick .btn-share-weibo': 'onClickWeiboBtn'
+            'click .header-btn-left': 'onClickLeftBtn',
+            'click .lang-opt.zh': 'switchToZh',
+            'click .lang-opt.en': 'switchToEn',
+            'click .btn-share-weixin': 'onClickWeixinBtn',
+            'click .btn-share-weibo': 'onClickWeiboBtn'
         },
         initPage: function() { },
         askToRestartApp: function() {

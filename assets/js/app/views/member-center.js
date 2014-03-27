@@ -1,6 +1,6 @@
 $(function() {
     var MemberProfileBox = MeiweiApp.View.extend({
-    	events: { 'fastclick .avatar': 'changeAvatar' },
+    	events: { 'click .avatar': 'changeAvatar' },
     	initView: function() {
             this.listenTo(MeiweiApp.me.profile, 'change', this.updateProfile);
             this.renderAvatar();
@@ -57,11 +57,11 @@ $(function() {
     
     MeiweiApp.Pages.MemberCenter = new (MeiweiApp.PageView.extend({
     	events: {
-    		'fastclick .header-btn-left': 'onClickLeftBtn',
-    		'fastclick .header-btn-right': 'onClickRightBtn',
-    		'fastclick .edit-profile': 'gotoMyProfile',
-    		'fastclick .member-center-nav > li': 'onClickNav',
-    		'fastclick .logout-button': 'logout'
+    		'click .header-btn-left': 'onClickLeftBtn',
+    		'click .header-btn-right': 'onClickRightBtn',
+    		'click .edit-profile': 'gotoMyProfile',
+    		'click .member-center-nav > li': 'onClickNav',
+    		'click .logout-button': 'logout'
     	},
     	onClickLeftBtn: function() { MeiweiApp.goTo('Home'); },
     	onClickRightBtn: function() { MeiweiApp.goTo('Settings'); },

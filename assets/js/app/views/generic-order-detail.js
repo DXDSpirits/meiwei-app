@@ -11,8 +11,8 @@ $(function() {
             40: TPL['generic-order-detail-vvip']
         },
     	events: {
-    	    'fastclick .btn-cancel': 'cancelOrder',
-    	    'fastclick .btn-payable': 'payOrder'
+    	    'click .btn-cancel': 'cancelOrder',
+    	    'click .btn-payable': 'payOrder'
     	},
     	cancelOrder: function() {
     		var model = this.model;

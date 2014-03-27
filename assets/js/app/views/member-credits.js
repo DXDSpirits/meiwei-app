@@ -8,8 +8,8 @@ $(function() {
     
     MeiweiApp.Pages.MemberCredits = new (MeiweiApp.PageView.extend({
         events: {
-            'fastclick .header-btn-left': 'onClickLeftBtn',
-            'fastclick .redeem-btn': 'goToProductRedeem'
+            'click .header-btn-left': 'onClickLeftBtn',
+            'click .redeem-btn': 'goToProductRedeem'
         },
         onClickLeftBtn: function() { MeiweiApp.goTo('MemberCenter'); },
     	goToProductRedeem: function() { MeiweiApp.goTo('ProductRedeem'); },

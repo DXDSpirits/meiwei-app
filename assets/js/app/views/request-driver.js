@@ -3,8 +3,8 @@ $(function() {
         className: 'dialog',
         template: TPL['orderdriver-confirm-dialog'],
         events: {
-            'fastclick .btn-cancel': 'cancel',
-            'fastclick .btn-confirm': 'confirm'
+            'click .btn-cancel': 'cancel',
+            'click .btn-confirm': 'confirm'
         },
         closeDialog: function() {
             this.remove();
@@ -32,10 +32,10 @@ $(function() {
     
     MeiweiApp.Pages.RequestDriver = new (MeiweiApp.PageView.extend({
         events: {
-            'fastclick .header-btn-left': 'onClickLeftBtn',
-            'fastclick .order-submit-button': 'submitOrder',
-            'fastclick .asap': 'switchTime',
-            'fastclick .contact-menu': 'selectContact'
+            'click .header-btn-left': 'onClickLeftBtn',
+            'click .order-submit-button': 'submitOrder',
+            'click .asap': 'switchTime',
+            'click .contact-menu': 'selectContact'
         },
         initPage: function() {
             _.bindAll(this, 'initializeMap', 'updateAddress', 'fillContact');

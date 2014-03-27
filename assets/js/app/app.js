@@ -47,6 +47,7 @@ MeiweiApp.initDevice = function() {
     } else {
         window.device = { platform: 'WebApp' };
     }
+    FastClick.attach(document.body);
 };
 
 MeiweiApp.fixViewport = function() {

@@ -2,9 +2,9 @@ $(function() {
     MeiweiApp.Views.OrderPages = MeiweiApp.CollectionView.extend({
         ModelView: MeiweiApp.ModelView.extend({
             events: {
-                'fastclick': 'goToOrderDetail',
-                'fastclick .btn-share-weixin': 'onClickWeixinBtn',
-                'fastclick .btn-share-weibo': 'onClickWeiboBtn'
+                'click': 'goToOrderDetail',
+                'click .btn-share-weixin': 'onClickWeixinBtn',
+                'click .btn-share-weibo': 'onClickWeiboBtn'
             },
             template: TPL['order-attending'],
             className: 'order-page-item carousel-item',
@@ -55,8 +55,8 @@ $(function() {
     
     MeiweiApp.Pages.Attending = new (MeiweiApp.PageView.extend({
         events: {
-            'fastclick .header-btn-left': 'onClickLeftBtn',
-            'fastclick .hint-text button': 'goAndBook',
+            'click .header-btn-left': 'onClickLeftBtn',
+            'click .hint-text button': 'goAndBook',
         },
         onClickLeftBtn: function() { MeiweiApp.goTo('Home'); },
         initPage: function() {

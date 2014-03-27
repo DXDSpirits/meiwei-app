@@ -3,7 +3,7 @@ $(function() {
     	ModelView: MeiweiApp.ModelView.extend({
     		className: 'floorplan-nav-item',
     		template: Mustache.compile("{{caption}}"),
-    		events: { 'fastclick': 'triggerSelect' },
+    		events: { 'click': 'triggerSelect' },
     		initModelView: function() {
     			this.listenTo(this.model, 'select', this.onSelect);
     		},

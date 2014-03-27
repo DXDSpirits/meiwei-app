@@ -31,7 +31,7 @@ $(function() {
     	tagName: "section",
     	className: "product-list-item",
     	template: TPL['product-list-item'],
-    	events: { 'fastclick': 'onSelectItem' },
+    	events: { 'click': 'onSelectItem' },
     	render: function() {
     		var attrs = this.model ? this.model.toJSON() : {};
             this.renderTemplate(attrs);
@@ -49,8 +49,8 @@ $(function() {
     
     MeiweiApp.Pages.ProductList = new (MeiweiApp.PageView.extend({
         events: {
-            'fastclick .header-btn-left': 'onClickLeftBtn',
-            'fastclick .header-title': 'toggleFilter'
+            'click .header-btn-left': 'onClickLeftBtn',
+            'click .header-title': 'toggleFilter'
         },
     	initPage: function() {
     	    _.bindAll(this, 'renderAll');

@@ -8,7 +8,7 @@ $(function() {
     
     MeiweiApp.Pages.RestaurantPictures = new (MeiweiApp.PageView.extend({
         events: {
-            'fastclick .header-btn-left': 'onClickLeftBtn',
+            'click .header-btn-left': 'onClickLeftBtn',
             'touchend .carousel': 'updateTitle'
         },
         initPage: function() {

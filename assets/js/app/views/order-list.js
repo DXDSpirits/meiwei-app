@@ -3,7 +3,7 @@ $(function() {
     	ModelView: MeiweiApp.ModelView.extend({
     		template: TPL['order-list-item'],
     		className: 'order-list-item',
-    		events: { 'fastclick': 'viewOrder' },
+    		events: { 'click': 'viewOrder' },
     		viewOrder: function() {
     			MeiweiApp.goTo('OrderDetail', {
     				order: this.model.toJSON()
@@ -23,9 +23,9 @@ $(function() {
     
     MeiweiApp.Pages.OrderList = new (MeiweiApp.PageView.extend({
     	events: {
-    		'fastclick .header-btn-left': 'onClickLeftBtn',
-    		'fastclick .filter-pending': 'getPendingOrders',
-    		'fastclick .filter-fulfilled': 'getFulfilledOrders'
+    		'click .header-btn-left': 'onClickLeftBtn',
+    		'click .filter-pending': 'getPendingOrders',
+    		'click .filter-fulfilled': 'getFulfilledOrders'
     	},
     	onClickLeftBtn: function() { MeiweiApp.goTo('MemberCenter'); },
     	initPage: function() {

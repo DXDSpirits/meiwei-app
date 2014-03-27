@@ -14,10 +14,10 @@ $(function() {
     
     MeiweiApp.Pages.MemberContacts = new(MeiweiApp.PageView.extend({
     	events: {
-    		'fastclick .header-btn-left': 'onClickLeftBtn',
-    		'fastclick .header-btn-right': 'onClickRightBtn',
-    		'fastclick .filter-online': 'getOnlineContacts',
-    		'fastclick .filter-local': 'getLocalContacts',
+    		'click .header-btn-left': 'onClickLeftBtn',
+    		'click .header-btn-right': 'onClickRightBtn',
+    		'click .filter-online': 'getOnlineContacts',
+    		'click .filter-local': 'getLocalContacts',
     		'click .contact-item': 'selectContact',
     		'submit .search-form': 'searchContacts',
     		//'touchstart .alphabet': 'alphabetOnTouchStart',

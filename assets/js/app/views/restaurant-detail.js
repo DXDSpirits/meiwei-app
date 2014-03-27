@@ -1,6 +1,6 @@
 $(function() {
     var ProfileBox = MeiweiApp.View.extend({
-    	events: { 'fastclick .order-button': 'goToOrder' },
+    	events: { 'click .order-button': 'goToOrder' },
     	initView: function() {
     		this.listenTo(this.model, 'change', this.render);
     	},
@@ -35,9 +35,9 @@ $(function() {
     
     MeiweiApp.Pages.RestaurantDetail = new (MeiweiApp.PageView.extend({
         events: {
-            'fastclick .header-btn-left': 'onClickLeftBtn',
-            'fastclick .header-btn-right': 'onClickRightBtn',
-            'fastclick .restaurant-pictures': 'viewPictures'
+            'click .header-btn-left': 'onClickLeftBtn',
+            'click .header-btn-right': 'onClickRightBtn',
+            'click .restaurant-pictures': 'viewPictures'
         },
     	initPage: function() {
     		this.restaurant = new MeiweiApp.Models.Restaurant();

@@ -1,7 +1,7 @@
 $(function() {
     var MarkerItemInfo = MeiweiApp.ModelView.extend({
         template: TPL['restaurant-list-item'],
-        events: { 'fastclick': 'viewRestaurant' },
+        events: { 'click': 'viewRestaurant' },
         viewRestaurant: function() {
             MeiweiApp.goTo('RestaurantDetail', { restaurant: this.model.toJSON() });
         },
@@ -21,7 +21,7 @@ $(function() {
     });
     
     var Map = MeiweiApp.View.extend({
-        events: { 'fastclick .locate-btn': 'locate' },
+        events: { 'click .locate-btn': 'locate' },
         initView: function() {
             _.bindAll(this, 'initializeMap');
             this.restaurants = this.collection;
@@ -109,7 +109,7 @@ $(function() {
             tagName: 'section',
             className: 'restaurant-list-item',
             template: TPL['restaurant-list-item'],
-            events: { 'fastclick': 'viewRestaurant' },
+            events: { 'click': 'viewRestaurant' },
             viewRestaurant: function() {
                 MeiweiApp.goTo('RestaurantDetail', { restaurant: this.model.toJSON() });
             },
@@ -166,9 +166,9 @@ $(function() {
     
     MeiweiApp.Pages.RestaurantSearch = new (MeiweiApp.PageView.extend({
         events: {
-            'fastclick .header-btn-left': 'onClickLeftBtn',
-            'fastclick .header-btn-right': 'onClickRightBtn',
-            'fastclick .filter p': 'toggleFilters',
+            'click .header-btn-left': 'onClickLeftBtn',
+            'click .header-btn-right': 'onClickRightBtn',
+            'click .filter p': 'toggleFilters',
             'tap .filter li': 'selectFilter',
             'touchmove .wrapper': 'closeFilters',
             'submit .search-form': 'searchKeywords',

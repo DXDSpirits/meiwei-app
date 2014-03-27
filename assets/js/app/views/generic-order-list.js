@@ -7,7 +7,7 @@ $(function() {
     		    40: TPL['generic-order-list-item-vvip']
     		},
     		className: 'order-list-item',
-    		events: { 'fastclick': 'viewOrder' },
+    		events: { 'click': 'viewOrder' },
     		viewOrder: function() {
     			MeiweiApp.goTo('GenericOrderDetail', {
     				order: this.model.toJSON()
@@ -31,9 +31,9 @@ $(function() {
     
     MeiweiApp.Pages.GenericOrderList = new (MeiweiApp.PageView.extend({
     	events: {
-    		'fastclick .header-btn-left': 'onClickLeftBtn',
-    		'fastclick .filter-pending': 'getPendingOrders',
-    		'fastclick .filter-fulfilled': 'getFulfilledOrders'
+    		'click .header-btn-left': 'onClickLeftBtn',
+    		'click .filter-pending': 'getPendingOrders',
+    		'click .filter-fulfilled': 'getFulfilledOrders'
     	},
     	onClickLeftBtn: function() { MeiweiApp.goTo('MemberCenter'); },
     	initPage: function() {

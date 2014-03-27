@@ -4,7 +4,7 @@ $(function() {
     });
     
     var OrderContactForm = MeiweiApp.View.extend({
-        events: { 'fastclick > header': 'selectContact' },
+        events: { 'click > header': 'selectContact' },
         initView: function(options) {
             _.bindAll(this, 'fillContact');
             this.$('.switch-gender').switchControl();
@@ -21,9 +21,9 @@ $(function() {
     
     MeiweiApp.Pages.ProductOrder = new (MeiweiApp.PageView.extend({
         events: {
-            'fastclick .header-btn-left': 'onClickLeftBtn',
-            'fastclick .header-btn-right': 'onClickRightBtn',
-            'fastclick .order-submit-button': 'askToSubmitOrder'
+            'click .header-btn-left': 'onClickLeftBtn',
+            'click .header-btn-right': 'onClickRightBtn',
+            'click .order-submit-button': 'askToSubmitOrder'
         },
         initPage: function() {
             _.bindAll(this, 'renderOrderForm', 'submitOrder');

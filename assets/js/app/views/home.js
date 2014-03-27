@@ -31,7 +31,7 @@ $(function() {
     var MasterHeros = MeiweiApp.CollectionView.extend({
         ModelView: MeiweiApp.ModelView.extend({
             template: TPL['hero-carousel-item'],
-            events: { 'fastclick': 'viewProducts' },
+            events: { 'click': 'viewProducts' },
             className: 'carousel-item',
             viewProducts: function(e) {
                 var el = e.currentTarget;
@@ -74,8 +74,8 @@ $(function() {
     	className: 'recommend-list-item img',
     	template: TPL['recommend-list-item'],
     	events: {
-    		'fastclick': 'viewRestaurant',
-    		'fastclick .order-button': 'gotoOrder'
+    		'click': 'viewRestaurant',
+    		'click .order-button': 'gotoOrder'
     	},
     	viewRestaurant: function(e) {
     		MeiweiApp.goTo('RestaurantDetail', { restaurant: this.model.get('restaurant') });
@@ -101,11 +101,11 @@ $(function() {
     
     MeiweiApp.Pages.Home = new (MeiweiApp.PageView.extend({
     	events: {
-    		'fastclick .header-btn-left': 'onClickLeftBtn',
-    		'fastclick .header-btn-right': 'onClickRightBtn',
-    		'fastclick .show-more': 'goToSearch',
+    		'click .header-btn-left': 'onClickLeftBtn',
+    		'click .header-btn-right': 'onClickRightBtn',
+    		'click .show-more': 'goToSearch',
     		'submit .search-form form': 'searchKeywords',
-    		'fastclick .header-title': 'toggleFilter',
+    		'click .header-title': 'toggleFilter',
     		'touchend .wrapper': 'hero'
     	},
     	initPage: function() {
