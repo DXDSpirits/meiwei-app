@@ -14,6 +14,7 @@ module.exports = function(grunt) {
                     'assets/js/app/models/*.js',
                     'assets/js/app/view.js',
                     'assets/js/app/router.js',
+                    'assets/js/app/event.js',
                     'assets/js/app/_close.js',
                     'assets/js/app/views/*.js',
                 ],
