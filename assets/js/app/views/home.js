@@ -93,6 +93,7 @@ $(function() {
     		'click .header-btn-left': 'onClickLeftBtn',
     		'click .header-btn-right': 'onClickRightBtn',
     		'click .show-more': 'goToSearch',
+    		'click .btn-explore': 'goToSearch',
     		'submit .search-form form': 'searchKeywords',
     		'click .header-title': 'toggleFilter',
     		'touchend .wrapper': 'hero'

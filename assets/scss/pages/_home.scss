@@ -24,8 +24,18 @@
 	    height: 52px;
 	    padding: 13px 5px 5px;
 	    position: relative;
+	    @include clearfix();
+	    > button {
+	        float: right;
+	        @include size(100%, 25%);
+	        font-size: $fontSizeSmall;
+	        min-height: inherit;
+	        padding: 0;
+	    }
 	    > form {
-            @include square(100%);
+	        float: left;
+            @include size(100%, 75%);
+            padding-right: 5px;
         }
         > form > input[type=search] {
             @include border-radius(10px);
