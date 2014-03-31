@@ -54,11 +54,14 @@ $(function() {
     			orderDetail: new OrderDetail({ model: this.order, el: this.$('.wrapper') })
     		};
     	},
+    	onResume: function() {
+    	    this.order.fetch();
+    	},
         reset: function() {
             this.$('.wrapper').css('background-image', 'none');
         },
         renderAll: function() {
-            var detail = this.order.get('detail')
+            var detail = this.order.get('detail');
             if (detail && detail.picture) {
                 MeiweiApp.loadBgImage(this.$('.wrapper'), detail.picture, { height: 250 });
             } else {

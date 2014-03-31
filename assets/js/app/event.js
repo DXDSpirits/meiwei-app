@@ -1,7 +1,7 @@
 document.addEventListener("deviceready", function(e) {
     document.addEventListener("resume", function(e) {
         if (MeiweiApp.history.active) {
-            MeiweiApp.history.active.refresh();
+            MeiweiApp.history.active.onResume();
         }
     }, false);
     document.addEventListener("backbutton", function(e) {

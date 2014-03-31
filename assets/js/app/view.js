@@ -86,7 +86,10 @@ MeiweiApp.PageView = MeiweiApp.View.extend({
     },
     disablePage: function() {
         this.undelegateEvents();
-        this.go = this.refresh = this.showPage = function() {};
+        this.go = function() {};
+        this.refresh = function() {};
+        this.showPage = function() {};
+        this.onResume = function() {};
     },
     initView: function() {
         if (!this.el) {
@@ -94,7 +97,7 @@ MeiweiApp.PageView = MeiweiApp.View.extend({
             return;
         }
         this.views = {};
-        _.bindAll(this, 'showPage', 'go', 'refresh', 'render', 'reset', 
+        _.bindAll(this, 'showPage', 'go', 'refresh', 'onResume', 'render', 'reset', 
                         'onClickLeftBtn', 'onClickRightBtn');
         var $el = this.$el;
         this.$('.wrapper').on('webkitAnimationEnd', function(e) {
@@ -126,7 +129,7 @@ MeiweiApp.PageView = MeiweiApp.View.extend({
         page.$('.wrapper').scroll(function() {
             if (page.$el.hasClass('view-hidden')) return;
             if (page.$('.page-nav').offset().top < viewportHeight) {
-                page.fetchMore();
+                setTimeout(function() { page.fetchMore(); }, 1000);
             }
         });
         page.listenTo(collection, 'reset', page.resetNavigator);
@@ -152,6 +155,9 @@ MeiweiApp.PageView = MeiweiApp.View.extend({
         timeout = setTimeout(pageOpen, 1000);
         this.$el.one('pageOpen', pageOpen);
         this.showPage();
+    },
+    onResume: function() {
+        this.refresh();
     },
     reset: function() {},
     showPage: function() {
