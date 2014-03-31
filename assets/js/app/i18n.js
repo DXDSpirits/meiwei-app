@@ -426,6 +426,14 @@ MeiweiApp.i18n = {
     "We couldn't find what you're looking for. Please try a different search.": {
         zh: "美位无法找到您搜索的餐厅，请尝试其他搜索。",
         en: "We couldn't find what you're looking for.<br>Please try a different search."
+    },
+    'Payment': {
+        zh: '支付',
+        en: 'Payment'
+    },
+    'We are working hard on the Wechat Payment.': {
+        zh: '美位正在努力开通微信支付，暂时您可以下载手机应用支付订单。',
+        en: 'We are working hard on the Wechat Payment.'
     }
 };
 
@@ -436,7 +444,7 @@ MeiweiApp.CheckI18n = function() {
         if (msg && !MeiweiApp.i18n[msg]) newMsg.push(msg);
         msg = $(el).attr('data-placeholder-i18n');
         if (msg && !MeiweiApp.i18n[msg]) newMsg.push(msg);
-    }
+    };
     $('[data-i18n], [data-placeholder-i18n]').each(function() {
         checkExist(this);
     });

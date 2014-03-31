@@ -12,7 +12,7 @@ window.MeiweiApp = new (Backbone.View.extend({
     
     configs: {
         APIHost: "http://api.clubmeiwei.com",
-        ajaxTimeout: 10000
+        ajaxTimeout: 120000
     },
     
     start: function() {
@@ -40,13 +40,17 @@ MeiweiApp.showSplash = function() {
 
 MeiweiApp.initDevice = function() {
     if (window.device) {
-        // Just Fine
+        MeiweiApp.isCordova = true;
     } else if(/MicroMessenger/i.test(navigator.userAgent)) {
+        MeiweiApp.isWeixin = true;
         window.device = { platform: 'Weixin' };
         $('title').append(' ' + $('meta[name=description]').attr('content'));
     } else {
         window.device = { platform: 'WebApp' };
     }
+    /*
+     * Emulate click events on body. Remove 300ms delay.
+     */
     FastClick.attach(document.body);
 };
 
@@ -75,7 +79,7 @@ MeiweiApp.initVersion = function() {
         localStorage.setItem('version-code', MeiweiApp.Version);
         if (authToken) localStorage.setItem('auth-token', authToken);
     }
-    if (!MeiweiApp.isCordova()) return;
+    if (!MeiweiApp.isCordova) return;
     var app = new MeiweiApp.Models.App();
     app.fetch({
         global: false,
