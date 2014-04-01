@@ -249,7 +249,8 @@
         height: 40px;
         text-align: center;
         font-size: $fontSizeSmall;
-        position: relative;
+        //position: relative;
+        position: static;
         > h1 {
             font-size: $baseFontSize;
             line-height: 40px;
