@@ -143,7 +143,7 @@ form label {
 .switch.off {
     > .switch-inner {
         > .switch-button {
-            @include translate3d(0, 0, 0);
+            margin-left:0px;
         }
         > .label-text {
             text-align: right;
@@ -154,7 +154,7 @@ form label {
 	> .switch-inner {
 		background-color: $brownLight;
 		> .switch-button {
-            @include translate3d(40px, 0, 0);
+            margin-left:40px;
         }
         > .label-text {
             text-align: left;
