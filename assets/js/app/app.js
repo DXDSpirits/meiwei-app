@@ -87,9 +87,9 @@ MeiweiApp.initVersion = function() {
             var version = parseFloat(model.get('version'));
             var onConfirm = function() {
                 if (device.platform == 'iOS') {
-                    var ref = window.open('https://itunes.apple.com/app/id689668571' ,'_blank', 'location=no');
+                    var ref = MeiweiApp.openWindow('https://itunes.apple.com/app/id689668571');
                 } else {
-                    var ref = window.open('http://web.clubmeiwei.com/ad/apppromo' ,'_blank', 'location=no');
+                    var ref = MeiweiApp.openWindow('http://web.clubmeiwei.com/ad/apppromo');
                 }
             };
             if (version && version > MeiweiApp.Version) {

@@ -66,10 +66,14 @@ MeiweiApp.payByAlipay = function(orderString) {
             MeiweiApp._('Payment'),
             MeiweiApp._('We are working hard on the Wechat Payment.'),
             function() {
-                window.open('http://www.clubmeiwei.com/ad/apppromo', '_blank', 'location=no');
+                MeiweiApp.openWindow('http://www.clubmeiwei.com/ad/apppromo');
             }
         );
     }
+};
+
+MeiweiApp.openWindow = function(link) {
+    window.open(link, '_blank', 'location=no');
 };
 
 MeiweiApp.loadImage = function(img, src, options) {
