@@ -29,6 +29,7 @@ fieldset {
 	.inline-group {
 		overflow: hidden;
 		border: 1px solid $brownLighter;
+		padding: 0 7px;
 		@include block-field-set();
 		@include flex-box($orient: horizontal);
 	}
@@ -58,6 +59,7 @@ input[type="color"],
 	@include clear-outline();
 	@include border-radius(0);
 	border: 1px solid $brownLighter;
+	&.error { background-color: #FFDDDA; }
 	
 	display: block;
 	color: $brown;

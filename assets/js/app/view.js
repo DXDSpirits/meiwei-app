@@ -11,6 +11,30 @@ MeiweiApp.View = Backbone.View.extend({
             $el.text(text || 'Error');
         }
     },
+    displayErrorBetter: function($form, error) {
+        try {
+            error = JSON.parse(error);
+            for (var name in error) {
+                var $input = $form.find('[name=' + name + ']');
+                if (!_.isEmpty($input)) {
+                    $input.addClass('error');
+                    $input.one('focus change', function() {
+                        $(this).removeClass('error');
+                    });
+                }
+            }
+            if (error['non_field_errors']) {
+                $form.find('.info-text').text(error['non_field_errors']);
+            }
+            $form.one('submit', function() {
+                $form.find('[name].error').removeClass('error');
+                $form.find('.info-text').empty();
+            });
+        } catch (e) {
+            $form.find('.info-text').text(error || 'Error');
+        }
+    },
+    
     template: Mustache.compile(""),
     renderTemplate: function(attrs) {
         this.$el.html(this.template(attrs || {}));
