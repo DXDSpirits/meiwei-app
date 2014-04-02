@@ -1,6 +1,6 @@
 
 .header-navbar {
-	@include flex-box($orient: horizontal);
+	//@include flex-box($orient: horizontal);
 	@include size($navbarHeight, 100%);
 	//padding: 0 $navbarPadding;
 	//position: fixed;
@@ -27,18 +27,20 @@
 
 .header-navbar {
     > h1 {
-        padding: 0 5px;
+        //padding: 0 5px;
         margin: 0;
         text-align: center;
+        width:100%;
+        padding:0 46px;
         font-size: $fontSizeLarge;
         line-height: $navbarHeight;
         @include text-overflow();
-        @include flexible($orient: horizontal);
+        //@include flexible($orient: horizontal);
     }
     > form {
-    	@include flexible($orient: horizontal);
+    	//@include flexible($orient: horizontal);
     	height: 44px;
-    	padding: 5px 0;
+    	padding: 5px 46px;
     	> input[type=search] {
             @include border-radius(500px);
             width: 100%;
@@ -53,14 +55,18 @@
 }
 
 .header-btn {
-	height: 60px;
-	padding-bottom: 60px - $navbarHeight;
-    width: -webkit-max-content;
-    min-width: 53px;
-	@include flex-box($orient: horizontal);
+	width: 26px;
+	height:26px;
+	top:50%;
+	margin-top:-13px;
+	position:absolute;
+	//padding-bottom: 60px - $navbarHeight;
+    //width: -webkit-max-content;
+    //min-width: 53px;
+	//@include flex-box($orient: horizontal);
 	p {
 	    text-align: center;
-	    @include flexible($orient: horizontal);
+	    //@include flexible($orient: horizontal);
 	    @include text-overflow();
 	    width: auto;
 	    width: -webkit-max-content;
@@ -70,23 +76,33 @@
 	    color: $brownLight;
 	}
 }
+.header-btn.header-btn-right{
+	right:0;
+	margin-right:10px;
+}
+.header-btn.header-btn-left{
+	left:0;
+	margin-left:10px;
+}
 
 .filter-bar {
     position: absolute;
     z-index: -2;
     left: 0;
     top: $navbarHeight;
-	@include flex-box($orient: horizontal);
+	//@include flex-box($orient: horizontal);
 	@include size($filterBarHeight, 100%);
 	background-color: $brown;
 	> .filter {
-		@include flexible($orient: horizontal);
+		//@include flexible($orient: horizontal);
 		height: $filterBarHeight;
 		line-height: $filterBarHeight;
 		text-align: center;
 		font-size: $fontSizeSmall;
 		background-color: $brown;
 		color: $white;
+		float:left;
+		width:33.333%;
 		&:active, &.active, &.selected { background-color: $brownDark; }
 	}
 	.spliter {
