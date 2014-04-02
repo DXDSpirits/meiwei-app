@@ -1,0 +1,138 @@
+<div class="view view-hidden" id="view-vvip">
+	<header class="header-navbar">
+		<div class="header-btn header-btn-left">
+			<i class="icon icon-back"></i>
+		</div>
+		<h1>VVIP服务</h1>
+		<div class="header-btn header-btn-right">
+			<i class="icon icon-blank"></i>
+		</div>
+	</header>
+	<section class="wrapper">
+        <form>
+            <p class="info-text"></p>
+            <fieldset>
+                <header class="control-group text-center">贵宾信息</header>
+                <div class="inline-group">
+                    <i class="icon icon-member-small"></i>
+                    <input type="text" name="guest_name" placeholder="姓名"/>
+                    <div class="control-group switch switch-gender">
+                        <div class="switch-inner">
+                            <input type="hidden" name="guest_gender" value="0"/>
+                            <label class="label-text"></label>
+                            <label class="label-off" data-i18n="Mr.">先生</label>
+                            <label class="label-on" data-i18n="Ms.">女士</label>
+                            <div class="switch-button"></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="inline-group">
+                    <i class="icon icon-member-small"></i>
+                    <input type="tel" name="guest_id_no" placeholder="身份证号码" />
+                </div>
+            </fieldset>
+            <fieldset class="guest-list"></fieldset>
+            <button class="btn btn-inverse btn-block-level add-client-button">添加贵宾</button>
+            <fieldset>
+                <header class="control-group text-center contact-menu">联系人信息</header>
+                <div class="inline-group">
+                    <i class="icon icon-member-small"></i>
+                    <input type="text" name="name" placeholder="联系人"/>
+                    <div class="control-group switch switch-gender">
+                        <div class="switch-inner">
+                            <input type="hidden" name="gender" value="0"/>
+                            <label class="label-text"></label>
+                            <label class="label-off" data-i18n="Mr.">先生</label>
+                            <label class="label-on" data-i18n="Ms.">女士</label>
+                            <div class="switch-button"></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="inline-group">
+                    <i class="icon icon-phone"></i>
+                    <input type="tel" name="mobile" placeholder="手机" />
+                </div>
+            </fieldset>
+            <fieldset class="service-detail departure">
+                <header class="control-group text-center clearfix">
+                    <span data-type="departure" class="service-type pull-left selected">出港服务</span>
+                    <span data-type="arrival" class="service-type pull-left">入港服务</span>
+                    <input type="hidden" name="service_type" value="departure">
+                </header>
+                <div class="inline-group">
+                    <label class="label-departure">起飞机场</label>
+                    <label class="label-arrival">降落机场</label>
+                    <select name="airport">
+                        <option value="">请选择机场</option>
+                        <option value="PVG">上海浦东国际机场￥1500/人</option>
+                        <option value="SHA">上海虹桥国际机场￥1500/人</option>
+                        <option value="PEK">北京首都国际机场￥1500/人</option>
+                        <option value="CAN">广州白云国际机场￥1500/人</option>
+                        <option value="CTU">成都双流国际机场￥800/人</option>
+                        <option value="HGH">杭州萧山国际机场￥800/人</option>
+                        <option value="CSX">长沙黄花国际机场￥800/人</option>
+                        <option value="NGB">宁波栎社国际机场￥800/人</option>
+                        <option value="KHN">南昌昌北国际机场￥800/人</option>
+                        <option value="KMG">昆明长水国际机场￥800/人</option>
+                        <option value="NKG">南京禄口国际机场￥800/人</option>
+                        <option value="SYX">三亚凤凰国际机场￥800/人</option>
+                        <option value="SZX">深圳宝安国际机场￥800/人</option>
+                        <option value="XIY">西安咸阳国际机场￥800/人</option>
+                        <option value="SHE">沈阳桃仙国际机场￥800/人</option>
+                        <option value="TAO">青岛流亭国际机场￥800/人</option>
+                        <option value="WUX">无锡苏南国际机场￥800/人</option>
+                        <option value="HAK">海口美兰国际机场￥800/人</option>
+                        <option value="NNG">南宁吴圩国际机场￥800/人</option>
+                        <option value="TSN">天津滨海国际机场￥800/人</option>
+                        <option value="XMN">厦门高崎国际机场￥800/人</option>
+                        <option value="CKG">重庆江北国际机场￥800/人</option>
+                        <option value="FOC">福州长乐国际机场￥800/人</option>
+                        <option value="WUH">武汉天河国际机场￥800/人</option>
+                        <option value="DYG">张家界荷花机场￥800/人</option>
+                        <option value="YNT">烟台莱山机场￥800/人</option>
+                        <option value="URC">乌鲁木齐地窝堡国际机场￥800/人</option>
+                        <option value="KWE">贵阳龙洞堡国际机场￥800/人</option>
+                        <option value="WNZ">温州龙湾国际机场￥800/人</option>
+                        <option value="LJG">丽江机场￥800/人</option>
+                        <option value="KWL">桂林两江机场￥800/人</option>
+                        <option value="JHG">西双版纳机场￥800/人</option>
+                        <option value="TYN">太原武宿机场￥800/人</option>
+                        <option value="HET">呼和浩特白塔国际机场￥800/人</option>
+                        <option value="HRB">哈尔滨太平国际机场￥800/人</option>
+                        <option value="INC">银川河东机场￥800/人</option>
+                        <option value="JJN">泉州晋江机场￥800/人</option>
+                        <option value="DSN">鄂尔多斯机场￥800/人</option>
+                        <option value="CZX">常州奔牛机场￥800/人</option>
+                        <option value="XUZ">徐州观音机场￥800/人</option>
+                        <option value="MIG">绵阳南郊机场￥800/人</option>
+                        <option value="KOW">赣州黄金机场￥800/人</option>
+                        <option value="HKG">香港国际机场￥800/人</option>
+                        <option value="MFM">澳门国际机场￥800/人</option>
+                    </select>
+                </div>
+                <div class="inline-group">
+                    <label class="label-departure">起飞时间</label>
+                    <label class="label-arrival">降落时间</label>
+                    <input type="datetime-local" name="datetime" />
+                </div>
+                <div class="inline-group">
+                    <i class="icon icon-map-marker-small"></i>
+                    <input type="text" name="flight_no" placeholder="航班号" />
+                </div>
+                <div class="inline-group">
+                    <i class="icon icon-car"></i>
+                    <input type="text" name="car_no" placeholder="车牌号，安排机场专用车位" />
+                </div>
+                <div class="inline-group">
+                    <i class="icon icon-group"></i>
+                    <input type="tel" name="accompany" placeholder="陪同人数，500元/人，最多两人" />
+                </div>
+                <div class="inline-group">
+                    <i class="icon icon-pencil"></i>
+                    <input type="text" name="comment" placeholder="其他要求" />
+                </div>
+            </fieldset>
+            <button class="btn btn-inverse btn-block-level order-submit-button" data-i18n="Submit Order">提交订单</button>
+        </form>
+	</section>
+</div>

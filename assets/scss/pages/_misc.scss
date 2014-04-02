@@ -51,3 +51,59 @@
         }
     }
 }
+
+#view-vvip {
+    .wrapper > form {
+        width: 90%;
+        margin: 20px auto;
+        background: $bodyBackground url($gradientShadowPathR) no-repeat top;
+        @include background-size(100% (3*$baseLineHeight));
+    }
+    .section-title {
+        margin: 0 -5.263157894% -10px;
+        height: 40px;
+        text-align: center;
+        font-size: $fontSizeSmall;
+        position: relative;
+        > h1 {
+            font-size: $baseFontSize;
+            line-height: 40px;
+            text-align: center;
+        }
+        &.menu > h1.pressed, &.menu > h1:active {
+            background: $brownLighter;
+        }
+        &.menu > h1::after {
+            content: "";
+            position: absolute;
+            top: (40px - 26px) / 2;
+            right: 15%;
+            @include icon-display();
+            @include icon-offset(3, 4);
+        }
+    }
+    .service-detail.departure {
+        .label-arrival { display: none; }
+        .service-type[data-type=departure] {
+            color: $brown;
+            font-weight: bold;
+        }
+    }
+    .service-detail.arrival {
+        .label-departure { display: none; }
+        .service-type[data-type=arrival] {
+            color: $brown;
+            font-weight: bold;
+        }
+    }
+    .service-type {
+        width: 50%;
+        height: 100%;
+        color: $brownLight;
+        cursor: pointer;
+    }
+    .guest-list .remove {
+        display: inline-block;
+        margin-left: 20px;
+    }
+}

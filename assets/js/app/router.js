@@ -38,6 +38,7 @@ MeiweiApp.Router = new (Backbone.Router.extend({
 		this.route('product/redeem', 'productRedeem');
 		
 		this.route('requestdriver', 'requestDriver');
+		this.route('vvip', 'vvip');
 		
 		this.route('attending', 'attending');
 		this.route('settings', 'settings');
@@ -83,6 +84,7 @@ MeiweiApp.Router = new (Backbone.Router.extend({
     productRedeem: function() { MeiweiApp.Pages.ProductRedeem.go(); MeiweiApp.history.active = MeiweiApp.Pages.ProductRedeem; },
     
     requestDriver: function() { MeiweiApp.Pages.RequestDriver.go(); MeiweiApp.history.active = MeiweiApp.Pages.RequestDriver; },
+    vvip: function() { MeiweiApp.Pages.VVIP.go(); MeiweiApp.history.active = MeiweiApp.Pages.VVIP; },
     
     attending: function() { MeiweiApp.Pages.Attending.go(); MeiweiApp.history.active = MeiweiApp.Pages.Attending; },
     settings: function() { MeiweiApp.Pages.Settings.go(); MeiweiApp.history.active = MeiweiApp.Pages.Settings; }
