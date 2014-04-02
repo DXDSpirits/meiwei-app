@@ -255,6 +255,10 @@
 	.anniversary-detail-form {
 		margin-top: 20px;
 		width: 80%;
+		.grid{
+			width:50%;
+			@include box-sizing(border-box);
+		}
 	}
 	.inspritions {
 	    padding: 20px 0;
@@ -289,6 +293,10 @@
         padding: 0 10px;
         button, .btn {
             font-size: $fontSizeSmall;
+        }
+        .grid{
+        	width:50%;
+			@include box-sizing(border-box);
         }
     }
     .lang-opt {
