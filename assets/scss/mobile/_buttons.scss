@@ -45,10 +45,8 @@ input[type="submit"], button, .btn {
 }
 
 .button-group {
-	//@include flex-box($orient: horizontal);
 	@include clearfix();
 	input[type="submit"], button, .btn {
-		@include flexible($orient: horizontal);
 		width:100%;
 	}
 	.grid{

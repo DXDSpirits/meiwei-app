@@ -37,7 +37,6 @@ body {
     overflow-y: scroll;
     -webkit-overflow-scrolling: touch;
     background-color: $bodyBackground;
-    @include flex-box($orient: vertical, $pack: start);
     @include backface-visibility(hidden);
     @include translate3d(0, 0, 0);
     &.rendering {
