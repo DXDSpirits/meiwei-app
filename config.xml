@@ -12,6 +12,9 @@
         <param name="ios-package" value="Weixin" />
     </feature>
     <feature name="Alipay">
+        <param name="android-package" value="com.meiwei.app.plugin.AlipayPlugin" />
+    </feature>
+    <feature name="Alipay">
         <param name="ios-package" value="Alipay" />
     </feature>
     <preference name="WebViewBounce" value="true" />
