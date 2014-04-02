@@ -26,6 +26,7 @@ MeiweiApp.Router = new (Backbone.Router.extend({
 		this.route('member/credits', 'memberCredits');
 		this.route('member/favorites', 'memberFavorites');
 		this.route('member/anniversaries', 'memberAnniversaries');
+		this.route('member/coupon', 'memberCoupon');
 		
 		this.route('order', 'orderList');
 		this.route(/^order\/(\d+)$/, 'orderDetail');
@@ -71,7 +72,8 @@ MeiweiApp.Router = new (Backbone.Router.extend({
     memberCredits: function() { MeiweiApp.Pages.MemberCredits.go(); MeiweiApp.history.active = MeiweiApp.Pages.MemberCredits; },
     memberFavorites: function() { MeiweiApp.Pages.MemberFavorites.go(); MeiweiApp.history.active = MeiweiApp.Pages.MemberFavorites; },
     memberAnniversaries: function() { MeiweiApp.Pages.MemberAnniversaries.go(); MeiweiApp.history.active = MeiweiApp.Pages.MemberAnniversaries; },
-    
+    memberCoupon:function(){
+    	MeiweiApp.Pages.MemberCoupon.go(); MeiweiApp.history.active = MeiweiApp.Pages.MemberCoupon; },
     orderList: function() { MeiweiApp.Pages.OrderList.go(); MeiweiApp.history.active = MeiweiApp.Pages.OrderList; },
     orderDetail: function(oid) { MeiweiApp.Pages.OrderDetail.go({orderId: oid}); MeiweiApp.history.active = MeiweiApp.Pages.OrderDetail; },
     genericOrderList: function() { MeiweiApp.Pages.GenericOrderList.go(); MeiweiApp.history.active = MeiweiApp.Pages.GenericOrderList; },

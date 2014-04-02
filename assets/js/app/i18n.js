@@ -438,6 +438,10 @@ MeiweiApp.i18n = {
     'Explore': {
         zh: '随便看看',
         en: 'Explore'
+    },
+    'Coupon': {
+        zh: '优惠券',
+        en: 'Coupon'
     }
 };
 

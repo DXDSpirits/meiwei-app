@@ -55,9 +55,19 @@ MeiweiApp.Collections.Favorites = MeiweiApp.Collection.extend({
 	model: MeiweiApp.Models.Favorite
 });
 
+MeiweiApp.Models.Coupon = MeiweiApp.Model.extend({
+	urlRoot: MeiweiApp.configs.APIHost + '/orders/coupon/'
+});
+
+MeiweiApp.Collections.Coupons = MeiweiApp.Collection.extend({
+	url: MeiweiApp.configs.APIHost + '/orders/coupon/',
+	model: MeiweiApp.Models.Coupon
+});
+
 MeiweiApp.me = new (MeiweiApp.Models.Member.extend({
 	initialize: function() {
 		this.favorites = new MeiweiApp.Collections.Favorites();
+		this.coupon = new MeiweiApp.Collections.Coupons();
 		this.contacts = new MeiweiApp.Collections.Contacts();
 		this.profile = new MeiweiApp.Models.Profile(this.get('profile'));
 		this.on('change:profile', function() {
@@ -67,6 +77,7 @@ MeiweiApp.me = new (MeiweiApp.Models.Member.extend({
             this.fetch();
             this.favorites.fetch();
             this.contacts.fetch();
+            this.coupon.fetch();
         });
 	},
 	parse: function(response) {
