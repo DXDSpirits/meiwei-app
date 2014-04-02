@@ -135,7 +135,7 @@ form label {
             @include border-radius(999px);
             background-color: $white;
             box-shadow: 0 0 1px $brownDark;
-            -webkit-transition: -webkit-transform .2s linear;
+            //-webkit-transition: -webkit-transform .2s linear;
         }
 	}
 }
