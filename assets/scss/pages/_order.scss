@@ -52,6 +52,9 @@
             color: #27AE60;
         }
     }
+    .filter{
+        width:50%;
+    }
 }
 
 #view-attending {
@@ -64,6 +67,9 @@
 		@include background-size(100% auto, 100% auto);
 	}
 	@include carousel($carouselWidth: 250px);
+    .carousel{
+        height:100%;
+    }
 	.order-page-item {
 		position: relative;
 	}
@@ -110,4 +116,16 @@
 		width: 80%;
 		.btn { margin: 20px auto; }
 	}
+    .section-qrcode{
+        margin:0 auto;
+    }
+    .grid{
+        width:50%;
+    }
+}
+.view-dialog{
+    .grid{
+        @include box-sizing(border-box);
+        width:50%;
+    }
 }

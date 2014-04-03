@@ -14,7 +14,7 @@
 		@include background-size(contain);
 		@include size($bannerHeight, 100%);
 		position: absolute;
-		z-index: -1;
+		z-index: 0;
 		//margin: 0 (-$navbarPadding);
 	}
 	@include transition(all $pageSwitchDuration ease-in-out);
@@ -31,7 +31,9 @@
         margin: 0;
         text-align: center;
         width:100%;
+        position:absolute;
         padding:0 46px;
+        z-index: 2;
         font-size: $fontSizeLarge;
         line-height: $navbarHeight;
         @include text-overflow();
@@ -40,7 +42,10 @@
     > form {
     	//@include flexible($orient: horizontal);
     	height: 44px;
+        width:100%;
     	padding: 5px 46px;
+        position:absolute;
+        z-index: 2;
     	> input[type=search] {
             @include border-radius(500px);
             width: 100%;
@@ -55,11 +60,12 @@
 }
 
 .header-btn {
-	width: 26px;
-	height:26px;
-	top:50%;
-	margin-top:-13px;
+	width: 44px;
+	height:44px;
+	top:0;
 	position:absolute;
+	z-index:3;
+	text-align:center;
 	//padding-bottom: 60px - $navbarHeight;
     //width: -webkit-max-content;
     //min-width: 53px;
@@ -70,19 +76,21 @@
 	    @include text-overflow();
 	    width: auto;
 	    width: -webkit-max-content;
-        margin: 0 10px;
+        margin: 3px auto;
 	}
 	&.pressed p, p.pressed {
 	    color: $brownLight;
 	}
+	i,p{
+		top:50%;
+		margin-top:10px;
+	}
 }
-.header-btn.header-btn-right{
+.header-btn-right{
 	right:0;
-	margin-right:10px;
 }
-.header-btn.header-btn-left{
+.header-btn-left{
 	left:0;
-	margin-left:10px;
 }
 
 .filter-bar {
@@ -92,6 +100,7 @@
     top: $navbarHeight;
 	//@include flex-box($orient: horizontal);
 	@include size($filterBarHeight, 100%);
+	@include clearfix();
 	background-color: $brown;
 	> .filter {
 		//@include flexible($orient: horizontal);
@@ -108,6 +117,9 @@
 	.spliter {
 		width: 0;
 		height: 30px;
+		position:absolute;
+		right:0;
+		top:0;
 		border-right: 1px solid darken($brown, 5%);
 		border-left: 1px solid lighten($brown, 5%);
 		background-color: $brown;
@@ -128,8 +140,9 @@
         top: $filterBarHeight;
         height: 200px;
         color: $white;
-        max-width: 200%;
-        min-width: 100%;
+        //max-width: 200%;
+        //min-width: 100%;
+        width:100%;
         @include translate3d(0, -150%, 0);
         @include transition(all .35s ease-in-out);
     }

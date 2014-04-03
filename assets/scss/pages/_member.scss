@@ -76,6 +76,9 @@
             background: rgba(106, 115, 125, 0.5);
         }
     }
+    .filter{
+    	width:50%;
+    }
 }
 
 #view-member-profile {
@@ -219,6 +222,12 @@
     .simple-list { margin: 5px 0 50px; }
     .positive { color: #27AE60; }
     .negative { color: #E74C3C; }
+}
+
+#view-order-list{
+	.filter{
+		width:50%;
+	}
 }
 
 #view-member-anniversaries {
