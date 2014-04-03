@@ -236,7 +236,7 @@
 		border-right: none;
 	}
 	select[name='ordertime'] {
-		@include flexible($flex: 3, $orient: horizontal);
+		//@include flexible($flex: 3, $orient: horizontal);
 	}
 	.order-info, .contact-info, .floorplan-select, .product-select {
 		width: 100%;

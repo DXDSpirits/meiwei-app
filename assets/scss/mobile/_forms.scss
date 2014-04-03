@@ -11,7 +11,7 @@
 }
 
 @mixin inline-field-set {
-	width: 1px; // A hack for iOS 5. width=0 seems wrong.
+	//width: 1px; // A hack for iOS 5. width=0 seems wrong.
 	//border-width: 0 1px 0 0;
 	border-width: 0;
 	&:last-child {
@@ -30,7 +30,7 @@ fieldset {
 		overflow: hidden;
 		border: 1px solid $brownLighter;
 		@include block-field-set();
-		@include flex-box($orient: horizontal);
+		//@include flex-box($orient: horizontal);
 	}
 }
 
@@ -74,9 +74,8 @@ input[type="color"],
 	fieldset > & {
 		@include block-field-set();
 	}
-	
 	fieldset .inline-group > & {
-		@include flexible($orient: horizontal);
+		//@include flexible($orient: horizontal);
 		@include inline-field-set();
 	}
 	
@@ -84,7 +83,29 @@ input[type="color"],
 	    color: $brownLighter;
 	}
 }
-
+.inline-group{
+	position:relative;
+	i,label,input,select,.control-group{
+		display:inline-block;
+		vertical-align:middle;
+	}
+	input[data-placeholder-i18n=Contact]{
+		width:100px;
+	}
+	input[type=datetime-local]{
+		width:180px!important;
+		display:inline-block!important;
+	}
+	input[name=personnum]{
+		width:50px;
+	}
+}
+/*.inline-group .icon{
+	position:absolute!important;
+	top:50%;
+	margin-top:-13px;
+	left:0;
+}*/
 // Textarea
 textarea {
 	height: auto;
