@@ -105,6 +105,7 @@ MeiweiApp.loadBgImage = function(el, src, options) {
     image.onload = function() {
         setTimeout(function(){
             el.css('background-size', '');
+            el.css('background-position', '');
             el.css('background-image', 'url(' + image_src + ')');
         },100);
     };
