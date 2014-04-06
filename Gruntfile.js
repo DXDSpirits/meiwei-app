@@ -43,6 +43,7 @@ module.exports = function(grunt) {
                     'assets/js/plugin/mobiscroll.core.js',
                     'assets/js/plugin/mobiscroll.datetime.js',
                     'assets/js/plugin/mobiscroll.scroller.js',
+                    'assets/js/plugin/mobiscroll.i18n.zh.js',
                     'assets/js/plugin/mobiscroll.scroller.android-ics.js'
                 ],
                 dest: '<%= cfg.path.dest %>/assets/js/plugins.js'

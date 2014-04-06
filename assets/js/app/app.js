@@ -17,7 +17,6 @@ window.MeiweiApp = new (Backbone.View.extend({
     
     start: function() {
         MeiweiApp.initDevice();
-        MeiweiApp.initTime();
         MeiweiApp.initVersion();
         MeiweiApp.showSplash();
         MeiweiApp.initAjaxEvents();
@@ -26,6 +25,7 @@ window.MeiweiApp = new (Backbone.View.extend({
         MeiweiApp.initSync();
         MeiweiApp.initGa();
         Backbone.history.start();
+        MeiweiApp.initTime();
         MeiweiApp.fixViewport();
     }
 }))({el: document.body});
@@ -61,10 +61,11 @@ MeiweiApp.initTime = function(){
                 preset: 'time'
             }
         }
+        var lang = MeiweiApp.getLang()=='en'?'':'zh';
         var opt = {
             'theme': 'android-ics light',
             'mode': 'scroller', //clickpick mixed
-            'lang': '', //default zh
+            'lang': lang, //default zh
             'display': 'bottom', //modal inline bubble top
             'animate': ''//none
         }
