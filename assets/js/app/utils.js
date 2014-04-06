@@ -92,6 +92,8 @@ MeiweiApp.loadImage = function(img, src, options) {
 };
 
 MeiweiApp.loadBgImage = function(el, src, options) {
+    el.css('background', '#000 url(assets/img/image-loader.gif) no-repeat center');
+    el.css('background-size', 'auto');
 	options = options || {};
 	if (MeiweiApp.isCordova && options.src_local) el.css('background-image', 'url(' + options.src_local + ')');
 	var ratio = window.devicePixelRatio || 2;
@@ -101,7 +103,10 @@ MeiweiApp.loadBgImage = function(el, src, options) {
     var image_src = src + '?imageMogr/v2/thumbnail/' + size;
     var image = new Image();
     image.onload = function() {
-        el.css('background-image', 'url(' + image_src + ')');
+        setTimeout(function(){
+            el.css('background-size', '');
+            el.css('background-image', 'url(' + image_src + ')');
+        },100);
     };
     image.src = image_src;
 };
