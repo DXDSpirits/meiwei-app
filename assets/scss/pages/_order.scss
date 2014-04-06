@@ -18,6 +18,7 @@
 		background: url($gradientShadowPathR) repeat-x top, url($gradientShadowPath) repeat-x bottom;
 		background-color: $bodyBackground;
 		@include background-size(100% 60px, 100% 60px);
+        min-height:100%;
 	}
 	.order-product {
 		width: 100%;
