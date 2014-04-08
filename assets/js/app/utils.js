@@ -92,10 +92,14 @@ MeiweiApp.loadImage = function(img, src, options) {
 };
 
 MeiweiApp.loadBgImage = function(el, src, options) {
-    el.css('background', '#000 url(assets/img/image-loader.gif) no-repeat center');
-    el.css('background-size', 'auto');
 	options = options || {};
-	if (MeiweiApp.isCordova && options.src_local) el.css('background-image', 'url(' + options.src_local + ')');
+	if (MeiweiApp.isCordova && options.src_local){
+        el.css('background-image', 'url(' + options.src_local + ')');
+    } 
+    else{
+        el.css('background', '#000 url(assets/img/image-loader.gif) no-repeat center');
+        el.css('background-size', 'auto');
+    }
 	var ratio = window.devicePixelRatio || 2;
 	var width = options.width || parseInt($('body').innerWidth());
 	var height = options.height;
@@ -106,6 +110,7 @@ MeiweiApp.loadBgImage = function(el, src, options) {
         setTimeout(function(){
             el.css('background-size', '');
             el.css('background-position', '');
+            el.css('background-color', '#fff');
             el.css('background-image', 'url(' + image_src + ')');
         },100);
     };
