@@ -48,7 +48,6 @@ MeiweiApp.initTime = function(){
         var option = {
            'date': {
                 preset: 'date',
-                dateOrder: 'd Dmmyy',
                 invalid: { daysOfWeek: [0, 6], daysOfMonth: ['5/1', '12/24', '12/25'] }
             },
             'datetime': {
