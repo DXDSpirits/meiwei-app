@@ -28,10 +28,6 @@
         {{/payment}}
         {{#comment}}<tr><th data-i18n="Remarks">备注</th><td>{{ comment }}</td></tr>{{/comment}}
     </table>
-</section>
-
-<section class="order-buttons">
-    <!--<button class="btn-inverse btn-block-level btn-cancel" data-i18n="Cancel Order">取消订单</button>-->
     {{#payment.is_payable}}
     <button class="btn-inverse btn-block-level btn-payable" data-i18n="支付">支付</button>
     {{/payment.is_payable}}

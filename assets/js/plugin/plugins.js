@@ -76,6 +76,9 @@
                         } else {
                             if ($element.hasClass('on')) switchOff(); else switchOn();
                         }
+                        setTimeout(function(){
+                            window.scrollTo(0, 0);
+                        },800);
                     };
                     switchGender(0);
                     var btn = new MBP.fastButton($element[0], switchGender);
