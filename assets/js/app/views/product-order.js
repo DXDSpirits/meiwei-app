@@ -80,6 +80,7 @@ $(function() {
             this.$('.wrapper').removeClass('rendering');
         },
         render: function() {
+            this.$('.info-text').html('');
             if (this.options.productItem) {
                 this.productItem.set(this.options.productItem);
                 this.renderOrderForm();

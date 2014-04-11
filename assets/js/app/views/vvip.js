@@ -54,7 +54,10 @@ $(function() {
             'click .add-client-button': 'addClient',
             'click .order-submit-button': 'submitOrder',
             'click .contact-menu': 'selectContact',
-            'click .service-type': 'switchService'
+            'click .service-type': 'switchService',
+            'click .info-desc': 'jumpDescription',
+            'change input[name=datetime]':'checkTime',
+            'blur input[name=accompany]':'checkAccompany'
         },
         initPage: function() {
             _.bindAll(this, 'fillContact');
@@ -63,6 +66,10 @@ $(function() {
                 guestList: new GuestLists({ collection: this.guests, el: this.$('.guest-list') })
             };
             this.$('.switch-gender').switchControl();
+        },
+        jumpDescription: function(){
+        	//link 设计
+        	MeiweiApp.openWindow('http://www.clubmeiwei.com/aboutus/vvip');
         },
         switchService: function(e) {
             var $el = $(e.target);
@@ -98,6 +105,21 @@ $(function() {
             amount = amount * guests + accompany * 500;
             return amount;
         },
+        checkTime: function(){
+        	var time=this.$('input[name=datetime]').val() || null;
+        	if(time==null)return;
+            var delta = Math.round((new Date(time) - new Date()) / 1000);
+            if (delta < 3 * 60 * 60) {
+                alert('离起飞时间小于3小时,将会导致费用加倍');
+            }
+        },
+        checkAccompany: function(){
+        	var accompany=this.$('input[name=accompany]').val() || null;
+        	if(parseInt(accompany)>2){
+        		this.$('input[name=accompany]').val('');
+        		alert('陪同人数最多为2人');
+	        }
+        },
         submitOrder: function(e) {
             if (e.preventDefault) e.preventDefault();
             if (this.guests.length == 0) this.addClient();
@@ -111,6 +133,7 @@ $(function() {
             fields.guests = this.guests.toJSON();
             this.order = new AirportOrderCreation(fields);
             var amount = this.calculateAmount();
+            this.$('.hint').remove();
             var self = this;
             MeiweiApp.showConfirmDialog(
                 '确认订单', 
@@ -140,6 +163,7 @@ $(function() {
             this.$('.info-text').empty();
             this.$('[name].error').empty();
             this.$('input[name=datetime]').val(moment().add('days', 3).format('YYYY-MM-DDThh:mm:00'));
+            this.$('.hint').remove();
         }
     }))({el: $("#view-vvip")});
 });

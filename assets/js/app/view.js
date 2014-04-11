@@ -18,8 +18,21 @@ MeiweiApp.View = Backbone.View.extend({
                 var $input = $form.find('[name=' + name + ']');
                 if (!_.isEmpty($input)) {
                     $input.addClass('error');
-                    $input.one('focus change', function() {
+                    var node="<div class='hint'>"+error[name]+"</div>";
+                    if(name=='airport'){
+                    	node="<div class='hint label'>"+error[name]+"</div>";
+                    }
+                    var n=$input.after(node);
+                    $input.next('.hint').one('click',function(){
+                    	$(this).prev().unbind('change');
+                    	$(this).prev().removeClass('error');
+                    	var $input=$(this).prev();
+                        $(this).remove();
+                        $input.trigger('focus');
+                    })
+                    $input.one('change', function() {
                         $(this).removeClass('error');
+                        $(this).next('.hint').remove();
                     });
                 }
             }

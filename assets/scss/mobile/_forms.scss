@@ -19,7 +19,6 @@
 	}
 }
 
-
 fieldset {
 	@include border-radius($baseBorderRadius);
 	width: 100%;
@@ -28,10 +27,27 @@ fieldset {
 	border: 1px solid $brownLighter;
 	.inline-group {
 		overflow: hidden;
+		position:relative;
 		border: 1px solid $brownLighter;
 		padding: 0 7px;
 		@include block-field-set();
 		@include flex-box($orient: horizontal);
+		.hint{
+			position:absolute;
+			padding:13px 10px;
+			border:1px solid red;
+			width:246px;
+			background-color: #FFDDDA;
+			color:red;
+			left:40px;
+			height: 44px;
+			font-size:14px;
+			line-height: 14px;
+		}
+		.hint.label{
+			left:70px;
+			width:216px;
+		}
 	}
 }
 
@@ -59,7 +75,7 @@ input[type="color"],
 	@include clear-outline();
 	@include border-radius(0);
 	border: 1px solid $brownLighter;
-	&.error { background-color: #FFDDDA; }
+	//&.error { background-color: #FFDDDA; }
 	
 	display: block;
 	color: $brown;

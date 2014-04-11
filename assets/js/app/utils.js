@@ -97,7 +97,10 @@ MeiweiApp.loadBgImage = function(el, src, options) {
         el.css('background-image', 'url(' + options.src_local + ')');
     } 
     else{
-        el.css('background', '#000 url(assets/img/image-loader.gif) no-repeat center');
+        el.css('background', '#fff url(assets/img/image-loader.gif) no-repeat center');
+        if(parseInt(el.css('height'))>500){
+            el.css('background', '#fff url(assets/img/image-loader.gif) no-repeat center 75px');
+        }
         el.css('background-size', 'auto');
     }
 	var ratio = window.devicePixelRatio || 2;
