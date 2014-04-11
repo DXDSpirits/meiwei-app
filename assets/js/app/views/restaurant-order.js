@@ -29,12 +29,18 @@ $(function() {
 	
     var ProductCartItemList = MeiweiApp.CollectionView.extend({
         ModelView: MeiweiApp.ModelView.extend({
+            initModelView:function(){
+                this.stopListening(this.model,'hide');
+                this.listenTo(this.model,'newhide',this.hide);
+            },
             className: 'product-cart-item',
             template: TPL['product-cart-item'],
             events: { 'click .delete-button': 'triggerDelete' },
             triggerDelete: function() {
                 MeiweiApp.ProductCart.remove(this.model);
-            }
+                this.model.trigger('newhide');
+            },
+
         })
     });
     
@@ -111,6 +117,10 @@ $(function() {
                 productCart: new ProductCartItemList({ collection: MeiweiApp.ProductCart, el: this.$('.product-cart') })
             };
         },
+        onClickLeftBtn: function(){
+            MeiweiApp.ProductCart.reset();
+            MeiweiApp.goBack(); 
+        },
         selectSeat: function() {
             var self = this;
             MeiweiApp.goTo('RestaurantFloorplans', {
@@ -126,7 +136,9 @@ $(function() {
             });
         },
         selectProduct: function() {
-            MeiweiApp.goTo('ProductPurchase');
+            //MeiweiApp.goTo('ProductPurchase');
+            //MeiweiApp.goTo('ProductList',{status:"order",rid:this.restaurant.id});
+            MeiweiApp.goTo('ProductList',{status:"order"});
         },
         askToSubmitOrder: function(e) {
             if (e.preventDefault) e.preventDefault();
@@ -157,18 +169,24 @@ $(function() {
             var self = this;
             newOrder.save({}, {
                 success: function(model, xhr, options) {
-                    MeiweiApp.goTo('Attending', { orderId: newOrder.id });
-                    MeiweiApp.showConfirmDialog(
-                        MeiweiApp._('邀请好友'), MeiweiApp._('是否邀请好友？'),
-                        function() {
-                            var content = '我预定了' + 
-                                moment(newOrder.get('orderdate') + ' ' + newOrder.get('ordertime')).format('LLLL') + 
-                                '在' + self.restaurant.get('address') +
-                                '的' + self.restaurant.get('fullname') + '。一起来吧！';
-                            MeiweiApp.sendWeixinMsg(content);
-                            MeiweiApp.sendGaSocial('weixin', 'message', 'invitation');
-                        }
-                    );
+                    if(1){
+                        MeiweiApp.goTo('Attending', { orderId: newOrder.id });
+                        MeiweiApp.showConfirmDialog(
+                            MeiweiApp._('邀请好友'), MeiweiApp._('是否邀请好友？'),
+                            function() {
+                                var content = '我预定了' + 
+                                    moment(newOrder.get('orderdate') + ' ' + newOrder.get('ordertime')).format('LLLL') + 
+                                    '在' + self.restaurant.get('address') +
+                                    '的' + self.restaurant.get('fullname') + '。一起来吧！';
+                                MeiweiApp.sendWeixinMsg(content);
+                                MeiweiApp.sendGaSocial('weixin', 'message', 'invitation');
+                            }
+                        );
+                    }
+                    else{
+                        MeiweiApp.goTo('GenericOrderDetail', { orderId: newOrder.id });
+                    }
+
                 },
                 error: function(model, xhr, options) {
                     self.$('.wrapper').scrollTop(0);

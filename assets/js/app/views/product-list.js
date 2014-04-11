@@ -22,12 +22,32 @@ $(function() {
     	events: { 'click': 'onSelectItem' },
     	render: function() {
     		var attrs = this.model ? this.model.toJSON() : {};
+            if(MeiweiApp.Status=="order"){
+                var id=this.model.get('id');
+                var isSelected=(MeiweiApp.ProductCart.get(id) != null);
+                this.model.set({selected: isSelected});
+                if(isSelected)this.$el.addClass('selected');
+                this.$el.attr('data-item',id);
+            }
             this.renderTemplate(attrs);
             MeiweiApp.loadBgImage(this.$('.thumbnail'), attrs.picture, { width: 89, height: 89 });
             return this;
     	},
     	onSelectItem: function(e) {
-    		MeiweiApp.goTo('ProductOrder', {productItem: this.model.toJSON()});
+            if(MeiweiApp.Status=="order"){
+                var $el = $(e.currentTarget);
+                var item = this.model;
+                if ($el.hasClass('selected')) {
+                    $el.removeClass('selected');
+                    MeiweiApp.ProductCart.remove(item);
+                } else {
+                    $el.addClass('selected');
+                    MeiweiApp.ProductCart.add(item);
+                }
+            }
+            else{
+                MeiweiApp.goTo('ProductOrder', {productItem: this.model.toJSON()});
+            }
     	}
     });
     
@@ -39,6 +59,11 @@ $(function() {
         events: {
             'click .header-btn-left': 'onClickLeftBtn',
             'click .header-title': 'toggleFilter'
+        },
+        onClickLeftBtn: function() { 
+            if(MeiweiApp.Status=="order")MeiweiApp.Status=null;
+            //MeiweiApp.goTo('RestaurantOrder', { restaurantId: this.options.rid });
+            MeiweiApp.goBack(); 
         },
     	initPage: function() {
     	    _.bindAll(this, 'renderAll');
@@ -74,6 +99,7 @@ $(function() {
     	    }
     	},
     	render: function() {
+            if(this.options.status=="order")MeiweiApp.Status="order";
     		this.products.fetch({ data: {category: 1}, success: this.renderAll });
     	}
     }))({el: $("#view-product-list")});

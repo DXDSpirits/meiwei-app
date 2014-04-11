@@ -43,6 +43,9 @@
     }
     .two-line { height: 40px; }
     .three-line { height: 60px; }
+    &.selected{
+    	background-color:#000;
+    }
 }
 
 .order-list { @extend %thumbnail-list; }
