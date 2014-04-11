@@ -43,8 +43,24 @@
     }
     .two-line { height: 40px; }
     .three-line { height: 60px; }
-    &.selected{
-    	background-color:#000;
+    .check{
+    	position:absolute;
+		width: 26px;
+		height: 26px;
+		line-height: 26px;
+		background-image: url("../img/icons@2x.png");
+		background-size: 260px 260px;
+		background-position: 26px 26px;
+		background-repeat: no-repeat;
+		vertical-align: middle;
+		background-position: -130px -130px;
+		position: absolute;
+		top: 0;
+		left: 0;
+    	visibility:hidden;
+    }
+    &.selected .check{
+    	visibility:visible;
     }
 }
 

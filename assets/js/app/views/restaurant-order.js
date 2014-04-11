@@ -28,6 +28,9 @@ $(function() {
     });
 	
     var ProductCartItemList = MeiweiApp.CollectionView.extend({
+        removeOne:function(item){
+            item.trigger('newhide');
+        },
         ModelView: MeiweiApp.ModelView.extend({
             initModelView:function(){
                 this.stopListening(this.model,'hide');
@@ -35,7 +38,7 @@ $(function() {
             },
             className: 'product-cart-item',
             template: TPL['product-cart-item'],
-            events: { 'click .delete-button': 'triggerDelete' },
+            events: { 'click': 'triggerDelete' },
             triggerDelete: function() {
                 MeiweiApp.ProductCart.remove(this.model);
                 this.model.trigger('newhide');
@@ -137,7 +140,6 @@ $(function() {
         },
         selectProduct: function() {
             //MeiweiApp.goTo('ProductPurchase');
-            //MeiweiApp.goTo('ProductList',{status:"order",rid:this.restaurant.id});
             MeiweiApp.goTo('ProductList',{status:"order"});
         },
         askToSubmitOrder: function(e) {
@@ -169,7 +171,7 @@ $(function() {
             var self = this;
             newOrder.save({}, {
                 success: function(model, xhr, options) {
-                    if(1){
+                    if(_.isEmpty(xhr.payment_order)){
                         MeiweiApp.goTo('Attending', { orderId: newOrder.id });
                         MeiweiApp.showConfirmDialog(
                             MeiweiApp._('邀请好友'), MeiweiApp._('是否邀请好友？'),
@@ -184,7 +186,7 @@ $(function() {
                         );
                     }
                     else{
-                        MeiweiApp.goTo('GenericOrderDetail', { orderId: newOrder.id });
+                        MeiweiApp.goTo('GenericOrderDetail', { orderId: newOrder.id,order: xhr.payment_order});
                     }
 
                 },
@@ -231,6 +233,7 @@ $(function() {
             this.$('.wrapper').removeClass('rendering');
         },
         render: function() {
+            this.$('.info-text').html('');
             if (this.options.restaurant) {
                 this.restaurant.set(this.options.restaurant);
                 this.renderOrderForm();

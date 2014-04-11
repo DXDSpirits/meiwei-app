@@ -22,7 +22,7 @@ $(function() {
     	events: { 'click': 'onSelectItem' },
     	render: function() {
     		var attrs = this.model ? this.model.toJSON() : {};
-            if(MeiweiApp.Status=="order"){
+            if(MeiweiApp.Pages.ProductList.options.status=="order"){
                 var id=this.model.get('id');
                 var isSelected=(MeiweiApp.ProductCart.get(id) != null);
                 this.model.set({selected: isSelected});
@@ -34,7 +34,7 @@ $(function() {
             return this;
     	},
     	onSelectItem: function(e) {
-            if(MeiweiApp.Status=="order"){
+            if(MeiweiApp.Pages.ProductList.options.status=="order"){
                 var $el = $(e.currentTarget);
                 var item = this.model;
                 if ($el.hasClass('selected')) {
@@ -44,6 +44,8 @@ $(function() {
                     $el.addClass('selected');
                     MeiweiApp.ProductCart.add(item);
                 }
+                // $el.addClass('selected');
+                // MeiweiApp.ProductCart.add(item);
             }
             else{
                 MeiweiApp.goTo('ProductOrder', {productItem: this.model.toJSON()});
@@ -61,7 +63,7 @@ $(function() {
             'click .header-title': 'toggleFilter'
         },
         onClickLeftBtn: function() { 
-            if(MeiweiApp.Status=="order")MeiweiApp.Status=null;
+            if(MeiweiApp.Pages.ProductList.options.status=="order")MeiweiApp.Pages.ProductList.options.status=null;
             //MeiweiApp.goTo('RestaurantOrder', { restaurantId: this.options.rid });
             MeiweiApp.goBack(); 
         },
@@ -91,6 +93,7 @@ $(function() {
     	        collectionOfView.reset(product.items.toJSON());
     	        this.$('.header-title > span').html(product.get('name'));
     	    } else {
+                this.$('.header-title > span').html('精品管家服务');
     	        var items = this.products.map(function(product) {
     	            var item = product.items.at(0);
     	            return item ? item.toJSON() : null;
@@ -99,7 +102,6 @@ $(function() {
     	    }
     	},
     	render: function() {
-            if(this.options.status=="order")MeiweiApp.Status="order";
     		this.products.fetch({ data: {category: 1}, success: this.renderAll });
     	}
     }))({el: $("#view-product-list")});
