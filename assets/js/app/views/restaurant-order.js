@@ -186,7 +186,7 @@ $(function() {
                         );
                     }
                     else{
-                        MeiweiApp.goTo('GenericOrderDetail', { orderId: newOrder.id,order: xhr.payment_order});
+                        MeiweiApp.goTo('GenericOrderDetail', { orderId: xhr.payment_order.id});
                     }
 
                 },
