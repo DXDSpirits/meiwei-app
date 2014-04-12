@@ -11,7 +11,8 @@ window.MeiweiApp = new (Backbone.View.extend({
     Pages: {},
     
     configs: {
-        APIHost: "http://192.168.1.7:8000",
+        //APIHost: "http://192.168.1.7:8000",
+        APIHost: "http://api.clubmeiwei.com",
         ajaxTimeout: 120000
     },
     

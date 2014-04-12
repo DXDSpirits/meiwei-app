@@ -44,8 +44,6 @@ $(function() {
                     $el.addClass('selected');
                     MeiweiApp.ProductCart.add(item);
                 }
-                // $el.addClass('selected');
-                // MeiweiApp.ProductCart.add(item);
             }
             else{
                 MeiweiApp.goTo('ProductOrder', {productItem: this.model.toJSON()});
@@ -64,7 +62,6 @@ $(function() {
         },
         onClickLeftBtn: function() { 
             if(MeiweiApp.Pages.ProductList.options.status=="order")MeiweiApp.Pages.ProductList.options.status=null;
-            //MeiweiApp.goTo('RestaurantOrder', { restaurantId: this.options.rid });
             MeiweiApp.goBack(); 
         },
     	initPage: function() {

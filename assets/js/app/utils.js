@@ -97,11 +97,14 @@ MeiweiApp.loadBgImage = function(el, src, options) {
         el.css('background-image', 'url(' + options.src_local + ')');
     } 
     else{
-        el.css('background', '#fff url(assets/img/image-loader.gif) no-repeat center');
-        if(parseInt(el.css('height'))>500){
-            el.css('background', '#fff url(assets/img/image-loader.gif) no-repeat center 75px');
+        el.css('background-color','#fff');
+        el.css('background-image', 'url(assets/img/image-loader.gif)');
+        el.css('background-repeat','no-repeat');
+        el.css('background-position','center center');
+        el.css('background-size','50px 50px');
+        if(parseInt(el.css('height'))>400){
+            el.css('background-position','center 75px');
         }
-        el.css('background-size', 'auto');
     }
 	var ratio = window.devicePixelRatio || 2;
 	var width = options.width || parseInt($('body').innerWidth());
@@ -110,12 +113,12 @@ MeiweiApp.loadBgImage = function(el, src, options) {
     var image_src = src + '?imageMogr/v2/thumbnail/' + size;
     var image = new Image();
     image.onload = function() {
-        setTimeout(function(){
+         setTimeout(function(){
             el.css('background-size', '');
-            el.css('background-position', '');
-            el.css('background-color', '#fff');
+            el.css('background-position', 'center top');
             el.css('background-image', 'url(' + image_src + ')');
-        },100);
+        //     el.css('background-color', '#fff');
+         },100);
     };
     image.src = image_src;
 };
