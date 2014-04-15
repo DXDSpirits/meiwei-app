@@ -1,3 +1,32 @@
+MeiweiApp.showAlertDialog = function(content) {
+    var dialog = new (MeiweiApp.View.extend({
+        className: 'dialog confirm-dialog',
+        template: TPL['alert-dialog'],
+        events: {
+            'click .btn-confirm': 'confirm'
+        },
+        closeDialog: function() {
+            this.remove();
+            $('#dialog-overlay').addClass('hidden');
+            this.undelegateEvents();
+        },
+        openDialog: function() {
+            $('body').append(this.el);
+            $('#dialog-overlay').removeClass('hidden');
+            this.delegateEvents();
+        },
+        confirm: function() {
+            this.closeDialog();
+        },
+        render: function() {
+            this.renderTemplate({content: content});
+            this.openDialog();
+            return this;
+        }
+    }))();
+    dialog.remove();
+    dialog.render();
+};
 
 MeiweiApp.showConfirmDialog = function(title, content, onConfirm) {
     var dialog = new (MeiweiApp.View.extend({

@@ -110,14 +110,14 @@ $(function() {
         	if(time==null)return;
             var delta = Math.round((new Date(time) - new Date()) / 1000);
             if (delta < 3 * 60 * 60) {
-                alert('离起飞时间小于3小时,将会导致费用加倍');
+                MeiweiApp.showAlertDialog('离起飞时间小于3小时,将会导致费用加倍');
             }
         },
         checkAccompany: function(){
         	var accompany=this.$('input[name=accompany]').val() || null;
         	if(parseInt(accompany)>2){
         		this.$('input[name=accompany]').val('');
-        		alert('陪同人数最多为2人');
+        		MeiweiApp.showAlertDialog('陪同人数最多为2人');
 	        }
         },
         submitOrder: function(e) {
