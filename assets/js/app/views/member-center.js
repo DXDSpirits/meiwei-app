@@ -1,9 +1,24 @@
 $(function() {
     var MemberProfileBox = MeiweiApp.View.extend({
-    	events: { 'click .avatar': 'changeAvatar' },
+    	events: {
+            'click .avatar': 'changeAvatar',
+            'change #imageUploader': 'changeAvatarHtml5'
+        },
     	initView: function() {
             this.listenTo(MeiweiApp.me.profile, 'change', this.updateProfile);
             this.renderAvatar();
+        },
+        changeAvatarHtml5: function(){
+            var reader = new FileReader();
+            var self=this
+            var files = !!$('#imageUploader').get(0).files ? $('#imageUploader').get(0).files : [];
+            reader.readAsDataURL(files[0]);
+            self.$('.avatar img')[0].src = "javascript:void(0)";
+            reader.onloadend = function(e){
+                var base64 = e.target.result;
+                $('.avatar img').css("background-image", "url("+base64+")");
+                window.localStorage.setItem("avatar",base64);
+            }
         },
     	changeAvatar: function() {
     		function onSuccess(imageData) {
@@ -80,7 +95,20 @@ $(function() {
     			profileBox: new MemberProfileBox({ el: this.$('.member-profile-box') }),
     			favoriteCarousel: new FavoriteRestoCarousel({ el: this.$('.favorite-resto-carousel') })
     		};
+            if(navigator.camera && _.isFunction(navigator.camera.getPicture)){
+                $("#imageUploader").remove();
+            }
+            else{
+                this.initAvatar();
+            }
     	},
+        initAvatar:function(){
+            if(window.localStorage.getItem('avatar')!=null){
+                var base64 = window.localStorage.getItem('avatar');
+                $('.avatar img')[0].src = "javascript:void(0)";
+                $('.avatar img').css("background-image", "url("+base64+")");
+            }
+        },
     	askToShare: function() {
 	        var key = 'visited-view-member-center';
 	        var lastTime = localStorage.getItem(key);
