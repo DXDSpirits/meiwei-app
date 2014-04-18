@@ -60,7 +60,7 @@ $(function() {
                 },
                 error: function(model, xhr, options) {
                     self.$('.wrapper').scrollTop(0);
-                    self.displayError(self.$('.info-text'), xhr.responseText);
+                    self.displayErrorBetter(self.$('form'), xhr.responseText);
                 }
             });
         },
