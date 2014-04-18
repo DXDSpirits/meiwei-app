@@ -8,26 +8,43 @@ $(function() {
             this.listenTo(MeiweiApp.me.profile, 'change', this.updateProfile);
             this.renderAvatar();
         },
+        onChangeAvatarSuccess: function(imageData){
+            localStorage.setItem('avatar', imageData);
+            if(navigator.camera && _.isFunction(navigator.camera.getPicture)){
+                this.$('.avatar img')[0].src = "data:image/jpeg;base64," + imageData;
+            }
+            else{
+                this.$('.avatar img')[0].src = "javascript:void(0)";
+                this.$('.avatar img').css("background-image", "url("+imageData+")");
+            }
+            var user_id = window.localStorage.getItem('user_id');
+            if(user_id){
+                new (Backbone.Model.extend({
+                    urlRoot : MeiweiApp.configs.APIHost + '/members/profile/'+user_id+'/avatar/'
+                }))().save();
+            }
+        },
         changeAvatarHtml5: function(){
             var reader = new FileReader();
             var self=this
             var files = !!$('#imageUploader').get(0).files ? $('#imageUploader').get(0).files : [];
             reader.readAsDataURL(files[0]);
-            self.$('.avatar img')[0].src = "javascript:void(0)";
             reader.onloadend = function(e){
-                var base64 = e.target.result;
-                $('.avatar img').css("background-image", "url("+base64+")");
-                window.localStorage.setItem("avatar",base64);
+                var imageData = e.target.result;
+                self.onChangeAvatarSuccess(imageData);
             }
         },
     	changeAvatar: function() {
-    		function onSuccess(imageData) {
-    			localStorage.setItem('avatar', imageData);
-    		    this.$('.avatar img')[0].src = "data:image/jpeg;base64," + imageData;
-    		}
+    		// function onSuccess(imageData) {
+    		// 	localStorage.setItem('avatar', imageData);
+    		//  this.$('.avatar img')[0].src = "data:image/jpeg;base64," + imageData;
+    		// }
+            var self=this; 
     		if (navigator.camera && _.isFunction(navigator.camera.getPicture)) {
         		navigator.camera.getPicture(
-        			function(imageData) { onSuccess(imageData); }, function() {}, {
+        			function(imageData) {
+                        self.onChangeAvatarSuccess(imageData);
+                    }, function() {}, {
         				quality: 50, allowEdit: true, encodingType: Camera.EncodingType.JPEG,
         				destinationType: Camera.DestinationType.DATA_URL,
         				sourceType: Camera.PictureSourceType.PHOTOLIBRARY
@@ -109,7 +126,8 @@ $(function() {
                 $('.avatar img').css("background-image", "url("+base64+")");
             }
         },
-    	askToShare: function() {
+    	askToShare: function(response) {
+            window.localStorage.setItem('user_id',response.get('id'));
 	        var key = 'visited-view-member-center';
 	        var lastTime = localStorage.getItem(key);
             if (!lastTime || !(new Date() - new Date(lastTime)) || 
