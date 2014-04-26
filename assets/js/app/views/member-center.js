@@ -43,7 +43,7 @@ $(function() {
     		if (navigator.camera && _.isFunction(navigator.camera.getPicture)) {
         		navigator.camera.getPicture(
         			function(imageData) {
-                        self.onChangeAvatarSuccess(imageData);
+                        self.onChangeAvatarSuccess("data:image/jpeg;base64," + imageData);
                     }, function() {}, {
         				quality: 50, allowEdit: true, encodingType: Camera.EncodingType.JPEG,
         				destinationType: Camera.DestinationType.DATA_URL,
@@ -60,9 +60,17 @@ $(function() {
     	},
     	renderAvatar: function() {
     	    var imageData = localStorage.getItem('avatar');
-            if (imageData) {
-                this.$('.avatar img')[0].src = "data:image/jpeg;base64," + imageData;
-            } else {
+            if(imageData){
+                if(navigator.camera && _.isFunction(navigator.camera.getPicture)){
+                    $("#imageUploader").remove();
+                    this.$('.avatar img')[0].src = imageData;
+                }
+                else{
+                    $('.avatar img')[0].src = "javascript:void(0)";
+                    $('.avatar img').css("background-image", "url("+imageData+")");
+                }
+            }
+            else{
                 this.$('.avatar img')[0].src = "assets/img/default-avatar@2x.png";
             }
         }
@@ -112,20 +120,7 @@ $(function() {
     			profileBox: new MemberProfileBox({ el: this.$('.member-profile-box') }),
     			favoriteCarousel: new FavoriteRestoCarousel({ el: this.$('.favorite-resto-carousel') })
     		};
-            if(navigator.camera && _.isFunction(navigator.camera.getPicture)){
-                $("#imageUploader").remove();
-            }
-            else{
-                this.initAvatar();
-            }
     	},
-        initAvatar:function(){
-            if(window.localStorage.getItem('avatar')!=null){
-                var base64 = window.localStorage.getItem('avatar');
-                $('.avatar img')[0].src = "javascript:void(0)";
-                $('.avatar img').css("background-image", "url("+base64+")");
-            }
-        },
     	askToShare: function(response) {
             window.localStorage.setItem('user_id',response.get('id'));
 	        var key = 'visited-view-member-center';
