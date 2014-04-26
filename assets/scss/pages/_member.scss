@@ -136,9 +136,16 @@
 			background-color: $white;
 			overflow: hidden;
 			img {
-				@include square(100%);
+				display:block;
+				@include square(88px);
+				max-width:150%;
+				position:relative;
+				top:-1px;
+				left:-1px;
+				@include box-sizing(border-box);
 				background-size:cover;
                 background-position:center;
+                background-repeat:no-repeat;
 			}
 		}
 		h1 {
