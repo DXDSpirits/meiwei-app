@@ -49,6 +49,9 @@ $(function() {
                             //window.location.href = 'http://www.linauror.com/wechat/success.php';
                         } else {
                             alert(res.err_msg);
+                            alert(model.get('appid') + '_' +
+                                model.get('timestamp') + '_' + model.get('noncestr') + '_' +
+                            model.get('signtype') + '_' + model.get('package') + '_' + model.get('paysign'))
                         }
                     });
                 }});
