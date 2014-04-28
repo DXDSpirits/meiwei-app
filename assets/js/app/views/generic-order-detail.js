@@ -37,9 +37,6 @@ $(function() {
                     payment_no: this.model.get('payment').payment_no
                 });
                 wxPayment.fetch({success: function(model) {
-                    alert(model.get('appid') + '_' +
-                        model.get('timestamp') + '_' + model.get('noncestr') + '_' +
-                        model.get('signtype') + '_' + model.get('package') + '_' + model.get('paysign'))
                     WeixinJSBridge.invoke('getBrandWCPayRequest', {
                         "appId": model.get('appid'),
                         "timeStamp": model.get('timestamp'),
