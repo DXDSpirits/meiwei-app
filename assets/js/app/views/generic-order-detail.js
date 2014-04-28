@@ -3,6 +3,11 @@ $(function() {
         urlRoot: MeiweiApp.configs.APIHost + '/alipay/payable/',
         idAttribute: 'payment_no'
     });
+
+    var WxPayment = MeiweiApp.Model.extend({
+        urlRoot: MeiweiApp.configs.APIHost + '/wxpay/payable/',
+        idAttribute: 'payment_no'
+    });
     
     var OrderDetail = MeiweiApp.ModelView.extend({
     	default_template: TPL['generic-order-detail'],
@@ -27,12 +32,34 @@ $(function() {
     		);
     	},
     	payOrder: function() {
-    	    var alipayPayment = new AlipayPayment({
-    	        payment_no: this.model.get('payment').payment_no
-    	    });
-    	    alipayPayment.fetch({success: function(model) {
-    	        MeiweiApp.payByAlipay(model.get('orderString'));
-    	    }});
+            if(window.WeixinJSBridge) {
+                var wxPayment = new WxPayment({
+                    payment_no: this.model.get('payment').payment_no
+                });
+                wxPayment.fetch({success: function(model) {
+                    WeixinJSBridge.invoke('getBrandWCPayRequest', {
+                        "appId": model.get('appid'),
+                        "timeStamp": model.get('timestamp'),
+                        "nonceStr": model.get('noncestr'),
+                        "package": model.get('package'),
+                        "signType": model.get('signtype'),
+                        "paySign": model.get('paysign')
+                    }, function (res) {
+                        if (res.err_msg == "get_brand_wcpay_request:ok") {
+                            //window.location.href = 'http://www.linauror.com/wechat/success.php';
+                        } else {
+                            alert(res.err_msg);
+                        }
+                    });
+                }});
+            } else {
+                var alipayPayment = new AlipayPayment({
+                    payment_no: this.model.get('payment').payment_no
+                });
+                alipayPayment.fetch({success: function(model) {
+                    MeiweiApp.payByAlipay(model.get('orderString'));
+                }});
+            }
     	},
         render: function() {
             if (this.model) {
