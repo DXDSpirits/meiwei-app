@@ -6,7 +6,9 @@ $(function() {
         },
     	initView: function() {
             this.listenTo(MeiweiApp.me.profile, 'change', this.updateProfile);
-            this.renderAvatar();
+            document.addEventListener("deviceready", function(e) {
+                self.renderAvatar();
+            });
         },
         onChangeAvatarSuccess: function(imageData){
             localStorage.setItem('avatar', imageData);
