@@ -56,11 +56,11 @@ $(function() {
             var self = this;
             newOrder.save({}, {
                 success: function(model, xhr, options) {
-                    MeiweiApp.goTo('GenericOrderList');
+                    MeiweiApp.goTo('GenericOrderDetail', {orderId: model.id});
                 },
                 error: function(model, xhr, options) {
                     self.$('.wrapper').scrollTop(0);
-                    self.displayError(self.$('.info-text'), xhr.responseText);
+                    self.displayErrorBetter(self.$('form'), xhr.responseText);
                 }
             });
         },
@@ -80,6 +80,7 @@ $(function() {
             this.$('.wrapper').removeClass('rendering');
         },
         render: function() {
+            this.$('.info-text').html('');
             if (this.options.productItem) {
                 this.productItem.set(this.options.productItem);
                 this.renderOrderForm();

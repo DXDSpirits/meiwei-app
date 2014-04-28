@@ -123,7 +123,7 @@ $(function() {
                     dialog.render();
                 },
                 error: function(model, xhr, options) {
-                    self.displayError(self.$('.info-text'), xhr.responseText);
+                    self.displayErrorBetter(self.$('form'), xhr.responseText);
                 }
             });
         },

@@ -1,3 +1,32 @@
+MeiweiApp.showAlertDialog = function(content) {
+    var dialog = new (MeiweiApp.View.extend({
+        className: 'dialog confirm-dialog',
+        template: TPL['alert-dialog'],
+        events: {
+            'click .btn-confirm': 'confirm'
+        },
+        closeDialog: function() {
+            this.remove();
+            $('#dialog-overlay').addClass('hidden');
+            this.undelegateEvents();
+        },
+        openDialog: function() {
+            $('body').append(this.el);
+            $('#dialog-overlay').removeClass('hidden');
+            this.delegateEvents();
+        },
+        confirm: function() {
+            this.closeDialog();
+        },
+        render: function() {
+            this.renderTemplate({content: content});
+            this.openDialog();
+            return this;
+        }
+    }))();
+    dialog.remove();
+    dialog.render();
+};
 
 MeiweiApp.showConfirmDialog = function(title, content, onConfirm) {
     var dialog = new (MeiweiApp.View.extend({
@@ -66,10 +95,14 @@ MeiweiApp.payByAlipay = function(orderString) {
             MeiweiApp._('Payment'),
             MeiweiApp._('We are working hard on the Wechat Payment.'),
             function() {
-                window.open('http://www.clubmeiwei.com/ad/apppromo', '_blank', 'location=no');
+                MeiweiApp.openWindow('http://www.clubmeiwei.com/ad/apppromo');
             }
         );
     }
+};
+
+MeiweiApp.openWindow = function(link) {
+    window.open(link, '_blank', 'location=no');
 };
 
 MeiweiApp.loadImage = function(img, src, options) {
@@ -89,7 +122,19 @@ MeiweiApp.loadImage = function(img, src, options) {
 
 MeiweiApp.loadBgImage = function(el, src, options) {
 	options = options || {};
-	if (MeiweiApp.isCordova && options.src_local) el.css('background-image', 'url(' + options.src_local + ')');
+	if (MeiweiApp.isCordova && options.src_local){
+        el.css('background-image', 'url(' + options.src_local + ')');
+    } 
+    else{
+        el.css('background-color','#fff');
+        el.css('background-image', 'url(assets/img/image-loader.gif)');
+        el.css('background-repeat','no-repeat');
+        el.css('background-position','center center');
+        el.css('background-size','50px 50px');
+        if(parseInt(el.css('height'))>400){
+            el.css('background-position','center 75px');
+        }
+    }
 	var ratio = window.devicePixelRatio || 2;
 	var width = options.width || parseInt($('body').innerWidth());
 	var height = options.height;
@@ -97,7 +142,12 @@ MeiweiApp.loadBgImage = function(el, src, options) {
     var image_src = src + '?imageMogr/v2/thumbnail/' + size;
     var image = new Image();
     image.onload = function() {
-        el.css('background-image', 'url(' + image_src + ')');
+         setTimeout(function(){
+            el.css('background-size', '');
+            el.css('background-position', 'center top');
+            el.css('background-image', 'url(' + image_src + ')');
+        //     el.css('background-color', '#fff');
+         },100);
     };
     image.src = image_src;
 };

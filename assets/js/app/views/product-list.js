@@ -22,12 +22,32 @@ $(function() {
     	events: { 'click': 'onSelectItem' },
     	render: function() {
     		var attrs = this.model ? this.model.toJSON() : {};
+            if(MeiweiApp.Pages.ProductList.options.status=="order"){
+                var id=this.model.get('id');
+                var isSelected=(MeiweiApp.ProductCart.get(id) != null);
+                this.model.set({selected: isSelected});
+                if(isSelected)this.$el.addClass('selected');
+                this.$el.attr('data-item',id);
+            }
             this.renderTemplate(attrs);
             MeiweiApp.loadBgImage(this.$('.thumbnail'), attrs.picture, { width: 89, height: 89 });
             return this;
     	},
     	onSelectItem: function(e) {
-    		MeiweiApp.goTo('ProductOrder', {productItem: this.model.toJSON()});
+            if(MeiweiApp.Pages.ProductList.options.status=="order"){
+                var $el = $(e.currentTarget);
+                var item = this.model;
+                if ($el.hasClass('selected')) {
+                    $el.removeClass('selected');
+                    MeiweiApp.ProductCart.remove(item);
+                } else {
+                    $el.addClass('selected');
+                    MeiweiApp.ProductCart.add(item);
+                }
+            }
+            else{
+                MeiweiApp.goTo('ProductOrder', {productItem: this.model.toJSON()});
+            }
     	}
     });
     
@@ -39,6 +59,10 @@ $(function() {
         events: {
             'click .header-btn-left': 'onClickLeftBtn',
             'click .header-title': 'toggleFilter'
+        },
+        onClickLeftBtn: function() { 
+            if(MeiweiApp.Pages.ProductList.options.status=="order")MeiweiApp.Pages.ProductList.options.status=null;
+            MeiweiApp.goBack(); 
         },
     	initPage: function() {
     	    _.bindAll(this, 'renderAll');
@@ -66,6 +90,7 @@ $(function() {
     	        collectionOfView.reset(product.items.toJSON());
     	        this.$('.header-title > span').html(product.get('name'));
     	    } else {
+                this.$('.header-title > span').html('精品管家服务');
     	        var items = this.products.map(function(product) {
     	            var item = product.items.at(0);
     	            return item ? item.toJSON() : null;

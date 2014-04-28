@@ -32,7 +32,7 @@ $(function() {
                 } else if (target == 'internal') {
                     MeiweiApp.goTo(uri, options);
                 } else if (target == 'external') {
-                    window.open(uri, '_blank', 'location=no');
+                    MeiweiApp.openWindow(uri);
                 }
             }
         }),

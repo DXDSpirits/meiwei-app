@@ -54,6 +54,9 @@ $(function() {
     			orderDetail: new OrderDetail({ model: this.order, el: this.$('.wrapper') })
     		};
     	},
+    	onClickLeftBtn: function() {
+    	    MeiweiApp.goTo('GenericOrderList');
+    	},
     	onResume: function() {
     	    this.order.fetch();
     	},

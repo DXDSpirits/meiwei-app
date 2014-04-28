@@ -11,6 +11,43 @@ MeiweiApp.View = Backbone.View.extend({
             $el.text(text || 'Error');
         }
     },
+    displayErrorBetter: function($form, error) {
+        try {
+            error = JSON.parse(error);
+            for (var name in error) {
+                var $input = $form.find('[name=' + name + ']');
+                if (!_.isEmpty($input)) {
+                    $input.addClass('error');
+                    var node="<div class='hint'>"+error[name]+"</div>";
+                    if(name=='airport'){
+                    	node="<div class='hint label'>"+error[name]+"</div>";
+                    }
+                    var n=$input.after(node);
+                    $input.next('.hint').one('click',function(){
+                    	$(this).prev().unbind('change');
+                    	$(this).prev().removeClass('error');
+                    	var $input=$(this).prev();
+                        $(this).remove();
+                        $input.trigger('focus');
+                    })
+                    $input.one('change', function() {
+                        $(this).removeClass('error');
+                        $(this).next('.hint').remove();
+                    });
+                }
+            }
+            if (error['non_field_errors']) {
+                $form.find('.info-text').text(error['non_field_errors']);
+            }
+            $form.one('submit', function() {
+                $form.find('[name].error').removeClass('error');
+                $form.find('.info-text').empty();
+            });
+        } catch (e) {
+            $form.find('.info-text').text(error || 'Error');
+        }
+    },
+    
     template: Mustache.compile(""),
     renderTemplate: function(attrs) {
         this.$el.html(this.template(attrs || {}));

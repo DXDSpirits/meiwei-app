@@ -43,7 +43,7 @@ $(function() {
             var link = this.getWeiboLink(screen, document, encodeURIComponent,
                                          'http://www.clubmeiwei.com', 'http://www.clubmeiwei.com',
                                          pic, content, url, 'utf-8');
-            var ref = window.open(link ,'_blank', 'location=no');
+            var ref = MeiweiApp.openWindow(link);
             MeiweiApp.sendGaSocial('weibo', 'tweet', 'app promo');
         },
         onClickWeixinBtn: function() {

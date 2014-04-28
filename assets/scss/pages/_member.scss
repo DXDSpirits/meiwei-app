@@ -1,3 +1,11 @@
+#imageUploader{
+	width:90px;
+	height:90px;
+	position:absolute;
+	top:0;
+	opacity:0;
+}
+
 #view-member-login {
 	.logo {
 		height: 170px;
@@ -127,7 +135,18 @@
 			margin: 0 auto;
 			background-color: $white;
 			overflow: hidden;
-			img { @include square(100%); }
+			img {
+				display:block;
+				@include square(88px);
+				max-width:150%;
+				position:relative;
+				top:-1px;
+				left:-1px;
+				@include box-sizing(border-box);
+				background-size:cover;
+                background-position:center;
+                background-repeat:no-repeat;
+			}
 		}
 		h1 {
 			position: relative;
