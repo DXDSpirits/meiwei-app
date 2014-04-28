@@ -10,8 +10,8 @@ $(function() {
         },
         onChangeAvatarSuccess: function(imageData){
             localStorage.setItem('avatar', imageData);
-            if(navigator.camera && _.isFunction(navigator.camera.getPicture)){
-                this.$('.avatar img')[0].src = "data:image/jpeg;base64," + imageData;
+            if(MeiweiApp.isCordova){
+                this.$('.avatar img')[0].src = imageData;
             }
             else{
                 this.$('.avatar img')[0].src = "javascript:void(0)";
@@ -61,7 +61,7 @@ $(function() {
     	renderAvatar: function() {
     	    var imageData = localStorage.getItem('avatar');
             if(imageData){
-                if(navigator.camera && _.isFunction(navigator.camera.getPicture)){
+                if(MeiweiApp.isCordova){
                     $("#imageUploader").remove();
                     this.$('.avatar img')[0].src = imageData;
                 }
