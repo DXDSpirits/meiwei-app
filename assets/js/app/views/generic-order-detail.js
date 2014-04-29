@@ -46,7 +46,9 @@ $(function() {
                         "paySign": model.get('paysign')
                     }, function (res) {
                         if (res.err_msg == "get_brand_wcpay_request:ok") {
-                            //window.location.href = 'http://www.linauror.com/wechat/success.php';
+                            window.setTimeout(function(){
+                                MeiweiApp.Pages.GenericOrderDetail.onResume();
+                            },2000);
                         } else {
                             alert(res.err_msg);
                         }
