@@ -54,10 +54,6 @@ MeiweiApp.Router = new (Backbone.Router.extend({
 	},
 	
 	registerAuthToken: function(token, path) {
-        var index = path.indexOf("&");
-        if(index>0) {
-            path = path.substr(0,index);
-        }
 	    MeiweiApp.TokenAuth.set(token);
 	    this.navigate(path, {trigger: true});
 	},
