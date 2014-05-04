@@ -10,7 +10,7 @@ MeiweiApp.Router = new (Backbone.Router.extend({
 	initialize: function(){
 		this.route('', 'index');
 		this.route('regAuth/:token/*path', 'registerAuthToken');
-        this.route('wxAuth/:wxtoken/:token/*path', 'registerWxAuthToken');
+        this.route('wxAuth/:token/*path', 'registerWxAuthToken');
 
 		this.route(/^home(?:\/l(\d+))?$/, 'home');
 		this.route('getstarted', 'getStarted');
@@ -58,11 +58,12 @@ MeiweiApp.Router = new (Backbone.Router.extend({
 	    this.navigate(path, {trigger: true});
 	},
 
-    registerWxAuthToken: function(wxtoken,token, path) {
+    registerWxAuthToken: function(token, path) {
         if(token!='0'){
             MeiweiApp.TokenAuth.set(token);
         }
-        window.localStorage.setItem('wxtoken',wxtoken);
+        var index = path.indexOf('?');
+        path = path.substr(0,index);
         this.navigate(path, {trigger: true});
     },
 	
