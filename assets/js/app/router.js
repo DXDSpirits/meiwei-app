@@ -64,7 +64,7 @@ MeiweiApp.Router = new (Backbone.Router.extend({
         }
         var index = path.indexOf('&');
         path = path.substr(0,index);
-        this.navigate(path, {trigger: true});
+        this.navigate(path, {trigger: true, replace:false});
     },
 	
 	home: function(lid) { MeiweiApp.Pages.Home.go({listId: lid}); MeiweiApp.history.active = MeiweiApp.Pages.Home; },
