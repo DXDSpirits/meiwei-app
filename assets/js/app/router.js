@@ -46,7 +46,40 @@ MeiweiApp.Router = new (Backbone.Router.extend({
 	},
 	
 	index: function() {
-	    if (localStorage.getItem('first-time')) {
+        var code = decodeURI((RegExp('code' + "=(.+?)(&|$)").exec(location.search) || [, null])[1]);
+        var state = decodeURI((RegExp('state' + "=(.+?)(&|$)").exec(location.search) || [, null])[1]);
+        var meiweiToken = decodeURI((RegExp('meiwei_token' + "=(.+?)(&|$)").exec(location.search) || [, null])[1]);
+
+        if (code && code != "null") {
+            var stateMapping = {
+                'restaurant_search': 'restaurant/search',
+                'jingxuanhongjiu': 'product/p31',
+                'daijia': 'requestdriver',
+                'dangjiushi': 'product/90/order',
+                'xianhuadingzhi': 'product/p21',
+                'dangaodingzhi': 'product/p39',
+                'meizhuangfuwu': 'product/p32',
+                'vvip': 'vvip',
+                'shangwuchuxing': 'product/p29',
+                'my_restaurant': 'order',
+                'my_genericorder': 'genericorder',
+                'my_coupon': 'member',
+                'weixin_login': 'http://www.clubmeiwei.com/weixin/login/'
+            };
+            if(meiweiToken && meiweiToken !="null") {
+                if(meiweiToken!='0') {
+                    MeiweiApp.TokenAuth.set(meiweiToken);
+                }
+            }
+            if(state && state !="null") {
+                if(stateMapping[state]) {
+                    this.navigate(stateMapping[state], {trigger: true});
+                    return;
+                }
+            }
+        }
+
+        if (localStorage.getItem('first-time')) {
 	        MeiweiApp.Pages.Home.go(); MeiweiApp.history.active = MeiweiApp.Pages.Home;
 	    } else {
 	        MeiweiApp.Pages.GetStarted.go(); MeiweiApp.history.active = MeiweiApp.Pages.GetStarted;
@@ -64,7 +97,7 @@ MeiweiApp.Router = new (Backbone.Router.extend({
         }
         var index = path.indexOf('&');
         path = path.substr(0,index);
-        this.navigate(path, {trigger: true, replace:false});
+        this.navigate(path, {trigger: true});
     },
 	
 	home: function(lid) { MeiweiApp.Pages.Home.go({listId: lid}); MeiweiApp.history.active = MeiweiApp.Pages.Home; },
