@@ -8,7 +8,6 @@ MeiweiApp.history = {
 
 MeiweiApp.Router = new (Backbone.Router.extend({
 	initialize: function(){
-        alert('ssssssssssss')
 		this.route('', 'index');
 		this.route('regAuth/:token/*path', 'registerAuthToken');
         this.route('wxAuth/:token/*path', 'registerWxAuthToken');
