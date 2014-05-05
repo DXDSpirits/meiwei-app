@@ -49,7 +49,7 @@ MeiweiApp.Router = new (Backbone.Router.extend({
         var code = decodeURI((RegExp('code' + "=(.+?)(&|$)").exec(location.search) || [, null])[1]);
         var state = decodeURI((RegExp('state' + "=(.+?)(&|$)").exec(location.search) || [, null])[1]);
         var meiweiToken = decodeURI((RegExp('meiwei_token' + "=(.+?)(&|$)").exec(location.search) || [, null])[1]);
-
+        alert(code + ' ' + state + ' ' + meiweiToken);
         if (code && code != "null") {
             var stateMapping = {
                 'restaurant_search': 'restaurant/search',
