@@ -42,7 +42,7 @@ $(function() {
     		// 	localStorage.setItem('avatar', imageData);
     		//  this.$('.avatar img')[0].src = "data:image/jpeg;base64," + imageData;
     		// }
-            var self=this; 
+            var self=this;
     		if (navigator.camera && _.isFunction(navigator.camera.getPicture)) {
         		navigator.camera.getPicture(
         			function(imageData) {
@@ -78,7 +78,7 @@ $(function() {
             }
         }
     });
-    
+
     var FavoriteRestoCarousel = MeiweiApp.View.extend({
     	initView: function() {
 	        this.listenTo(MeiweiApp.me.favorites, 'reset', this.pickImage);
@@ -97,7 +97,7 @@ $(function() {
             }
         }
     });
-    
+
     MeiweiApp.Pages.MemberCenter = new (MeiweiApp.PageView.extend({
     	events: {
     		'click .header-btn-left': 'onClickLeftBtn',
@@ -128,7 +128,7 @@ $(function() {
             window.localStorage.setItem('user_id',response.get('id'));
 	        var key = 'visited-view-member-center';
 	        var lastTime = localStorage.getItem(key);
-            if (!lastTime || !(new Date() - new Date(lastTime)) || 
+            if (!lastTime || !(new Date() - new Date(lastTime)) ||
                 new Date() - new Date(lastTime) > 30 * 24 * 60 * 60 * 1000) {
                 localStorage.setItem(key, (new Date()).toISOString());
                 MeiweiApp.showConfirmDialog(
