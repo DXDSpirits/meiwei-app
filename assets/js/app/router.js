@@ -46,6 +46,79 @@ MeiweiApp.Router = new (Backbone.Router.extend({
 	},
 	
 	index: function() {
+        var code = decodeURI((RegExp('code' + "=(.+?)(&|$)").exec(location.search) || [, null])[1]);
+        var state = decodeURI((RegExp('state' + "=(.+?)(&|$)").exec(location.search) || [, null])[1]);
+        var meiweiToken = decodeURI((RegExp('meiwei_token' + "=(.+?)(&|$)").exec(location.search) || [, null])[1]);
+        if (code && code != "null") {
+            var stateMapping = {
+                'restaurant_search': 'restaurant/search',
+                'jingxuanhongjiu': 'product/p31',
+                'daijia': 'requestdriver',
+                'dangjiushi': 'product/90/order',
+                'xianhuadingzhi': 'product/p21',
+                'dangaodingzhi': 'product/p39',
+                'meizhuangfuwu': 'product/p32',
+                'vvip': 'vvip',
+                'shangwuchuxing': 'product/p29',
+                'my_restaurant': 'order',
+                'my_genericorder': 'genericorder',
+                'my_coupon': 'member',
+                'weixin_login': 'http://www.clubmeiwei.com/weixin/login/'
+            };
+            if(meiweiToken && meiweiToken !="null") {
+                if(meiweiToken!='0') {
+                    MeiweiApp.TokenAuth.set(meiweiToken);
+                }
+            }
+            if(state && state !="null") {
+                if(stateMapping[state]) {
+                    //this.navigate(stateMapping[state], {trigger: true});
+                    switch (state) {
+                        case 'restaurant_search':
+                            this.restaurantSearch();
+                            break;
+                        case 'jingxuanhongjiu':
+                            this.productList(31);
+                            break;
+                        case 'daijia':
+                            this.requestDriver();
+                            break;
+                        case 'dangjiushi':
+                            this.productOrder(90);
+                            break;
+                        case 'xianhuadingzhi':
+                            this.productList(21);
+                            break;
+                        case 'dangaodingzhi':
+                            this.productList(39);
+                            break;
+                        case 'meizhuangfuwu':
+                            this.productList(32);
+                            break;
+                        case 'vvip':
+                            this.vvip();
+                            break;
+                        case 'shangwuchuxing':
+                            this.productList(29);
+                            break;
+                        case 'my_restaurant':
+                            this.orderList();
+                            break;
+                        case 'my_genericorder':
+                            this.genericOrderList();
+                            break;
+                        case 'my_coupon':
+                            this.memberCenter();
+                            break;
+                        default :
+                            this.getStarted();
+                            break;
+                    }
+                    return;
+                }
+            }
+        }
+
         if (localStorage.getItem('first-time')) {
 	        MeiweiApp.Pages.Home.go(); MeiweiApp.history.active = MeiweiApp.Pages.Home;
 	    } else {
