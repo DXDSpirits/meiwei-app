@@ -50,7 +50,7 @@ $(function() {
                                 MeiweiApp.Pages.GenericOrderDetail.onResume();
                             },2000);
                         } else {
-                            alert(res.err_msg);
+                            //alert(res.err_msg);
                         }
                     });
                 }});
