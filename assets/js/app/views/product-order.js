@@ -81,9 +81,6 @@ $(function() {
         },
         render: function() {
             this.$('.info-text').html('');
-            MeiweiApp.me.fetch({success:function(){
-                
-            }});
             if (this.options.productItem) {
                 this.productItem.set(this.options.productItem);
                 this.renderOrderForm();
