@@ -1,21 +1,20 @@
-
 window.MeiweiApp = new (Backbone.View.extend({
-    
+
     Version: 2.3,
-    
+
     Models: {},
     Views: {},
     Collections: {},
-    
+
     Templates: {},
     Pages: {},
-    
+
     configs: {
         APIHost: "http://api.clubmeiwei.com",
         ajaxTimeout: 120000
     },
-    
-    start: function() {
+
+    start: function () {
         MeiweiApp.initDevice();
         MeiweiApp.initVersion();
         MeiweiApp.showSplash();
@@ -30,23 +29,23 @@ window.MeiweiApp = new (Backbone.View.extend({
     }
 }))({el: document.body});
 
-MeiweiApp.showSplash = function() {
+MeiweiApp.showSplash = function () {
     if (navigator.splashscreen) {
         navigator.splashscreen.show();
-        setTimeout(function() {
+        setTimeout(function () {
             navigator.splashscreen.hide();
         }, 1000);
     }
 };
 
-MeiweiApp.isAndroid = function(){
+MeiweiApp.isAndroid = function () {
     return /Android/i.test(navigator.userAgent);
 }
 
-MeiweiApp.initTime = function(){
-    if(MeiweiApp.isAndroid()){
+MeiweiApp.initTime = function () {
+    if (MeiweiApp.isAndroid()) {
         var option = {
-           'date': {
+            'date': {
                 preset: 'date',
                 invalid: { daysOfWeek: [0, 6], daysOfMonth: ['5/1', '12/24', '12/25'] }
             },
@@ -60,7 +59,7 @@ MeiweiApp.initTime = function(){
                 preset: 'time'
             }
         }
-        var lang = MeiweiApp.getLang()=='en'?'':'zh';
+        var lang = MeiweiApp.getLang() == 'en' ? '' : 'zh';
         var opt = {
             'theme': 'android-ics light',
             'mode': 'scroller', //clickpick mixed
@@ -74,13 +73,33 @@ MeiweiApp.initTime = function(){
     }
 };
 
-MeiweiApp.initDevice = function() {
+MeiweiApp.setWeixinShare = function (message) {
+    document.addEventListener('WeixinJSBridgeReady', function onBridgeReady() {
+        WeixinJSBridge.on('menu:share:appmessage', function (argv) {
+            WeixinJSBridge.invoke('sendAppMessage', message);
+        });
+        WeixinJSBridge.on('menu:share:timeline', function (argv) {
+            WeixinJSBridge.invoke('shareTimeline', message);
+        });
+    }, false);
+};
+
+MeiweiApp.initDevice = function () {
     if (window.device) {
         MeiweiApp.isCordova = true;
-    } else if(/MicroMessenger/i.test(navigator.userAgent)) {
+    } else if (/MicroMessenger/i.test(navigator.userAgent)) {
         MeiweiApp.isWeixin = true;
         window.device = { platform: 'Weixin' };
         $('title').append(' ' + $('meta[name=description]').attr('content'));
+        var message = {
+            "img_url" : 'http://mobile.clubmeiwei.com/assets/img/default.png',
+            "img_width" : "240",
+            "img_height" : "150",
+            "link" : "https://open.weixin.qq.com/connect/oauth2/authorize?appid=wx0fd053b2f2f80d94&redirect_uri=http%3A%2F%2Fmobile.clubmeiwei.com%2Fweixin%2Fweixin.html%3Fshowwxpaytitle%3D1%23wxAuth%2F4055d9f95fc462499ae201ac3d13c389975d4821%2Frestaurant%2Fsearch&response_type=code&scope=snsapi_base&state=restaurant_search#wechat_redirect",
+            "desc" : "百余家高端餐厅预订和贴心的私人管家服务",
+            "title" : "美位 - 只为最懂得享受的你"
+        };
+        MeiweiApp.setWeixinShare(message);
     } else {
         window.device = { platform: 'WebApp' };
     }
@@ -90,12 +109,12 @@ MeiweiApp.initDevice = function() {
     FastClick.attach(document.body);
 };
 
-MeiweiApp.fixViewport = function() {
+MeiweiApp.fixViewport = function () {
     var wrapperOffset = 44;
     if (window.device.platform === 'iOS' && parseFloat(window.device.version) >= 7.0) {
         wrapperOffset += 20;
     }
-    var fixWrapperHeight = function() {
+    var fixWrapperHeight = function () {
         $('body>.view>.wrapper').css('height', $(window).height() - wrapperOffset);
     };
     fixWrapperHeight();
@@ -107,7 +126,7 @@ MeiweiApp.fixViewport = function() {
     }
 };
 
-MeiweiApp.initVersion = function() {
+MeiweiApp.initVersion = function () {
     var pVersion = parseFloat(localStorage.getItem('version-code')) || 1.0;
     if (MeiweiApp.Version != pVersion) {
         var authToken = localStorage.getItem('auth-token');
@@ -119,9 +138,9 @@ MeiweiApp.initVersion = function() {
     var app = new MeiweiApp.Models.App();
     app.fetch({
         global: false,
-        success: function(model, response, options) {
+        success: function (model, response, options) {
             var version = parseFloat(model.get('version'));
-            var onConfirm = function() {
+            var onConfirm = function () {
                 if (device.platform == 'iOS') {
                     var ref = MeiweiApp.openWindow('https://itunes.apple.com/app/id689668571');
                 } else {
@@ -139,51 +158,53 @@ MeiweiApp.initVersion = function() {
     });
 };
 
-MeiweiApp.initLanguage = function() {
+MeiweiApp.initLanguage = function () {
     var langCode = localStorage.getItem('lang-code') || 'zh';
     /*
      * i18n is disabled for the moment
      */
     langCode = 'zh';
-    MeiweiApp._ = function(msgId) {
+    MeiweiApp._ = function (msgId) {
         var msg = MeiweiApp.i18n[msgId];
         return msg ? msg[langCode] : msgId;
     };
-    MeiweiApp.initLang = function(context) {
+    MeiweiApp.initLang = function (context) {
         context = context || document;
-        $(context).find('[data-i18n]').each(function() {
+        $(context).find('[data-i18n]').each(function () {
             $(this).html(MeiweiApp._($(this).attr('data-i18n')));
         });
-        $(context).find('[data-placeholder-i18n]').each(function() {
+        $(context).find('[data-placeholder-i18n]').each(function () {
             $(this).attr('placeholder', MeiweiApp._($(this).attr('data-placeholder-i18n')));
         });
         moment.lang(langCode == 'en' ? 'en' : 'zh-cn');
     };
-    MeiweiApp.setLang = function(lang) {
+    MeiweiApp.setLang = function (lang) {
         localStorage.setItem('lang-code', (langCode = lang));
         MeiweiApp.initLang();
     };
-    MeiweiApp.getLang = function() { return langCode; };
+    MeiweiApp.getLang = function () {
+        return langCode;
+    };
     MeiweiApp.initLang();
 };
 
-MeiweiApp.initGeolocation = function(callback) {
-    var onSuccess = function(position) {
+MeiweiApp.initGeolocation = function (callback) {
+    var onSuccess = function (position) {
         MeiweiApp.coords.latitude = position.coords.latitude;
         MeiweiApp.coords.longitude = position.coords.longitude;
         if (callback) callback();
     };
-    var onError = function() {
+    var onError = function () {
         if (callback) callback();
     };
     MeiweiApp.coords = { longitude: 121.491, latitude: 31.233 };
     navigator.geolocation.getCurrentPosition(onSuccess, onError);
 };
 
-MeiweiApp.initSync = function() {
+MeiweiApp.initSync = function () {
     var authToken = localStorage.getItem('auth-token');
     var originalSync = Backbone.sync;
-    Backbone.sync = function(method, model, options) {
+    Backbone.sync = function (method, model, options) {
         options.timeout = options.timeout || MeiweiApp.configs.ajaxTimeout;
         _.extend((options.headers || (options.headers = {})), { 'Accept-Language': MeiweiApp.getLang() });
         if (authToken) {
@@ -199,39 +220,39 @@ MeiweiApp.initSync = function() {
         return originalSync.call(model, method, model, options);
     };
     MeiweiApp.TokenAuth = {
-        get: function() {
+        get: function () {
             return _.clone(authToken);
         },
-        set: function(token) {
+        set: function (token) {
             authToken = _.clone(token);
             localStorage.setItem('auth-token', authToken);
         },
-        clear: function() {
+        clear: function () {
             authToken = null;
             localStorage.removeItem('auth-token');
         }
     };
 };
 
-MeiweiApp.initAjaxEvents = function() {
+MeiweiApp.initAjaxEvents = function () {
     var timeout = 1000;
     var xhrPool = [];
-    $(document).ajaxStart(function() {
+    $(document).ajaxStart(function () {
         $('#apploader').removeClass('invisible');
     });
-    $(document).ajaxStop(function() {
-        setTimeout(function() {
+    $(document).ajaxStop(function () {
+        setTimeout(function () {
             $('#apploader').addClass('invisible');
             timeout = 1000;
         }, timeout);
     });
-    $(document).ajaxError(function(event, jqxhr, settings, exception) {
+    $(document).ajaxError(function (event, jqxhr, settings, exception) {
         var response = jqxhr.responseJSON || {};
         if (jqxhr.status == 401 || jqxhr.status == 403 || jqxhr.status == 499) {
             if (response.detail != 'Authentication credentials were not provided.') {
                 var text = $('#apploader .ajax-error').html();
                 $('#apploader .ajax-error').html(response.detail).removeClass('hidden');
-                setTimeout(function() {
+                setTimeout(function () {
                     $('#apploader .ajax-error').html(text).addClass('hidden');
                 }, (timeout = 2000)/* + 500*/);
             }
@@ -239,35 +260,37 @@ MeiweiApp.initAjaxEvents = function() {
             MeiweiApp.Pages.MemberLogin.go({ ref: MeiweiApp.history.active });
         } else if (settings.type == 'GET' && jqxhr.statusText != 'abort') {
             $('#apploader .ajax-error').removeClass('hidden');
-            setTimeout(function() {
+            setTimeout(function () {
                 $('#apploader .ajax-error').addClass('hidden');
             }, (timeout = 2500)/* + 500*/);
         }
     });
     $.ajaxSetup({
-        beforeSend: function(jqXHR) {
+        beforeSend: function (jqXHR) {
             if (xhrPool.length >= 7) {
                 xhrPool[0].abort();
                 xhrPool.splice(0, 1);
             }
             xhrPool.push(jqXHR);
         },
-        complete: function(jqXHR) {
+        complete: function (jqXHR) {
             var index = xhrPool.indexOf(jqXHR);
             if (index > -1) xhrPool.splice(index, 1);
         }
     });
-    MeiweiApp.abortAllAjax = function() {
-        _.each(xhrPool, function(jqXHR) { jqXHR.abort(); });
+    MeiweiApp.abortAllAjax = function () {
+        _.each(xhrPool, function (jqXHR) {
+            jqXHR.abort();
+        });
         xhrPool.length = 0;
-        setTimeout(function() {
+        setTimeout(function () {
             $('#apploader').addClass('invisible');
             timeout = 0;
         }, timeout);
     };
 };
 
-MeiweiApp.initGa = function() {
+MeiweiApp.initGa = function () {
     var clientId = MeiweiApp.TokenAuth.get() ? MeiweiApp.TokenAuth.get() : window.device.uuid;
     if (clientId) {
         ga('create', 'UA-40624648-3', { 'storage': 'none', 'clientId': clientId });
@@ -276,20 +299,22 @@ MeiweiApp.initGa = function() {
     }
 };
 
-MeiweiApp.handleError = function(err) {
+MeiweiApp.handleError = function (err) {
     try {
         var error = new MeiweiApp.Models.ClientError();
         error.save({message: err.message, detail: err.stack}, {global: false});
         console.error(err.message);
-    } catch (e) {}
+    } catch (e) {
+    }
 };
 
-window.onerror = function(message, file, line, column, errorObj) {
+window.onerror = function (message, file, line, column, errorObj) {
     try {
         MeiweiApp.abortAllAjax();
         var detail = errorObj && errorObj.stack ? errorObj.stack : [file, line, column].join(':');
         var error = new MeiweiApp.Models.ClientError();
         error.save({message: message, detail: detail}, {global: false});
         console.error(message, detail);
-    } catch (e) {}
+    } catch (e) {
+    }
 };
