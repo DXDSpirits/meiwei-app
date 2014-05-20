@@ -93,7 +93,7 @@ MeiweiApp.payByAlipay = function(orderString) {
     } else {
         MeiweiApp.showConfirmDialog(
             MeiweiApp._('Payment'),
-            MeiweiApp._('We are working hard on the Wechat Payment.'),
+            MeiweiApp._('We are working hard on the Ali Payment.'),
             function() {
                 MeiweiApp.openWindow('http://www.clubmeiwei.com/ad/apppromo');
             }

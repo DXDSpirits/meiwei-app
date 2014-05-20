@@ -32,27 +32,31 @@ $(function() {
     		);
     	},
     	payOrder: function() {
-            if(window.WeixinJSBridge) {
+            if(MeiweiApp.isWeixin) {
                 var wxPayment = new WxPayment({
                     payment_no: this.model.get('payment').payment_no
                 });
                 wxPayment.fetch({success: function(model) {
-                    WeixinJSBridge.invoke('getBrandWCPayRequest', {
-                        "appId": model.get('appid'),
-                        "timeStamp": model.get('timestamp'),
-                        "nonceStr": model.get('noncestr'),
-                        "package": model.get('package'),
-                        "signType": model.get('signtype'),
-                        "paySign": model.get('paysign')
-                    }, function (res) {
-                        if (res.err_msg == "get_brand_wcpay_request:ok") {
-                            window.setTimeout(function(){
-                                MeiweiApp.Pages.GenericOrderDetail.onResume();
-                            },2000);
-                        } else {
-                            //alert(res.err_msg);
-                        }
-                    });
+                    if(window.WeixinJSBridge) {
+                        WeixinJSBridge.invoke('getBrandWCPayRequest', {
+                            "appId": model.get('appid'),
+                            "timeStamp": model.get('timestamp'),
+                            "nonceStr": model.get('noncestr'),
+                            "package": model.get('package'),
+                            "signType": model.get('signtype'),
+                            "paySign": model.get('paysign')
+                        }, function (res) {
+                            if (res.err_msg == "get_brand_wcpay_request:ok") {
+                                window.setTimeout(function(){
+                                    MeiweiApp.Pages.GenericOrderDetail.onResume();
+                                },2000);
+                            } else {
+                                //alert(res.err_msg);
+                            }
+                        });
+                    } else {
+
+                    }
                 }});
             } else {
                 var alipayPayment = new AlipayPayment({

@@ -431,9 +431,9 @@ MeiweiApp.i18n = {
         zh: '支付',
         en: 'Payment'
     },
-    'We are working hard on the Wechat Payment.': {
-        zh: '美位正在努力开通微信支付，暂时您可以下载手机应用支付订单。',
-        en: 'We are working hard on the Wechat Payment.'
+    'We are working hard on the Ali Payment.': {
+        zh: '美位正在努力开通支付宝支付，暂时您可以下载手机应用支付订单。',
+        en: 'We are working hard on the Ali Payment.'
     },
     'Explore': {
         zh: '随便看看',
