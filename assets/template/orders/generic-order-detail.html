@@ -31,4 +31,7 @@
     {{#payment.is_payable}}
     <button class="btn-inverse btn-block-level btn-payable" data-i18n="支付">支付</button>
     {{/payment.is_payable}}
+    {{^payment.is_paid}}
+    <button class="btn-inverse btn-block-level btn-cancel" data-i18n="取消">取消</button>
+    {{/payment.is_paid}}
 </section>

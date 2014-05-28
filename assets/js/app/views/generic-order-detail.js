@@ -26,7 +26,7 @@ $(function() {
     		    MeiweiApp._('Please confirm the cancellation'),
     		    function() {
     		        model.cancel({success: function() {
-    		            MeiweiApp.goTo('OrderList');
+    		            MeiweiApp.goTo('GenericOrderList');
     		        }});
     		    }
     		);
