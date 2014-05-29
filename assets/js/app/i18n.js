@@ -271,10 +271,6 @@ MeiweiApp.i18n = {
         zh: '请确认取消订单',
         en: 'Cancel Order'
     },
-    'Please confirm driver the cancellation': {
-        zh: '请确认取消订单,并拨打安师傅客服电话取消预订',
-        en: 'Cancel Order'
-    },
     'An SMS will be sent to you to inform you the order has been confirmed': {
         zh: '订单被确认以后您会收到一条短信',
         en: 'An SMS will be sent to you to inform you the order has been confirmed'
@@ -442,6 +438,10 @@ MeiweiApp.i18n = {
     'Explore': {
         zh: '随便看看',
         en: 'Explore'
+    },
+    'Calling Anshifu and cancel order':{
+        zh:'请拨打安师傅客服电话，取消代驾预订，谢谢！',
+        en:'Calling Anshifu and cancel order'
     }
 };
 
