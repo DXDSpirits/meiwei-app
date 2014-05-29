@@ -27,15 +27,28 @@ $(function () {
         },
         cancelOrder: function () {
             var model = this.model;
-            MeiweiApp.showConfirmDialog(
-                MeiweiApp._('Cancel Order'),
-                MeiweiApp._('Please confirm the cancellation'),
-                function () {
-                    model.cancel({success: function () {
-                        MeiweiApp.goTo('GenericOrderList');
-                    }});
-                }
-            );
+            if(model.get('order_type')==30) {
+                MeiweiApp.showConfirmDialog(
+                    MeiweiApp._('Cancel Order'),
+                    MeiweiApp._('Please confirm driver the cancellation'),
+                    function () {
+                        model.cancel({success: function () {
+                            MeiweiApp.goTo('GenericOrderList');
+                        }});
+                        window.location.href="tel://"+'4-001-002-003';
+                    }
+                );
+            } else {
+                MeiweiApp.showConfirmDialog(
+                    MeiweiApp._('Cancel Order'),
+                    MeiweiApp._('Please confirm the cancellation'),
+                    function () {
+                        model.cancel({success: function () {
+                            MeiweiApp.goTo('GenericOrderList');
+                        }});
+                    }
+                );
+            }
         },
         payOrder: function () {
             if (MeiweiApp.isWeixin) {
