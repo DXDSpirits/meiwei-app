@@ -6,11 +6,11 @@ $(function() {
             } catch (e) { }
         },
         get : function(key) {
-            try {
-                var item = localStorage.getItem('bootstrap-' + key);
-                if (item) return JSON.parse(item);
-            } catch (e) { }
-            Bootstrap.set(key, Bootstrap.data[key]);
+//            try {
+//                var item = localStorage.getItem('bootstrap-' + key);
+//                if (item) return JSON.parse(item);
+//            } catch (e) { }
+//            Bootstrap.set(key, Bootstrap.data[key]);
             return Bootstrap.data[key];
         }
     };
