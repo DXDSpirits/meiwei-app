@@ -201,9 +201,7 @@ $(function() {
             this.$('.wrapper').css('background-image', 'none');
         },
         renderOrderForm: function(model, response, options) {
-        	var localImage = 'assets/img/bootstrap/restaurant/' + this.restaurant.id + '.jpg';
             MeiweiApp.loadBgImage(this.$('.wrapper'), this.restaurant.get('frontpic'), {
-    			src_local: localImage,
     			height: 250
     		});
             //MeiweiApp.loadBgImage($('body'), this.restaurant.get('frontpic'), { height: 250 });

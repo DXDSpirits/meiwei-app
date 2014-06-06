@@ -77,7 +77,6 @@ $(function() {
     	render: function() {
     		MeiweiApp.ModelView.prototype.render.call(this);
     		MeiweiApp.loadBgImage(this.$el, this.model.get('restaurant').frontpic, {
-    			src_local: 'assets/img/bootstrap/restaurant/' + this.model.get('restaurant').id + '.jpg',
     			height: 250
     		});
     		return this;

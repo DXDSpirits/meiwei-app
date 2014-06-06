@@ -89,7 +89,6 @@ $(function() {
                 var ran = _.random(0, favorites.length - 1);
                 var model = favorites.at(ran);
 	            MeiweiApp.loadBgImage(this.$el, model.get('restaurantinfor').frontpic, {
-	    			src_local: 'assets/img/bootstrap/restaurant/' + model.get('restaurantinfor').id + '.jpg',
 	    			height: 250
 	    		});
             } else {

@@ -84,9 +84,7 @@ $(function() {
     		}, this);
     		this.$('.icon-favorite').toggleClass('succeed', (succeed != null));
     		this.$('.header-title').html(this.restaurant.get('fullname'));
-    		var localImage = 'assets/img/bootstrap/restaurant/' + this.restaurant.id + '.jpg';
             MeiweiApp.loadBgImage(this.$('.wrapper'), this.restaurant.get('frontpic'), {
-    			src_local: localImage,
     			height: 250
     		});
     		//MeiweiApp.loadBgImage($('body'), this.restaurant.get('frontpic'), { height: 250 });
