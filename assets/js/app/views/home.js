@@ -174,7 +174,7 @@ $(function() {
                 if (listId) MeiweiApp.Pages.Home.recommend.id = listId;
                 this.recommend.fetch();
                 this.recommendNames.fetch();
-                this.heros.fetch();
+                this.heros.fetch({reset: true});
             }
     	}
     }))({el: $("#view-home")});
