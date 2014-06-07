@@ -193,9 +193,7 @@ MeiweiApp.PageView = MeiweiApp.View.extend({
         this.$el.one('pageOpen', pageOpen);
         this.showPage();
     },
-    onResume: function() {
-        this.refresh();
-    },
+    onResume: function() {},
     reset: function() {},
     showPage: function() {
         if (this.$el && this.$el.hasClass('view-hidden')) {
