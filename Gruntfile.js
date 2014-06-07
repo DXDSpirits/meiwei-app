@@ -83,7 +83,6 @@ module.exports = function(grunt) {
                     'assets/font/**/*',
                     'assets/js/vendor/**/*',
                     '.htaccess',
-                    'config.xml',
                     'cordova.js'
                 ],
                 dest: '<%= cfg.path.dest %>'
