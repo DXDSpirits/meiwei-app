@@ -1,7 +1,20 @@
 $(function() {
+    var AlipayPayment = MeiweiApp.Model.extend({
+        urlRoot: MeiweiApp.configs.APIHost + '/alipay/payable/',
+        idAttribute: 'payment_no'
+    });
+
+    var WxPayment = MeiweiApp.Model.extend({
+        urlRoot: MeiweiApp.configs.APIHost + '/wxpay/payable/',
+        idAttribute: 'payment_no'
+    });
+
     var OrderDetail = MeiweiApp.ModelView.extend({
     	template: TPL['order-detail'],
-    	events: { 'click .btn-cancel': 'cancelOrder' },
+    	events: {
+            'click .btn-cancel': 'cancelOrder',
+            'click .btn-payable': 'payOrder'
+        },
     	cancelOrder: function() {
     		var model = this.model;
     		MeiweiApp.showConfirmDialog(
@@ -13,7 +26,43 @@ $(function() {
     		        }});
     		    }
     		);
-    	}
+    	},
+        payOrder: function () {
+            if (MeiweiApp.isWeixin) {
+                var wxPayment = new WxPayment({
+                    payment_no: this.model.get('payment_order').payment_no
+                });
+                wxPayment.fetch({success: function (model) {
+                    if (window.WeixinJSBridge) {
+                        WeixinJSBridge.invoke('getBrandWCPayRequest', {
+                            "appId": model.get('appid'),
+                            "timeStamp": model.get('timestamp'),
+                            "nonceStr": model.get('noncestr'),
+                            "package": model.get('package'),
+                            "signType": model.get('signtype'),
+                            "paySign": model.get('paysign')
+                        }, function (res) {
+                            if (res.err_msg == "get_brand_wcpay_request:ok") {
+                                window.setTimeout(function () {
+                                    MeiweiApp.Pages.OrderDetail.onResume();
+                                }, 2000);
+                            } else {
+                                alert(res.err_msg);
+                            }
+                        });
+                    } else {
+
+                    }
+                }});
+            } else {
+                var alipayPayment = new AlipayPayment({
+                    payment_no: this.model.get('payment_order').payment_no
+                });
+                alipayPayment.fetch({success: function (model) {
+                    MeiweiApp.payByAlipay(model.get('orderString'));
+                }});
+            }
+        }
     });
     
     MeiweiApp.Pages.OrderDetail = new (MeiweiApp.PageView.extend({
@@ -38,6 +87,14 @@ $(function() {
             this.$('.wrapper').css('background-image', 'none');
         },
     	renderAll: function() {
+            if(this.order.get('payment_order')) {
+                var paymentStatus = this.order.get('payment_order').status;
+                if (paymentStatus == 50) {
+                    this.order.set('payment_status', false);
+                } else {
+                    this.order.set('payment_status', true);
+                }
+            }
     		var resto = this.order.get('restaurantinfor');
     		var localImage = 'assets/img/bootstrap/restaurant/' + resto.id + '.jpg';
             MeiweiApp.loadBgImage(this.$('.wrapper'), resto.frontpic, { height: 250 });
@@ -51,6 +108,7 @@ $(function() {
     		}
     	},
     	render: function() {
+            this.order.unset('payment_status');
     		if (this.options.order) {
     			this.order.set(this.options.order);
     			this.renderAll();
