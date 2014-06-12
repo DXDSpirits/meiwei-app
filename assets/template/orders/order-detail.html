@@ -33,10 +33,10 @@
 {{/product_items.length}}
 
 <section class="order-buttons">
-    {{^payment_status}}
+    {{^is_payable}}
     <button class="btn-inverse btn-block-level btn-cancel" data-i18n="Cancel Order">取消订单</button>
-    {{/payment_status}}
-    {{#payment_status}}
+    {{/is_payable}}
+    {{#is_payable}}
     <table>
         <tbody>
         <tr>
@@ -45,5 +45,5 @@
         </tr>
         </tbody>
     </table>
-    {{/payment_status}}
+    {{/is_payable}}
 </section>

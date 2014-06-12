@@ -86,15 +86,10 @@ $(function() {
         reset: function() {
             this.$('.wrapper').css('background-image', 'none');
         },
+        onResume: function () {
+            this.order.fetch({success: this.renderAll});
+        },
     	renderAll: function() {
-            if(this.order.get('payment_order')) {
-                var paymentStatus = this.order.get('payment_order').status;
-                if (paymentStatus == 50) {
-                    this.order.set('payment_status', false);
-                } else {
-                    this.order.set('payment_status', true);
-                }
-            }
     		var resto = this.order.get('restaurantinfor');
     		var localImage = 'assets/img/bootstrap/restaurant/' + resto.id + '.jpg';
             MeiweiApp.loadBgImage(this.$('.wrapper'), resto.frontpic, { height: 250 });
@@ -108,7 +103,6 @@ $(function() {
     		}
     	},
     	render: function() {
-            this.order.unset('payment_status');
     		if (this.options.order) {
     			this.order.set(this.options.order);
     			this.renderAll();
