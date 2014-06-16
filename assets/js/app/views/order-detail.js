@@ -47,7 +47,7 @@ $(function() {
                                     MeiweiApp.Pages.OrderDetail.onResume();
                                 }, 2000);
                             } else {
-                                alert(res.err_msg);
+//                                alert(res.err_msg);
                             }
                         });
                     } else {
