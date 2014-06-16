@@ -15,6 +15,22 @@
     		<tr><th colspan="2" data-i18n="Discount">折扣</th></tr>
             <tr><td colspan="2">{{{ restaurantinfor.discount }}}</td></tr>
         {{ /restaurantinfor.discount }}
+        {{#is_prepay}}
+        <tr>
+            <th colspan="2">支付</th>
+        </tr>
+        <tr>
+            <td>
+                <span>￥{{ payment_order.amount }}</span>
+                {{#payment_order.is_paid}}
+                <span class="payment_status paid">已支付</span>
+                {{/payment_order.is_paid}}
+                {{^payment_order.is_paid}}
+                <span class="payment_status">未支付</span>
+                {{/payment_order.is_paid}}
+            </td>
+        </tr>
+        {{/is_prepay}}
 	</table>
 </section>
 
