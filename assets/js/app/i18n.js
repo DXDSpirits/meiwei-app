@@ -24,7 +24,7 @@ MeiweiApp.i18n = {
         en: 'Loading...'
     },
     'Reserve': {
-        zh: '订餐',
+        zh: '订位',
         en: 'Book'
     },
     'Price Range': {

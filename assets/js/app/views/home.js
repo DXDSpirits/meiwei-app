@@ -27,6 +27,11 @@ $(function() {
                 var target = this.model.get('target');
                 var uri = this.model.get('uri');
                 var options = this.model.get('options');
+                if(this.model.get('id')=='nightclub') {
+                    MeiweiApp.Pages.Home.recommend.id = 31;
+                    MeiweiApp.Pages.Home.recommend.fetch();
+                    return;
+                }
                 if (target == 'product') {
                     MeiweiApp.goTo('ProductOrder', {productItemId: +uri});
                 } else if (target == 'internal') {
