@@ -159,6 +159,7 @@ $(function() {
                 orderdate: this.$('input[name=orderdate]').val() || null,
                 ordertime: this.$('select[name=ordertime]').val() || null,
                 personnum: this.$('input[name=personnum]').val() || null,
+                clubseattype: this.$('select[name=clubseattype]').val() || null,
                 contactname: this.$('input[name=contactname]').val() || null,
                 contactgender: this.$('input[name=contactgender]').val() || null,
                 contactphone: this.$('input[name=contactphone]').val() || null,
@@ -219,6 +220,12 @@ $(function() {
                     ordertime: '19:00',
                     personnum: 2
                 };
+            }
+
+            if(this.restaurant.get('restaurant_type')==20){
+                this.$('.club-seat-type').removeClass('hidden');
+            } else {
+                this.$('.club-seat-type').addClass('hidden');
             }
             
             this.views.orderForm.render(defaultValues);
