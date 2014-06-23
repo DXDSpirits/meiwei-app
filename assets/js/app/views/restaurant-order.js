@@ -223,9 +223,9 @@ $(function() {
             }
 
             if(this.restaurant.get('restaurant_type')==20){
-                this.$('.club-seat-type').removeClass('hidden');
+                this.$('#defaultSeatType').text('卡座');
             } else {
-                this.$('.club-seat-type').addClass('hidden');
+                this.$('#defaultSeatType').text('随意');
             }
             
             this.views.orderForm.render(defaultValues);

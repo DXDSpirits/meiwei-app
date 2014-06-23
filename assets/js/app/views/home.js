@@ -23,15 +23,11 @@ $(function() {
             events: { 'click': 'viewProducts' },
             className: 'carousel-item',
             viewProducts: function(e) {
+                MeiweiApp.Pages.Home.resetFilters();
                 var el = e.currentTarget;
                 var target = this.model.get('target');
                 var uri = this.model.get('uri');
                 var options = this.model.get('options');
-                if(this.model.get('id')=='nightclub') {
-                    MeiweiApp.Pages.Home.recommend.id = 31;
-                    MeiweiApp.Pages.Home.recommend.fetch();
-                    return;
-                }
                 if (target == 'product') {
                     MeiweiApp.goTo('ProductOrder', {productItemId: +uri});
                 } else if (target == 'internal') {
@@ -72,9 +68,11 @@ $(function() {
     		'click .order-button': 'gotoOrder'
     	},
     	viewRestaurant: function(e) {
+            MeiweiApp.Pages.Home.resetFilters();
     		MeiweiApp.goTo('RestaurantDetail', { restaurant: this.model.get('restaurant') });
     	},
     	gotoOrder: function(e) {
+            MeiweiApp.Pages.Home.resetFilters();
     		if (e.stopPropagation) e.stopPropagation();
     		var restaurantId = this.model.get('restaurant').id;
     		MeiweiApp.goTo('RestaurantOrder', { restaurantId: restaurantId });
@@ -117,8 +115,19 @@ $(function() {
     		 */
     		this.listenTo(this.recommend.items, 'reset change add remove', this.renderAll);
     	},
-    	onClickLeftBtn: function() { MeiweiApp.goTo('MemberCenter'); },
-    	onClickRightBtn: function() { MeiweiApp.goTo('Attending'); },
+    	onClickLeftBtn: function() {
+            this.resetFilters();
+            MeiweiApp.goTo('MemberCenter');
+        },
+        resetFilters:function(){
+            if(!MeiweiApp.Pages.Home.$('.recommends-filter').hasClass('closed')){
+                MeiweiApp.Pages.Home.$('.recommends-filter').addClass('closed');
+            }
+        },
+    	onClickRightBtn: function() {
+            this.resetFilters();
+            MeiweiApp.goTo('Attending');
+        },
     	toggleFilter: function() {
     	    this.$('.recommends-filter').toggleClass('closed');
     	    MeiweiApp.sendGaEvent('homepage list', 'select');

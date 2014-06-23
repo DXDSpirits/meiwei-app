@@ -46,6 +46,7 @@ $(function() {
                 }
             }
             else{
+                MeiweiApp.Pages.ProductList.resetFilters();
                 MeiweiApp.goTo('ProductOrder', {productItem: this.model.toJSON()});
             }
     	}
@@ -60,7 +61,8 @@ $(function() {
             'click .header-btn-left': 'onClickLeftBtn',
             'click .header-title': 'toggleFilter'
         },
-        onClickLeftBtn: function() { 
+        onClickLeftBtn: function() {
+            MeiweiApp.Pages.ProductList.resetFilters();
             if(MeiweiApp.Pages.ProductList.options.status=="order")MeiweiApp.Pages.ProductList.options.status=null;
             MeiweiApp.goBack(); 
         },
@@ -81,6 +83,11 @@ $(function() {
         toggleFilter: function() {
             this.$('.product-filter').toggleClass('closed');
             MeiweiApp.sendGaEvent('product list', 'select');
+        },
+        resetFilters:function(){
+            if(!this.$('.product-filter').hasClass('closed')){
+                this.$('.product-filter').addClass('closed')
+            }
         },
     	renderAll: function() {
     	    var productId = this.options.productId;

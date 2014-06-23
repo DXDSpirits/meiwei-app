@@ -31,10 +31,10 @@
 						<i class="icon icon-group"></i>
 						<input type="text" name="personnum" pattern="[0-9]*" />
 					</div>
-                    <div class="inline-group club-seat-type hidden">
+                    <div class="inline-group club-seat-type">
                         <i class="icon icon-select"></i>
                         <select name="clubseattype">
-                            <option value="0">卡座</option>
+                            <option value="0" id="defaultSeatType">卡座</option>
                             <option value="1">包厢</option>
                         </select>
                     </div>
@@ -69,12 +69,12 @@
 				</fieldset>
 			</form>
 		</section>
-		<section class="floorplan-select">
-			<header class="section-title menu"><h1>
-			    <span data-i18n="Select Seat">桌位选择</span>
-			    <span data-i18n="Seat Selected" class="seat-selected hidden"></span>
-			</h1></header>
-		</section>
+		<!--<section class="floorplan-select">-->
+			<!--<header class="section-title menu"><h1>-->
+			    <!--<span data-i18n="Select Seat">桌位选择</span>-->
+			    <!--<span data-i18n="Seat Selected" class="seat-selected hidden"></span>-->
+			<!--</h1></header>-->
+		<!--</section>-->
 		<section class="product-select">
 			<header class="section-title menu"><h1 data-i18n="Concierge Services">私人管家服务</h1></header>
 			<div class="product-cart clearfix"></div>

@@ -3,6 +3,7 @@ $(function() {
         template: TPL['restaurant-list-item'],
         events: { 'click': 'viewRestaurant' },
         viewRestaurant: function() {
+            MeiweiApp.Pages.RestaurantSearch.resetFilters();
             MeiweiApp.goTo('RestaurantDetail', { restaurant: this.model.toJSON() });
         },
         toggle: function(resto) {
@@ -111,6 +112,7 @@ $(function() {
             template: TPL['restaurant-list-item'],
             events: { 'click': 'viewRestaurant' },
             viewRestaurant: function() {
+                MeiweiApp.Pages.RestaurantSearch.resetFilters();
                 MeiweiApp.goTo('RestaurantDetail', { restaurant: this.model.toJSON() });
             },
             render: function() {
@@ -184,6 +186,10 @@ $(function() {
             this.resetFilters();
             this.views.map[flip ? 'hide' : 'show']();
         },
+        onClickLeftBtn:function(){
+            this.resetFilters();
+            MeiweiApp.goTo('Home');
+        },
         initPage: function() {
             this.restaurants = new MeiweiApp.Collections.Restaurants();
             this.filters = new MeiweiApp.Models.Filters();
@@ -242,7 +248,14 @@ $(function() {
         render: function() {
             MeiweiApp.initGeolocation();
             var keywords = this.options.keywords;
-            keywords ? this.searchRestaurants({ keywords: keywords }) : this.restaurants.fetch();
+            var recommendId = this.options.recommendId;
+            if(recommendId){
+                this.searchRestaurants({recommend:recommendId});
+            } else if(keywords) {
+                this.searchRestaurants({ keywords: keywords });
+            } else {
+                this.restaurants.fetch();
+            }
             if (!this.bootstrapped) {
                 this.bootstrapped = true;
                 var filters = window.Bootstrap && Bootstrap.get('restaurant-search-filters');
