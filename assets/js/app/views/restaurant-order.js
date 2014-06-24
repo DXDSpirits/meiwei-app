@@ -225,7 +225,7 @@ $(function() {
             if(this.restaurant.get('restaurant_type')==20){
                 this.$('#defaultSeatType').text('卡座');
             } else {
-                this.$('#defaultSeatType').text('大堂');
+                this.$('#defaultSeatType').text('大厅');
             }
             
             this.views.orderForm.render(defaultValues);
