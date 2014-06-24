@@ -91,6 +91,7 @@ $(function() {
                     var $option = $('<option></option>').val(item[0]).html(item[0] + ' ' + item[1]);
                     $select.append($option);
                 }
+                this.defaultValues.ordertime = hour[0];
             }
             $select.val(this.defaultValues.ordertime);
         },
