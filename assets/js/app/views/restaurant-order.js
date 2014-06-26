@@ -160,7 +160,7 @@ $(function() {
                 orderdate: this.$('input[name=orderdate]').val() || null,
                 ordertime: this.$('select[name=ordertime]').val() || null,
                 personnum: this.$('input[name=personnum]').val() || null,
-                clubseattype: this.$('select[name=clubseattype]').val() || null,
+                clubseattype: this.$('input[name=clubseattype]:checked').val() || null,
                 contactname: this.$('input[name=contactname]').val() || null,
                 contactgender: this.$('input[name=contactgender]').val() || null,
                 contactphone: this.$('input[name=contactphone]').val() || null,

@@ -3,32 +3,33 @@
 
 <section class="order-detail">
 	<table>
-		<tr><th colspan="2" data-i18n="Order No">订单号</th></tr>
-		<tr><td colspan="2">{{ order_no }}</td></tr>
-		<tr><th data-i18n="Order Date">订餐日期</th><th data-i18n="Order Time">订餐时间</th></tr>
-		<tr><td>{{ orderdate }}</td><td>{{ ordertime }}</td></tr>
-		<tr><th colspan="2" data-i18n="Peoples">就餐人数</th></tr>
-		<tr><td colspan="2">{{ personnum }}</td></tr>
-		<tr><th data-i18n="Contact">联系人</th><th data-i18n="Mobile">手机号</th></tr>
-		<tr><td>{{ contactname }}</td><td>{{ contactphone }}</td></tr>
+		<tr><th colspan="" data-i18n="Order No">订单号</th><td colspan="">{{ order_no }}</td></tr>
+		<tr><th data-i18n="Order Date">订餐日期</th><td>{{ orderdate }}</td></tr>
+        <tr><th data-i18n="Order Time">订餐时间</th><td>{{ ordertime }}</td></tr>
+		<tr><th colspan="" data-i18n="Peoples">就餐人数</th><td colspan="">{{ personnum }}</td></tr>
+        {{#clubseattype}}
+        <tr><th>座位</th><td id="seatType">包厢</td></tr>
+        {{/clubseattype}}
+        {{^clubseattype}}
+        <tr><th>座位</th><td id="seatType">卡座</td></tr>
+        {{/clubseattype}}
+		<tr><th data-i18n="Contact">联系人</th><td>{{ contactname }}</td></tr>
+		<tr><th data-i18n="Mobile">手机号</th><td>{{ contactphone }}</td></tr>
 		{{ #restaurantinfor.discount }}
-    		<tr><th colspan="2" data-i18n="Discount">折扣</th></tr>
-            <tr><td colspan="2">{{{ restaurantinfor.discount }}}</td></tr>
+    		<tr><th data-i18n="Discount">折扣</th><td>{{{ restaurantinfor.discount }}}</td></tr>
         {{ /restaurantinfor.discount }}
         {{#is_prepay}}
         <tr>
-            <th colspan="2">预支付</th>
-        </tr>
-        <tr>
+            <th colspan="">预支付</th>
             <td>
-                <span>￥{{ payment_order.amount }}</span>
-                {{#payment_order.is_paid}}
-                <span class="payment_status paid">已支付</span>
-                {{/payment_order.is_paid}}
-                {{^payment_order.is_paid}}
-                <span class="payment_status">未支付</span>
-                {{/payment_order.is_paid}}
-            </td>
+            <span>￥{{ payment_order.amount }}</span>
+            {{#payment_order.is_paid}}
+            <span class="payment_status paid">已支付</span>
+            {{/payment_order.is_paid}}
+            {{^payment_order.is_paid}}
+            <span class="payment_status">未支付</span>
+            {{/payment_order.is_paid}}
+        </td>
         </tr>
         {{/is_prepay}}
 	</table>

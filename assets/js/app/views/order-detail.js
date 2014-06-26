@@ -15,6 +15,14 @@ $(function() {
             'click .btn-cancel': 'cancelOrder',
             'click .btn-payable': 'payOrder'
         },
+        render:function(){
+            MeiweiApp.ModelView.prototype.render.call(this);
+            if(this.model.get('restaurantinfor').restaurant_type==20) {
+                $('#seatType').text('卡座');
+            } else {
+                $('#seatType').text('大厅');
+            }
+        },
     	cancelOrder: function() {
     		var model = this.model;
     		MeiweiApp.showConfirmDialog(

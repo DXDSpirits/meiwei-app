@@ -1,4 +1,4 @@
-<div class="view view-hidden" id="view-restaurant-order">
+<div class="view view-hidden" id="view-restaurant-order" xmlns="http://www.w3.org/1999/html">
 	<header class="header-navbar">
 		<div class="header-btn header-btn-left back-btn">
 			<i class="icon icon-back"></i>
@@ -32,11 +32,12 @@
 						<input type="text" name="personnum" pattern="[0-9]*" />
 					</div>
                     <div class="inline-group club-seat-type">
-                        <i class="icon icon-circle"></i>
-                        <select name="clubseattype">
-                            <option value="0" id="defaultSeatType" selected>卡座</option>
-                            <option value="1">包厢</option>
-                        </select>
+                        <label>
+                            <input type="radio"  checked name="clubseattype" value="0"><span id="defaultSeatType">卡座</span>
+                        </label>
+                        <label>
+                            <input type="radio" name="clubseattype" value="1"><span>包厢</span>
+                        </label>
                     </div>
 					<div class="order-detail inline-group">
 						<i class="icon icon-pencil"></i>
