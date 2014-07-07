@@ -76,9 +76,9 @@ $(function() {
     		    '<h1>{{name}}</h1>{{#price}}<h1><strong>￥{{price}}</strong></h1>{{/price}}<p>{{description}}</p>');
             this.$('.product-info').html(infoTemplate(this.productItem.toJSON()));
             this.$('input[name=datetime]').val(moment().add('days', 1).format('YYYY-MM-DD'));
-            if(this.options.productItemId==175) {
-                this.$('input[name=datetime]').val(moment('2014-07-06').format('YYYY-MM-DD'));
-            }
+//            if(this.options.productItemId==175) {
+//                this.$('input[name=datetime]').val(moment('2014-07-06').format('YYYY-MM-DD'));
+//            }
             this.views.orderContactForm.render();
             this.$('.wrapper').removeClass('rendering');
         },
