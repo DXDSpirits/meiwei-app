@@ -211,6 +211,16 @@
             text-indent: -20px;
         }
 	}
+    .settings-share {
+        margin-top: 10px;
+        margin-bottom: 10px;
+        padding-left: 15px;
+        padding-right: 15px;
+        width: 100%;
+        button, .btn {
+            font-size: $fontSizeSmall;
+        }
+    }
 }
 
 #view-restaurant-order {
