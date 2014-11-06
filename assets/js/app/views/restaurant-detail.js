@@ -38,7 +38,8 @@ $(function() {
             'click .header-btn-left': 'onClickLeftBtn',
             'click .header-btn-right': 'onClickRightBtn',
             'click .img-stack-icon': 'viewPictures',
-            'click .btn-share-weixin': 'onClickWeixinBtn',
+            'click .btn-share-wechat': 'onClickWechatBtn',
+            'click .btn-share-weixin': 'onClickMomentsBtn',
             'click .btn-share-weibo': 'onClickWeiboBtn'
         },
     	initPage: function() {
@@ -68,8 +69,14 @@ $(function() {
             var ref = MeiweiApp.openWindow(link);
             MeiweiApp.sendGaSocial('weibo', 'tweet', 'app promo');
         },
-        onClickWeixinBtn: function() {
-            if (!MeiweiApp.me.id) MeiweiApp.me.fetch();
+        onClickWechatBtn: function() {
+            var url = 'http://mobile.clubmeiwei.com/#restaurant/' + this.restaurant.id;
+            var content  = this.restaurant.get('fullname');
+            var pic = this.restaurant.get('frontpic');
+            MeiweiApp.sendWeixinLink(url, content, pic);
+            MeiweiApp.sendGaSocial('weixin', 'share to friend', 'app promo');
+        },
+        onClickMomentsBtn: function() {
             var url = 'http://mobile.clubmeiwei.com/#restaurant/' + this.restaurant.id;
             var content  = this.restaurant.get('fullname');
             var pic = this.restaurant.get('frontpic');

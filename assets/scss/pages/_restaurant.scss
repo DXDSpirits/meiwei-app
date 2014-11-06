@@ -211,7 +211,7 @@
             text-indent: -20px;
         }
 	}
-    .settings-share {
+    .restaurant-share {
         margin-top: 10px;
         margin-bottom: 10px;
         padding-left: 15px;
@@ -219,6 +219,17 @@
         width: 100%;
         button, .btn {
             font-size: $fontSizeSmall;
+        }
+        background: $bodyBackground url($gradientShadowPathR) no-repeat top;
+        @include background-size(100% (3*$baseLineHeight));
+        > header {
+            height: 36px;
+            padding-top: 8px;
+            font-size: $fontSizeSmall;
+            h1 {
+                font-size: $fontSizeSmall;
+                span { vertical-align: middle; }
+            }
         }
     }
 }

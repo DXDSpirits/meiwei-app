@@ -331,6 +331,10 @@ MeiweiApp.i18n = {
         zh: '折扣',
         en: 'Discount'
     },
+    'Share to Wechat': {
+        zh: '分享到微信',
+        en: 'Share to Moments'
+    },
     'Share to Moments': {
         zh: '分享到朋友圈',
         en: 'Share to Moments'
@@ -338,6 +342,22 @@ MeiweiApp.i18n = {
     'Share to Weibo': {
         zh: '分享到微博',
         en: 'Share to Weibo'
+    },
+    'Share to': {
+        zh: '分享到',
+        en: 'Moments'
+    },
+    'Wechat': {
+        zh: '微信',
+        en: 'Moments'
+    },
+    'Wechat Moments': {
+        zh: '朋友圈',
+        en: 'Moments'
+    },
+    'Weibo': {
+        zh: '微博',
+        en: 'Weibo'
     },
     'Purchase': {
         zh: '兑换',
