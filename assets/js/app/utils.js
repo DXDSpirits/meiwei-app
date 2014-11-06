@@ -109,7 +109,7 @@ MeiweiApp.sendWeixinMsg = function(content) {
     }
 };
 
-MeiweiApp.sendWeixinLink = function(content) {
+MeiweiApp.sendWeixinLink = function(url, content, pic) {
     var command = [url, content, content, pic];
     var success = function() {}, fail = function() {};
     if (MeiweiApp.isCordova && window.Cordova) {
