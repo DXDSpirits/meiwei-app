@@ -59,29 +59,30 @@ $(function() {
                 '&content=', c || 'gb2312', '&pic=', e(p || ''), '&ralateUid=', '3058840707'].join('');
             return [f, p].join('');
         },
+        getShareMessage: function() {
+            return {
+                url: 'http://mobile.clubmeiwei.com/#restaurant/' + this.restaurant.id,
+                content: this.restaurant.get('fullname') + ' 地址：' + this.restaurant.get('address'),
+                pic: this.restaurant.get('frontpic')
+            }
+        },
         onClickWeiboBtn : function() {
-            var url = 'http://mobile.clubmeiwei.com/#restaurant/' + this.restaurant.id;
-            var content  = this.restaurant.get('fullname');
-            var pic = this.restaurant.get('frontpic');
+            var message = this.getShareMessage();
             var link = this.getWeiboLink(screen, document, encodeURIComponent,
                                          'http://www.clubmeiwei.com', 'http://www.clubmeiwei.com',
-                                         pic, content, url, 'utf-8');
+                                         message.pic, message.content, message.url, 'utf-8');
             var ref = MeiweiApp.openWindow(link);
-            MeiweiApp.sendGaSocial('weibo', 'tweet', 'app promo');
+            MeiweiApp.sendGaSocial('weibo', 'tweet', 'restaurant');
         },
         onClickWechatBtn: function() {
-            var url = 'http://mobile.clubmeiwei.com/#restaurant/' + this.restaurant.id;
-            var content  = this.restaurant.get('fullname');
-            var pic = this.restaurant.get('frontpic');
-            MeiweiApp.sendWeixinLink(url, content, pic);
-            MeiweiApp.sendGaSocial('weixin', 'share to friend', 'app promo');
+            var message = this.getShareMessage();
+            MeiweiApp.sendWeixinLink(message.url, message.content, message.pic);
+            MeiweiApp.sendGaSocial('weixin', 'share to friend', 'restaurant');
         },
         onClickMomentsBtn: function() {
-            var url = 'http://mobile.clubmeiwei.com/#restaurant/' + this.restaurant.id;
-            var content  = this.restaurant.get('fullname');
-            var pic = this.restaurant.get('frontpic');
-            MeiweiApp.shareToMoments(url, content, pic);
-            MeiweiApp.sendGaSocial('weixin', 'share to moments', 'app promo');
+            var message = this.getShareMessage();
+            MeiweiApp.shareToMoments(message.url, message.content, message.pic);
+            MeiweiApp.sendGaSocial('weixin', 'share to moments', 'restaurant');
         },
     	viewPictures: function() {
     	    MeiweiApp.goTo('RestaurantPictures', {pictures: this.restaurant.get('pictures')});
