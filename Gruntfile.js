@@ -5,48 +5,48 @@ module.exports = function(grunt) {
         concat: {
             mwapp: {
                 src: [
-                    'assets/js/app/_open.js',
-                    'assets/js/app/app.js',
-                    'assets/js/app/app-local.js',
-                    'assets/js/app/utils.js',
-                    'assets/js/app/i18n.js',
-                    'assets/js/app/model.js',
-                    'assets/js/app/models/*.js',
-                    'assets/js/app/view.js',
-                    'assets/js/app/router.js',
-                    'assets/js/app/event.js',
-                    'assets/js/app/_close.js',
-                    'assets/js/app/views/*.js',
+                    'assets/javascripts/app/_open.js',
+                    'assets/javascripts/app/app.js',
+                    'assets/javascripts/app/app-local.js',
+                    'assets/javascripts/app/utils.js',
+                    'assets/javascripts/app/i18n.js',
+                    'assets/javascripts/app/model.js',
+                    'assets/javascripts/app/models/*.js',
+                    'assets/javascripts/app/view.js',
+                    'assets/javascripts/app/router.js',
+                    'assets/javascripts/app/event.js',
+                    'assets/javascripts/app/_close.js',
+                    'assets/javascripts/app/views/*.js',
                 ],
-                dest: '<%= cfg.path.dest %>/assets/js/mw-app.js'
+                dest: '<%= cfg.path.dest %>/assets/javascripts/mw-app.js'
             }
         },
         uglify: {
             mwapp: {
-                src: '<%= cfg.path.dest %>/assets/js/mw-app.js',
-                dest: '<%= cfg.path.dest %>/assets/js/mw-app.min.js'
+                src: '<%= cfg.path.dest %>/assets/javascripts/mw-app.js',
+                dest: '<%= cfg.path.dest %>/assets/javascripts/mw-app.min.js'
             },
             bootstrap: {
-                src: 'assets/js/bootstrap.js',
-                dest: '<%= cfg.path.dest %>/assets/js/bootstrap.js'
+                src: 'assets/javascripts/bootstrap.js',
+                dest: '<%= cfg.path.dest %>/assets/javascripts/bootstrap.js'
             },
             plugins: {
                 src: [
-                    'assets/js/plugin/helper.js',
-                    'assets/js/plugin/plugins.js',
-                    'assets/js/plugin/qrcode.js',
-                    'assets/js/plugin/jquery.qrcode.js',
-                    'assets/js/plugin/fastclick.js',
-                    'assets/js/plugin/moment.js',
-                    'assets/js/plugin/moment.zh-cn.js',
-                    'assets/js/plugin/iscroll.js',
-                    'assets/js/plugin/mobiscroll.core.js',
-                    'assets/js/plugin/mobiscroll.datetime.js',
-                    'assets/js/plugin/mobiscroll.scroller.js',
-                    'assets/js/plugin/mobiscroll.i18n.zh.js',
-                    'assets/js/plugin/mobiscroll.scroller.android-ics.js'
+                    'assets/javascripts/plugin/helper.js',
+                    'assets/javascripts/plugin/plugins.js',
+                    'assets/javascripts/plugin/qrcode.js',
+                    'assets/javascripts/plugin/jquery.qrcode.js',
+                    'assets/javascripts/plugin/fastclick.js',
+                    'assets/javascripts/plugin/moment.js',
+                    'assets/javascripts/plugin/moment.zh-cn.js',
+                    'assets/javascripts/plugin/iscroll.js',
+                    'assets/javascripts/plugin/mobiscroll.core.js',
+                    'assets/javascripts/plugin/mobiscroll.datetime.js',
+                    'assets/javascripts/plugin/mobiscroll.scroller.js',
+                    'assets/javascripts/plugin/mobiscroll.i18n.zh.js',
+                    'assets/javascripts/plugin/mobiscroll.scroller.android-ics.js'
                 ],
-                dest: '<%= cfg.path.dest %>/assets/js/plugins.js'
+                dest: '<%= cfg.path.dest %>/assets/javascripts/plugins.js'
             }
         },
         sass: {
@@ -71,7 +71,7 @@ module.exports = function(grunt) {
         templates: {
             all: {
                 src: ['assets/template/*.html', 'assets/template/*/*.html'],
-                dest: '<%= cfg.path.dest %>/assets/js/templates.js'
+                dest: '<%= cfg.path.dest %>/assets/javascripts/templates.js'
             }
         },
         copy: {
@@ -81,7 +81,7 @@ module.exports = function(grunt) {
                     'assets/css/**/*',
                     'assets/img/**/*',
                     'assets/font/**/*',
-                    'assets/js/vendor/**/*',
+                    'assets/javascripts/vendor/**/*',
                     '.htaccess',
                     'cordova.js'
                 ],
@@ -90,19 +90,19 @@ module.exports = function(grunt) {
         },
         watch: {
             scripts_mwapp: {
-                files: ['assets/js/app/*.js', 'assets/js/app/models/*.js', 'assets/js/app/views/*.js'],
+                files: ['assets/javascripts/app/*.js', 'assets/javascripts/app/models/*.js', 'assets/javascripts/app/views/*.js'],
                 tasks: ['concat:mwapp', 'uglify:mwapp']
             },
             scripts_bootstrap: {
-                files: ['assets/js/bootstrap.js'],
+                files: ['assets/javascripts/bootstrap.js'],
                 tasks: ['uglify:bootstrap']
             },
             scripts_plugins: {
-                files: ['assets/js/plugin/*.js'],
+                files: ['assets/javascripts/plugin/*.js'],
                 tasks: ['uglify:plugins']
             },
             staticfiles: {
-                files: ['assets/css/**/*', 'assets/img/**/*', 'assets/font/**/*', 'assets/js/vendor/**/*', 
+                files: ['assets/css/**/*', 'assets/img/**/*', 'assets/font/**/*', 'assets/javascripts/vendor/**/*', 
                         'config.xml', '.htaccess', 'cordova.js'],
                 tasks: ['copy']
             },

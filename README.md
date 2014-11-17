@@ -46,15 +46,15 @@ Development stuff
 
 			echo '{"path": {"dest": "www", "src": "."}}' >> config.json
 
-	- Compile templates in `assets/template/*` to generate `www/assets/js/templates.js`
+	- Compile templates in `assets/template/*` to generate `www/assets/javascripts/templates.js`
 
 			grunt templates
 
-	- Concat JavaScript files in `assets/js/app/*` to generate `assets/js/mw-app.js`
+	- Concat JavaScript files in `assets/javascripts/app/*` to generate `assets/javascripts/mw-app.js`
 
 			grunt concat
 
-	- Minify JavaScript files in `assets/js/plugin/*` and `assets/js/mw-app.js` to generate `www/assets/js/plugin/*` and `assets/js/mw-app.js`
+	- Minify JavaScript files in `assets/javascripts/plugin/*` and `assets/javascripts/mw-app.js` to generate `www/assets/javascripts/plugin/*` and `assets/javascripts/mw-app.js`
 
 			grunt uglify
 
