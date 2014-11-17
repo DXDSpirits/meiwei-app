@@ -58,7 +58,7 @@ Development stuff
 
 			grunt uglify
 
-	- Compile Sass files in `assets/sass/*` to generate `www/assets/css/mobile.css`
+	- Compile Sass files in `assets/sass/*` to generate `www/assets/stylesheets/mobile.css`
 
 			grunt sass
 

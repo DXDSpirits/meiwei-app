@@ -53,11 +53,11 @@ module.exports = function(grunt) {
             mobile: {
                 options: { style: 'compressed' },
                 src: 'assets/scss/mobile.scss',
-                dest: '<%= cfg.path.dest %>/assets/css/mobile.min.css'
+                dest: '<%= cfg.path.dest %>/assets/stylesheets/mobile.min.css'
             },
             development: {
                 src: 'assets/scss/mobile.scss',
-                dest: '<%= cfg.path.dest %>/assets/css/mobile.css'
+                dest: '<%= cfg.path.dest %>/assets/stylesheets/mobile.css'
             }
         },
         includes: {
@@ -78,7 +78,7 @@ module.exports = function(grunt) {
             staticfiles: {
                 expand: true,
                 src: [
-                    'assets/css/**/*',
+                    'assets/stylesheets/**/*',
                     'assets/images/**/*',
                     'assets/fonts/**/*',
                     'assets/javascripts/vendor/**/*',
@@ -102,7 +102,7 @@ module.exports = function(grunt) {
                 tasks: ['uglify:plugins']
             },
             staticfiles: {
-                files: ['assets/css/**/*', 'assets/images/**/*', 'assets/fonts/**/*', 'assets/javascripts/vendor/**/*', 
+                files: ['assets/stylesheets/**/*', 'assets/images/**/*', 'assets/fonts/**/*', 'assets/javascripts/vendor/**/*', 
                         'config.xml', '.htaccess', 'cordova.js'],
                 tasks: ['copy']
             },
