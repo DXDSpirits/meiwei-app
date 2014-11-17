@@ -15,7 +15,7 @@ module.exports = function(grunt){
 					var key = path.basename(filepath, path.extname(filepath));
 					// Clean up some spaces
 					mustache = mustache.replace(/[\r\n\t]+/g, '');
-					return "\t\t'" + key + "': Mustache.compile('" + mustache + "')";
+					return "\t\t'" + key + "': '" + mustache + "'";
 				}
 			).join(',\n');
 			

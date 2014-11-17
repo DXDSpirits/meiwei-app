@@ -1,7 +1,7 @@
 $(function() {
     var pictureCarousel = MeiweiApp.CollectionView.extend({
         ModelView: MeiweiApp.ModelView.extend({
-            template: Mustache.compile('<img src="{{{ path }}}" alt="">'),
+            template: '<img src="{{{ path }}}" alt="">',
             className: 'picture-item carousel-item',
         })
     });

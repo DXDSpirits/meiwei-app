@@ -2,7 +2,7 @@ $(function() {
     var ProductFilter = MeiweiApp.CollectionView.extend({
         ModelView: MeiweiApp.ModelView.extend({
             className: 'filter-item',
-            template: Mustache.compile('{{name}}'),
+            template: '{{name}}',
             events: { 'click': 'onclick' },
             onclick: function() {
                 MeiweiApp.sendGaEvent('product list', 'select', 'product', this.model.id);

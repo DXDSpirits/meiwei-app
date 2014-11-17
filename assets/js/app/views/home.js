@@ -5,7 +5,7 @@ $(function() {
     var RecommendsFilter = MeiweiApp.CollectionView.extend({
         ModelView: MeiweiApp.ModelView.extend({
             className: 'filter-item',
-            template: Mustache.compile('{{name}}'),
+            template: '{{name}}',
             events: { 'click': 'onclick' },
             onclick: function() {
                 MeiweiApp.sendGaEvent('homepage list', 'select', 'recommend', this.model.id);

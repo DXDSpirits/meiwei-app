@@ -48,9 +48,9 @@ MeiweiApp.View = Backbone.View.extend({
         }
     },
     
-    template: Mustache.compile(""),
+    template: '',
     renderTemplate: function(attrs) {
-        this.$el.html(this.template(attrs || {}));
+        this.$el.html(Mustache.render(this.template, attrs || {}));
         MeiweiApp.initLang(this.$el);
         return this;
     }

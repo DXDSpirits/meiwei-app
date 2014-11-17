@@ -28,7 +28,7 @@ $(function() {
     
     var ReviewList = MeiweiApp.CollectionView.extend({
         ModelView: MeiweiApp.ModelView.extend({
-            template: Mustache.compile('<div class="avatar"></div><p>{{{ comments }}}</p>'),
+            template: '<div class="avatar"></div><p>{{{ comments }}}</p>',
             className: 'review-list-item',
         })
     });

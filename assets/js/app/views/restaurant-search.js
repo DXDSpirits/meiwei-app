@@ -129,7 +129,7 @@ $(function() {
         filtername: 'circle',
         tagName: 'li',
         className: 'filter-item',
-        template: Mustache.compile("{{name}}"),
+        template: "{{name}}",
         render: function() {
             MeiweiApp.ModelView.prototype.render.call(this);
             this.$el.attr({ 'data-filter': this.filtername, 'data-id': this.model.id });

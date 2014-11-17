@@ -36,9 +36,8 @@ $(function() {
     
     var GuestLists = MeiweiApp.CollectionView.extend({
         ModelView: MeiweiApp.ModelView.extend({
-            template: Mustache.compile(
-                '<span>{{name}}{{#gender}}女士{{/gender}}{{^gender}}先生{{/gender}}, {{id_no}}</span>' +
-                '<a class="remove">删除</a>'),
+            template: '<span>{{name}}{{#gender}}女士{{/gender}}{{^gender}}先生{{/gender}}, {{id_no}}</span>' +
+                      '<a class="remove">删除</a>',
             tagName: 'p',
             className: 'control-group text-right',
             events: { 'click .remove': 'removeGuest' },
