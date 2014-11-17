@@ -93,7 +93,7 @@ MeiweiApp.initDevice = function () {
         $('title').append(' ' + $('meta[name=description]').attr('content'));
         var redirectUrl = encodeURIComponent('http://mobile.clubmeiwei.com/weixin/weixin.html?showwxpaytitle=1');
         var message = {
-            "img_url" : 'http://mobile.clubmeiwei.com/assets/img/default.png',
+            "img_url" : 'http://mobile.clubmeiwei.com/assets/images/default.png',
             "img_width" : "240",
             "img_height" : "150",
             "link" : "https://open.weixin.qq.com/connect/oauth2/authorize?appid=wx0fd053b2f2f80d94&redirect_uri=" + redirectUrl +

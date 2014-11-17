@@ -74,7 +74,7 @@ $(function() {
                 }
             }
             else{
-                this.$('.avatar img')[0].src = "assets/img/default-avatar@2x.png";
+                this.$('.avatar img')[0].src = "assets/images/default-avatar@2x.png";
             }
         }
     });
@@ -92,7 +92,7 @@ $(function() {
 	    			height: 250
 	    		});
             } else {
-            	this.$el.css('background-image', 'url(assets/img/default.png)');
+            	this.$el.css('background-image', 'url(assets/images/default.png)');
             }
         }
     });

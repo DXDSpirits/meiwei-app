@@ -190,13 +190,13 @@
                 @include square(50px);
                 float: right;
                 margin: 0 0 10px 0;
-                background: url("../img/rabbit-boy.png") no-repeat top;
+                background: url("../images/rabbit-boy.png") no-repeat top;
                 @include background-size(contain);
             }
             &:nth-child(2n) .avatar {
                 float: left;
                 margin: 0 10px 10px 0;
-                background-image: url('../img/rabbit-girl.png');
+                background-image: url('../images/rabbit-girl.png');
             }
         }
     }

@@ -99,7 +99,7 @@ $(function() {
         },
     	renderAll: function() {
     		var resto = this.order.get('restaurantinfor');
-    		var localImage = 'assets/img/bootstrap/restaurant/' + resto.id + '.jpg';
+    		var localImage = 'assets/images/bootstrap/restaurant/' + resto.id + '.jpg';
             MeiweiApp.loadBgImage(this.$('.wrapper'), resto.frontpic, { height: 250 });
             this.$('.item-name').html(resto.fullname);
     		if (this.order.get('editable')) {

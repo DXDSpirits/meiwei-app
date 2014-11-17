@@ -87,7 +87,7 @@ $(function() {
                     var marker = new AMap.Marker({
                         map: this.map,
                         position: new AMap.LngLat(coord.longitude / 100000.0 , coord.latitude / 100000.0),
-                        icon: new AMap.Icon({ size: new AMap.Size(25, 25), image: "assets/img/mapmarker.png" })
+                        icon: new AMap.Icon({ size: new AMap.Size(25, 25), image: "assets/images/mapmarker.png" })
                     });
                     this.markers.push(marker);
                     this.addMessage(marker, item.toJSON());

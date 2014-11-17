@@ -2,11 +2,11 @@ $(function() {
     MeiweiApp.Pages.GetStarted = new (MeiweiApp.PageView.extend({
     	initPage: function() {
     		this.pics = [
-    			'assets/img/getstarted/1@640x1096.png',
-    			'assets/img/getstarted/2@640x1096.png',
-    			'assets/img/getstarted/3@640x1096.png',
-    			'assets/img/getstarted/4@640x1096.png',
-    			'assets/img/getstarted/5@640x1096.png'
+    			'assets/images/getstarted/1@640x1096.png',
+    			'assets/images/getstarted/2@640x1096.png',
+    			'assets/images/getstarted/3@640x1096.png',
+    			'assets/images/getstarted/4@640x1096.png',
+    			'assets/images/getstarted/5@640x1096.png'
     		];
     	},
         events: {

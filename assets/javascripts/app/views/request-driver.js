@@ -84,7 +84,7 @@ $(function() {
                     mapObj.geoCoder.getAddress(e.lnglat);
                     mapObj.clearMap();
                     new AMap.Marker({ map: mapObj, position: e.lnglat,
-                        icon: new AMap.Icon({ size: new AMap.Size(25, 25), image: "assets/img/mapmarker.png" })
+                        icon: new AMap.Icon({ size: new AMap.Size(25, 25), image: "assets/images/mapmarker.png" })
                     });
                 });
                 $addressInput.on('change', function() {

@@ -161,7 +161,7 @@ MeiweiApp.loadImage = function(img, src, options) {
 
 MeiweiApp.loadBgImage = function(el, src, options) {
 	options = options || {};
-    el.css('background-image', 'url(' + 'assets/img/loading.gif' + ')');
+    el.css('background-image', 'url(' + 'assets/images/loading.gif' + ')');
 	var ratio = window.devicePixelRatio || 2;
 	var width = options.width || parseInt($('body').innerWidth());
 	var height = options.height;

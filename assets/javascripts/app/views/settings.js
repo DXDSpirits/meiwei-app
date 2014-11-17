@@ -39,7 +39,7 @@ $(function() {
             if (!MeiweiApp.me.id) MeiweiApp.me.fetch();
             var url = 'http://web.clubmeiwei.com/ad/apppromo?ref=' + MeiweiApp.me.id;
             var content  = '美位网手机应用华丽登场土豪时代，快来体验高品质订餐和贴心的私人管家服务！';
-            var pic = 'http://web.clubmeiwei.com/assets/img/apppromo.jpg';
+            var pic = 'http://web.clubmeiwei.com/assets/images/apppromo.jpg';
             var link = this.getWeiboLink(screen, document, encodeURIComponent,
                                          'http://www.clubmeiwei.com', 'http://www.clubmeiwei.com',
                                          pic, content, url, 'utf-8');
@@ -50,7 +50,7 @@ $(function() {
             if (!MeiweiApp.me.id) MeiweiApp.me.fetch();
             var url = 'http://web.clubmeiwei.com/ad/apppromo?ref=' + MeiweiApp.me.id;
             var content  = '美位网手机应用华丽登场土豪时代，快来体验高品质订餐和贴心的私人管家服务！';
-            var pic = 'http://web.clubmeiwei.com/assets/img/apppromo.jpg';
+            var pic = 'http://web.clubmeiwei.com/assets/images/apppromo.jpg';
             MeiweiApp.shareToMoments(url, content, pic);
             MeiweiApp.sendGaSocial('weixin', 'share to moments', 'app promo');
         },
