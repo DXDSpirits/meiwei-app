@@ -12,10 +12,10 @@ MeiweiApp.Models.Ad = MeiweiApp.Model.extend({
 });
 
 MeiweiApp.Models.Hero = MeiweiApp.Model.extend({
-    urlRoot: MeiweiApp.configs.APIHost + '/clients/newhero/'
+    urlRoot: MeiweiApp.configs.APIHost + '/clients/hero/'
 });
 
 MeiweiApp.Collections.Heros = MeiweiApp.Collection.extend({
-    url: MeiweiApp.configs.APIHost + '/clients/newhero/',
+    url: MeiweiApp.configs.APIHost + '/clients/hero/',
     model: MeiweiApp.Models.Hero
 });
