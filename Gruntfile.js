@@ -125,22 +125,7 @@ module.exports = function(grunt) {
                     port: 8080,
                     base: '<%= cfg.path.dest %>',
                     keepalive: true,
-                    hostname: null,
-                    middleware: function(connect, options){
-                        var appcache = grunt.option('appcache');
-                        return [
-                            function(req, res, next){
-                                if (req.url == '/manifest.appcache' && !appcache){
-                                    res.writeHead(404);
-                                    res.end();
-                                } else {
-                                    next();
-                                }
-                            },
-                            connect.static(options.base),
-                            connect.directory(options.base)
-                        ];
-                    }
+                    hostname: '*'
                 }
             }
         },
