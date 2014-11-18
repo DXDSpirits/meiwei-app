@@ -1,4 +1,4 @@
-$(function() {
+(function() {
     function checkFirstTime() {
         return !localStorage.getItem('visited-view-home');
     }
@@ -192,4 +192,4 @@ $(function() {
             }
     	}
     }))({el: $("#view-home")});
-});
+})();

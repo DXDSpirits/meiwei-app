@@ -1,4 +1,4 @@
-$(function() {
+(function() {
     MeiweiApp.Views.ProductModelView = MeiweiApp.ModelView.extend({
     	tagName: "section",
     	className: "product-box",
@@ -163,4 +163,4 @@ $(function() {
         	this.products.fetch({ data: {category: 2} });
     	}
     }))({el: $("#view-product-redeem")});
-});
+})();

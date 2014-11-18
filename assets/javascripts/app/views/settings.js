@@ -1,4 +1,4 @@
-$(function() {
+(function() {
     MeiweiApp.Pages.Settings = new (MeiweiApp.PageView.extend({
         events: {
             'click .header-btn-left': 'onClickLeftBtn',
@@ -60,4 +60,4 @@ $(function() {
             this.$('.lang-opt.en').toggleClass('selected', MeiweiApp.getLang() == 'en');
         }
     }))({el: $("#view-settings")});
-});
+})();

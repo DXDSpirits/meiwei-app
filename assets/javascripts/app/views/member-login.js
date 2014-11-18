@@ -1,4 +1,4 @@
-$(function() {
+(function() {
     MeiweiApp.Views.MemberLoginForm = MeiweiApp.View.extend({
     	events: {
     		'click .login-button': 'login',
@@ -102,4 +102,4 @@ $(function() {
     		this.views.registerForm.render();
     	}
     }))({el: $("#view-member-login")});
-});
+})();

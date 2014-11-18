@@ -1,4 +1,4 @@
-$(function() {
+(function() {
     var ProductFilter = MeiweiApp.CollectionView.extend({
         ModelView: MeiweiApp.ModelView.extend({
             className: 'filter-item',
@@ -109,4 +109,4 @@ $(function() {
     		this.products.fetch({ data: {category: 1}, success: this.renderAll });
     	}
     }))({el: $("#view-product-list")});
-});
+})();

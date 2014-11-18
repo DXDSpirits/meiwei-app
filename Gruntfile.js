@@ -2,10 +2,13 @@ module.exports = function(grunt) {
     grunt.initConfig({
         pkg: grunt.file.readJSON('package.json'),
         cfg: grunt.file.readJSON('config.json'),
-        concat: {
+        uglify: {
             mwapp: {
+                options: {
+                    beautify: true,
+                    mangle: false
+                },
                 src: [
-                    'assets/javascripts/app/_open.js',
                     'assets/javascripts/app/app.js',
                     'assets/javascripts/app/app-local.js',
                     'assets/javascripts/app/utils.js',
@@ -15,16 +18,9 @@ module.exports = function(grunt) {
                     'assets/javascripts/app/view.js',
                     'assets/javascripts/app/router.js',
                     'assets/javascripts/app/event.js',
-                    'assets/javascripts/app/_close.js',
                     'assets/javascripts/app/views/*.js',
                 ],
                 dest: '<%= cfg.path.dest %>/assets/javascripts/mw-app.js'
-            }
-        },
-        uglify: {
-            mwapp: {
-                src: '<%= cfg.path.dest %>/assets/javascripts/mw-app.js',
-                dest: '<%= cfg.path.dest %>/assets/javascripts/mw-app.min.js'
             },
             plugins: {
                 src: [
@@ -47,17 +43,17 @@ module.exports = function(grunt) {
         },
         sass: {
             bootstrap: {
-                options: { style: 'compressed' },
+                options: { style: 'compressed', sourcemap: 'none' },
                 src: 'assets/scss/bootstrap.scss',
                 dest: '<%= cfg.path.dest %>/assets/stylesheets/bootstrap.css'
             },
             fontawesome: {
-                options: { style: 'compressed' },
+                options: { style: 'compressed', sourcemap: 'none' },
                 src: 'assets/scss/font-awesome.scss',
                 dest: '<%= cfg.path.dest %>/assets/stylesheets/font-awesome.css'
             },
             mobile: {
-                options: { style: 'compressed' },
+                options: { style: 'compressed', sourcemap: 'none' },
                 src: 'assets/scss/mobile.scss',
                 dest: '<%= cfg.path.dest %>/assets/stylesheets/mobile.css'
             }
@@ -94,7 +90,7 @@ module.exports = function(grunt) {
         watch: {
             scripts_mwapp: {
                 files: ['assets/javascripts/app/**/*.js'],
-                tasks: ['concat:mwapp', 'uglify:mwapp']
+                tasks: ['uglify:mwapp']
             },
             scripts_plugins: {
                 files: ['assets/javascripts/plugin/*.js'],
@@ -153,7 +149,7 @@ module.exports = function(grunt) {
         },
         concurrent: {
             dist: {
-                tasks: ['concat', 'sass', 'includes', 'templates', 'uglify', 'copy'],
+                tasks: ['sass', 'includes', 'templates', 'uglify', 'copy'],
                 options: { logConcurrentOutput: true }
             },
             server: {
@@ -166,7 +162,6 @@ module.exports = function(grunt) {
     });
     
     grunt.loadTasks('tasks');
-    grunt.loadNpmTasks('grunt-contrib-concat');
     grunt.loadNpmTasks('grunt-contrib-copy');
     grunt.loadNpmTasks('grunt-contrib-uglify');
     grunt.loadNpmTasks('grunt-contrib-sass');

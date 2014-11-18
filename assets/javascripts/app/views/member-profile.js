@@ -1,4 +1,4 @@
-$(function() {
+(function() {
     MeiweiApp.Views.MemberProfileForm = MeiweiApp.View.extend({
         events: {
             'click button': 'updateProfile'
@@ -83,4 +83,4 @@ $(function() {
             MeiweiApp.me.fetch({ success: this.views.profileForm.render });
         }
     }))({el: $("#view-member-profile")});
-});
+})();

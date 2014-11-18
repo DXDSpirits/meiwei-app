@@ -1,4 +1,4 @@
-$(function() {
+(function() {
     MeiweiApp.Views.MemberAnniversaryForm = MeiweiApp.View.extend({
     	events: {
     		'click .save-button': 'saveItem',
@@ -63,4 +63,4 @@ $(function() {
     		this.views.anniversaryForm.render();
     	}
     }))({el: $("#view-member-anniversary-detail")});
-});
+})();

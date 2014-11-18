@@ -1,4 +1,4 @@
-$(function() {
+(function() {
     var ProfileBox = MeiweiApp.View.extend({
     	events: { 'click .order-button': 'goToOrder' },
     	initView: function() {
@@ -136,4 +136,4 @@ $(function() {
     		}
     	}
     }))({el: $("#view-restaurant-detail")});
-});
+})();

@@ -1,4 +1,4 @@
-$(function() {
+(function() {
     var CreditList = MeiweiApp.CollectionView.extend({
     	ModelView: MeiweiApp.ModelView.extend({
     		template: TPL['member-credit-item'],
@@ -33,4 +33,4 @@ $(function() {
     		});
     	}
     }))({el: $("#view-member-credits")});
-});
+})();

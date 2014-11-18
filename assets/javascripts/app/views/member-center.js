@@ -1,4 +1,4 @@
-$(function() {
+(function() {
     var MemberProfileBox = MeiweiApp.View.extend({
     	events: {
             'click .avatar': 'changeAvatar',
@@ -148,4 +148,4 @@ $(function() {
     	    }
     	}
     }))({el: $("#view-member-center")});
-});
+})();

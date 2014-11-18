@@ -1,4 +1,4 @@
-$(function() {
+(function() {
     var pictureCarousel = MeiweiApp.CollectionView.extend({
         ModelView: MeiweiApp.ModelView.extend({
             template: '<img src="{{{ path }}}" alt="">',
@@ -52,4 +52,4 @@ $(function() {
             this.renderPages();
         }
     }))({el: $("#view-restaurant-pictures")});
-});
+})();

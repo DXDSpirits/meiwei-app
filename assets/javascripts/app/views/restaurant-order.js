@@ -1,4 +1,4 @@
-$(function() {
+(function() {
 	var ConfirmDialog = MeiweiApp.View.extend({
     	className: 'dialog',
     	template: TPL['order-confirm-dialog'],
@@ -252,4 +252,4 @@ $(function() {
             }
         }
     }))({el: $("#view-restaurant-order")});
-});
+})();

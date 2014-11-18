@@ -1,4 +1,4 @@
-$(function() {
+(function() {
     var OrderListView = MeiweiApp.CollectionView.extend({
     	ModelView: MeiweiApp.ModelView.extend({
     	    default_template: TPL['generic-order-list-item'],
@@ -66,4 +66,4 @@ $(function() {
     		this.getPendingOrders();
     	}
     }))({el: $("#view-generic-order-list")});
-});
+})();

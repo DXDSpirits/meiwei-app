@@ -1,4 +1,4 @@
-$(function() {
+(function() {
     MeiweiApp.Views.FavoriteList = MeiweiApp.CollectionView.extend({
     	ModelView: MeiweiApp.ModelView.extend({
     		template: TPL['favorite-list-item'],
@@ -47,4 +47,4 @@ $(function() {
     		this.favorites.fetch({ reset: true });
     	}
     }))({el: $("#view-member-favorites")});
-});
+})();

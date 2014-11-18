@@ -1,4 +1,4 @@
-$(function() {
+(function() {
     var ProductOrderCreation = MeiweiApp.Model.extend({
         urlRoot: MeiweiApp.configs.APIHost + '/orders/orderproduct/'
     });
@@ -92,4 +92,4 @@ $(function() {
             }
         }
     }))({el: $("#view-product-order")});
-});
+})();

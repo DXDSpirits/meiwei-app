@@ -1,4 +1,4 @@
-$(function() {
+(function() {
     
     var ContactList = MeiweiApp.CollectionView.extend({
     	ModelView: MeiweiApp.ModelView.extend({
@@ -125,4 +125,4 @@ $(function() {
     	    this.getOnlineContacts();
     	}
     }))({ el: $("#view-member-contacts") });
-});
+})();

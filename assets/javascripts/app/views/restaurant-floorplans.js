@@ -1,4 +1,4 @@
-$(function() {
+(function() {
     MeiweiApp.Views.FloorplanNav = MeiweiApp.CollectionView.extend({
     	ModelView: MeiweiApp.ModelView.extend({
     		className: 'floorplan-nav-item',
@@ -91,4 +91,4 @@ $(function() {
     		this.initScroller();
     	}
     }))({el: $("#view-restaurant-floorplans")});
-});
+})();

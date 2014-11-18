@@ -1,4 +1,4 @@
-$(function() {
+(function() {
     var AirportOrderCreation = MeiweiApp.Model.extend({
         urlRoot: MeiweiApp.configs.APIHost + '/orders/orderairport/'
     });
@@ -165,4 +165,4 @@ $(function() {
             this.$('.hint').remove();
         }
     }))({el: $("#view-vvip")});
-});
+})();

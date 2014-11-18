@@ -1,4 +1,4 @@
-$(function() {
+(function() {
     var MarkerItemInfo = MeiweiApp.ModelView.extend({
         template: TPL['restaurant-list-item'],
         events: { 'click': 'viewRestaurant' },
@@ -265,4 +265,4 @@ $(function() {
             }
         }
     }))({el: $("#view-restaurant-search")});
-});
+})();

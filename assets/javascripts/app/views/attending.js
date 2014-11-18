@@ -1,4 +1,4 @@
-$(function() {
+(function() {
     MeiweiApp.Views.OrderPages = MeiweiApp.CollectionView.extend({
         ModelView: MeiweiApp.ModelView.extend({
             events: {
@@ -101,4 +101,4 @@ $(function() {
             });
         }
     }))({el: $("#view-attending")});
-});
+})();

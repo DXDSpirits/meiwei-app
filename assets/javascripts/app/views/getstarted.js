@@ -1,4 +1,4 @@
-$(function() {
+(function() {
     MeiweiApp.Pages.GetStarted = new (MeiweiApp.PageView.extend({
     	initPage: function() {
     		this.pics = [
@@ -47,4 +47,4 @@ $(function() {
         	this.adjustWidth();
         }
     }))({el: $("#view-getstarted")});
-});
+})();

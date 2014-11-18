@@ -1,4 +1,4 @@
-$(function() {
+(function() {
     MeiweiApp.Views.AnnversaryList = MeiweiApp.CollectionView.extend({
     	ModelView: MeiweiApp.ModelView.extend({
     		template: TPL['member-anniversary-item'],
@@ -41,4 +41,4 @@ $(function() {
     		this.anniversaries.fetch({ reset: true });
     	}
     }))({el: $("#view-member-anniversaries")});
-});
+})();

@@ -1,4 +1,4 @@
-$(function () {
+(function () {
     var AlipayPayment = MeiweiApp.Model.extend({
         urlRoot: MeiweiApp.configs.APIHost + '/alipay/payable/',
         idAttribute: 'payment_no'
@@ -130,4 +130,4 @@ $(function () {
             }
         }
     }))({el: $("#view-generic-order-detail")});
-});
+})();

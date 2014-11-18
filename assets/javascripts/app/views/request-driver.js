@@ -1,4 +1,4 @@
-$(function() {
+(function() {
     var ConfirmDialog = MeiweiApp.View.extend({
         className: 'dialog',
         template: TPL['orderdriver-confirm-dialog'],
@@ -141,4 +141,4 @@ $(function() {
             this.showMap();
         }
     }))({el: $("#view-request-driver")});
-});
+})();
