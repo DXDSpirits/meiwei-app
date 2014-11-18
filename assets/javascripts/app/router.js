@@ -7,6 +7,11 @@ MeiweiApp.history = {
 };
 
 MeiweiApp.Router = new (Backbone.Router.extend({
+    navigate: function(fragment, options) {
+        options = options || {};
+        options.trigger = !(options.trigger === false);
+        Backbone.Router.prototype.navigate.call(this, fragment, options);
+    },
 	initialize: function(){
 		this.route('', 'index');
 		this.route('regAuth/:token/*path', 'registerAuthToken');
