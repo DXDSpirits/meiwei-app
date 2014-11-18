@@ -5,31 +5,6 @@
 @-o-viewport{width:device-width;}
 @viewport{width:device-width;}
 
-.background {
-    position: absolute;
-    z-index: -1;
-    top: 0;
-    left: 0;
-    bottom: 0;
-    right: 0;
-    height: 100%;
-    width: 100%;
-    margin: 0;
-    padding: 0;
-}
-
-.img {
-    background-size: cover;
-    background-repeat: no-repeat;
-    background-position: center;
-}
-
-.img-loading {
-    background-color: rgba(255, 255, 255, 1);
-    background-size: 32px 32px !important;
-    background-repeat: no-repeat !important;
-    background-position: center !important;
-}
 
 body {
 	background-color: $bodyBackground;
@@ -77,7 +52,8 @@ body {
     }
 }
 
-.view.view-hidden > .wrapper {
+
+.view.view-hidden  > .wrapper {
     @include translate3d(100%, 0, 0);
 }
 
@@ -86,10 +62,25 @@ body {
     -webkit-animation-fill-mode: forwards;
 }
 
+.view.view-next.view-next-reverse > .wrapper {
+    @include animation(slideinfromleft $pageSwitchDuration linear);
+}
+
 .view.view-prev > .wrapper {
     @include animation(slideouttoleft $pageSwitchDuration linear);
     -webkit-animation-fill-mode: forwards;
 }
+
+.view.view-prev.view-prev-reverse > .wrapper {
+    @include animation(slideouttoright $pageSwitchDuration linear);
+}
+
+.view.view-hidden > .footer-navbar,
+.view.view-hidden > .header-navbar {
+    opacity: 0;
+    visibility: hidden;
+}
+
 
 #apploader {
 	position: fixed;
