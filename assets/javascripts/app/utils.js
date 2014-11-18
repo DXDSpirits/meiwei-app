@@ -145,34 +145,34 @@ MeiweiApp.openWindow = function(link) {
     window.open(link, '_blank', 'location=no');
 };
 
-MeiweiApp.loadImage = function(img, src, options) {
-    options = options || {};
+MeiweiApp.imageFullpath = function(src, options) {
+    image_src = /^http:\/\//.test(src) ? src : MeiweiApp.configs.CDNURL + src;
     var ratio = window.devicePixelRatio || 2;
     var width = options.width || parseInt($('body').innerWidth());
-	var height = options.height;
-	var size = height ? width * ratio + 'x' + height * ratio + '!' : width * ratio;
-	var image_src = src + '?imageMogr/v2/thumbnail/' + size;
-    var image = new Image();
+    var height = options.height;
+    var size = height ? width * ratio + 'x' + height * ratio + '!' : width * ratio;
+    image_src += '?imageMogr/v2/thumbnail/' + size;
+    return image_src;
+};
+
+MeiweiApp.loadImage = function(img, src, options) {
+    if (!src) return;
+    options = options || {};
+    var image = new Image(), image_src = MeiweiApp.imageFullpath(src, options);
     image.onload = function() {
-        img.replaceWith(image);
+        img.attr('src', image_src);
     };
     image.src = image_src;
 };
 
 MeiweiApp.loadBgImage = function(el, src, options) {
-	options = options || {};
-    el.css('background-image', 'url(' + 'assets/images/loading.gif' + ')');
-	var ratio = window.devicePixelRatio || 2;
-	var width = options.width || parseInt($('body').innerWidth());
-	var height = options.height;
-	var size = height ? width * ratio + 'x' + height * ratio + '^' : width * ratio;
-    var image_src = src + '?imageMogr/v2/thumbnail/' + size;
-    var image = new Image();
+    if (!src) return;
+    options = options || {};
+    el.css('background-image', 'url(' + MeiweiApp.configs.CDNURL + 'images/loading.gif' + ')');
+    var image = new Image(), image_src = MeiweiApp.imageFullpath(src, options);
     image.onload = function() {
-         setTimeout(function(){
-            el.removeClass('img-loading');
-            el.css('background-image', 'url(' + image_src + ')');
-         }, 100);
+        el.removeClass('img-loading');
+        el.css('background-image', 'url(' + image_src + ')');
     };
     el.addClass('img-loading');
     image.src = image_src;

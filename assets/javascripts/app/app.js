@@ -1,3 +1,4 @@
+
 window.MeiweiApp = new (Backbone.View.extend({
 
     Version: 3.0,
@@ -11,6 +12,7 @@ window.MeiweiApp = new (Backbone.View.extend({
 
     configs: {
         APIHost: "http://api.clubmeiwei.com",
+        CDNURL: "assets/",
         ajaxTimeout: 120000
     },
 
@@ -28,6 +30,15 @@ window.MeiweiApp = new (Backbone.View.extend({
         MeiweiApp.fixViewport();
     }
 }))({el: document.body});
+
+_.extend(MeiweiApp, Backbone.Events);
+
+MeiweiApp.EventAggregator = (function() {
+    var EA = function() {};
+    EA.extend = Backbone.Model.extend;
+    _.extend(EA.prototype, Backbone.Events);
+    return EA;
+})();
 
 MeiweiApp.showSplash = function () {
     if (navigator.splashscreen) {
@@ -108,7 +119,7 @@ MeiweiApp.initDevice = function () {
     /*
      * Emulate click events on body. Remove 300ms delay.
      */
-    FastClick.attach(document.body);
+    new FastClick(document.body);
 };
 
 MeiweiApp.fixViewport = function () {
@@ -125,6 +136,15 @@ MeiweiApp.fixViewport = function () {
         $('meta[name=viewport]').attr('content', 'width=device-width, height=device-height, initial-scale=1, maximum-scale=1, user-scalable=0');
     } else {
         $('meta[name=viewport]').attr('content', 'width=device-width, initial-scale=1, maximum-scale=1, user-scalable=0');
+    }
+    if (navigator.userAgent.match(/IEMobile\/10\.0/)) {
+        var msViewportStyle = document.createElement("style");
+        msViewportStyle.appendChild(
+            document.createTextNode(
+                "@-ms-viewport{width:auto!important}"
+            )
+        );
+        document.getElementsByTagName("head")[0].appendChild(msViewportStyle);
     }
 };
 
