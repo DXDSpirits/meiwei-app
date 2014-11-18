@@ -26,10 +26,6 @@ module.exports = function(grunt) {
                 src: '<%= cfg.path.dest %>/assets/javascripts/mw-app.js',
                 dest: '<%= cfg.path.dest %>/assets/javascripts/mw-app.min.js'
             },
-            bootstrap: {
-                src: 'assets/javascripts/bootstrap.js',
-                dest: '<%= cfg.path.dest %>/assets/javascripts/bootstrap.js'
-            },
             plugins: {
                 src: [
                     'assets/javascripts/plugin/helper.js',
@@ -50,12 +46,18 @@ module.exports = function(grunt) {
             }
         },
         sass: {
+            bootstrap: {
+                options: { style: 'compressed' },
+                src: 'assets/scss/bootstrap.scss',
+                dest: '<%= cfg.path.dest %>/assets/stylesheets/bootstrap.css'
+            },
+            fontawesome: {
+                options: { style: 'compressed' },
+                src: 'assets/scss/font-awesome.scss',
+                dest: '<%= cfg.path.dest %>/assets/stylesheets/font-awesome.css'
+            },
             mobile: {
                 options: { style: 'compressed' },
-                src: 'assets/scss/mobile.scss',
-                dest: '<%= cfg.path.dest %>/assets/stylesheets/mobile.min.css'
-            },
-            development: {
                 src: 'assets/scss/mobile.scss',
                 dest: '<%= cfg.path.dest %>/assets/stylesheets/mobile.css'
             }
@@ -82,6 +84,7 @@ module.exports = function(grunt) {
                     'assets/images/**/*',
                     'assets/fonts/**/*',
                     'assets/javascripts/vendor/**/*',
+                    'assets/javascripts/boost.js',
                     '.htaccess',
                     'cordova.js'
                 ],
@@ -90,28 +93,47 @@ module.exports = function(grunt) {
         },
         watch: {
             scripts_mwapp: {
-                files: ['assets/javascripts/app/*.js', 'assets/javascripts/app/models/*.js', 'assets/javascripts/app/views/*.js'],
+                files: ['assets/javascripts/app/**/*.js'],
                 tasks: ['concat:mwapp', 'uglify:mwapp']
-            },
-            scripts_bootstrap: {
-                files: ['assets/javascripts/bootstrap.js'],
-                tasks: ['uglify:bootstrap']
             },
             scripts_plugins: {
                 files: ['assets/javascripts/plugin/*.js'],
                 tasks: ['uglify:plugins']
             },
             staticfiles: {
-                files: ['assets/stylesheets/**/*', 'assets/images/**/*', 'assets/fonts/**/*', 'assets/javascripts/vendor/**/*', 
+                files: ['assets/stylesheets/**/*',
+                        'assets/images/**/*',
+                        'assets/fonts/**/*',
+                        'assets/javascripts/vendor/**/*',
+                        'assets/javascripts/boost.js',
                         'config.xml', '.htaccess', 'cordova.js'],
                 tasks: ['copy']
             },
-            stylesheets: {
-                files: ['assets/scss/*.scss', 'assets/scss/mobile/*.scss', 'assets/scss/font-awesome/*.scss', 'assets/scss/pages/*.scss'],
-                tasks: ['sass']
+            sass_bootstrap: {
+                files: [
+                    'assets/scss/bootstrap/**/*.scss',
+                    'assets/scss/_variables.scss',
+                    'assets/scss/_bootstrap.scss',
+                    'assets/scss/bootstrap.scss'
+                ],
+                tasks: ['sass:bootstrap']
+            },
+            sass_fontawesome: {
+                files: [
+                    'assets/scss/font-awesome/**/*.scss',
+                    'assets/scss/font-awesome.scss'
+                ],
+                tasks: ['sass:fontawesome']
+            },
+            sass_mobile: {
+                files: ['assets/scss/mobile/**/*.scss',
+                        'assets/scss/pages/**/*.scss',
+                        'assets/scss/_variables.scss',
+                        'assets/scss/mobile.scss'],
+                tasks: ['sass:mobile']
             },
             templates: {
-                files: ['assets/template/*.html', 'assets/template/*/*.html'],
+                files: ['assets/template/**/*.html'],
                 tasks: ['templates']
             },
             html: {

@@ -1,0 +1,50 @@
+@import "variables";
+
+//======================================== Bootstrap ========================================
+@import "_bootstrap.scss";
+//===========================================================================================
+
+
+a:hover, a:focus {
+    color: $link-hover-color;
+    text-decoration: none;
+}
+
+h1, .h1,
+h2, .h2,
+h3, .h3 {
+    margin-top: ($line-height-computed / 2);
+}
+
+mark,
+.mark {
+    background-color: transparent;
+    color: inherit;
+    padding: .2em;
+}
+
+.invisible {
+    opacity: 0;
+    visibility: hidden;
+}
+
+.form-control {
+    @include box-shadow(none);
+    &:focus {
+        outline: 0;
+        @include box-shadow(none);
+    }
+}
+
+input[type=tel],
+input[type=url],
+input[type=text],
+input[type=email],
+input[type=search],
+input[type=number],
+input[type=password],
+textarea {
+    &.form-control {
+        -webkit-appearance: none;
+    }
+}
