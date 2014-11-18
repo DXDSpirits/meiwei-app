@@ -20,6 +20,7 @@ window.MeiweiApp = new (Backbone.View.extend({
         MeiweiApp.initDevice();
         MeiweiApp.initVersion();
         MeiweiApp.showSplash();
+        MeiweiApp.fillImages();
         MeiweiApp.initAjaxEvents();
         MeiweiApp.initLanguage();
         MeiweiApp.initGeolocation();
@@ -47,6 +48,17 @@ MeiweiApp.showSplash = function () {
             navigator.splashscreen.hide();
         }, 1000);
     }
+};
+
+MeiweiApp.fillImages = function() {
+    $('img[data-src]').each(function() {
+        var src = $(this).data('src');
+        src && MeiweiApp.loadImage($(this), src);
+    });
+    $('.img[data-bg-src]').each(function() {
+        var src = $(this).data('bg-src');
+        src && MeiweiApp.loadBgImage($(this), src);
+    });
 };
 
 MeiweiApp.isAndroid = function () {
