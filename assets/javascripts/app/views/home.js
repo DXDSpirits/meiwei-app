@@ -10,7 +10,7 @@ $(function() {
             onclick: function() {
                 MeiweiApp.sendGaEvent('homepage list', 'select', 'recommend', this.model.id);
                 MeiweiApp.Pages.Home.recommend.clear();
-                MeiweiApp.Pages.Home.recommend.id = this.model.id;
+                MeiweiApp.Pages.Home.recommend.set('id', this.model.id);
                 MeiweiApp.Pages.Home.recommend.fetch();
                 MeiweiApp.Pages.Home.$('.recommends-filter').addClass('closed');
             }
@@ -185,7 +185,7 @@ $(function() {
                 var heros = window.Bootstrap && Bootstrap.get('home-heros');
                 if (heros) this.heros.reset(heros);
             } else {
-                if (listId) MeiweiApp.Pages.Home.recommend.id = listId;
+                if (listId) MeiweiApp.Pages.Home.recommend.set('id', listId);
                 this.recommend.fetch();
                 this.recommendNames.fetch();
                 this.heros.fetch({reset: true});

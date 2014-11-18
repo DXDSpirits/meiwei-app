@@ -32,7 +32,7 @@ MeiweiApp.Model = Backbone.Model.extend({
             var origUrl = Backbone.Model.prototype.url.call(this);
             return origUrl + (origUrl.charAt(origUrl.length - 1) == '/' ? '' : '/');
         }
-    }
+    },
 });
 
 MeiweiApp.Collection = Backbone.Collection.extend({
