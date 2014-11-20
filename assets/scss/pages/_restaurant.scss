@@ -292,7 +292,7 @@
 	    &::before { content: '('; }
 	    &::after { content: ')'; }
 	}
-	.switch-gender {
+	.switch-gender, .switch-seat {
 		@include flexible($flex: 0, $orient: horizontal);
 		width: 70px;
 	}

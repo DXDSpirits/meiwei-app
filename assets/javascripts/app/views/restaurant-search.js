@@ -21,6 +21,7 @@
         }
     });
     
+    /*
     var Map = MeiweiApp.View.extend({
         events: { 'click .locate-btn': 'locate' },
         initView: function() {
@@ -104,7 +105,8 @@
             if (marker.clickListener) AMap.event.removeListener(marker.clickListener);
         }
     });
-    
+    */
+   
     var RestaurantList = MeiweiApp.CollectionView.extend({
         ModelView: MeiweiApp.ModelView.extend({
             tagName: 'section',
@@ -178,13 +180,13 @@
         },
         clearFormInput: function() { this.$('.search-form > input').val(''); },
         onClickRightBtn: function() {
-            this.$('.wrapper').scrollTop(0);
+            /*this.$('.wrapper').scrollTop(0);
             var flip = this.$('.flipper').hasClass('flip');
             this.$('.flipper').toggleClass('flip', !flip);
             this.$('.header-btn-right .icon-bars').toggleClass('hidden', flip);
             this.$('.header-btn-right .icon-locate').toggleClass('hidden', !flip);
             this.resetFilters();
-            this.views.map[flip ? 'hide' : 'show']();
+            this.views.map[flip ? 'hide' : 'show']();*/
         },
         onClickLeftBtn:function(){
             this.resetFilters();
@@ -197,11 +199,11 @@
             this.circles = new MeiweiApp.Collections.Circles();
             this.recommendnames = new MeiweiApp.Collections.RecommendNames();
             this.views = {
+                //map: new Map({ collection: this.restaurants, el: this.$('.map_canvas')}),
                 restaurantList: new RestaurantList({ collection: this.restaurants, el: this.$('.restaurant-list') }),
                 recommendFilter: new RecommendFilter({ collection: this.recommendnames, el: this.$('.filter.recommend ul') }),
                 cuisineFilter: new CuisineFilter({ collection: this.cuisines, el: this.$('.filter.cuisine ul') }),
-                circleFilter: new CircleFilter({ collection: this.circles, el: this.$('.filter.circle ul') }),
-                map: new Map({ collection: this.restaurants, el: this.$('.map_canvas')})
+                circleFilter: new CircleFilter({ collection: this.circles, el: this.$('.filter.circle ul') })
             };
             this.listenTo(this.filters, 'change', this.refreshFilters);
             this.initPageNav(this, this.restaurants);

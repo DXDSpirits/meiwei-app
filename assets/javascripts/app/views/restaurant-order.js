@@ -48,7 +48,10 @@
     });
     
     var RestaurantOrderContactForm = MeiweiApp.View.extend({
-        events: { 'click > header': 'selectContact' },
+        events: {
+            //'click > header': 'selectContact'
+            'click .icon-contact': 'selectContact'
+        },
         initView: function(options) {
             _.bindAll(this, 'fillContact');
             this.$('.switch-gender').switchControl();
@@ -79,6 +82,7 @@
             this.restaurant = this.model;
             this.model = null;
             this.hours = new MeiweiApp.Models.Hour();
+            this.$('.switch-seat').switchControl();
         },
         renderHourList: function() {
             var day = moment(this.$('input[name=orderdate]').val()).day();
@@ -222,12 +226,9 @@
                     personnum: 2
                 };
             }
-
-            if(this.restaurant.get('restaurant_type')==20){
-                this.$('#defaultSeatType').text('卡座');
-            } else {
-                this.$('#defaultSeatType').text('大厅');
-            }
+            
+            var resto_tyle = this.restaurant.get('restaurant_type');
+            $(this.$('.club-seat-type span')[0]).text(resto_tyle == 20 ? '卡座' : '大厅');
             
             this.views.orderForm.render(defaultValues);
             this.views.orderContactForm.render(defaultValues);
@@ -247,7 +248,7 @@
                 this.restaurant.set(this.options.restaurant);
                 this.renderOrderForm();
             } else if (this.options.restaurantId) {
-                this.restaurant.set({id: this.options.restaurantId});
+                this.restaurant.set({ id: this.options.restaurantId });
                 this.restaurant.fetch({ success: this.renderOrderForm });
             }
         }

@@ -189,6 +189,14 @@
             zh: '联系人',
             en: 'Contacts'
         },
+        'Order Contact': {
+            zh: '预订人',
+            en: 'Contact'
+        },
+        'Recent Contacts': {
+            zh: '最近使用',
+            en: 'Recent Contacts'
+        },
         'Online Contacts': {
             zh: '美位联系人',
             en: 'Online Contacts'

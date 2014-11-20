@@ -28,16 +28,19 @@
 							<option>17:00</option><option>17:30</option><option>18:00</option><option>18:30</option>
 							<option>19:00</option><option>19:30</option><option>20:00</option><option>20:30</option>
 						</select>
-						<i class="icon icon-group"></i>
-						<input type="text" name="personnum" pattern="[0-9]*" />
 					</div>
-                    <div class="inline-group club-seat-type">
-                        <label>
-                            <input type="radio"  checked name="clubseattype" value="0"><span id="defaultSeatType">卡座</span>
-                        </label>
-                        <label>
-                            <input type="radio" name="clubseattype" value="1"><span>包厢</span>
-                        </label>
+					<div class="inline-group">
+					    <i class="icon icon-group"></i>
+                        <input type="text" name="personnum" pattern="[0-9]*" />
+                        <div class="control-group switch switch-seat">
+                            <div class="switch-inner">
+                                <input type="hidden" name="clubseattype" value="0"/>
+                                <label class="label-text">卡座</label>
+                                <label class="label-off">卡座</label>
+                                <label class="label-on">包厢</label>
+                                <div class="switch-button"></div>
+                            </div>
+                        </div>
                     </div>
 					<div class="order-detail inline-group">
 						<i class="icon icon-pencil"></i>
@@ -47,7 +50,7 @@
 			</form>
 		</section>
 		<section class="contact-info">
-			<header class="section-title menu"><h1 data-i18n="Select Contact">选择预订人</h1></header>
+			<header class="section-title"><h1 data-i18n="Order Contact">预订人</h1></header>
 			<form>
 				<fieldset>
 					<div class="inline-group">
@@ -66,6 +69,7 @@
 					<div class="inline-group">
 						<i class="icon icon-phone"></i>
 						<input type="tel" name="contactphone" data-placeholder-i18n="Mobile" placeholder="手机号" />
+						<i class="icon icon-contact"></i>
 					</div>
 				</fieldset>
 			</form>

@@ -59,7 +59,7 @@
 .icon-setting:active,
 :active>.icon-setting		{ @include icon-offset(7, 1); }
 
-.icon-down-small             { @include icon-offset(8, 1); }
+.icon-down-small            { @include icon-offset(8, 1); }
 .icon-down-small:active,
 :active>.icon-down-small    { @include icon-offset(9, 1); }
 
@@ -78,7 +78,11 @@
 
 .icon-share					{ @include icon-offset(6, 2); }
 .icon-share:active,
-:active>.icon-share		{ @include icon-offset(7, 2); }
+:active>.icon-share		    { @include icon-offset(7, 2); }
+
+.icon-contact               { @include icon-offset(8, 2); }
+.icon-contact:active,
+:active>.icon-contact       { @include icon-offset(9, 2); }
 
 .icon-map-marker-small		{ @include icon-offset(0, 3); }
 .icon-car					{ @include icon-offset(1, 3); }
