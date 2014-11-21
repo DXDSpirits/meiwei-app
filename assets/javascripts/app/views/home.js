@@ -41,7 +41,7 @@
             this.listenTo(this.collection, 'reset change add remove', this.renderCarousel);
         },
         renderCarousel: function() {
-            window.Bootstrap && Bootstrap.set('home-heros', this.collection.toJSON());
+            window.BOOST && BOOST.set('home-heros', this.collection.toJSON());
             var items = this.$('.carousel-item'), itemWidth = $(items[0]).outerWidth(),
                 wrapperWidth = this.$el.closest('.carousel').innerWidth(),
                 margin = (wrapperWidth - itemWidth) / 2;
@@ -156,7 +156,7 @@
     	},
     	renderAll: function() {
     		if (this.recommend.id == this.defaultRecommendId) {
-    	    	window.Bootstrap && Bootstrap.set('home-recommend-items', this.recommend.items.toJSON());
+    	    	window.BOOST && BOOST.set('home-recommend-items', this.recommend.items.toJSON());
     	    }
     	    this.$('.show-more').removeClass('hidden');
     	    this.$('.header-title > span').html(this.recommend.get('name'));
@@ -178,11 +178,11 @@
 	        if (!this.bootstrapped && !listId) {
                 this.bootstrapped = true;
                 this.firstVisit();
-                var recommendNames = window.Bootstrap && Bootstrap.get('home-recommendnames');
+                var recommendNames = window.BOOST && BOOST.get('home-recommendnames');
                 if (recommendNames) this.recommendNames.reset(recommendNames);
-                var recommends = window.Bootstrap && Bootstrap.get('home-recommend-items');
+                var recommends = window.BOOST && BOOST.get('home-recommend-items');
                 if (recommends) this.recommend.items.reset(recommends);
-                var heros = window.Bootstrap && Bootstrap.get('home-heros');
+                var heros = window.BOOST && BOOST.get('home-heros');
                 if (heros) this.heros.reset(heros);
             } else {
                 if (listId) MeiweiApp.Pages.Home.recommend.set('id', listId);

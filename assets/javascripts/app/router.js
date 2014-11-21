@@ -111,11 +111,14 @@
     MeiweiApp.goTo = function(pageName, options) {
     	var next = MeiweiApp.Pages[pageName];
     	(options || (options = {})).caller = options.caller || MeiweiApp.history.active;
-    	if (next != MeiweiApp.history.active) {
-    	    MeiweiApp.abortAllAjax();
-    		MeiweiApp.history.stack.push(MeiweiApp.history.active);
-    		MeiweiApp.history.active = next;
+    	if (next && next != MeiweiApp.history.active) {
+    	    if (MeiweiApp.history.active) {
+                MeiweiApp.history.stack.push(MeiweiApp.history.active);
+                MeiweiApp.history.active.leave();
+            }
     		MeiweiApp.history.active.go(options);
+    		next.go(options);
+            this.history.active = next;
     	}
     	if (pageName == 'Home') MeiweiApp.history.stack.length = 0;
     };
@@ -125,7 +128,6 @@
     };
     
     MeiweiApp.goBack = function() {
-        MeiweiApp.abortAllAjax();
     	if (MeiweiApp.history.stack.length > 0) {
     		var prev = MeiweiApp.history.stack.pop();
     		MeiweiApp.history.active = prev;
