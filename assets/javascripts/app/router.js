@@ -116,7 +116,6 @@
                 MeiweiApp.history.stack.push(MeiweiApp.history.active);
                 MeiweiApp.history.active.leave();
             }
-    		MeiweiApp.history.active.go(options);
     		next.go(options);
             this.history.active = next;
     	}
