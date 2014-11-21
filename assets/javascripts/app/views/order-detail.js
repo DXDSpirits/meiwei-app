@@ -17,10 +17,8 @@
         },
         render:function(){
             MeiweiApp.ModelView.prototype.render.call(this);
-            if(this.model.get('restaurantinfor').restaurant_type==20) {
+            if (this.model.get('clubseattype') == 0 && this.model.get('restaurantinfor').restaurant_type==20) {
                 $('#seatType').text('卡座');
-            } else {
-                $('#seatType').text('大厅');
             }
         },
     	cancelOrder: function() {
