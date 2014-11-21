@@ -148,10 +148,6 @@ module.exports = function(grunt) {
             }
         },
         concurrent: {
-            dist: {
-                tasks: ['sass', 'includes', 'templates', 'uglify', 'copy'],
-                options: { logConcurrentOutput: true }
-            },
             server: {
                 tasks: ['watch', 'connect'],
                 options: {
@@ -175,5 +171,5 @@ module.exports = function(grunt) {
     if (port) grunt.config('connect.server.options.port', port);
     grunt.loadNpmTasks('grunt-contrib-connect');
     grunt.registerTask('server', 'concurrent:server');
-    grunt.registerTask('dist', 'concurrent:dist');
+    grunt.registerTask('dist', ['sass', 'includes', 'templates', 'uglify', 'copy']);
 };
