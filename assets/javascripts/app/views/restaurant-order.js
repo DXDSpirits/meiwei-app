@@ -164,7 +164,7 @@
                 orderdate: this.$('input[name=orderdate]').val() || null,
                 ordertime: this.$('select[name=ordertime]').val() || null,
                 personnum: this.$('input[name=personnum]').val() || null,
-                clubseattype: this.$('input[name=clubseattype]:checked').val() || null,
+                clubseattype: this.$('input[name=clubseattype]').val() || null,
                 contactname: this.$('input[name=contactname]').val() || null,
                 contactgender: this.$('input[name=contactgender]').val() || null,
                 contactphone: this.$('input[name=contactphone]').val() || null,
@@ -223,12 +223,14 @@
                 defaultValues = {
                     orderdate: moment().add('days', 1).format('YYYY-MM-DD'),
                     ordertime: '19:00',
-                    personnum: 2
+                    personnum: 2,
+                    clubseattype: 0
                 };
             }
             
             var resto_tyle = this.restaurant.get('restaurant_type');
-            $(this.$('.club-seat-type span')[0]).text(resto_tyle == 20 ? '卡座' : '大厅');
+            this.$('.switch-seat .label-off').text(resto_tyle == 20 ? '卡座' : '大厅');
+            this.$('.switch-seat').switchControl('toggle', defaultValues.clubseattype);
             
             this.views.orderForm.render(defaultValues);
             this.views.orderContactForm.render(defaultValues);
