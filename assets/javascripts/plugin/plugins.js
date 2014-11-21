@@ -56,18 +56,18 @@
                 return this.each(function() {
                     "off: 0; on : 1"
                     var $element = $(this), 
-                        onLabel = $(this).find('.label-on').text() || 'ON',
-                        offLabel = $(this).find('.label-off').text() || 'OFF';
+                        onLabel = $(this).find('.label-on'),
+                        offLabel = $(this).find('.label-off');
                     var switchGender = function(gender) {
                         var switchOff = function() {
                             $element.removeClass('on').addClass('off');
                             $element.find('input').val(0);
-                            $element.find('.label-text').html(offLabel);
+                            $element.find('.label-text').html(offLabel.text() || 'OFF');
                         };
                         var switchOn = function() {
                             $element.removeClass('off').addClass('on');
                             $element.find('input').val(1);
-                            $element.find('.label-text').html(onLabel);
+                            $element.find('.label-text').html(onLabel.text() || 'ON');
                         }
                         if (gender == 0) {
                             switchOff();
