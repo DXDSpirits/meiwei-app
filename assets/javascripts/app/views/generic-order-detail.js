@@ -47,32 +47,32 @@
                 }
             );
         },
-        callWxPay: function(model) {
-            if (window.WeixinJSBridge) {
-                WeixinJSBridge.invoke('getBrandWCPayRequest', {
-                    "appId": model.get('appid'),
-                    "timeStamp": model.get('timestamp'),
-                    "nonceStr": model.get('noncestr'),
-                    "package": model.get('package'),
-                    "signType": model.get('signtype'),
-                    "paySign": model.get('paysign')
-                }, function (res) {
-                    if (res.err_msg == "get_brand_wcpay_request:ok") {
-                        window.setTimeout(function () {
-                            MeiweiApp.Pages.OrderDetail.onResume();
-                        }, 2000);
-                    }
-                });
-            }
+        callWxPay: function(payment_no) {
+            var wxPayment = new WxPayment({ payment_no: payment_no });
+            var self = this;
+            wxPayment.fetch({success: function (model) {
+                if (window.WeixinJSBridge) {
+                    WeixinJSBridge.invoke('getBrandWCPayRequest', {
+                        "appId": model.get('appid'),
+                        "timeStamp": model.get('timestamp'),
+                        "nonceStr": model.get('noncestr'),
+                        "package": model.get('package'),
+                        "signType": model.get('signtype'),
+                        "paySign": model.get('paysign')
+                    }, function (res) {
+                        if (res.err_msg == "get_brand_wcpay_request:ok") {
+                            window.setTimeout(function () {
+                                self.onResume();
+                            }, 2000);
+                        }
+                    });
+                }
+            }});
         },
         payOrder: function () {
             var payment_no = this.model.get('payment').payment_no;
-            if (MeiweiApp.isWeixin) {
-                var wxPayment = new WxPayment({ payment_no: payment_no });
-                var self = this;
-                wxPayment.fetch({success: function (model) {
-                    self.callWxPay(model);
-                }});
+            if (MeiweiApp.isWeixin && false) {
+                this.callWxPay(payment_no);
             } else if (MeiweiApp.isCordova) {
                 var alipayPayment = new AlipayPayment({ payment_no: payment_no });
                 alipayPayment.fetch({success: function (model) {
