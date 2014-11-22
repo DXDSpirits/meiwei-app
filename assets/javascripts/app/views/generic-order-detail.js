@@ -47,40 +47,40 @@
                 }
             );
         },
-        payOrder: function () {
-            if (MeiweiApp.isWeixin) {
-                var wxPayment = new WxPayment({
-                    payment_no: this.model.get('payment').payment_no
-                });
-                wxPayment.fetch({success: function (model) {
-                    if (window.WeixinJSBridge) {
-                        WeixinJSBridge.invoke('getBrandWCPayRequest', {
-                            "appId": model.get('appid'),
-                            "timeStamp": model.get('timestamp'),
-                            "nonceStr": model.get('noncestr'),
-                            "package": model.get('package'),
-                            "signType": model.get('signtype'),
-                            "paySign": model.get('paysign')
-                        }, function (res) {
-                            if (res.err_msg == "get_brand_wcpay_request:ok") {
-                                window.setTimeout(function () {
-                                    MeiweiApp.Pages.GenericOrderDetail.onResume();
-                                }, 2000);
-                            } else {
-                                //alert(res.err_msg);
-                            }
-                        });
-                    } else {
-
+        callWxPay: function(model) {
+            if (window.WeixinJSBridge) {
+                WeixinJSBridge.invoke('getBrandWCPayRequest', {
+                    "appId": model.get('appid'),
+                    "timeStamp": model.get('timestamp'),
+                    "nonceStr": model.get('noncestr'),
+                    "package": model.get('package'),
+                    "signType": model.get('signtype'),
+                    "paySign": model.get('paysign')
+                }, function (res) {
+                    if (res.err_msg == "get_brand_wcpay_request:ok") {
+                        window.setTimeout(function () {
+                            MeiweiApp.Pages.OrderDetail.onResume();
+                        }, 2000);
                     }
-                }});
-            } else {
-                var alipayPayment = new AlipayPayment({
-                    payment_no: this.model.get('payment').payment_no
                 });
+            }
+        },
+        payOrder: function () {
+            var payment_no = this.model.get('payment').payment_no;
+            if (MeiweiApp.isWeixin) {
+                var wxPayment = new WxPayment({ payment_no: payment_no });
+                var self = this;
+                wxPayment.fetch({success: function (model) {
+                    self.callWxPay(model);
+                }});
+            } else if (MeiweiApp.isCordova) {
+                var alipayPayment = new AlipayPayment({ payment_no: payment_no });
                 alipayPayment.fetch({success: function (model) {
                     MeiweiApp.payByAlipay(model.get('orderString'));
                 }});
+            } else {
+                var payable_url = MeiweiApp.configs.APIHost + '/alipay/payablewap/' + payment_no;
+                location.href = payable_url;
             }
         },
         render: function () {
