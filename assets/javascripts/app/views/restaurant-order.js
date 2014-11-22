@@ -177,27 +177,18 @@
             var self = this;
             newOrder.save({}, {
                 success: function(model, xhr, options) {
-                    if(_.isEmpty(xhr.payment_order)){
-                        MeiweiApp.goTo('Attending', { orderId: newOrder.id });
-                        MeiweiApp.showConfirmDialog(
-                            MeiweiApp._('邀请好友'), MeiweiApp._('是否邀请好友？'),
-                            function() {
-                                var content = '我预定了' + 
-                                    moment(newOrder.get('orderdate') + ' ' + newOrder.get('ordertime')).format('LLLL') + 
-                                    '在' + self.restaurant.get('address') +
-                                    '的' + self.restaurant.get('fullname') + '。一起来吧！';
-                                MeiweiApp.sendWeixinMsg(content);
-                                MeiweiApp.sendGaSocial('weixin', 'message', 'invitation');
-                            }
-                        );
-                    }
-                    else{
-                        //MeiweiApp.goTo('GenericOrderDetail', { orderId: xhr.payment_order.id});
-                        MeiweiApp.goTo('OrderDetail', {
-                            order: model.toJSON()
-                        });
-                    }
-
+                    MeiweiApp.goTo('Attending', { orderId: newOrder.id });
+                    MeiweiApp.showConfirmDialog(
+                        MeiweiApp._('邀请好友'), MeiweiApp._('是否邀请好友？'),
+                        function() {
+                            var content = '我预定了' + 
+                                moment(newOrder.get('orderdate') + ' ' + newOrder.get('ordertime')).format('LLLL') + 
+                                '在' + self.restaurant.get('address') +
+                                '的' + self.restaurant.get('fullname') + '。一起来吧！';
+                            MeiweiApp.sendWeixinMsg(content);
+                            MeiweiApp.sendGaSocial('weixin', 'message', 'invitation');
+                        }
+                    );
                 },
                 error: function(model, xhr, options) {
                     self.$('.wrapper').scrollTop(0);

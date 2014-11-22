@@ -18,20 +18,6 @@
 		{{ #restaurantinfor.discount }}
     		<tr><th data-i18n="Discount">折扣</th><td>{{{ restaurantinfor.discount }}}</td></tr>
         {{ /restaurantinfor.discount }}
-        {{#is_prepay}}
-        <tr>
-            <th colspan="">预支付</th>
-            <td>
-            <span>￥{{ payment_order.amount }}</span>
-            {{#payment_order.is_paid}}
-            <span class="payment_status paid">已支付</span>
-            {{/payment_order.is_paid}}
-            {{^payment_order.is_paid}}
-            <span class="payment_status">未支付</span>
-            {{/payment_order.is_paid}}
-        </td>
-        </tr>
-        {{/is_prepay}}
 	</table>
 </section>
 
@@ -50,17 +36,5 @@
 {{/product_items.length}}
 
 <section class="order-buttons">
-    {{^is_payable}}
     <button class="btn-inverse btn-block-level btn-cancel" data-i18n="Cancel Order">取消订单</button>
-    {{/is_payable}}
-    {{#is_payable}}
-    <table>
-        <tbody>
-        <tr>
-            <td><button class="btn-inverse btn-block-level btn-cancel" data-i18n="Cancel Order">取消订单</button></td>
-            <td><button class="btn-inverse btn-block-level btn-payable">支付</button></td>
-        </tr>
-        </tbody>
-    </table>
-    {{/is_payable}}
 </section>

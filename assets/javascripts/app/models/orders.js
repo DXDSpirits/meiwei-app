@@ -5,16 +5,6 @@
     	parse: function(response) {
     		response.ordertime = response.ordertime.slice(0, 5);
     		response.editable = (response.status < 20);
-            response.is_payable = false;
-            response.is_prepay = false;
-            if(response.payment_order) {
-                if(response.payment_order.amount>0) {
-                    response.is_prepay = true;
-                }
-                if(response.payment_order.status==0) {
-                    response.is_payable = true;
-                }
-            }
     		return response;
     	},
     	cancel: function(options) {
