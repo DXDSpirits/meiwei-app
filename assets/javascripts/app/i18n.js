@@ -94,7 +94,7 @@
             en: 'Profile'
         },
         'Reservations': {
-            zh: '订餐',
+            zh: '餐厅预订',
             en: 'Reservations'
         },
         'Credits': {
