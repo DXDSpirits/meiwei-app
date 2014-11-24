@@ -1,4 +1,8 @@
 (function() {
+    var VIPCardOrderCreation = MeiweiApp.Model.extend({
+        urlRoot: MeiweiApp.configs.APIHost + '/orders/ordervipcard/'
+    });
+    
 	var ConfirmDialog = MeiweiApp.View.extend({
     	className: 'dialog',
     	template: TPL['order-confirm-dialog'],
@@ -42,8 +46,7 @@
             triggerDelete: function() {
                 MeiweiApp.ProductCart.remove(this.model);
                 this.model.trigger('newhide');
-            },
-
+            }
         })
     });
     
@@ -261,7 +264,15 @@
             }
         },
         purchasePremium: function() {
-            MeiweiApp.goTo('VIPPurchase');
+            var newOrder = new VIPCardOrderCreation({
+                member: MeiweiApp.me.id,
+                product_id: 183
+            });
+            newOrder.save({}, {
+                success: function(model, xhr, options) {
+                    MeiweiApp.goTo('GenericOrderDetail', {orderId: model.id});
+                }
+            });
         },
         render: function() {
             this.$('.info-text').html('');

@@ -302,6 +302,9 @@
             padding-left: 2px;
             padding-right: 2px;
         }
+        .premium-purchase {
+            cursor: pointer;
+        }
     }
 	.seat-selected {
 	    &::before { content: '('; }

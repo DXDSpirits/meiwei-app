@@ -4,14 +4,22 @@
 <section class="order-detail">
     <table>
         <tr><th data-i18n="Order No">订单号</th><td>{{ order_no }}</td></tr>
+        {{#attributes.datetime}}
         <tr><th data-i18n="Order Date">订单日期</th><td>{{ attributes.formatted_datetime }}</td></tr>
+        {{/attributes.datetime}}
+        {{#attributes.address}}
         <tr><th data-i18n="Address">地址</th><td>{{ attributes.address }}</td></tr>
+        {{/attributes.address}}
+        {{#name}}
         <tr>
             <th data-i18n="Contact">联系人</th>
             {{#gender}}<td>{{ name }}女士</td>{{/gender}}
             {{^gender}}<td>{{ name }}先生</td>{{/gender}}
         </tr>
+        {{/name}}
+        {{#mobile}}
         <tr><th data-i18n="Mobile">手机</th><td>{{ mobile }}</td></tr>
+        {{/mobile}}
         {{#payment}}
         <tr>
             <th data-i18n="价格">价格</th>
