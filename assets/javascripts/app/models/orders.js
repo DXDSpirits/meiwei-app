@@ -45,4 +45,17 @@
         urlRoot: MeiweiApp.configs.APIHost + '/orders/orderdriver/'
     });
     
+    MeiweiApp.Models.OrderVIPCard = MeiweiApp.Model.extend({
+        urlRoot: MeiweiApp.configs.APIHost + '/orders/ordervipcard/'
+    });
+    
+    MeiweiApp.Models.Coupon = MeiweiApp.Model.extend({
+        urlRoot: MeiweiApp.configs.APIHost + '/orders/coupon/'
+    });
+    
+    MeiweiApp.Collections.Coupons = MeiweiApp.Collection.extend({
+        url: MeiweiApp.configs.APIHost + '/orders/coupon/',
+        model: MeiweiApp.Models.Coupon
+    });
+    
 })();
