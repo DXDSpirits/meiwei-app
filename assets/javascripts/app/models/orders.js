@@ -55,7 +55,12 @@
     
     MeiweiApp.Collections.Coupons = MeiweiApp.Collection.extend({
         url: MeiweiApp.configs.APIHost + '/orders/coupon/',
-        model: MeiweiApp.Models.Coupon
+        model: MeiweiApp.Models.Coupon,
+        premiumCount: function() {
+            return this.filter(function(coupon) {
+                return 30 == coupon.get('detail').coupon_type
+            }).length;
+        }
     });
     
 })();

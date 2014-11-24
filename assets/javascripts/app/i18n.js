@@ -189,8 +189,8 @@
             zh: '联系人',
             en: 'Contacts'
         },
-        'Order Contact': {
-            zh: '预订人',
+        'Restaurant Order Contact': {
+            zh: '订餐人信息',
             en: 'Contact'
         },
         'Recent Contacts': {

@@ -288,11 +288,26 @@
             @include icon-offset(3, 4);
         }
     }
+    .premium-flag {
+        p {
+            font-size: $fontSizeSmall;
+            padding: 14px 3px; 
+            line-height: 16px;
+        }
+        .mark {
+            display: inline-block;
+            background-color: $brownDark;
+            color: $white;
+            font-size: 90%;
+            padding-left: 2px;
+            padding-right: 2px;
+        }
+    }
 	.seat-selected {
 	    &::before { content: '('; }
 	    &::after { content: ')'; }
 	}
-	.switch-gender, .switch-seat {
+	.switch-gender, .switch-seat, .switch-premium {
 		@include flexible($flex: 0, $orient: horizontal);
 		width: 70px;
 	}

@@ -54,7 +54,6 @@
         },
         initView: function(options) {
             _.bindAll(this, 'fillContact');
-            this.$('.switch-gender').switchControl();
         },
         selectContact: function() {
             MeiweiApp.goTo('MemberContacts', { multiple: false, callback: this.fillContact });
@@ -82,7 +81,6 @@
             this.restaurant = this.model;
             this.model = null;
             this.hours = new MeiweiApp.Models.Hour();
-            this.$('.switch-seat').switchControl();
         },
         renderHourList: function() {
             var day = moment(this.$('input[name=orderdate]').val()).day();
@@ -115,6 +113,7 @@
             'click .floorplan-select > header': 'selectSeat',
             'click .product-select > header': 'selectProduct',
             'click .order-submit-button': 'askToSubmitOrder',
+            'click .premium-purchase': 'purchasePremium'
         },
         initPage: function() {
             _.bindAll(this, 'renderOrderForm', 'submitOrder');
@@ -124,6 +123,9 @@
                 orderContactForm: new RestaurantOrderContactForm({ el: this.$('.contact-info') }),
                 productCart: new ProductCartItemList({ collection: MeiweiApp.ProductCart, el: this.$('.product-cart') })
             };
+            this.$('.switch-seat').switchControl();
+            this.$('.switch-gender').switchControl();
+            this.$('.switch-premium').switchControl();
         },
         onClickLeftBtn: function(){
             MeiweiApp.ProductCart.reset();
@@ -226,6 +228,7 @@
             this.views.orderForm.render(defaultValues);
             this.views.orderContactForm.render(defaultValues);
             this.views.productCart.render();
+            this.renderPremiumFlag();
             
             if (_.isEmpty(this.restaurant.get('floorplans'))) {
                 this.$('.floorplan-select').addClass('hidden');
@@ -234,6 +237,31 @@
             }
             //this.$('input[name=orderdate]').focus();
             this.$('.wrapper').removeClass('rendering');
+        },
+        renderPremiumFlag: function() {
+            if (this.restaurant.get('premium')) {
+                this.$('.premium-flag').removeClass('hidden');
+                var coupons = new MeiweiApp.Collections.Coupons();
+                coupons.fetch({
+                    success: function(collection) {
+                        var count = coupons.premiumCount();
+                        self.$('.premium-flag .number').text(count);
+                        if (count <= 0) {
+                            self.$('.switch-premium').addClass('hidden');
+                            self.$('.premium-purchase').removeClass('hidden');
+                        } else {
+                            self.$('.premium-purchase').addClass('hidden');
+                            self.$('.switch-premium').removeClass('hidden');
+                            self.$('.switch-premium').switchControl('toggle', true);
+                        }
+                    }
+                });
+            } else {
+                this.$('.premium-flag').addClass('hidden');
+            }
+        },
+        purchasePremium: function() {
+            MeiweiApp.goTo('VIPPurchase');
         },
         render: function() {
             this.$('.info-text').html('');
