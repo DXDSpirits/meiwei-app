@@ -152,7 +152,7 @@
         var ratio = window.devicePixelRatio || 2;
         var width = options.width || parseInt($('body').innerWidth());
         var height = options.height;
-        var size = height ? width * ratio + 'x' + height * ratio + '!' : width * ratio;
+        var size = height ? width * ratio + 'x' + height * ratio : width * ratio;
         image_src += '?imageMogr/v2/thumbnail/' + size;
         return image_src;
     };
