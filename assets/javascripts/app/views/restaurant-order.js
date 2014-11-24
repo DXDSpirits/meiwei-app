@@ -169,12 +169,13 @@
                 orderdate: this.$('input[name=orderdate]').val() || null,
                 ordertime: this.$('select[name=ordertime]').val() || null,
                 personnum: this.$('input[name=personnum]').val() || null,
-                clubseattype: this.$('input[name=clubseattype]').val() || null,
+                clubseattype: this.$('input[name=clubseattype]').val() || 0,
                 contactname: this.$('input[name=contactname]').val() || null,
-                contactgender: this.$('input[name=contactgender]').val() || null,
+                contactgender: this.$('input[name=contactgender]').val() || 0,
                 contactphone: this.$('input[name=contactphone]').val() || null,
-                tables: this.selectedSeats || null,
+                premiumorder: this.$('input[name=premiumorder]').val() || 0,
                 other: this.$('input[name=other]').val() || null,
+                tables: this.selectedSeats || null,
                 products: products.slice(0, -1)
             });
             if (this.options.pendingOrder) this.options.pendingOrder.cancel();
