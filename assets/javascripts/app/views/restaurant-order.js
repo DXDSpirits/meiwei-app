@@ -169,11 +169,11 @@
                 orderdate: this.$('input[name=orderdate]').val() || null,
                 ordertime: this.$('select[name=ordertime]').val() || null,
                 personnum: this.$('input[name=personnum]').val() || null,
-                clubseattype: this.$('input[name=clubseattype]').val() || 0,
+                clubseattype: this.$('input[name=clubseattype]').val() || null,
                 contactname: this.$('input[name=contactname]').val() || null,
-                contactgender: this.$('input[name=contactgender]').val() || 0,
+                contactgender: this.$('input[name=contactgender]').val() || null,
                 contactphone: this.$('input[name=contactphone]').val() || null,
-                premiumorder: this.$('input[name=premiumorder]').val() || 0,
+                premium: +this.$('input[name=premium]').val() == 1,
                 other: this.$('input[name=other]').val() || null,
                 tables: this.selectedSeats || null,
                 products: products.slice(0, -1)
@@ -245,22 +245,26 @@
         renderPremiumFlag: function() {
             if (this.restaurant.get('premium')) {
                 this.$('.premium-flag').removeClass('hidden');
+                this.$('.switch-premium').switchControl('toggle', true);
                 var coupons = new MeiweiApp.Collections.Coupons();
+                var self = this;
                 coupons.fetch({
                     success: function(collection) {
                         var count = coupons.premiumCount();
                         self.$('.premium-flag .number').text(count);
                         if (count <= 0) {
+                            self.$('.switch-premium').switchControl('toggle', false);
                             self.$('.switch-premium').addClass('hidden');
                             self.$('.premium-purchase').removeClass('hidden');
                         } else {
-                            self.$('.premium-purchase').addClass('hidden');
-                            self.$('.switch-premium').removeClass('hidden');
                             self.$('.switch-premium').switchControl('toggle', true);
+                            self.$('.switch-premium').removeClass('hidden');
+                            self.$('.premium-purchase').addClass('hidden');
                         }
                     }
                 });
             } else {
+                this.$('.switch-premium').switchControl('toggle', false);
                 this.$('.premium-flag').addClass('hidden');
             }
         },
