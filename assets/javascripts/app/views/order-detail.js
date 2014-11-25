@@ -35,6 +35,7 @@
     				el: this.$('.wrapper')
     			})
     		};
+    		this.$('.wrapper').css('background-size', 'auto ' + $(window).width() + 'px');
     	},
     	onClickRightBtn: function() {
     		MeiweiApp.ProductCart.reset(this.order.get('product_items'));
@@ -52,7 +53,7 @@
     	renderAll: function() {
     		var resto = this.order.get('restaurantinfor');
     		var localImage = 'assets/images/bootstrap/restaurant/' + resto.id + '.jpg';
-            MeiweiApp.loadBgImage(this.$('.wrapper'), resto.frontpic, { height: 250 });
+            MeiweiApp.loadBgImage(this.$('.wrapper'), resto.frontpic, { height: 320 });
             this.$('.item-name').html(resto.fullname);
     		if (this.order.get('editable')) {
     			this.$('.header-btn-right i').attr('class', 'icon icon-edit');

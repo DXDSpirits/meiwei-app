@@ -3,17 +3,18 @@
         urlRoot: MeiweiApp.configs.APIHost + '/alipay/payable/',
         idAttribute: 'payment_no'
     });
-
+    
     var WxPayment = MeiweiApp.Model.extend({
         urlRoot: MeiweiApp.configs.APIHost + '/wxpay/payable/',
         idAttribute: 'payment_no'
     });
-
+    
     var OrderDetail = MeiweiApp.ModelView.extend({
         default_template: TPL['generic-order-detail'],
         templates: {
             30: TPL['generic-order-detail-driver'],
-            40: TPL['generic-order-detail-vvip']
+            40: TPL['generic-order-detail-vvip'],
+            60: TPL['generic-order-detail-vipcard']
         },
         events: {
             'click .btn-cancel': 'cancelOrder',
@@ -39,9 +40,7 @@
                             '4-001-002-003',
                             MeiweiApp._('Call Us'),
                             MeiweiApp._('Calling Anshifu and cancel order'),
-                            function () {
-
-                            }
+                            function () {}
                         );
                     }
                 }
@@ -102,6 +101,7 @@
             this.views = {
                 orderDetail: new OrderDetail({ model: this.order, el: this.$('.wrapper') })
             };
+            this.$('.wrapper').css('background-size', 'auto ' + $(window).width() + 'px');
         },
         onClickLeftBtn: function () {
             MeiweiApp.goTo('GenericOrderList');
@@ -115,9 +115,9 @@
         renderAll: function () {
             var detail = this.order.get('detail');
             if (detail && detail.picture) {
-                MeiweiApp.loadBgImage(this.$('.wrapper'), detail.picture, { height: 250 });
+                MeiweiApp.loadBgImage(this.$('.wrapper'), detail.picture, { height: 320 });
             } else {
-                MeiweiApp.loadBgImage(this.$('.wrapper'), 'assets/images/default-order-avatar.png', { height: 250 });
+                MeiweiApp.loadBgImage(this.$('.wrapper'), 'assets/images/default-order-avatar.png', { height: 320 });
             }
         },
         render: function () {

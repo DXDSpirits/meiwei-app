@@ -1,0 +1,28 @@
+
+<!--<p class="item-name">订单号 {{ order_no }}</p>-->
+<!--{{ detail.name }}-->
+<section class="order-detail order-detail-vipcard">
+    <ol class="desc">
+        <li>不等位特权无需排队，优先使用于大堂</li>
+        <li>为确保零等待，推荐您在11:00前预约午餐，17:30前预约晚餐</li>
+        <li>本公司保留最终解释权</li>
+    </ol>
+    <div class="premium-flag">
+        <p><span class="mark">特</span></p>
+        <p class="flexible">不等位特权12次</p>
+        {{#payment}}
+        {{#payment.is_paid}}
+        <span class="payment_status paid">已支付</span>
+        {{/payment.is_paid}}
+        {{#payment.is_payable}}
+        <p>￥{{ payment.amount }}</p>
+        {{/payment.is_payable}}
+        {{/payment}}
+    </div>
+    {{#payment.is_payable}}
+    <button class="btn-inverse btn-block-level btn-payable" data-i18n="支付">支付</button>
+    {{/payment.is_payable}}
+    <!--{{^payment.is_paid}}-->
+    <!--<button class="btn-inverse btn-block-level btn-cancel" data-i18n="取消">取消</button>-->
+    <!--{{/payment.is_paid}}-->
+</section>

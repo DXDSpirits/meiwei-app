@@ -3,7 +3,7 @@
         background-repeat: no-repeat;
         background-position: center top;
         @include background-size(contain);
-        padding-top: 50%;
+        padding-top: 100%;
     }
 	.item-name {
         width: 100%;
@@ -19,7 +19,7 @@
 		background-color: $bodyBackground;
 		@include background-size(100% 60px, 100% 60px);
         min-height:100%;
-        >button{
+        > button {
             margin-top:30px;
         }
 	}
@@ -44,6 +44,37 @@
 	    background-color: $bodyBackground;
 	    padding: 20px 40px;
 	}
+}
+
+#view-generic-order-detail {
+    .order-detail-vipcard {
+        ol {
+            padding-top: 20px;
+            padding-bottom: 20px;
+            color: $brownLight;
+            font-size: $fontSizeSmall;
+            list-style-type: decimal;
+        }
+        .premium-flag {
+            @include flex-box($orient: horizontal);
+            p {
+                font-size: $fontSizeSmall;
+                padding: 14px 3px; 
+                line-height: 16px;
+            }
+            .mark {
+                display: inline-block;
+                background-color: $brownDark;
+                color: $white;
+                font-size: 90%;
+                padding-left: 2px;
+                padding-right: 2px;
+            }
+            .premium-purchase {
+                cursor: pointer;
+            }
+        }
+    }
 }
 
 #view-generic-order-list, #view-generic-order-detail, #view-order-detail {
