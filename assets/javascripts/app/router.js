@@ -71,37 +71,41 @@
             this.navigate(path, {trigger: true});
         },
     	
-    	home: function(lid) { MeiweiApp.Pages.Home.go({listId: lid}); MeiweiApp.history.active = MeiweiApp.Pages.Home; },
-    	getStarted: function() { MeiweiApp.Pages.GetStarted.go(); MeiweiApp.history.active = MeiweiApp.Pages.GetStarted; },
+    	home: function(lid) { MeiweiApp.goTo('Home', {listId: lid}); },
+    	getStarted: function() { MeiweiApp.goTo('GetStarted'); },
     	
-    	restaurantDetail: function(rid) { MeiweiApp.Pages.RestaurantDetail.go({restaurantId: rid}); MeiweiApp.history.active = MeiweiApp.Pages.RestaurantDetail; },
-    	restaurantSearch: function() { MeiweiApp.Pages.RestaurantSearch.go(); MeiweiApp.history.active = MeiweiApp.Pages.RestaurantSearch; },
-    	restaurantOrder: function(rid) { MeiweiApp.Pages.RestaurantOrder.go({restaurantId: rid}); MeiweiApp.history.active = MeiweiApp.Pages.RestaurantOrder; },
-    	//restaurantFloorplans: function(rid) { MeiweiApp.Pages.RestaurantFloorplans.go(); MeiweiApp.history.active = MeiweiApp.Pages.RestaurantFloorplans; },
+    	restaurantDetail: function(rid) { MeiweiApp.goTo('RestaurantDetail', {restaurantId: rid}); },
+    	restaurantSearch: function() { MeiweiApp.goTo('RestaurantSearch'); },
+    	restaurantOrder: function(rid) { MeiweiApp.goTo('RestaurantOrder', {restaurantId: rid}); },
+    	//restaurantFloorplans: function(rid) { MeiweiApp.goTo('RestaurantFloorplans'); },
     	
-    	memberCenter: function() { MeiweiApp.Pages.MemberCenter.go(); MeiweiApp.history.active = MeiweiApp.Pages.MemberCenter; },
-    	memberLogin: function() { MeiweiApp.Pages.MemberLogin.go(); MeiweiApp.history.active = MeiweiApp.Pages.MemberLogin; },
-    	memberProfile: function() { MeiweiApp.Pages.MemberProfile.go(); MeiweiApp.history.active = MeiweiApp.Pages.MemberProfile; },
-        memberContacts: function() { MeiweiApp.Pages.MemberContacts.go(); MeiweiApp.history.active = MeiweiApp.Pages.MemberContacts; },
-        memberCredits: function() { MeiweiApp.Pages.MemberCredits.go(); MeiweiApp.history.active = MeiweiApp.Pages.MemberCredits; },
-        memberFavorites: function() { MeiweiApp.Pages.MemberFavorites.go(); MeiweiApp.history.active = MeiweiApp.Pages.MemberFavorites; },
-        memberAnniversaries: function() { MeiweiApp.Pages.MemberAnniversaries.go(); MeiweiApp.history.active = MeiweiApp.Pages.MemberAnniversaries; },
+    	memberCenter: function() { MeiweiApp.goTo('MemberCenter'); },
+    	memberLogin: function() { MeiweiApp.goTo('MemberLogin'); },
+    	memberProfile: function() { MeiweiApp.goTo('MemberProfile'); },
+        memberContacts: function() { MeiweiApp.goTo('MemberContacts'); },
+        memberCredits: function() { MeiweiApp.goTo('MemberCredits'); },
+        memberFavorites: function() { MeiweiApp.goTo('MemberFavorites'); },
+        memberAnniversaries: function() { MeiweiApp.goTo('MemberAnniversaries'); },
         
-        orderList: function() { MeiweiApp.Pages.OrderList.go(); MeiweiApp.history.active = MeiweiApp.Pages.OrderList; },
-        orderDetail: function(oid) { MeiweiApp.Pages.OrderDetail.go({orderId: oid}); MeiweiApp.history.active = MeiweiApp.Pages.OrderDetail; },
-        genericOrderList: function() { MeiweiApp.Pages.GenericOrderList.go(); MeiweiApp.history.active = MeiweiApp.Pages.GenericOrderList; },
-        genericOrderDetail: function(oid) { MeiweiApp.Pages.GenericOrderDetail.go({orderId: oid}); MeiweiApp.history.active = MeiweiApp.Pages.GenericOrderDetail; },
+        orderList: function() { MeiweiApp.goTo('OrderList'); },
+        orderDetail: function(oid) { MeiweiApp.goTo('OrderDetail', {orderId: oid}); },
+        genericOrderList: function() { MeiweiApp.goTo('GenericOrderList'); },
+        genericOrderDetail: function(oid) { MeiweiApp.goTo('GenericOrderDetail', {orderId: oid}); },
         
-        productList: function(pid) { MeiweiApp.Pages.ProductList.go({productId: pid}); MeiweiApp.history.active = MeiweiApp.Pages.ProductList; },
-        productOrder: function(pid) { MeiweiApp.Pages.ProductOrder.go({productItemId: pid}); MeiweiApp.history.active = MeiweiApp.Pages.ProductOrder; },
-        productPurchase: function() { MeiweiApp.Pages.ProductPurchase.go(); MeiweiApp.history.active = MeiweiApp.Pages.ProductPurchase; },
-        productRedeem: function() { MeiweiApp.Pages.ProductRedeem.go(); MeiweiApp.history.active = MeiweiApp.Pages.ProductRedeem; },
+        productList: function(pid) { MeiweiApp.goTo('ProductList', {productId: pid}); },
+        productOrder: function(pid) { MeiweiApp.goTo('ProductOrder', {productItemId: pid}) },
+        //productPurchase: function() { MeiweiApp.goTo('ProductPurchase'); },
+        productRedeem: function() { MeiweiApp.goTo('ProductRedeem'); },
         
-        requestDriver: function() { MeiweiApp.Pages.RequestDriver.go(); MeiweiApp.history.active = MeiweiApp.Pages.RequestDriver; },
-        vvip: function() { MeiweiApp.Pages.VVIP.go(); MeiweiApp.history.active = MeiweiApp.Pages.VVIP; },
+        packageOrder: function(pid) { MeiweiApp.goTo('PackageOrder', {productItemId: pid}) },
+        packageOrderConfirm: function(pid) { MeiweiApp.goTo('PackageOrderConfirm', {productItemId: pid}) },
+        packageOrderDetail: function(pid) { MeiweiApp.goTo('PackageOrderDetail', {productItemId: pid}) },
         
-        attending: function() { MeiweiApp.Pages.Attending.go(); MeiweiApp.history.active = MeiweiApp.Pages.Attending; },
-        settings: function() { MeiweiApp.Pages.Settings.go(); MeiweiApp.history.active = MeiweiApp.Pages.Settings; }
+        requestDriver: function() { MeiweiApp.goTo('RequestDriver'); },
+        vvip: function() { MeiweiApp.goTo('VVIP'); },
+        
+        attending: function() { MeiweiApp.goTo('Attending'); },
+        settings: function() { MeiweiApp.goTo('Settings'); }
     }));
     
     MeiweiApp.goToPath = function(path) {
