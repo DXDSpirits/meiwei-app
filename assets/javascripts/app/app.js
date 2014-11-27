@@ -344,6 +344,7 @@
     };
     
     window.onerror = function (message, file, line, column, errorObj) {
+        if (MeiweiApp.configs.Debug) return;
         try {
             MeiweiApp.abortAllAjax();
             var detail = errorObj && errorObj.stack ? errorObj.stack : [file, line, column].join(':');

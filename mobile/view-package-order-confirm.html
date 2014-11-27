@@ -9,29 +9,8 @@
         </div>
     </header>
     <section class="wrapper">
-        <section class="product-info"></section>
-        <section class="order-info">
-            <header class="section-title"><h1 data-i18n="Reservation Detail">预订信息</h1></header>
-            <form>
-                <p class="info-text"></p>
-                <fieldset>
-                    <div class="inline-group">
-                        <i class="icon icon-calendar"></i>
-                        <input type="date" name="datetime" />
-                    </div>
-                    <div class="inline-group">
-                        <i class="icon icon-map-marker-small"></i>
-                        <input type="text" name="address" data-placeholder-i18n="Address" placeholder="地址" />
-                    </div>
-                    <div class="inline-group">
-                        <i class="icon icon-pencil"></i>
-                        <input type="text" name="comment" data-placeholder-i18n="Remarks" placeholder="备注" />
-                    </div>
-                </fieldset>
-            </form>
-        </section>
-        <section class="contact-info">
-            <header class="section-title menu"><h1 data-i18n="Select Contact">选择预订人</h1></header>
+        <section class="contact-info receiver">
+            <header class="section-title menu"><h1>收件人信息</h1></header>
             <form>
                 <fieldset>
                     <div class="inline-group">
@@ -50,12 +29,50 @@
                     <div class="inline-group">
                         <i class="icon icon-phone"></i>
                         <input type="tel" name="mobile" data-placeholder-i18n="Mobile" placeholder="手机号" />
+                        <i class="icon icon-contact"></i>
+                    </div>
+                    <div class="inline-group">
+                        <i class="icon icon-map-marker"></i>
+                        <input type="text" name="address" placeholder="地址" />
+                    </div>
+                    <div class="inline-group">
+                        <i class="icon icon-edit"></i>
+                        <input type="text" name="wish" placeholder="写点祝福吧～" />
+                    </div>
+                </fieldset>
+            </form>
+        </section>
+        <section class="contact-info sender">
+            <header class="section-title menu"><h1>寄件人信息</h1></header>
+            <form>
+                <fieldset>
+                    <div class="inline-group">
+                        <i class="icon icon-member-small"></i>
+                        <input type="text" name="name" data-placeholder-i18n="Contact" placeholder="联系人"/>
+                        <div class="control-group switch switch-gender">
+                            <div class="switch-inner">
+                                <input type="hidden" name="gender" value="0"/>
+                                <label class="label-text"></label>
+                                <label class="label-off" data-i18n="Mr.">先生</label>
+                                <label class="label-on" data-i18n="Ms.">女士</label>
+                                <div class="switch-button"></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="inline-group">
+                        <i class="icon icon-phone"></i>
+                        <input type="tel" name="mobile" data-placeholder-i18n="Mobile" placeholder="手机号" />
+                        <i class="icon icon-contact"></i>
+                    </div>
+                    <div class="inline-group">
+                        <i class="icon icon-map-marker"></i>
+                        <input type="tel" name="address" placeholder="地址" />
                     </div>
                 </fieldset>
             </form>
         </section>
         <section class="order-submit-button">
-            <button class="btn btn-inverse" data-i18n="Submit Order">提交订单</button>
+            <button class="btn btn-inverse btn-submit" data-i18n="Submit Order">提交订单</button>
         </section>
     </section>
 </div>

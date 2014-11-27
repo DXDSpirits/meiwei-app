@@ -1,95 +1,57 @@
 (function() {
-    var ProductOrderCreation = MeiweiApp.Model.extend({
-        urlRoot: MeiweiApp.configs.APIHost + '/orders/orderproduct/'
-    });
     
-    var OrderContactForm = MeiweiApp.View.extend({
-        events: { 'click > header': 'selectContact' },
-        initView: function(options) {
-            _.bindAll(this, 'fillContact');
-            this.$('.switch-gender').switchControl();
-        },
-        selectContact: function() {
-            MeiweiApp.goTo('MemberContacts', { multiple: false, callback: this.fillContact });
-        },
-        fillContact: function(contactname, contactphone, contactgender) {
-            this.$('input[name=name]').val(contactname);
-            this.$('input[name=mobile]').val(contactphone);
-            this.$('.switch-gender').switchControl('toggle', contactgender);
-        }
+    var PackageOrderCreation = MeiweiApp.Model.extend({
+        urlRoot: MeiweiApp.configs.APIHost + '/orders/orderpackage/'
     });
     
     MeiweiApp.Pages.PackageOrder = new (MeiweiApp.PageView.extend({
         events: {
             'click .header-btn-left': 'onClickLeftBtn',
             'click .header-btn-right': 'onClickRightBtn',
-            'click .order-submit-button': 'askToSubmitOrder'
+            'click .btn-invite': 'onClickBtnInvite',
+            'click .btn-continue': 'onClickBtnContinue',
+            'click .option-tabs .btn': 'selectOption'
         },
-        initPage: function() {
-            _.bindAll(this, 'renderOrderForm', 'submitOrder');
-            this.productItem = new MeiweiApp.Models.ProductItem();
-            this.views = {
-                orderContactForm: new OrderContactForm({ el: this.$('.contact-info') }),
-            };
+        initPage: function() {},
+        onClickBtnInvite: function() {
+            MeiweiApp.sendWeixinMsg('你的TA在“以爱之名 兑现诺言”活动中，向你发起了“敢爱礼盒”，你敢兑现你的承诺吗？点击查看详情 http://mobile.clubmeiwei.com/#packageorder');
         },
-        askToSubmitOrder: function(e) {
-            if (e.preventDefault) e.preventDefault();
-			MeiweiApp.showConfirmDialog(
-                MeiweiApp._('Confirm Order'),
-                MeiweiApp._('An SMS will be sent to you to inform you the order has been confirmed'),
-                this.submitOrder
-            );
+        onClickBtnContinue: function() {
+            var birthday = this.$('input[name=birthday]').val() || null;
+            var anniversary = this.$('input[name=anniversary]').val() || null;
+            if (!birthday || !anniversary) {
+                MeiweiApp.showAlertDialog('请完善生日和纪念日信息');
+            } else {
+                var order = new PackageOrderCreation({
+                    birthday: birthday,
+                    anniversary: anniversary,
+                    option_christmas: this.$('.product-christmas .option-tabs .active').data('target'),
+                    option_valentine: this.$('.product-valentine .option-tabs .active').data('target')
+                });
+                MeiweiApp.goTo('PackageOrderConfirm', {
+                    order: order
+                });
+            }
         },
-        submitOrder: function() {
-            var newOrder = new ProductOrderCreation();
-            newOrder.set({
-                member: MeiweiApp.me.id,
-                product_id: this.productItem.id,
-                datetime: this.$('input[name=datetime]').val() + ' 00:00:00' || null,
-                name: this.$('input[name=name]').val() || null,
-                gender: this.$('input[name=gender]').val() || null,
-                mobile: this.$('input[name=mobile]').val() || null,
-                address: this.$('input[name=address]').val() || null,
-                comment: this.$('input[name=comment]').val() || null
+        selectOption: function(e) {
+            var $tab = $(e.currentTarget);
+            var target = +$tab.data('target');
+            var panel = $tab.closest('.package-product').find('.panel')[target];
+            $tab.addClass('active').siblings().removeClass('active');
+            $(panel).removeClass('hidden').siblings().addClass('hidden');
+        },
+        renderCarousel: function() {
+            var items = this.$('.carousel-item'), itemWidth = $(items[0]).outerWidth(),
+                wrapperWidth = this.$('.carousel').width(),
+                margin = (wrapperWidth - itemWidth) / 2;
+            this.$('.carousel-inner').css({
+                'width': 5 * itemWidth + 2 * margin,
+                'padding-left': margin,
+                'padding-right': margin
             });
-            this.$('.info-text').html('');
-            var self = this;
-            newOrder.save({}, {
-                success: function(model, xhr, options) {
-                    MeiweiApp.goTo('GenericOrderDetail', {orderId: model.id});
-                },
-                error: function(model, xhr, options) {
-                    self.$('.wrapper').scrollTop(0);
-                    self.displayErrorBetter(self.$('form'), xhr.responseText);
-                }
-            });
-        },
-        reset: function() {
-            this.$('.wrapper').addClass('rendering');
-            this.$('.wrapper').css('background-image', 'none');
-        },
-        renderOrderForm: function(model, response, options) {
-            MeiweiApp.loadBgImage(this.$('.wrapper'), this.productItem.get('picture'), {
-    			height: 250
-    		});
-    		var infoTemplate = '<h1>{{name}}</h1>{{#price}}<h1><strong>￥{{price}}</strong></h1>{{/price}}<p>{{description}}</p>';
-            this.$('.product-info').html(Mustache.render(infoTemplate, this.productItem.toJSON()));
-            this.$('input[name=datetime]').val(moment().add('days', 1).format('YYYY-MM-DD'));
-//            if(this.options.productItemId==175) {
-//                this.$('input[name=datetime]').val(moment('2014-07-06').format('YYYY-MM-DD'));
-//            }
-            this.views.orderContactForm.render();
-            this.$('.wrapper').removeClass('rendering');
         },
         render: function() {
-            this.$('.info-text').html('');
-            if (this.options.productItem) {
-                this.productItem.set(this.options.productItem);
-                this.renderOrderForm();
-            } else if (this.options.productItemId) {
-                this.productItem.set({id: this.options.productItemId});
-                this.productItem.fetch({ success: this.renderOrderForm });
-            }
+            this.renderCarousel();
         }
     }))({el: $("#view-package-order")});
 })();

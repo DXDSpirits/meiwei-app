@@ -4,7 +4,9 @@
     });
     
     var OrderContactForm = MeiweiApp.View.extend({
-        events: { 'click > header': 'selectContact' },
+        events: {
+            'click .icon-contact': 'selectContact'
+        },
         initView: function(options) {
             _.bindAll(this, 'fillContact');
             this.$('.switch-gender').switchControl();
@@ -23,72 +25,42 @@
         events: {
             'click .header-btn-left': 'onClickLeftBtn',
             'click .header-btn-right': 'onClickRightBtn',
-            'click .order-submit-button': 'askToSubmitOrder'
+            'click .btn-submit': 'submitOrder'
         },
         initPage: function() {
-            _.bindAll(this, 'renderOrderForm', 'submitOrder');
-            this.productItem = new MeiweiApp.Models.ProductItem();
             this.views = {
-                orderContactForm: new OrderContactForm({ el: this.$('.contact-info') }),
+                senderForm: new OrderContactForm({ el: this.$('.contact-info.sender') }),
+                receiverForm: new OrderContactForm({ el: this.$('.contact-info.receiver') }),
             };
         },
-        askToSubmitOrder: function(e) {
-            if (e.preventDefault) e.preventDefault();
-			MeiweiApp.showConfirmDialog(
-                MeiweiApp._('Confirm Order'),
-                MeiweiApp._('An SMS will be sent to you to inform you the order has been confirmed'),
-                this.submitOrder
-            );
-        },
         submitOrder: function() {
-            var newOrder = new ProductOrderCreation();
-            newOrder.set({
-                member: MeiweiApp.me.id,
-                product_id: this.productItem.id,
-                datetime: this.$('input[name=datetime]').val() + ' 00:00:00' || null,
-                name: this.$('input[name=name]').val() || null,
-                gender: this.$('input[name=gender]').val() || null,
-                mobile: this.$('input[name=mobile]').val() || null,
-                address: this.$('input[name=address]').val() || null,
-                comment: this.$('input[name=comment]').val() || null
+            this.order.set({
+                name: this.$('.receiver input[name=name]').val() || null,
+                gender: this.$('.receiver input[name=gender]').val() || null,
+                mobile: this.$('.receiver input[name=mobile]').val() || null,
+                address: this.$('.receiver input[name=address]').val() || null,
+                sender_name: this.$('.sender input[name=name]').val() || null,
+                sender_gender: this.$('.sender input[name=gender]').val() || null,
+                sender_mobile: this.$('.sender input[name=mobile]').val() || null,
+                sender_address: this.$('.sender input[name=address]').val() || null,
+                comment: this.$('input[name=wish]').val() || null
             });
             this.$('.info-text').html('');
-            var self = this;
-            newOrder.save({}, {
+            this.order.save({}, {
                 success: function(model, xhr, options) {
-                    MeiweiApp.goTo('GenericOrderDetail', {orderId: model.id});
+                    MeiweiApp.goTo('PackageOrderDetail');
                 },
                 error: function(model, xhr, options) {
-                    self.$('.wrapper').scrollTop(0);
-                    self.displayErrorBetter(self.$('form'), xhr.responseText);
+                    MeiweiApp.showAlertDialog('请完善收件人和寄件人信息');
                 }
             });
         },
-        reset: function() {
-            this.$('.wrapper').addClass('rendering');
-            this.$('.wrapper').css('background-image', 'none');
-        },
-        renderOrderForm: function(model, response, options) {
-            MeiweiApp.loadBgImage(this.$('.wrapper'), this.productItem.get('picture'), {
-    			height: 250
-    		});
-    		var infoTemplate = '<h1>{{name}}</h1>{{#price}}<h1><strong>￥{{price}}</strong></h1>{{/price}}<p>{{description}}</p>';
-            this.$('.product-info').html(Mustache.render(infoTemplate, this.productItem.toJSON()));
-            this.$('input[name=datetime]').val(moment().add('days', 1).format('YYYY-MM-DD'));
-//            if(this.options.productItemId==175) {
-//                this.$('input[name=datetime]').val(moment('2014-07-06').format('YYYY-MM-DD'));
-//            }
-            this.views.orderContactForm.render();
-            this.$('.wrapper').removeClass('rendering');
-        },
         render: function() {
             this.$('.info-text').html('');
-            if (this.options.productItem) {
-                this.productItem.set(this.options.productItem);
-                this.renderOrderForm();
-            } else if (this.options.productItemId) {
-                this.productItem.set({id: this.options.productItemId});
-                this.productItem.fetch({ success: this.renderOrderForm });
+            if (this.options.order) {
+                this.order = this.options.order;
+            } else {
+                MeiweiApp.goBack();
             }
         }
     }))({el: $("#view-package-order-confirm")});

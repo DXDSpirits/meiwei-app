@@ -1,9 +1,128 @@
 #view-package-order {
-    
+    .wrapper {
+        padding-bottom: 20px;
+    }
+    .banner {
+        padding-top: 47%;
+        width: 100%;
+    }
+    .package-product {
+        font-size: $fontSizeMini;
+        width: 90%;
+        padding-top: 20px;
+        .product-name {
+            margin-bottom: 10px;
+        }
+        background: url($gradientShadowPathR) repeat-x top;
+        @include background-size(100% 60px);
+    }
+    .option-tabs {
+        .btn, button {
+            font-size: 14px;
+            margin-right: 1px;
+            border: 0;
+            border-radius: 0;
+            background-color: $brownLight;
+            color: $white;
+            &.active {
+                background-color: $brown;
+            }
+        }
+    }
+    .panel {
+        .img {
+            width: 45%;
+            padding-top: 45%;
+        }
+        p {
+            margin-bottom: 10px;
+        }
+        .text {
+            width: 50%;
+            padding-top: 10px;
+        }
+        .large {
+            margin-top: 15px;
+            margin-bottom: 15px;
+            font-size: $fontSizeMini + 2px;
+        }
+        .small {
+            font-size: $fontSizeMini - 2px;
+        }
+    }
+    .product-birthday {
+        fieldset {
+            margin-bottom: 5px;
+        }
+    }
+    .product-anniversary {
+        .slider {
+            @include scrollable();
+        }
+        .slider-inner {
+            width: 600px;
+        }
+        .slider-item {
+            display: inline-block;
+            vertical-align: middle;
+            margin: 20px 5px;
+            width: 100px;
+            height: 100px;
+        }
+        .small {
+            font-size: $fontSizeMini - 2px;
+        }
+        .text {
+            padding-top: 5px;
+        }
+        fieldset {
+            margin-top: 0;
+            margin-bottom: 5px;
+        }
+    }
 }
 
 #view-package-order-confirm {
-    
+    .wrapper {
+        padding-top: 5px;
+    }
+    .contact-info {
+        width: 100%;
+        padding: 0 10%;
+        background: $bodyBackground url($gradientShadowPathR) no-repeat top;
+        @include background-size(100% (3*$baseLineHeight));
+    }
+    fieldset {
+        margin: 0;
+        border-width: 1px 0 0 0;
+        @include border-radius(0);
+    }
+    .inline-group {
+        border-right: none;
+    }
+    .section-title {
+        margin: 0 -21.4285714%;
+        height: 40px;
+        text-align: center;
+        font-size: $fontSizeSmall;
+        position: relative;
+        > h1 {
+            font-size: $baseFontSize;
+            line-height: 40px;
+            text-align: center;
+        }
+    }
+    .switch-gender {
+        @include flexible($flex: 0, $orient: horizontal);
+        width: 70px;
+    }
+    .order-submit-button {
+        background: $bodyBackground url($gradientShadowPathR) no-repeat top;
+        @include background-size(100% (3*$baseLineHeight));
+        padding: 30px 10% 15px;
+        width: 100%;
+        > .btn { width: 100%; }
+    }
 }
 
 #view-package-order-detail {

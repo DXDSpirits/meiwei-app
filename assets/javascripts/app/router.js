@@ -42,6 +42,10 @@
     		this.route('product/purchase', 'productPurchase');
     		this.route('product/redeem', 'productRedeem');
     		
+    		this.route('packageorder', 'packageOrder');
+            this.route('packageorder/confirm', 'packageOrderConfirm');
+            this.route('packageorder/detail', 'packageOrderDetail');
+    		
     		this.route('requestdriver', 'requestDriver');
     		this.route('vvip', 'vvip');
     		
@@ -97,9 +101,9 @@
         //productPurchase: function() { MeiweiApp.goTo('ProductPurchase'); },
         productRedeem: function() { MeiweiApp.goTo('ProductRedeem'); },
         
-        packageOrder: function(pid) { MeiweiApp.goTo('PackageOrder', {productItemId: pid}) },
-        packageOrderConfirm: function(pid) { MeiweiApp.goTo('PackageOrderConfirm', {productItemId: pid}) },
-        packageOrderDetail: function(pid) { MeiweiApp.goTo('PackageOrderDetail', {productItemId: pid}) },
+        packageOrder: function() { MeiweiApp.goTo('PackageOrder'); },
+        packageOrderConfirm: function() { MeiweiApp.goTo('PackageOrderConfirm'); },
+        packageOrderDetail: function() { MeiweiApp.goTo('PackageOrderDetail'); },
         
         requestDriver: function() { MeiweiApp.goTo('RequestDriver'); },
         vvip: function() { MeiweiApp.goTo('VVIP'); },
