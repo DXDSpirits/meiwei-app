@@ -126,5 +126,68 @@
 }
 
 #view-package-order-detail {
-    
+    .wrapper {
+        padding-bottom: 20px;
+    }
+    .banner {
+        padding-top: 47%;
+        width: 100%;
+    }
+    .order-detail {
+        background: $bodyBackground url($gradientShadowPathR) no-repeat top;
+        @include background-size(100% (3*$baseLineHeight));
+        border-bottom: 1px solid $brownLight;
+        width: 90%;
+        padding-top: 10px;
+        margin-bottom: 30px;
+        table {
+            margin-top: 10px;
+            border-top-left-radius: 5px;
+            border-top-right-radius: 5px;
+            overflow: hidden;
+        }
+        tr {
+            border-bottom: 1px solid $brownLight;
+        }
+        td {
+            font-size: $fontSizeMini;
+            padding-top: 5px;
+            padding-bottom: 5px;
+            &.complete {
+                color: $brownDark;
+                font-weight: bold;
+            }
+        }
+        th {
+            background-color: $brownLight;
+            color: #9c1e37;
+            padding-top: 5px;
+            padding-bottom: 5px;
+            font-weight: bold;
+        }
+    }
+    .contact-detail {
+        width: 100%;
+        > section {
+            background: $bodyBackground url($gradientShadowPathR) no-repeat top;
+            @include background-size(100% (3*$baseLineHeight));
+            margin-top: 10px;
+            margin-bottom: 20px;
+            padding-left: 10%;
+            padding-right: 10%;
+            > p {
+                padding-top: 10px;
+                padding-bottom: 10px;
+                border-bottom: 1px solid $brownLight;
+                font-size: $fontSizeSmall;
+                .icon {
+                    display: inline-block;
+                    margin-right: 20px;
+                }
+            }
+        }
+        .callus-button {
+            padding: 0 10%;
+        }
+    }
 }

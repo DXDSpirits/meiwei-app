@@ -1,0 +1,17 @@
+
+<h2>敢爱礼盒信息</h2>
+<table>
+    <tr><th>日期</th><th>订单号</th><th>状态</th></tr>
+    {{#orders_packed}}
+    <tr>
+        <td>{{datetime}}</td>
+        <td>{{order_no}}</td>
+        {{#attributes.trackno}}
+        <td class="complete">已送出</td>
+        {{/attributes.trackno}}
+        {{^attributes.trackno}}
+        <td>未送出</td>
+        {{/attributes.trackno}}
+    </tr>
+    {{/orders_packed}}
+</table>

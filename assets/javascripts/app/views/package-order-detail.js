@@ -10,69 +10,43 @@
     });
     
     var OrderDetail = MeiweiApp.ModelView.extend({
-        default_template: TPL['generic-order-detail'],
-        templates: {
-            30: TPL['generic-order-detail-driver'],
-            40: TPL['generic-order-detail-vvip'],
-            60: TPL['generic-order-detail-vipcard']
-        },
+        template: TPL['package-order-detail'],
+        serializeData: function() {
+            var NAMES = ['圣诞节', '情人节', '生　日', '纪念日'];
+            var orders_packed = [];
+            _.each(this.model.get('orders_packed'), function(order, index) {
+                if (index >= 4) return;
+                orders_packed.push({
+                    order_no: order.order_no,
+                    datetime: NAMES[index] + ' ' + order.attributes.datetime,
+                    complete: order.attributes.trackno != null
+                });
+            });
+            return { orders_packed: orders_packed };
+        }
+    });
+    
+    var ContactDetail = MeiweiApp.ModelView.extend({
+        template: TPL['package-order-contact-detail']
+    });
+
+    MeiweiApp.Pages.PackageOrderDetail = new (MeiweiApp.PageView.extend({
         events: {
+            'click .header-btn-left': 'onClickLeftBtn',
+            'click .header-btn-right': 'onClickRightBtn',
             'click .btn-cancel': 'cancelOrder',
             'click .btn-payable': 'payOrder'
         },
-        initModelView: function () {
-            var self = this;
-            $(document).on('click', '.generic-order-cancel', function (e) {
-                self.cancelOrder();
-            });
-        },
-        cancelOrder: function () {
-            var model = this.model;
-            MeiweiApp.showConfirmDialog(
-                MeiweiApp._('Cancel Order'),
-                MeiweiApp._('Please confirm the cancellation'),
-                function () {
-                    model.cancel({success: function () {
-                        MeiweiApp.goTo('GenericOrderList');
-                    }});
-                    if (model.get('order_type') == 30) {
-                        MeiweiApp.showCallDialog(
-                            '4-001-002-003',
-                            MeiweiApp._('Call Us'),
-                            MeiweiApp._('Calling Anshifu and cancel order'),
-                            function () {}
-                        );
-                    }
-                }
-            );
-        },
-        callWxPay: function(payment_no) {
-            var wxPayment = new WxPayment({ payment_no: payment_no });
-            var self = this;
-            wxPayment.fetch({success: function (model) {
-                if (window.WeixinJSBridge) {
-                    WeixinJSBridge.invoke('getBrandWCPayRequest', {
-                        "appId": model.get('appid'),
-                        "timeStamp": model.get('timestamp'),
-                        "nonceStr": model.get('noncestr'),
-                        "package": model.get('package'),
-                        "signType": model.get('signtype'),
-                        "paySign": model.get('paysign')
-                    }, function (res) {
-                        if (res.err_msg == "get_brand_wcpay_request:ok") {
-                            window.setTimeout(function () {
-                                self.onResume();
-                            }, 2000);
-                        }
-                    });
-                }
-            }});
+        initPage: function () {
+            this.order = new MeiweiApp.Models.PackageOrder();
+            this.views = {
+                orderDetail: new OrderDetail({ model: this.order, el: this.$('.order-detail') }),
+                contactDetail: new ContactDetail({ model: this.order, el: this.$('.contact-detail') })
+            };
         },
         payOrder: function () {
-            var payment_no = this.model.get('payment').payment_no;
-            if (MeiweiApp.isWeixin && false) {
-                this.callWxPay(payment_no);
-            } else if (MeiweiApp.isCordova) {
+            var payment_no = this.order.get('payment').payment_no;
+            if (MeiweiApp.isCordova) {
                 var alipayPayment = new AlipayPayment({ payment_no: payment_no });
                 alipayPayment.fetch({success: function (model) {
                     MeiweiApp.payByAlipay(model.get('orderString'));
@@ -82,52 +56,23 @@
                 location.href = payable_url;
             }
         },
-        render: function () {
-            if (this.model) {
-                this.template = this.templates[this.model.get('order_type')] || this.default_template;
-                MeiweiApp.ModelView.prototype.render.call(this);
-                if (!this.model.get('editable')) {
-                    this.$('.btn-cancel').remove();
+        cancelOrder: function () {
+            var self = this;
+            MeiweiApp.showConfirmDialog(
+                "终止订单",
+                "注意：终止订单后将停止派送余下礼物",
+                function () {
+                    self.order.cancel({success: function () {
+                        MeiweiApp.goTo('Home');
+                    }});
                 }
-            }
-            return this;
-        }
-    });
-
-    MeiweiApp.Pages.PackageOrderDetail = new (MeiweiApp.PageView.extend({
-        initPage: function () {
-            _.bindAll(this, 'renderAll');
-            this.order = new MeiweiApp.Models.GenericOrder();
-            this.views = {
-                orderDetail: new OrderDetail({ model: this.order, el: this.$('.wrapper') })
-            };
-            this.$('.wrapper').css('background-size', 'auto ' + $(window).width() + 'px');
-        },
-        onClickLeftBtn: function () {
-            MeiweiApp.goTo('GenericOrderList');
+            );
         },
         onResume: function () {
             this.order.fetch();
         },
-        reset: function () {
-            this.$('.wrapper').css('background-image', 'none');
-        },
-        renderAll: function () {
-            var detail = this.order.get('detail');
-            if (detail && detail.picture) {
-                MeiweiApp.loadBgImage(this.$('.wrapper'), detail.picture, { height: 320 });
-            } else {
-                MeiweiApp.loadBgImage(this.$('.wrapper'), 'assets/images/default-order-avatar.png', { height: 320 });
-            }
-        },
         render: function () {
-            if (this.options.order) {
-                this.order.set(this.options.order);
-                this.renderAll();
-            } else if (this.options.orderId) {
-                this.order.set({id: this.options.orderId});
-                this.order.fetch({success: this.renderAll});
-            }
+            this.order.fetch();
         }
     }))({el: $("#view-package-order-detail")});
 })();

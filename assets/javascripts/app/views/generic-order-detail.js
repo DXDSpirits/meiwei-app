@@ -20,32 +20,6 @@
             'click .btn-cancel': 'cancelOrder',
             'click .btn-payable': 'payOrder'
         },
-        initModelView: function () {
-            var self = this;
-            $(document).on('click', '.generic-order-cancel', function (e) {
-                self.cancelOrder();
-            });
-        },
-        cancelOrder: function () {
-            var model = this.model;
-            MeiweiApp.showConfirmDialog(
-                MeiweiApp._('Cancel Order'),
-                MeiweiApp._('Please confirm the cancellation'),
-                function () {
-                    model.cancel({success: function () {
-                        MeiweiApp.goTo('GenericOrderList');
-                    }});
-                    if (model.get('order_type') == 30) {
-                        MeiweiApp.showCallDialog(
-                            '4-001-002-003',
-                            MeiweiApp._('Call Us'),
-                            MeiweiApp._('Calling Anshifu and cancel order'),
-                            function () {}
-                        );
-                    }
-                }
-            );
-        },
         callWxPay: function(payment_no) {
             var wxPayment = new WxPayment({ payment_no: payment_no });
             var self = this;
@@ -95,6 +69,11 @@
     });
 
     MeiweiApp.Pages.GenericOrderDetail = new (MeiweiApp.PageView.extend({
+        events: {
+            'click .header-btn-left': 'onClickLeftBtn',
+            'click .header-btn-right': 'onClickRightBtn',
+            'click .generic-order-cancel': 'cancelOrder'
+        },
         initPage: function () {
             _.bindAll(this, 'renderAll');
             this.order = new MeiweiApp.Models.GenericOrder();
@@ -105,6 +84,26 @@
         },
         onClickLeftBtn: function () {
             MeiweiApp.goTo('GenericOrderList');
+        },
+        cancelOrder: function () {
+            var order = this.order;
+            MeiweiApp.showConfirmDialog(
+                MeiweiApp._('Cancel Order'),
+                MeiweiApp._('Please confirm the cancellation'),
+                function () {
+                    order.cancel({success: function () {
+                        MeiweiApp.goTo('GenericOrderList');
+                    }});
+                    if (order.get('order_type') == 30) {
+                        MeiweiApp.showCallDialog(
+                            '4-001-002-003',
+                            MeiweiApp._('Call Us'),
+                            MeiweiApp._('Calling Anshifu and cancel order'),
+                            function () {}
+                        );
+                    }
+                }
+            );
         },
         onResume: function () {
             this.order.fetch();

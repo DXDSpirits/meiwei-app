@@ -2,7 +2,7 @@
     
     var MeiweiApp = window.MeiweiApp = new (Backbone.View.extend({
     
-        Version: 3.0,
+        Version: 3.1,
     
         Models: {},
         Views: {},

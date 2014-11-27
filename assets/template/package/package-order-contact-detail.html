@@ -1,0 +1,17 @@
+<h2 class="text-center">收件人信息</h2>
+<section class="contact-items">
+    <p><i class="icon icon-member"></i><span>{{name}}</span></p>
+    <p><i class="icon icon-phone"></i><span>{{mobile}}</span></p>
+    <p><i class="icon icon-map-marker"></i><span>{{attributes.address}}</span></p>
+    <p><i class="icon icon-pencil"></i><span>{{comment}}</span></p>
+</section>
+<div class="callus-button">
+    {{#payment.is_paid}}
+    <a href="tel:02160515617" class="btn">
+        <p><i class="icon icon-phone"> </i><span data-i18n="Call Us">客服电话</span></p>
+    </a>
+    {{/payment.is_paid}}
+    {{#payment.is_payable}}
+    <button class="btn-inverse btn-block-level btn-payable" data-i18n="支付">支付</button>
+    {{/payment.is_payable}}
+</div>

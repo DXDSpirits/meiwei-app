@@ -41,6 +41,24 @@
         model: MeiweiApp.Models.GenericOrder
     });
     
+    MeiweiApp.Models.PackageOrder = MeiweiApp.Model.extend({
+        urlRoot: MeiweiApp.configs.APIHost + '/orders/packagegenericorder/',
+        parse: function(response) {
+            return _.isArray(response.results) ? response.results[0] : response;
+        },
+        cancel: function(options) {
+            options = options || {};
+            var url = this.url() + 'cancel/';
+            options.url = url;
+            Backbone.sync('update', this, options);
+        }
+    });
+    
+    MeiweiApp.Collections.PackageOrders = MeiweiApp.Collection.extend({
+        url: MeiweiApp.configs.APIHost + '/orders/genericorder/',
+        model: MeiweiApp.Models.GenericOrder
+    });
+    
     MeiweiApp.Models.OrderDriver = MeiweiApp.Model.extend({
         urlRoot: MeiweiApp.configs.APIHost + '/orders/orderdriver/'
     });
