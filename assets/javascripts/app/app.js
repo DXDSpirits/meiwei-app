@@ -24,7 +24,7 @@
             MeiweiApp.fillImages();
             MeiweiApp.initAjaxEvents();
             MeiweiApp.initLanguage();
-            MeiweiApp.initGeolocation();
+            //MeiweiApp.initGeolocation();
             MeiweiApp.initSync();
             MeiweiApp.initGa();
             Backbone.history.start();
