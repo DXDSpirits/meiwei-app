@@ -43,6 +43,7 @@
                 orderDetail: new OrderDetail({ model: this.order, el: this.$('.order-detail') }),
                 contactDetail: new ContactDetail({ model: this.order, el: this.$('.contact-detail') })
             };
+            this.listenTo(this.order, 'change', this.checkPayment);
         },
         payOrder: function () {
             var payment_no = this.order.get('payment').payment_no;
@@ -71,8 +72,17 @@
         onResume: function () {
             this.order.fetch();
         },
+        checkPayment: function() {
+            if (this.order.get('payment').is_payable) {
+                this.payOrder();
+            }
+        },
         render: function () {
-            this.order.fetch();
+            if (this.options.order) {
+                this.order.set(this.options.order);
+            } else {
+                this.order.fetch();
+            }
         }
     }))({el: $("#view-package-order-detail")});
 })();

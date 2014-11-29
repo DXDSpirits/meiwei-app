@@ -40,7 +40,7 @@
             $tab.addClass('active').siblings().removeClass('active');
             $(panel).removeClass('hidden').siblings().addClass('hidden');
         },
-        renderCarousel: function() {
+        renderAll: function() {
             var items = this.$('.carousel-item'), itemWidth = $(items[0]).outerWidth(),
                 wrapperWidth = this.$('.carousel').width(),
                 margin = (wrapperWidth - itemWidth) / 2;
@@ -49,9 +49,28 @@
                 'padding-left': margin,
                 'padding-right': margin
             });
+            this.$('.wrapper').removeClass('rendering');
+        },
+        reset: function() {
+            this.$('.wrapper').addClass('rendering');
         },
         render: function() {
-            this.renderCarousel();
+            var self = this;
+            var order = new MeiweiApp.Models.PackageOrder();
+            order.fetch({
+                success: function() {
+                    if (order.id) {
+                        MeiweiApp.goTo('PackageOrderDetail', {
+                            order: order.toJSON()
+                        });
+                    } else {
+                        self.renderAll();
+                    }
+                },
+                error: function() {
+                    self.renderAll();
+                }
+            });
         }
     }))({el: $("#view-package-order")});
 })();
