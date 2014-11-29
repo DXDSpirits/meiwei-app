@@ -12,7 +12,12 @@
             'click .btn-continue': 'onClickBtnContinue',
             'click .option-tabs .btn': 'selectOption'
         },
-        initPage: function() {},
+        initPage: function() {
+            this.stat = new (MeiweiApp.Model.extend({
+                urlRoot: MeiweiApp.configs.APIHost + '/clients/package_order_stat/'
+            }))();
+            this.stat.fetch();
+        },
         onClickBtnInvite: function() {
             MeiweiApp.sendWeixinMsg('你的TA在“以爱之名 兑现诺言”活动中，向你发起了“敢爱礼盒”，你敢兑现你的承诺吗？点击查看详情 http://mobile.clubmeiwei.com/#packageorder');
         },
@@ -49,6 +54,9 @@
                 'padding-left': margin,
                 'padding-right': margin
             });
+            var count = this.stat.get('count') || localStorage.getItem('package_order_stat') || 20129;
+            this.$('.count>span').text(count);
+            localStorage.setItem('package_order_stat', count);
             this.$('.wrapper').removeClass('rendering');
         },
         reset: function() {

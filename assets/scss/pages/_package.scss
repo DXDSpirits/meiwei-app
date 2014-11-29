@@ -6,6 +6,25 @@
         padding-top: 47%;
         width: 100%;
     }
+    .price-and-counts {
+        border-top: 1px solid $brownLight;
+        padding: 10px 20px;
+        font-size: $fontSizeMini;
+        .price {
+            display: inline-block;
+            margin-right: 5px;
+            color: #9c1e37;
+            font-size: $baseFontSize;
+        }
+        .count {
+            display: inline-block;
+            background-color: $brownLight;
+            color: $white;
+            padding-left: 10px;
+            padding-right: 10px;
+            border-radius: 20px;
+        }
+    }
     .package-product {
         font-size: $fontSizeMini;
         width: 90%;
@@ -63,11 +82,27 @@
             width: 600px;
         }
         .slider-item {
+            position: relative;
             display: inline-block;
             vertical-align: middle;
             margin: 20px 5px;
             width: 100px;
             height: 100px;
+            broder-radius: 3px;
+            overflow: hidden;
+        }
+        .tag {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            padding: 5px;
+            line-height: 1;
+            text-align: center;
+            color: $white;
+            background-color: rgba(0, 0, 0, 0.5);
+            border-bottom-left-radius: 3px;
+            border-bottom-right-radius: 3px;
         }
         .small {
             font-size: $fontSizeMini - 2px;
@@ -101,15 +136,25 @@
         border-right: none;
     }
     .section-title {
-        margin: 0 -21.4285714%;
+        margin: 0 -12.5%;
         height: 40px;
-        text-align: center;
         font-size: $fontSizeSmall;
         position: relative;
         > h1 {
             font-size: $baseFontSize;
             line-height: 40px;
             text-align: center;
+        }
+        &.menu > h1.pressed, &.menu > h1:active {
+            background: $brownLighter;
+        }
+        &.menu > h1::after {
+            content: "";
+            position: absolute;
+            top: (40px - 26px) / 2;
+            right: 10%;
+            @include icon-display();
+            @include icon-offset(8, 2);
         }
     }
     .switch-gender {
