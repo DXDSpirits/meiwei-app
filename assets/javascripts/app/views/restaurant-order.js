@@ -52,8 +52,7 @@
     
     var RestaurantOrderContactForm = MeiweiApp.View.extend({
         events: {
-            //'click > header': 'selectContact'
-            'click .icon-contact': 'selectContact'
+            'click > header': 'selectContact'
         },
         initView: function(options) {
             _.bindAll(this, 'fillContact');

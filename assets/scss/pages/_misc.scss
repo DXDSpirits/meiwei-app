@@ -85,6 +85,9 @@
             @include icon-offset(3, 4);
         }
     }
+    .contact-info .section-title > h1::after {
+        @include icon-offset(8, 2);
+    }
     .service-detail.departure {
         .label-arrival { display: none; }
         .service-type[data-type=departure] {

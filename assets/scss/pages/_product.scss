@@ -155,6 +155,9 @@
             @include icon-offset(3, 4);
         }
     }
+    .contact-info .section-title > h1::after {
+        @include icon-offset(8, 2);
+    }
     .switch-gender {
         @include flexible($flex: 0, $orient: horizontal);
         width: 70px;

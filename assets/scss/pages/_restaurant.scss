@@ -288,6 +288,9 @@
             @include icon-offset(3, 4);
         }
     }
+    .contact-info .section-title > h1::after {
+        @include icon-offset(8, 2);
+    }
     .premium-flag {
         p {
             font-size: $fontSizeSmall;
