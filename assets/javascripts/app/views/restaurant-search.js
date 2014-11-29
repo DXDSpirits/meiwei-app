@@ -230,7 +230,7 @@
             this.$('.circle > p > span').html(MeiweiApp._('Circles'));
         },
         refreshFilters: function() {
-            window.Bootstrap && Bootstrap.set('restaurant-search-filters', this.filters.toJSON());
+            window.BOOST && BOOST.set('restaurant-search-filters', this.filters.toJSON());
             var self = this;
             var reset = function(className, filterName) {
                 self[filterName].reset(self.filters.get(filterName));
@@ -260,7 +260,7 @@
             }
             if (!this.bootstrapped) {
                 this.bootstrapped = true;
-                var filters = window.Bootstrap && Bootstrap.get('restaurant-search-filters');
+                var filters = window.BOOST && BOOST.get('restaurant-search-filters');
                 if (filters) this.filters.set(filters);
             } else {
                 this.filters.fetch();
