@@ -24,10 +24,12 @@
             MeiweiApp.fillImages();
             MeiweiApp.initAjaxEvents();
             MeiweiApp.initLanguage();
-            MeiweiApp.initGeolocation();
+            //MeiweiApp.initGeolocation();
             MeiweiApp.initSync();
             MeiweiApp.initGa();
-            Backbone.history.start();
+            if (!Backbone.history.start()) {
+                MeiweiApp.Router.navigate('', {trigger: true});
+            }
             MeiweiApp.initTime();
             MeiweiApp.fixViewport();
         }
