@@ -101,7 +101,7 @@
     
     MeiweiApp.setWeixinShare = function (message) {
         var redirectUrl = encodeURIComponent('http://mobile.clubmeiwei.com/weixin/weixin.html?showwxpaytitle=1');
-        message = message || {
+        MeiweiApp.wechatShareMessage = message || {
             "img_url" : 'http://mobile.clubmeiwei.com/assets/images/default.png',
             "img_width" : "240",
             "img_height" : "150",
@@ -110,14 +110,6 @@
             "desc" : "百余家高端餐厅预订和贴心的私人管家服务",
             "title" : "美位 - 只为最懂得享受的你"
         };
-        document.addEventListener('WeixinJSBridgeReady', function onBridgeReady() {
-            WeixinJSBridge.on('menu:share:appmessage', function (argv) {
-                WeixinJSBridge.invoke('sendAppMessage', message);
-            });
-            WeixinJSBridge.on('menu:share:timeline', function (argv) {
-                WeixinJSBridge.invoke('shareTimeline', message);
-            });
-        }, false);
     };
     
     MeiweiApp.initDevice = function () {

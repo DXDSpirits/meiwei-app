@@ -21,4 +21,13 @@
         WeixinJSBridge.call('hideToolbar');
     });
     
+    document.addEventListener('WeixinJSBridgeReady', function onBridgeReady() {
+        WeixinJSBridge.on('menu:share:appmessage', function (argv) {
+            WeixinJSBridge.invoke('sendAppMessage', MeiweiApp.wechatShareMessage);
+        });
+        WeixinJSBridge.on('menu:share:timeline', function (argv) {
+            WeixinJSBridge.invoke('shareTimeline', MeiweiApp.wechatShareMessage);
+        });
+    }, false);
+    
 })();
