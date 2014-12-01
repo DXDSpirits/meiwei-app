@@ -31,6 +31,9 @@
         padding-top: 20px;
         .product-name {
             margin-bottom: 10px;
+            small {
+                font-size: 0.8em;
+            }
         }
         background: url($gradientShadowPathR) repeat-x top;
         @include background-size(100% 60px);

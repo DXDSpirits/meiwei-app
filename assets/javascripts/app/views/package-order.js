@@ -24,12 +24,14 @@
         onClickBtnContinue: function() {
             var birthday = this.$('input[name=birthday]').val() || null;
             var anniversary = this.$('input[name=anniversary]').val() || null;
+            var anniversaryName = this.$('input[name="anniversary-name"]').val() || null;
             if (!birthday || !anniversary) {
                 MeiweiApp.showAlertDialog('请完善生日和纪念日信息');
             } else {
                 var order = new PackageOrderCreation({
                     birthday: birthday,
                     anniversary: anniversary,
+                    anniversaryName: anniversaryName,
                     option_christmas: this.$('.product-christmas .option-tabs .active').data('target'),
                     option_valentine: this.$('.product-valentine .option-tabs .active').data('target')
                 });
