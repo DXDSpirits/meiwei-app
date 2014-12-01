@@ -54,7 +54,7 @@
                 "img_height" : "240",
                 "link" : "http://mobile.clubmeiwei.com/#packageorder",
                 "desc" : "你的TA在“以爱之名 兑现诺言”活动中，向你发起了“敢爱礼盒”，你敢兑现你的承诺吗？",
-                "title" : "你的TA在“以爱之名 兑现诺言”活动中，向你发起了“敢爱礼盒”，你敢兑现你的承诺吗？"
+                "title" : "爱我就给我惊喜吧"
             });
             var items = this.$('.carousel-item'), itemWidth = $(items[0]).outerWidth(),
                 wrapperWidth = this.$('.carousel').width(),
