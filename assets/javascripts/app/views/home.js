@@ -183,7 +183,7 @@
             var listId = this.options.listId;
             if (!this.bootstrapped && !listId) {
                 this.bootstrapped = true;
-                this.firstVisit();
+                //this.firstVisit();
                 var recommendNames = window.BOOST && BOOST.get('home-recommendnames');
                 if (recommendNames) this.recommendNames.reset(recommendNames);
                 var recommends = window.BOOST && BOOST.get('home-recommend-items');

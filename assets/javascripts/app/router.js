@@ -54,6 +54,8 @@
     	},
     	
     	index: function() {
+            MeiweiApp.goTo('Home');
+            return;
     	    if (localStorage.getItem('first-time')) {
     	        MeiweiApp.Pages.Home.go(); MeiweiApp.history.active = MeiweiApp.Pages.Home;
     	    } else {
