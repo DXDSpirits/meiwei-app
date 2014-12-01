@@ -103,11 +103,23 @@
         }
     };
     
+    MeiweiApp.showWechatShareTip = function() {
+        var $tip = $('#wechat-share-tip');
+        $tip.removeClass('hidden');
+        var hideTip = _.once(function() {
+            $tip.addClass('hidden');
+        });
+        $tip.one('click', hideTip);
+        _.delay(hideTip, 3000);
+    };
+    
     MeiweiApp.sendWeixinMsg = function(content) {
         var command = [content];
         var success = function() {}, fail = function() {};
         if (MeiweiApp.isCordova && window.Cordova) {
             Cordova.exec(success, fail, "Weixin", "sendTextContent", command);
+        } else {
+            MeiweiApp.showWechatShareTip();
         }
     };
     

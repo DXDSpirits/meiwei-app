@@ -48,6 +48,14 @@
             $(panel).removeClass('hidden').siblings().addClass('hidden');
         },
         renderAll: function() {
+            MeiweiApp.setWeixinShare({
+                "img_url" : 'http://mobile.clubmeiwei.com/assets/images/package-order-avatar.jpg',
+                "img_width" : "240",
+                "img_height" : "240",
+                "link" : "http://mobile.clubmeiwei.com/#packageorder",
+                "desc" : "你的TA在“以爱之名 兑现诺言”活动中，向你发起了“敢爱礼盒”，你敢兑现你的承诺吗？",
+                "title" : "你的TA在“以爱之名 兑现诺言”活动中，向你发起了“敢爱礼盒”，你敢兑现你的承诺吗？"
+            });
             var items = this.$('.carousel-item'), itemWidth = $(items[0]).outerWidth(),
                 wrapperWidth = this.$('.carousel').width(),
                 margin = (wrapperWidth - itemWidth) / 2;
@@ -61,26 +69,30 @@
             localStorage.setItem('package_order_stat', count);
             this.$('.wrapper').removeClass('rendering');
         },
+        leave: function() {
+            MeiweiApp.setWeixinShare();
+        },
         reset: function() {
             this.$('.wrapper').addClass('rendering');
         },
         render: function() {
             var self = this;
             var order = new MeiweiApp.Models.PackageOrder();
-            order.fetch({
-                success: function() {
-                    if (order.id) {
-                        MeiweiApp.goTo('PackageOrderDetail', {
-                            order: order.toJSON()
-                        });
-                    } else {
-                        self.renderAll();
+            if (!MeiweiApp.TokenAuth.get()) {
+                this.renderAll();
+            } else {
+                order.fetch({
+                    success: function() {
+                        if (order.id) {
+                            MeiweiApp.goTo('PackageOrderDetail', {
+                                order: order.toJSON()
+                            });
+                        } else {
+                            self.renderAll();
+                        }
                     }
-                },
-                error: function() {
-                    self.renderAll();
-                }
-            });
+                });
+            }
         }
     }))({el: $("#view-package-order")});
 })();

@@ -54,20 +54,23 @@
     	},
     	
     	index: function() {
-            MeiweiApp.goTo('Home');
-            return;
-    	    if (localStorage.getItem('first-time')) {
-    	        MeiweiApp.Pages.Home.go(); MeiweiApp.history.active = MeiweiApp.Pages.Home;
+    	    if (MeiweiApp.isWeixin) {
+    	        MeiweiApp.goTo('PackageOrder');
     	    } else {
-    	        MeiweiApp.Pages.GetStarted.go(); MeiweiApp.history.active = MeiweiApp.Pages.GetStarted;
+    	        MeiweiApp.goTo('Home');
     	    }
+    	    //if (localStorage.getItem('first-time')) {
+    	    //    MeiweiApp.Pages.Home.go(); MeiweiApp.history.active = MeiweiApp.Pages.Home;
+    	    //} else {
+    	    //    MeiweiApp.Pages.GetStarted.go(); MeiweiApp.history.active = MeiweiApp.Pages.GetStarted;
+    	    //}
     	},
     	
     	registerAuthToken: function(token, path) {
     	    MeiweiApp.TokenAuth.set(token);
     	    this.navigate(path, {trigger: true});
     	},
-    
+        
         registerWxAuthToken: function(token, path) {
             if(token!='0'){
                 MeiweiApp.TokenAuth.set(token);
@@ -99,7 +102,7 @@
         genericOrderDetail: function(oid) { MeiweiApp.goTo('GenericOrderDetail', {orderId: oid}); },
         
         productList: function(pid) { MeiweiApp.goTo('ProductList', {productId: pid}); },
-        productOrder: function(pid) { MeiweiApp.goTo('ProductOrder', {productItemId: pid}) },
+        productOrder: function(pid) { MeiweiApp.goTo('ProductOrder', {productItemId: pid}); },
         //productPurchase: function() { MeiweiApp.goTo('ProductPurchase'); },
         productRedeem: function() { MeiweiApp.goTo('ProductRedeem'); },
         

@@ -66,7 +66,7 @@
     
     MeiweiApp.isAndroid = function () {
         return /Android/i.test(navigator.userAgent);
-    }
+    };
     
     MeiweiApp.initTime = function () {
         if (MeiweiApp.isAndroid()) {
@@ -84,7 +84,7 @@
                 'time': {
                     preset: 'time'
                 }
-            }
+            };
             var lang = MeiweiApp.getLang() == 'en' ? '' : 'zh';
             var opt = {
                 'theme': 'android-ics light',
@@ -92,7 +92,7 @@
                 'lang': lang, //default zh
                 'display': 'bottom', //modal inline bubble top
                 'animate': ''//none
-            }
+            };
             $('input[type=time]').scroller('destroy').scroller($.extend(option['time'], opt));
             $('input[type=datetime-local]').scroller('destroy').scroller($.extend(option['datetime'], opt));
             $('input[type=date]').scroller('destroy').scroller($.extend(option['date'], opt));
@@ -100,6 +100,16 @@
     };
     
     MeiweiApp.setWeixinShare = function (message) {
+        var redirectUrl = encodeURIComponent('http://mobile.clubmeiwei.com/weixin/weixin.html?showwxpaytitle=1');
+        message = message || {
+            "img_url" : 'http://mobile.clubmeiwei.com/assets/images/default.png',
+            "img_width" : "240",
+            "img_height" : "150",
+            "link" : "https://open.weixin.qq.com/connect/oauth2/authorize?appid=wx0fd053b2f2f80d94&redirect_uri=" + redirectUrl +
+                "&response_type=code&scope=snsapi_base&state=restaurant_search#wechat_redirect",
+            "desc" : "百余家高端餐厅预订和贴心的私人管家服务",
+            "title" : "美位 - 只为最懂得享受的你"
+        };
         document.addEventListener('WeixinJSBridgeReady', function onBridgeReady() {
             WeixinJSBridge.on('menu:share:appmessage', function (argv) {
                 WeixinJSBridge.invoke('sendAppMessage', message);
@@ -117,17 +127,7 @@
             MeiweiApp.isWeixin = true;
             window.device = { platform: 'Weixin' };
             $('title').append(' ' + $('meta[name=description]').attr('content'));
-            var redirectUrl = encodeURIComponent('http://mobile.clubmeiwei.com/weixin/weixin.html?showwxpaytitle=1');
-            var message = {
-                "img_url" : 'http://mobile.clubmeiwei.com/assets/images/default.png',
-                "img_width" : "240",
-                "img_height" : "150",
-                "link" : "https://open.weixin.qq.com/connect/oauth2/authorize?appid=wx0fd053b2f2f80d94&redirect_uri=" + redirectUrl +
-                    "&response_type=code&scope=snsapi_base&state=restaurant_search#wechat_redirect",
-                "desc" : "百余家高端餐厅预订和贴心的私人管家服务",
-                "title" : "美位 - 只为最懂得享受的你"
-            };
-            MeiweiApp.setWeixinShare(message);
+            MeiweiApp.setWeixinShare();
         } else {
             window.device = { platform: 'WebApp' };
         }
