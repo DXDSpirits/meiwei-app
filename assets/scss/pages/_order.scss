@@ -2,7 +2,7 @@
     .wrapper {
         background-repeat: no-repeat;
         background-position: center top;
-        @include background-size(contain);
+        @include background-size(auto 100%);
         padding-top: 100%;
     }
 	.item-name {

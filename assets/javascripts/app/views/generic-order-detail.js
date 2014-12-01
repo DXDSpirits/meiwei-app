@@ -80,7 +80,6 @@
             this.views = {
                 orderDetail: new OrderDetail({ model: this.order, el: this.$('.wrapper') })
             };
-            this.$('.wrapper').css('background-size', 'auto ' + $(window).width() + 'px');
         },
         onClickLeftBtn: function () {
             MeiweiApp.goTo('GenericOrderList');

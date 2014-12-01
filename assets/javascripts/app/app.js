@@ -134,11 +134,14 @@
         if (window.device.platform === 'iOS' && parseFloat(window.device.version) >= 7.0) {
             wrapperOffset += 20;
         }
+        var availHeight = Math.min(window.innerHeight - wrapperOffset, 600);
         var fixWrapperHeight = function () {
-            $('body>.view>.wrapper').css('height', $(window).height() - wrapperOffset);
+            $('body>.view>.wrapper').css('height', availHeight + 'px');
         };
-        fixWrapperHeight();
-        $(window).resize(fixWrapperHeight);
+        _.delay(function() {
+            fixWrapperHeight();
+        }, availHeight >= 600 ? 3000 : 500);
+        //$(window).resize(fixWrapperHeight);
         if (window.device) {
             $('meta[name=viewport]').attr('content', 'width=device-width, height=device-height, initial-scale=1, maximum-scale=1, user-scalable=0');
         } else {

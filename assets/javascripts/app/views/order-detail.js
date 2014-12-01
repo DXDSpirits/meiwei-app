@@ -35,7 +35,6 @@
     				el: this.$('.wrapper')
     			})
     		};
-    		this.$('.wrapper').css('background-size', 'auto ' + $(window).width() + 'px');
     	},
     	onClickRightBtn: function() {
     		MeiweiApp.ProductCart.reset(this.order.get('product_items'));
