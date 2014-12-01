@@ -46,12 +46,13 @@
                 comment: this.$('input[name=wish]').val() || null
             });
             this.$('.info-text').html('');
+            if (!name || !gender || !mobile || !address || 
+                !sender_name || !sender_gender || !sender_mobile || !sender_address) {
+                MeiweiApp.showAlertDialog('请完善收件人和寄件人信息');
+            }
             this.order.save({}, {
                 success: function(model, xhr, options) {
                     MeiweiApp.goTo('PackageOrderDetail');
-                },
-                error: function(model, xhr, options) {
-                    MeiweiApp.showAlertDialog('请完善收件人和寄件人信息');
                 }
             });
         },

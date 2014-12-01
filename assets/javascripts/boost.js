@@ -1,4 +1,4 @@
-$(function() {
+(function() {
     var BOOST = {
         set : function(key, json) {
             try {
@@ -28,4 +28,4 @@ $(function() {
     }
 
     window.BOOST = BOOST;
-});
+})();

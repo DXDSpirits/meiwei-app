@@ -118,7 +118,7 @@
         } else if (/MicroMessenger/i.test(navigator.userAgent)) {
             MeiweiApp.isWeixin = true;
             window.device = { platform: 'Weixin' };
-            $('title').append(' ' + $('meta[name=description]').attr('content'));
+            //$('title').append(' ' + $('meta[name=description]').attr('content'));
             MeiweiApp.setWeixinShare();
         } else {
             window.device = { platform: 'WebApp' };

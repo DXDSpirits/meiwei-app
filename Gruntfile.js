@@ -81,6 +81,7 @@ module.exports = function(grunt) {
                     'assets/fonts/**/*',
                     'assets/javascripts/vendor/**/*',
                     'assets/javascripts/boost.js',
+                    'assets/javascripts/patch.js',
                     '.htaccess',
                     'cordova.js'
                 ],
