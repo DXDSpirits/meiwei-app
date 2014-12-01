@@ -2,11 +2,15 @@
 .header-navbar {
 	@include flex-box($orient: horizontal);
 	@include size($navbarHeight, 100%);
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100%;
 	//padding: 0 $navbarPadding;
 	//position: fixed;
 	//top: 0;
 	//z-index: $zindexFixedNavbar;
-	position: relative;
+	//position: relative;
 	z-index: 1;
 	&::before {
 		content: " ";

@@ -10,19 +10,27 @@ body {
 	background-color: $bodyBackground;
 }
 
+.views-wrapper {
+    position: relative;
+    width: 100%;
+    overflow: hidden;
+    position: relative;
+}
+
 .view, .header-navbar, #apploader {
     width: 100%;
     max-width: 420px;
 }
 
 .view {
-	position: fixed;
+	position: absolute;
 	top: 0;
 	left: 0;
 	padding: 0;
 	margin: 0;
 	width: 100%;
 	height: 100%;
+	padding-top: $navbarHeight;
 	overflow: hidden;
 	&.view-next, &.view-prev, &.view-hidden {
         pointer-events: none;
@@ -39,7 +47,7 @@ body {
     position: relative;
     z-index: 0;
     width: 100%;
-    height: 0;
+    height: 100%;
     overflow-x: hidden;
     overflow-y: scroll;
     -webkit-overflow-scrolling: touch;
