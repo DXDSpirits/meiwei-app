@@ -3,9 +3,12 @@
     
     $('#view-package-order-confirm input[name=address]').attr('type', 'text');
     
-    MeiweiApp.Pages.PackageOrderDetail.checkPayment = function() {};
+    var page = MeiweiApp.Pages.PackageOrderDetail;
+    page.checkPayment = function() {};
+    page.stopListening(page.order);
     
-    MeiweiApp.Pages.PackageOrderConfirm.submitOrder = function() {
+    var page = MeiweiApp.Pages.PackageOrderConfirm;
+    page.submitOrder = function() {
         var name = this.$('.receiver input[name=name]').val() || null;
         var gender = this.$('.receiver input[name=gender]').val() || null;
         var mobile = this.$('.receiver input[name=mobile]').val() || null;
@@ -37,7 +40,7 @@
             });
         }
     };
-    MeiweiApp.Pages.PackageOrderConfirm.undelegateEvents();
-    MeiweiApp.Pages.PackageOrderConfirm.delegateEvents();
+    page.undelegateEvents();
+    page.delegateEvents();
     
 })();
