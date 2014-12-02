@@ -12,14 +12,10 @@ body {
 
 .views-wrapper {
     position: relative;
-    width: 100%;
     overflow: hidden;
-    position: relative;
-}
-
-.view, .header-navbar, #apploader {
     width: 100%;
     max-width: 420px;
+    margin: 0 auto;
 }
 
 .view {
@@ -34,12 +30,6 @@ body {
 	overflow: hidden;
 	&.view-next, &.view-prev, &.view-hidden {
         pointer-events: none;
-    }
-    &.view-hidden {
-        //display: none;
-    }
-    &.view-next, &.view-prev {
-        //display: block;
     }
 }
 

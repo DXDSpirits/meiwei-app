@@ -19,6 +19,7 @@
     
         start: function () {
             MeiweiApp.initDevice();
+            MeiweiApp.fixViewport();
             MeiweiApp.initVersion();
             MeiweiApp.showSplash();
             MeiweiApp.fillImages();
@@ -31,7 +32,6 @@
                 MeiweiApp.Router.navigate('', {trigger: true});
             }
             MeiweiApp.initTime();
-            MeiweiApp.fixViewport();
         }
     }))({el: document.body});
     
@@ -136,16 +136,17 @@
         }
         var availHeight = Math.min(window.innerHeight - wrapperOffset, 650);
         var fixWrapperHeight = function () {
-            _.delay(function() {
-                $('.views-wrapper').css('height', availHeight);
-            }, availHeight >= 600 ? 3000 : 500);
+            $('.views-wrapper').height(availHeight);
+            //_.delay(function() {
+            //    $('.views-wrapper').height(availHeight);
+            //}, availHeight >= 600 ? 3000 : 500);
         };
         fixWrapperHeight();
         //$(window).resize(fixWrapperHeight);
-        if (window.device) {
-            $('meta[name=viewport]').attr('content', 'width=device-width, height=device-height, initial-scale=1, maximum-scale=1, user-scalable=0');
+        if (MeiweiApp.isCordova) {
+            $('meta[name=viewport]').attr('content', 'width=device-width, height=device-height, initial-scale=1, maximum-scale=1, user-scalable=0, minimal-ui');
         } else {
-            $('meta[name=viewport]').attr('content', 'width=device-width, initial-scale=1, maximum-scale=1, user-scalable=0');
+            $('meta[name=viewport]').attr('content', 'width=device-width, initial-scale=1, maximum-scale=1, user-scalable=0, minimal-ui');
         }
         if (navigator.userAgent.match(/IEMobile\/10\.0/)) {
             var msViewportStyle = document.createElement("style");
