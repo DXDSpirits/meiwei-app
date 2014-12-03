@@ -34,21 +34,28 @@
     };
     
     var page = MeiweiApp.Pages.PackageOrderDetail;
-    page.checkPayment = function() {};
+    page.checkPayment = function() {
+        if (page.order.get('payment').is_payable) {
+            page.$('.header-btn-right').text('修改');
+        } else {
+            page.$('.header-btn-right').text('终止');
+        }
+    };
     page.stopListening(page.order);
+    page.listenTo(page.order, 'change', page.checkPayment);
     
     var page = MeiweiApp.Pages.PackageOrderConfirm;
     page.submitOrder = function() {
-        var name = this.$('.receiver input[name=name]').val() || null;
-        var gender = this.$('.receiver input[name=gender]').val() || null;
-        var mobile = this.$('.receiver input[name=mobile]').val() || null;
-        var address = this.$('.receiver input[name=address]').val() || null;
-        var sender_name = this.$('.sender input[name=name]').val() || null;
-        var sender_gender = this.$('.sender input[name=gender]').val() || null;
-        var sender_mobile = this.$('.sender input[name=mobile]').val() || null;
-        var sender_address = this.$('.sender input[name=address]').val() || null;
-        var comment = this.$('input[name=wish]').val() || null;
-        this.order.set({
+        var name = page.$('.receiver input[name=name]').val() || null;
+        var gender = page.$('.receiver input[name=gender]').val() || null;
+        var mobile = page.$('.receiver input[name=mobile]').val() || null;
+        var address = page.$('.receiver input[name=address]').val() || null;
+        var sender_name = page.$('.sender input[name=name]').val() || null;
+        var sender_gender = page.$('.sender input[name=gender]').val() || null;
+        var sender_mobile = page.$('.sender input[name=mobile]').val() || null;
+        var sender_address = page.$('.sender input[name=address]').val() || null;
+        var comment = page.$('input[name=wish]').val() || null;
+        page.order.set({
             name: name,
             gender: gender,
             mobile: mobile,
@@ -59,11 +66,11 @@
             sender_address: sender_address,
             comment: comment
         });
-        this.$('.info-text').html('');
+        page.$('.info-text').html('');
         if (!name || !mobile || !address || !sender_name || !sender_mobile || !sender_address) {
             MeiweiApp.showAlertDialog('请完善收件人和寄件人信息');
         } else {
-            this.order.save({}, {
+            page.order.save({}, {
                 success: function(model, xhr, options) {
                     MeiweiApp.goTo('PackageOrderDetail');
                 }
