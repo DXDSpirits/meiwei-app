@@ -38,6 +38,14 @@
     
     (function() {
         var page = MeiweiApp.Pages.PackageOrderDetail;
+        page.render = function () {
+            page.order.clear({ silent: true });
+            if (page.options.order) {
+                page.order.set(page.options.order);
+            } else {
+                page.order.fetch();
+            }
+        };
         page.checkPayment = function() {
             if (page.order.get('payment').is_payable) {
                 page.$('.header-btn-right').text('修改');
@@ -45,7 +53,26 @@
                 page.$('.header-btn-right').text('终止');
             }
         };
+        page.cancelOrder = function () {
+            if (page.order.get('payment').is_payable) {
+                page.order.cancel({success: function () {
+                    MeiweiApp.goTo('PackageOrder');
+                }});
+            } else {
+                MeiweiApp.showConfirmDialog(
+                    "终止订单",
+                    "注意：终止订单后将停止派送余下礼物",
+                    function () {
+                        page.order.cancel({success: function () {
+                            MeiweiApp.goTo('Home');
+                        }});
+                    }
+                );
+            }
+        };
+        page.undelegateEvents();
         page.stopListening(page.order);
+        page.delegateEvents();
         page.listenTo(page.order, 'change', page.checkPayment);
     })();
     
