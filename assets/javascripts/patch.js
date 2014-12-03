@@ -2,7 +2,8 @@
     window.PATCH = true;
     
     $('#view-package-order-confirm input[name=address]').attr('type', 'text');
-    $('#view-package-order-confirm .header-navbar h1').text('敢爱礼盒');
+    $('#view-package-order-confirm .header-navbar h1').attr('data-i18n', '敢爱礼盒').text('敢爱礼盒');
+    $('#view-package-order .header-navbar h1').attr('data-i18n', '敢爱礼盒').text('敢爱礼盒');
     
     (function() {
         MeiweiApp.initTime = function () {
