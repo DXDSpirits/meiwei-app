@@ -43,6 +43,13 @@
     page.undelegateEvents();
     page.delegateEvents();
     
+    page = MeiweiApp.Pages.PackageOrderDetail;
+    page.onClickLeftBtn = function () {
+        MeiweiApp.goTo('Home');
+    };
+    page.undelegateEvents();
+    page.delegateEvents();
+    
     var src = 'http://mobile.clubmeiwei.com/assets/images/package-order-banner-jeux.jpg';
     $('#view-package-order-detail .banner').attr('data-bg-src', src);
     MeiweiApp.loadBgImage($('#view-package-order-detail .banner'), src);
