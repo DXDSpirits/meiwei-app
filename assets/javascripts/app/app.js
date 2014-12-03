@@ -72,8 +72,8 @@
         if (MeiweiApp.isAndroid()) {
             var option = {
                 'date': {
-                    preset: 'date',
-                    invalid: { daysOfWeek: [0, 6], daysOfMonth: ['5/1', '12/24', '12/25'] }
+                    preset: 'date'/*,
+                    invalid: { daysOfWeek: [0, 6], daysOfMonth: ['5/1', '12/24', '12/25'] }*/
                 },
                 'datetime': {
                     preset: 'datetime',
