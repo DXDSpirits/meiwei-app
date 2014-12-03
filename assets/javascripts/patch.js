@@ -3,6 +3,36 @@
     
     $('#view-package-order-confirm input[name=address]').attr('type', 'text');
     
+    MeiweiApp.initTime = function () {
+        if (MeiweiApp.isAndroid()) {
+            var option = {
+                'date': {
+                    preset: 'date'
+                },
+                'datetime': {
+                    preset: 'datetime',
+                    minDate: new Date(2012, 3, 10, 9, 22),
+                    maxDate: new Date(2014, 7, 30, 15, 44),
+                    stepMinute: 5
+                },
+                'time': {
+                    preset: 'time'
+                }
+            };
+            var lang = MeiweiApp.getLang() == 'en' ? '' : 'zh';
+            var opt = {
+                'theme': 'android-ics light',
+                'mode': 'scroller', //clickpick mixed
+                'lang': lang, //default zh
+                'display': 'bottom', //modal inline bubble top
+                'animate': ''//none
+            };
+            $('input[type=time]').scroller('destroy').scroller($.extend(option['time'], opt));
+            $('input[type=datetime-local]').scroller('destroy').scroller($.extend(option['datetime'], opt));
+            $('input[type=date]').scroller('destroy').scroller($.extend(option['date'], opt));
+        }
+    };
+    
     var page = MeiweiApp.Pages.PackageOrderDetail;
     page.checkPayment = function() {};
     page.stopListening(page.order);
