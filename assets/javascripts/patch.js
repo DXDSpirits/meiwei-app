@@ -38,7 +38,36 @@
     })();
     
     (function() {
+        var page = MeiweiApp.Pages.PackageOrder;
+        var html = 
+        '<div class="pull-left img" data-bg-src="http://mobile.clubmeiwei.com/assets/images/package/1-3.jpg"></div>' +
+        '<div class="pull-right text">' +
+            '<p>尺寸：22cm*22cm*16cm</p>' +
+            '<p>选材：黄玫瑰，洋牡丹，桂皮，西瓜果，松果，尤加利叶，常春藤，薏米果</p>' +
+            '<p class="large">价值 1899</p>' +
+            '<p class="small">派送时间：2014年12月24日</p>' +
+        '</div>';
+        $(page.$('.product-christmas .panel')[2]).html(html);
+        $(page.$('.product-christmas .option-tabs .btn')[2]).text('暖冬圣诞');
+    })();
+    
+    (function() {
         var page = MeiweiApp.Pages.PackageOrderDetail;
+        page.onClickLeftBtn = function () {
+            MeiweiApp.goTo('Home');
+        };
+        page.payOrder = function () {
+            var payment_no = page.order.get('payment').payment_no;
+            if (MeiweiApp.isCordova && device.platform === 'iOS') {
+                var alipayPayment = new AlipayPayment({ payment_no: payment_no });
+                alipayPayment.fetch({success: function (model) {
+                    MeiweiApp.payByAlipay(model.get('orderString'));
+                }});
+            } else {
+                var payable_url = MeiweiApp.configs.APIHost + '/alipay/payablewap/' + payment_no;
+                location.href = payable_url;
+            }
+        };
         page.render = function () {
             page.order.clear({ silent: true });
             if (page.options.order) {
@@ -116,9 +145,18 @@
     })();
     
     (function() {
-        var page = MeiweiApp.Pages.PackageOrderDetail;
-        page.onClickLeftBtn = function () {
-            MeiweiApp.goTo('Home');
+        var page = MeiweiApp.Pages.GenericOrderDetail;
+        page.payOrder = function () {
+            var payment_no = page.order.get('payment').payment_no;
+            if (MeiweiApp.isCordova && device.platform === 'iOS') {
+                var alipayPayment = new AlipayPayment({ payment_no: payment_no });
+                alipayPayment.fetch({success: function (model) {
+                    MeiweiApp.payByAlipay(model.get('orderString'));
+                }});
+            } else {
+                var payable_url = MeiweiApp.configs.APIHost + '/alipay/payablewap/' + payment_no;
+                location.href = payable_url;
+            }
         };
         page.undelegateEvents();
         page.delegateEvents();
