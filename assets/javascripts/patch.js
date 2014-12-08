@@ -146,7 +146,7 @@
     
     (function() {
         var page = MeiweiApp.Pages.GenericOrderDetail;
-        page.payOrder = function () {
+        page.views.orderDetail.payOrder = function () {
             var payment_no = page.order.get('payment').payment_no;
             if (MeiweiApp.isCordova && device.platform === 'iOS') {
                 var alipayPayment = new AlipayPayment({ payment_no: payment_no });
