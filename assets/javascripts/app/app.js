@@ -2,7 +2,7 @@
     
     var MeiweiApp = window.MeiweiApp = new (Backbone.View.extend({
     
-        Version: 3.1,
+        Version: 3.2,
     
         Models: {},
         Views: {},
@@ -72,8 +72,7 @@
         if (MeiweiApp.isAndroid()) {
             var option = {
                 'date': {
-                    preset: 'date'/*,
-                    invalid: { daysOfWeek: [0, 6], daysOfMonth: ['5/1', '12/24', '12/25'] }*/
+                    preset: 'date'
                 },
                 'datetime': {
                     preset: 'datetime',
@@ -134,15 +133,11 @@
         if (window.device.platform === 'iOS' && parseFloat(window.device.version) >= 7.0) {
             wrapperOffset += 20;
         }
-        var availHeight = Math.min(window.innerHeight - wrapperOffset, 650);
-        var fixWrapperHeight = function () {
-            $('.views-wrapper').height(availHeight);
-            //_.delay(function() {
-            //    $('.views-wrapper').height(availHeight);
-            //}, availHeight >= 600 ? 3000 : 500);
-        };
+        var fixWrapperHeight = _.debounce(function () {
+            $('.views-wrapper').height(window.innerHeight - wrapperOffset);
+        }, 100);
         fixWrapperHeight();
-        //$(window).resize(fixWrapperHeight);
+        $(window).resize(fixWrapperHeight);
         if (MeiweiApp.isCordova) {
             $('meta[name=viewport]').attr('content', 'width=device-width, height=device-height, initial-scale=1, maximum-scale=1, user-scalable=0, minimal-ui');
         } else {

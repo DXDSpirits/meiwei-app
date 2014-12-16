@@ -44,16 +44,15 @@
         },
         payOrder: function () {
             var payment_no = this.model.get('payment').payment_no;
-            if (MeiweiApp.isWeixin && false) {
-                this.callWxPay(payment_no);
-            } else if (MeiweiApp.isCordova) {
+            if (MeiweiApp.isCordova && device.platform === 'iOS') {
                 var alipayPayment = new AlipayPayment({ payment_no: payment_no });
                 alipayPayment.fetch({success: function (model) {
                     MeiweiApp.payByAlipay(model.get('orderString'));
                 }});
             } else {
                 var payable_url = MeiweiApp.configs.APIHost + '/alipay/payablewap/' + payment_no;
-                location.href = payable_url;
+                //location.href = payable_url;
+                MeiweiApp.openWindow(payable_url);
             }
         },
         render: function () {

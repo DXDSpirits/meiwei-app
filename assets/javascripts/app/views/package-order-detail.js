@@ -45,39 +45,52 @@
             };
             this.listenTo(this.order, 'change', this.checkPayment);
         },
+        onClickLeftBtn: function () {
+            MeiweiApp.goTo('Home');
+        },
         payOrder: function () {
             var payment_no = this.order.get('payment').payment_no;
-            if (MeiweiApp.isCordova) {
+            if (MeiweiApp.isCordova && device.platform === 'iOS') {
                 var alipayPayment = new AlipayPayment({ payment_no: payment_no });
                 alipayPayment.fetch({success: function (model) {
                     MeiweiApp.payByAlipay(model.get('orderString'));
                 }});
             } else {
                 var payable_url = MeiweiApp.configs.APIHost + '/alipay/payablewap/' + payment_no;
-                location.href = payable_url;
+                //location.href = payable_url;
+                MeiweiApp.openWindow(payable_url);
             }
         },
         cancelOrder: function () {
-            var self = this;
-            MeiweiApp.showConfirmDialog(
-                "终止订单",
-                "注意：终止订单后将停止派送余下礼物",
-                function () {
-                    self.order.cancel({success: function () {
-                        MeiweiApp.goTo('Home');
-                    }});
-                }
-            );
+            if (this.order.get('payment').is_payable) {
+                this.order.cancel({success: function () {
+                    MeiweiApp.goTo('PackageOrder');
+                }});
+            } else {
+                var self = this;
+                MeiweiApp.showConfirmDialog(
+                    "终止订单",
+                    "注意：终止订单后将停止派送余下礼物",
+                    function () {
+                        self.order.cancel({success: function () {
+                            MeiweiApp.goTo('Home');
+                        }});
+                    }
+                );
+            }
         },
         onResume: function () {
             this.order.fetch();
         },
         checkPayment: function() {
             if (this.order.get('payment').is_payable) {
-                this.payOrder();
+                this.$('.header-btn-right').text('修改');
+            } else {
+                this.$('.header-btn-right').text('终止');
             }
         },
         render: function () {
+            this.order.clear({ silent: true });
             if (this.options.order) {
                 this.order.set(this.options.order);
             } else {

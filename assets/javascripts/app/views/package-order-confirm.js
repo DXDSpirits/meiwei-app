@@ -34,27 +34,36 @@
             };
         },
         submitOrder: function() {
+            var name = this.$('.receiver input[name=name]').val() || null;
+            var gender = this.$('.receiver input[name=gender]').val() || null;
+            var mobile = this.$('.receiver input[name=mobile]').val() || null;
+            var address = this.$('.receiver input[name=address]').val() || null;
+            var sender_name = this.$('.sender input[name=name]').val() || null;
+            var sender_gender = this.$('.sender input[name=gender]').val() || null;
+            var sender_mobile = this.$('.sender input[name=mobile]').val() || null;
+            var sender_address = this.$('.sender input[name=address]').val() || null;
+            var comment = this.$('input[name=wish]').val() || null;
             this.order.set({
-                name: this.$('.receiver input[name=name]').val() || null,
-                gender: this.$('.receiver input[name=gender]').val() || null,
-                mobile: this.$('.receiver input[name=mobile]').val() || null,
-                address: this.$('.receiver input[name=address]').val() || null,
-                sender_name: this.$('.sender input[name=name]').val() || null,
-                sender_gender: this.$('.sender input[name=gender]').val() || null,
-                sender_mobile: this.$('.sender input[name=mobile]').val() || null,
-                sender_address: this.$('.sender input[name=address]').val() || null,
-                comment: this.$('input[name=wish]').val() || null
+                name: name,
+                gender: gender,
+                mobile: mobile,
+                address: address,
+                sender_name: sender_name,
+                sender_gender: sender_gender,
+                sender_mobile: sender_mobile,
+                sender_address: sender_address,
+                comment: comment
             });
             this.$('.info-text').html('');
-            if (!name || !gender || !mobile || !address || 
-                !sender_name || !sender_gender || !sender_mobile || !sender_address) {
+            if (!name || !mobile || !address || !sender_name || !sender_mobile || !sender_address) {
                 MeiweiApp.showAlertDialog('请完善收件人和寄件人信息');
+            } else {
+                this.order.save({}, {
+                    success: function(model, xhr, options) {
+                        MeiweiApp.goTo('PackageOrderDetail');
+                    }
+                });
             }
-            this.order.save({}, {
-                success: function(model, xhr, options) {
-                    MeiweiApp.goTo('PackageOrderDetail');
-                }
-            });
         },
         render: function() {
             this.$('.info-text').html('');
